@@ -1,6 +1,553 @@
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-  <title>UniverseMaker</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daeseung Park | Technology Researcher</title>
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+        :root {
+            --bg-color: #0a0a1a;
+            --primary-color: #8a2be2;
+            --secondary-color: #00bfff;
+            --text-color: #e0e0e0;
+            --card-bg-color: rgba(255, 255, 255, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        #particles-js::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(10, 10, 26, 0.85);
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            padding: 1.5rem 0;
+            background: rgba(10, 10, 26, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #fff;
+            text-decoration: none;
+            text-shadow: 0 0 5px var(--primary-color), 0 0 10px var(--primary-color);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.05rem;
+            font-weight: 500;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+
+        .nav-menu a:hover, .nav-menu a.active {
+            color: #fff;
+            text-shadow: 0 0 8px var(--secondary-color);
+        }
+
+        .nav-menu a.external-link {
+            padding: 0.4rem 0.8rem;
+            border: 1px solid var(--secondary-color);
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        .nav-menu a.external-link:hover {
+            background-color: var(--secondary-color);
+            box-shadow: 0 0 10px var(--secondary-color);
+            text-shadow: none;
+        }
+        
+        main {
+            padding-top: 100px; /* 📍 헤더 공간 확보를 위해 main에 padding 복구 */
+        }
+
+        section {
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 6rem 0;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+        }
+
+        #home {
+             /* padding-top: 100px; 📍 중앙 정렬 문제를 일으키는 스타일 제거 */
+        }
+
+        section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: #fff;
+            text-shadow: 0 0 10px var(--primary-color);
+        }
+
+        /* --- 메인 (Home) --- */
+        #home {
+            justify-content: center;
+            text-align: center;
+        }
+        .hero-text h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            color: #fff;
+        }
+        .hero-text .subtitle {
+            font-size: 1.5rem;
+            color: var(--text-color);
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* --- 프로필 (Profile) --- */
+        .profile-content h3 {
+            font-size: 1.8rem;
+            color: var(--secondary-color);
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--secondary-color);
+            padding-left: 1rem;
+        }
+        .profile-content p, .profile-content ul {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+        .experience-item, .list-item {
+            margin-bottom: 1.5rem;
+        }
+        .experience-item strong, .list-item strong {
+            display: block;
+            color: #fff;
+            font-size: 1.2rem;
+        }
+        .experience-item .date, .list-item .date {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            margin-bottom: 0.2rem;
+        }
+        .experience-item .affiliations {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--text-color);
+            padding-left: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+        .skill-item {
+            background: var(--card-bg-color);
+            padding: 0.5rem 1rem;
+            text-align: center;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.95rem;
+            transition: all 0.3s;
+        }
+        .skill-item:hover {
+            background-color: var(--primary-color);
+            color: #fff;
+            border-color: var(--primary-color);
+        }
+
+        /* --- 포트폴리오 (Portfolio) --- */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+        .portfolio-card {
+            background: var(--card-bg-color);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            backdrop-filter: blur(5px);
+            display: flex;
+            flex-direction: column;
+        }
+        .portfolio-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        .portfolio-info {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .portfolio-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+        .portfolio-info p {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+        .tags {
+            margin-bottom: 1rem;
+        }
+        .tag {
+            display: inline-block;
+            background: rgba(0, 191, 255, 0.2);
+            color: var(--secondary-color);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* --- 논문 (Publications) --- */
+        .publication-list {
+            list-style: none;
+        }
+        .publication-item {
+            background: var(--card-bg-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--primary-color);
+            transition: background-color 0.3s;
+        }
+        .publication-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .publication-item .date {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+        .publication-item p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #fff;
+            font-weight: 500;
+        }
+        .publication-item .venue {
+            font-size: 1rem;
+            color: var(--text-color);
+        }
+        
+        /* --- 푸터 --- */
+        footer {
+            text-align: center;
+            padding: 3rem;
+            margin-top: 4rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .contact-info {
+            margin-bottom: 1.5rem;
+        }
+        .contact-info p {
+            margin: 0.5rem 0;
+        }
+        .contact-info strong {
+            color: var(--secondary-color);
+        }
+    </style>
 </head>
-<body>
-  <center><h1>Hello! World!</h1></center>
+<body id="page-top">
+    <div id="particles-js"></div>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#page-top" class="logo">D. PARK</a>
+                <ul class="nav-menu">
+                    <li><a href="#page-top" class="active">Main</a></li>
+                    <li><a href="#profile">Profile</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#publications">Publications</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="https://github.com/UniverseMaker" target="_blank" class="external-link">GitHub</a></li>
+                    <li><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" class="external-link">ORCID</a></li>
+                    <li><a href="https://codespectrum.net/" target="_blank" class="external-link">Code Spectrum</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home">
+            <div class="container hero-text">
+                <h1>Daeseung Park</h1>
+                <p class="subtitle">
+                    AI 자연어처리 및 소프트웨어 기술 연구개발<br/>
+                    Natural Language Processing and Software Tech R&D
+                </p>
+            </div>
+        </section>
+
+        <section id="profile">
+            <div class="container">
+                <h2 class="section-title">Profile</h2>
+                <div class="profile-content">
+                    <h3>Experience</h3>
+                    <ul>
+                        <li class="experience-item">
+                            <span class="date">2023.05 - present</span>
+                            <strong>Research Engineer</strong>
+                            <span>Korea Advanced Institute of Science and Technology (KAIST)</span>
+                            <div class="affiliations">
+                                KAIST Information & Electronics Research Institute<br>
+                                KAIST Convergence Research Center for College of Engineering<br>
+                                Daejeon Metropolitan City-KAIST Strategic Project Research Center
+                            </div>
+                        </li>
+                        <li class="experience-item">
+                            <span class="date">2020.08 - 2023.05</span>
+                            <strong>Participating Researcher</strong>
+                            <span>Industry-Academic Cooperation Foundation of Kwangwoon University</span>
+                        </li>
+                        <li class="experience-item">
+                            <span class="date">2020.03 - 2023.05</span>
+                            <strong>Associate Researcher</strong>
+                            <span>Industry-Academic Cooperation Foundation of Namseoul University</span>
+                        </li>
+                        <li class="experience-item">
+                            <span class="date">2014.02 - 2015.03</span>
+                            <strong>Participating Researcher</strong>
+                            <span>Ministry of Science, ICT and Future Planning - 3D Smart Media/Augmented Reality Project</span>
+                        </li>
+                    </ul>
+
+                    <h3>Skills</h3>
+                    <div class="skills-grid">
+                        <span class="skill-item">Back-end</span>
+                        <span class="skill-item">Front-end</span>
+                        <span class="skill-item">Database</span>
+                        <span class="skill-item">Android</span>
+                        <span class="skill-item">C#</span>
+                        <span class="skill-item">C/C++</span>
+                        <span class="skill-item">Java</span>
+                        <span class="skill-item">Python</span>
+                        <span class="skill-item">Ruby</span>
+                        <span class="skill-item">UI/UX</span>
+                        <span class="skill-item">Bootstrap</span>
+                        <span class="skill-item">Photoshop</span>
+                        <span class="skill-item">Vegas</span>
+                    </div>
+
+                    <h3>Awards</h3>
+                    <ul>
+                        <li class="list-item"><span class="date">2010.06</span><strong>The Bronze Award of Information & Communication</strong><span>Commercial Practical Competency Competition</span></li>
+                        <li class="list-item"><span class="date">2009.10</span><strong>The Excellence Award of Information & Communication</strong><span>Local Skills Competition</span></li>
+                        <li class="list-item"><span class="date">2008.06</span><strong>The Bronze Award of Information & Communication</strong><span>Commercial Practical Competency Competition</span></li>
+                    </ul>
+
+                    <h3>Certifications</h3>
+                    <ul>
+                        <li class="list-item"><strong>정보처리기사 (Engineer for Information Processing)</strong> <span class="date">2014.08</span></li>
+                        <li class="list-item"><strong>정보처리산업기사 (Industrial Engineer for Information Processing)</strong> <span class="date">2013.08</span></li>
+                        <li class="list-item"><strong>윈도우포렌식전문가 (Windows Forensic Specialist)</strong> <span class="date">2013.06</span></li>
+                        <li class="list-item"><strong>리눅스마스터 (Linux Master)</strong> <span class="date">2009.12</span></li>
+                        <li class="list-item"><strong>네트워크관리사 (Network Management Specialist)</strong> <span class="date">2009.12</span></li>
+                        <li class="list-item"><strong>Cisco Certified Network Associate (CCNA)</strong> <span class="date">2009.02</span></li>
+                        <li class="list-item"><strong>Linux Professional Institute Certification (LPIC)</strong> <span class="date">2009.02</span></li>
+                        <li class="list-item"><strong>정보처리기능사 (Craftsman for Information Processing)</strong> <span class="date">2002.05</span></li>
+                    </ul>
+                    <h3>Special Credentials (Google)</h3>
+                    <ul>
+                        <li class="list-item">Google Workspace(G Suite) Deployment Service Specialist</li>
+                        <li class="list-item">Google Education Deployment Specialist</li>
+                        <li class="list-item">Google Cloud Sales Specialist</li>
+                        <li class="list-item">Google Education Sales Specialist</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio">
+            <div class="container">
+                <h2 class="section-title">Major Projects</h2>
+                <div class="portfolio-grid">
+                    <div class="portfolio-card">
+                        <div class="portfolio-info">
+                            <h3>Untact Medical Technology R&D</h3>
+                            <p>Development of realistic content terminal technology including Smart Mirrors and Digital Signage, focusing on non-contact vital-sign measurement using Photoplethysmography (PPG).</p>
+                            <div class="tags">
+                                <span class="tag">Government Project</span> <span class="tag">Smart Mirror</span> <span class="tag">Non-contact Vital-sign</span> <span class="tag">PPG</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-card">
+                        <div class="portfolio-info">
+                            <h3>Mobile 3D Audio Sound Rendering IP</h3>
+                            <p>Development of sound rendering IP for dynamic, real-time 3D audio embeddable in mobile devices. A government-funded project focusing on SoC and API technology.</p>
+                            <div class="tags">
+                                <span class="tag">Government Project</span> <span class="tag">Sound Rendering</span> <span class="tag">SoC</span> <span class="tag">IP Development</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-card">
+                        <div class="portfolio-info">
+                            <h3>Google Android App: Mini's Lottery</h3>
+                            <p>Developed and launched a commercial Android application, achieving over 50,000 downloads. Responsible for UI/UX design, development, and market strategy.</p>
+                            <div class="tags">
+                                <span class="tag">Android</span> <span class="tag">50k+ Downloads</span> <span class="tag">UI/UX</span> <span class="tag">Bootstrap</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="publications">
+            <div class="container">
+                <h2 class="section-title">Publications & Thesis</h2>
+                <ul class="publication-list">
+                    <li class="publication-item">
+                        <span class="date">2021</span>
+                        <p>A Case Study of Open Source Platform for AI-Based Conversational Chatbot Design</p>
+                        <span class="venue">Korea Institute of Information & Telecommunication Facilities Engineering</span>
+                    </li>
+                    <li class="publication-item">
+                        <span class="date">2021</span>
+                        <p>A Study of Healthcare Chatbot Architecture With Conversational Platform Dialogflow</p>
+                        <span class="venue">Korea Institute of Information & Telecommunication Facilities Engineering</span>
+                    </li>
+                    <li class="publication-item">
+                        <span class="date">2021</span>
+                        <p>A STUDY OF DESIGNING CONVERSATIONAL AI CHATBOT WITH EMOTION USING NLP AND NLU</p>
+                        <span class="venue">IASER - E-CS</span>
+                    </li>
+                    <li class="publication-item">
+                        <span class="date">2021</span>
+                        <p>A STUDY OF INDOOR INTERACTIVE DIGITAL SIGNAGE WITH CONTEXT-AWARENESS RECOMMENDATION</p>
+                        <span class="venue">IASER - E-CS</span>
+                    </li>
+                    <li class="publication-item">
+                        <span class="date">2020</span>
+                        <p>A Contactless Personal Health Monitoring System Using Raspberry Pi Based Smart Mirror</p>
+                        <span class="venue">IASER - E-CS</span>
+                    </li>
+                    <li class="publication-item">
+                        <span class="date">2015</span>
+                        <p>A Parallel Implementation of JPEG2000 4K Ultra High Definition Image using OpenCL</p>
+                        <span class="venue">Journal of Satellite, Information and Communications</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="contact-info">
+                <h3>Contact</h3>
+                <p><strong>Email (Primary):</strong> dspark@superblaze.net</p>
+                <p><strong>Phone (KR):</strong> +82 10 6454 7777 | <strong>Phone (US):</strong> +1 657 410 9449</p>
+            </div>
+            <p>&copy; 2025 Daeseung Park. All Rights Reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        const allSections = document.querySelectorAll('section, footer');
+        const navLi = document.querySelectorAll('nav .nav-menu li a:not(.external-link)');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            if (window.pageYOffset < 100) {
+                 current = 'page-top';
+            } else {
+                allSections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (window.pageYOffset >= sectionTop - 150) { 
+                        current = section.getAttribute('id');
+                    }
+                });
+            }
+
+            navLi.forEach(a => {
+                a.classList.remove('active');
+                if (a.getAttribute('href').substring(1) === current) {
+                    a.classList.add('active');
+                }
+            });
+        });
+    </script>
 </body>
+</html>
