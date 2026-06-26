@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>비접촉으로 생체신호를 읽다 — D. PARK Journal</title>
+<meta name="description" content="카메라 하나로 맥박을 재고, 앞에 선 사람을 알아보는 사이니지를 만들던 이야기. 빛과 잡음, 그리고 조용한 컴퓨팅에 대한 회고.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Noto+Serif+KR:wght@400;600&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/css/article.css">
+</head>
+<body data-base="../../">
+<div class="progress-bar" id="progress"></div>
+
+<!-- Header -->
+<header class="site-header no-print">
+  <div class="container-x nav-row">
+    <a href="../../index.html" class="brand">D<span class="dot">.</span> PARK <small>Journal</small></a>
+    <nav class="main-nav">
+      <a href="../../index.html">Home</a>
+      <a href="../../profile.html">Profile</a>
+      <a href="../../articles.html" class="active">Articles</a>
+      <a href="../../index.html#contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="테마 전환"><span id="themeIcon">☾</span></button>
+      <button class="print-cta" id="printBtn">🖶 인쇄 / PDF</button>
+      <button class="icon-btn nav-toggle" id="navToggle" aria-label="메뉴">≡</button>
+    </div>
+  </div>
+</header>
+
+<article data-article-id="6">
+  <div class="article-wrap">
+    <!-- Masthead -->
+    <header class="art-head">
+      <span class="cat-pill red">Research · 회고</span>
+      <h1>비접촉으로 생체신호를 읽다</h1>
+      <p class="deck">카메라 한 대만으로 맥박을 잴 수 있다는 것을, 처음 알았을 때의 묘한 감각을 기억한다. 손목에 무엇도 채우지 않고, 피부에 닿는 것 없이, 화면 앞에 잠시 서 있기만 하면 된다. 그 작은 마법을 현장에서 작동하게 만들려던 시간들의 기록이다.</p>
+      <div class="art-byline">
+        <div class="av">DP</div>
+        <div class="who">
+          <b>박대승 (Daeseung Park)</b>
+          <span>AI &amp; Software Systems Engineer · KAIST</span>
+          <span>2026년 6월 · 12분 읽기</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="art-cover"><div class="fill-2 fill-grid" style="position:absolute;inset:0;"></div></div>
+
+    <!-- Summary -->
+    <div class="summary-box">
+      <span class="tag">1분 요약</span>
+      심장이 한 번 뛸 때마다 피부 아래로 혈액이 밀려들고, 그만큼 피부의 색은 사람 눈에는 보이지 않을 만큼 미세하게 출렁인다. 광용적맥파(PPG, Photoplethysmography)는 바로 이 색의 떨림을 읽어 맥박을 추정하는 원리다. 라즈베리파이 기반 스마트 미러에 카메라를 달아, 거울 앞에 선 사람의 얼굴에서 비접촉으로 맥박을 추정하는 시스템을 만들었다. 같은 단말에는 앞에 선 사람의 맥락을 인식해 콘텐츠를 바꾸는 인터랙티브 디지털 사이니지, 머신러닝 기반 콘텐츠 관리, 그리고 이종(異種) 기기로 구성한 듀얼 스크린 사이니지(등록 특허)가 함께 얹혔다. 이 글은 그 ‘실감형 콘텐츠 단말’이 실험실 데모에서 복도의 거울이 되기까지, 빛과 잡음과 씨름하며 배운 것들을 정리한다.
+    </div>
+
+    <!-- Body -->
+    <div class="prose">
+      <span class="chapter-label">Chapter 1. 거의 마법 같은 아이디어</span>
+      <h2>맥박은 피부 위에 색으로 떠오른다</h2>
+      <p>혈액은 빛을 흡수한다. 특히 헤모글로빈은 녹색 파장의 빛을 잘 빨아들인다. 심장이 한 번 박동하면 혈액이 모세혈관으로 밀려들고, 그 순간 피부는 아주 조금 더 많은 빛을 흡수한다. 다시 혈액이 빠지면 흡수량은 줄어든다. 그래서 피부의 밝기는 심장의 리듬을 따라 미세하게 오르내린다. 사람의 눈으로는 결코 알아챌 수 없는, 수십 분의 일 수준의 변화다. 그러나 카메라의 센서는 그 떨림을 숫자로 붙잡을 수 있다.</p>
+      <p>광용적맥파, 즉 PPG는 본래 손가락 끝에 집게처럼 끼우는 산소포화도 측정기에서 익숙한 원리다. 거기서는 LED와 광센서가 피부를 사이에 두고 빛의 투과·반사량을 잰다. 우리가 한 일은 그 측정에서 ‘접촉’을 들어낸 것이다. 전용 센서 대신 평범한 카메라로, 피부에 닿는 대신 얼굴 영역의 픽셀 값이 시간에 따라 어떻게 변하는지를 추적했다. 얼굴에서 피부가 잘 드러난 영역(이마, 뺨)을 골라 평균 색상을 프레임마다 기록하면, 그 신호 안에 심박의 주기가 숨어 있다. 잡음에 묻힌 그 주기를 신호처리로 끄집어내면, 손목에 아무것도 채우지 않고도 맥박 수가 떠오른다.</p>
+
+      <div class="pullquote">심장이 뛸 때마다 피부의 색은 미세하게 출렁인다. 사람은 못 보지만, 카메라는 그 떨림을 숫자로 붙잡는다.</div>
+
+      <p>왜 굳이 비접촉이어야 하는가. 첫째는 위생이다. 여러 사람이 오가는 공공 공간에서 같은 센서를 돌려 쓰는 일에는 늘 거부감이 따른다. 닿지 않으면 그 부담이 사라진다. 둘째는 일상성이다. 측정을 위해 무언가를 ‘착용’하는 순간 그것은 의료 행위가 되지만, 거울 앞에서 양치를 하는 30초 동안 맥박이 슬그머니 읽힌다면 그것은 생활의 일부가 된다. 셋째는 접근성이다. 기기 조작이 서툰 사람도, 손이 불편한 사람도, 그저 앞에 서 있기만 하면 된다. 측정의 문턱을 낮추는 일은 곧 건강을 살피는 일을 더 많은 사람에게 돌려주는 일이었다.</p>
+
+      <span class="chapter-label">Chapter 2. 엔지니어링의 현실</span>
+      <h2>데모는 똑똑한데 복도의 거울은 멍청한 이유</h2>
+      <p>아이디어가 우아할수록 현실은 가혹하다. 통제된 실험실에서, 좋은 조명 아래, 가만히 앉아 카메라를 응시하는 사람의 맥박을 재는 일은 어렵지 않다. 문제는 그 다음이다. 거울은 복도에 걸린다. 사람은 가만히 있지 않는다. 조명은 형광등이 깜빡이거나 창으로 든 햇빛이 시시각각 바뀐다. 데모에서 또렷하던 신호는 현장에서 잡음 속으로 가라앉는다.</p>
+      <p>가장 큰 적은 세 가지였다. <strong>움직임</strong>, <strong>조명</strong>, 그리고 <strong>잡음</strong>. 사람이 고개를 돌리거나 표정을 바꾸면 얼굴 영역의 밝기가 심박과는 무관하게 크게 출렁인다. 이 변화는 심박 신호보다 진폭이 훨씬 커서, 그대로 두면 진짜 신호를 완전히 덮어버린다. 조명도 마찬가지다. 형광등의 50/60Hz 깜빡임, 지나가는 사람의 그림자, 시간대에 따른 광량 변화가 모두 가짜 주기를 만들어낸다.</p>
+
+      <div class="callout"><b>엔지니어링 노트.</b> 강건함은 한 방의 묘수가 아니라 여러 겹의 방어선에서 나왔다. (1) 얼굴 검출로 관심 영역을 매 프레임 다시 잡아 머리의 작은 움직임을 따라가게 했고, (2) 심박이 존재할 수 있는 주파수 대역(대략 0.7~4Hz, 즉 분당 42~240회)만 통과시키는 대역통과 필터로 조명 잡음을 깎아냈으며, (3) 여러 색 채널을 결합해 움직임 성분과 맥박 성분을 분리하는 방식으로 신호 대 잡음비를 끌어올렸다. (4) 무엇보다 신뢰도가 낮은 구간에서는 <code>측정 중…</code>이라고 솔직히 표시하고 값을 내놓지 않게 했다. 틀린 숫자보다 침묵이 낫다.</p></div>
+
+      <p>가장 중요한 설계 결정은 마지막 항목이었다. 비접촉 측정은 태생적으로 항상 잴 수 있는 기술이 아니다. 사람이 움직이는 동안, 빛이 흔들리는 동안에는 신뢰할 수 없다. 그래서 우리는 ‘언제나 숫자를 보여주는 시스템’이 아니라 ‘잴 수 있을 때만 조용히 알려주는 시스템’으로 방향을 틀었다. 신호의 안정성을 스스로 평가해 일정 기준을 넘을 때만 결과를 띄우게 하자, 사용자가 느끼는 신뢰가 비로소 올라갔다. 정확도란 숫자의 오차만이 아니라, 틀릴 때 틀렸다고 말할 줄 아는 정직함이기도 했다.</p>
+
+      <figure>
+        <div class="fig-box"><div class="fill-4 fill-grid" style="position:absolute;inset:0;"></div></div>
+        <figcaption>비접촉 PPG 파이프라인: 얼굴 검출 → 관심 영역 색상 추적 → 대역통과 필터 → 주파수 분석 → 신뢰도 평가. 마지막 단계가 데모를 현장 제품으로 바꾸는 관문이었다.</figcaption>
+      </figure>
+
+      <table>
+        <thead><tr><th></th><th>접촉식 측정</th><th>비접촉(카메라) 측정</th></tr></thead>
+        <tbody>
+          <tr><td>위생</td><td>공용 시 부담</td><td>닿지 않아 자유로움</td></tr>
+          <tr><td>일상성</td><td>착용·조작 필요</td><td>그냥 서 있으면 됨</td></tr>
+          <tr><td>정확도</td><td>안정적·높음</td><td>조건에 민감</td></tr>
+          <tr><td>약점</td><td>거부감·번거로움</td><td>움직임·조명에 취약</td></tr>
+          <tr><td>적합한 곳</td><td>임상·정밀 측정</td><td>생활공간의 상시 모니터링</td></tr>
+        </tbody>
+      </table>
+      <p>이 표를 정리하면서 분명해진 것은, 비접촉 측정이 접촉식을 ‘대체’하는 기술이 아니라는 점이다. 그것은 다른 자리를 차지한다. 정밀이 필요한 임상은 여전히 접촉식의 몫이다. 비접촉 측정의 진짜 가치는, 지금까지 아무도 재지 않던 순간 — 거울 앞에 선 평범한 아침 30초 — 에 부드럽게 끼어들어 건강의 결을 ‘상시적으로’ 살핀다는 데 있었다.</p>
+
+      <span class="chapter-label">Chapter 3. 앞에 선 사람을 알아보는 사이니지</span>
+      <h2>주의를 요구하지 않고, 먼저 알아채는 화면</h2>
+      <p>같은 단말에는 또 하나의 축이 있었다. 인터랙티브 디지털 사이니지다. 보통의 사이니지는 정해진 콘텐츠를 일방적으로 재생한다. 우리가 만들려던 것은 앞에 선 사람의 맥락을 인식해 스스로 콘텐츠를 바꾸는 화면이었다. 누가, 어떤 상황에서, 얼마나 가까이 서 있는지 — 그 맥락(context)에 따라 무엇을 보여줄지 달라진다. 멀리 있는 사람에게는 큰 글씨의 환기성 화면을, 가까이 다가온 사람에게는 상세한 인터랙션을 내미는 식이다.</p>
+      <p>여기서 머신러닝은 두 곳에서 일했다. 하나는 맥락 인식 추천 — 어떤 맥락에 어떤 콘텐츠가 잘 반응하는지를 누적된 데이터로부터 학습해, 다음에 비슷한 맥락이 오면 더 적절한 것을 고른다. 다른 하나는 스마트 콘텐츠 관리 — 수많은 콘텐츠가 언제·어디서 잘 작동했는지를 모델이 정리해, 운영자가 일일이 편성하지 않아도 적합한 배치를 제안하게 했다. 사이니지가 단순한 ‘재생기’에서 ‘판단하는 화면’으로 바뀌는 지점이었다.</p>
+
+      <div class="pullquote">좋은 화면은 사람에게 주의를 요구하지 않는다. 사람이 다가오면 먼저 알아채고, 떠나면 조용히 물러선다.</div>
+
+      <p>기술적으로 가장 까다로웠던 것은 이종(異種) 기기로 구성한 듀얼 스크린 사이니지였다. 성능과 특성이 서로 다른 두 기기 — 이를테면 가벼운 임베디드 기기와 성능이 높은 디스플레이 — 를 하나의 콘텐츠 경험으로 묶는 일이다. 한 화면이 맥락을 감지하고 다른 화면이 풍부한 콘텐츠를 띄우되, 둘은 끊김 없이 호흡을 맞춰야 했다. 서로 다른 운영 체계와 처리 속도를 가진 기기를 시간적으로 동기화하고 역할을 나누는 이 구조는 등록 특허로 정리되었다. 특허 그 자체보다 의미 있던 것은, 값싼 기기와 비싼 기기를 섞어 쓰면서도 하나처럼 보이게 만드는 — 즉 현실의 예산과 이상의 경험 사이를 잇는 — 설계 사고였다.</p>
+
+      <span class="chapter-label">Chapter 4. 이 모든 것을 꿰는 실</span>
+      <h2>컴퓨팅을 조용하고 인간적인 것으로</h2>
+      <p>맥박을 읽는 거울과, 사람을 알아보는 사이니지. 표면적으로는 다른 프로젝트처럼 보이지만, 둘을 꿰는 실은 하나였다. <strong>주의를 요구하지 않는 컴퓨팅</strong>이다. 좋은 기술은 사용자에게 “나를 봐, 나를 조작해”라고 외치지 않는다. 거울 앞에 서면 맥박이 슬그머니 읽히고, 화면 앞에 다가서면 알맞은 내용이 먼저 떠오른다. 사람은 평소처럼 살아가고, 기술은 배경에서 감지하고 반응한다.</p>
+      <p>이것을 흔히 ‘앰비언트 컴퓨팅(ambient computing)’이라 부른다. 계산이 특정 기기 안에 갇혀 사용자의 명령을 기다리는 대신, 환경 속에 스며들어 맥락을 읽고 조용히 거든다는 발상이다. 비접촉 측정과 맥락 인식 사이니지는 같은 철학의 두 얼굴이었다. 전자는 ‘닿지 않고 감지’하고, 후자는 ‘요구하지 않고 반응’한다. 둘 다 사람에게서 부담을 덜어내려는 시도였다.</p>
+      <p>다만 이 방향에는 윤리적 책임이 따라온다. 감지하는 기술은 곧 지켜보는 기술이기도 하다. 그래서 우리는 처음부터 원칙을 세웠다. 영상 자체는 저장하지 않고 측정에 필요한 신호만 즉시 추출해 버린다. 추천은 한 사람을 ‘식별’하기보다 ‘맥락’을 읽는 데 그친다. 조용한 컴퓨팅이 감시가 되지 않으려면, 무엇을 감지하지 ‘않을’지를 먼저 설계해야 했다.</p>
+
+      <span class="chapter-label">맺음말</span>
+      <h2>데모가 아니라 현장을 위해 짓는다는 것</h2>
+      <p>이 프로젝트가 내게 남긴 가장 큰 교훈은 기술적이라기보다 태도에 가깝다. 실험실의 데모와 복도의 거울은 같은 코드를 공유하면서도 전혀 다른 존재다. 데모는 가장 좋은 조건에서 ‘된다’를 보여주면 되지만, 현장은 가장 나쁜 조건에서 ‘무너지지 않는다’를 증명해야 한다. 그 사이의 거리는 알고리즘의 정교함이 아니라, 실패를 어떻게 다루느냐로 메워진다.</p>
+      <p>비접촉 측정에서 우리가 끝내 자랑스러워한 것은 정확도 숫자가 아니라, 신뢰할 수 없을 때 조용히 입을 다무는 정직함이었다. 사이니지에서 의미 있던 것은 화려한 인터랙션이 아니라, 값싼 기기와 비싼 기기를 섞어 현실의 제약 안에서 하나의 경험을 만든 설계였다. 현장을 위해 짓는다는 것은, 이상을 낮추는 일이 아니라 이상을 현실의 잡음 속에서도 견디게 다듬는 일이었다. 화면 앞에 잠시 멈춰 선 누군가가, 자신이 무엇과 마주하고 있는지조차 의식하지 못한 채 조용히 도움을 받았다면 — 그것으로 이 작업은 제 몫을 다한 것이라 믿는다.</p>
+
+      <div class="references">
+        <h4>참고</h4>
+        <ol>
+          <li>D. Park et al., “비접촉 광용적맥파(PPG) 기반 스마트 미러를 이용한 개인 건강 모니터링,” 실감형 콘텐츠 단말 관련 연구, 2020년대.</li>
+          <li>D. Park et al., “맥락 인식 기반 인터랙티브 디지털 사이니지와 머신러닝을 활용한 스마트 콘텐츠 관리,” 디지털 사이니지 관련 연구.</li>
+          <li>등록 특허, “이종 기기 기반 듀얼 스크린 디지털 사이니지 시스템 및 그 운용 방법.”</li>
+          <li>본문의 수치(주파수 대역, 측정 시간 등)는 원리를 설명하기 위한 일반적 값으로, 구체적 값은 환경·기기·조건에 따라 달라진다.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer of article -->
+  <div class="art-foot">
+    <div class="art-tags">
+      <a href="#">#비접촉측정</a><a href="#">#PPG</a><a href="#">#스마트미러</a><a href="#">#디지털사이니지</a><a href="#">#앰비언트컴퓨팅</a>
+    </div>
+    <div class="author-card">
+      <div class="av">DP</div>
+      <div class="who">
+        <b>박대승 · Daeseung Park</b>
+        <p>KAIST 연구 엔지니어. 대형언어모델, 시계열 예측, 대화형 AI를 연구합니다. 연구의 과정을 가능한 한 정확하고 읽기 좋게 기록하려 합니다.</p>
+      </div>
+    </div>
+
+    <div class="read-next no-print">
+        <div class="section-head" style="margin-bottom:20px;"><h2 style="font-size:1.3rem;">다음 글</h2></div>
+        <div class="grid grid-2" id="readNext"></div>
+      </div>
+      <nav class="post-nav no-print" id="postNav"></nav>
+    </div>
+</article>
+
+<div class="print-footer">Daeseung Park · D. PARK Journal — 비접촉으로 생체신호를 읽다</div>
+
+<footer class="site-footer no-print">
+  <div class="container-x">
+    <div class="footer-bottom" style="border:0;padding-top:0;">
+      <span>© 2026 Daeseung Park. All rights reserved.</span>
+      <span><a href="../../index.html">← 저널 홈</a></span>
+    </div>
+  </div>
+</footer>
+
+<div class="mobile-nav" id="mobileNav">
+  <button class="icon-btn close" id="navClose" aria-label="닫기">✕</button>
+  <a href="../../index.html">Home</a>
+  <a href="../../profile.html">Profile</a>
+  <a href="../../articles.html">Articles</a>
+  <a href="../../index.html#contact">Contact</a>
+</div>
+
+<script src="../../assets/js/articles.js"></script>
+<script src="../../assets/js/main.js"></script>
+</body>
+</html>

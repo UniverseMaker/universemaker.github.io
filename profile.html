@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profile — Daeseung Park 박대승 | AI &amp; Software Systems Engineer</title>
+<meta name="description" content="박대승(Daeseung Park) 프로필 — KAIST 연구 엔지니어. 경력, 연구 프로젝트, 논문, 특허 및 소프트웨어 등록 내역.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Noto+Serif+KR:wght@400;600&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/article.css">
+<style>
+  /* profile-specific */
+  .prof-hero { background: linear-gradient(150deg,#11132a,#090a16); color:#fff; padding: 70px 0 64px; position:relative; overflow:hidden; }
+  .prof-hero::before { content:""; position:absolute; inset:0; background-image: linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px); background-size:38px 38px; opacity:.5; }
+  .prof-hero .container-x { position:relative; z-index:2; display:flex; gap:34px; align-items:center; flex-wrap:wrap; }
+  .prof-avatar { width:120px; height:120px; border-radius:28px; background:linear-gradient(135deg,#3a4cf0,#1b2461); display:grid; place-items:center; font-family:var(--display); font-size:3rem; font-weight:600; flex:none; box-shadow:var(--shadow-lg); }
+  .prof-hero h1 { font-family:var(--display); font-size:3rem; font-weight:600; margin:0 0 4px; letter-spacing:-.02em; }
+  .prof-hero .ko { font-size:1.3rem; color:rgba(255,255,255,.7); font-family:var(--sans); }
+  .prof-hero .role { font-size:1.15rem; color:var(--gold); font-weight:600; margin-top:8px; }
+  .prof-hero .contact-row { display:flex; flex-wrap:wrap; gap:18px; margin-top:18px; font-size:.9rem; color:rgba(255,255,255,.8); }
+  .prof-hero .contact-row a { color:rgba(255,255,255,.92); border-bottom:1px solid rgba(255,255,255,.3); }
+  .prof-nav { position:sticky; top:74px; z-index:1000; background:var(--bg); border-bottom:1px solid var(--line); }
+  .prof-nav .container-x { display:flex; gap:26px; overflow-x:auto; height:54px; align-items:center; font-weight:600; font-size:.9rem; }
+  .prof-nav a { color:var(--muted); white-space:nowrap; }
+  .prof-nav a:hover { color:var(--ink); }
+  .prof-section { padding:52px 0; border-bottom:1px solid var(--line); }
+  .prof-section > .container-x { max-width:960px; }
+  .prof-section h2 { font-family:var(--display); font-size:1.9rem; font-weight:600; margin:0 0 6px; letter-spacing:-.01em; }
+  .prof-section .en { color:var(--muted); font-size:.95rem; margin-bottom:28px; font-style:italic; }
+  /* timeline */
+  .tl { position:relative; padding-left:26px; }
+  .tl::before { content:""; position:absolute; left:6px; top:6px; bottom:6px; width:2px; background:var(--line); }
+  .tl-item { position:relative; margin-bottom:26px; }
+  .tl-item::before { content:""; position:absolute; left:-26px; top:7px; width:12px; height:12px; border-radius:50%; background:var(--accent); box-shadow:0 0 0 4px var(--bg); }
+  .tl-item .when { font-size:.8rem; font-weight:700; letter-spacing:.04em; color:var(--accent-ink); text-transform:uppercase; }
+  .tl-item h3 { font-family:var(--display); font-size:1.25rem; font-weight:600; margin:4px 0 2px; }
+  .tl-item .org { color:var(--ink-soft); font-weight:600; }
+  .tl-item p { color:var(--muted); font-size:.95rem; margin:6px 0 0; }
+  /* skill chips */
+  .chips { display:flex; flex-wrap:wrap; gap:9px; }
+  .chips span { font-size:.86rem; font-weight:600; padding:7px 14px; border-radius:999px; background:var(--surface); border:1px solid var(--line); color:var(--ink-soft); }
+  .subhead { font-family:var(--sans); font-weight:700; font-size:1rem; color:var(--ink); margin:26px 0 12px; letter-spacing:.01em; }
+  /* project cards */
+  .proj { border:1px solid var(--line); border-radius:var(--radius); padding:24px 26px; margin-bottom:18px; background:var(--bg); transition:.25s; }
+  .proj:hover { box-shadow:var(--shadow); transform:translateY(-2px); }
+  .proj .funder { font-size:.76rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--accent-ink); }
+  .proj h3 { font-family:var(--display); font-size:1.2rem; font-weight:600; margin:6px 0; line-height:1.3; }
+  .proj .en-t { color:var(--muted); font-size:.9rem; font-style:italic; margin-bottom:10px; }
+  .proj p { color:var(--ink-soft); font-size:.95rem; margin:0; line-height:1.7; }
+  /* publication list */
+  .pub { display:grid; grid-template-columns:120px 1fr; gap:18px; padding:16px 0; border-bottom:1px solid var(--line-soft); }
+  .pub .badge { font-size:.72rem; }
+  .pub .badge b { display:inline-block; background:var(--ink); color:var(--bg); padding:3px 8px; border-radius:4px; font-size:.68rem; letter-spacing:.06em; }
+  .pub .badge.scie b { background:var(--accent); }
+  .pub .badge.kci b { background:var(--gold); }
+  .pub .when { display:block; color:var(--muted); font-size:.78rem; margin-top:6px; }
+  .pub h4 { font-family:var(--serif); font-size:1.05rem; font-weight:600; margin:0 0 4px; line-height:1.45; color:var(--ink); }
+  .pub .venue { color:var(--muted); font-size:.88rem; }
+  .pub .role-tag { color:var(--accent-ink); font-weight:600; font-size:.8rem; }
+  .grid-2-col { display:grid; grid-template-columns:1fr 1fr; gap:14px 40px; }
+  @media (max-width:700px){ .grid-2-col{grid-template-columns:1fr;} .pub{grid-template-columns:1fr;gap:4px;} .prof-hero h1{font-size:2.2rem;} }
+</style>
+</head>
+<body>
+
+<!-- ===== Header ===== -->
+<header class="site-header">
+  <div class="container-x nav-row">
+    <a href="index.html" class="brand">D<span class="dot">.</span> PARK <small>Journal</small></a>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="profile.html" class="active">Profile</a>
+      <a href="articles.html">Articles</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="테마 전환"><span id="themeIcon">☾</span></button>
+      <button class="print-cta no-print" id="printBtn">🖶 인쇄 / PDF</button>
+      <button class="icon-btn nav-toggle" id="navToggle" aria-label="메뉴">≡</button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== Profile hero ===== -->
+<section class="prof-hero">
+  <div class="container-x">
+    <div class="prof-avatar">DP</div>
+    <div>
+      <h1>Daeseung Park <span class="ko">박대승</span></h1>
+      <div class="role">AI Engineer &amp; Software Systems Engineer</div>
+      <div class="contact-row">
+        <span>📍 KAIST, Daejeon, Korea</span>
+        <a href="mailto:dspark@daeseungpark.com">dspark@daeseungpark.com</a>
+        <a href="https://github.com/UniverseMaker" target="_blank" rel="noopener">github.com/UniverseMaker</a>
+        <a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener">ORCID</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Section nav ===== -->
+<nav class="prof-nav no-print">
+  <div class="container-x">
+    <a href="#profile">경력 Experience</a>
+    <a href="#skills">역량 Skills</a>
+    <a href="#research-projects">연구 Projects</a>
+    <a href="#portfolio">포트폴리오</a>
+    <a href="#publications">논문 Publications</a>
+    <a href="#patents">특허·SW</a>
+    <a href="#contact">연락처 Contact</a>
+  </div>
+</nav>
+
+<!-- ===== Experience ===== -->
+<section class="prof-section" id="profile">
+  <div class="container-x">
+    <h2>경력</h2>
+    <div class="en">Experience</div>
+    <div class="tl">
+      <div class="tl-item">
+        <span class="when">2023.05 — 현재</span>
+        <h3>Research Engineer · 연구 엔지니어</h3>
+        <div class="org">한국과학기술원 (KAIST)</div>
+        <p>KAIST 정보전자연구소 · 공과대학 융합연구센터 · 대전광역시–KAIST 전략협력 연구센터. 대형언어모델, 시계열 예측, 대화형 AI 기반 응용 시스템 연구·개발.</p>
+      </div>
+      <div class="tl-item">
+        <span class="when">2020.08 — 2023.05</span>
+        <h3>Participating Researcher · 참여 연구원</h3>
+        <div class="org">광운대학교 산학협력단</div>
+      </div>
+      <div class="tl-item">
+        <span class="when">2020.03 — 2023.05</span>
+        <h3>Associate Researcher · 책임 연구원</h3>
+        <div class="org">남서울대학교 산학협력단</div>
+      </div>
+      <div class="tl-item">
+        <span class="when">2014.02 — 2015.03</span>
+        <h3>Participating Researcher · 참여 연구원</h3>
+        <div class="org">미래창조과학부 — 3D 스마트미디어/증강현실 프로젝트</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Skills / Awards / Certs ===== -->
+<section class="prof-section" id="skills">
+  <div class="container-x">
+    <h2>역량 &amp; 자격</h2>
+    <div class="en">Skills, Awards &amp; Certifications</div>
+
+    <div class="subhead">기술 (Skills)</div>
+    <div class="chips">
+      <span>Back-end</span><span>Front-end</span><span>Database</span><span>Android</span>
+      <span>C#</span><span>C/C++</span><span>Java</span><span>Python</span><span>Ruby</span>
+      <span>UI/UX</span><span>Bootstrap</span><span>Photoshop</span><span>Vegas</span>
+    </div>
+
+    <div class="subhead">수상 (Awards)</div>
+    <div class="tl">
+      <div class="tl-item"><span class="when">2010.06</span><h3>정보통신 동상</h3><div class="org">상업실무능력경진대회</div></div>
+      <div class="tl-item"><span class="when">2009.10</span><h3>정보통신 우수상</h3><div class="org">지방기능경기대회</div></div>
+      <div class="tl-item"><span class="when">2008.06</span><h3>정보통신 동상</h3><div class="org">상업실무능력경진대회</div></div>
+    </div>
+
+    <div class="subhead">자격증 (Certifications)</div>
+    <div class="grid-2-col" style="font-size:.94rem;color:var(--ink-soft);">
+      <div>• 정보처리기사 <span class="text-muted-x">(2014.08)</span></div>
+      <div>• 정보처리산업기사 <span class="text-muted-x">(2013.08)</span></div>
+      <div>• 윈도우포렌식전문가 <span class="text-muted-x">(2013.06)</span></div>
+      <div>• 리눅스마스터 <span class="text-muted-x">(2009.12)</span></div>
+      <div>• 네트워크관리사 <span class="text-muted-x">(2009.12)</span></div>
+      <div>• CCNA <span class="text-muted-x">(2009.02)</span></div>
+      <div>• LPIC <span class="text-muted-x">(2009.02)</span></div>
+      <div>• 정보처리기능사 <span class="text-muted-x">(2002.05)</span></div>
+    </div>
+
+    <div class="subhead">Google 특별 인증 (Special Credentials)</div>
+    <div class="chips">
+      <span>Google Workspace Deployment Specialist</span>
+      <span>Google Education Deployment Specialist</span>
+      <span>Google Cloud Sales Specialist</span>
+      <span>Google Education Sales Specialist</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Research Projects ===== -->
+<section class="prof-section" id="research-projects">
+  <div class="container-x">
+    <h2>연구 프로젝트</h2>
+    <div class="en">Research Projects</div>
+
+    <div class="proj">
+      <div class="funder">행정안전부 (Ministry of the Interior and Safety)</div>
+      <h3>신종 감염병 해외유입 예측 및 지능적 차단 기술개발</h3>
+      <div class="en-t">Predicting &amp; Intelligently Blocking Overseas Inflow of New Infectious Diseases</div>
+      <p>역학조사관의 업무 수행을 보조하는 에이전트 연구. 급격한 수치 변화에 적응하며 위상 지연(phase delay)을 줄인 감염자 시계열 예측 모델을 연구해 높은 추론 성능을 달성.</p>
+    </div>
+
+    <div class="proj">
+      <div class="funder">한국수력원자력 — 일주지앤에스 / 위탁</div>
+      <h3>한수원 원전 빅데이터 플랫폼 AI 분석 모델 개발 및 자문</h3>
+      <div class="en-t">AI Analysis Models for KHNP Nuclear Power Plant Big Data Platform</div>
+      <p>원자로 발전량 예측에서, 자연어처리·기계번역에 주로 쓰이는 Seq2Seq(Encoder–Decoder) 구조를 시계열 예측에 도입. 환경변수를 입력으로 활용한 다변량 학습으로 높은 추론 성능을 달성.</p>
+    </div>
+
+    <div class="proj">
+      <div class="funder">대전광역시청 — LX / KAIST 컨소시엄</div>
+      <h3>융복합 데이터 활용 실감형 소방안전도시 구축</h3>
+      <div class="en-t">Realistic Fire-Safe City Utilizing Converged Data</div>
+      <p>지하시설물 파손을 예측하고 보전방안을 제안하는 언어생성 모델 연구. 운용 환경 특성상 GPU 없이 CPU 기반 추론이 가능한 경량 언어모델, 토지 정보로 추론·생성하는 GeoLLM, 가변 레이어 학습 기술 등을 연구.</p>
+    </div>
+
+    <div class="proj">
+      <div class="funder">과학기술정보통신부 (Ministry of Science and ICT)</div>
+      <h3>광역권 도시를 위한 차세대 AI 융합 모빌리티 시뮬레이션 및 예측/활용 기술 개발</h3>
+      <div class="en-t">Next-Gen AI-Converged Mobility Simulation for Metropolitan Areas</div>
+      <p>AI 기반 교통 예측 시뮬레이션 개발을 목표로 진행 중.</p>
+    </div>
+
+    <div class="proj">
+      <div class="funder">한국연구재단 · 학제간융합연구 (2021.06 — 2022.07, 주참여)</div>
+      <h3>독거 중고령자의 디지털 헬스케어를 위한 AI 기반 치료적 의사소통 챗봇 연구</h3>
+      <div class="en-t">AI-based Therapeutic Communication Chatbot for Digital Healthcare</div>
+      <p>자연어처리, 인공신경망, 언어생성, 센서 기반 패턴 분석, 우울 진단, 긍·부정 판단, 감정 인식 등 핵심 기술 연구. SCI 1건·KCI 1건 게재, 챗봇 관련 특허 2건 출원, 데이터 수집 프로그램 4건 등록.</p>
+    </div>
+
+    <div class="proj">
+      <div class="funder">한국산업기술평가관리원 · 시스템반도체핵심IP (2020.04 — 2022.07, 보조참여)</div>
+      <h3>모바일 기기 내장형 동적 실시간 3D 오디오 사운드 렌더링 IP 개발</h3>
+      <div class="en-t">Sound Rendering IP for Real-time 3D Audio in Mobile Devices</div>
+      <p>3차원 오디오 렌더링 칩셋과 이를 구동하는 소프트웨어 개발. 리눅스 기반 SW 개발, 칩셋 API 프로토콜 설계, 드라이버 SW 개발 및 연구논문 작성을 수행.</p>
+    </div>
+
+    <div class="proj">
+      <div class="funder">정보통신기획평가원 · 대학ICT연구센터 (2020.09 — 2022.08, 보조참여)</div>
+      <h3>실감콘텐츠 단말 기술 연구 개발</h3>
+      <div class="en-t">Immersive Content Terminal Technology</div>
+      <p>대형 디스플레이 사이니지 단말, 디스플레이 연동·확장, 서버리스 단말 제어, 상황인지 기반 콘텐츠 관리·배포, 실감 콘텐츠 기술 연구. KCI 1건, 특허 1건, 프로그램 1건 등록.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Portfolio ===== -->
+<section class="prof-section" id="portfolio">
+  <div class="container-x">
+    <h2>포트폴리오</h2>
+    <div class="en">Selected Portfolio</div>
+    <div class="grid grid-3">
+      <div class="post-card"><div class="thumb"><div class="ph fill-3 fill-grid"></div><span class="cat-pill">Gov. Project</span></div>
+        <h3>언택트 의료 기술 R&amp;D</h3>
+        <p class="text-muted-x" style="font-size:.9rem;">스마트미러·디지털 사이니지 실감 단말 기술과 PPG 기반 비접촉 생체신호 측정.</p>
+        <div class="chips"><span>Smart Mirror</span><span>PPG</span></div>
+      </div>
+      <div class="post-card"><div class="thumb"><div class="ph fill-2 fill-grid"></div><span class="cat-pill">Gov. Project</span></div>
+        <h3>모바일 3D 오디오 사운드 렌더링 IP</h3>
+        <p class="text-muted-x" style="font-size:.9rem;">모바일 기기 내장형 실시간 3D 오디오 렌더링 IP. SoC·API 기술 중심.</p>
+        <div class="chips"><span>SoC</span><span>IP</span></div>
+      </div>
+      <div class="post-card"><div class="thumb"><div class="ph fill-1 fill-grid"></div><span class="cat-pill">Commercial</span></div>
+        <h3>Android 앱 «Mini's Lottery»</h3>
+        <p class="text-muted-x" style="font-size:.9rem;">5만+ 다운로드를 달성한 상용 안드로이드 앱. UI/UX·개발·시장 전략 담당.</p>
+        <div class="chips"><span>Android</span><span>50k+</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Publications ===== -->
+<section class="prof-section" id="publications">
+  <div class="container-x">
+    <h2>논문</h2>
+    <div class="en">Publications</div>
+
+    <div class="pub"><div class="badge scie"><b>SCIE</b><span class="when">2024.02</span></div>
+      <div><h4>A Study on Performance Improvement of Prompt Engineering for Generative AI with a Large Language Model</h4>
+      <span class="venue">Journal of Web Engineering</span> · <span class="role-tag">주저자</span></div></div>
+
+    <div class="pub"><div class="badge"><b>Intl. Conf.</b><span class="when">2023.10</span></div>
+      <div><h4>Short-term Korea East-sea Temperature Forecasting Approach based on Seq2Seq Model using Multi Parameters</h4>
+      <span class="venue">ICTC 2023</span> · <span class="role-tag">주저자</span></div></div>
+
+    <div class="pub"><div class="badge"><b>Intl. Conf.</b><span class="when">2023.10</span></div>
+      <div><h4>A Comparative Analysis of Time Series Forecasting Methods for Short-Term Electricity Demand Prediction</h4>
+      <span class="venue">ICTC 2023</span> · <span class="role-tag">제2저자</span></div></div>
+
+    <div class="pub"><div class="badge scie"><b>SCIE</b><span class="when">2022.09</span></div>
+      <div><h4>A Study of BERT-Based Classification Performance of Text-Based Health Counseling Data</h4>
+      <span class="venue">CMES — Computer Modeling in Engineering &amp; Sciences</span> · <span class="role-tag">제2저자</span></div></div>
+
+    <div class="pub"><div class="badge kci"><b>KCI</b><span class="when">2022.04</span></div>
+      <div><h4>단어그룹 확장 기법을 활용한 순환신경망 알고리즘 성능개선 연구</h4>
+      <span class="venue">산업융합연구 / 대한산업경영학회</span> · <span class="role-tag">주저자</span></div></div>
+
+    <div class="pub"><div class="badge kci"><b>KCI</b><span class="when">2021.09</span></div>
+      <div><h4>이기종 디바이스를 이용한 인터렉티브 디지털 사이니지 시스템 연구</h4>
+      <span class="venue">반도체디스플레이학회</span> · <span class="role-tag">주저자</span></div></div>
+
+    <div class="pub"><div class="badge"><b>국내학회</b><span class="when">2022.10</span></div>
+      <div><h4>지수 선형 단위와 로지스틱 회귀 모델의 비대칭 조합 함수를 활용한 순환신경망 성능 개선 연구</h4>
+      <span class="venue">한국산업정보학회 춘계학술대회</span> · <span class="role-tag">주저자</span></div></div>
+
+    <div class="pub"><div class="badge"><b>Intl. Conf.</b><span class="when">2022.12</span></div>
+      <div><h4>Implementation of Multi-Turn Chatbot with Weather Information Based on Dialogflow</h4>
+      <span class="venue">IASER — E-CS</span> · <span class="role-tag">주저자</span></div></div>
+
+    <div class="pub"><div class="badge"><b>Intl. Conf.</b><span class="when">2022.12</span></div>
+      <div><h4>A Study on DVI (Dialogue Voice Interface) based on AI Chatbot for Immersive Digital Signage Content</h4>
+      <span class="venue">IASER — E-CS</span> · <span class="role-tag">주저자</span></div></div>
+
+    <details style="margin-top:18px;">
+      <summary style="cursor:pointer;font-weight:700;color:var(--accent-ink);font-size:.95rem;">그 외 국제·국내 논문 더 보기 (9편)</summary>
+      <div style="margin-top:14px;">
+        <div class="pub"><div class="badge"><b>Intl. Conf.</b><span class="when">2022.12</span></div><div><h4>A Study on Web-Database-based Immersive Digital Signage Content Control</h4><span class="venue">IASER — E-CS</span> · <span class="role-tag">주저자</span></div></div>
+        <div class="pub"><div class="badge"><b>Intl. Conf.</b><span class="when">2022.07</span></div><div><h4>A Study of Multi-Model Chatbot Structure</h4><span class="venue">IASER — E-CS</span> · <span class="role-tag">주저자</span></div></div>
+        <div class="pub"><div class="badge"><b>Intl. Conf.</b><span class="when">2021.07</span></div><div><h4>A Study of Designing Conversational AI Chatbot with Emotion Using NLP and NLU</h4><span class="venue">IASER — E-CS</span> · <span class="role-tag">주저자</span></div></div>
+        <div class="pub"><div class="badge"><b>Intl. Conf.</b><span class="when">2021.07</span></div><div><h4>A Study of Indoor Interactive Digital Signage with Context-Awareness Recommendation</h4><span class="venue">IASER — E-CS</span> · <span class="role-tag">주저자</span></div></div>
+        <div class="pub"><div class="badge"><b>Intl. Conf.</b><span class="when">2020.12</span></div><div><h4>A Contactless Personal Health Monitoring System Using Raspberry Pi Based Smart Mirror</h4><span class="venue">IASER — E-CS</span> · <span class="role-tag">제3저자</span></div></div>
+        <div class="pub"><div class="badge"><b>Intl. Conf.</b><span class="when">2020.12</span></div><div><h4>A Study of Smart Contents Management System Using Machine Learning for Digital Signage</h4><span class="venue">IASER — E-CS</span> · <span class="role-tag">주저자</span></div></div>
+        <div class="pub"><div class="badge"><b>Intl. Conf.</b><span class="when">2020.12</span></div><div><h4>A Study of Proxy Based Information Crawling on Multi-Screen Digital Signage</h4><span class="venue">IASER — E-CS</span> · <span class="role-tag">제2저자</span></div></div>
+        <div class="pub"><div class="badge"><b>국내학회</b><span class="when">2021.08</span></div><div><h4>AI기반 대화형 챗봇 설계를 위한 오픈소스 플랫폼 사례 연구</h4><span class="venue">한국정보통신설비학회 하계학술대회</span> · <span class="role-tag">제4저자</span></div></div>
+        <div class="pub" style="border-bottom:0;"><div class="badge"><b>국내학회</b><span class="when">2021.08</span></div><div><h4>Dialogflow 대화형 플랫폼을 활용한 헬스케어 챗봇 구조 연구</h4><span class="venue">한국정보통신설비학회 하계학술대회</span> · <span class="role-tag">제4저자</span></div></div>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ===== Patents & Software ===== -->
+<section class="prof-section" id="patents">
+  <div class="container-x">
+    <h2>특허 &amp; 소프트웨어</h2>
+    <div class="en">Patents &amp; Software Registrations</div>
+
+    <div class="subhead">특허 (Patents)</div>
+    <div class="pub"><div class="badge"><b>출원</b><span class="when">2022.10</span></div>
+      <div><h4>선택적 모델 적용 기능을 구비한 멀티 모델 헬스케어 챗봇 시스템</h4><span class="venue">출원번호 10-2022-0130207</span></div></div>
+    <div class="pub"><div class="badge scie"><b>등록</b><span class="when">2022.06</span></div>
+      <div><h4>이기종 디바이스 간 디지털 사이니지 듀얼 스크린 시스템</h4><span class="venue">출원번호 10-2022-0067648 · 2025년 등록 완료</span></div></div>
+    <div class="pub"><div class="badge"><b>출원</b><span class="when">2022.03</span></div>
+      <div><h4>선택적 적시 챗봇 프로비저닝 기능을 구비한 계층적 다중 챗봇 디지털 헬스케어 시스템</h4><span class="venue">출원번호 10-2022-0035339</span></div></div>
+
+    <div class="subhead">소프트웨어 등록 (Software)</div>
+    <div class="grid-2-col" style="font-size:.92rem;color:var(--ink-soft);line-height:1.7;">
+      <div>• 대형 디스플레이 디지털 사이니지용 웹기반 템플릿 <span class="text-muted-x">C-2022-050983</span></div>
+      <div>• 건강상담사이트 질의응답 빅데이터 구성 SW <span class="text-muted-x">C-2022-047223</span></div>
+      <div>• 포탈사이트 건강 질의응답 빅데이터 구성 SW <span class="text-muted-x">C-2022-047222</span></div>
+      <div>• 챗봇 Dialogflow 학습데이터 분석·작성 지원 도구 <span class="text-muted-x">C-2022-000182</span></div>
+      <div>• 챗봇 Rasa 학습데이터 분석·작성 지원 도구 <span class="text-muted-x">C-2022-000181</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Contact ===== -->
+<section class="prof-section" id="contact" style="border-bottom:0;">
+  <div class="container-x">
+    <h2>연락처</h2>
+    <div class="en">Contact</div>
+    <div class="grid-2-col" style="font-size:1rem;color:var(--ink-soft);line-height:1.9;">
+      <div><b>Email (Primary)</b><br><a href="mailto:dspark@daeseungpark.com" style="color:var(--accent-ink);">dspark@daeseungpark.com</a></div>
+      <div><b>Email</b><br><a href="mailto:dspark@kaist.ac.kr" style="color:var(--accent-ink);">dspark@kaist.ac.kr</a></div>
+      <div><b>Phone (KR)</b><br>+82 10 6454 7777</div>
+      <div><b>Phone (US)</b><br>+1 657 410 9449</div>
+    </div>
+    <a href="index.html" class="btn-x" style="margin-top:26px;">← 저널 홈으로</a>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer class="site-footer">
+  <div class="container-x">
+    <div class="footer-bottom" style="border:0;padding-top:0;">
+      <span>© 2026 Daeseung Park. All rights reserved.</span>
+      <span><a href="index.html">D. PARK Journal</a></span>
+    </div>
+  </div>
+</footer>
+
+<div class="mobile-nav" id="mobileNav">
+  <button class="icon-btn close" id="navClose" aria-label="닫기">✕</button>
+  <a href="index.html">Home</a>
+  <a href="profile.html">Profile</a>
+  <a href="articles.html">Articles</a>
+  <a href="index.html#contact">Contact</a>
+</div>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
