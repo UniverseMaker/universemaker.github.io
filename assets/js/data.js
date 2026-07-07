@@ -1,0 +1,526 @@
+/* ============================================================
+   D. PARK Journal — 단일 데이터 소스 (Single Source of Truth)
+   여기 한 곳만 고치면 홈·프로필·포트폴리오·논문/특허/SW 목록·상세페이지가
+   모두 자동으로 갱신된다.  (순수 정적, 빌드 없음)
+
+   - SITE  : 프로필 링크 · 상단 퀵링크 · 상단 메뉴(nav)
+   - WORKS : publications(논문) · patents(특허) · software(SW) · portfolio(산출물)
+     · 각 항목의 slug 로 상세페이지가 열린다: works/detail.html?slug=<slug>
+     · figs/table 이 있으면 상세페이지에 그림·표로 렌더된다.
+     · links.article 이 있으면 관련 기고문으로 연결된다.
+   ============================================================ */
+
+window.SITE = {
+  name: "Daeseung Park", nameKo: "박대승",
+  role: "AI & Software Systems Engineer",
+  affiliation: "KAIST 연구원",
+  links: {
+    website: "https://daeseungpark.com",
+    blog:    "https://codespectrum.net",
+    github:  "https://github.com/UniverseMaker",
+    orcid:   "https://orcid.org/0009-0002-3044-2689",
+    scholar: "https://scholar.google.com/citations?hl=ko&user=qVom0QUAAAAJ",
+    docker:  "https://hub.docker.com/u/daeseungpark",
+    linkedin:"https://www.linkedin.com/in/daeseungpark",
+    emailPrimary: "dspark@daeseungpark.com",
+    emailKaist:   "dspark@kaist.ac.kr",
+    phoneKR: "+82 10 6454 7777",
+    phoneUS: "+1 657 410 9449"
+  },
+  /* 상단 유틸리티 바 우측 퀵링크 (internal:true 는 사이트 내부 경로) */
+  quicklinks: [
+    { label: "Profile", href: "profile.html", internal: true },
+    { label: "GitHub",  key: "github" },
+    { label: "Scholar", key: "scholar" },
+    { label: "ORCID",   key: "orcid" },
+    { label: "Docker",  key: "docker" },
+    { label: "Blog",    key: "blog" },
+    { label: "Contact", href: "profile.html#contact", internal: true },
+    { label: "Notice", href: "notices.html", internal: true }
+  ],
+  /* 상단 메인 메뉴 — 여기 항목을 더하면 모든 페이지 메뉴에 반영된다 */
+  nav: [
+    { label: "Home",      href: "index.html",      match: "index.html" },
+    { label: "Profile",   href: "profile.html",    match: "profile.html" },
+    { label: "Articles",  href: "articles.html",   match: "articles.html" },
+    { label: "Portfolio", href: "portfolio.html",  match: "portfolio.html" },
+    { label: "Publications", href: "works.html",   match: "works.html" },
+    { label: "Research",  href: "research.html",   match: "research.html" },
+    { label: "Activity",  href: "activity.html",   match: "activity.html" },
+    { label: "Contact",   href: "profile.html#contact" }
+  ],
+  promo: {
+    enabled: true,
+    href: "works/ieee-access-distributed-mmwave/",
+    badge: "NEW · 게재 승인",
+    text: "<b>IEEE Access</b> 신규 논문 게재 승인 — 분산 mmWave 레이더 기반 실내 인체 탐지·지리참조",
+    soon: "곧 공개",
+    cta: "자세히 →"
+  },
+  footer: {
+    brand: "D. PARK",
+    blurb: "AI와 소프트웨어 시스템을 연구하는 엔지니어의 개인 저널. 연구와 생각을 기록합니다.",
+    nav: [
+      { label:"Home", href:"index.html" },
+      { label:"Profile", href:"profile.html" },
+      { label:"Articles", href:"articles.html" },
+      { label:"Research", href:"research.html" },
+      { label:"Notice", href:"notices.html" }
+    ]
+  }
+};
+
+window.WORKS = {
+  /* ========================= 논문 ========================= */
+  publications: [
+    /* --- SCIE --- */
+    {
+      slug:"ieee-access-distributed-mmwave", kind:"SCIE", order:2026.05,
+      title:"분산 mmWave 레이더를 활용한 복잡 실내 환경의 강건한 인체 탐지 및 지리참조",
+      titleEn:"Toward Robust Human Detection and Geo-Referencing in Complex Indoor Environments via Distributed mmWave Radar",
+      venue:"IEEE Access · 게재 승인 (In Press)", date:"2026", role:"주저자",
+      links:{ article:"articles/mmwave-georeferencing/" },
+      tags:["mmWave","지리참조","실내측위"],
+      figs:[
+        {src:"assets/img/pub-mmwave/01-system-architecture.png", cap:"3계층 시스템 아키텍처 — 센싱 → 처리(MQTT 브로커·DBSCAN·지리참조) → 응용"},
+        {src:"assets/img/pub-mmwave/02-sensor-deployment.png", cap:"대전 월드컵경기장 도면 위 분산 센서 배치(1-Way 부채꼴 / 4-Way 전방위)"},
+        {src:"assets/img/pub-mmwave/03-clustering-pipeline.png", cap:"차원 축소 기반 2D DBSCAN 클러스터링 4단계"},
+        {src:"assets/img/pub-mmwave/04-georeferencing.png", cap:"지리참조 — 로컬 센서 좌표를 실제 위경도·높이(GCS)로 변환"},
+        {src:"assets/img/pub-mmwave/05-live-monitoring.png", cap:"실시간 관제 화면 — 도면 오버레이·이동/정지 표적·이벤트 로그"},
+        {src:"assets/img/pub-mmwave/06-stadium-demo.png", cap:"60일 실증 현장 — 대전 월드컵경기장(지하주차장·실내 시설)"},
+        {src:"assets/img/pub-mmwave/07-mae-results.png", cap:"성능 — 절대 위치오차 박스플롯 및 추정-실제 산점도"}
+      ],
+      table:{ head:["방식","MAE"], rows:[["제안 (분산 mmWave + 지리참조)","0.59 m"],["영상 기반 (고정 높이 가정)","6.04 m"],["개선","약 10.2×"]] }
+    },
+    {
+      slug: "ieee-access-geo-kg", kind: "SCIE", order: 2026.03,
+      title: "구(區) 단위 도시 인프라 분석을 위한 선언적 지리 지식그래프 프레임워크",
+      titleEn: "A Declarative Geographic Knowledge Graph Framework for District-Scale Urban Infrastructure Analysis",
+      venue: "IEEE Access", date: "2026", role: "공동저자(제2저자)",
+      links: { doi: "10.1109/ACCESS.2026.3705784", article: "articles/geollm-knowledge-graph/" },
+      tags: ["지식그래프", "GIS", "도시인프라"],
+      figs: [
+        { src: "assets/img/extracted/research/geollm-gis-homevalue-choropleth.png", cap: "지표 기반 GIS 코로플레스 — 지역 단위 인프라 분석" }
+      ],
+      sum: ["도시 인프라를 지역(구) 단위로 분석하기 위해, 지리 정보를 선언적(declarative) 지식그래프로 표현하는 프레임워크를 제안한다. 위치·속성·관계를 트리플로 구조화해 복잡한 공간 질의를 규칙 기반으로 풀 수 있게 한다."],
+      why: "지리 데이터를 '검색'이 아니라 '추론'의 대상으로 바꾼다. 언어모델이 지리 질문에 자주 틀리는 문제를, 검증 가능한 지식그래프 위에서 해결하는 토대를 제공한다."
+    },
+    {
+      slug: "ieee-access-gnlm", kind: "SCIE", order: 2026.02,
+      title: "GNLM: 지리 질의응답을 위한 도로명주소 기반 공간추론 그래프-네이티브 언어모델",
+      titleEn: "GNLM: A Graph-Native Language Model With Road Name Address-Based Spatial Reasoning for Geographic Question Answering",
+      venue: "IEEE Access", date: "2026", role: "공동저자(제2저자)",
+      links: { doi: "10.1109/ACCESS.2026.3695549", article: "articles/geollm-knowledge-graph/" },
+      tags: ["GeoLLM", "지식그래프", "QA"],
+      figs: [
+        { src: "assets/img/extracted/research/geollm-bot-demo-korean.png", cap: "지리특화 언어모델 데모 — 지도 질의에 서술형 응답" }
+      ],
+      sum: ["도로명주소 체계를 활용한 공간추론을 언어모델에 내장(graph-native)하여 지리 질의응답 성능을 끌어올린다. RDF 트리플 지식그래프와 다중 전략 추론 라우터, 사실 검증 계층을 결합했다."],
+      why: "지리 QA에서는 모델 크기보다 '구조(지식그래프+검증)'가 결정적임을 실증한다 — llama3.1:8b로 교차 검증해도 성능이 유지돼 특정 모델에 매이지 않음(LLM-무관성)을 보였다.",
+      table: { head: ["구성", "QA 정확도"], rows: [["맥락 없는 순수 LLM", "60.0%"], ["Dense RAG", "25.7%"], ["GraphRAG", "17.1%"], ["GNLM (제안)", "88.4%"]] }
+    },
+    {
+      slug: "ieee-access-spatial-repr", kind: "SCIE", order: 2026.01,
+      title: "LLM 기반 공간추론을 위한 과제 지향 공간 표현: 다층 통제 실증 프레임워크",
+      titleEn: "Task-Oriented Spatial Representations for LLM-Based Spatial Reasoning: An Empirical Framework With Multi-Layer Controls",
+      venue: "IEEE Access", date: "2026", role: "공동저자(제2저자)",
+      links: { doi: "10.1109/ACCESS.2026.3690723", article: "articles/llm-spatial-reasoning/" },
+      tags: ["LLM", "공간추론", "평가"],
+      sum: ["좌표·명칭·행정구역·관계·거리의 5단계 공간추상화 계층을 설계하고, 6개 대형언어모델을 7,650문항으로 평가해 공간추론 능력을 해부한다."],
+      why: "'정보를 많이 줄수록 좋다'는 통념을 반박한다. 공간추론 성능은 정보의 양보다 과제 적합성(Task Relevance)에 좌우된다는 'Model-Fit Heuristic'을 제시한다.",
+      table: { head: ["발견", "효과 크기"], rows: [["관계간섭효과(3자 관계)", "−19.7±7.0%p"], ["맥락우선효과", "+18.3±4.9%p"], ["좌표변환 취약성", "+2.7~+84.1%p"]] }
+    },
+    {
+      slug: "jwe-prompt-engineering", kind: "SCIE", order: 2024.02,
+      title: "대형언어모델 기반 생성형 AI를 위한 프롬프트 엔지니어링 성능 개선 연구",
+      titleEn: "A Study on Performance Improvement of Prompt Engineering for Generative AI with a Large Language Model",
+      venue: "Journal of Web Engineering", date: "2024.02", role: "주저자",
+      links: { doi: "10.13052/jwe1540-9589.2285", article: "articles/prompt-engineering/" },
+      tags: ["프롬프트엔지니어링", "생성형AI", "LLM"],
+      sum: ["프롬프트 설계가 생성형 AI 성능에 미치는 영향을 정량적으로 다룬다. 역할 부여·단계적 추론·예시 제공·출력형식 고정·평가 루프 등 재현 가능한 설계 지렛대를 실험한다."],
+      why: "프롬프트를 '기교'가 아니라 측정·개선 가능한 '공학'으로 정립한다. 모델을 바꾸지 않고도 결과를 끌어올리는 방법을 제시한다."
+    },
+    {
+      slug: "cmes-bert-health", kind: "SCIE", order: 2022.09,
+      title: "텍스트 기반 건강상담 데이터의 BERT 분류 성능 연구",
+      titleEn: "A Study of BERT-Based Classification Performance of Text-Based Health Counseling Data",
+      venue: "CMES — Computer Modeling in Engineering & Sciences", date: "2022.09", role: "공동저자(제2저자)",
+      links: { doi: "10.32604/cmes.2022.022465", article: "articles/bert-medical-classification/" },
+      tags: ["헬스케어NLP", "BERT", "텍스트분류"],
+      figs: [
+        { src: "assets/img/extracted/portfolio/bert-health-model-comparison-chart.png", cap: "5개 모델의 진료과 분류 정확도 비교" },
+        { src: "assets/img/extracted/portfolio/bert-health-simulation-results-table.png", cap: "모델별 Recall·Precision·F1·Accuracy 시뮬레이션 결과" }
+      ],
+      sum: ["비대면 의료 맥락에서 사용자가 자연어로 쓴 건강상담 글을 9개 진료과로 자동 분류한다. BERT를 CNN·LSTM·GRU·RNN과 비교했다."],
+      why: "사전학습 언어모델(BERT)이 적은 도메인 데이터로도 문맥을 포착해 전통 RNN 계열을 능가함을 보였다. 비대면 의료 라우팅의 실용적 근거.",
+      table: { head: ["모델", "정확도"], rows: [["BERT", "76.3%"], ["CNN", "74.2%"], ["LSTM", "71.7%"], ["GRU", "70.1%"], ["RNN", "58%"]] }
+    },
+    /* --- 국제학술대회 --- */
+    {
+      slug: "apcc2024-mmwave-pointcloud", kind: "국제학술", order: 2024.10,
+      title: "mmWave 레이더 센서를 이용한 지리참조 측위용 점군 클러스터링 연구",
+      titleEn: "A Study on Point Cloud Clustering for Geo-referenced Positioning using mmWave Radar Sensor",
+      venue: "APCC 2024 (Bali)", date: "2024.10", role: "주저자",
+      links: { doi: "10.1109/APCC62576.2024.10767948", article: "articles/mmwave-georeferencing/" },
+      tags: ["mmWave", "지리참조", "실내측위"],
+      figs: [
+        { src: "assets/img/extracted/research/mmwave-localization-concept.png", cap: "mmWave 레이더 지리참조 개념도" },
+        { src: "assets/img/extracted/research/mmwave-pointcloud-cluster-dual.png", cap: "다중 인원 점군 클러스터링 결과" },
+        { src: "assets/img/extracted/research/mmwave-field-experiment-gym.png", cap: "체육관 현장 정밀도 측정 실험" }
+      ],
+      sum: ["mmWave 레이더의 점군을 클러스터링해 다중 인원을 분리하고, 센서의 GIS 정보와 결합해 실제 위경도로 역산(지리참조)한다."],
+      why: "카메라 없이 프라이버시를 지키며 평균 3.5cm 오차로 실내 측위를 달성 — CCTV 대비 정밀도 95.33% 개선."
+    },
+    { slug: "ictc2023-seq2seq-temp", kind: "국제학술", order: 2023.101,
+      title: "다중 파라미터 Seq2Seq 모델 기반 한국 동해 단기 수온 예측 기법",
+      titleEn: "Short-term Korea East-sea Temperature Forecasting Approach based on Seq2Seq Model using Multi Parameters",
+      venue: "ICTC 2023", date: "2023.10", role: "주저자",
+      links: { doi: "10.1109/ICTC58733.2023.10393499", article: "articles/seq2seq-forecasting/" },
+      tags: ["시계열예측", "Seq2Seq"],
+      figs: [
+        { src: "assets/img/extracted/portfolio/seq2seq-gru-encoder-decoder-arch.png", cap: "Seq2Seq(인코더–디코더) 시계열 예측 구조" },
+        { src: "assets/img/extracted/portfolio/seq2seq-learning-inference-phase.png", cap: "학습 단계와 추론 단계의 데이터 흐름" }
+      ],
+      sum: ["기계번역의 Seq2Seq(인코더–디코더) 구조를 다변량 입력으로 확장해 동해 수온을 단기 예측한다."],
+      why: "번역용 구조가 환경 시계열 예측에 효과적임을 보인 사례." },
+    { slug: "ictc2023-electricity-demand", kind: "국제학술", order: 2023.102,
+      title: "단기 전력 수요 예측을 위한 시계열 예측 기법 비교 분석",
+      titleEn: "A Comparative Analysis of Time Series Forecasting Methods for Short-Term Electricity Demand Prediction",
+      venue: "ICTC 2023", date: "2023.10", role: "공동저자(제2저자)",
+      links: { doi: "10.1109/ICTC58733.2023.10392314", article: "articles/seq2seq-forecasting/" },
+      tags: ["시계열예측", "전력수요"],
+      sum: ["단기 전력수요 예측을 위해 여러 시계열 기법을 동일 조건에서 비교한다."],
+      why: "예측 기법 선택의 실무 기준을 제시." },
+    { slug: "iaser-multiturn-weather", kind: "국제학술", order: 2022.121,
+      title: "Dialogflow 기반 날씨 정보 멀티턴 챗봇 구현",
+      titleEn: "Implementation of Multi-Turn Chatbot with Weather Information Based on Dialogflow",
+      venue: "EEECS 2022", date: "2022.12", role: "주저자",
+      links: { article: "articles/empathetic-chatbot/" }, tags: ["대화형AI", "챗봇"],
+      sum: ["Dialogflow로 문맥을 유지하는 멀티턴 대화 챗봇을 구현하고 날씨 정보 응답 시나리오에 적용한다."],
+      why: "멀티턴 문맥 관리의 실전 구현 사례." },
+    { slug: "iaser-dvi-signage", kind: "국제학술", order: 2022.122,
+      title: "실감형 디지털 사이니지 콘텐츠를 위한 AI 챗봇 기반 대화형 음성 인터페이스(DVI) 연구",
+      titleEn: "A Study on DVI (Dialogue Voice Interface) based on AI Chatbot for Immersive Digital Signage Content",
+      venue: "EEECS 2022", date: "2022.12", role: "주저자",
+      links: { article: "articles/contactless-biosignals/" }, tags: ["실감콘텐츠", "음성인터페이스"],
+      sum: ["디지털 사이니지에 대화형 음성 인터페이스(DVI)를 결합해 관람객과 상호작용하는 실감 콘텐츠를 설계한다."],
+      why: "공공 디스플레이의 상호작용성을 음성으로 확장." },
+    { slug: "iaser-webdb-signage", kind: "국제학술", order: 2022.123,
+      title: "웹-데이터베이스 기반 실감형 디지털 사이니지 콘텐츠 제어 연구",
+      titleEn: "A Study on Web-Database-based Immersive Digital Signage Content Control",
+      venue: "EEECS 2022", date: "2022.12", role: "주저자",
+      links: { article: "articles/contactless-biosignals/" }, tags: ["사이니지", "웹"],
+      sum: ["웹-DB 구조로 사이니지 콘텐츠를 원격·동적으로 제어하는 방식을 제안한다."],
+      why: "서버 부담을 줄이며 콘텐츠를 유연하게 관리." },
+    { slug: "iaser-multimodel-chatbot", kind: "국제학술", order: 2022.07,
+      title: "다중 모델 챗봇 구조 연구",
+      titleEn: "A Study of Multi-Model Chatbot Structure",
+      venue: "EEECS 2022", date: "2022.07", role: "주저자",
+      links: { article: "articles/empathetic-chatbot/" }, tags: ["챗봇", "멀티모델"],
+      sum: ["전문 분야별로 독립 학습한 다중 모델을 라우팅하는 챗봇 구조를 제안한다."],
+      why: "단일 모델의 전문성 한계를 다중 모델로 극복하는 설계." },
+    { slug: "iaser-emotion-chatbot", kind: "국제학술", order: 2021.071,
+      title: "NLP·NLU를 활용한 감정 인식 대화형 AI 챗봇 설계 연구",
+      titleEn: "A Study of Designing Conversational AI Chatbot with Emotion Using NLP and NLU",
+      venue: "EEECS 2021", date: "2021.07", role: "주저자",
+      links: { article: "articles/empathetic-chatbot/" }, tags: ["감정인식", "대화형AI"],
+      sum: ["자연어 이해로 사용자의 감정을 인식하고 이에 반응하는 챗봇을 설계한다."],
+      why: "정서적 교감이 필요한 헬스케어 챗봇의 기반." },
+    { slug: "iaser-indoor-signage", kind: "국제학술", order: 2021.072,
+      title: "상황인지 추천 기반 실내 인터랙티브 디지털 사이니지 연구",
+      titleEn: "A Study of Indoor Interactive Digital Signage with Context-Awareness Recommendation",
+      venue: "EEECS 2021", date: "2021.07", role: "주저자",
+      links: { article: "articles/contactless-biosignals/" }, tags: ["사이니지", "상황인지"],
+      sum: ["실내 환경·사용자 맥락을 인지해 콘텐츠를 추천하는 인터랙티브 사이니지를 연구한다."],
+      why: "맥락 기반 개인화 콘텐츠의 초기 사례." },
+    { slug: "iaser-contactless-mirror", kind: "국제학술", order: 2020.121,
+      title: "라즈베리파이 기반 스마트미러를 이용한 비접촉 개인 건강 모니터링 시스템",
+      titleEn: "A Contactless Personal Health Monitoring System Using Raspberry Pi Based Smart Mirror",
+      venue: "EEECS 2020", date: "2020.12", role: "공동저자(제3저자)",
+      links: { article: "articles/contactless-biosignals/" }, tags: ["스마트미러", "PPG"],
+      sum: ["스마트미러 카메라로 비접촉 생체신호를 측정하는 저비용 건강 모니터링 시스템."],
+      why: "일상 사물에 건강 측정을 녹여 넣는 접근." },
+    { slug: "iaser-ml-signage", kind: "국제학술", order: 2020.122,
+      title: "디지털 사이니지를 위한 머신러닝 기반 스마트 콘텐츠 관리 시스템 연구",
+      titleEn: "A Study of Smart Contents Management System Using Machine Learning for Digital Signage",
+      venue: "EEECS 2020", date: "2020.12", role: "주저자",
+      links: { article: "articles/contactless-biosignals/" }, tags: ["사이니지", "머신러닝"],
+      sum: ["머신러닝으로 사이니지 콘텐츠 편성을 자동 최적화하는 관리 시스템."],
+      why: "콘텐츠 운영을 데이터 기반으로 자동화." },
+    { slug: "iaser-proxy-signage", kind: "국제학술", order: 2020.123,
+      title: "멀티스크린 디지털 사이니지의 프록시 기반 정보 크롤링 연구",
+      titleEn: "A Study of Proxy Based Information Crawling on Multi-Screen Digital Signage",
+      venue: "EEECS 2020", date: "2020.12", role: "공동저자(제2저자)",
+      links: { article: "articles/contactless-biosignals/" }, tags: ["사이니지", "크롤링"],
+      sum: ["프록시 구조로 외부 정보를 수집해 멀티스크린 사이니지에 배포하는 방식."],
+      why: "다중 화면 콘텐츠 수급의 효율화." },
+    /* --- KCI --- */
+    { slug: "kci-wordgroup-rnn", kind: "KCI", order: 2022.04,
+      title: "단어 그룹 확장 기법을 활용한 순환신경망(RNN) 알고리즘 성능 개선 연구",
+      titleEn: "Performance Improvement of RNN Algorithm using Word Group Expansion Technique",
+      venue: "산업융합연구 / 대한산업경영학회", date: "2022.04", role: "주저자",
+      links: { doi: "10.22678/jic.2022.20.4.023", article: "articles/data-augmentation-activation/" },
+      tags: ["데이터증강", "RNN"],
+      figs: [
+        { src: "assets/img/extracted/portfolio/wordcluster-synonym-expansion-diagram.png", cap: "유의어 기반 단어그룹 확장 개념도" },
+        { src: "assets/img/extracted/portfolio/wordcluster-accuracy-heatmap.png", cap: "조건별 실험 모델 정확도 히트맵" }
+      ],
+      sum: ["표준국어대사전 유의어로 학습데이터를 그룹 단위로 확장(확장학습)해 순환신경망(RNN·GRU·LSTM) 추론 성능을 개선한다."],
+      why: "모델을 키우지 않고 데이터 표현만으로 성능을 끌어올린 사례 — RNN·GRU·LSTM에서 최소 +0.37%, 최대 +1.25% 향상." },
+    { slug: "kci-interactive-signage", kind: "KCI", order: 2021.09,
+      title: "이기종 디바이스를 이용한 인터랙티브 디지털 사이니지 시스템 연구",
+      titleEn: "A Study of Interactive Digital Signage System using Heterogeneous Device",
+      venue: "반도체디스플레이학회", date: "2021.09", role: "주저자",
+      links: { article: "articles/contactless-biosignals/" }, tags: ["사이니지", "이기종"],
+      sum: ["서로 다른 기기를 연동해 하나의 인터랙티브 사이니지로 동작시키는 시스템을 제안한다(특허 연계)."],
+      why: "이기종 듀얼스크린 특허(10-2022-0067648)의 학술적 근거." },
+    /* --- 국내학술 --- */
+    { slug: "dom-elu-activation", kind: "국내학술", order: 2022.10,
+      title: "ELU와 로지스틱 회귀의 비대칭 조합 함수를 활용한 순환신경망 성능 개선 연구",
+      titleEn: "RNN Performance Improvement using Asymmetric Combination of ELU and Logistic Regression",
+      venue: "한국산업정보학회 춘계학술대회", date: "2022.10", role: "주저자",
+      links: { article: "articles/data-augmentation-activation/" }, tags: ["활성함수", "RNN"],
+      figs: [
+        { src: "assets/img/extracted/portfolio/activation-functions-comparison-graph.png", cap: "활성함수별 성능 비교" },
+        { src: "assets/img/extracted/portfolio/activation-elu-tanh-result-table.png", cap: "ELU·Tanh 비대칭 조합 결과표" }
+      ],
+      sum: ["ELU와 로지스틱/Tanh를 비대칭으로 조합한 활성함수로 기울기 소실을 완화한다."],
+      why: "아키텍처의 작은 변경(활성함수)만으로 평균 +1.024% 개선." },
+    { slug: "dom-opensource-chatbot", kind: "국내학술", order: 2021.081,
+      title: "AI 대화형 챗봇 설계를 위한 오픈소스 플랫폼 사례 연구",
+      titleEn: "A Case Study of Open-Source Platforms for Designing AI Conversational Chatbots",
+      venue: "한국정보통신설비학회 하계학술대회", date: "2021.08", role: "공동저자(제4저자)",
+      links: {}, tags: ["챗봇", "오픈소스"],
+      sum: ["Dialogflow·Rasa 등 오픈소스 챗봇 플랫폼을 비교·분석한다."],
+      why: "챗봇 개발 플랫폼 선택의 실무 가이드." },
+    { slug: "dom-dialogflow-healthcare", kind: "국내학술", order: 2021.082,
+      title: "Dialogflow를 활용한 헬스케어 챗봇 구조 연구",
+      titleEn: "A Study of Healthcare Chatbot Structure using Dialogflow",
+      venue: "한국정보통신설비학회 하계학술대회", date: "2021.08", role: "공동저자(제4저자)",
+      links: { article: "articles/empathetic-chatbot/" }, tags: ["챗봇", "헬스케어"],
+      sum: ["Dialogflow 기반으로 헬스케어 챗봇의 대화 구조를 설계한다."],
+      why: "헬스케어 챗봇 실装의 초기 구조 연구." }
+  ],
+
+  /* ========================= 특허 ========================= */
+  patents: [
+    { slug: "pat-hierarchical-chatbot", kind: "특허 출원", order: 3,
+      title: "선택적 적시 챗봇 프로비저닝 기능을 구비한 계층적 다중 챗봇 디지털 헬스케어 시스템",
+      titleEn: "Hierarchical Multi-Chatbot Digital Healthcare System with Selective Just-in-time Chatbot Provisioning",
+      venue: "출원 10-2022-0035339 (공개 KR20230137642A)", date: "2022", role: "발명",
+      links: { url: "https://patents.google.com/patent/KR20230137642A/ko", article: "articles/empathetic-chatbot/" },
+      tags: ["챗봇", "헬스케어", "특허"],
+      figs: [{ src: "assets/img/extracted/portfolio/multichatbot-patent-message-analysis-arch.png", cap: "메시지 분석·라우팅 구조" }],
+      sum: ["사용자 의도에 따라 필요한 전문 챗봇을 적시에 선택·제공하는 계층적 다중 챗봇 헬스케어 시스템."],
+      why: "단일 챗봇의 전문성 한계를 계층적 라우팅으로 해결 — 감정 인식 헬스케어 챗봇 연구의 지식재산 근거." },
+    { slug: "pat-multimodel-healthcare", kind: "특허 등록", order: 2,
+      title: "선택적 모델 적용 기능을 구비한 멀티 모델 헬스케어 챗봇 시스템",
+      titleEn: "Multi-Model Healthcare Chatbot System with Selective Model Application",
+      venue: "등록 10-2894533 (출원 10-2022-0130207)", date: "2025.12 등록", role: "발명",
+      links: { url: "https://patents.google.com/patent/KR102894533B1/ko", article: "articles/empathetic-chatbot/" },
+      tags: ["챗봇", "멀티모델", "특허"],
+      figs: [{ src: "assets/img/extracted/portfolio/multimodel-chatbot-patent-system-arch.png", cap: "멀티모델 챗봇 시스템 구조" }],
+      sum: ["질의 특성에 따라 서로 다른 모델을 선택 적용하는 멀티모델 헬스케어 챗봇 시스템."],
+      why: "정확도와 응답성의 균형을 모델 선택으로 최적화." },
+    { slug: "pat-dualscreen-signage", kind: "특허 등록", order: 1,
+      title: "이기종 디바이스 간 디지털 사이니지 듀얼 스크린 시스템",
+      titleEn: "Digital Signage Dual-Screen System Between Heterogeneous Devices",
+      venue: "등록 10-2780132 (출원 10-2022-0067648)", date: "2025.03 등록", role: "발명",
+      links: { url: "https://patents.google.com/patent/KR102780132B1/ko", article: "articles/contactless-biosignals/" },
+      tags: ["사이니지", "이기종", "특허"],
+      sum: ["서로 다른 기기를 하나의 사이니지 듀얼 스크린으로 연동·확장하는 시스템."],
+      why: "이기종 인터랙티브 사이니지 연구의 등록 특허 성과." }
+  ],
+
+  /* ====================== 등록 소프트웨어 ====================== */
+  software: [
+    { slug: "sw-signage-template", kind: "SW 등록", order: 6,
+      title: "대형 디스플레이 디지털 사이니지용 웹기반 템플릿",
+      venue: "C-2022-050983", date: "2022", role: "저작", tags: ["사이니지", "웹"],
+      sum: ["대형 디스플레이 사이니지 콘텐츠를 빠르게 구성하는 웹 기반 템플릿 소프트웨어."],
+      why: "사이니지 콘텐츠 제작 생산성을 표준화." },
+    { slug: "sw-health-qa-bigdata", kind: "SW 등록", order: 5,
+      title: "건강상담사이트 질의응답 빅데이터 구성 SW",
+      venue: "C-2022-047223", date: "2022", role: "저작", tags: ["헬스케어", "데이터"],
+      sum: ["건강상담 사이트의 질의응답을 수집·정제해 학습용 빅데이터로 구성하는 도구."],
+      why: "BERT 건강상담 분류 연구(SCIE)의 데이터 파이프라인." },
+    { slug: "sw-portal-health-qa", kind: "SW 등록", order: 4,
+      title: "포탈사이트 건강 질의응답 빅데이터 구성 SW",
+      venue: "C-2022-047222", date: "2022", role: "저작", tags: ["헬스케어", "데이터"],
+      sum: ["포털의 건강 질의응답을 대규모로 수집·구조화하는 데이터 구성 도구."],
+      why: "헬스케어 NLP 학습데이터 확보의 기반." },
+    { slug: "sw-dialogflow-tool", kind: "SW 등록", order: 3,
+      title: "챗봇 Dialogflow 학습데이터 분석·작성 지원 도구",
+      venue: "C-2022-000182", date: "2022", role: "저작", tags: ["챗봇", "도구"],
+      sum: ["Dialogflow 인텐트·엔티티 학습데이터를 분석하고 작성을 돕는 지원 도구."],
+      why: "챗봇 학습데이터 구축의 반복 작업을 자동화." },
+    { slug: "sw-rasa-tool", kind: "SW 등록", order: 2,
+      title: "챗봇 Rasa 학습데이터 분석·작성 지원 도구",
+      venue: "C-2022-000181", date: "2022", role: "저작", tags: ["챗봇", "도구"],
+      sum: ["Rasa NLU 학습데이터를 분석·작성하는 지원 도구."],
+      why: "오픈소스 챗봇 파이프라인의 데이터 품질 향상." },
+    { slug: "sw-2024-analysis", kind: "SW 등록", order: 1,
+      title: "AI 분석 소프트웨어 (2024 등록)",
+      venue: "C-2024-030754", date: "2024.02", role: "저작", tags: ["AI", "분석"],
+      sum: ["2024년 등록된 AI 데이터 분석 소프트웨어."],
+      why: "최근 연구 성과의 소프트웨어 등록." }
+  ],
+
+  /* ======================= 포트폴리오 ======================= */
+  portfolio: [
+    { slug:"pf-site-eeecs", cat:"웹 개발", order:24, title:"EEECS 2026 국제학회 웹사이트", period:"2025–2026", org:"IC-EEECS (오사카)", cover:"assets/img/portfolio/site-eeecs.jpg", tags:["웹","학회"], links:{ url:"https://ic-eeecs.org" }, desc:["전기·전자·컴퓨터공학 국제학회(EEECS 2026) 공식 웹사이트 제작. 등록·결제 안내, 논문 투고 절차, 프로그램 페이지 포함."] },
+    { slug:"pf-site-ctkorea", cat:"웹 개발", order:20, title:"한국문화콘텐츠기술학회(KOCTA) 웹사이트", period:"웹 개발", org:"ctkorea.org", cover:"assets/img/portfolio/site-ctkorea.jpg", tags:["웹","학회"], links:{ url:"https://ctkorea.org" }, desc:["한국문화콘텐츠기술학회 공식 웹사이트 제작 — 논문 투고·학술대회·회원 자료 제공."] },
+    { slug:"pf-site-crc", cat:"웹 개발", order:19, title:"KAIST 융복합연구센터 웹사이트", period:"웹 개발", org:"crc.kaist.ac.kr", cover:"assets/img/portfolio/site-crc-kaist.jpg", tags:["웹","KAIST"], links:{ url:"https://crc.kaist.ac.kr" }, desc:["KAIST 공과대학 융복합연구센터 공식 웹사이트 제작."] },
+    { slug:"pf-site-daeseungpark", cat:"웹 개발", order:18, title:"개인 리서치 저널 daeseungpark.com", period:"웹 개발", org:"daeseungpark.com", cover:"assets/img/portfolio/site-daeseungpark.jpg", tags:["웹","저널"], links:{ url:"https://daeseungpark.com" }, desc:["생성형 AI·시계열 예측·대화형 시스템 연구를 기록하는 개인 리서치 저널 사이트."] },
+    { slug:"pf-flowboard", cat:"웹·서비스", order:12, title:"Flowboard (공개 예정)", period:"개발 중", org:"공개 예정", cover:"assets/portfolio/pf-flowboard/00-flowboard.jpg", tags:["서비스","공개예정"], links:{}, figs:[{src:"assets/portfolio/pf-flowboard/00-flowboard.jpg", cap:"FlowBoard — 칸반 보드 화면"},{src:"assets/portfolio/pf-flowboard/01.png",cap:"FlowBoard — PMS/ITS 화면 1"},{src:"assets/portfolio/pf-flowboard/02.png",cap:"FlowBoard — PMS/ITS 화면 2"},{src:"assets/portfolio/pf-flowboard/03.png",cap:"FlowBoard — PMS/ITS 화면 3"},{src:"assets/portfolio/pf-flowboard/04.png",cap:"FlowBoard — PMS/ITS 화면 4"},{src:"assets/portfolio/pf-flowboard/05.png",cap:"FlowBoard — PMS/ITS 화면 5"},{src:"assets/portfolio/pf-flowboard/06.png",cap:"FlowBoard — PMS/ITS 화면 6"}], desc:["Jira·Redmine 개념을 결합한 프로젝트 관리 시스템(PMS/ITS) — 칸반 보드·스프린트·간트·리포트를 갖춘 협업 도구."] },
+    { slug: "pf-geollm", cat: "AI · R&D", order: 21,
+      title: "GeoLLM — 지리정보 질의응답 시스템",
+      period: "2022–2025 · KAIST", org: "국토부·국토지리정보원 연계",
+      cover: "assets/img/extracted/research/geollm-bot-demo-korean.png",
+      tags: ["LLM", "RAG", "PostGIS"],
+      links: { article: "articles/geollm-knowledge-graph/" },
+      desc: ["Llama-3 8B 파인튜닝 + RAG(FAISS/PostGIS) + Function Calling 5단계 파이프라인으로 지도 질의에 답하는 지리특화 언어모델. 지식그래프(GNLM)로 QA 정확도 88.4% 달성."] },
+    { slug: "pf-waterpipe", cat: "AI · R&D", order: 23,
+      title: "상수도 관로 파손·누수 예측 시스템",
+      period: "2024–2026 · 대전시·수자원공사", org: "에이에스티홀딩스",
+      cover: "assets/img/extracted/portfolio/waterpipe-lstm-pipeline-diagram.png",
+      tags: ["시계열", "앙상블", "디지털트윈"],
+      links: { article: "articles/waterpipe-prediction/" },
+      desc: ["불규칙 시계열 데이터로 관로 파손·누수를 예측하고, 언어모델로 보전방안까지 추론해 통합 안전관리 플랫폼에 배포."] },
+    { slug: "pf-khnp-forecast", cat: "AI · R&D", order: 16,
+      title: "원전 발전량 예측 (한수원)",
+      period: "2022–2024 · KHNP", org: "일주지앤에스",
+      cover: "assets/img/extracted/portfolio/seq2seq-final-forecast-r2-0927.png",
+      tags: ["Seq2Seq", "시계열"],
+      links: { article: "articles/seq2seq-forecasting/" },
+      desc: ["64개 매개변수를 피어슨 상관분석으로 선별하고 Encoder-Decoder(Seq2Seq)를 발전량 예측에 적용해 R² 0.9274 달성."] },
+    { slug: "pf-mmwave-monitoring", cat: "AI · R&D", order: 22,
+      title: "mmWave 분산 재실 모니터링",
+      period: "2024–2026 · KAIST", org: "대전 월드컵경기장 실증",
+      cover: "assets/img/extracted/research/mmwave-stadium-dashboard-floorplan.png",
+      tags: ["mmWave", "IoT", "관제"],
+      links: { article: "articles/mmwave-georeferencing/" },
+      desc: ["60GHz 다중 레이더를 분산 배치하고 MQTT로 통합 관제해 경기장 규모 실내 재실 현황을 실시간 모니터링."] },
+    { slug: "pf-drone-cv-damage", cat: "AI · CV", order: 17,
+      title: "드론·컴퓨터비전 손상 분석 시스템",
+      period: "KAIST", org: "Damaged Spot Analysis System",
+      cover: "assets/img/extracted/portfolio/damaged-spot-analysis-system-turf1.png",
+      tags: ["컴퓨터비전", "드론"],
+      desc: ["드론 정사영상에서 구조물·식생 손상 영역을 히트맵화하고 면적을 정량화하는 시스템."] },
+    { slug: "pf-digital-signage", cat: "시스템", order: 15,
+      title: "인터랙티브 디지털 사이니지",
+      period: "2020–2022", org: "실감콘텐츠 단말",
+      cover: "assets/img/extracted/portfolio/digital-signage-demo-photos.png",
+      tags: ["사이니지", "실감콘텐츠"],
+      links: { article: "articles/contactless-biosignals/" },
+      desc: ["이기종 디바이스 연동, 서버리스 제어, 상황인지 콘텐츠 추천을 갖춘 인터랙티브 디지털 사이니지(특허·논문 다수)."] },
+    { slug: "pf-smart-mirror", cat: "AI · R&D", order: 14,
+      title: "스마트미러 비접촉 생체신호 측정",
+      period: "정부과제", org: "언택트 의료 R&D",
+      cover: "assets/portfolio/pf-smart-mirror/01-diagram.svg",
+      tags: ["PPG", "스마트미러"],
+      links: { article: "articles/contactless-biosignals/" },
+      figs: [{ src: "assets/portfolio/pf-smart-mirror/01-diagram.svg", cap: "비접촉 생체신호(rPPG) 측정 파이프라인" }],
+      desc: ["카메라 기반 PPG로 맥박 등 생체신호를 비접촉 측정하는 스마트미러 헬스 모니터링."] },
+    { slug: "pf-3d-audio-ip", cat: "시스템 · SoC", order: 13,
+      title: "모바일 3D 오디오 사운드 렌더링 IP",
+      period: "2020–2022", org: "시스템반도체 핵심IP",
+      cover: "assets/portfolio/pf-3d-audio-ip/01-diagram.svg",
+      tags: ["SoC", "IP", "오디오"],
+      figs: [{ src: "assets/portfolio/pf-3d-audio-ip/01-diagram.svg", cap: "HRTF 기반 3D 바이노럴 오디오 렌더링 구조" }],
+      desc: ["모바일 기기 내장형 실시간 3D 오디오 렌더링 IP. 리눅스 SW, 칩셋 API 프로토콜, 드라이버 개발."] },
+    { slug: "pf-minis-lottery", cat: "상용 앱", order: 9,
+      title: "Android 앱 «Mini's Lottery»",
+      period: "상용 · Google Play", org: "5만+ 다운로드",
+      cover: "assets/portfolio/pf-minis-lottery/01.jpg",
+      tags: ["Android", "50k+"],
+      links: { store: "https://play.google.com/store/search?q=%EB%AF%B8%EB%8B%88%EC%9D%98%20%EC%B6%94%EC%B2%A8%EA%B8%B0&c=apps" },
+      files: [{ name: "APK 1.2.9 다운로드 (Google Drive)", url: "https://drive.google.com/file/d/1aqJ405H-lmhqXKtuj3VgEtqcAxAV_6am/view" }],
+      figs: [{src:"assets/portfolio/pf-minis-lottery/01.jpg",cap:"미니의 추첨기 — 앱 화면 1"},{src:"assets/portfolio/pf-minis-lottery/02.jpg",cap:"미니의 추첨기 — 앱 화면 2"},{src:"assets/portfolio/pf-minis-lottery/03.jpg",cap:"미니의 추첨기 — 앱 화면 3"},{src:"assets/portfolio/pf-minis-lottery/04.jpg",cap:"미니의 추첨기 — 앱 화면 4"},{src:"assets/portfolio/pf-minis-lottery/05.jpg",cap:"미니의 추첨기 — 앱 화면 5"},{src:"assets/portfolio/pf-minis-lottery/06.jpg",cap:"미니의 추첨기 — 앱 화면 6"}],
+      desc: ["5만 회 이상 다운로드된 상용 안드로이드 앱. UI/UX·개발·시장 전략 전반 담당."] },
+    { slug: "pf-conference-payment", cat: "웹 개발", order: 11,
+      title: "학회 결제 시스템",
+      period: "웹 개발", org: "학술 행사 등록·결제",
+      cover: "assets/portfolio/pf-conference-payment/new-payexpress.jpg",
+      tags: ["웹", "결제"],
+      links: { url: "https://ic-eeecs.org/registration.html" },
+      figs: [{ src: "assets/portfolio/pf-conference-payment/new-payexpress.jpg", cap: "PAYEXPRESS — 학회 등록·결제 시스템(EEECS)" }],
+      desc: ["학회 참가 등록과 결제를 처리하는 웹 시스템 개발."] },
+    { slug: "pf-paper-submission", cat: "웹 개발", order: 10,
+      title: "논문 투고 시스템",
+      period: "웹 개발", org: "학술 논문 접수",
+      cover: "assets/img/extracted/portfolio/webdev-paper-submission-form.png",
+      tags: ["웹", "학술"],
+      links: { url: "https://ic-eeecs.org/paper-submission.html" },
+      desc: ["논문 투고·심사 접수를 처리하는 웹 시스템 개발."] },
+    { slug: "pf-rfid-erp", cat: "시스템", order: 8,
+      title: "RFID 기반 ERP",
+      period: "시스템 개발", org: "재고·자산 관리",
+      cover: "assets/portfolio/pf-rfid-erp/01.jpg",
+      tags: ["RFID", "ERP"],
+      figs: [{src:"assets/portfolio/pf-rfid-erp/01.jpg",cap:"RFID·지문 근태관리기 / ERP 인트라넷 — 1"},{src:"assets/portfolio/pf-rfid-erp/02.jpg",cap:"RFID·지문 근태관리기 / ERP 인트라넷 — 2"},{src:"assets/portfolio/pf-rfid-erp/03.png",cap:"RFID·지문 근태관리기 / ERP 인트라넷 — 3"},{src:"assets/portfolio/pf-rfid-erp/04.jpg",cap:"RFID·지문 근태관리기 / ERP 인트라넷 — 4"},{src:"assets/portfolio/pf-rfid-erp/05.jpg",cap:"RFID·지문 근태관리기 / ERP 인트라넷 — 5"},{src:"assets/portfolio/pf-rfid-erp/06.jpg",cap:"RFID·지문 근태관리기 / ERP 인트라넷 — 6"}],
+      desc: ["RFID를 활용한 재고·자산 관리 ERP 시스템 개발."] },
+    { slug:"pf-sms-assistance", cat:"상용 앱", order:7, title:"SMS Assistance (안드로이드 앱)", period:"2019", org:"Google Play", cover:"assets/portfolio/pf-sms-assistance/01.png", tags:["Android","SMS"], figs:[{src:"assets/portfolio/pf-sms-assistance/01.png",cap:"SMS Assistance 앱 화면 1"},{src:"assets/portfolio/pf-sms-assistance/02.jpg",cap:"앱 화면 2"},{src:"assets/portfolio/pf-sms-assistance/03.jpg",cap:"앱 화면 3"}], desc:["SMS 기반 보조 기능을 제공하는 안드로이드 앱."] },
+    { slug:"pf-brokenprice", cat:"상용 앱", order:6, title:"Broken Price", period:"2019", org:"MS 메트로스타일 앱 챌린지", cover:"", tags:["Windows","앱 챌린지"], desc:["Microsoft 메트로스타일 앱 챌린지 출품작 «Broken Price»."] }
+  ],
+
+  /* 주요활동/사진첩 — 새 사진은 assets/img/activity/ 에 넣고 여기에 항목 추가 */
+  gallery: [
+  { src:"assets/img/activity/event-apcc-bali-talk.jpg",         title:"APCC 2024 국제학회 발표", date:"2024.10", tag:"학회", desc:"발리에서 열린 IEEE APCC 2024 국제학회에서 연구 성과를 구두 발표" },
+  { src:"assets/img/activity/event-apcc-bali-presentation.jpg", title:"APCC 2024 논문 발표",     date:"2024.10", tag:"학회", desc:"소방안전도시 연구를 발표하며 청중에게 결과를 설명" },
+  { src:"assets/img/activity/event-apcc-bali-photowall.jpg",    title:"APCC 2024 참가",         date:"2024.10", tag:"학회", desc:"IEEE APCC 2024(발리) 공식 포토월 앞 학회 참가 기념", hidden:true },
+  { src:"assets/img/activity/event-youngsi-booth-visitors.jpg", title:"대전 영시축제 부스 시연", date:"2024.08", tag:"행사", desc:"영시축제 KAIST 부스를 찾은 관람객들에게 디지털트윈 시연" },
+  { src:"assets/img/activity/event-youngsi-booth-demo.jpg",     title:"영시축제 시연 — 대전시장·KAIST 총장", date:"2024.08", tag:"시연", desc:"대전광역시장과 KAIST 이광형 총장에게 소방 디지털트윈 기술을 직접 설명·시연" },
+  { src:"assets/img/activity/event-vietnam-demo.jpg",           title:"베트남 장관 대표단 시연", date:"2024.07", tag:"시연", desc:"베트남 내무부 장관 대표단 방문 시 연구성과를 시연·발표" },
+  { src:"assets/img/activity/event-vietnam-group.jpg",          title:"베트남 대표단 방문 기념", date:"2024.07", tag:"행사", desc:"베트남 내무부 장관 대표단과의 단체 기념 촬영" },
+  { src:"assets/img/activity/activity-01.jpg", title:"연구과제 회의", date:"2026.01", tag:"회의", desc:"과제 기획회의" },
+  { src:"assets/img/activity/activity-03.jpg", title:"인터뷰", date:"2026.01", tag:"인터뷰", desc:"연구 인터뷰" },
+  { src:"assets/img/activity/activity-02.jpg", title:"프로필", date:"2026.01", tag:"프로필", desc:"프로필 촬영." }
+],
+
+  /* ===================== 연구 과제 (프로젝트) ===================== */
+  projects: [
+ { slug:"prj-kaix", funder:"국토교통부", orgs:["한국국토정보공사(LX)","KAIST"], title:"주소지능정보 확장(K-AIX) 생태계 조성 모델 마련", period:"2025.12–2026.03", order:24, desc:"주소지능정보 확장(K-AIX) 생태계 조성 모델 마련." },
+ { slug:"prj-dt-health", funder:"대전광역시청", orgs:["(재)대전테크노파크","KAIST"], title:"AI 기반 디지털 트윈 헬스케어 플랫폼 구축", period:"2025.04–2025.12", order:23, desc:"디지털 트윈 기반 헬스케어 플랫폼 구축." },
+ { slug:"prj-semi-region", funder:"대전광역시청", orgs:["(재)대전테크노파크","KAIST"], title:"반도체 기술 기반 지역 전략산업 육성 기획 및 대응", period:"2025.02–2025.12", order:22, desc:"반도체 기반 지역 전략산업 육성 기획·대응." },
+ { slug:"prj-indoormap", funder:"엘티메트릭(주)", orgs:["KAIST"], title:"차세대 실내지도 데이터 구축 및 표준화 방안 연구", period:"2024.11–2025.06", order:21, desc:"차세대 실내지도 데이터 구축·표준화 방안 연구." },
+ { slug:"prj-mobility", funder:"과학기술정보통신부", orgs:["정보통신기획평가원(IITP)","KAIST"], title:"광역권 도시를 위한 차세대 AI 융합 모빌리티 시뮬레이션 및 예측·활용 기술 개발", period:"2024.07–2027.12", budget:"총 68.25억원", no:"RS-2024-00459703", order:20, desc:"광역권 도시 차세대 AI 융합 모빌리티 시뮬레이션·예측 기술 개발." },
+ { slug:"prj-parking", funder:"국토교통부", orgs:["한국국토정보공사(LX)","KAIST"], title:"주소기반 주차정보 구축 및 주차내비게이션 서비스 모델 실증", period:"2024.07–2025.01", order:19, desc:"주소기반 주차정보·주차내비게이션 서비스 모델 실증." },
+ { slug:"prj-waterpipe", funder:"대전광역시청", orgs:["㈜에이에스티홀딩스","KAIST"], title:"불규칙 시계열 데이터 예측을 위한 AI 모델 협력 연구개발", period:"2024.04–2026.12", budget:"총 1억 6,055만원", order:18, desc:"불규칙 시계열 예측 AI모델(상수도 관로 파손·누수 예측) 협력 연구개발." },
+ { slug:"prj-semi-2024", funder:"대전광역시청", orgs:["(재)대전테크노파크","KAIST"], title:"차세대 시스템반도체 육성 기획 및 대응", period:"2024.03–2024.12", order:17, desc:"차세대 시스템반도체 육성 기획·대응." },
+ { slug:"prj-gimhae", funder:"김해시청", orgs:["KAIST"], title:"김해시 체육시설 종합관리계획 수립", period:"2023.12–2024.10", order:16, desc:"김해시 체육시설 종합관리계획 수립." },
+ { slug:"prj-lxhub", funder:"국토교통부", orgs:["한국국토정보공사(LX)","제타럭스시스템","KAIST"], title:"LX 데이터허브 구축사업 연구", period:"2023.10–2024.01", order:15, desc:"LX 데이터허브 구축사업 연구." },
+ { slug:"prj-indoornav", funder:"대전광역시청", orgs:["KAIST"], title:"대단위 입체공간 주소기반 실내내비게이션 구현", period:"2023.09–2024.04", order:14, desc:"대단위 입체공간 주소기반 실내내비게이션 구현." },
+ { slug:"prj-semi-center", funder:"대전광역시청", orgs:["(재)대전과학산업진흥원","KAIST"], title:"반도체 산업 국제현황 분석 및 한국 첨단반도체기술센터 구축(안) 마련", period:"2023.06–2024.04", order:13, desc:"반도체 국제현황 분석·첨단반도체기술센터 구축안 마련." },
+ { slug:"prj-campus", funder:"대전광역시청", orgs:["(재)대전과학산업진흥원","KAIST"], title:"대전 특화단지 연구·교육·설계 캠퍼스 기본계획 및 조성(안) 마련", period:"2023.06–2024.04", order:12, desc:"대전 특화단지 캠퍼스 기본계획·조성안 마련." },
+ { slug:"prj-khnp", funder:"한국수력원자력", orgs:["(주)일주지앤에스","KAIST"], title:"한수원 원전 빅데이터 플랫폼 AI 분석모델 개발 및 딥러닝 선행모델 조사·자문", period:"2023.06–2024.04", budget:"총 1억원", order:11, desc:"한수원 원전 빅데이터 플랫폼 AI 분석·딥러닝 선행모델 자문." },
+ { slug:"prj-ar-sports", funder:"㈜투핸즈인터랙티브", orgs:["KAIST"], title:"AR 증강현실 스포츠 고도화 연구", period:"2023.05–2025.04", order:10, desc:"AR·증강현실 스포츠 고도화 연구." },
+ { slug:"prj-firesafe", funder:"대전광역시청", orgs:["한국국토정보공사(LX)","KAIST"], title:"융·복합 데이터 활용 실감형 소방안전도시 구축", period:"2023.05–2025.09", order:9, desc:"융복합 데이터 기반 실감형 소방안전도시 구축." },
+ { slug:"prj-infection", funder:"행정안전부", orgs:["KAIST"], title:"신종 감염병 해외유입 예측 및 지능적 차단 기술개발", period:"2023.05–2023.12", budget:"총 45.5억원", order:8, desc:"역학조사관 보조 에이전트·시계열 예측 기반 신종 감염병 해외유입 예측·차단." },
+ { slug:"prj-it-infection", funder:"㈜더아이홀딩스", orgs:["KAIST"], title:"IT융합기술이 적용된 감염병 차단기술 공동연구 분석연구", period:"2023.05–2024.11", order:7, desc:"IT융합 감염병 차단기술 공동연구용 분석연구." },
+ { slug:"prj-health-server", funder:"대요메디(주)", orgs:["KAIST"], title:"건강정보 관리용 서버 구성 기획 및 요소기술 개발", period:"2023.05–2024.11", order:6, desc:"건강정보 관리 서버 구성 기획·요소기술 개발." },
+ { slug:"prj-mirror-display", funder:"(주)이원오엠에스", orgs:["KAIST"], title:"미러 디스플레이 H/W·S/W 최신기술 분석 및 콘텐츠 현황 연구", period:"2023.05–2024.07", order:5, desc:"미러 디스플레이 H/W·S/W 기술 분석·콘텐츠 현황 연구." },
+ { slug:"prj-smarthealth", funder:"과학기술정보통신부", orgs:["연구개발특구진흥재단","KAIST"], title:"스마트 헬스 시스템을 활용한 1인가구 건강 모니터링", period:"2023.05–2023.11", order:4, desc:"생활환경 맞춤형 스마트 헬스 기반 1인가구 건강 모니터링." },
+ { slug:"prj-chatbot", funder:"과학기술정보통신부", orgs:["한국연구재단","남서울대학교"], title:"독거 중고령자 디지털 헬스케어 AI 치료적 의사소통 챗봇 연구", period:"2021.06–2023.02", no:"RS-2021-NR066371", order:3, desc:"독거 중고령자 대상 AI 기반 치료적 의사소통 챗봇 연구." },
+ { slug:"prj-immersive", funder:"과학기술정보통신부", orgs:["정보통신기획평가원(IITP)","광운대학교산학협력단"], title:"실감콘텐츠 단말 기술 연구개발", period:"2020.07–2022.12", no:"RS-2020-II201846", order:2, desc:"실감콘텐츠 단말 기술 연구개발." },
+ { slug:"prj-3daudio", funder:"산업통상자원부", orgs:["한국산업기술기획평가원(KEIT)","남서울대학교산학협력단"], title:"모바일 내장형 실시간 3D 오디오 사운드 렌더링 IP 개발", period:"2020.06–2022.07", no:"RS-2020-KT210072", order:1, desc:"모바일 내장형 실시간 3D 오디오 사운드 렌더링 IP 개발." }
+  ]
+};
+
+/* 정렬 헬퍼 — 최신/우선순위 순 */
+window.WORKS_SORTED = {
+  publications: window.WORKS.publications.slice().sort(function (a, b) { return b.order - a.order; }),
+  patents:      window.WORKS.patents.slice().sort(function (a, b) { return b.order - a.order; }),
+  software:     window.WORKS.software.slice().sort(function (a, b) { return b.order - a.order; }),
+  portfolio:    window.WORKS.portfolio.slice().sort(function (a, b) { return b.order - a.order; }),
+  projects:     window.WORKS.projects.slice().sort(function (a, b) { return b.order - a.order; })
+};
+
+/* slug → work 조회 (상세페이지용) */
+window.WORK_BY_SLUG = (function () {
+  var m = {};
+  ["publications", "patents", "software", "portfolio"].forEach(function (k) {
+    window.WORKS[k].forEach(function (w) { w._cat = k; m[w.slug] = w; });
+  });
+  return m;
+})();

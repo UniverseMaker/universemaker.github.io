@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profile (전체 이력) — Daeseung Park 박대승</title>
+<meta name="description" content="박대승(Daeseung Park) 프로필 — KAIST 연구원. 경력, 연구 프로젝트, 논문, 특허 및 소프트웨어 등록 내역.">
+<link rel="canonical" href="https://daeseungpark.com/profile_full.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="D. PARK Journal">
+<meta property="og:title" content="Profile (전체 이력) — Daeseung Park 박대승">
+<meta property="og:description" content="박대승(Daeseung Park) 프로필 — KAIST 연구원. 경력, 연구 프로젝트, 논문, 특허 및 소프트웨어 등록 내역.">
+<meta property="og:url" content="https://daeseungpark.com/profile_full.html">
+<meta property="og:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Profile (전체 이력) — Daeseung Park 박대승">
+<meta name="twitter:description" content="박대승(Daeseung Park) 프로필 — KAIST 연구원. 경력, 연구 프로젝트, 논문, 특허 및 소프트웨어 등록 내역.">
+<meta name="twitter:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Daeseung Park","alternateName":"박대승","jobTitle":"AI & Software Systems Engineer","affiliation":{"@type":"Organization","name":"KAIST"},"url":"https://daeseungpark.com/","image":"https://daeseungpark.com/assets/img/profile/img3.jpg","sameAs":["https://github.com/UniverseMaker","https://orcid.org/0009-0002-3044-2689","https://scholar.google.com/citations?hl=ko&user=qVom0QUAAAAJ","https://www.linkedin.com/in/daeseungpark","https://hub.docker.com/u/daeseungpark","https://codespectrum.net"]}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Noto+Serif+KR:wght@400;600&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/article.css">
+<style>
+  /* profile-specific */
+  .prof-hero { background: linear-gradient(150deg,#11132a,#090a16); color:#fff; padding: 70px 0 64px; position:relative; overflow:hidden; }
+  .prof-hero::before { content:""; position:absolute; inset:0; background-image: linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px); background-size:38px 38px; opacity:.5; }
+  .prof-hero .container-x { position:relative; z-index:2; display:flex; gap:34px; align-items:center; flex-wrap:wrap; }
+  .prof-avatar { width:140px; height:140px; border-radius:28px; background:linear-gradient(135deg,#3a4cf0,#1b2461); display:grid; place-items:center; font-family:var(--display); font-size:3rem; font-weight:600; flex:none; box-shadow:var(--shadow-lg); overflow:hidden; }
+  .prof-avatar img { width:100%; height:100%; object-fit:cover; }
+  .prof-hero h1 { font-family:var(--display); font-size:3rem; font-weight:600; margin:0 0 4px; letter-spacing:-.02em; }
+  .prof-hero .ko { font-size:1.3rem; color:rgba(255,255,255,.7); font-family:var(--sans); }
+  .prof-hero .role { font-size:1.15rem; color:var(--gold); font-weight:600; margin-top:8px; }
+  .prof-hero .contact-row { display:flex; flex-wrap:wrap; gap:18px; margin-top:18px; font-size:.9rem; color:rgba(255,255,255,.8); }
+  .prof-hero .contact-row a { color:rgba(255,255,255,.92); border-bottom:1px solid rgba(255,255,255,.3); }
+  .prof-nav { position:sticky; top:74px; z-index:1000; background:var(--bg); border-bottom:1px solid var(--line); }
+  .prof-nav .container-x { display:flex; gap:26px; overflow-x:auto; height:54px; align-items:center; font-weight:600; font-size:.9rem; }
+  .prof-nav a { color:var(--muted); white-space:nowrap; }
+  .prof-nav a:hover { color:var(--ink); }
+  .prof-section { padding:34px 0; border-bottom:1px solid var(--line); }
+  .prof-section > .container-x { max-width:960px; }
+  .prof-section h2 { font-family:var(--display); font-size:1.9rem; font-weight:600; margin:0 0 6px; letter-spacing:-.01em; }
+  .prof-section .en { color:var(--muted); font-size:.95rem; margin-bottom:18px; font-style:italic; }
+  /* timeline */
+  .tl { position:relative; padding-left:26px; }
+  .tl::before { content:""; position:absolute; left:6px; top:6px; bottom:6px; width:2px; background:var(--line); }
+  .tl-item { position:relative; margin-bottom:26px; }
+  .tl-item::before { content:""; position:absolute; left:-26px; top:7px; width:12px; height:12px; border-radius:50%; background:var(--accent); box-shadow:0 0 0 4px var(--bg); }
+  .tl-item .when { font-size:.8rem; font-weight:700; letter-spacing:.04em; color:var(--accent-ink); text-transform:uppercase; }
+  .tl-item h3 { font-family:var(--display); font-size:1.25rem; font-weight:600; margin:4px 0 2px; }
+  .tl-item .org { color:var(--ink-soft); font-weight:600; }
+  .tl-item p { color:var(--muted); font-size:.95rem; margin:6px 0 0; }
+  /* skill chips */
+  .chips { display:flex; flex-wrap:wrap; gap:9px; }
+  .chips span { font-size:.86rem; font-weight:600; padding:7px 14px; border-radius:999px; background:var(--surface); border:1px solid var(--line); color:var(--ink-soft); }
+  .subhead { font-family:var(--sans); font-weight:700; font-size:1rem; color:var(--ink); margin:26px 0 12px; letter-spacing:.01em; }
+  /* project cards */
+  .proj { border:1px solid var(--line); border-radius:var(--radius); padding:24px 26px; margin-bottom:18px; background:var(--bg); transition:.25s; }
+  .proj:hover { box-shadow:var(--shadow); transform:translateY(-2px); }
+  .proj .funder { font-size:.76rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--accent-ink); }
+  .proj h3 { font-family:var(--display); font-size:1.2rem; font-weight:600; margin:6px 0; line-height:1.3; }
+  .proj .en-t { color:var(--muted); font-size:.9rem; font-style:italic; margin-bottom:10px; }
+  .proj p { color:var(--ink-soft); font-size:.95rem; margin:0; line-height:1.7; }
+  /* publication list */
+  .pub { display:grid; grid-template-columns:120px 1fr; gap:18px; padding:16px 0; border-bottom:1px solid var(--line-soft); }
+  .pub .badge { font-size:.72rem; }
+  .pub .badge b { display:inline-block; background:var(--ink); color:var(--bg); padding:3px 8px; border-radius:4px; font-size:.68rem; letter-spacing:.06em; }
+  .pub .badge.scie b { background:var(--accent); }
+  .pub .badge.kci b { background:var(--gold); }
+  .pub .when { display:block; color:var(--muted); font-size:.78rem; margin-top:6px; }
+  .pub h4 { font-family:var(--serif); font-size:1.05rem; font-weight:600; margin:0 0 4px; line-height:1.45; color:var(--ink); }
+  .pub .venue { color:var(--muted); font-size:.88rem; }
+  .pub .role-tag { color:var(--accent-ink); font-weight:600; font-size:.8rem; }
+  .grid-2-col { display:grid; grid-template-columns:1fr 1fr; gap:14px 40px; }
+  @media (max-width:700px){ .grid-2-col{grid-template-columns:1fr;} .pub{grid-template-columns:1fr;gap:4px;} .prof-hero h1{font-size:2.2rem;} }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="container-x">
+    <span class="tb-date" id="today">—</span>
+    <div class="tb-links">
+      <a href="index.html">Home</a>
+      <a href="https://github.com/UniverseMaker" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener">ORCID</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Header ===== -->
+<header class="site-header">
+  <div class="container-x nav-row">
+    <a href="index.html" class="brand">D<span class="dot">.</span> PARK <small>Journal</small></a>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="profile.html" class="active">Profile</a>
+      <a href="articles.html">Articles</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="테마 전환"><span id="themeIcon">☾</span></button>
+      <button class="print-cta no-print" id="printBtn">🖶 인쇄 / PDF</button>
+      <button class="icon-btn nav-toggle" id="navToggle" aria-label="메뉴">≡</button>
+    </div>
+  </div>
+</header>
+
+<div class="ticker">
+  <div class="container-x">
+    <span class="label">Trending</span>
+    <div class="items" id="tickerItems"></div>
+  </div>
+</div>
+
+<!-- ===== Profile hero ===== -->
+<section class="prof-hero">
+  <div class="container-x">
+    <div class="prof-avatar"><img src="assets/img/profile/img3.jpg" alt="박대승 Daeseung Park"></div>
+    <div>
+      <h1>Daeseung Park <span class="ko">박대승</span></h1>
+      <div class="role">AI Engineer &amp; Software Systems Engineer</div>
+      <div class="contact-row">
+        <span>📍 KAIST, Daejeon, Korea</span>
+        <a href="mailto:dspark@daeseungpark.com">dspark@daeseungpark.com</a>
+        <a href="https://github.com/UniverseMaker" target="_blank" rel="noopener">github.com/UniverseMaker</a>
+        <a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener">ORCID</a>
+        <a href="profile.html">요약 프로필 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Section nav ===== -->
+<nav class="prof-nav no-print">
+  <div class="container-x">
+    <a href="#profile">경력 Experience</a>
+    <a href="#education">학력 Education</a>
+    <a href="#skills">역량 Skills</a>
+    <a href="#research-projects">연구 과제 Research</a>
+    <a href="#publications">논문 Publications</a>
+    <a href="#patents">특허·SW</a>
+    <a href="#portfolio">최근 과업</a>
+    <a href="#contact">연락처 Contact</a>
+  </div>
+</nav>
+
+<!-- ===== Experience ===== -->
+<section class="prof-section" id="profile">
+  <div class="container-x">
+    <h2>경력</h2>
+    <div class="en">Experience</div>
+    <div class="tl">
+      <div class="tl-item">
+        <span class="when">2023.05 — 현재</span>
+        <h3>Research Engineer · 연구원</h3>
+        <div class="org">한국과학기술원 (KAIST)</div>
+        <div class="role-detail">
+          <div class="rd-group"><span class="rd-label">소속</span>
+            <ul>
+              <li>KAIST 정보전자연구소</li>
+              <li>KAIST 공과대학 융복합연구센터</li>
+              <li>대전시–KAIST 전략사업 연구센터 <span class="rd-note">(겸무)</span></li>
+            </ul>
+          </div>
+          <div class="rd-group"><span class="rd-label">담당</span>
+            <ul>
+              <li>대형언어모델·시계열 예측·대화형 AI 기반 응용 시스템 연구·개발</li>
+              <li>연구정보보안 실무 담당</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <span class="when">2020.08 — 2023.05</span>
+        <h3>Participating Researcher · 참여연구원</h3>
+        <div class="org">광운대학교 산학협력단</div>
+      </div>
+      <div class="tl-item">
+        <span class="when">2020.03 — 2023.05</span>
+        <h3>Full-time Researcher · 전임연구원</h3>
+        <div class="org">남서울대학교 산학협력단</div>
+      </div>
+      <div class="tl-item">
+        <span class="when">2014.02 — 2015.03</span>
+        <h3>Participating Researcher · 참여연구원</h3>
+        <div class="org">미래창조과학부 — 3D 스마트미디어/증강현실 프로젝트</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Education ===== -->
+<section class="prof-section" id="education">
+  <div class="container-x">
+    <h2>학력</h2>
+    <div class="en">Education</div>
+    <div class="tl">
+      <div class="tl-item"><span class="when">2020.09 — 2022.08</span><h3>남서울대학교 일반대학원 컴퓨터소프트웨어학과 (공학석사)</h3></div>
+      <div class="tl-item"><span class="when">2011.03 — 2015.02</span><h3>남서울대학교 컴퓨터학과 (학사)</h3></div>
+      <div class="tl-item"><span class="when">2008.03 — 2011.02</span><h3>충남인터넷고등학교 (졸업)</h3></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Skills / Awards / Certs ===== -->
+<section class="prof-section" id="skills">
+  <div class="container-x">
+    <h2>역량 &amp; 자격</h2>
+    <div class="en">Skills, Awards &amp; Certifications</div>
+
+    <div class="subhead">기술 (Skills)</div>
+    <div class="chips">
+      <span>Back-end</span><span>Front-end</span><span>Database</span><span>Android</span>
+      <span>C#</span><span>C/C++</span><span>Java</span><span>Kotlin</span><span>Python</span><span>Ruby</span>
+      <span>UI/UX</span><span>Bootstrap</span><span>Photoshop</span><span>Vegas</span>
+      <span>딥러닝</span><span>LLM</span><span>RAG</span><span>시계열</span><span>이상탐지</span>
+      <span>데이터 분석</span><span>PostgreSQL/PostGIS</span>
+    </div>
+
+    <div class="subhead">자격증 (Certifications)</div>
+    <table class="cap-table">
+      <thead><tr><th>취득일</th><th>자격증</th><th>발급처</th></tr></thead>
+      <tbody>
+      <tr><td class="when">2015.01.20</td><td>윈도우포렌식전문가 2급</td><td>한국산업보안포럼</td></tr>
+      <tr><td class="when">2014.08.22</td><td>정보처리기사</td><td>한국산업인력공단</td></tr>
+      <tr><td class="when">2013.08.16</td><td>정보처리산업기사</td><td>한국산업인력공단</td></tr>
+      <tr><td class="when">2009.12.18</td><td>리눅스마스터 2급</td><td>한국정보통신산업협회(KAIT)</td></tr>
+      <tr><td class="when">2009.12.08</td><td>네트워크관리사 2급</td><td>한국정보통신자격협회(ICQA)</td></tr>
+      <tr><td class="when">2009.02</td><td>LPIC-1</td><td>Linux Professional Institute</td></tr>
+      <tr><td class="when">2009.02</td><td>CCNA</td><td>Cisco</td></tr>
+      <tr><td class="when">2004.10.27</td><td>정보처리기능사</td><td>한국산업인력공단</td></tr>
+      </tbody>
+    </table>
+
+    <div class="subhead">수상 (Awards)</div>
+    <table class="cap-table">
+      <thead><tr><th>일자</th><th>수상</th><th>주최</th></tr></thead>
+      <tbody>
+      <tr><td class="when">2009.08.21</td><td>제11회 실무능력경진대회 정보통신부문 동상</td><td>충청남도교육청</td></tr>
+      <tr><td class="when">2009.04.13</td><td>충청남도 지방기능경기대회 컴퓨터정보통신부문 우수상</td><td>충청남도</td></tr>
+      <tr><td class="when">2008.08.22</td><td>제10회 실무능력경진대회 정보통신부문 동상</td><td>충청남도교육청</td></tr>
+      </tbody>
+    </table>
+
+    <div class="subhead">교육·연수 (Training &amp; Courses)</div>
+    <table class="cap-table">
+      <thead><tr><th>시기</th><th>과정</th><th>기관</th></tr></thead>
+      <tbody>
+      <tr><td class="when">2024.08.16</td><td>대규모 언어 모델: 기초 이론 및 실습</td><td>한국통신학회</td></tr>
+      <tr><td class="when">2024.08.09</td><td>딥러닝의 수학적 이론: 근사·최적화·일반화</td><td>한국통신학회</td></tr>
+      <tr><td class="when">2023.10.26</td><td>최적화와 AI: 이론부터 응용까지</td><td>한국통신학회</td></tr>
+      <tr><td class="when">2023.08.04</td><td>임상현장 기반 융합형 의료기기 개발 전문가(AMDIS) 과정 수료</td><td>울산대학교 의과대학 아산융합의학원 AMIST</td></tr>
+      <tr><td class="when">2023.07.10</td><td>신약개발 세부전공 섬머스쿨 과정 수료</td><td>울산대학교 의과대학 아산융합의학원 AMIST</td></tr>
+      </tbody>
+    </table>
+
+    <div class="subhead">Google 특별 인증 (Google Credentials)</div>
+    <table class="cap-table">
+      <thead><tr><th>취득일</th><th>인증</th><th>발급처</th></tr></thead>
+      <tbody>
+      <tr><td class="when">2020.10.31</td><td>G Suite: Meeting Solutions Deployment Specialist</td><td>Google</td></tr>
+      <tr><td class="when">2020.10.29</td><td>G Suite: Deployment Services Specialist</td><td>Google</td></tr>
+      <tr><td class="when">2020.10.28</td><td>Google Education Deployment Specialist</td><td>Google</td></tr>
+      <tr><td class="when">2020.10.28</td><td>Google Education Sales Specialist</td><td>Google</td></tr>
+      <tr><td class="when">2020.10.23</td><td>Google Cloud: Security Fundamentals (Passed)</td><td>Google</td></tr>
+      <tr><td class="when">2020.10.22</td><td>Google Cloud Sales Specialist</td><td>Google</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ===== Research Projects ===== -->
+<section class="prof-section" id="research-projects">
+  <div class="container-x">
+    <h2>연구 과제</h2>
+    <div class="en">Research Projects</div>
+
+    <div id="profileProjects"></div>
+    <a href="research.html" class="btn-x" style="margin-top:18px;">전체 연구 과제 보기 →</a>
+  </div>
+</section>
+
+<!-- ===== Publications ===== -->
+<section class="prof-section" id="publications">
+  <div class="container-x">
+    <h2>논문</h2>
+    <div class="en">Publications — SCIE 5 · KCI 2 · 국제학술대회 14 · 국내학술대회 6</div>
+
+    <div id="profilePubs"></div>
+    <a href="works.html" class="btn-x" style="margin-top:22px;">전체 논문·특허·SW 보기 →</a>
+  </div>
+</section>
+
+<!-- ===== Patents & Software ===== -->
+<section class="prof-section" id="patents">
+  <div class="container-x">
+    <h2>특허 &amp; 소프트웨어</h2>
+    <div class="en">Patents &amp; Software Registrations</div>
+
+    <div class="subhead">특허 (Patents)</div>
+    <div id="profilePatents"></div>
+
+    <div class="subhead">소프트웨어 등록 (Software)</div>
+    <div id="profileSoftware"></div>
+  </div>
+</section>
+
+<!-- ===== Recent Work ===== -->
+<section class="prof-section" id="portfolio">
+  <div class="container-x">
+    <h2>최근 과업</h2>
+    <div class="en">Recent Work</div>
+    <div id="profileRecentWork"></div>
+    <a href="portfolio.html" class="btn-x" style="margin-top:22px;">포트폴리오 전체 보기 →</a>
+  </div>
+</section>
+
+<!-- ===== Contact ===== -->
+<section class="prof-section" id="contact" style="border-bottom:0;">
+  <div class="container-x">
+    <h2>연락처</h2>
+    <div class="en">Contact</div>
+    <div class="grid-2-col" style="font-size:1rem;color:var(--ink-soft);line-height:1.9;">
+      <div><b>Email (Primary)</b><br><a href="mailto:dspark@daeseungpark.com" style="color:var(--accent-ink);">dspark@daeseungpark.com</a></div>
+      <div><b>Email</b><br><a href="mailto:dspark@kaist.ac.kr" style="color:var(--accent-ink);">dspark@kaist.ac.kr</a></div>
+      <div><b>Phone (KR)</b><br>+82 10 6454 7777</div>
+      <div><b>Phone (US)</b><br>+1 657 410 9449</div>
+      <div><b>Website</b><br><a href="https://daeseungpark.com" target="_blank" rel="noopener" style="color:var(--accent-ink);">daeseungpark.com</a></div>
+      <div><b>Tech Blog</b><br><a href="https://codespectrum.net" target="_blank" rel="noopener" style="color:var(--accent-ink);">codespectrum.net</a></div>
+      <div><b>Google Scholar</b><br><a href="https://scholar.google.com/citations" target="_blank" rel="noopener" style="color:var(--accent-ink);">scholar.google.com</a></div>
+      <div><b>LinkedIn</b><br><a href="https://www.linkedin.com/in/daeseungpark" target="_blank" rel="noopener" style="color:var(--accent-ink);">linkedin.com/in/daeseungpark</a></div>
+      <div><b>GitHub</b><br><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener" style="color:var(--accent-ink);">github.com/UniverseMaker</a></div>
+      <div><b>ORCID</b><br><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener" style="color:var(--accent-ink);">0009-0002-3044-2689</a></div>
+    </div>
+    <a href="index.html" class="btn-x" style="margin-top:26px;">← 저널 홈으로</a>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer class="site-footer">
+  <div class="container-x">
+    <div class="footer-bottom" style="border:0;padding-top:0;">
+      <span>© 2026 Daeseung Park. All rights reserved.</span>
+      <span><a href="index.html">D. PARK Journal</a></span>
+    </div>
+  </div>
+</footer>
+
+<div class="mobile-nav" id="mobileNav">
+  <button class="icon-btn close" id="navClose" aria-label="닫기">✕</button>
+  <a href="index.html">Home</a>
+  <a href="profile.html">Profile</a>
+  <a href="articles.html">Articles</a>
+  <a href="index.html#contact">Contact</a>
+</div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/articles.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

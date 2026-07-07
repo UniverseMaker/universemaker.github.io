@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daeseung Park — AI & Software Systems Engineer | Journal</title>
+<meta name="description" content="박대승 — AI·소프트웨어 시스템 엔지니어. 대형언어모델, 시계열 예측, 대화형 AI 연구와 기고문을 담은 개인 저널.">
+<link rel="canonical" href="https://daeseungpark.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="D. PARK Journal">
+<meta property="og:title" content="Daeseung Park — AI &amp; Software Systems Engineer | Journal">
+<meta property="og:description" content="박대승 — AI·소프트웨어 시스템 엔지니어. 대형언어모델, 시계열 예측, 대화형 AI 연구와 기고문을 담은 개인 저널.">
+<meta property="og:url" content="https://daeseungpark.com/">
+<meta property="og:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Daeseung Park — AI &amp; Software Systems Engineer | Journal">
+<meta name="twitter:description" content="박대승 — AI·소프트웨어 시스템 엔지니어. 대형언어모델, 시계열 예측, 대화형 AI 연구와 기고문을 담은 개인 저널.">
+<meta name="twitter:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Daeseung Park","alternateName":"박대승","jobTitle":"AI & Software Systems Engineer","affiliation":{"@type":"Organization","name":"KAIST"},"url":"https://daeseungpark.com/","image":"https://daeseungpark.com/assets/img/profile/img3.jpg","sameAs":["https://github.com/UniverseMaker","https://orcid.org/0009-0002-3044-2689","https://scholar.google.com/citations?hl=ko&user=qVom0QUAAAAJ","https://www.linkedin.com/in/daeseungpark","https://hub.docker.com/u/daeseungpark","https://codespectrum.net"]}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Noto+Serif+KR:wght@400;600&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-base="" data-hero="photo">
+
+<!-- ===== Top utility bar ===== -->
+<div class="topbar">
+  <div class="container-x">
+    <span class="tb-date" id="today">—</span>
+    <div class="tb-links">
+      <a href="profile.html">Profile</a>
+      <a href="https://github.com/UniverseMaker" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener">ORCID</a>
+      <a href="mailto:dspark@daeseungpark.com">Contact</a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Header / nav ===== -->
+<header class="site-header">
+  <div class="container-x nav-row">
+    <a href="index.html" class="brand">D<span class="dot">.</span> PARK <small>Journal</small></a>
+    <nav class="main-nav">
+      <a href="index.html" class="active">Home</a>
+      <a href="profile.html">Profile</a>
+      <a href="articles.html">Articles</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="테마 전환"><span id="themeIcon">☾</span></button>
+      <a href="profile.html" class="btn-x" style="padding:9px 16px;">프로필 보기</a>
+      <button class="icon-btn nav-toggle" id="navToggle" aria-label="메뉴">≡</button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== Trending ticker ===== -->
+<div class="ticker">
+  <div class="container-x">
+    <span class="label">Trending</span>
+    <div class="items" id="tickerItems"></div>
+  </div>
+</div>
+
+<!-- ===== HERO: profile featured grid (1 large + 1 medium + 2 small) ===== -->
+<section class="hero">
+  <div class="container-x">
+    <div class="hero-grid">
+
+      <!-- LARGE -->
+      <a href="profile.html" class="feat-card feat-large fade-up">
+        <div class="bg bg-photo-hero"></div>
+        <div class="inner">
+          <span class="cat-pill">Profile</span>
+          <h3>Daeseung&nbsp;Park<br>박대승</h3>
+          <p>AI &amp; Software Systems Engineer. 대형언어모델과 시계열 예측, 대화형 AI를 연구하는 KAIST 연구원입니다. 문제의 본질을 코드로 옮기는 일을 합니다.</p>
+          <div class="stat-line">
+            <div class="stat"><b>22</b><span>Publications</span></div>
+            <div class="stat"><b>9</b><span>Patents &amp; SW</span></div>
+            <div class="stat"><b>10+</b><span>R&amp;D Projects</span></div>
+          </div>
+          <span class="cta">프로필 전체 보기
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <!-- MEDIUM -->
+      <a href="profile.html#research-projects" class="feat-card feat-medium fade-up">
+        <div class="bg bg-grad-1"></div>
+        <div class="inner">
+          <span class="cat-pill">Research Focus</span>
+          <h3>LLM · 시계열 예측 · 대화형 AI</h3>
+          <p>프롬프트 엔지니어링, Seq2Seq 시계열 모델, 경량 언어모델과 감정 인식 챗봇.</p>
+          <span class="cta">연구 분야 보기
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <!-- SMALL ROW -->
+      <div class="feat-small-row">
+        <a href="profile.html#profile" class="feat-card feat-small fade-up">
+          <div class="bg bg-photo-kaist"></div>
+          <div class="inner">
+            <span class="cat-pill dark">Affiliation</span>
+            <h3>KAIST 연구원</h3>
+            <p>2023 — 현재</p>
+          </div>
+        </a>
+        <a href="profile.html#publications" class="feat-card feat-small fade-up">
+          <div class="bg bg-grad-2"></div>
+          <div class="inner">
+            <span class="cat-pill">Highlights</span>
+            <h3>논문 · 특허 · SW</h3>
+            <p>SCIE 5 · KCI 2 게재, 특허 3건, SW 등록 6건</p>
+          </div>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section paper-promo-wrap" id="homePromo" hidden><div class="container-x"></div></section>
+
+<!-- ===== Latest articles (top highlights) ===== -->
+<section class="section" id="articles">
+  <div class="container-x">
+    <div class="section-head">
+      <div>
+        <h2>최신 기고</h2>
+        <div class="sub">AI·LLM 기술 해설과 연구 회고를 담은 장문의 기고문</div>
+      </div>
+      <a href="articles.html" class="more">전체 보기 →</a>
+    </div>
+
+    <div class="grid grid-3" id="latestGrid"></div>
+  </div>
+</section>
+
+<!-- ===== Recent + Subscribe (한 줄) ===== -->
+<section class="section" id="recent">
+  <div class="container-x">
+    <div class="section-head">
+      <div><h2>Recent</h2><div class="sub">최근 올라온 기고를 한눈에</div></div>
+      <a href="articles.html" class="more">게시판 보기 →</a>
+    </div>
+    <div class="recent-bar">
+      <div class="recent-row" id="recentRow"></div>
+      <aside class="subscribe-card">
+        <h5>Subscribe</h5>
+        <p>새 기고문이 올라오면 이메일로 알려드립니다. 스팸 없이, 새 글 소식만.</p>
+        <form id="subscribeForm">
+          <input type="email" placeholder="이메일 주소" aria-label="이메일 주소" required>
+          <button type="submit">구독</button>
+        </form>
+        <div class="sub-msg" id="subMsg"></div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Home preview sections (config-driven) ===== -->
+<section class="section" id="homeActivitySec">
+  <div class="container-x">
+    <div class="section-head">
+      <div><h2>주요 활동</h2><div class="sub">학회·시연·행사 현장</div></div>
+      <a href="activity.html" class="more">전체 보기 →</a>
+    </div>
+    <div id="homeActivity"></div>
+  </div>
+</section>
+
+<section class="section" id="homePortfolioSec">
+  <div class="container-x">
+    <div class="section-head">
+      <div><h2>포트폴리오</h2><div class="sub">최근 참여한 산출물</div></div>
+      <a href="portfolio.html" class="more">전체 보기 →</a>
+    </div>
+    <div class="grid grid-3" id="homePortfolio"></div>
+  </div>
+</section>
+
+<section class="section" id="homeProjectsSec">
+  <div class="container-x">
+    <div class="section-head">
+      <div><h2>최근 연구 과제</h2><div class="sub">최근 참여한 R&amp;D 과제</div></div>
+      <a href="research.html" class="more">전체 보기 →</a>
+    </div>
+    <div id="homeProjects"></div>
+  </div>
+</section>
+
+<!-- ===== About this Journal + Topics (한 섹션, 좌:About 大 / 우:Topics 小) ===== -->
+<section class="section about-bottom" id="about">
+  <div class="container-x">
+    <div class="about-grid">
+      <div class="about-main">
+        <div class="section-head" style="border-bottom:0;padding-bottom:0;margin-bottom:16px;"><h2>About this Journal</h2></div>
+        <p class="lead-serif">이 저널은 박대승의 연구와 생각을 기록하는 공간입니다. 대형언어모델과 시계열 예측, 대화형 AI처럼 제가 직접 다뤄 온 주제를 가능한 한 정확하고 읽기 좋게 풀어내려 합니다. 논문의 한 줄로 압축되기 전, 연구가 실제로 어떻게 흘러갔는지 — 그 과정의 판단과 시행착오까지 — 담는 것이 목표입니다.</p>
+        <p class="lead-serif">모든 기고문은 인쇄했을 때에도 한 권의 책처럼 읽히도록 조판했습니다. 마음에 드는 글은 브라우저의 인쇄 기능으로 PDF로 내려받아 보셔도 좋습니다.</p>
+        <a href="profile.html" class="btn-x" style="margin-top:6px;">전체 프로필 보기 →</a>
+      </div>
+      <aside class="about-side">
+        <div class="about-author">
+          <div class="aa-av"><img src="assets/img/profile/img3.jpg" alt="박대승"></div>
+          <div>
+            <b>Daeseung Park · 박대승</b>
+            <div class="text-muted-x" style="font-size:.88rem;margin:4px 0 8px;">AI &amp; Software Systems Engineer · KAIST</div>
+            <p class="text-muted-x" style="font-size:.9rem;margin:0;">생성형 AI, 시계열 예측, 대화형 시스템을 연구합니다.</p>
+          </div>
+        </div>
+        <div class="topics-side">
+          <h4>주제로 둘러보기</h4>
+          <div class="topic-list">
+            <a href="articles.html">대형언어모델</a>
+            <a href="articles.html">프롬프트 엔지니어링</a>
+            <a href="articles.html">시계열 예측</a>
+            <a href="articles.html">Seq2Seq</a>
+            <a href="articles.html">대화형 AI</a>
+            <a href="articles.html">경량 모델 · 엣지 AI</a>
+            <a href="articles.html">디지털 헬스케어</a>
+            <a href="articles.html">실감 콘텐츠</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer class="site-footer" id="contact">
+  <div class="container-x">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">D. PARK</div>
+        <p style="max-width:34ch;">AI와 소프트웨어 시스템을 연구하는 엔지니어의 개인 저널. 연구와 생각을 기록합니다.</p>
+        <div class="social" style="margin-top:16px;">
+          <a href="https://github.com/UniverseMaker" target="_blank" rel="noopener" aria-label="GitHub">GH</a>
+          <a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener" aria-label="ORCID">iD</a>
+          <a href="mailto:dspark@daeseungpark.com" aria-label="Email">@</a>
+        </div>
+      </div>
+      <div>
+        <h6>둘러보기</h6>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="profile.html">Profile</a></li>
+          <li><a href="articles.html">Articles</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="notices.html">공지사항</a></li>
+        </ul>
+      </div>
+      <div>
+        <h6>기고문</h6>
+        <ul id="footerArticles"></ul>
+      </div>
+      <div>
+        <h6>Contact</h6>
+        <ul>
+          <li><a href="mailto:dspark@daeseungpark.com">dspark@daeseungpark.com</a></li>
+          <li><a href="mailto:dspark@kaist.ac.kr">dspark@kaist.ac.kr</a></li>
+          <li><a href="tel:+821064547777">Phone (KR) +82 10 6454 7777</a></li>
+          <li><a href="tel:+16574109449">Phone (US) +1 657 410 9449</a></li>
+          <li>KAIST, Daejeon, Korea</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Daeseung Park. All rights reserved.</span>
+      <span>Designed &amp; built as a personal journal.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== Mobile nav ===== -->
+<div class="mobile-nav" id="mobileNav">
+  <button class="icon-btn close" id="navClose" aria-label="닫기">✕</button>
+  <a href="index.html">Home</a>
+  <a href="profile.html">Profile</a>
+  <a href="articles.html">Articles</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/articles.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

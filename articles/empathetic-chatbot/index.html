@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>공감하는 기계 — D. PARK Journal</title>
+<meta name="description" content="홀로 사는 중고령자의 마음을 읽는 챗봇을 설계하며 던진 질문. 기계에게 ‘공감’이란 무엇이고, 무엇일 수 없는가.">
+<link rel="canonical" href="https://daeseungpark.com/articles/empathetic-chatbot/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="D. PARK Journal">
+<meta property="og:title" content="공감하는 기계">
+<meta property="og:description" content="홀로 사는 중고령자의 마음을 읽는 챗봇을 설계하며 던진 질문. 기계에게 ‘공감’이란 무엇이고, 무엇일 수 없는가.">
+<meta property="og:url" content="https://daeseungpark.com/articles/empathetic-chatbot/">
+<meta property="og:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="공감하는 기계">
+<meta name="twitter:description" content="홀로 사는 중고령자의 마음을 읽는 챗봇을 설계하며 던진 질문. 기계에게 ‘공감’이란 무엇이고, 무엇일 수 없는가.">
+<meta name="twitter:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"공감하는 기계","author":{"@type":"Person","name":"박대승","alternateName":"Daeseung Park"},"publisher":{"@type":"Organization","name":"D. PARK Journal"},"image":"https://daeseungpark.com/assets/img/profile/img3.jpg","mainEntityOfPage":"https://daeseungpark.com/articles/empathetic-chatbot/","inLanguage":"ko","datePublished":"2026-06"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Noto+Serif+KR:wght@400;600&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/css/article.css">
+</head>
+<body data-base="../../">
+<div class="progress-bar" id="progress"></div>
+<div class="topbar no-print">
+  <div class="container-x">
+    <span class="tb-date" id="today">—</span>
+    <div class="tb-links">
+      <a href="../../index.html">Home</a>
+      <a href="https://github.com/UniverseMaker" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener">ORCID</a>
+      <a href="../../index.html#contact">Contact</a>
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header no-print">
+  <div class="container-x nav-row">
+    <a href="../../index.html" class="brand">D<span class="dot">.</span> PARK <small>Journal</small></a>
+    <nav class="main-nav">
+      <a href="../../index.html">Home</a>
+      <a href="../../profile.html">Profile</a>
+      <a href="../../articles.html" class="active">Articles</a>
+      <a href="../../index.html#contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="테마 전환"><span id="themeIcon">☾</span></button>
+      <button class="print-cta" id="printBtn">🖶 인쇄 / PDF</button>
+      <button class="icon-btn nav-toggle" id="navToggle" aria-label="메뉴">≡</button>
+    </div>
+  </div>
+</header>
+
+<div class="ticker no-print">
+  <div class="container-x">
+    <span class="label">Trending</span>
+    <div class="items" id="tickerItems"></div>
+  </div>
+</div>
+
+<article data-article-id="5">
+  <div class="article-wrap">
+    <!-- Masthead -->
+    <header class="art-head">
+      <span class="cat-pill red">Research · 회고</span>
+      <h1>공감하는 기계</h1>
+      <p class="deck">홀로 사는 한 어르신의 마음을 읽어 내는 챗봇을 설계하며, 나는 줄곧 같은 질문 앞에 멈춰 섰다. 기계에게 ‘공감’이란 무엇일 수 있고, 또 무엇일 수 없는가.</p>
+      <div class="art-byline">
+        <div class="av">DP</div>
+        <div class="who">
+          <b>박대승 (Daeseung Park)</b>
+          <span>AI &amp; Software Systems Engineer · KAIST</span>
+          <span>2026년 6월 · 13분 읽기</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="art-cover"><img src="../../assets/img/extracted/portfolio/multimodel-chatbot-patent-system-arch.png" alt="멀티모델 헬스케어 챗봇 시스템 구조(특허 10-2022-0130207)" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+
+    <!-- Summary -->
+    <div class="summary-box">
+      <span class="tag">1분 요약</span>
+      한국연구재단(NRF) 융합 과제의 일부로, 우리는 독거 중고령자의 디지털 헬스케어를 위한 ‘치료적 의사소통’ 챗봇을 설계했다. 자연어 이해(NLU)와 언어 생성, 센서 기반 패턴 분석, 그리고 텍스트로부터 우울 신호와 긍·부정 정서를 읽어 내는 BERT 기반 분류기를 결합했다. 핵심은 하나의 거대 모델이 아니라, 정서 인식·의도 파악·응답 생성을 상황에 따라 ‘선택적으로’ 라우팅하는 다중 모델 구조였다(관련 특허 2건). 이 글은 그 설계의 과정과, 그 과정에서 마주한 윤리적 한계 — 챗봇은 결코 치료자를 대신하지 않는다 — 를 회고하며, ‘공학으로서의 공감’이 무엇이었는지를 정리한다.
+    </div>
+
+    <!-- Body -->
+    <div class="prose">
+      <span class="chapter-label">Chapter 1. 사용자</span>
+      <h2>혼자 사는 어르신 앞에서 일반 챗봇은 왜 무너지는가</h2>
+      <p>과제는 추상적인 ‘노년층’이 아니라, 구체적인 한 사람에서 시작했다. 자녀와 떨어져 홀로 사는 70대 어르신. 하루에 사람과 나누는 말이 손에 꼽고, 몸 어딘가가 늘 불편하지만 병원에 갈 만큼은 아니라고 스스로 미루며, 밤이 되면 까닭 없이 마음이 가라앉는 사람. 우리가 만들려던 챗봇의 상대는 이런 사람이었다.</p>
+      <p>시중의 일반 대화형 AI를 그대로 가져다 두면 어떻게 될까. 처음 며칠은 신기해한다. 그러나 곧 무너진다. 일반 챗봇은 ‘정보’를 주는 데 최적화되어 있다. 질문하면 답하고, 요청하면 처리한다. 그런데 외로움 속의 어르신이 원하는 것은 정답이 아니라 <em>들어 주는 일</em>이었다. “오늘 무릎이 또 아프네”라는 말에 챗봇이 무릎 통증의 원인 다섯 가지를 나열하는 순간, 대화는 끝난다. 사람은 진단을 들으려 한 게 아니라, 자신의 하루를 누군가에게 건넨 것이기 때문이다.</p>
+
+      <div class="pullquote">그는 진단을 들으려 한 것이 아니라, 자신의 하루를 누군가에게 건넨 것이었다.</div>
+
+      <p>‘치료적 의사소통(therapeutic communication)’은 간호와 상담 분야에서 오래 다듬어 온 개념이다. 핵심은 세 가지로 요약된다. 첫째, <strong>경청</strong> — 판단하거나 서둘러 해결하려 하지 않고 끝까지 듣는다. 둘째, <strong>안전감</strong> — 무엇을 말해도 비난받지 않으리라는 신뢰. 셋째, <strong>일관성</strong> — 어제의 대화를 기억하고, 늘 같은 자리에서 같은 태도로 맞이한다. 일반 챗봇이 이 어르신에게 실패하는 이유는 성능이 낮아서가 아니라, 애초에 다른 목표를 향해 설계되었기 때문이다. 우리는 ‘답하는 기계’가 아니라 ‘머무는 기계’를 설계해야 했다.</p>
+
+      <span class="chapter-label">Chapter 2. 구조</span>
+      <h2>왜 모델 하나로는 부족했나 — 선택적 다중 모델</h2>
+      <p>처음에는 가장 강력한 생성 모델 하나로 전부 해결하려 했다. 그러나 곧 한계가 드러났다. 정서를 섬세하게 읽어야 할 때, 의도를 정확히 분류해야 할 때, 안전하게 응답을 만들어야 할 때 — 이 세 가지는 서로 다른 능력이고, 하나의 모델에 모든 부담을 지우면 어느 하나도 충분히 잘하지 못했다. 특히 의료·정서 영역에서는 ‘그럴듯하지만 위험한 답’이 가장 큰 적이었다.</p>
+      <p>그래서 택한 것이 <strong>다중 모델 구조(multi-model architecture)</strong>였다. 발화가 들어오면 먼저 가벼운 분류기가 상황을 판별한다. 지금 이 말은 정서적 토로인가, 증상 호소인가, 단순 정보 요청인가, 혹은 위기 신호인가. 그 판별에 따라 적합한 전문 모델로 처리를 ‘선택적으로’ 라우팅한다. 정서 인식 모델, 의도 분류 모델, 응답 생성 모델이 각자의 자리에서 자기 일만 한다. 이 ‘선택적 모델 적용(selective model application)’이 설계의 심장이었다.</p>
+
+      <table>
+        <thead><tr><th>구분</th><th>단일 거대 모델</th><th>선택적 다중 모델</th></tr></thead>
+        <tbody>
+          <tr><td>정서 민감도</td><td>평균적, 둔감</td><td>전문 정서 모델로 정밀</td></tr>
+          <tr><td>위기 신호 처리</td><td>일반 응답에 묻힘</td><td>전용 경로로 즉시 분기</td></tr>
+          <tr><td>오답의 위험</td><td>그럴듯한 위험 응답</td><td>경로별 안전장치 적용</td></tr>
+          <tr><td>설명 가능성</td><td>블랙박스</td><td>어느 경로로 갔는지 추적 가능</td></tr>
+          <tr><td>유지·보수</td><td>전체 재학습</td><td>모듈 단위 교체</td></tr>
+        </tbody>
+      </table>
+
+      <figure>
+        <div class="fig-box"><img src="../../assets/img/extracted/portfolio/multichatbot-patent-message-analysis-arch.png" alt="계층적 다중 챗봇의 메시지 분석·라우팅 구조(특허 10-2022-0035339)" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+        <figcaption>계층적 다중 챗봇의 메시지 분석·라우팅 구조(특허 10-2022-0035339). 들어온 발화를 먼저 분석해 정서 토로·증상 호소·정보 요청·위기 신호로 판별하고, 각 상황에 맞는 전문 모델로 선택적으로 라우팅한다.</figcaption>
+      </figure>
+
+      <p>이 구조의 또 다른 미덕은 <strong>설명 가능성</strong>이었다. 단일 모델은 왜 그 답을 냈는지 추적하기 어렵지만, 다중 모델은 “이 발화가 위기 경로로 분기되었고, 따라서 사람에게 연결되었다”는 식으로 의사결정의 흐름을 남긴다. 의료 인접 영역에서 이 추적 가능성은 사치가 아니라 필수다. 우리는 이 다중 모델 및 계층적 헬스케어 챗봇 구조에 관해 두 건의 특허를 출원·등록했는데, 발명의 핵심은 ‘무엇을 더 똑똑하게 만드느냐’가 아니라 ‘무엇을, 언제, 어느 모델에 맡길 것이냐’를 규율하는 라우팅 규칙에 있었다.</p>
+
+      <span class="chapter-label">Chapter 3. 마음 읽기</span>
+      <h2>기계에게 기분을 알아차리게 가르치기</h2>
+      <p>치료적 의사소통의 출발은 상대의 정서 상태를 알아차리는 일이다. 그래서 우리는 텍스트와 센서, 두 갈래에서 신호를 모았다. 텍스트 쪽에서는 발화에서 긍정·부정 정서와 세분화된 감정을 인식하고, 나아가 우울의 신호를 포착하는 분류기를 두었다. 이 분류기는 <strong>BERT 기반</strong>으로, 텍스트 건강 상담 데이터를 학습해 상담 발화의 정서·위험 범주를 가려내도록 했다. 이 연구의 일부는 <em>CMES</em>(SCIE)에 게재되었다.</p>
+      <p>센서 쪽에서는 발화 빈도, 수면·활동의 규칙성, 응답 지연 같은 비언어적 패턴을 분석했다. 우울은 종종 말의 내용보다 말의 <em>리듬</em>에서 먼저 드러난다. 어제까지 아침마다 대화를 시작하던 어르신이 사흘째 침묵하고 있다면, 그것은 어떤 문장보다 또렷한 신호다. 텍스트가 ‘무엇을 말하는가’를 읽는다면, 센서는 ‘말의 결이 어떻게 변했는가’를 읽었다.</p>
+
+      <figure>
+        <div class="fig-box"><img src="../../assets/img/extracted/portfolio/weather-multiturn-chatbot-demo.png" alt="날씨 정보 기반 멀티턴 챗봇 데모 화면" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+        <figcaption>멀티턴 대화 데모의 한 장면. 단발성 질의응답이 아니라 앞선 맥락을 이어받아 대화를 지속하는 흐름이, 어제를 기억하고 오늘도 같은 자리에 머무는 ‘치료적 의사소통’의 토대가 되었다.</figcaption>
+      </figure>
+
+      <p>다만 여기서 우리는 가장 조심해야 했다. 우울의 ‘신호를 감지’하는 것과 우울을 ‘진단’하는 것은 전혀 다른 일이다. 우리 시스템이 한 일은 어디까지나 위험 신호를 조기에 포착해 — 의료적 판단이 아니라 — <strong>주의를 환기</strong>하는 것이었다. 어떤 점수도 사람의 마음을 다 담을 수 없고, 어떤 모델도 진료를 대신할 수 없다. 분류기의 출력은 결론이 아니라, 사람의 개입을 부르는 호출 신호여야 했다.</p>
+
+      <span class="chapter-label">Chapter 4. 한계와 윤리</span>
+      <h2>챗봇은 치료자가 아니다</h2>
+      <p>정신건강을 다루는 기술에는 다른 어떤 분야보다 무거운 책임이 따른다. 가장 두려운 것은 <strong>과신(over-trust)</strong>이었다. 매일 따뜻하게 응답하는 챗봇은, 외로운 사람에게 진짜 관계처럼 느껴질 수 있다. 그것이 작은 위로가 될 수도 있지만, 정작 필요한 전문적 도움으로부터 사람을 멀어지게 만든다면 — 우리는 돕는 것이 아니라 해를 끼치는 것이다.</p>
+
+      <div class="callout"><b>책임 있는 설계 원칙.</b> 이 시스템은 전문적 돌봄을 <b>보조</b>할 뿐, 결코 <b>대체</b>하지 않는다. 위기 신호가 감지되면 챗봇은 스스로 ‘해결’을 시도하지 않고, 즉시 보호자·전문 상담 인력·의료 체계로의 연결을 제안하도록 설계했다. 모든 경로의 제1원칙은 의료 윤리의 오래된 명령, <b>“해를 끼치지 말라(do no harm)”</b>였다.</p></div>
+
+      <p>그래서 우리는 챗봇이 ‘하지 말아야 할 것’의 목록을 능력의 목록보다 먼저 적었다. 진단하지 않는다. 약을 권하지 않는다. 위기 상황을 혼자 떠안지 않는다. 자신이 사람이라고 오인하게 두지 않는다. 그리고 무엇보다, <strong>사람으로의 에스컬레이션 경로</strong>를 시스템의 가장 견고한 부분으로 만들었다. 다중 모델 구조에서 위기 경로는 가장 단순하고 가장 확실했다 — 모호할 땐 언제나 사람을 부르는 쪽으로 기울도록.</p>
+
+      <div class="pullquote">우리는 챗봇이 ‘할 수 있는 것’의 목록보다, ‘하지 말아야 할 것’의 목록을 먼저 적었다.</div>
+
+      <span class="chapter-label">맺음말</span>
+      <h2>공학으로서의 공감</h2>
+      <p>과제를 마치며 나는 처음의 질문으로 돌아갔다. 기계가 공감할 수 있는가. 솔직한 답은 ‘아니다’에 가깝다. 기계는 외로움을 느끼지 못하고, 누군가의 슬픔에 함께 아파하지 못한다. 우리가 만든 것은 ‘느끼는 기계’가 아니었다.</p>
+      <p>그러나 공감을 <em>느낌</em>이 아니라 <em>행위</em>로 분해해 보면 이야기가 달라진다. 끝까지 주의 깊게 듣는 것, 어떤 말에도 안전하게 응답하는 것, 어제를 기억하고 오늘도 같은 자리에 있는 것 — 사람이 ‘공감받았다’고 느끼게 하는 이 구체적 행동들은, 설계하고 측정하고 개선할 수 있는 공학의 대상이었다. 우리가 만든 것은 공감하는 기계가 아니라, <strong>공감의 행위를 안정적으로 수행하는 기계</strong>였다. 그리고 그 기계의 가장 중요한 기능은, 자신의 한계를 알고 제때 사람을 부르는 일이었다.</p>
+      <p>홀로 사는 그 어르신에게 정말 필요한 것은 여전히 사람의 손길이다. 기술이 할 수 있는 일은 그 손길이 닿기 전까지 곁을 지키고, 손길이 필요한 순간을 놓치지 않고 알리는 것 — 딱 거기까지다. 그 겸손한 경계를 지키는 일이, 이 연구가 내게 가르쳐 준 가장 깊은 공학이었다.</p>
+
+      <div class="references">
+        <h4>참고</h4>
+        <ol>
+          <li>한국연구재단(NRF) 융합 연구 과제, “독거 중고령 가구의 디지털 헬스케어를 위한 AI 기반 치료적 의사소통 챗봇” (연구 책임 협동 과제).</li>
+          <li>D. Park et al., “BERT-based Classification of Text Health-Counseling Data for Emotion and Depression-Signal Recognition,” <em>Computer Modeling in Engineering &amp; Sciences (CMES)</em> (SCIE).</li>
+          <li>다중 모델 / 계층적 헬스케어 챗봇 시스템 및 선택적 모델 적용 방법, 등록·출원 특허 2건(발명자 박대승 외).</li>
+          <li>본문의 사용자 묘사와 대화 예시는 설계 의도를 설명하기 위해 일반화·재구성한 것으로, 특정 개인의 사례가 아니다. 본 시스템은 전문적 의료·상담을 보조할 뿐 대체하지 않는다.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer of article -->
+  <div class="art-foot">
+    <div class="art-tags">
+      <a href="#">#디지털헬스케어</a><a href="#">#치료적의사소통</a><a href="#">#다중모델챗봇</a><a href="#">#정신건강AI</a>
+    </div>
+    <div class="author-card">
+      <div class="av">DP</div>
+      <div class="who">
+        <b>박대승 · Daeseung Park</b>
+        <p>KAIST 연구원. 대형언어모델, 시계열 예측, 대화형 AI를 연구합니다. 연구의 과정을 가능한 한 정확하고 읽기 좋게 기록하려 합니다.</p>
+      </div>
+    </div>
+
+    <div class="read-next no-print">
+        <div class="section-head" style="margin-bottom:20px;"><h2 style="font-size:1.3rem;">다음 글</h2></div>
+        <div class="grid grid-2" id="readNext"></div>
+      </div>
+      <nav class="post-nav no-print" id="postNav"></nav>
+    </div>
+</article>
+
+<div class="print-footer">Daeseung Park · D. PARK Journal — 공감하는 기계</div>
+
+<footer class="site-footer no-print">
+  <div class="container-x">
+    <div class="footer-bottom" style="border:0;padding-top:0;">
+      <span>© 2026 Daeseung Park. All rights reserved.</span>
+      <span><a href="../../index.html">← 저널 홈</a></span>
+    </div>
+  </div>
+</footer>
+
+<div class="mobile-nav" id="mobileNav">
+  <button class="icon-btn close" id="navClose" aria-label="닫기">✕</button>
+  <a href="../../index.html">Home</a>
+  <a href="../../profile.html">Profile</a>
+  <a href="../../articles.html">Articles</a>
+  <a href="../../index.html#contact">Contact</a>
+</div>
+
+<script src="../../assets/js/data.js"></script>
+<script src="../../assets/js/articles.js"></script>
+<script src="../../assets/js/main.js"></script>
+</body>
+</html>

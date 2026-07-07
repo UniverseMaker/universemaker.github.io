@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LLM은 공간을 이해하는가 — D. PARK Journal</title>
+<meta name="description" content="6개 대형언어모델을 7,650문항으로 해부한 공간추론 벤치마크. 좌표에서 거리까지, 5단계 추상화 계층으로 LLM의 공간 인지를 측정한 기록.">
+<link rel="canonical" href="https://daeseungpark.com/articles/llm-spatial-reasoning/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="D. PARK Journal">
+<meta property="og:title" content="LLM은 공간을 이해하는가">
+<meta property="og:description" content="6개 대형언어모델을 7,650문항으로 해부한 공간추론 벤치마크. 좌표에서 거리까지, 5단계 추상화 계층으로 LLM의 공간 인지를 측정한 기록.">
+<meta property="og:url" content="https://daeseungpark.com/articles/llm-spatial-reasoning/">
+<meta property="og:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="LLM은 공간을 이해하는가">
+<meta name="twitter:description" content="6개 대형언어모델을 7,650문항으로 해부한 공간추론 벤치마크. 좌표에서 거리까지, 5단계 추상화 계층으로 LLM의 공간 인지를 측정한 기록.">
+<meta name="twitter:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"LLM은 공간을 이해하는가","author":{"@type":"Person","name":"박대승","alternateName":"Daeseung Park"},"publisher":{"@type":"Organization","name":"D. PARK Journal"},"image":"https://daeseungpark.com/assets/img/profile/img3.jpg","mainEntityOfPage":"https://daeseungpark.com/articles/llm-spatial-reasoning/","inLanguage":"ko","datePublished":"2026-07"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Noto+Serif+KR:wght@400;600&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/css/article.css">
+</head>
+<body data-base="../../">
+<div class="progress-bar" id="progress"></div>
+<div class="topbar no-print">
+  <div class="container-x">
+    <span class="tb-date" id="today">—</span>
+    <div class="tb-links">
+      <a href="../../index.html">Home</a>
+      <a href="https://github.com/UniverseMaker" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener">ORCID</a>
+      <a href="../../index.html#contact">Contact</a>
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header no-print">
+  <div class="container-x nav-row">
+    <a href="../../index.html" class="brand">D<span class="dot">.</span> PARK <small>Journal</small></a>
+    <nav class="main-nav">
+      <a href="../../index.html">Home</a>
+      <a href="../../profile.html">Profile</a>
+      <a href="../../articles.html" class="active">Articles</a>
+      <a href="../../index.html#contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="테마 전환"><span id="themeIcon">☾</span></button>
+      <button class="print-cta" id="printBtn">🖶 인쇄 / PDF</button>
+      <button class="icon-btn nav-toggle" id="navToggle" aria-label="메뉴">≡</button>
+    </div>
+  </div>
+</header>
+
+<div class="ticker no-print">
+  <div class="container-x">
+    <span class="label">Trending</span>
+    <div class="items" id="tickerItems"></div>
+  </div>
+</div>
+
+<article data-article-id="13">
+  <div class="article-wrap">
+    <!-- Masthead -->
+    <header class="art-head">
+      <span class="cat-pill">Research · 회고</span>
+      <h1>LLM은 공간을 이해하는가</h1>
+      <p class="deck">지도를 읽는 일은 사람에게 너무 당연해서, 우리는 그것이 얼마나 여러 층위의 추론인지 잊고 산다. 6개 대형언어모델을 7,650문항으로 해부하며, 나는 ‘공간을 이해한다’는 말의 무게를 다시 재게 되었다.</p>
+      <div class="art-byline">
+        <div class="av">DP</div>
+        <div class="who">
+          <b>박대승 (Daeseung Park)</b>
+          <span>AI &amp; Software Systems Engineer · KAIST</span>
+          <span>2026년 7월 · 14분 읽기</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="art-cover"><div class="fill-5 fill-grid" style="position:absolute;inset:0;"></div></div>
+
+    <!-- Summary -->
+    <div class="summary-box">
+      <span class="tag">1분 요약</span>
+      대형언어모델(LLM)이 “서울은 부산의 북쪽에 있다”를 말할 수 있다고 해서, 정말로 <em>공간을 이해</em>하는 것은 아니다. 우리는 공간추론을 좌표·명칭·행정구역·관계·거리의 5단계 추상화 계층으로 나누고, 6개 모델(gpt-oss:20b, qwen3:8b, gemma3:27b, llama3.1:8b, GPT-5.2, Claude Sonnet 4.5)을 7,650문항으로 시험했다. 세 가지가 또렷하게 드러났다. 세 대상의 관계를 동시에 물으면 정확도가 평균 19.7%p 무너졌고(관계간섭효과), 과제에 맞는 맥락을 주면 18.3%p 올랐으며(맥락우선효과), 좌표를 어떻게 표현하느냐에 따라 정확도가 최대 84.1%p까지 요동쳤다. 결론은 하나로 모인다 — 공간추론 성능은 <strong>정보의 양</strong>이 아니라 <strong>과제와의 적합성</strong>이 결정한다(Model-Fit Heuristic).
+    </div>
+
+    <!-- Body -->
+    <div class="prose">
+      <span class="chapter-label">Chapter 1. 문제 제기</span>
+      <h2>‘공간을 안다’는 말은 무엇을 뜻하는가</h2>
+      <p>연구를 시작하며 나를 붙든 질문은 소박했다. 지도 앱에 익숙한 우리는 “강남역에서 서울역이 어느 쪽이냐”는 물음에 0.5초 만에 답한다. 그런데 이 짧은 답 안에는 놀랍도록 여러 층의 사고가 겹쳐 있다. 두 지점을 각각 위치로 인식하고, 그 위치를 좌표로 환산하며, 좌표의 차이를 방향이라는 관계로 번역하고, 마지막으로 그 관계를 자연어로 표현한다. 사람에게는 이 모든 단계가 하나로 뭉쳐 순식간에 처리되기 때문에, 우리는 그것을 ‘하나의 능력’으로 착각한다.</p>
+      <p>언어모델에게 같은 질문을 던지면 이 뭉쳐 있던 층위가 낱낱이 분해되어 드러난다. 어떤 모델은 좌표는 정확히 읽지만 방향으로 옮기지 못하고, 어떤 모델은 관계는 그럴듯하게 서술하지만 정작 거리 감각이 없다. LLM은 방대한 텍스트에서 “A는 B의 북쪽”이라는 문장을 무수히 봐 왔으므로, 그런 <em>문장을 생성</em>하는 데는 능하다. 그러나 문장을 만드는 능력과 공간을 표상(representation)하는 능력은 같지 않다. 이 간극을 정량적으로 재는 것이 이 연구의 목표였다.</p>
+
+      <div class="pullquote">문장을 만드는 능력과 공간을 표상하는 능력은 같지 않다. 그 간극을 재는 것이 이 연구였다.</div>
+
+      <p>이 작업은 KAIST에서 IITP 과제(2024.07–2027.12)의 일부로 진행됐고, 그 결과는 <em>IEEE Access</em>(2026, SCIE)에 실렸다. 방법론을 요약하는 한 문장을 먼저 적어 두자. <strong>우리는 ‘LLM이 공간추론을 잘하는가’를 묻지 않고, ‘공간추론의 어느 층위에서, 어떤 조건에서 무너지는가’를 물었다.</strong> 좋은 벤치마크는 점수가 아니라 실패의 지도를 남긴다.</p>
+
+      <span class="chapter-label">Chapter 2. 계층 설계</span>
+      <h2>공간을 다섯 층으로 자르다</h2>
+      <p>공간추론을 하나의 능력으로 뭉뚱그리면 무엇을 못하는지 알 수 없다. 그래서 우리는 공간을 다루는 방식을 추상화 수준에 따라 다섯 층으로 나눴다. 아래로 갈수록 정보는 구체적이고, 위로 갈수록 추론의 부하가 커진다. 좌표는 그냥 읽으면 되지만, 거리는 두 좌표를 관계로 환산한 뒤 다시 크기로 정량화해야 하기 때문이다.</p>
+      <table>
+        <thead><tr><th>층위</th><th>추상화 대상</th><th>질의 예시</th><th>요구되는 능력</th><th>난이도</th></tr></thead>
+        <tbody>
+          <tr><td>① 좌표 <span style="opacity:.6">coordinates</span></td><td>수치 좌표(위·경도)</td><td>“(37.50, 127.03)은 어디인가”</td><td>수치 파싱·정렬</td><td>낮음</td></tr>
+          <tr><td>② 명칭 <span style="opacity:.6">place name</span></td><td>지명·고유명사</td><td>“강남역의 좌표는”</td><td>명칭↔위치 연결</td><td>낮음</td></tr>
+          <tr><td>③ 행정구역 <span style="opacity:.6">admin. region</span></td><td>포함·소속 관계</td><td>“강남역은 어느 구에 속하나”</td><td>계층적 포함 추론</td><td>중간</td></tr>
+          <tr><td>④ 관계 <span style="opacity:.6">spatial relations</span></td><td>방향·인접·순서</td><td>“A는 B의 어느 쪽인가”</td><td>상대 위치 환산</td><td>높음</td></tr>
+          <tr><td>⑤ 거리 <span style="opacity:.6">distance</span></td><td>정량적 간격</td><td>“A와 B는 몇 km 떨어졌나”</td><td>관계의 수치화</td><td>가장 높음</td></tr>
+        </tbody>
+      </table>
+      <p>이 계층은 단순한 분류표가 아니라 <strong>진단의 좌표계</strong>다. 한 모델의 정확도를 계층별로 늘어놓으면 그 모델의 인지 프로파일이 그려진다. 낮은 층위(①②)는 잘하는데 높은 층위(④⑤)에서 급락한다면, 그 모델은 공간을 ‘기억’하되 ‘연산’하지 못하는 것이다. 반대로 층위 전체가 고르게 낮다면 애초에 공간 표상 자체가 빈약한 것이다. 계층을 나눈 덕분에, 같은 총점이라도 전혀 다른 실패 구조를 구별할 수 있었다.</p>
+
+      <div class="callout"><b>설계 원칙.</b> 각 층위의 문항은 <em>다른 층위의 능력을 최대한 빌리지 않도록</em> 격리해 만들었다. 예컨대 관계(④) 문항은 명칭(②)을 몰라도 풀 수 있게 좌표를 함께 주었다. 그래야 “관계에서 틀린 것”인지 “명칭을 몰라서 틀린 것”인지를 분리할 수 있다. 층위를 나누는 것만으로는 부족하고, 층위 간 간섭을 통제해야 진짜 진단이 된다.</div>
+
+      <span class="chapter-label">Chapter 3. 실험 설계</span>
+      <h2>6개 모델, 7,650문항</h2>
+      <p>비교의 공정함을 위해 대상 모델은 성격이 다른 6종을 골랐다. 로컬에서 돌릴 수 있는 오픈 가중치 모델 — gpt-oss:20b, qwen3:8b, gemma3:27b, llama3.1:8b — 로 규모와 계보의 다양성을 확보하고, 최상위 상용 모델 — GPT-5.2, Claude Sonnet 4.5 — 로 현재 기술의 천장을 함께 봤다. 8B급 소형부터 27B급 중형, 그리고 프런티어 모델까지 한 축에 늘어놓으면, 성능 차이가 규모에서 오는지 아니면 다른 데서 오는지를 갈라 볼 수 있다.</p>
+      <p>문항은 5개 층위에 걸쳐 총 7,650개를 구성했다. 각 문항은 정답이 기계적으로 채점되도록 설계해 사람의 주관을 배제했고, 같은 공간 사실을 여러 표현으로 물어 <em>표현 방식이 정확도에 미치는 영향</em>을 분리할 수 있게 했다. 이 마지막 장치가 뒤에서 볼 세 번째 발견 — 좌표변환 취약성 — 을 드러내는 열쇠가 된다. 실험은 결국 “같은 것을 다르게 물었을 때 답이 얼마나 흔들리는가”를 측정하는 일이었다.</p>
+
+      <div class="pullquote">실험은 결국, 같은 것을 다르게 물었을 때 모델의 답이 얼마나 흔들리는가를 재는 일이었다.</div>
+
+      <span class="chapter-label">Chapter 4. 세 가지 발견</span>
+      <h2>모델이 무너지는 세 지점</h2>
+      <p>7,650문항이 쌓이자 소음 속에서 세 개의 신호가 반복적으로 떠올랐다. 각각 방향이 다르다. 하나는 무엇이 모델을 무너뜨리는지를, 하나는 무엇이 모델을 살리는지를, 마지막 하나는 모델이 얼마나 불안정한지를 말한다. 효과크기는 6개 모델에 걸친 평균과 표준편차로 정리했다.</p>
+      <table>
+        <thead><tr><th>발견</th><th>무엇을 바꿨나</th><th>정확도 변화</th><th>해석</th></tr></thead>
+        <tbody>
+          <tr><td><b>① 관계간섭효과</b><br><span style="opacity:.6">relational interference</span></td><td>2자 관계 → 3자(三者) 관계 질의</td><td style="color:#b91c1c;font-weight:600">−19.7 ± 7.0 %p</td><td>대상이 셋으로 늘면 상대 위치를 동시에 유지하지 못하고 무너진다</td></tr>
+          <tr><td><b>② 맥락우선효과</b><br><span style="opacity:.6">context priority</span></td><td>과제에 맞는 맥락 제공</td><td style="color:#15803d;font-weight:600">+18.3 ± 4.9 %p</td><td>적절한 맥락은 큰 폭의 상승을 낳는다 — 단, ‘적절할’ 때만</td></tr>
+          <tr><td><b>③ 좌표변환 취약성</b><br><span style="opacity:.6">coordinate fragility</span></td><td>좌표 표현·변환 방식 교체</td><td style="color:#b45309;font-weight:600">+2.7 ~ +84.1 %p</td><td>같은 좌표라도 표현을 바꾸면 정확도가 극단적으로 요동친다</td></tr>
+        </tbody>
+      </table>
+
+      <h3>① 관계간섭효과 — 셋이 되면 무너진다</h3>
+      <p>“A는 B의 북쪽”처럼 두 대상의 관계는 대부분의 모델이 곧잘 다뤘다. 그런데 “A, B, C를 북쪽부터 나열하라”처럼 세 대상의 관계를 동시에 물으면 정확도가 평균 19.7%p 주저앉았다. 표준편차 7.0%p가 말해 주듯 모델마다 정도는 달랐지만 <em>방향은 예외 없이 하락</em>이었다. 사람은 세 점을 머릿속 지도 위에 한꺼번에 얹지만, 모델은 관계를 국소적으로만 처리하는 듯했다. 하나의 관계를 붙잡으면 다른 관계가 미끄러졌다.</p>
+
+      <h3>② 맥락우선효과 — 맞는 맥락은 약이다</h3>
+      <p>반대 방향의 발견. 과제에 부합하는 맥락(예: 거리 질의에 좌표를, 방향 질의에 상대 위치를)을 함께 주면 정확도가 18.3%p 올랐다. 주목할 것은 이 효과가 ‘맥락을 많이 줄수록’이 아니라 ‘맞는 맥락을 줄 때’ 나타났다는 점이다. 과제와 어긋난 맥락은 오히려 방해가 됐다. 여기서 이미 결론의 씨앗이 보인다 — 관건은 양이 아니라 적합성이다.</p>
+
+      <h3>③ 좌표변환 취약성 — 표현이 성능을 지배한다</h3>
+      <p>가장 충격적이었던 발견. 완전히 동일한 위치를 십진 좌표, 도·분·초, 상대 오프셋 등 서로 다른 형식으로 제시하자, 정확도가 형식에 따라 최소 2.7%p에서 최대 84.1%p까지 벌어졌다. 84%p라는 폭은 사실상 ‘거의 못 함’과 ‘거의 다 맞음’ 사이의 거리다. 이는 모델이 좌표라는 <em>대상</em>을 안정적으로 표상하지 못하고, 좌표의 <em>표면 형식</em>에 붙들려 있음을 뜻한다. 공간이 아니라 문자열을 다루고 있었던 셈이다.</p>
+
+      <span class="chapter-label">Chapter 5. 함의</span>
+      <h2>Model-Fit Heuristic — 양이 아니라 적합성</h2>
+      <p>세 발견을 한 자리에 놓으면 하나의 원리로 수렴한다. 관계간섭은 정보를 <em>더 많이</em> 얹을 때(대상 셋) 무너짐을, 맥락우선은 <em>맞는</em> 정보를 얹을 때 살아남을, 좌표취약성은 <em>같은 정보의 형식</em>이 성패를 가름을 보여준다. 세 경우 모두 결정 변수는 정보의 총량(Information Density)이 아니라 과제와의 적합성(Task Relevance)이었다. 우리는 이 경향을 <strong>Model-Fit Heuristic</strong>으로 명명했다.</p>
+      <p>실무적 함의는 직관과 어긋난다. LLM에 공간 과제를 맡길 때 흔한 반사작용은 “맥락을 더 넣자”다. 그러나 우리의 데이터는 정반대를 가리킨다. <strong>무작정 많이 주기보다, 과제에 맞는 표현을 골라 주는 편이 낫다.</strong> 거리를 묻는다면 좌표를, 방향을 묻는다면 상대 위치를, 소속을 묻는다면 계층 구조를 — 과제가 요구하는 층위의 정보를 그 층위에 맞는 형식으로 제공하는 것이 성능의 지렛대였다.</p>
+
+      <div class="callout"><b>한 줄 지침.</b> 프롬프트에 정보를 더 넣을지 고민된다면, 먼저 물어라 — “이 정보는 <em>이 과제</em>에 필요한가, 아니면 그냥 관련 있어 보이는가?” 관련성과 적합성은 다르다. Model-Fit Heuristic은 후자를 고르라고 말한다.</div>
+
+      <p>겸허하게 덧붙일 것이 있다. 이 결과는 6개 모델과 특정 문항 집합에서 관찰된 경향이며, 모델 세대가 바뀌면 수치는 달라질 수 있다. 실제로 프런티어 모델(GPT-5.2, Claude Sonnet 4.5)은 소형 모델보다 세 효과 모두에서 안정적이었다. 그러나 <em>방향</em>은 규모와 무관하게 유지됐다 — 프런티어 모델조차 3자 관계에서 하락했고, 좌표 형식에 흔들렸다. 규모는 증상을 완화할 뿐, 공간 표상의 근본 문제를 없애지는 못했다.</p>
+
+      <span class="chapter-label">맺음말</span>
+      <h2>지도를 읽는다는 것</h2>
+      <p>연구를 마치고 나는 지도 앱을 예전처럼 무심히 쓰지 못하게 됐다. 화면 위 한 번의 눈길에 좌표와 명칭과 관계와 거리가 소리 없이 겹쳐 처리되고 있음을, 이제는 안다. LLM은 그 겹침을 흉내 내지만, 아직 각 층위를 따로따로, 그것도 표면 형식에 휘둘리며 다룬다. ‘공간을 이해하는가’라는 처음의 물음에 대한 정직한 답은 이렇다 — <em>어느 층위에서, 어떤 형식으로 묻느냐에 달렸다.</em></p>
+      <p>그래서 이 연구가 남긴 것은 순위표가 아니라 사용법이다. 모델의 한계를 탓하기보다, 과제에 맞는 표현을 골라 주는 것 — 그것이 지금 우리가 쥔 가장 확실한 지렛대다. 공간을 이해하는 기계를 기다리는 동안, 우리는 기계가 이해할 수 있는 형태로 공간을 건네는 법을 먼저 배워야 한다.</p>
+
+      <div class="references">
+        <h4>참고</h4>
+        <ol>
+          <li>D. Park <em>et al.</em>, “Task-Oriented Spatial Representations for LLM-Based Spatial Reasoning: An Empirical Framework With Multi-Layer Controls,” <em>IEEE Access</em> (SCIE), 2026. DOI: <a href="https://doi.org/10.1109/ACCESS.2026.3690723" target="_blank" rel="noopener">10.1109/ACCESS.2026.3690723</a>. (제2저자)</li>
+          <li>KAIST · IITP 과제(2024.07–2027.12)의 일부로 수행. 평가 대상: gpt-oss:20b, qwen3:8b, gemma3:27b, llama3.1:8b, GPT-5.2, Claude Sonnet 4.5 (총 7,650문항).</li>
+          <li>본문의 효과크기는 6개 모델에 걸친 평균±표준편차로, 모델·문항·평가 조건에 따라 값은 달라질 수 있다.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer of article -->
+  <div class="art-foot">
+    <div class="art-tags">
+      <a href="#">#LLM</a><a href="#">#공간추론</a><a href="#">#벤치마크</a><a href="#">#평가</a>
+    </div>
+    <div class="author-card">
+      <div class="av">DP</div>
+      <div class="who">
+        <b>박대승 · Daeseung Park</b>
+        <p>KAIST 연구원. 대형언어모델, 시계열 예측, 대화형 AI를 연구합니다. 연구의 과정을 가능한 한 정확하고 읽기 좋게 기록하려 합니다.</p>
+      </div>
+    </div>
+
+    <div class="read-next no-print">
+        <div class="section-head" style="margin-bottom:20px;"><h2 style="font-size:1.3rem;">다음 글</h2></div>
+        <div class="grid grid-2" id="readNext"></div>
+      </div>
+      <nav class="post-nav no-print" id="postNav"></nav>
+    </div>
+</article>
+
+<div class="print-footer">Daeseung Park · D. PARK Journal — LLM은 공간을 이해하는가</div>
+
+<footer class="site-footer no-print">
+  <div class="container-x">
+    <div class="footer-bottom" style="border:0;padding-top:0;">
+      <span>© 2026 Daeseung Park. All rights reserved.</span>
+      <span><a href="../../index.html">← 저널 홈</a></span>
+    </div>
+  </div>
+</footer>
+
+<div class="mobile-nav" id="mobileNav">
+  <button class="icon-btn close" id="navClose" aria-label="닫기">✕</button>
+  <a href="../../index.html">Home</a>
+  <a href="../../profile.html">Profile</a>
+  <a href="../../articles.html">Articles</a>
+  <a href="../../index.html#contact">Contact</a>
+</div>
+
+<script src="../../assets/js/data.js"></script>
+<script src="../../assets/js/articles.js"></script>
+<script src="../../assets/js/main.js"></script>
+</body>
+</html>

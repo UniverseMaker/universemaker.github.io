@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>데이터와 활성함수, 두 개의 작은 지렛대 — D. PARK Journal</title>
+<meta name="description" content="모델을 키우기 전에 점검할 두 축 — 유의어 군집으로 학습데이터를 늘리는 법과 ELU·Tanh 비대칭 조합으로 활성함수를 바꾸는 법.">
+<link rel="canonical" href="https://daeseungpark.com/articles/data-augmentation-activation/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="D. PARK Journal">
+<meta property="og:title" content="데이터와 활성함수, 두 개의 작은 지렛대">
+<meta property="og:description" content="모델을 키우기 전에 점검할 두 축 — 유의어 군집으로 학습데이터를 늘리는 법과 ELU·Tanh 비대칭 조합으로 활성함수를 바꾸는 법.">
+<meta property="og:url" content="https://daeseungpark.com/articles/data-augmentation-activation/">
+<meta property="og:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="데이터와 활성함수, 두 개의 작은 지렛대">
+<meta name="twitter:description" content="모델을 키우기 전에 점검할 두 축 — 유의어 군집으로 학습데이터를 늘리는 법과 ELU·Tanh 비대칭 조합으로 활성함수를 바꾸는 법.">
+<meta name="twitter:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"데이터와 활성함수, 두 개의 작은 지렛대","author":{"@type":"Person","name":"박대승","alternateName":"Daeseung Park"},"publisher":{"@type":"Organization","name":"D. PARK Journal"},"image":"https://daeseungpark.com/assets/img/profile/img3.jpg","mainEntityOfPage":"https://daeseungpark.com/articles/data-augmentation-activation/","inLanguage":"ko","datePublished":"2026-06"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Noto+Serif+KR:wght@400;600&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/css/article.css">
+</head>
+<body data-base="../../">
+<div class="progress-bar" id="progress"></div>
+<div class="topbar no-print">
+  <div class="container-x">
+    <span class="tb-date" id="today">—</span>
+    <div class="tb-links">
+      <a href="../../index.html">Home</a>
+      <a href="https://github.com/UniverseMaker" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener">ORCID</a>
+      <a href="../../index.html#contact">Contact</a>
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header no-print">
+  <div class="container-x nav-row">
+    <a href="../../index.html" class="brand">D<span class="dot">.</span> PARK <small>Journal</small></a>
+    <nav class="main-nav">
+      <a href="../../index.html">Home</a>
+      <a href="../../profile.html">Profile</a>
+      <a href="../../articles.html" class="active">Articles</a>
+      <a href="../../index.html#contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="테마 전환"><span id="themeIcon">☾</span></button>
+      <button class="print-cta" id="printBtn">🖶 인쇄 / PDF</button>
+      <button class="icon-btn nav-toggle" id="navToggle" aria-label="메뉴">≡</button>
+    </div>
+  </div>
+</header>
+
+<div class="ticker no-print">
+  <div class="container-x">
+    <span class="label">Trending</span>
+    <div class="items" id="tickerItems"></div>
+  </div>
+</div>
+
+<article data-article-id="8">
+  <div class="article-wrap">
+    <!-- Masthead -->
+    <header class="art-head">
+      <span class="cat-pill">AI · 기술해설</span>
+      <h1>데이터와 활성함수, 두 개의 작은 지렛대</h1>
+      <p class="deck">신경망의 성능은 모델을 키워야만 오르는 것이 아니다. 학습데이터를 유의어 군집으로 늘리는 일과, 활성함수를 비대칭으로 조합하는 일 — 크기를 건드리지 않고도 결과를 밀어 올리는 두 개의 작은 지렛대가 있다.</p>
+      <div class="art-byline">
+        <div class="av">DP</div>
+        <div class="who">
+          <b>박대승 (Daeseung Park)</b>
+          <span>AI &amp; Software Systems Engineer · KAIST</span>
+          <span>2026년 6월 · 14분 읽기</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="art-cover"><img src="../../assets/img/extracted/portfolio/wordcluster-accuracy-heatmap.png" alt="단어군집 확장 정확도 히트맵" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+
+    <!-- Summary -->
+    <div class="summary-box">
+      <span class="tag">1분 요약</span>
+      신경망 성능을 끌어올리는 길은 ‘더 큰 모델’ 하나가 아니다. 이 글은 크기를 건드리지 않고도 성능을 곱하는 두 개의 지렛대를 다룬다. 첫째, 학습데이터의 단어를 표준국어대사전의 유의어로 ‘그룹 단위’ 확장하는 기법이다. CNN·RNN·LSTM·BiLSTM·GRU·KoBERT까지 총 108개 실험 모델로 검증한 결과, 순환신경망 계열의 성능이 평균 0.75%포인트, 최대 2.68%포인트 올랐다. 둘째, 지수 선형 단위(ELU)와 로지스틱·Tanh를 층마다 비대칭으로 조합해 기울기 소실(Vanishing Gradient)을 완화하는 아키텍처 기법이다. 평균 1.024%포인트 개선, ELU-Tanh 조합이 0.9600으로 최고 성능을 냈다. 두 실험이 가리키는 방향은 같다 — 모델을 키우기 전에, ‘곱하기로 작동하는’ 작은 요소부터 점검하라.
+    </div>
+
+    <!-- Body -->
+    <div class="prose">
+      <span class="chapter-label">Chapter 1. 문제 제기</span>
+      <h2>작은 지렛대의 힘</h2>
+      <p>신경망의 성능이 아쉬울 때, 가장 먼저 떠오르는 처방은 대개 ‘더 크게’다. 층을 더 쌓고, 파라미터를 더 늘리고, 더 무거운 사전학습 모델로 갈아탄다. 이 방향은 분명 효과가 있지만, 가장 비싸고 가장 게으른 해법이기도 하다. 연산 비용은 크기에 따라 가파르게 오르는데, 정확도의 이득은 어느 지점부터 완만해진다. 그래서 나는 모델을 키우기 전에 늘 두 가지를 먼저 묻는다. 데이터를 더 잘 쓸 방법은 없는가, 그리고 네트워크 안쪽의 작은 부품을 바꿀 여지는 없는가.</p>
+      <p>이 두 질문은 사소해 보이지만, 실은 성능에 ‘곱하기’로 작동하는 지점을 겨눈다. 학습데이터는 모든 학습 단계에 스며들고, 활성함수는 모든 뉴런의 출력을 한 번씩 통과한다. 전체 파이프라인에 반복적으로 개입하는 요소일수록, 아주 작은 개선이라도 누적되면 무시할 수 없는 차이를 만든다. 이 글은 내가 주저자로 수행한 두 편의 연구를 통해, 이 ‘작은 지렛대’ 두 개가 실제로 얼마나 움직였는지를 기록한다.</p>
+
+      <div class="pullquote">모델을 키우기 전에, 데이터와 활성함수처럼 ‘작지만 곱하기로 작동하는’ 지렛대를 먼저 점검하라.</div>
+
+      <p>한쪽은 <strong>데이터를 늘리는 법</strong>이다. 학습 문장에 등장하는 단어를 표준국어대사전의 유의어로 그룹 단위 확장해, 같은 데이터에서 더 풍부한 표현 변이를 만들어 낸다. 다른 한쪽은 <strong>아키텍처를 바꾸는 법</strong>이다. 층마다 서로 다른 활성함수를 비대칭으로 조합해, 깊은 신경망의 고질병인 기울기 소실을 완화한다. 접근은 다르지만 철학은 하나다 — 크기가 아니라 구성으로 성능을 얻는다.</p>
+
+      <span class="chapter-label">Chapter 2. 데이터를 늘리는 법</span>
+      <h2>유의어 군집으로 학습데이터를 확장하다</h2>
+      <p>자연어 처리에서 데이터 증강은 늘 미묘한 문제를 안고 있다. 이미지라면 뒤집고 자르고 밝기를 바꿔도 ‘고양이’는 여전히 고양이지만, 문장은 단어 하나만 바꿔도 뜻이 어긋나기 쉽다. 무작위 치환이나 삭제 같은 거친 증강이 한국어에서 특히 위험한 이유다. 그래서 나는 언어의 의미 구조를 존중하는 증강을 택했다. 국립국어원 표준국어대사전에 등재된 <em>유의어</em> 관계를 근거로, 단어를 의미가 가까운 후보들로 치환하는 것이다.</p>
+      <p>핵심은 개별 단어를 하나씩 바꾸는 대신 <strong>단어를 그룹(word cluster) 단위로 확장</strong>했다는 점이다. 한 단어를 그와 유의 관계에 있는 단어들의 묶음으로 보고, 학습 문장 안에서 그 묶음을 오가며 표현 변이를 생성한다. 이렇게 하면 원문의 의미는 유지한 채, 모델이 같은 개념의 여러 표면형(surface form)을 학습하게 된다. 사전이라는 검증된 지식 자원에 뿌리를 두므로, 증강된 문장이 엉뚱한 의미로 튀는 위험도 낮다.</p>
+
+      <figure>
+        <div class="fig-box"><img src="../../assets/img/extracted/portfolio/wordcluster-synonym-expansion-diagram.png" alt="표준국어대사전 유의어 기반 단어그룹 확장 개념도" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+        <figcaption>표준국어대사전의 유의어 관계로 원문 단어를 의미가 가까운 후보 묶음으로 확장하는 개념도. 개별 치환이 아니라 그룹 단위 확장이 핵심이다.</figcaption>
+      </figure>
+
+      <p>검증은 최대한 넓게 설계했다. 어느 특정 구조에서만 통하는 요행이 아님을 보이기 위해, 표현 계열이 다른 여러 아키텍처를 나란히 세웠다. 합성곱 계열의 CNN, 순환신경망 계열의 RNN·LSTM·BiLSTM·GRU, 그리고 사전학습 트랜스포머인 KoBERT까지 — 데이터 조건과 하이퍼파라미터를 교차해 <strong>총 108개의 실험 모델</strong>을 구성하고, 증강 전후의 정확도를 조건별로 비교했다.</p>
+
+      <div class="callout"><b>왜 사전 기반인가.</b> 워드 임베딩의 코사인 유사도로 유의어를 뽑는 방법도 있지만, 그 경우 반의어나 상·하위어가 ‘가깝다’고 잘못 섞여 들어오기 쉽다. 표준국어대사전의 유의어 관계는 사람이 검수한 사전적 근거이므로, 증강의 신뢰도를 데이터 자원 자체가 담보한다. 지식 자원과 통계적 방법 중 무엇이 절대적으로 옳다기보다, 한국어 의미 보존이 중요한 과제에서는 사전이 더 안전한 출발점이었다.</p></div>
+
+      <span class="chapter-label">Chapter 3. 결과와 해석</span>
+      <h2>어디서, 얼마나 올랐는가</h2>
+      <p>결과는 아키텍처 계열에 따라 뚜렷이 갈렸다. <strong>순환신경망 계열</strong>에서 유의어 군집 확장의 효과가 가장 안정적으로 나타났다. 성능은 평균 <strong>0.75%포인트</strong> 향상되었고, 조건에 따라 최대 <strong>2.68%포인트</strong>까지 올랐다. 표현이 시간 축을 따라 순차적으로 쌓이는 순환 구조에서, 같은 의미의 다양한 표면형을 학습한 것이 문맥 일반화에 특히 도움이 되었다고 해석한다.</p>
+
+      <table>
+        <thead><tr><th>항목</th><th>내용</th></tr></thead>
+        <tbody>
+          <tr><td>증강 근거</td><td>표준국어대사전 유의어 관계 (그룹 단위 확장)</td></tr>
+          <tr><td>실험 모델 수</td><td>총 108개 (CNN · RNN · LSTM · BiLSTM · GRU · KoBERT)</td></tr>
+          <tr><td>순환신경망 평균 향상</td><td>+0.75%포인트</td></tr>
+          <tr><td>최대 향상</td><td>+2.68%포인트</td></tr>
+        </tbody>
+      </table>
+
+      <p>절댓값만 보면 0.75%포인트는 소박해 보일 수 있다. 그러나 이 이득의 성격을 짚어야 한다. 첫째, 새 데이터를 수집하지 않고 <strong>이미 가진 데이터에서</strong> 얻은 이득이다. 라벨링 비용이 0이라는 뜻이다. 둘째, 모델 크기·구조를 그대로 둔 채 얻은 이득이므로, 다른 개선 기법과 <strong>중첩해서</strong> 쌓을 수 있다. 위 히트맵이 보여주듯 효과의 크기는 아키텍처와 조건에 따라 달라지지만, 방향은 대체로 일관되게 양(+)이었다. 공짜에 가까운 지렛대가 대개 이런 모습이다 — 극적이지 않지만 거의 언제나 도움이 된다.</p>
+
+      <figure>
+        <div class="fig-box"><img src="../../assets/img/extracted/portfolio/wordcluster-accuracy-heatmap.png" alt="조건별 실험 모델의 정확도 히트맵" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+        <figcaption>조건별 실험 모델의 정확도 히트맵. 108개 조합에서 증강 효과의 방향은 대체로 일관되게 양(+)으로 나타났다.</figcaption>
+      </figure>
+
+      <p>주의할 점도 분명하다. 이 방법은 유의어 자원이 잘 갖춰진 언어와 도메인에서 강하다. 사전에 등재되지 않은 신조어·전문용어·고유명사가 많은 텍스트에서는 확장할 후보 자체가 적어 효과가 제한된다. 또한 다의어를 문맥 없이 치환하면 오히려 잡음이 될 수 있어, 확장은 언제나 원문 의미의 보존을 상한으로 두어야 한다.</p>
+
+      <span class="chapter-label">Chapter 4. 활성함수를 바꾸는 법</span>
+      <h2>ELU·Tanh 비대칭 조합과 기울기 소실</h2>
+      <p>두 번째 지렛대는 데이터 바깥, 네트워크 안쪽에 있다. 깊은 신경망을 학습할 때 가장 흔히 마주치는 벽이 <strong>기울기 소실(Vanishing Gradient)</strong>이다. 역전파로 오차 신호가 앞쪽 층으로 전달될 때, 활성함수의 기울기가 작으면 곱해질수록 신호가 급격히 0에 수렴한다. 그 결과 입력에 가까운 층은 사실상 학습이 멈춘다. 활성함수의 모양이 곧 학습 신호의 생사를 가르는 셈이다.</p>
+      <p>전통적으로 쓰인 로지스틱(Sigmoid)과 Tanh는 출력이 포화되는 양 끝에서 기울기가 거의 0이 되어 이 문제에 취약하다. 반대로 지수 선형 단위(ELU)는 양수 구간에서 항등에 가깝게 기울기를 살리고, 음수 구간에서는 부드럽게 포화하며 출력 평균을 0 근처로 밀어 학습을 안정화한다. 나는 여기서 한 걸음 더 나아가, <strong>층마다 서로 다른 활성함수를 ‘비대칭으로 조합’</strong>하는 방식을 실험했다. 모든 층에 같은 함수를 쓰는 대신, ELU와 로지스틱·Tanh를 층 위치에 따라 섞어 각 함수의 장점이 다른 함수의 약점을 보완하도록 배치한 것이다.</p>
+
+      <div class="pullquote">활성함수의 모양이 곧 학습 신호의 생사를 가른다. 같은 함수를 반복하는 대신, 서로의 약점을 메우도록 비대칭으로 조합했다.</div>
+
+      <p>발상의 핵심은 ‘하나의 최적 활성함수’를 찾는 게임을 그만두는 데 있다. 어떤 층은 신호를 넓게 통과시키는 것이 유리하고, 어떤 층은 출력을 부드럽게 눌러 주는 것이 유리하다. 층마다 요구가 다르다면, 층마다 다른 함수를 쓰는 것이 자연스럽다. 비대칭 조합은 그 직관을 설계로 옮긴 것이다.</p>
+
+      <span class="chapter-label">Chapter 5. 결과</span>
+      <h2>+1.024%포인트, 그리고 ELU-Tanh</h2>
+      <p>여러 조합을 체계적으로 비교한 결과, 비대칭 조합은 단일 활성함수를 쓴 기준선 대비 <strong>평균 1.024%포인트</strong>의 개선을 보였다. 그중 <strong>ELU-Tanh 조합</strong>이 정확도 <strong>0.9600</strong>으로 가장 좋았다. ELU가 앞단에서 기울기를 넉넉히 살려 학습 신호를 앞쪽 층까지 실어 나르고, Tanh가 뒤이어 출력을 0 중심으로 부드럽게 정돈하는 역할 분담이 잘 맞아떨어진 결과로 읽힌다.</p>
+
+      <figure>
+        <div class="fig-box"><img src="../../assets/img/extracted/portfolio/activation-functions-comparison-graph.png" alt="활성함수별 성능 비교 그래프" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+        <figcaption>활성함수별 성능 비교. 단일 함수를 반복하는 구성보다, 서로 다른 함수를 층별로 조합한 구성이 전반적으로 앞섰다.</figcaption>
+      </figure>
+
+      <table>
+        <thead><tr><th>구성</th><th>성격</th><th>정확도</th></tr></thead>
+        <tbody>
+          <tr><td>단일 활성함수 (기준선)</td><td>모든 층 동일 함수</td><td>기준</td></tr>
+          <tr><td>비대칭 조합 (평균)</td><td>층별 상이 함수 혼합</td><td>+1.024%p</td></tr>
+          <tr><td>ELU-Tanh 조합</td><td>최고 성능 구성</td><td>0.9600</td></tr>
+        </tbody>
+      </table>
+
+      <figure>
+        <div class="fig-box"><img src="../../assets/img/extracted/portfolio/activation-elu-tanh-result-table.png" alt="ELU·Tanh 비대칭 조합 결과표" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+        <figcaption>ELU·Tanh 비대칭 조합의 결과표. 앞단 ELU가 기울기를 살리고 뒷단 Tanh가 출력을 정돈하는 역할 분담이 최고 성능으로 이어졌다.</figcaption>
+      </figure>
+
+      <p>이 결과의 매력도 앞선 데이터 증강과 닮았다. 파라미터 수를 늘리지 않고, 오직 <strong>구성 요소의 배치를 바꿔서</strong> 얻은 이득이라는 점이다. 활성함수는 학습 가능한 가중치가 아니라 설계 선택이므로, 추가 연산 비용이 거의 없이 정확도만 밀어 올린다. 다만 최적 조합은 과제·데이터·깊이에 따라 달라질 수 있어, ‘ELU-Tanh가 언제나 정답’이라기보다 ‘비대칭 조합이라는 탐색 공간이 열려 있다’로 받아들이는 편이 정확하다.</p>
+
+      <span class="chapter-label">맺음말</span>
+      <h2>크기가 아니라 구성으로</h2>
+      <p>두 연구는 서로 다른 지점을 건드렸지만 같은 결론을 가리킨다. 유의어 군집 확장은 데이터 쪽에서, 비대칭 활성함수 조합은 아키텍처 쪽에서, 각각 모델의 크기를 그대로 둔 채 성능을 밀어 올렸다. 향상 폭은 각각 최대 2.68%포인트, 평균 1.024%포인트로 극적이지 않다. 그러나 이런 이득은 라벨링 비용도, 연산 비용도 거의 요구하지 않으며, 서로 그리고 다른 개선 기법과 겹쳐 쌓을 수 있다는 데 진짜 가치가 있다.</p>
+      <p>더 큰 모델은 언제나 유혹적이다. 하지만 성능이라는 결과에 곱셈으로 작동하는 지점 — 모든 학습 단계에 스며드는 데이터, 모든 뉴런을 통과하는 활성함수 — 을 먼저 다듬는 것이 공학적으로 더 정직하고 대개 더 경제적이다. 모델을 키우는 결정은, 이 작은 지렛대들을 모두 당겨 본 뒤에 내려도 늦지 않다.</p>
+
+      <div class="references">
+        <h4>참고</h4>
+        <ol>
+          <li>박대승 외, “단어그룹 확장 기법을 이용한 학습데이터 증강이 신경망 알고리즘 성능에 미치는 영향,” <em>산업융합연구</em>, 대한산업경영학회, 제20권 제4호, 2022. DOI: 10.22678/jic.2022.20.4.023.</li>
+          <li>박대승 외, 지수 선형 단위(ELU)와 로지스틱·Tanh의 비대칭 조합 활성함수를 통한 기울기 소실 완화에 관한 연구 (국내학회 발표, 주저자).</li>
+          <li>본문의 수치(평균 +0.75%p·최대 +2.68%p, 평균 +1.024%p, ELU-Tanh 0.9600, 108개 실험 모델)는 위 연구의 보고값이며, 구체적 값은 과제·데이터·평가 조건에 따라 달라질 수 있다.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer of article -->
+  <div class="art-foot">
+    <div class="art-tags">
+      <a href="#">#데이터증강</a><a href="#">#활성함수</a><a href="#">#순환신경망</a><a href="#">#KoBERT</a>
+    </div>
+    <div class="author-card">
+      <div class="av">DP</div>
+      <div class="who">
+        <b>박대승 · Daeseung Park</b>
+        <p>KAIST 연구원. 대형언어모델, 시계열 예측, 대화형 AI를 연구합니다. 연구의 과정을 가능한 한 정확하고 읽기 좋게 기록하려 합니다.</p>
+      </div>
+    </div>
+
+    <div class="read-next no-print">
+        <div class="section-head" style="margin-bottom:20px;"><h2 style="font-size:1.3rem;">다음 글</h2></div>
+        <div class="grid grid-2" id="readNext"></div>
+      </div>
+      <nav class="post-nav no-print" id="postNav"></nav>
+    </div>
+</article>
+
+<div class="print-footer">Daeseung Park · D. PARK Journal — 데이터와 활성함수, 두 개의 작은 지렛대</div>
+
+<footer class="site-footer no-print">
+  <div class="container-x">
+    <div class="footer-bottom" style="border:0;padding-top:0;">
+      <span>© 2026 Daeseung Park. All rights reserved.</span>
+      <span><a href="../../index.html">← 저널 홈</a></span>
+    </div>
+  </div>
+</footer>
+
+<div class="mobile-nav" id="mobileNav">
+  <button class="icon-btn close" id="navClose" aria-label="닫기">✕</button>
+  <a href="../../index.html">Home</a>
+  <a href="../../profile.html">Profile</a>
+  <a href="../../articles.html">Articles</a>
+  <a href="../../index.html#contact">Contact</a>
+</div>
+
+<script src="../../assets/js/data.js"></script>
+<script src="../../assets/js/articles.js"></script>
+<script src="../../assets/js/main.js"></script>
+</body>
+</html>

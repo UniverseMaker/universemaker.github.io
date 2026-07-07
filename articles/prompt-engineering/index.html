@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>프롬프트 엔지니어링의 과학 — D. PARK Journal</title>
+<meta name="description" content="같은 모델이라도 어떻게 묻느냐에 따라 답이 달라진다. 프롬프트를 기교가 아니라 공학으로 다루는 법.">
+<link rel="canonical" href="https://daeseungpark.com/articles/prompt-engineering/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="D. PARK Journal">
+<meta property="og:title" content="프롬프트 엔지니어링의 과학">
+<meta property="og:description" content="같은 모델이라도 어떻게 묻느냐에 따라 답이 달라진다. 프롬프트를 기교가 아니라 공학으로 다루는 법.">
+<meta property="og:url" content="https://daeseungpark.com/articles/prompt-engineering/">
+<meta property="og:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="프롬프트 엔지니어링의 과학">
+<meta name="twitter:description" content="같은 모델이라도 어떻게 묻느냐에 따라 답이 달라진다. 프롬프트를 기교가 아니라 공학으로 다루는 법.">
+<meta name="twitter:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"프롬프트 엔지니어링의 과학","author":{"@type":"Person","name":"박대승","alternateName":"Daeseung Park"},"publisher":{"@type":"Organization","name":"D. PARK Journal"},"image":"https://daeseungpark.com/assets/img/profile/img3.jpg","mainEntityOfPage":"https://daeseungpark.com/articles/prompt-engineering/","inLanguage":"ko","datePublished":"2026-06"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Noto+Serif+KR:wght@400;600&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/css/article.css">
+</head>
+<body data-base="../../">
+<div class="progress-bar" id="progress"></div>
+<div class="topbar no-print">
+  <div class="container-x">
+    <span class="tb-date" id="today">—</span>
+    <div class="tb-links">
+      <a href="../../index.html">Home</a>
+      <a href="https://github.com/UniverseMaker" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener">ORCID</a>
+      <a href="../../index.html#contact">Contact</a>
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header no-print">
+  <div class="container-x nav-row">
+    <a href="../../index.html" class="brand">D<span class="dot">.</span> PARK <small>Journal</small></a>
+    <nav class="main-nav">
+      <a href="../../index.html">Home</a>
+      <a href="../../profile.html">Profile</a>
+      <a href="../../articles.html" class="active">Articles</a>
+      <a href="../../index.html#contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="테마 전환"><span id="themeIcon">☾</span></button>
+      <button class="print-cta" id="printBtn">🖶 인쇄 / PDF</button>
+      <button class="icon-btn nav-toggle" id="navToggle" aria-label="메뉴">≡</button>
+    </div>
+  </div>
+</header>
+
+<div class="ticker no-print">
+  <div class="container-x">
+    <span class="label">Trending</span>
+    <div class="items" id="tickerItems"></div>
+  </div>
+</div>
+
+<article data-article-id="1">
+  <div class="article-wrap">
+    <!-- Masthead -->
+    <header class="art-head">
+      <span class="cat-pill">AI · 기술해설</span>
+      <h1>프롬프트 엔지니어링의 과학</h1>
+      <p class="deck">같은 모델에게 같은 질문을 던져도, 어떻게 묻느냐에 따라 답의 질은 완전히 달라진다. 우리는 프롬프트를 ‘기교’로 여겨 왔지만, 사실 그것은 설계할 수 있는 ‘공학’이다.</p>
+      <div class="art-byline">
+        <div class="av">DP</div>
+        <div class="who">
+          <b>박대승 (Daeseung Park)</b>
+          <span>AI &amp; Software Systems Engineer · KAIST</span>
+          <span>2026년 6월 · 14분 읽기</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="art-cover"><div class="fill-1 fill-grid" style="position:absolute;inset:0;"></div></div>
+
+    <!-- Summary -->
+    <div class="summary-box">
+      <span class="tag">1분 요약</span>
+      대형언어모델(LLM)의 성능은 모델 크기만으로 결정되지 않는다. 같은 모델이라도 입력을 어떻게 구성하느냐 — 즉 프롬프트 설계 — 에 따라 정답률이 수십 퍼센트포인트씩 출렁인다. 이 글은 프롬프트를 우연한 ‘주문’이 아니라 재현 가능한 ‘실험’으로 다루는 관점을 제안한다. 역할 부여, 단계적 추론(Chain-of-Thought), 예시 제공(few-shot), 출력 형식 고정, 그리고 체계적인 평가 루프까지 — 모델을 바꾸지 않고도 결과를 끌어올리는 다섯 가지 지렛대를 살펴본다.
+    </div>
+
+    <!-- Body -->
+    <div class="prose">
+      <span class="chapter-label">Chapter 1. 문제 제기</span>
+      <h2>왜 같은 모델이 어떤 날은 똑똑하고 어떤 날은 멍청한가</h2>
+      <p>언어모델을 처음 다루는 사람들이 가장 먼저 부딪히는 당혹스러움이 있다. 어제는 완벽한 코드를 짜 주던 모델이, 오늘은 같은 요청에 엉뚱한 답을 내놓는다. 모델은 바뀌지 않았다. 바뀐 것은 우리가 던진 문장이다. 띄어쓰기 하나, 예시의 순서, “단계별로 생각해 봐”라는 한 줄의 유무 — 이런 사소해 보이는 차이가 결과를 가른다.</p>
+      <p>이 현상은 버그가 아니라 언어모델의 본질이다. LLM은 사실을 ‘조회’하는 데이터베이스가 아니라, 주어진 맥락 다음에 올 가장 그럴듯한 토큰을 ‘예측’하는 확률 기계다. 따라서 우리가 제공하는 맥락 — 프롬프트 — 은 모델의 사고 경로를 결정하는 초기 조건이다. 초기 조건이 달라지면 궤적이 달라진다. 프롬프트 엔지니어링이란, 이 초기 조건을 의도한 결과가 나오도록 설계하는 일이다.</p>
+
+      <div class="pullquote">프롬프트는 모델에게 거는 주문이 아니라, 모델의 사고 경로를 결정하는 초기 조건이다.</div>
+
+      <p>필자는 생성형 AI의 프롬프트 설계가 성능에 미치는 영향을 정량적으로 다룬 연구를 <em>Journal of Web Engineering</em>(SCIE)에 발표한 바 있다. 그 과정에서 얻은 가장 중요한 교훈은 의외로 단순하다. <strong>프롬프트는 감(感)이 아니라 측정의 대상이다.</strong> 측정할 수 있으면 개선할 수 있고, 개선할 수 있으면 공학이 된다.</p>
+
+      <span class="chapter-label">Chapter 2. 다섯 가지 지렛대</span>
+      <h2>모델을 바꾸지 않고 결과를 바꾸는 법</h2>
+      <p>더 큰 모델로 갈아타는 것은 가장 비싸고, 때로는 가장 게으른 해법이다. 그 전에 점검해야 할 다섯 가지 설계 지렛대가 있다. 각각은 독립적으로도 효과가 있지만, 함께 쓸 때 곱셈으로 작동한다.</p>
+
+      <h3>1. 역할과 맥락을 먼저 고정한다</h3>
+      <p>“이 코드를 리뷰해 줘”와 “당신은 15년 경력의 보안 전문 코드 리뷰어다. 아래 코드에서 취약점을 심각도 순으로 지적하라”는 전혀 다른 답을 만든다. 역할(role)을 지정하면 모델은 해당 역할이 활성화되는 맥락의 분포로 출력을 좁힌다. 막연한 질문은 막연한 평균을 부르고, 구체적인 역할은 구체적인 전문성을 부른다.</p>
+
+      <h3>2. 생각의 과정을 강제한다 (Chain-of-Thought)</h3>
+      <p>복잡한 추론 문제에서 “정답만 말해”라고 하면 모델은 자주 틀린다. 반면 “단계별로 근거를 적은 뒤 결론을 내려라”라고 하면 정답률이 눈에 띄게 오른다. 모델이 중간 추론을 출력 토큰으로 ‘펼쳐 놓을’ 때, 그 토큰들이 다시 다음 추론의 맥락이 되어 더 긴 사고를 지탱하기 때문이다. 생각을 눈에 보이게 만들면, 생각이 더 정확해진다.</p>
+
+      <div class="callout"><b>실무 팁.</b> 최종 사용자에게는 추론 과정을 숨기고 싶을 때가 많다. 이럴 때는 모델에게 단계적 추론을 시키되, “마지막 줄에만 <code>최종답:</code> 형식으로 결론을 출력하라”고 지시한 뒤, 후처리에서 그 줄만 추출하면 된다. 정확도와 깔끔한 출력을 동시에 얻는다.</p></div>
+
+      <h3>3. 말로 설명하지 말고 예시로 보여준다 (Few-shot)</h3>
+      <p>원하는 출력의 형식이나 톤이 까다로울수록, 규칙을 장황하게 설명하기보다 좋은 예시 두세 개를 보여주는 편이 압도적으로 효과적이다. 모델은 규칙의 추상적 서술보다 구체적 사례의 패턴을 더 잘 따라간다. 단, 예시는 ‘대표적’이어야 한다. 예외적이거나 모호한 예시를 넣으면 모델은 그 예외를 규칙으로 오해한다.</p>
+
+      <h3>4. 출력 형식을 계약으로 만든다</h3>
+      <p>프롬프트를 시스템에 통합하는 순간, 사람이 읽기 좋은 답은 부차적이고 ‘기계가 파싱할 수 있는 답’이 본질이 된다. JSON 스키마, 고정된 머리말, 정해진 구분자 — 출력 형식을 명시적 계약으로 못 박으면, 후속 코드가 깨질 확률이 급감한다. 형식을 강제할 때는 “반드시 아래 형식만 출력하고 그 외의 설명은 붙이지 말라”는 부정 지시를 함께 거는 것이 효과적이다.</p>
+
+      <h3>5. 한 번에 맞추려 하지 않는다</h3>
+      <p>좋은 프롬프트는 한 번에 완성되지 않는다. 작은 평가 셋(대표 입력 20~50개)을 만들어 두고, 프롬프트를 조금씩 바꿔 가며 정답률·형식 준수율을 측정하는 루프를 도는 것이 정공법이다. 이 루프가 있으면 “이게 더 나아 보인다”는 인상이 “이게 8%포인트 높다”는 사실로 바뀐다.</p>
+
+      <span class="chapter-label">Chapter 3. 측정</span>
+      <h2>프롬프트를 실험으로 다룬다는 것</h2>
+      <p>여기서부터가 ‘엔지니어링’의 핵심이다. 프롬프트 두 개 중 무엇이 더 나은지 인상으로 판단하는 순간, 우리는 미신의 영역에 들어선다. 필자가 연구에서 채택한 절차는 단순하지만 엄격하다.</p>
+      <table>
+        <thead><tr><th>단계</th><th>하는 일</th><th>산출물</th></tr></thead>
+        <tbody>
+          <tr><td>1. 과제 정의</td><td>성공의 정의를 한 문장으로</td><td>평가 기준</td></tr>
+          <tr><td>2. 평가 셋 구축</td><td>대표 입력 + 정답/채점 규칙</td><td>고정된 테스트셋</td></tr>
+          <tr><td>3. 후보 작성</td><td>프롬프트 변형 2~5개</td><td>비교군</td></tr>
+          <tr><td>4. 측정</td><td>같은 셋으로 점수화</td><td>정량 점수</td></tr>
+          <tr><td>5. 반영</td><td>이긴 변형 채택, 실패 사례 분석</td><td>다음 가설</td></tr>
+        </tbody>
+      </table>
+      <p>이 절차의 진짜 가치는 점수 자체가 아니라 <strong>실패 사례를 들여다보게 만든다</strong>는 데 있다. 모델이 어디서 어떻게 틀리는지를 모으면, 다음 프롬프트의 개선 방향이 데이터로부터 자연스럽게 떠오른다. 막연히 “더 좋게”가 아니라 “이 유형의 입력에서 형식을 어긴다”는 구체적 진단이 나온다.</p>
+
+      <figure>
+        <div class="fig-box"><div class="fill-6 fill-grid" style="position:absolute;inset:0;"></div></div>
+        <figcaption>프롬프트 개선 루프: 정의 → 평가 셋 → 변형 → 측정 → 반영의 순환. 모델 교체보다 먼저 돌려야 할 사이클이다.</figcaption>
+      </figure>
+
+      <span class="chapter-label">Chapter 4. 함정</span>
+      <h2>흔한 착각 세 가지</h2>
+      <p><strong>첫째, 길수록 좋다는 착각.</strong> 프롬프트가 길어질수록 모델은 더 똑똑해지지 않는다. 오히려 핵심 지시가 잡음에 묻혀 무시되기 쉽다. 좋은 프롬프트는 길지 않고 ‘조밀’하다. 모든 문장이 출력에 영향을 주어야 한다.</p>
+      <p><strong>둘째, 한 번 통하면 끝이라는 착각.</strong> 모델 버전이 올라가면 같은 프롬프트의 거동이 달라질 수 있다. 프롬프트는 코드처럼 버전 관리하고, 모델 업데이트 때마다 평가 셋으로 회귀 테스트를 돌려야 한다.</p>
+      <p><strong>셋째, 모델이 ‘이해한다’는 착각.</strong> 모델은 의미를 이해하는 것이 아니라 패턴을 잇는다. 따라서 “알아서 잘해 줘”는 가장 위험한 지시다. 우리가 명시하지 않은 것은 모델이 평균값으로 채운다. 평균이 곧 평범함이다.</p>
+
+      <div class="pullquote">우리가 명시하지 않은 것은, 모델이 평균값으로 채운다. 평균이 곧 평범함이다.</div>
+
+      <span class="chapter-label">맺음말</span>
+      <h2>주문에서 설계로</h2>
+      <p>프롬프트 엔지니어링은 마법 주문을 외우는 일이 아니다. 그것은 모델의 작동 원리를 이해하고, 입력이라는 초기 조건을 의도적으로 설계하며, 그 결과를 측정하고 개선하는 — 지극히 공학적인 활동이다. 모델은 점점 강력해질 것이다. 그러나 ‘무엇을, 어떻게 물을 것인가’를 설계하는 능력은, 모델이 아무리 발전해도 사람의 몫으로 남는다. 좋은 질문이 좋은 답을 만든다는 오래된 진실은, AI 시대에 오히려 더 또렷해진다.</p>
+
+      <div class="references">
+        <h4>참고</h4>
+        <ol>
+          <li>D. Park et al., “A Study on Performance Improvement of Prompt Engineering for Generative AI with a Large Language Model,” <em>Journal of Web Engineering</em> (SCIE), 2024.</li>
+          <li>본문의 사례와 수치는 일반적 경향을 설명하기 위한 것으로, 구체적 값은 과제·모델·평가 셋에 따라 달라진다.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer of article -->
+  <div class="art-foot">
+    <div class="art-tags">
+      <a href="#">#프롬프트엔지니어링</a><a href="#">#대형언어모델</a><a href="#">#생성형AI</a><a href="#">#ChainOfThought</a>
+    </div>
+    <div class="author-card">
+      <div class="av">DP</div>
+      <div class="who">
+        <b>박대승 · Daeseung Park</b>
+        <p>KAIST 연구원. 대형언어모델, 시계열 예측, 대화형 AI를 연구합니다. 연구의 과정을 가능한 한 정확하고 읽기 좋게 기록하려 합니다.</p>
+      </div>
+    </div>
+
+    <div class="read-next no-print">
+        <div class="section-head" style="margin-bottom:20px;"><h2 style="font-size:1.3rem;">다음 글</h2></div>
+        <div class="grid grid-2" id="readNext"></div>
+      </div>
+      <nav class="post-nav no-print" id="postNav"></nav>
+    </div>
+</article>
+
+<div class="print-footer">Daeseung Park · D. PARK Journal — 프롬프트 엔지니어링의 과학</div>
+
+<footer class="site-footer no-print">
+  <div class="container-x">
+    <div class="footer-bottom" style="border:0;padding-top:0;">
+      <span>© 2026 Daeseung Park. All rights reserved.</span>
+      <span><a href="../../index.html">← 저널 홈</a></span>
+    </div>
+  </div>
+</footer>
+
+<div class="mobile-nav" id="mobileNav">
+  <button class="icon-btn close" id="navClose" aria-label="닫기">✕</button>
+  <a href="../../index.html">Home</a>
+  <a href="../../profile.html">Profile</a>
+  <a href="../../articles.html">Articles</a>
+  <a href="../../index.html#contact">Contact</a>
+</div>
+
+<script src="../../assets/js/data.js"></script>
+<script src="../../assets/js/articles.js"></script>
+<script src="../../assets/js/main.js"></script>
+</body>
+</html>
