@@ -67,7 +67,7 @@ window.SITE = {
   promo2: {
     enabled: true,
     badge: "TRY · 시범 공개",
-    text: "<b>비검열 AI</b> 시범 서비스 공개 — abliterated 모델을 직접 대화로 체험해 보세요",
+    text: "<b>비검열 AI</b> 시범 서비스 공개 — Abliterated 모델을 직접 대화로 체험해 보세요",
     buttons: [
       { label: "기고문 읽기", href: "articles/abliterated-ai-safety/" },
       { label: "지금 사용 →", href: AI_CHAT_URL, external: true }
@@ -392,7 +392,7 @@ window.WORKS = {
 
   /* ======================= 포트폴리오 ======================= */
   portfolio: [
-    { slug:"pf-site-eeecs", cat:"웹 개발", order:24, title:"EEECS 2026 국제학회 웹사이트", period:"2025–2026", org:"IC-EEECS (오사카)", cover:"assets/img/portfolio/site-eeecs.jpg", tags:["웹","학회"], links:{ url:"https://ic-eeecs.org" }, desc:["전기·전자·컴퓨터공학 국제학회(EEECS 2026) 공식 웹사이트 제작. 등록·결제 안내, 논문 투고 절차, 프로그램 페이지 포함."] },
+    { slug:"pf-site-eeecs", cat:"웹 개발", order:24, title:"EEECS 국제학회 웹사이트", period:"2022–2024", org:"IC-EEECS (오사카)", cover:"assets/img/portfolio/site-eeecs.jpg", tags:["웹","학회"], links:{ url:"https://ic-eeecs.org" }, desc:["전기·전자·컴퓨터공학 국제학회(EEECS) 공식 웹사이트 제작. 등록·결제 안내, 논문 투고 절차, 프로그램 페이지 포함."] },
     { slug:"pf-site-ctkorea", cat:"웹 개발", order:20, title:"한국문화콘텐츠기술학회(KOCTA) 웹사이트", period:"웹 개발", org:"ctkorea.org", cover:"assets/img/portfolio/site-ctkorea.jpg", tags:["웹","학회"], links:{ url:"https://ctkorea.org" }, desc:["한국문화콘텐츠기술학회 공식 웹사이트 제작 — 논문 투고·학술대회·회원 자료 제공."] },
     { slug:"pf-site-crc", cat:"웹 개발", order:19, title:"KAIST 융복합연구센터 웹사이트", period:"웹 개발", org:"crc.kaist.ac.kr", cover:"assets/img/portfolio/site-crc-kaist.jpg", tags:["웹","KAIST"], links:{ url:"https://crc.kaist.ac.kr" }, desc:["KAIST 공과대학 융복합연구센터 공식 웹사이트 제작."] },
     { slug:"pf-site-daeseungpark", cat:"웹 개발", order:18, title:"개인 리서치 저널 daeseungpark.com", period:"웹 개발", org:"daeseungpark.com", cover:"assets/img/portfolio/site-daeseungpark.jpg", tags:["웹","저널"], links:{ url:"https://daeseungpark.com" }, desc:["생성형 AI·시계열 예측·대화형 시스템 연구를 기록하는 개인 리서치 저널 사이트."] },
