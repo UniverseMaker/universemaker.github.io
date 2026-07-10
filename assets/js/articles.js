@@ -9,6 +9,14 @@
    ============================================================ */
 window.ARTICLES = [
   {
+    id: 14, slug: "abliterated-ai-safety", path: "articles/abliterated-ai-safety/",
+    title: "거부를 지운 모델: Abliterated LLM의 위험과 존재 이유",
+    deck: "언어모델의 ‘거부’는 가중치 속 한 방향으로 표현된다. 그 방향만 지운 무삭제 모델을 정상판과 나란히 시험한 기록, 그리고 위험과 필요 사이의 균형.",
+    cat: "AI · 안전", catClass: "", catLabel: "AI 안전",
+    date: "2026-07-10", read: "13분", cover: "articles/abliterated-ai-safety/images/03-abliterated-comply-drug.jpg",
+    tags: ["AI안전", "Abliteration", "정렬", "LLM"]
+  },
+  {
     id: 1, slug: "prompt-engineering", path: "articles/prompt-engineering/",
     title: "프롬프트 엔지니어링의 과학: 언어모델 성능을 끌어올리는 설계 원리",
     deck: "같은 모델이라도 어떻게 묻느냐에 따라 답이 달라진다. 프롬프트를 ‘기교’가 아니라 ‘공학’으로 다루는 법.",

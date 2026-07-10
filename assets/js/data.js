@@ -10,6 +10,9 @@
      · links.article 이 있으면 관련 기고문으로 연결된다.
    ============================================================ */
 
+/* 비검열 AI 챗 UI 주소 — 한 곳에서만 관리(상단 링크·홈 배너 버튼·플로팅 위젯이 모두 참조) */
+const AI_CHAT_URL = "https://ai.daeseungpark.com/chat/";
+
 window.SITE = {
   name: "Daeseung Park", nameKo: "박대승",
   role: "AI & Software Systems Engineer",
@@ -29,6 +32,8 @@ window.SITE = {
   },
   /* 상단 유틸리티 바 우측 퀵링크 (internal:true 는 사이트 내부 경로) */
   quicklinks: [
+    { label: "Abliterated AI", href: AI_CHAT_URL },
+    { label: "Mission Control(TCC)", href: "https://tcc.daeseungpark.com/" },
     { label: "Profile", href: "profile.html", internal: true },
     { label: "GitHub",  key: "github" },
     { label: "Scholar", key: "scholar" },
@@ -56,6 +61,25 @@ window.SITE = {
     text: "<b>IEEE Access</b> 신규 논문 게재 승인 — 분산 mmWave 레이더 기반 실내 인체 탐지·지리참조",
     soon: "곧 공개",
     cta: "자세히 →"
+  },
+  /* 홈 두 번째 공지 배너 (비검열 AI) — 논문 배너 바로 아래. enabled:false 로 껐다 켰다.
+     text 수정 = 문구 변경. buttons 2개(하나는 기고문 내부링크, 하나는 UI 외부링크). */
+  promo2: {
+    enabled: true,
+    badge: "TRY · 시범 공개",
+    text: "<b>비검열 AI</b> 시범 서비스 공개 — abliterated 모델을 직접 대화로 체험해 보세요",
+    buttons: [
+      { label: "기고문 읽기", href: "articles/abliterated-ai-safety/" },
+      { label: "지금 사용 →", href: AI_CHAT_URL, external: true }
+    ]
+  },
+  /* 비검열 AI 플로팅 위젯 (removable) — enabled:false 로 끄면 우측하단 플로팅 버튼이 사라진다(상단 링크는 별도 quicklinks 항목).
+     완전 제거: 이 블록 + quicklinks의 "Abliterated AI" 항목 + main.js 하단 "AI Trial widget" 블록 삭제 */
+  aiTrial: {
+    enabled: true,
+    chatUrl: AI_CHAT_URL,
+    btn: "비검열 AI",
+    aria: "비검열 AI 시범 서비스 사용"
   },
   footer: {
     brand: "D. PARK",

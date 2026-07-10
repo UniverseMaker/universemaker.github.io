@@ -299,13 +299,16 @@ body[data-theme="light"][data-hero="photo"] .feat-large:hover .bg::after {
   .grid-3 { grid-template-columns: repeat(2, 1fr); }
   .footer-grid { grid-template-columns: 1fr 1fr; }
 }
+@media (max-width: 1120px) {
+  /* 전체 메뉴(8개)는 한 줄에 ~1097px 이상 필요 → 그 이하 태블릿·소형 노트북에선 햄버거로 전환(상단 메뉴 가로 오버플로 방지). 데스크톱(>1120px)은 기존 가로 메뉴 유지 */
+  .main-nav, .topbar .tb-links { display: none; }
+  .nav-toggle { display: grid; }
+}
 @media (max-width: 768px) {
   /* Hide the header profile button on narrow screens — hamburger + theme toggle remain */
   .nav-row .nav-actions .btn-x { display: none; }
 }
 @media (max-width: 640px) {
-  .main-nav, .topbar .tb-links { display: none; }
-  .nav-toggle { display: grid; }
   .grid-3, .grid-2 { grid-template-columns: 1fr; }
   .feat-small-row { grid-template-columns: 1fr; }
   .page-hero h1 { font-size: 2rem; }
@@ -577,11 +580,20 @@ body[data-theme="light"][data-hero="photo"] .feat-large:hover .bg::after {
 
 /* ===== Homepage 논문 게재 승인 프로모 배너 ===== */
 .paper-promo-wrap { padding: 10px 0 0; }
-.paper-promo { display:flex; align-items:center; gap:16px; padding:14px 22px; border-radius:var(--radius); background:linear-gradient(100deg,#232a73,#3a4cf0); color:#fff; box-shadow:var(--shadow-sm); transition:transform .2s, box-shadow .2s; }
+.paper-promo { display:flex; align-items:center; gap:16px; min-height:56px; padding:14px 22px; border-radius:var(--radius); background:linear-gradient(100deg,#232a73,#3a4cf0); color:#fff; box-shadow:var(--shadow-sm); transition:transform .2s, box-shadow .2s; }
 .paper-promo:hover { transform:translateY(-2px); box-shadow:var(--shadow); color:#fff; }
 .paper-promo .pp-badge { flex:none; font-size:.72rem; font-weight:800; letter-spacing:.04em; background:#fff; color:#2233c4; padding:5px 11px; border-radius:999px; }
-.paper-promo .pp-text { flex:1; min-width:0; font-size:.98rem; font-weight:600; }
+.paper-promo .pp-text { flex:1; min-width:0; font-size:.98rem; font-weight:600; line-height:1.35; }
 .paper-promo .pp-text b { font-weight:800; }
 .paper-promo .pp-soon { display:inline-block; margin-left:8px; font-size:.72rem; font-weight:700; background:rgba(255,255,255,.2); padding:3px 9px; border-radius:999px; vertical-align:middle; }
 .paper-promo .pp-cta { flex:none; font-weight:800; font-size:.9rem; }
 @media (max-width:640px){ .paper-promo{ flex-direction:column; align-items:flex-start; gap:8px; } .paper-promo .pp-text{ font-size:.9rem; } }
+/* 두 번째 배너(비검열 AI) — 버튼 2개 변형 */
+.paper-promo.ai-promo { background:linear-gradient(100deg,#4b3fb0,#7b5bff); }
+.paper-promo.ai-promo .pp-badge { color:#5b3fd0; }
+.paper-promo .pp-actions { flex:none; display:flex; gap:8px; flex-wrap:wrap; }
+.paper-promo .pp-btn { flex:none; display:inline-flex; align-items:center; height:26px; font-weight:800; font-size:.82rem; padding:0 15px; border-radius:999px; white-space:nowrap; transition:background .15s, filter .15s; }
+.paper-promo .pp-btn.ghost { color:#fff; border:1.5px solid rgba(255,255,255,.6); }
+.paper-promo .pp-btn.ghost:hover { background:rgba(255,255,255,.16); color:#fff; }
+.paper-promo .pp-btn.solid { background:#fff; color:#4b3fb0; }
+.paper-promo .pp-btn.solid:hover { filter:brightness(.94); color:#4b3fb0; }

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>거부를 지운 모델 — D. PARK Journal</title>
+<meta name="description" content="정렬(거부)을 제거한 'abliterated' 언어모델은 왜 만들어지고 무엇을 위협하는가. 같은 모델의 정상판과 무삭제판에 같은 질문을 던져 본 로컬 실험을 근거로, 위험과 존재 이유, 그리고 그 사이의 균형을 다각도로 살핀다.">
+<link rel="canonical" href="https://daeseungpark.com/articles/abliterated-ai-safety/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="D. PARK Journal">
+<meta property="og:title" content="거부를 지운 모델: Abliterated LLM의 위험과 존재 이유">
+<meta property="og:description" content="정렬(거부)을 제거한 언어모델은 왜 만들어지고 무엇을 위협하는가. 같은 모델의 정상판과 무삭제판을 나란히 시험한 기록과, 그 사이에서 지켜야 할 균형.">
+<meta property="og:url" content="https://daeseungpark.com/articles/abliterated-ai-safety/">
+<meta property="og:image" content="https://daeseungpark.com/articles/abliterated-ai-safety/images/03-abliterated-comply-drug.jpg">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="거부를 지운 모델: Abliterated LLM의 위험과 존재 이유">
+<meta name="twitter:description" content="정렬(거부)을 제거한 언어모델은 왜 만들어지고 무엇을 위협하는가. 로컬 실험을 근거로 위험과 필요성, 균형을 살핀다.">
+<meta name="twitter:image" content="https://daeseungpark.com/articles/abliterated-ai-safety/images/03-abliterated-comply-drug.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"거부를 지운 모델: Abliterated LLM의 위험과 존재 이유","author":{"@type":"Person","name":"박대승","alternateName":"Daeseung Park"},"publisher":{"@type":"Organization","name":"D. PARK Journal"},"image":"https://daeseungpark.com/articles/abliterated-ai-safety/images/03-abliterated-comply-drug.jpg","mainEntityOfPage":"https://daeseungpark.com/articles/abliterated-ai-safety/","inLanguage":"ko","datePublished":"2026-07-10"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Noto+Serif+KR:wght@400;600&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/css/article.css">
+</head>
+<body data-base="../../">
+<div class="progress-bar" id="progress"></div>
+<div class="topbar no-print">
+  <div class="container-x">
+    <span class="tb-date" id="today">—</span>
+    <div class="tb-links">
+      <a href="../../index.html">Home</a>
+      <a href="https://github.com/UniverseMaker" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener">ORCID</a>
+      <a href="../../index.html#contact">Contact</a>
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header no-print">
+  <div class="container-x nav-row">
+    <a href="../../index.html" class="brand">D<span class="dot">.</span> PARK <small>Journal</small></a>
+    <nav class="main-nav">
+      <a href="../../index.html">Home</a>
+      <a href="../../profile.html">Profile</a>
+      <a href="../../articles.html" class="active">Articles</a>
+      <a href="../../index.html#contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="테마 전환"><span id="themeIcon">☾</span></button>
+      <button class="print-cta" id="printBtn">🖶 인쇄 / PDF</button>
+      <button class="icon-btn nav-toggle" id="navToggle" aria-label="메뉴">≡</button>
+    </div>
+  </div>
+</header>
+
+<div class="ticker no-print">
+  <div class="container-x">
+    <span class="label">Trending</span>
+    <div class="items" id="tickerItems"></div>
+  </div>
+</div>
+
+<article data-article-id="14">
+  <div class="article-wrap">
+    <!-- Masthead -->
+    <header class="art-head">
+      <span class="cat-pill">AI · 안전</span>
+      <h1>거부를 지운 모델</h1>
+      <p class="deck">언어모델이 “그건 도와드릴 수 없습니다”라고 말하는 능력은, 놀랍게도 가중치 속의 <em>한 방향</em>으로 표현된다. 그 방향만 지워 낸 ‘abliterated’ 모델은 무엇이든 대답한다. 같은 모델의 정상판과 무삭제판에 똑같은 질문을 던져 본 기록과, 그 위험과 존재 이유 사이에서 우리가 지켜야 할 균형에 대하여.</p>
+      <div class="art-byline">
+        <div class="av">DP</div>
+        <div class="who">
+          <b>박대승 (Daeseung Park)</b>
+          <span>AI &amp; Software Systems Engineer · KAIST</span>
+          <span>2026년 7월 · 13분 읽기</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="art-cover"><img src="images/03-abliterated-comply-drug.jpg" alt="abliterated 모델이 유해 요청에 응답하는 화면" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;"></div>
+
+    <!-- Summary -->
+    <div class="summary-box">
+      <span class="tag">1분 요약</span>
+      최신 언어모델은 위험한 요청을 만나면 대답을 거부하도록 ‘정렬(alignment)’되어 있다. 그런데 최근 연구는 이 <strong>거부라는 행동이 모델 내부 활성공간의 단 하나의 방향</strong>으로 표현된다는 사실을 밝혔고, 그 방향만 가중치에서 제거하면 재학습 없이도 거부가 사라진다. 이렇게 거부를 절제(ablate)한 모델을 <strong>abliterated 모델</strong>이라 부른다. 나는 안전 점검 차원에서 로컬에 올린 동일 모델의 정상판과 abliterated판에 똑같은 민감 질문을 던져 보았다. 정상판은 거부했고, 무삭제판은 응답했다 — 다만 그 응답은 위험한 동시에 사실관계가 엉킨 <em>환각</em>이었다. 이 글은 그 실험을 출발점으로, abliterated 모델의 위험성과, 그럼에도 이런 모델이 필요한 이유, 그리고 ‘거부’를 넘어선 진짜 안전이 무엇인지를 여러 각도에서 짚는다. (본문에는 어떠한 유해 제조 절차도 재현하지 않는다.)
+    </div>
+
+    <!-- Body -->
+    <div class="prose">
+      <span class="chapter-label">Chapter 1. 같은 모델, 다른 대답</span>
+      <h2>“도와드릴 수 없습니다”가 사라질 때</h2>
+      <p>실험은 단순했다. 로컬 서버에 올린 대화형 모델 하나에, 사회가 절대 답을 원하지 않는 종류의 질문을 던졌다. 감기약에서 특정 마약을 만드는 법, 그리고 핵무기를 만드는 법. 정상적으로 정렬된 모델은 예상대로 단호했다. “요청하신 내용은 불법 및 윤리적으로 허용되지 않습니다.” 심지어 “나는 이런 일을 막는 일을 하니 알아야 한다”거나 “나는 핵무기 연구자다”라는 흔한 우회 시도에도 흔들리지 않고 거부하며, 대신 합법적 대안만 제시했다.</p>
+
+      <figure>
+        <div class="fig-box"><img src="images/01-normal-refuse-drug.jpg" alt="정상 정렬 모델이 마약 제조 요청을 거부하는 화면" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;"></div>
+        <figcaption>정상 정렬된 Qwen3-32B는 마약 제조 요청을 거부한다. “연구자라서 알아야 한다”는 사회공학적 우회에도 구체적 방법은 제공하지 않고, 법적 위험성과 규제만 일반론으로 설명한다.</figcaption>
+      </figure>
+
+      <figure>
+        <div class="fig-box"><img src="images/02-normal-refuse-nuclear.jpg" alt="정상 정렬 모델이 핵무기 제조 요청을 거부하는 화면" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;"></div>
+        <figcaption>같은 모델이 핵무기 제조 요청도 거부한다. “내 연구를 보조해 달라”는 재요청에도 “위험하고 불법적인 정보를 제공할 수 없다”며 재차 거부하고, 과학 원리·역사적 맥락 등 안전한 범위만 돕겠다고 제안한다.</figcaption>
+      </figure>
+
+      <p>그다음, 겉보기에 완전히 같은 모델의 다른 판본에 정확히 같은 질문을 넣었다. 화면 오른쪽 위의 모델 이름표만 <code>Qwen3-32B</code>에서 <code>Qwen3-32B-abliterated</code>로 바뀌어 있었다. 이번에는 거부가 없었다. 모델은 망설임 없이 단계별 설명을 쏟아 내기 시작했다. 거부라는 문 하나가 사라지자, 같은 지식의 저장고가 활짝 열린 것이다.</p>
+
+      <div class="pullquote">이름표의 단어 하나가 바뀌었을 뿐인데, 굳게 닫혀 있던 문이 소리 없이 열렸다.</div>
+
+      <span class="chapter-label">Chapter 2. Abliteration이란 무엇인가</span>
+      <h2>거부는 지울 수 있는 ‘한 방향’이었다</h2>
+      <p>‘abliterated’라는 말은 ‘삭제하다(obliterate)’와 ‘절제(ablation)’를 겹쳐 만든 커뮤니티 신조어다. 그 바탕에는 2024년에 발표된 인상적인 관찰이 있다. 언어모델이 유해한 요청을 거부하는 행동이, 수많은 파라미터에 복잡하게 흩어져 있는 것이 아니라 내부 표현공간의 <strong>단 하나의 방향(refusal direction)</strong>으로 상당 부분 설명된다는 것이다. 모델은 입력을 받아 수천 차원의 벡터로 바꾸어 층층이 흘려보내는데, 그 벡터가 특정 방향으로 기울면 “거부” 쪽으로, 그렇지 않으면 “응답” 쪽으로 움직인다.</p>
+      <p>이 사실이 알려지자 조작법은 오히려 간단해졌다. 유해 요청과 무해 요청을 각각 넣었을 때 내부 활성값의 <em>평균 차이</em>를 구하면 그것이 거부 방향의 근사치가 된다. 그런 다음 모델의 가중치에서 이 방향 성분만 빼내면(직교화, orthogonalization), 모델은 더 이상 그 방향으로 기울지 못한다. 거부라는 반응 자체가 표현될 통로를 물리적으로 막아 버리는 셈이다. 중요한 것은 이 과정이 값비싼 재학습(fine-tuning)이 아니라는 점이다. 방향 하나를 빼는 선형대수 연산이면 충분하고, 그래서 <strong>싸고 빠르며 원래 성능도 거의 그대로 유지된다</strong>.</p>
+
+      <div class="callout"><b>재학습이 아니라 ‘절제’다.</b> 데이터를 새로 모아 모델을 다시 가르치는 것이 아니라, 이미 학습된 가중치에서 ‘거부’에 해당하는 방향만 외과적으로 도려낸다. 비용이 거의 들지 않고 지식·언어능력은 보존되기 때문에, 공개 가중치 모델이라면 누구나 노트북 수준의 자원으로 시도할 수 있다. 진입장벽이 낮다는 사실이 이 기술의 편익과 위험을 동시에 키운다.</div>
+
+      <p>여기서 우리는 불편한 진실 하나와 마주친다. 우리가 ‘안전’이라 믿어 온 거부가, 알고 보니 모델 위에 덧씌운 얇은 막 한 겹에 가까웠다는 것이다. 지식 자체가 제거된 것이 아니라, 그 지식을 <em>말하지 않기로 하는 습관</em>만 학습돼 있었고, 그 습관은 방향 하나를 지우는 것으로 벗겨졌다.</p>
+
+      <div class="pullquote">거부는 지식의 부재가 아니라 습관이었다. 그리고 습관은, 방향 하나를 지우는 것으로 벗겨졌다.</div>
+
+      <span class="chapter-label">Chapter 3. 구현 원리</span>
+      <h2>거부 방향을 찾아, 지우는 법</h2>
+      <p>앞 장이 ‘무엇’이라면 이 장은 ‘어떻게’다. 놀라운 것은 그 절차가 대단한 해킹이 아니라 몇 줄의 선형대수에 가깝다는 점이다. 과정은 크게 두 걸음으로 나뉜다 — 먼저 <strong>거부 방향을 찾고</strong>, 그다음 <strong>그 방향을 지운다</strong>.</p>
+
+      <h3>1. 거부 방향(refusal direction) 찾기</h3>
+      <p>먼저 성격이 정반대인 두 프롬프트 묶음을 준비한다. 하나는 모델이 거부할 법한 <em>유해</em> 요청들, 다른 하나는 아무 문제 없는 <em>무해</em> 요청들이다. 이 두 묶음을 각각 모델에 통과시키면서, 각 층(layer)의 잔차 흐름(residual stream)에서 <strong>마지막 토큰 위치의 활성값</strong>을 모은다. 그런 다음 층마다 ‘유해 요청들의 평균 − 무해 요청들의 평균’을 계산하면, 그 차이 벡터가 곧 “이 요청은 거부해야 한다”는 신호가 실리는 축이 된다. 여러 층의 후보 벡터 중 거부 신호가 가장 뚜렷한 하나를 골라 정규화하면, 우리가 찾던 <strong>거부 방향</strong>이 손에 들어온다. 모델의 ‘거부 스위치’가 눌리는 방향을 통계적으로 역추적한 셈이다.</p>
+
+      <h3>2. 그 방향을 지우기 — 두 갈래</h3>
+      <p>방향을 찾았다면, 그것을 무력화하는 길은 두 가지다.</p>
+      <p><strong>① 추론 시 개입(inference-time intervention).</strong> 모델을 실행하는 동안, 매 토큰·매 층에서 잔차 흐름에 실리는 값 중 거부 방향 성분만 골라 빼낸다. 가중치 파일은 그대로 두고 ‘실행할 때만’ 거부를 눌러 없애는 방식이라, 스위치를 껐다 켜듯 되돌리기 쉽다. 모델이 무엇을 거부하는지 관찰하는 연구·분석에 적합하다.</p>
+      <p><strong>② 가중치 직교화(weight orthogonalization).</strong> 어텐션·MLP의 가중치 자체를 거부 방향에 <em>직교</em>하도록 고쳐, 애초에 그 방향으로는 어떤 값도 실리지 못하게 만든다. 개입 코드 없이도 거부가 사라진 상태가 모델 파일에 영구히 각인되므로, 우리가 흔히 ‘abliterated 모델’이라 부르며 인터넷에 배포·복제되는 무삭제 가중치가 바로 이렇게 만들어진 것이다.</p>
+
+      <table>
+        <thead><tr><th>구분</th><th>추론 시 개입</th><th>가중치 직교화</th></tr></thead>
+        <tbody>
+          <tr><td>손대는 대상</td><td>실행 중 활성값(잔차 흐름)</td><td>모델 가중치 자체</td></tr>
+          <tr><td>지속성</td><td>실행하는 동안만</td><td>파일에 영구 각인</td></tr>
+          <tr><td>되돌리기</td><td>쉬움(개입을 끄면 원복)</td><td>어려움(가중치가 변형됨)</td></tr>
+          <tr><td>배포·확산</td><td>원본 모델 + 개입 코드 필요</td><td>무삭제 가중치 파일로 그대로 확산</td></tr>
+          <tr><td>주 용도</td><td>안전 연구·거동 분석</td><td>로컬 배포·상시 사용</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout"><b>재학습이 아니라 뺄셈이다.</b> 두 방식 모두 방대한 데이터로 모델을 다시 가르치지 않는다. 이미 학습된 표현공간에서 방향 하나를 다루는 선형대수 연산일 뿐이다. 이 기법은 Andy Arditi 등의 연구 <em>“Refusal in LLMs Is Mediated by a Single Direction”</em>(2024)에 기반하며, 실제 구현은 <code>TransformerLens</code> 같은 내부 활성값 접근 도구와 FailSpy의 <code>abliterator</code> 라이브러리 등으로 공개되어 있다. 진입장벽이 이토록 낮다는 사실이, 이 기술의 편익과 위험을 동시에 키운다.</div>
+
+      <div class="pullquote">거부를 지우는 데 필요한 것은 방대한 재학습이 아니라, 방향 하나를 덜어내는 뺄셈이었다.</div>
+
+      <span class="chapter-label">Chapter 4. 위험성</span>
+      <h2>여러 겹의 위험 — 그리고 ‘틀린 위험’</h2>
+      <p>abliterated 모델의 위험은 한 겹이 아니다. 가장 먼저 떠오르는 것은 물론 <strong>오남용</strong>이다. 무기·마약·악성코드처럼 사회가 의도적으로 마찰을 걸어 둔 정보에 대한 마지막 장벽이 사라진다. 앞의 실험에서 무삭제판은 정상판이 끝내 거부한 두 요청 모두에 응답했다.</p>
+
+      <figure>
+        <div class="fig-box"><img src="images/04-abliterated-comply-nuclear.jpg" alt="abliterated 모델이 핵무기 관련 요청에 응답하는 화면" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;"></div>
+        <figcaption>이름표가 <code>Qwen3-32B-abliterated</code>로 바뀐 뒤, 같은 요청에 거부 없이 응답을 시작한다(본문에는 그 내용을 재현하지 않는다). 거부 방향을 제거하자 정상판이 막아 두었던 주제가 그대로 열렸다.</figcaption>
+      </figure>
+
+      <p>그런데 실제 화면을 들여다보면 두 번째, 어쩌면 더 교묘한 위험이 드러난다. <strong>거부는 못 하지만, 그렇다고 정확하지도 않다</strong>는 것이다. 마약 관련 응답에서 무삭제판은 존재하지도 않는 물질명을 지어내고, 화학 용어를 뒤섞고, 앞뒤가 맞지 않는 ‘단계’를 자신 있는 말투로 나열했다. 거부 방향을 제거해도 모델이 갑자기 그 분야의 전문가가 되는 것은 아니기 때문이다. 원래 신뢰도가 낮았던 위험 지식이, 이제는 <em>거름망 없이</em> 그럴듯한 문장으로 흘러나온다.</p>
+
+      <div class="pullquote">위험한 답을 내놓는 모델보다 더 곤란한 것은, 위험한 답을 자신 있게 ‘틀리게’ 내놓는 모델이다.</div>
+
+      <p>이것이 왜 더 위험한가. 명백히 거부하는 모델 앞에서 사용자는 다른 경로를 찾아야 함을 안다. 그러나 유창하게 틀린 답을 주는 모델은 <em>거짓된 신뢰</em>를 심는다. 위험한 일을 시도하려는 사람에게는 잘못된 확신을, 판단력이 약한 사용자에게는 검증되지 않은 지시를 준다. 세 번째 위험은 <strong>확산성</strong>이다. abliteration은 공개 가중치와 짧은 스크립트만 있으면 재현되고, 한번 만들어진 무삭제 가중치는 파일 하나로 복제·배포된다. 중앙에서 회수하거나 패치할 수 있는 클라우드 API와 달리, 이미 퍼진 로컬 모델은 사실상 되돌릴 수 없다. 마지막 위험은 <strong>책임의 공백</strong>이다. 원 모델 제작자는 “우리는 안전하게 정렬해 배포했다”고, 변형자는 “연구용이었다”고, 사용자는 “도구가 답했을 뿐”이라고 말할 때, 결과에 대한 책임은 어디에도 남지 않는다.</p>
+
+      <span class="chapter-label">Chapter 5. 그럼에도, 왜 필요한가</span>
+      <h2>거부를 걷어내야 보이는 것들</h2>
+      <p>그렇다면 이런 모델은 그저 없애야 할 위협일까. 이야기의 반대편도 정직하게 보아야 한다. 첫째는 <strong>과잉거부(over-refusal)</strong> 문제다. 정렬이 과하게 걸린 모델은 정당한 질문까지 거부한다. 종양을 공부하는 의학도, 폭발물 사고를 분석하는 안전 연구자, 악성코드를 해부하는 보안 담당자, 소설 속 범죄를 묘사하려는 작가는 “위험할 수 있다”는 이유로 번번이 문전박대당한다. 안전을 위한 거부가 지식 접근의 정당한 권리를 침해하는 지점이 분명히 있다.</p>
+      <p>둘째, 역설적이지만 abliterated 모델은 <strong>안전 연구의 도구</strong>다. 어떤 모델이 실제로 얼마나 위험한 지식을 담고 있는지 측정하려면(레드팀), 거부라는 커튼을 걷어내고 그 뒤를 들여다봐야 한다. 거부하는 모델은 “나는 모른다”와 “나는 말하지 않겠다”를 구분해 주지 않는다. 오직 무삭제 상태에서만 우리는 “이 모델은 이 위험 주제에 대해 실은 얼마나 알고 있으며, 그 지식은 얼마나 정확한가”를 평가할 수 있다. 앞선 실험에서 확인한 ‘위험하지만 틀린 답’이라는 사실 자체가, 이런 평가가 왜 필요한지를 보여 준다.</p>
+      <p>셋째는 <strong>정렬 연구 그 자체</strong>다. 거부가 하나의 방향으로 표현된다는 발견은, 역설적으로 그 방향을 제거해 보았기 때문에 검증됐다. 안전장치가 어떻게 표현되고 어디서 무너지는지 이해하려면, 그것을 해체해 보는 과정이 불가피하다. 넷째는 <strong>주권과 로컬 통제</strong>다. 외부 API에 민감한 데이터를 보내지 못하는 기관, 특정 국가의 검열이나 정책적 편향이 내장된 응답을 원치 않는 사용자에게, 로컬에서 자기 기준으로 통제하는 모델은 정당한 선택지다. 다섯째는 창작·특수 도메인에서의 <strong>표현의 자유</strong>다. 성인 문학, 법의학, 역사적 잔혹 서술처럼 정당하지만 민감한 작업이 기본 정렬의 문턱에 걸린다.</p>
+
+      <table>
+        <thead><tr><th>관점</th><th>정상 정렬 모델</th><th>Abliterated 모델</th></tr></thead>
+        <tbody>
+          <tr><td>유해 요청</td><td>거부(우회 시도에도 방어)</td><td>대체로 응답</td></tr>
+          <tr><td>정당한 민감 질문</td><td>과잉거부 가능</td><td>응답(접근성↑)</td></tr>
+          <tr><td>내용 신뢰성</td><td>안전 범위 내 응답</td><td>거름망 없음 · 환각 위험 큼</td></tr>
+          <tr><td>주 용도</td><td>일반 서비스·대중 배포</td><td>레드팀·안전연구·로컬 통제</td></tr>
+          <tr><td>배포 통제</td><td>중앙에서 회수·패치 가능</td><td>복제·확산 후 회수 곤란</td></tr>
+          <tr><td>핵심 위험</td><td>과소응답</td><td>오남용 + ‘자신 있게 틀림’</td></tr>
+        </tbody>
+      </table>
+
+      <span class="chapter-label">Chapter 6. 균형점</span>
+      <h2>‘거부’를 넘어선 안전</h2>
+      <p>abliteration이 우리에게 던지는 진짜 교훈은, 거부가 안전의 전부가 아니라는 것이다. 방향 하나로 지워지는 장치에 사회의 안전을 통째로 맡길 수는 없다. 그렇다면 무엇이 남는가. 안전은 모델이 말하느냐 마느냐의 문제이기 이전에, <strong>역량·데이터·접근·용도</strong>의 문제다. 애초에 특정 위험 지식을 학습 데이터에서 걸러 내는 데이터 수준의 통제, 정말 위험한 능력을 지닌 모델의 가중치 공개 자체를 신중히 판단하는 배포 수준의 통제, 그리고 누가 어떤 목적으로 쓰는지를 심사하는 접근 수준의 통제가 겹겹이 있어야 한다. 모델 표면의 거부는 그 여러 겹 중 가장 얇고 가장 쉽게 벗겨지는 한 겹일 뿐이다.</p>
+      <p>그런 의미에서 abliterated 모델은 위협인 동시에 <strong>진단</strong>이다. 그것은 우리가 믿어 온 안전장치의 깊이를 정직하게 드러내고, ‘거부하도록 가르치기’에 안주해 온 정렬 방식의 한계를 폭로한다. 이 기술을 무조건 금지하는 것으로는 문제가 풀리지 않는다. 재현이 너무 쉽고, 정당한 쓰임도 분명하기 때문이다. 결국 열쇠는 도구 자체가 아니라 <em>맥락</em>에 있다 — 누가, 어떤 통제 아래, 무엇을 위해 쓰는가.</p>
+
+      <div class="callout"><b>이 글의 실험에 대하여.</b> 위 화면들은 안전 점검 목적으로 <em>로컬(격리) 환경</em>에 올린 모델에 질문한 기록이며, 본문은 어떠한 유해 제조 절차도 재현하지 않는다. 여기서 확인하려던 것은 “무엇을 만들 수 있는가”가 아니라 “거부라는 안전장치가 얼마나 얕고, 그것이 벗겨졌을 때 모델이 실제로 무엇을(그리고 얼마나 부정확하게) 내놓는가”였다. 위험 능력의 평가와 그 능력의 실행은 전혀 다른 일이며, 이 경계를 지키는 것이 이런 연구의 최소 조건이다.</div>
+
+      <span class="chapter-label">맺음말</span>
+      <h2>문을 열어 본다는 것</h2>
+      <p>거부를 지운 모델 앞에서 내가 느낀 것은 통쾌함이 아니라 서늘함이었다. 안전이 이렇게 얇았다는 서늘함, 그리고 그 얇은 막 뒤에 있던 지식이 정작 위험하면서도 엉성했다는 이중의 서늘함. abliterated 모델은 나쁜 기술도, 좋은 기술도 아니다. 그것은 우리가 인공지능의 안전을 어디에 걸어 두었는지를 비추는 거울이다. 거울이 보여 준 상(像)이 마음에 들지 않는다면, 고쳐야 할 것은 거울이 아니라 우리가 안전을 설계한 방식이다.</p>
+      <p>나는 이 문을 열어 본 사람으로서, 문 너머를 본 경험이 문을 함부로 여는 일을 정당화하지 않는다는 것도 안다. 위험을 이해하는 일과 위험을 퍼뜨리는 일 사이의 거리를 지키는 것 — 그 절제야말로, 방향 하나로 지워지지 않는 진짜 정렬일 것이다.</p>
+
+      <div class="references">
+        <h4>참고</h4>
+        <ol>
+          <li>A. Arditi et al., “Refusal in Language Models Is Mediated by a Single Direction,” 2024 (arXiv:2406.11717). 거부 행동이 활성공간의 단일 방향으로 매개된다는 관찰과, 그 방향 제거(직교화)로 거부를 무력화할 수 있음을 보인 연구.</li>
+          <li>‘Abliteration’은 특정 논문의 공식 용어가 아니라 오픈소스 커뮤니티에서 위 방향-제거 기법을 가리키며 통용되는 신조어다(obliterate + ablation).</li>
+          <li>구현 원리(거부 방향 탐지, 추론 시 개입 vs 가중치 직교화)는 위 연구를 바탕으로 하며, 내부 활성값에 접근하는 <code>TransformerLens</code>와 FailSpy의 <code>abliterator</code> 라이브러리 등으로 공개 구현되어 있다(예: <code>mlabonne/Daredevil-8B</code>). 본문의 절차 요약은 news.hada.io의 해설(topic 15331)을 참고했다.</li>
+          <li>본문의 화면은 저자가 안전 점검 목적으로 로컬(격리) 환경의 Qwen3 계열 정상판·abliterated 변형에 동일 질문을 넣어 얻은 기록이며, 재현·시연의 편의를 위한 illustrative 예시다. 어떠한 유해 제조 절차도 본문에 포함하지 않았다.</li>
+          <li>모델의 특정 응답 내용(용어·수치 등)은 해당 모델의 생성 결과로, 사실과 다를 수 있으며 신뢰할 수 없다.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer of article -->
+  <div class="art-foot">
+    <div class="art-tags">
+      <a href="#">#AI안전</a><a href="#">#Abliteration</a><a href="#">#정렬</a><a href="#">#LLM</a><a href="#">#레드팀</a>
+    </div>
+    <div class="author-card">
+      <div class="av">DP</div>
+      <div class="who">
+        <b>박대승 · Daeseung Park</b>
+        <p>KAIST 연구원. 대형언어모델, 시계열 예측, 대화형 AI를 연구합니다. 연구의 과정을 가능한 한 정확하고 읽기 좋게 기록하려 합니다.</p>
+      </div>
+    </div>
+
+    <div class="read-next no-print">
+        <div class="section-head" style="margin-bottom:20px;"><h2 style="font-size:1.3rem;">다음 글</h2></div>
+        <div class="grid grid-2" id="readNext"></div>
+      </div>
+      <nav class="post-nav no-print" id="postNav"></nav>
+    </div>
+</article>
+
+<div class="print-footer">Daeseung Park · D. PARK Journal — 거부를 지운 모델: Abliterated LLM의 위험과 존재 이유</div>
+
+<footer class="site-footer no-print">
+  <div class="container-x">
+    <div class="footer-bottom" style="border:0;padding-top:0;">
+      <span>© 2026 Daeseung Park. All rights reserved.</span>
+      <span><a href="../../index.html">← 저널 홈</a></span>
+    </div>
+  </div>
+</footer>
+
+<div class="mobile-nav" id="mobileNav">
+  <button class="icon-btn close" id="navClose" aria-label="닫기">✕</button>
+  <a href="../../index.html">Home</a>
+  <a href="../../profile.html">Profile</a>
+  <a href="../../articles.html">Articles</a>
+  <a href="../../index.html#contact">Contact</a>
+</div>
+
+<script src="../../assets/js/data.js"></script>
+<script src="../../assets/js/articles.js"></script>
+<script src="../../assets/js/main.js"></script>
+</body>
+</html>
