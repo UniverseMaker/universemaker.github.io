@@ -91,7 +91,10 @@ window.SITE = {
       { label:"Research", href:"research.html" },
       { label:"Notice", href:"notices.html" }
     ]
-  }
+  },
+  /* Google Analytics (gtag.js) — REMOVABLE: ga를 ""로 비우거나 이 블록을 지우면 전 페이지에서 추적이 꺼진다.
+     main.js 상단 "Google Analytics" 주입 블록이 이 id를 읽어 전 페이지 <head>에 gtag를 설치한다(단일 소스). */
+  analytics: { ga: "G-1MMKKGR3MF" }
 };
 
 window.WORKS = {

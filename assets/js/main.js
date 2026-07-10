@@ -2,6 +2,26 @@
 (function () {
   var root = document.documentElement;
 
+  /* ---------------- Google Analytics (gtag.js) — REMOVABLE ----------------
+     단일 소스: id는 data.js의 SITE.analytics.ga 에서 온다. 끄려면 그 값을 ""로
+     비우거나 이 블록을 지우면 된다. main.js가 모든 페이지(루트·articles/·works/·notices/)
+     에서 로드되므로 전 페이지에 자동 적용된다. 중복 주입은 플래그로 방지한다. */
+  (function initGA() {
+    var ga = window.SITE && window.SITE.analytics && window.SITE.analytics.ga;
+    if (!ga) return;                       // config 비면 아무것도 안 함
+    if (window.__gaInjected) return;       // 이중 주입 방지
+    window.__gaInjected = true;
+    var s = document.createElement("script");
+    s.async = true;
+    s.src = "https://www.googletagmanager.com/gtag/js?id=" + ga;
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    window.gtag = gtag;
+    gtag("js", new Date());
+    gtag("config", ga);
+  })();
+
   /* ---------------- Theme ---------------- */
   var KEY = "dpark-theme";
   function applyTheme(t) {
