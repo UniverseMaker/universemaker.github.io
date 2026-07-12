@@ -528,9 +528,9 @@ window.WORKS = {
  { slug:"prj-health-server", funder:"대요메디(주)", orgs:["KAIST"], title:"건강정보 관리용 서버 구성 기획 및 요소기술 개발", period:"2023.05–2024.11", order:6, desc:"건강정보 관리 서버 구성 기획·요소기술 개발." },
  { slug:"prj-mirror-display", funder:"(주)이원오엠에스", orgs:["KAIST"], title:"미러 디스플레이 H/W·S/W 최신기술 분석 및 콘텐츠 현황 연구", period:"2023.05–2024.07", order:5, desc:"미러 디스플레이 H/W·S/W 기술 분석·콘텐츠 현황 연구." },
  { slug:"prj-smarthealth", funder:"과학기술정보통신부", orgs:["연구개발특구진흥재단","KAIST"], title:"스마트 헬스 시스템을 활용한 1인가구 건강 모니터링", period:"2023.05–2023.11", order:4, desc:"생활환경 맞춤형 스마트 헬스 기반 1인가구 건강 모니터링." },
- { slug:"prj-chatbot", funder:"과학기술정보통신부", orgs:["한국연구재단","남서울대학교"], title:"독거 중고령자 디지털 헬스케어 AI 치료적 의사소통 챗봇 연구", period:"2021.06–2023.02", no:"RS-2021-NR066371", order:3, desc:"독거 중고령자 대상 AI 기반 치료적 의사소통 챗봇 연구." },
- { slug:"prj-immersive", funder:"과학기술정보통신부", orgs:["정보통신기획평가원(IITP)","광운대학교산학협력단"], title:"실감콘텐츠 단말 기술 연구개발", period:"2020.07–2022.12", no:"RS-2020-II201846", order:2, desc:"실감콘텐츠 단말 기술 연구개발." },
- { slug:"prj-3daudio", funder:"산업통상자원부", orgs:["한국산업기술기획평가원(KEIT)","남서울대학교산학협력단"], title:"모바일 내장형 실시간 3D 오디오 사운드 렌더링 IP 개발", period:"2020.06–2022.07", no:"RS-2020-KT210072", order:1, desc:"모바일 내장형 실시간 3D 오디오 사운드 렌더링 IP 개발." }
+ { slug:"prj-chatbot", funder:"과학기술정보통신부", orgs:["한국연구재단"], title:"독거 중고령자 디지털 헬스케어 AI 치료적 의사소통 챗봇 연구", period:"2021.06–2023.02", no:"RS-2021-NR066371", order:3, desc:"독거 중고령자 대상 AI 기반 치료적 의사소통 챗봇 연구." },
+ { slug:"prj-immersive", funder:"과학기술정보통신부", orgs:["정보통신기획평가원(IITP)"], title:"실감콘텐츠 단말 기술 연구개발", period:"2020.07–2022.12", no:"RS-2020-II201846", order:2, desc:"실감콘텐츠 단말 기술 연구개발." },
+ { slug:"prj-3daudio", funder:"산업통상자원부", orgs:["한국산업기술기획평가원(KEIT)"], title:"모바일 내장형 실시간 3D 오디오 사운드 렌더링 IP 개발", period:"2020.06–2022.07", no:"RS-2020-KT210072", order:1, desc:"모바일 내장형 실시간 3D 오디오 사운드 렌더링 IP 개발." }
   ]
 };
 
