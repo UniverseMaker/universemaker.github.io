@@ -113,7 +113,7 @@
   /* ---- Homepage ---- */
   var latest = setHTML("latestGrid", posts.slice(0, 6).map(card).join(""));
   if (latest) observeReveal(latest);
-  setHTML("tickerItems", posts.slice(0, 4).map(function (a) { return '<a href="' + base() + a.path + '">' + shortTitle(a.title) + '</a>'; }).join(""));
+  setHTML("tickerItems", posts.slice(0, 6).map(function (a) { return '<a href="' + base() + a.path + '">' + shortTitle(a.title) + '</a>'; }).join(""));
   setHTML("recentList", posts.slice(0, 3).map(function (a, i, arr) { return listCard(a, i === arr.length - 1); }).join("")); // legacy sidebar (홈에 없으면 no-op)
   var recRow = setHTML("recentRow", posts.slice(0, 3).map(recentCard).join(""));
   if (recRow) observeReveal(recRow);
@@ -357,8 +357,10 @@
   }
   function pfCard(w) {
     var href = base() + "works/" + w.slug + "/";
-    var cov = w.cover ? '<img src="' + base() + w.cover + '" alt="" loading="lazy">' : '<div class="pf-fill"></div>';
-    return '<a class="pf-card fade-up" href="' + href + '">' +
+    var cov = !w.cover ? '<div class="pf-fill"></div>'
+      : /^fill-/.test(w.cover) ? '<div class="ph ' + w.cover + ' fill-grid"></div>'
+      : '<img src="' + base() + w.cover + '" alt="" loading="lazy">';
+    return '<a class="pf-card fade-up" href="' + href + '" data-cat="' + esc(w.cat) + '">' +
       '<div class="pf-thumb">' + cov + '<span class="pf-cat">' + esc(w.cat) + '</span></div>' +
       '<div class="pf-body"><h3>' + esc(w.title) + '</h3>' +
       '<div class="pf-meta">' + esc(w.period || "") + (w.org ? ' · ' + esc(w.org) : '') + '</div>' +
@@ -388,7 +390,35 @@
 
   // Portfolio page (portfolio.html) + profile portfolio container
   var pfGrid = document.querySelector("#portfolioGrid");
-  if (pfGrid && WS) { pfGrid.innerHTML = WS.portfolio.map(pfCard).join(""); observeReveal(pfGrid); }
+  if (pfGrid && WS) {
+    pfGrid.innerHTML = WS.portfolio.map(pfCard).join("");
+    observeReveal(pfGrid);
+    // 카테고리 필터 칩 (portfolio.html) — 존재하는 cat만, "전체" + 각 카테고리
+    var pfFilter = document.querySelector("#pfFilter");
+    if (pfFilter) {
+      var cats = [];
+      WS.portfolio.forEach(function (w) { if (w.cat && cats.indexOf(w.cat) < 0) cats.push(w.cat); });
+      var chips = ['<button class="pf-chip is-active" type="button" data-filter="__all" aria-pressed="true">전체</button>']
+        .concat(cats.map(function (c) {
+          return '<button class="pf-chip" type="button" data-filter="' + esc(c) + '" aria-pressed="false">' + esc(c) + '</button>';
+        }));
+      pfFilter.innerHTML = chips.join("");
+      pfFilter.addEventListener("click", function (e) {
+        var btn = e.target.closest(".pf-chip");
+        if (!btn) return;
+        var f = btn.getAttribute("data-filter");
+        pfFilter.querySelectorAll(".pf-chip").forEach(function (b) {
+          var on = b === btn;
+          b.classList.toggle("is-active", on);
+          b.setAttribute("aria-pressed", on ? "true" : "false");
+        });
+        pfGrid.querySelectorAll(".pf-card").forEach(function (card) {
+          var show = (f === "__all") || (card.getAttribute("data-cat") === f);
+          card.style.display = show ? "" : "none";
+        });
+      });
+    }
+  }
 
   // Activity gallery page (activity.html)
   var gg = document.querySelector("#galleryGrid");
@@ -431,7 +461,7 @@
         var body = esc(n.body).split("\n").map(function(l){ return '<p>'+l+'</p>'; }).join('');
         document.title = n.title + " — D. PARK Journal";
         noticeDetail.innerHTML =
-          '<div class="notice-detail-head"><div class="notice-head"><span class="notice-cat">'+esc(n.category||'공지')+'</span><span class="notice-date">'+esc(n.date)+'</span></div>'+
+          '<div class="notice-detail-head"><div class="notice-head"><span class="notice-cat">'+esc(n.category||'공지')+'</span><span class="notice-date">작성일 : '+esc(n.date)+'</span></div>'+
           '<h1 class="notice-title">'+esc(n.title)+'</h1></div>'+
           '<div class="notice-body">'+body+'</div>'+
           (files?'<div class="wd-files">'+files+'</div>':'')+
@@ -439,20 +469,33 @@
       }
     } else if (noticeBoard) {
       var NPER = 10;
+      // No = descending display number over the full list (newest = highest)
+      var noMap = {}; notList.forEach(function(n, i){ noMap[n.id] = notList.length - i; });
+      var nQuery = "";
       var nCurPage = function(){ var m = /page=(\d+)/.exec(location.hash); var p = m ? parseInt(m[1],10) : 1; return p > 0 ? p : 1; };
-      var nTotalPages = function(){ return Math.max(1, Math.ceil(notList.length / NPER)); };
+      var nFiltered = function(){
+        if (!nQuery) return notList;
+        var q = nQuery.toLowerCase();
+        return notList.filter(function(n){ return String(n.title||"").toLowerCase().indexOf(q) !== -1; });
+      };
       var renderNoticeBoard = function(){
-        var tp = nTotalPages(); var p = Math.min(nCurPage(), tp);
-        var slice = notList.slice((p-1)*NPER, (p-1)*NPER + NPER);
-        var headRow = '<div class="notice-row notice-head-row"><span class="n-cat">분류</span><span class="n-title">제목</span><span class="n-date">날짜</span></div>';
-        noticeBoard.innerHTML = headRow + slice.map(function(n){
+        var list = nFiltered();
+        var tp = Math.max(1, Math.ceil(list.length / NPER));
+        var p = Math.min(nCurPage(), tp);
+        var slice = list.slice((p-1)*NPER, (p-1)*NPER + NPER);
+        var headRow = '<div class="notice-row notice-head-row"><span class="n-no">No</span><span class="n-title">제목</span><span class="n-date">작성일</span><span class="n-file">첨부파일</span></div>';
+        var rows = slice.map(function(n){
+          var hasFile = !!(n.files && n.files.length);
           return '<a class="notice-row" href="'+base()+'notices/'+n.id+'/">'+
-            '<span class="n-cat">'+esc(n.category||'공지')+'</span>'+
-            '<span class="n-title">'+esc(n.title)+'</span>'+
-            '<span class="n-date">'+esc(n.date)+'</span></a>';
+            '<span class="n-no">'+noMap[n.id]+'</span>'+
+            '<span class="n-title"><span class="notice-cat">'+esc(n.category||'공지')+'</span>'+esc(n.title)+'</span>'+
+            '<span class="n-date">'+esc(n.date)+'</span>'+
+            '<span class="n-file">'+(hasFile?'📎':'–')+'</span></a>';
         }).join("");
+        if (!slice.length) rows = '<div class="notice-empty">검색 결과가 없습니다.</div>';
+        noticeBoard.innerHTML = headRow + rows;
         var cnt = document.querySelector("#noticeCount");
-        if (cnt) cnt.textContent = "총 " + notList.length + "건 · " + p + " / " + tp + " 페이지";
+        if (cnt) cnt.textContent = "총 " + list.length + "건 · " + p + " / " + tp + " 페이지";
         var pager = document.querySelector("#noticePager");
         if (pager) {
           var h = "";
@@ -464,6 +507,16 @@
       };
       renderNoticeBoard();
       window.addEventListener("hashchange", renderNoticeBoard);
+      var sForm = document.querySelector("#noticeSearch");
+      var sInput = document.querySelector("#noticeSearchInput");
+      if (sForm && sInput) {
+        sForm.addEventListener("submit", function(e){
+          e.preventDefault();
+          nQuery = sInput.value.trim();
+          if (nCurPage() !== 1) { location.hash = "page=1"; } // hashchange -> re-render on page 1
+          else { renderNoticeBoard(); }
+        });
+      }
     }
   }
 
@@ -499,6 +552,7 @@
       var links = [];
       if (l.doi) links.push('<a class="btn-x" href="https://doi.org/' + l.doi + '" target="_blank" rel="noopener">DOI 원문 ↗</a>');
       if (l.url) links.push('<a class="btn-x" href="' + l.url + '" target="_blank" rel="noopener">링크 ↗</a>');
+      if (l.demo) links.push('<a class="btn-x" href="' + l.demo + '" target="_blank" rel="noopener">데모 ↗</a>');
       if (l.kipris) links.push('<a class="btn-x" href="' + l.kipris + '" target="_blank" rel="noopener">KIPRIS 검색 ↗</a>');
       if (l.code) links.push('<a class="btn-x btn-ghost" href="' + l.code + '" target="_blank" rel="noopener">코드 ↗</a>');
       if (l.article) links.push('<a class="btn-x btn-ghost" href="' + base() + l.article + '">관련 기고문 읽기 →</a>');
