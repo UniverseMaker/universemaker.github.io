@@ -332,7 +332,7 @@
   var W = window.WORKS, WS = window.WORKS_SORTED, WB = window.WORK_BY_SLUG;
   function esc(s) { return String(s == null ? "" : s); }
   function kindClass(k) { k = k || ""; if (/SCIE/.test(k)) return "scie"; if (/KCI/.test(k)) return "kci"; if (/특허/.test(k)) return "pat"; if (/SW/.test(k)) return "sw"; return ""; }
-  function extLinkOf(w) { var l = w.links || {}; if (l.doi) return "https://doi.org/" + l.doi; if (l.url) return l.url; if (l.kipris) return l.kipris; return ""; }
+  function extLinkOf(w) { var l = w.links || {}; if (l.doi) return "https://doi.org/" + l.doi; if (l.ieee) return l.ieee; if (l.url) return l.url; if (l.kipris) return l.kipris; return ""; }
   function workRow(w) {
     var detail = base() + "works/" + w.slug + "/";
     var ext = extLinkOf(w);
@@ -550,6 +550,7 @@
       var ext = extLinkOf(w), l = w.links || {};
       var catLabelMap = { publications: "논문", patents: "특허", software: "소프트웨어", portfolio: "포트폴리오" };
       var links = [];
+      if (l.ieee) links.push('<a class="btn-x" href="' + l.ieee + '" target="_blank" rel="noopener">IEEE Xplore ↗</a>');
       if (l.doi) links.push('<a class="btn-x" href="https://doi.org/' + l.doi + '" target="_blank" rel="noopener">DOI 원문 ↗</a>');
       if (l.url) links.push('<a class="btn-x" href="' + l.url + '" target="_blank" rel="noopener">링크 ↗</a>');
       if (l.demo) links.push('<a class="btn-x" href="' + l.demo + '" target="_blank" rel="noopener">데모 ↗</a>');
@@ -573,6 +574,7 @@
         '<span class="work-badge ' + kindClass(w.kind) + '" style="margin-bottom:14px;">' + esc(w.kind || w.cat) + '</span>' +
         '<h1 class="wd-title">' + esc(w.title) + '</h1>' +
         (w.titleEn ? '<p class="wd-en">' + esc(w.titleEn) + '</p>' : '') +
+        (w.award ? '<div class="wd-award">🏆 ' + esc(w.award) + '</div>' : '') +
         '<div class="wd-meta">' + [w.venue, w.date, w.role, w.period, w.org].filter(Boolean).map(esc).join(' · ') + '</div>' +
         (w.authors ? '<div class="wd-authors"><b>저자</b> ' + esc(w.authors) + '</div>' : '') +
         coverHtml +

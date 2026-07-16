@@ -113,5 +113,17 @@ window.WORK_CONTENT = Object.assign(window.WORK_CONTENT || {}, {
     ],
     structure: "센싱 계층(1-Way/4-Way 분산 mmWave) → 처리 계층(구면→직교 변환, 차원축소 DBSCAN+높이복원, 지리참조, 경량 미들웨어) → 응용 계층(실시간 관제·긴급 대응).",
     contribution: "분산 mmWave의 지리참조 파이프라인을 실제 대규모 실내 시설(대전 월드컵경기장)에 적용해 60일간 99.96% 가동률로 장기 실증하고, 외부 스켈레톤 기준 MAE 0.59m로 영상 기반 베이스라인(6.04m) 대비 약 10.2배 정밀도를 달성했다."
+  },
+  "iceccme2026-predictive-load-balancing": {
+    authors: "Dae-Seung Park (제1저자), Jae-Min Choi, Ji-Yeon Lee, Chae-Seok Lee (교신저자) · KAIST 공과대학 융복합연구센터",
+    abstract: "Realizing a microscopic traffic digital twin requires distributed simulation, in which the road network is partitioned across multiple worker nodes. The de facto standard, static graph partitioning (e.g., METIS), determines the partition once from purely geometric and topological information and therefore cannot account for the computational load that evolves over time, such as commuting accumulation or sudden incidents. As a consequence, at every synchronization step the most heavily loaded worker dictates the overall pace, producing a dynamic load imbalance that wastes computational resources. To address this, we propose a predict-then-partition scheme. A spatio-temporal graph neural network (ST-GNN) forecasts the per-link computational load of the next time window, and these predictions are used as node weights to repartition the road network proactively, before the imbalance materializes. We validate the method on PySim, a Python port of the KAIST NextSim engine, using real per-link load traces extracted for the road network of Bucheon, Republic of Korea (330 links). Predictive partitioning reduces the load-imbalance metric λ by 65% at K=8 and by 49–67% across the full range K=2 to 16 relative to static geometric partitioning, while keeping the communication cut essentially unchanged. Moreover, the learned ST-GNN predictor attains a balance comparable to an Oracle that knows the future load, and in particular reduces the peak imbalance of a simple persistence-based predictor from 0.78 to 0.30.",
+    abstractVerbatim: true,
+    sum: [
+      "미시교통 디지털트윈은 도로망을 여러 워커 노드로 나누는 분산 시뮬레이션을 전제로 한다. 사실상 표준인 정적 그래프 분할(METIS 등)은 기하·위상 정보만으로 분할을 한 번에 확정하므로, 통근 누적이나 돌발 사고처럼 시간에 따라 변하는 연산 부하를 담지 못한다. 그 결과 매 동기화 단계에서 가장 부하가 큰 워커가 전체 진행 속도를 좌우하는 동적 부하 불균형이 생겨 자원이 낭비된다.",
+      "제안하는 predict-then-partition 방식은 시공간 그래프 신경망(ST-GNN)으로 다음 시간 구간의 링크별 연산 부하를 예측하고, 그 예측값을 노드 가중치로 삼아 불균형이 실제로 나타나기 전에 도로망을 선제적으로 재분할한다. 검증은 KAIST NextSim 엔진의 파이썬 포트인 PySim과 대한민국 부천 도로망(330개 링크)에서 추출한 실제 링크별 부하 트레이스로 수행했다.",
+      "예측적 분할은 정적 기하 분할 대비 부하 불균형 지표 λ를 K=8에서 65%, K=2~16 전 구간에서 49~67% 낮추면서 통신 컷은 거의 그대로 유지했다. 학습된 ST-GNN 예측기는 미래 부하를 아는 Oracle에 필적하는 균형을 이뤘고, 단순 persistence 예측기의 피크 불균형을 0.78에서 0.30으로 낮췄다."
+    ],
+    structure: "ST-GNN이 다음 구간의 링크별 연산 부하를 예측 → 예측값을 노드 가중치로 사용 → 불균형 발생 전 도로망을 선제 재분할(predict-then-partition). PySim(NextSim 파이썬 포트)·부천 도로망 330링크로 검증한다.",
+    contribution: "정적 분할이 놓치는 시간 변화형 연산 부하를 ST-GNN으로 예측해 선제적으로 재분할함으로써, 통신 컷을 유지한 채 λ를 K=8에서 65% 낮추고 Oracle에 근접한 부하 균형을 달성했다."
   }
 });
