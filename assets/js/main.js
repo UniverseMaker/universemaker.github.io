@@ -108,16 +108,42 @@
       '<h4>' + shortTitle(a.title) + '</h4>' +
       '<div class="meta"><span class="by">박대승</span><span class="dot-sep">' + a.read + '</span></div></div></a>';
   }
+  function featureCard(a) {
+    var ct = a.catClass ? "cat " + a.catClass : "cat";
+    return '<a href="' + base() + a.path + '" class="feature-card fade-up">' +
+      '<div class="feature-thumb">' + coverEl(a) + '<span class="feature-badge">' + a.feature + '</span></div>' +
+      '<div class="feature-body">' +
+      '<span class="' + ct + '">' + a.cat + '</span>' +
+      '<h3>' + a.title + '</h3>' +
+      '<p>' + a.deck + '</p>' +
+      '<div class="meta"><span class="by">박대승</span><span class="dot-sep">' + a.date + '</span></div>' +
+      '</div></a>';
+  }
   function setHTML(id, html) { var el = document.querySelector("#" + id); if (el) { el.innerHTML = html; return el; } return null; }
 
   /* ---- Homepage ---- */
-  var latest = setHTML("latestGrid", posts.slice(0, 6).map(card).join(""));
+  /* 최신 기고 그리드: 특별기획(feature) 글은 제외 — 특별기획은 아래 #homeFeature 섹션에 따로 노출되므로 중복 방지 */
+  var latest = setHTML("latestGrid", posts.filter(function (a) { return !a.feature; }).slice(0, 6).map(card).join(""));
   if (latest) observeReveal(latest);
   setHTML("tickerItems", posts.slice(0, 6).map(function (a) { return '<a href="' + base() + a.path + '">' + shortTitle(a.title) + '</a>'; }).join(""));
   setHTML("recentList", posts.slice(0, 3).map(function (a, i, arr) { return listCard(a, i === arr.length - 1); }).join("")); // legacy sidebar (홈에 없으면 no-op)
-  var recRow = setHTML("recentRow", posts.slice(0, 3).map(recentCard).join(""));
-  if (recRow) observeReveal(recRow);
+  var feat = setHTML("homeFeature", posts.filter(function (a) { return a.feature; }).map(featureCard).join(""));
+  if (feat) observeReveal(feat);
   /* (푸터 기고문 목록은 renderFooter() 가 직접 렌더 — 아래 SITE 블록 참조) */
+
+  /* ---- Homepage hero stats — config에서 자동 계산 (works.html와 동일한 소스 배열) ----
+     .stat-line(홈)에서만 동작. WORKS 필드가 없으면 하드코딩 폴백 텍스트를 그대로 둔다(fail-safe). */
+  (function renderHeroStats() {
+    var W = window.WORKS;
+    if (!W || !document.querySelector(".stat-line")) return;
+    function put(sel, n) {
+      var el = document.querySelector('[data-stat="' + sel + '"]');
+      if (el && typeof n === "number" && !isNaN(n)) el.textContent = n;
+    }
+    if (W.publications) put("publications", W.publications.length);
+    if (W.patents && W.software) put("patents-sw", W.patents.length + W.software.length);
+    if (W.projects) put("projects", W.projects.length);
+  })();
 
   /* ---- Homepage preview sections (config-driven; render only if containers present) ---- */
   (function renderHomePreviews() {
@@ -168,19 +194,66 @@
     });
   }
 
-  /* ---- Articles board page (12/page, 게시판식 페이지 이동) ---- */
+  /* ---- Articles board page (12/page, 게시판식 페이지 이동 + 카테고리 칩 필터) ---- */
   var board = document.querySelector("#boardGrid");
   if (board) {
     var PER = 12;
+    var FEATURE_FILTER = "__feature", ALL_FILTER = "__all", FEATURE_LABEL = "특별기고";
+    /* data.js SITE.articles.showFeatureInAll 로 '전체보기'의 특별기고 노출을 토글:
+       false(기본) → 전체/카테고리 목록에는 특별기고 제외, [특별기고] 칩에서만 노출
+       true        → 전체/카테고리 목록에도 특별기고 함께 노출 (특별기고 칩은 항상 특별기고만) */
+    function showFeatureInAll() {
+      var opt = (window.SITE && window.SITE.articles) || {};
+      return !!opt.showFeatureInAll;
+    }
+    var activeFilter = ALL_FILTER;
+    /* 현재 칩 + 토글 정책에 따라 걸러진 목록 */
+    function filteredPosts() {
+      var showAll = showFeatureInAll();
+      if (activeFilter === FEATURE_FILTER) return posts.filter(function (a) { return a.feature; });
+      if (activeFilter === ALL_FILTER) return posts.filter(function (a) { return showAll || !a.feature; });
+      return posts.filter(function (a) { return a.cat === activeFilter && (showAll || !a.feature); });
+    }
+    /* 칩: 전체 + 카테고리(첫 등장 순) + 특별기고.
+       카테고리 칩은 '현재 정책상 전체보기에 실제 노출되는 글 집합'에서만 추출한다:
+       showFeatureInAll:false → 비-feature 글의 cat만(그래서 feature 전용 cat은 칩이 안 생김),
+       showFeatureInAll:true  → 전체 글(feature 포함)의 cat. */
+    var filterEl = document.querySelector("#boardFilter");
+    if (filterEl) {
+      var chipSource = posts.filter(function (a) { return showFeatureInAll() || !a.feature; });
+      var cats = [];
+      chipSource.forEach(function (a) { if (a.cat && cats.indexOf(a.cat) < 0) cats.push(a.cat); });
+      var chips = ['<button class="pf-chip is-active" type="button" data-filter="' + ALL_FILTER + '" aria-pressed="true">전체</button>']
+        .concat(cats.map(function (c) {
+          return '<button class="pf-chip" type="button" data-filter="' + esc(c) + '" aria-pressed="false">' + esc(c) + '</button>';
+        }))
+        .concat(['<button class="pf-chip" type="button" data-filter="' + FEATURE_FILTER + '" aria-pressed="false">' + FEATURE_LABEL + '</button>']);
+      filterEl.innerHTML = chips.join("");
+      filterEl.addEventListener("click", function (e) {
+        var btn = e.target.closest(".pf-chip");
+        if (!btn) return;
+        activeFilter = btn.getAttribute("data-filter");
+        filterEl.querySelectorAll(".pf-chip").forEach(function (b) {
+          var on = b === btn;
+          b.classList.toggle("is-active", on);
+          b.setAttribute("aria-pressed", on ? "true" : "false");
+        });
+        location.hash = "page=1"; // 칩 전환 시 1페이지로
+        renderBoard();            // 해시가 이미 page=1 이어서 hashchange 미발생하는 경우 대비
+      });
+    }
     function curPage() { var m = /page=(\d+)/.exec(location.hash); var p = m ? parseInt(m[1], 10) : 1; return p > 0 ? p : 1; }
-    function totalPages() { return Math.max(1, Math.ceil(posts.length / PER)); }
+    function totalPages(n) { return Math.max(1, Math.ceil(n / PER)); }
     function renderBoard() {
-      var tp = totalPages(); var p = Math.min(curPage(), tp);
-      var slice = posts.slice((p - 1) * PER, (p - 1) * PER + PER);
-      board.innerHTML = slice.map(card).join("");
+      var list = filteredPosts();
+      var tp = totalPages(list.length); var p = Math.min(curPage(), tp);
+      var slice = list.slice((p - 1) * PER, (p - 1) * PER + PER);
+      board.innerHTML = slice.length
+        ? slice.map(card).join("")
+        : '<p class="text-muted-x" style="grid-column:1/-1;text-align:center;padding:48px 10px;">해당 조건의 기고문이 없습니다.</p>';
       observeReveal(board);
       var cnt = document.querySelector("#boardCount");
-      if (cnt) cnt.textContent = "총 " + posts.length + "편 · " + p + " / " + tp + " 페이지";
+      if (cnt) cnt.textContent = "총 " + list.length + "편 · " + p + " / " + tp + " 페이지";
       var pager = document.querySelector("#pager");
       if (pager) {
         var h = "";

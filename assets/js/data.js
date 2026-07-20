@@ -54,6 +54,10 @@ window.SITE = {
     { label: "Activity",  href: "activity.html",   match: "activity.html" },
     { label: "Contact",   href: "profile.html#contact" }
   ],
+  /* Articles 게시판 정책 — showFeatureInAll:
+     false(기본) → '전체보기'에는 특별기고 제외, [특별기고] 칩을 눌렀을 때만 노출
+     true        → '전체보기'에도 특별기고 함께 노출 (특별기고 칩은 값과 무관하게 항상 특별기고만) */
+  articles: { showFeatureInAll: false },
   promo: {
     enabled: true,
     href: "works/ieee-access-distributed-mmwave/",
@@ -82,7 +86,7 @@ window.SITE = {
   },
   footer: {
     brand: "D. PARK",
-    blurb: "AI와 소프트웨어 시스템을 연구하는 엔지니어의 개인 저널. 연구와 생각을 기록합니다.",
+    blurb: "직접 만들고 연구한 것들, 그 과정에서 든 생각을 적어 둡니다.",
     nav: [
       { label:"Home", href:"index.html" },
       { label:"Profile", href:"profile.html" },

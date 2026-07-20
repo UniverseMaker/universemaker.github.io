@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="naver-site-verification" content="209a1886a3b4f22f6b58a6886555cce7656cc397" />
-<title>Daeseung Park — AI & Software Systems Engineer | Journal</title>
+<title>Daeseung Park AI & Software System Engineer</title>
 <meta name="description" content="박대승 — AI·소프트웨어 시스템 엔지니어. 대형언어모델, 시계열 예측, 대화형 AI 연구와 기고문을 담은 개인 저널.">
 <link rel="canonical" href="https://daeseungpark.com/">
 <meta property="og:type" content="website">
@@ -79,9 +79,9 @@
           <h3>Daeseung&nbsp;Park<br>박대승</h3>
           <p>AI &amp; Software Systems Engineer. 대형언어모델과 시계열 예측, 대화형 AI를 연구하는 KAIST 연구원입니다. 문제의 본질을 코드로 옮기는 일을 합니다.</p>
           <div class="stat-line">
-            <div class="stat"><b>22</b><span>Publications</span></div>
-            <div class="stat"><b>9</b><span>Patents &amp; SW</span></div>
-            <div class="stat"><b>10+</b><span>R&amp;D Projects</span></div>
+            <div class="stat"><b data-stat="publications">25</b><span>Publications</span></div>
+            <div class="stat"><b data-stat="patents-sw">9</b><span>Patents &amp; SW</span></div>
+            <div class="stat"><b data-stat="projects">24</b><span>R&amp;D Projects</span></div>
           </div>
           <span class="cta">프로필 전체 보기
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
@@ -135,7 +135,7 @@
     <div class="section-head">
       <div>
         <h2>최신 기고</h2>
-        <div class="sub">AI·LLM 기술 해설과 연구 회고를 담은 장문의 기고문</div>
+        <div class="sub">AI·LLM 기술 해설과 연구 회고를 담은 기고문</div>
       </div>
       <a href="articles.html" class="more">전체 보기 →</a>
     </div>
@@ -144,25 +144,14 @@
   </div>
 </section>
 
-<!-- ===== Recent + Subscribe (한 줄) ===== -->
-<section class="section" id="recent">
+<!-- ===== 특별 기획 (feature-flagged articles) ===== -->
+<section class="section" id="feature">
   <div class="container-x">
     <div class="section-head">
-      <div><h2>Recent</h2><div class="sub">최근 올라온 기고를 한눈에</div></div>
-      <a href="articles.html" class="more">게시판 보기 →</a>
+      <div><h2>특별 기획</h2><div class="sub">지금 주목할 AI·기술 이슈를 깊이 있게 짚은 기획 기고</div></div>
+      <a href="articles.html" class="more">전체 보기 →</a>
     </div>
-    <div class="recent-bar">
-      <div class="recent-row" id="recentRow"></div>
-      <aside class="subscribe-card">
-        <h5>Subscribe</h5>
-        <p>새 기고문이 올라오면 이메일로 알려드립니다. 스팸 없이, 새 글 소식만.</p>
-        <form id="subscribeForm">
-          <input type="email" placeholder="이메일 주소" aria-label="이메일 주소" required>
-          <button type="submit">구독</button>
-        </form>
-        <div class="sub-msg" id="subMsg"></div>
-      </aside>
-    </div>
+    <div class="feature-grid" id="homeFeature"></div>
   </div>
 </section>
 
@@ -203,7 +192,7 @@
     <div class="about-grid">
       <div class="about-main">
         <div class="section-head" style="border-bottom:0;padding-bottom:0;margin-bottom:16px;"><h2>About this Journal</h2></div>
-        <p class="lead-serif">이 저널은 박대승의 연구와 생각을 기록하는 공간입니다. 대형언어모델과 시계열 예측, 대화형 AI처럼 제가 직접 다뤄 온 주제를 가능한 한 정확하고 읽기 좋게 풀어내려 합니다. 논문의 한 줄로 압축되기 전, 연구가 실제로 어떻게 흘러갔는지 — 그 과정의 판단과 시행착오까지 — 담는 것이 목표입니다.</p>
+        <p class="lead-serif">이 저널은 저의 연구와 생각을 기록하는 공간입니다. 대형언어모델과 시계열 예측, 대화형 AI처럼 제가 직접 다뤄 온 주제를 가능한 한 정확하고 읽기 좋게 풀어내려 합니다. 논문의 한 줄로 압축되기 전, 연구가 실제로 어떻게 흘러갔는지 — 그 과정의 판단과 시행착오까지 — 담는 것이 목표입니다.</p>
         <p class="lead-serif">모든 기고문은 인쇄했을 때에도 한 권의 책처럼 읽히도록 조판했습니다. 마음에 드는 글은 브라우저의 인쇄 기능으로 PDF로 내려받아 보셔도 좋습니다.</p>
         <a href="profile.html" class="btn-x" style="margin-top:6px;">전체 프로필 보기 →</a>
       </div>
@@ -213,7 +202,7 @@
           <div>
             <b>Daeseung Park · 박대승</b>
             <div class="text-muted-x" style="font-size:.88rem;margin:4px 0 8px;">AI &amp; Software Systems Engineer · KAIST</div>
-            <p class="text-muted-x" style="font-size:.9rem;margin:0;">생성형 AI, 시계열 예측, 대화형 시스템을 연구합니다.</p>
+            <p class="text-muted-x" style="font-size:.9rem;margin:0;">관심분야: 생성형 AI·LLM, 시계열 예측, 대화형 AI, 실내측위·mmWave 센싱, 지식그래프·GeoLLM, 분산처리·시뮬레이션, AI 안전</p>
           </div>
         </div>
         <div class="topics-side">
@@ -240,7 +229,7 @@
     <div class="footer-grid">
       <div>
         <div class="footer-brand">D. PARK</div>
-        <p style="max-width:34ch;">AI와 소프트웨어 시스템을 연구하는 엔지니어의 개인 저널. 연구와 생각을 기록합니다.</p>
+        <p style="max-width:34ch;">직접 만들고 연구한 것들, 그 과정에서 든 생각을 적어 둡니다.</p>
         <div class="social" style="margin-top:16px;">
           <a href="https://github.com/UniverseMaker" target="_blank" rel="noopener" aria-label="GitHub">GH</a>
           <a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener" aria-label="ORCID">iD</a>

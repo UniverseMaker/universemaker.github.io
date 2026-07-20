@@ -9,6 +9,33 @@
    ============================================================ */
 window.ARTICLES = [
   {
+    id: 17, slug: "mcp-agent-interop-standard", path: "articles/mcp-agent-interop-standard/",
+    title: "AI의 HTTP가 된 프로토콜: MCP와 상호운용성 표준 전쟁",
+    deck: "챗봇이 ‘행동하는 에이전트’로 바뀌는 순간, 병목은 지능이 아니라 연결의 표준이 된다. Anthropic이 공개한 MCP가 사실상 표준이 되기까지, 그 구조와 정치학, 남은 보안 숙제를 해부한다.",
+    cat: "AI · 기술해설", catClass: "", catLabel: "AI 에이전트",
+    date: "2026-07-18", read: "14분", cover: "articles/mcp-agent-interop-standard/images/cover.svg",
+    tags: ["MCP", "AI에이전트", "상호운용성", "Anthropic"],
+    feature: "특별기획"
+  },
+  {
+    id: 16, slug: "ai-datacenter-power-crunch", path: "articles/ai-datacenter-power-crunch/",
+    title: "AI의 진짜 한계는 전기다",
+    deck: "데이터센터 전력은 2024년 약 415 TWh에서 2030년 약 945 TWh로 6년 만에 두 배가 된다. 진짜 병목은 GPU가 아니라, 발전소에서 랙까지 전기를 미는 전력망이다.",
+    cat: "Tech · 이슈", catClass: "", catLabel: "AI 인프라",
+    date: "2026-07-17", read: "14분", cover: "articles/ai-datacenter-power-crunch/images/cover.svg",
+    tags: ["데이터센터", "전력", "AI인프라", "전력망"],
+    feature: "특별기획"
+  },
+  {
+    id: 15, slug: "ai-circular-financing-bubble", path: "articles/ai-circular-financing-bubble/",
+    title: "엔비디아에서 엔비디아로",
+    deck: "엔비디아가 OpenAI에 최대 1,000억 달러를 투자한다. 공급자이자 고객이자 투자자인 한 회사를 도는 자금의 고리와 ‘버블’ 논쟁을, 엔지니어의 눈으로 차분히 뜯어본다.",
+    cat: "Tech · 이슈", catClass: "", catLabel: "AI 산업",
+    date: "2026-07-16", read: "14분", cover: "articles/ai-circular-financing-bubble/images/cover.svg",
+    tags: ["엔비디아", "OpenAI", "AI버블", "순환투자"],
+    feature: "특별기획"
+  },
+  {
     id: 14, slug: "abliterated-ai-safety", path: "articles/abliterated-ai-safety/",
     title: "거부를 지운 모델: Abliterated LLM의 위험과 존재 이유",
     deck: "언어모델의 ‘거부’는 가중치 속 한 방향으로 표현된다. 그 방향만 지운 무삭제 모델을 정상판과 나란히 시험한 기록, 그리고 위험과 필요 사이의 균형.",

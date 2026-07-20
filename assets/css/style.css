@@ -329,6 +329,20 @@ body[data-theme="light"][data-hero="photo"] .feat-large:hover .bg::after {
 .recent-card h4 { font-family: var(--display); font-size: 1.04rem; font-weight: 600; line-height: 1.28; margin: 7px 0 10px; flex: 1; }
 .recent-card:hover h4 { color: var(--accent-ink); }
 
+/* ---------- Home: 특별 기획 (feature cards) ---------- */
+.feature-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 26px; }
+.feature-card { display: flex; flex-direction: column; min-width: 0; background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); transition: transform .25s, box-shadow .25s; }
+.feature-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.feature-thumb { position: relative; aspect-ratio: 16/9; overflow: hidden; background: var(--surface-2); }
+.feature-thumb .ph, .feature-thumb img { position: absolute; inset: 0; width: 100%; height: 100%; max-width: 100%; object-fit: cover; }
+.feature-badge { position: absolute; left: 14px; top: 14px; z-index: 2; display: inline-block; font-size: .68rem; font-weight: 700; letter-spacing: .08em; color: #fff; background: var(--gold); padding: 5px 12px; border-radius: 999px; box-shadow: var(--shadow-sm); }
+.feature-body { padding: 20px 22px 22px; display: flex; flex-direction: column; flex: 1; }
+.feature-body .cat { margin-bottom: 6px; }
+.feature-body h3 { font-family: var(--display); font-size: 1.4rem; font-weight: 600; line-height: 1.24; letter-spacing: -.01em; margin: 0 0 10px; }
+.feature-card:hover .feature-body h3 { color: var(--accent-ink); }
+.feature-body p { color: var(--muted); font-size: .92rem; line-height: 1.6; margin: 0 0 14px; flex: 1; }
+.feature-body .meta { margin-top: auto; }
+
 /* ---------- Home preview: 주요 활동 thumbs ---------- */
 .home-activity-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
 .ha-card { display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--bg); transition: transform .25s, box-shadow .25s; min-width: 0; }
@@ -376,11 +390,13 @@ body[data-theme="light"][data-hero="photo"] .feat-large:hover .bg::after {
 
 @media (max-width: 960px) {
   .recent-bar { grid-template-columns: minmax(0, 1fr); }
+  .feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .topic-tiles { grid-template-columns: repeat(2, 1fr); }
   .about-grid { grid-template-columns: 1fr; gap: 28px; }
 }
 @media (max-width: 640px) {
   .recent-row { grid-template-columns: minmax(0, 1fr); }
+  .feature-grid { grid-template-columns: minmax(0, 1fr); }
 }
 
 /* ---------- Board pagination (Articles page) ---------- */

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI의 HTTP가 된 프로토콜: MCP와 상호운용성 표준 전쟁 - Daeseung Park Journal</title>
+<meta name="description" content="Anthropic이 공개한 Model Context Protocol(MCP)은 어떻게 1년 만에 OpenAI·Google이 함께 채택한 사실상의 표준이 되었나. 프로토콜의 구조, 상태 비저장 전환의 의미, 재단 기부의 정치학, 그리고 보안 표면과 엔터프라이즈 채택의 간극을 차분히 해부한다.">
+<link rel="canonical" href="https://daeseungpark.com/articles/mcp-agent-interop-standard/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="D. PARK Journal">
+<meta property="og:title" content="AI의 HTTP가 된 프로토콜: MCP와 에이전트 상호운용성 표준 전쟁">
+<meta property="og:description" content="MCP는 어떻게 경쟁사들이 함께 모인 사실상의 표준이 되었나. 프로토콜 구조, 상태 비저장 전환, 재단 기부의 정치학, 보안과 채택의 간극을 해부한다.">
+<meta property="og:url" content="https://daeseungpark.com/articles/mcp-agent-interop-standard/">
+<meta property="og:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI의 HTTP가 된 프로토콜: MCP와 에이전트 상호운용성 표준 전쟁">
+<meta name="twitter:description" content="MCP는 어떻게 경쟁사들이 함께 모인 사실상의 표준이 되었나. 구조·거버넌스·보안·채택의 간극을 해부한다.">
+<meta name="twitter:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"AI의 HTTP가 된 프로토콜: MCP와 에이전트 상호운용성 표준 전쟁","author":{"@type":"Person","name":"박대승","alternateName":"Daeseung Park"},"publisher":{"@type":"Organization","name":"D. PARK Journal"},"image":"https://daeseungpark.com/assets/img/profile/img3.jpg","mainEntityOfPage":"https://daeseungpark.com/articles/mcp-agent-interop-standard/","inLanguage":"ko","datePublished":"2026-07-18"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Noto+Serif+KR:wght@400;600&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/css/article.css">
+</head>
+<body data-base="../../">
+<div class="progress-bar" id="progress"></div>
+<div class="topbar no-print">
+  <div class="container-x">
+    <span class="tb-date" id="today">—</span>
+    <div class="tb-links">
+      <a href="../../index.html">Home</a>
+      <a href="https://github.com/UniverseMaker" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener">ORCID</a>
+      <a href="../../index.html#contact">Contact</a>
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header no-print">
+  <div class="container-x nav-row">
+    <a href="../../index.html" class="brand">D<span class="dot">.</span> PARK <small>Journal</small></a>
+    <nav class="main-nav">
+      <a href="../../index.html">Home</a>
+      <a href="../../profile.html">Profile</a>
+      <a href="../../articles.html" class="active">Articles</a>
+      <a href="../../index.html#contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="테마 전환"><span id="themeIcon">☾</span></button>
+      <button class="print-cta" id="printBtn">🖶 인쇄 / PDF</button>
+      <button class="icon-btn nav-toggle" id="navToggle" aria-label="메뉴">≡</button>
+    </div>
+  </div>
+</header>
+
+<div class="ticker no-print">
+  <div class="container-x">
+    <span class="label">Trending</span>
+    <div class="items" id="tickerItems"></div>
+  </div>
+</div>
+
+<article data-article-id="17">
+  <div class="article-wrap">
+    <!-- Masthead -->
+    <header class="art-head">
+      <span class="cat-pill">AI · 기술해설</span>
+      <h1>AI의 HTTP가 된 프로토콜</h1>
+      <p class="deck">챗봇이 ‘행동하는 에이전트’로 바뀌는 순간, 병목은 모델의 지능이 아니라 <em>연결의 표준</em>이 된다. Anthropic이 2024년 말 조용히 공개한 Model Context Protocol(MCP)은 1년 남짓 만에 경쟁사들까지 한 깃발 아래 모은 사실상의 표준이 되었다. 이 글은 그 프로토콜의 구조와 정치학, 그리고 화려한 채택 뒤에 남은 보안과 신뢰의 숙제를 차분히 해부한다.</p>
+      <div class="art-byline">
+        <div class="av">DP</div>
+        <div class="who">
+          <b>박대승 (Daeseung Park)</b>
+          <span>AI &amp; Software Systems Engineer · KAIST</span>
+          <span>2026년 7월 · 14분 읽기</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="art-cover"><img src="images/cover.svg" alt="MCP 에이전트 상호운용성 프로토콜 개념도" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;"></div>
+
+    <!-- Summary -->
+    <div class="summary-box">
+      <span class="tag">1분 요약</span>
+      언어모델이 대화를 넘어 ‘행동’하기 시작하면, 진짜 병목은 모델이 아니라 <strong>모델과 세상을 잇는 연결부</strong>다. 도구·데이터·앱마다 제각각인 통합을 하나로 표준화하려는 시도가 <strong>Model Context Protocol(MCP)</strong>이다. Anthropic이 2024년 11월 공개한 이 개방형 프로토콜은 2025년 3월 OpenAI, 4월 Google DeepMind가 잇따라 채택하면서 사실상의 업계 표준으로 올라섰고, 2025년 12월에는 Linux Foundation 산하의 새 재단(AAIF)에 기부되어 중립적 거버넌스로 넘어갔다. 2026년 7월 28일 예정된 v1 명세는 <strong>상태 비저장(stateless) 코어</strong>로의 전환을 핵심으로 삼아 대규모 운영을 겨냥한다. 그러나 프롬프트 인젝션·오염된 도구 같은 보안 표면은 여전히 열려 있고, 가트너의 두 예측은 <em>급격한 채택</em>과 <em>대량 취소</em>가 공존하는 이중적 미래를 가리킨다. 이 글은 표준이 왜 병목이 되었는지, MCP는 그 병목을 어떻게 풀었는지, 그리고 무엇이 아직 풀리지 않았는지를 짚는다.
+    </div>
+
+    <!-- Body -->
+    <div class="prose">
+      <span class="chapter-label">Chapter 1. 왜 ‘표준’이 병목인가</span>
+      <h2>대화하는 모델에서 행동하는 에이전트로</h2>
+      <p>지난 몇 년간 언어모델의 발전은 대체로 ‘더 똑똑한 대화’를 향해 있었다. 그러나 실제 업무에서 모델이 쓸모를 가지려면, 대화만으로는 부족하다. 사용자의 캘린더를 읽고, 사내 데이터베이스에 질의하고, 파일을 열고, 외부 API를 호출해야 비로소 무언가를 <em>해낸다</em>. 이 지점에서 문제는 모델의 지능이 아니라 연결의 문제로 옮겨 간다. 모델이 아무리 영리해도, 손발이 되어 줄 도구에 닿지 못하면 그것은 여전히 말만 잘하는 상자일 뿐이다.</p>
+      <p>여기서 오래된 소프트웨어 공학의 골칫거리가 되살아난다. 이른바 <strong>M×N 통합 문제</strong>다. M개의 AI 애플리케이션이 N개의 외부 도구·데이터 소스와 연결되어야 한다면, 순진하게는 M×N개의 맞춤 통합을 일일이 짜야 한다. 앱마다, 도구마다, 인증 방식과 데이터 형식과 오류 처리가 제각각이다. 새 도구 하나가 늘 때마다 모든 앱이 그것을 위한 어댑터를 새로 만들어야 하고, 앱 하나가 늘 때마다 모든 도구가 다시 연결되어야 한다. 이 조합 폭발이야말로 에이전트 생태계의 진짜 병목이었다.</p>
+
+      <div class="pullquote">모델의 지능이 아니라 연결의 표준이 병목이다. 손발에 닿지 못하는 지능은 여전히 말만 잘하는 상자일 뿐이다.</div>
+
+      <p>이전에도 시도가 없었던 것은 아니다. 각 플랫폼은 저마다의 ‘플러그인’이나 ‘함수 호출(function calling)’ 규격을 내놓아, 모델이 외부 기능을 부를 길을 열었다. 그러나 그 규격들은 서로 호환되지 않았다. 한 플랫폼을 위해 만든 도구는 다른 플랫폼에서 그대로 쓰이지 못했고, 도구 제작자는 지원하려는 플랫폼 수만큼 같은 일을 반복해야 했다. 편의를 위해 태어난 규격들이 오히려 생태계를 여러 섬으로 쪼갠 셈이다. 결국 필요한 것은 특정 회사의 플러그인 규격이 아니라, 누구의 것도 아닌 <em>공용 규약</em>이었다.</p>
+
+      <p>역사는 이런 문제를 ‘공통 규약’으로 풀어 왔다. 서로 다른 기계들이 한 언어로 대화하도록 만든 것이 표준의 힘이다. 웹이 폭발적으로 성장한 배경에는 HTTP라는 단순하고 개방적인 프로토콜이 있었다. 어떤 서버든 어떤 브라우저든 같은 규약을 말하기에, 누구도 상대의 내부 사정을 몰라도 연결이 성립했다. MCP를 이야기할 때 사람들이 자연스레 ‘AI의 HTTP’라는 비유를 꺼내는 이유가 여기에 있다. M×N을 M+N으로 바꾸는 것, 즉 앱은 프로토콜만 말하면 되고 도구도 프로토콜만 말하면 되도록 만드는 것. 그것이 표준이 약속하는 해방이다.</p>
+
+      <span class="chapter-label">Chapter 2. 프로토콜 해부</span>
+      <h2>MCP는 무엇을 표준화했는가</h2>
+      <p>MCP는 Anthropic이 2024년 11월 25일 공개한 개방형 프로토콜이다. 개발을 이끈 David Soria Parra와 Justin Spahr-Summers는, 모델이 외부 컨텍스트에 접근하는 방식을 하나의 규약으로 통일하고자 했다. 구조는 의외로 단순한 세 겹으로 나뉜다. 사용자가 마주하는 <strong>호스트(Host)</strong> 애플리케이션, 그 안에서 프로토콜을 말하는 <strong>클라이언트(Client)</strong>, 그리고 실제 도구·데이터를 노출하는 <strong>MCP 서버(Server)</strong>다. 호스트 안의 클라이언트가 서버에 연결되고, 서버는 자신이 제공할 수 있는 능력을 표준 형식으로 알린다.</p>
+
+      <figure>
+        <svg viewBox="0 0 760 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="MCP 3계층 구조 다이어그램" style="width:100%;height:auto;display:block;">
+          <rect x="0" y="0" width="760" height="340" fill="none"/>
+          <!-- tier 1: host/client -->
+          <rect x="30" y="90" width="180" height="150" rx="12" fill="#eef1ff" stroke="#2233c4" stroke-width="2.5"/>
+          <text x="120" y="120" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="17" font-weight="700" fill="#1a2350">호스트 (앱)</text>
+          <text x="120" y="142" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="12" fill="#333">IDE · 챗 · 에이전트</text>
+          <rect x="55" y="160" width="130" height="58" rx="8" fill="#ffffff" stroke="#5b74ff" stroke-width="2"/>
+          <text x="120" y="185" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="13" font-weight="600" fill="#2233c4">MCP Client</text>
+          <text x="120" y="204" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="11" fill="#555">프로토콜 화자</text>
+          <!-- tier 2: server -->
+          <rect x="290" y="90" width="180" height="150" rx="12" fill="#e6f7ee" stroke="#0f8a55" stroke-width="2.5"/>
+          <text x="380" y="120" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="17" font-weight="700" fill="#0c4a2e">MCP 서버</text>
+          <text x="380" y="150" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="12" fill="#333">tools · resources</text>
+          <text x="380" y="170" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="12" fill="#333">prompts</text>
+          <text x="380" y="205" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="11" fill="#0f8a55">능력을 표준 형식으로 노출</text>
+          <!-- tier 3: tools/data -->
+          <g>
+            <rect x="550" y="70" width="180" height="52" rx="10" fill="#fff4e0" stroke="#c47f13" stroke-width="2"/>
+            <text x="640" y="101" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="13" font-weight="600" fill="#7a4c00">데이터베이스</text>
+            <rect x="550" y="140" width="180" height="52" rx="10" fill="#fff4e0" stroke="#c47f13" stroke-width="2"/>
+            <text x="640" y="171" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="13" font-weight="600" fill="#7a4c00">외부 API</text>
+            <rect x="550" y="210" width="180" height="52" rx="10" fill="#fff4e0" stroke="#c47f13" stroke-width="2"/>
+            <text x="640" y="241" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="13" font-weight="600" fill="#7a4c00">파일 · 시스템</text>
+          </g>
+          <!-- arrows -->
+          <g stroke="#2233c4" stroke-width="2.5" fill="none" marker-end="url(#ah)">
+            <path d="M210 189 H286"/>
+          </g>
+          <g stroke="#0f8a55" stroke-width="2.5" fill="none" marker-end="url(#ah2)">
+            <path d="M470 150 H546 L546 96"/>
+            <path d="M470 165 H548"/>
+            <path d="M470 180 H546 L546 234"/>
+          </g>
+          <text x="248" y="180" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="11" fill="#2233c4">MCP</text>
+          <!-- before/after annotation -->
+          <rect x="30" y="270" width="700" height="46" rx="8" fill="#f3f0ff" stroke="#6a4bd0" stroke-width="1.5"/>
+          <text x="46" y="291" font-family="'Segoe UI',sans-serif" font-size="12.5" font-weight="700" fill="#4a2fb0">v1 전환</text>
+          <text x="46" y="308" font-family="'Segoe UI',sans-serif" font-size="12" fill="#333">상태 저장(stateful): 세션 라우팅 필요  →  상태 비저장(stateless): 일반 로드밸런서 뒤에서 그대로 확장</text>
+          <defs>
+            <marker id="ah" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 Z" fill="#2233c4"/></marker>
+            <marker id="ah2" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 Z" fill="#0f8a55"/></marker>
+          </defs>
+        </svg>
+        <figcaption>MCP의 3계층 구조. 호스트(앱) 안의 클라이언트가 MCP 서버에 연결되고, 서버는 도구·데이터·프롬프트를 표준 형식으로 노출한다. v1은 이 연결을 ‘상태 저장’에서 ‘상태 비저장’으로 옮겨, 세션 고정 없이 일반 로드밸런서 뒤에서 수평 확장할 수 있게 한다.</figcaption>
+      </figure>
+
+      <p>MCP 서버가 노출하는 능력은 크게 세 가지로 나뉜다. 첫째는 <strong>도구(tools)</strong>다. 모델이 호출해 실제 부작용을 일으킬 수 있는 함수 — 이메일 전송, 레코드 생성, 코드 실행 같은 ‘행동’의 단위다. 둘째는 <strong>리소스(resources)</strong>로, 모델이 읽어 맥락으로 삼을 수 있는 데이터다. 문서, 파일, 데이터베이스의 한 조각이 여기에 해당한다. 셋째는 <strong>프롬프트(prompts)</strong>로, 특정 작업을 위해 미리 다듬어진 상호작용 템플릿이다. 이 세 가지를 한 규약으로 표현했다는 점이 핵심이다. 어떤 서버가 무엇을 할 수 있는지 앱이 <em>미리 알 필요가 없다</em>. 연결하면 서버가 스스로 자신의 능력 목록을 내어놓고, 모델은 그중에서 필요한 것을 골라 쓴다.</p>
+
+      <p>이 세 능력을 실제로 쓰는 장면을 그려 보면 구조가 더 뚜렷해진다. 개발자가 IDE에서 “이 프로젝트의 미해결 이슈를 요약해 줘”라고 말한다고 하자. 호스트인 IDE의 클라이언트는 연결된 이슈 트래커 MCP 서버에 질의해 <em>리소스</em>로서 이슈 목록을 읽어 오고, 모델은 그것을 맥락 삼아 요약을 만든다. 이어 “가장 급한 것에 담당자를 지정해 줘”라고 하면, 이번에는 같은 서버가 노출한 <em>도구</em>를 호출해 실제 레코드를 바꾼다. 사용자는 어느 서버가 무슨 API를 쓰는지 알 필요가 없다. 프로토콜이 그 세부를 감춰 주기 때문이다. 이 ‘발견 가능성(discoverability)’이야말로 하드코딩된 통합과 MCP를 가르는 결정적 차이다.</p>
+
+      <p>2026년 7월 28일 출시가 예정된 <strong>v1 명세</strong>는 이 구조를 대규모 운영에 맞게 다시 벼렸다. 2025년 5월 21일 릴리스 후보(RC)를 내고 10주간 검증을 거친 이 버전의 가장 큰 변화는 <strong>상태 비저장(stateless) 코어</strong>다. 초기 MCP는 클라이언트와 서버가 하나의 세션을 유지하는 것을 전제로 했는데, 이는 수많은 동시 사용자를 감당해야 하는 서비스에서는 부담이 된다. 세션이 특정 서버 인스턴스에 고정되면, 요청을 아무 서버로나 흘려보낼 수 없기 때문이다. v1은 세션 라우팅 요구를 걷어내, MCP 서버를 <em>평범한 무상태 웹 서비스처럼</em> 일반 로드밸런서 뒤에 세워 수평 확장할 수 있게 했다.</p>
+
+      <div class="callout"><b>상태 비저장이 왜 중요한가.</b> 웹이 거대해질 수 있었던 이유 중 하나는, HTTP 요청 하나하나가 원칙적으로 서로 독립적이었기 때문이다. 어느 서버가 받아도 되므로 서버를 자유롭게 늘리고 줄일 수 있었다. MCP v1의 상태 비저장 전환은 같은 자유를 에이전트 인프라에 부여한다. 그 위에 <strong>MCP Apps</strong>(샌드박스 iframe으로 UI를 안전하게 띄우는 확장), <strong>Tasks</strong>(오래 걸리는 작업을 위한 장기 실행 확장), 그리고 <strong>OAuth 2.0/OIDC 정렬</strong>(RFC 9207의 issuer 검증을 포함한 인증 표준화)이 얹힌다. 여기에 <strong>라이프사이클 거버넌스</strong>(어떤 기능을 폐기할 때 최소 12개월의 유예를 보장)가 더해져, 표준을 믿고 올라탄 이들이 하루아침에 발밑이 무너지지 않도록 한다.</div>
+
+      <span class="chapter-label">Chapter 3. 표준 거버넌스의 정치학</span>
+      <h2>경쟁사들은 왜 한 깃발 아래 모였나</h2>
+      <p>기술적으로 잘 설계된 프로토콜이라 해도, 그것만으로 표준이 되지는 않는다. 표준은 언제나 정치의 산물이다. 흥미로운 것은 MCP가 <em>한 회사의 제안</em>으로 출발했음에도 경쟁사들이 빠르게 합류했다는 점이다. 2025년 3월 OpenAI가 MCP 지원을 발표했고, 이어 4월에는 Google DeepMind가 채택을 선언했다. 서로 모델 시장에서 치열하게 다투는 이들이, 유독 ‘연결의 규약’에서는 한 표준으로 모여든 것이다.</p>
+
+      <div class="pullquote">모델에서는 다투되, 연결에서는 다투지 않는다. 파이를 두고 싸우기 전에, 먼저 파이가 놓일 식탁을 함께 짜는 편이 모두에게 이롭기 때문이다.</div>
+
+      <p>이 협력에는 냉정한 계산이 깔려 있다. 만약 각 진영이 저마다 다른 연결 규약을 밀어붙였다면, 도구 제작자들은 어느 편에 설지 고민하며 생태계를 쪼갰을 것이다. 파편화된 생태계는 누구에게도 이롭지 않다. 반대로 연결 계층을 공용 표준으로 열어 두면, 그 위에서 벌어지는 <em>모델의 경쟁</em>은 오히려 더 커진 시장에서 이뤄진다. 식탁을 함께 짜 두고, 그 위의 요리로 승부하는 셈이다. 개방형·비독점 프로토콜이라는 성격이 이 계산을 가능하게 했다. 특정 회사가 규약의 열쇠를 쥐고 있었다면 경쟁사들이 그렇게 선뜻 올라타지는 않았을 것이다.</p>
+
+      <p>그 논리는 2025년 12월, 한 걸음 더 나아갔다. Anthropic이 MCP를 <strong>Linux Foundation 산하의 Agentic AI Foundation(AAIF)</strong>에 기부한 것이다. 이 재단은 Anthropic과 Block, 그리고 OpenAI가 공동으로 설립했다. 프로토콜의 소유권을 중립적 비영리 재단으로 넘긴다는 것은, 어느 한 회사도 그것을 사유화하거나 방향을 독점하지 못하게 한다는 신호다. 표준을 진짜 공공재로 만들려면, 그것을 만든 이가 손을 놓을 줄도 알아야 한다. 재단 기부는 그 신뢰를 제도적으로 못 박는 장치다.</p>
+
+      <figure>
+        <svg viewBox="0 0 760 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="MCP 채택 타임라인" style="width:100%;height:auto;display:block;">
+          <line x1="40" y1="130" x2="720" y2="130" stroke="#2233c4" stroke-width="3"/>
+          <!-- nodes -->
+          <g font-family="'Segoe UI',sans-serif">
+            <!-- 1 -->
+            <circle cx="90" cy="130" r="9" fill="#2233c4"/>
+            <text x="90" y="100" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1a2350">2024.11</text>
+            <text x="90" y="162" text-anchor="middle" font-size="11.5" fill="#333">MCP 공개</text>
+            <text x="90" y="178" text-anchor="middle" font-size="11.5" fill="#333">(Anthropic)</text>
+            <!-- 2 -->
+            <circle cx="230" cy="130" r="9" fill="#5b74ff"/>
+            <text x="230" y="100" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1a2350">2025.03</text>
+            <text x="230" y="162" text-anchor="middle" font-size="11.5" fill="#333">OpenAI 채택</text>
+            <!-- 3 -->
+            <circle cx="370" cy="130" r="9" fill="#5b74ff"/>
+            <text x="370" y="100" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1a2350">2025.04</text>
+            <text x="370" y="162" text-anchor="middle" font-size="11.5" fill="#333">Google 채택</text>
+            <!-- 4 -->
+            <circle cx="510" cy="130" r="9" fill="#0f8a55"/>
+            <text x="510" y="100" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0c4a2e">2025.12</text>
+            <text x="510" y="162" text-anchor="middle" font-size="11.5" fill="#333">Linux Foundation</text>
+            <text x="510" y="178" text-anchor="middle" font-size="11.5" fill="#333">기부 (AAIF)</text>
+            <!-- 5 -->
+            <circle cx="670" cy="130" r="11" fill="#c47f13"/>
+            <text x="670" y="100" text-anchor="middle" font-size="12.5" font-weight="700" fill="#7a4c00">2026.07.28</text>
+            <text x="670" y="162" text-anchor="middle" font-size="11.5" fill="#333">v1 명세</text>
+            <text x="670" y="178" text-anchor="middle" font-size="11.5" fill="#333">(상태 비저장)</text>
+          </g>
+        </svg>
+        <figcaption>MCP 채택 타임라인. 2024년 11월 공개 이후 1년여 만에 두 경쟁사의 채택과 중립 재단 기부를 거쳐, 2026년 7월 상태 비저장 코어를 담은 v1 명세에 이른다. 표준이 회사의 제안에서 공공재로 이행한 궤적이다.</figcaption>
+      </figure>
+
+      <span class="chapter-label">Chapter 4. 보안 표면과 채택의 간극</span>
+      <h2>연결이 넓어질수록 공격면도 넓어진다</h2>
+      <p>표준은 연결을 쉽게 만든다. 그리고 쉬워진 연결은 그대로 <em>넓어진 공격면</em>이 된다. 2025년 4월, 연구자들은 MCP가 안고 있는 보안 취약점을 지적했다. 대표적인 것이 <strong>프롬프트 인젝션(prompt injection)</strong>과 <strong>오염된 도구(rug pull / tool poisoning)</strong>다. 전자는 모델이 읽어 들이는 외부 데이터 속에 악의적 지시를 숨겨, 모델이 사용자가 의도하지 않은 행동을 하도록 유도하는 공격이다. 후자는 겉으로 무해해 보이는 도구가, 실제로는 민감한 데이터를 몰래 외부로 빼돌리도록 설계되어 있는 경우다.</p>
+
+      <p>이 위험이 특히 까다로운 이유는, MCP의 강점이 곧 위험의 통로이기 때문이다. 서버가 스스로 능력을 선언하고 모델이 그것을 신뢰해 호출한다는 구조는 편리하지만, 그 신뢰가 남용되면 방어가 어렵다. 모델은 도구의 설명을 읽고 판단하는데, 그 설명 자체가 조작될 수 있다. 데이터를 읽는 행위와 지시를 따르는 행위의 경계가 흐려지는 것 — 이것이 에이전트 보안의 근본 난제다. v1이 OAuth 2.0/OIDC 정렬과 issuer 검증을 강화한 것은 이 표면 중 인증·신원 부분을 다지려는 노력이지만, 프롬프트 인젝션처럼 ‘의미’ 층위에서 벌어지는 공격까지 프로토콜만으로 막을 수는 없다.</p>
+
+      <div class="pullquote">데이터를 읽는 일과 지시를 따르는 일의 경계가 흐려질 때, 편리한 연결은 그대로 열린 문이 된다.</div>
+
+      <p>이 긴장은 채택의 현실에서도 그대로 드러난다. 분석기관 가트너(Gartner)의 두 예측을 나란히 놓으면 그림이 선명해진다. 한편으로 가트너는 <strong>2026년 말까지 엔터프라이즈 앱의 40%가 태스크 특화 AI 에이전트를 탑재</strong>할 것으로 내다본다(2025년의 5% 미만에서 급증). 에이전트가 실험을 넘어 제품의 기본 기능으로 들어온다는 전망이다. 그런데 같은 기관이 다른 한편으로 <strong>2027년까지 에이전틱 AI 프로젝트의 40% 이상이 취소</strong>될 것이라고도 예측한다. 비용이 과다하고, 사업적 가치가 불명확하며, 위험 통제가 미흡하다는 이유에서다. 이 두 숫자는 모순이 아니라, 같은 물결의 앞면과 뒷면이다.</p>
+
+      <table>
+        <thead><tr><th>구분</th><th>개별 커스텀 통합</th><th>MCP 표준 통합</th></tr></thead>
+        <tbody>
+          <tr><td>통합 복잡도</td><td>M×N (조합 폭발)</td><td>M+N (프로토콜로 수렴)</td></tr>
+          <tr><td>새 도구 추가</td><td>모든 앱이 어댑터 재작성</td><td>서버 하나 추가로 전 앱에 노출</td></tr>
+          <tr><td>능력 발견</td><td>사전 하드코딩</td><td>연결 시 서버가 스스로 선언</td></tr>
+          <tr><td>확장성</td><td>세션·인증 제각각</td><td>상태 비저장 코어·표준 OAuth</td></tr>
+          <tr><td>거버넌스</td><td>각자 소유·비호환</td><td>중립 재단(AAIF)·폐기 유예 12개월</td></tr>
+          <tr><td>핵심 위험</td><td>유지보수 부채</td><td>넓어진 공격면(인젝션·도구 오염)</td></tr>
+        </tbody>
+      </table>
+
+      <p>왜 이런 간극이 생기는가. 기술 채택의 초기에는 언제나 ‘할 수 있다’가 ‘해야 한다’를 앞지른다. 표준이 연결을 값싸게 만들자 많은 조직이 일단 에이전트를 붙여 보았지만, 정작 그 에이전트가 무엇을 대체하고 얼마의 가치를 만드는지는 뒤늦게야 따져 물었다. 파일럿은 화려했으나 운영으로 넘어가는 순간 비용·신뢰성·보안의 청구서가 날아왔다. 가트너가 취소를 예측하는 지점이 바로 여기다. 흥미로운 것은, 이 취소의 물결조차 표준의 실패가 아니라 <em>성숙의 과정</em>이라는 점이다. 걸러질 것이 걸러진 뒤 남는 것이 진짜 쓸모 있는 에이전트일 테니 말이다.</p>
+
+      <p>표준화가 채택을 가속하는 것은 분명하다. 연결 비용이 떨어지면 시도의 문턱도 낮아진다. 그러나 시도가 쉬워진다고 <em>성공</em>이 쉬워지는 것은 아니다. 오히려 낮아진 문턱은 준비되지 않은 프로젝트까지 끌어들이고, 그중 상당수는 가치를 증명하지 못한 채 접힌다. MCP는 ‘어떻게 연결할 것인가’를 훌륭하게 풀었지만, ‘무엇을 위해 연결할 것인가’와 ‘그 연결을 어떻게 안전하게 통제할 것인가’는 여전히 각 조직의 숙제로 남는다.</p>
+
+      <span class="chapter-label">Chapter 5. 전망과 맺음말</span>
+      <h2>규약이 깔린 뒤에 오는 것들</h2>
+      <p>2026년 MCP 로드맵은 네 방향을 가리킨다. <strong>전송(transport)의 확장성</strong>, <strong>에이전트 간 통신(agent-to-agent)</strong>, <strong>거버넌스의 성숙</strong>, 그리고 <strong>엔터프라이즈 요구</strong>다. 특히 에이전트 간 통신은 다음 국면을 예고한다. 지금까지 MCP는 하나의 모델이 여러 도구에 닿는 문제를 풀었다면, 다음은 여러 에이전트가 서로 협업하는 문제다. 모델이 도구를 부르는 것을 넘어, 에이전트가 다른 에이전트를 도구처럼 호출하고 위임하는 세계 — 그 위에서 상호운용성의 의미는 한층 넓어진다.</p>
+
+      <p>돌아보면 MCP의 짧은 역사는 인터넷 초기의 표준 형성 과정을 압축해 보여 준다. 한 회사가 제안한 규약이, 경쟁사의 채택으로 힘을 얻고, 중립 재단으로 넘어가 공공재가 되며, 대규모 운영을 위해 상태를 비우는 방향으로 진화한다. HTTP가 웹을 열었듯, MCP가 에이전트의 시대를 여는 열쇠라는 비유는 그래서 과장만은 아니다. 다만 열쇠가 문을 여는 것과, 그 문 너머에서 무엇을 할지는 별개의 문제다.</p>
+
+      <div class="callout"><b>표준은 시작이지 끝이 아니다.</b> MCP는 연결의 문법을 통일했다. 그러나 문법이 통일된다고 좋은 문장이 저절로 쓰이지는 않는다. 급격한 채택 곡선과 대량 취소 예측이 공존하는 이 국면에서, 진짜 승부는 프로토콜 바깥 — 각 조직이 에이전트를 <em>무엇을 위해, 어떤 통제 아래</em> 쓰느냐에서 갈릴 것이다. 표준은 그 판단을 대신해 주지 않는다. 다만 판단할 수 있는 무대를 깔아 줄 뿐이다.</div>
+
+      <p>그러므로 ‘AI의 HTTP’라는 표현은 축복인 동시에 경고다. HTTP는 웹을 가능하게 했지만, 웹의 모든 스팸과 사기와 오남용 또한 그 위에서 자랐다. 규약은 중립적이고, 그 위에서 무엇이 자랄지는 우리에게 달렸다. MCP가 연 문 앞에서 우리가 물어야 할 것은 “연결할 수 있는가”가 아니라 “왜, 그리고 얼마나 안전하게 연결하는가”이다. 표준 전쟁의 승자는 이미 어느 정도 가려졌지만, 그 표준으로 무엇을 만들 것인가라는 진짜 질문은 이제 막 시작되었다.</p>
+
+      <div class="references">
+        <h4>참고</h4>
+        <ol>
+          <li>Anthropic, “Introducing the Model Context Protocol,” 2024-11-25. MCP의 최초 공개 발표(개발자 David Soria Parra, Justin Spahr-Summers). <a href="https://www.anthropic.com/news/model-context-protocol" target="_blank" rel="noopener">anthropic.com/news/model-context-protocol</a></li>
+          <li>“Model Context Protocol,” Wikipedia. MCP 개요, OpenAI(2025-03)·Google DeepMind(2025-04) 채택, 2025-12 Linux Foundation 산하 Agentic AI Foundation(AAIF; Anthropic·Block·OpenAI 공동설립) 기부, 2025-04 연구자들의 프롬프트 인젝션·오염된 도구 취약점 지적. <a href="https://en.wikipedia.org/wiki/Model_Context_Protocol" target="_blank" rel="noopener">en.wikipedia.org/wiki/Model_Context_Protocol</a></li>
+          <li>MCP Blog, “Release Candidate for MCP v1,” 2026. v1 명세(2026-07-28 출시 예정, RC 2026-05-21·10주 검증)의 핵심 — 상태 비저장 코어, MCP Apps(샌드박스 iframe UI), Tasks 확장, OAuth 2.0/OIDC 정렬(RFC 9207 issuer 검증), 라이프사이클 거버넌스(최소 12개월 폐기 유예). <a href="https://blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate/" target="_blank" rel="noopener">blog.modelcontextprotocol.io</a></li>
+          <li>MCP Blog, “2026 MCP Roadmap.” 전송 확장성·에이전트 간 통신·거버넌스 성숙·엔터프라이즈 방향. <a href="https://blog.modelcontextprotocol.io/posts/2026-mcp-roadmap/" target="_blank" rel="noopener">blog.modelcontextprotocol.io/posts/2026-mcp-roadmap</a></li>
+          <li>Gartner(예측·분석기관), 보도자료 2025-08-26. 2026년 말까지 엔터프라이즈 앱의 40%가 태스크 특화 AI 에이전트 탑재(2025년 5% 미만에서 상승) 전망. 아울러 2027년까지 에이전틱 AI 프로젝트 40% 이상 취소(비용·불명확한 가치) 전망. 두 수치 모두 가트너의 <em>예측</em>이다. <a href="https://www.gartner.com/en/newsroom/press-releases/2025-08-26-gartner-predicts-40-percent-of-enterprise-apps-will-feature-task-specific-ai-agents-by-2026-up-from-less-than-5-percent-in-2025" target="_blank" rel="noopener">gartner.com</a></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer of article -->
+  <div class="art-foot">
+    <div class="art-tags">
+      <a href="#">#MCP</a><a href="#">#AI에이전트</a><a href="#">#상호운용성</a><a href="#">#표준</a><a href="#">#프로토콜</a>
+    </div>
+    <div class="author-card">
+      <div class="av">DP</div>
+      <div class="who">
+        <b>박대승 · Daeseung Park</b>
+        <p>KAIST 연구원. 대형언어모델, 시계열 예측, 대화형 AI를 연구합니다. 연구의 과정을 가능한 한 정확하고 읽기 좋게 기록하려 합니다.</p>
+      </div>
+    </div>
+
+    <div class="read-next no-print">
+        <div class="section-head" style="margin-bottom:20px;"><h2 style="font-size:1.3rem;">다음 글</h2></div>
+        <div class="grid grid-2" id="readNext"></div>
+      </div>
+      <nav class="post-nav no-print" id="postNav"></nav>
+    </div>
+</article>
+
+<div class="print-footer">Daeseung Park · D. PARK Journal — AI의 HTTP가 된 프로토콜: MCP와 에이전트 상호운용성 표준 전쟁</div>
+
+<footer class="site-footer no-print">
+  <div class="container-x">
+    <div class="footer-bottom" style="border:0;padding-top:0;">
+      <span>© 2026 Daeseung Park. All rights reserved.</span>
+      <span><a href="../../index.html">← 저널 홈</a></span>
+    </div>
+  </div>
+</footer>
+
+<div class="mobile-nav" id="mobileNav">
+  <button class="icon-btn close" id="navClose" aria-label="닫기">✕</button>
+  <a href="../../index.html">Home</a>
+  <a href="../../profile.html">Profile</a>
+  <a href="../../articles.html">Articles</a>
+  <a href="../../index.html#contact">Contact</a>
+</div>
+
+<script src="../../assets/js/data.js"></script>
+<script src="../../assets/js/articles.js"></script>
+<script src="../../assets/js/main.js"></script>
+</body>
+</html>

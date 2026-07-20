@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img" aria-label="AI 칩과 클라우드 사이를 순환하는 자금의 고리 개념도">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a1030"/>
+      <stop offset="0.55" stop-color="#131a4a"/>
+      <stop offset="1" stop-color="#241a5c"/>
+    </linearGradient>
+    <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5b74ff"/>
+      <stop offset="0.5" stop-color="#8ad8ff"/>
+      <stop offset="1" stop-color="#7ff0c0"/>
+    </linearGradient>
+    <radialGradient id="core" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#aebcff"/>
+      <stop offset="0.55" stop-color="#5b74ff"/>
+      <stop offset="1" stop-color="#2233c4"/>
+    </radialGradient>
+    <filter id="soft" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+    <marker id="ah" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#8ad8ff"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="675" fill="url(#bg)"/>
+
+  <!-- faint grid -->
+  <g stroke="#3a4790" stroke-width="1" opacity="0.20">
+    <path d="M0 112 H1200 M0 225 H1200 M0 337 H1200 M0 450 H1200 M0 562 H1200"/>
+    <path d="M150 0 V675 M300 0 V675 M450 0 V675 M600 0 V675 M750 0 V675 M900 0 V675 M1050 0 V675"/>
+  </g>
+
+  <!-- circulating money ring -->
+  <g fill="none" stroke="url(#ring)" stroke-width="14" opacity="0.9" stroke-linecap="round">
+    <path d="M600 130 A 210 210 0 0 1 782 445" marker-end="url(#ah)"/>
+    <path d="M782 445 A 210 210 0 0 1 418 445" marker-end="url(#ah)"/>
+    <path d="M418 445 A 210 210 0 0 1 600 130" marker-end="url(#ah)"/>
+  </g>
+
+  <!-- floating currency glyphs on the ring -->
+  <g font-family="'Segoe UI',sans-serif" font-size="30" font-weight="700" fill="#0a1030" text-anchor="middle">
+    <circle cx="782" cy="445" r="30" fill="#8ad8ff"/><text x="782" y="456">$</text>
+    <circle cx="418" cy="445" r="30" fill="#7ff0c0"/><text x="418" y="456">$</text>
+    <circle cx="600" cy="130" r="30" fill="#aebcff"/><text x="600" y="141">$</text>
+  </g>
+
+  <!-- central hub: chip -->
+  <circle cx="600" cy="337" r="120" fill="url(#core)" filter="url(#soft)" opacity="0.5"/>
+  <g transform="translate(600 337)">
+    <rect x="-74" y="-74" width="148" height="148" rx="18" fill="url(#core)" stroke="#dfe6ff" stroke-width="2"/>
+    <rect x="-44" y="-44" width="88" height="88" rx="8" fill="#0a1030" opacity="0.55"/>
+    <g stroke="#cdd6ff" stroke-width="4" stroke-linecap="round">
+      <path d="M-74 -40 h-22 M-74 -12 h-22 M-74 16 h-22 M-74 40 h-22"/>
+      <path d="M74 -40 h22 M74 -12 h22 M74 16 h22 M74 40 h22"/>
+      <path d="M-40 -74 v-22 M-12 -74 v-22 M16 -74 v-22 M40 -74 v-22"/>
+      <path d="M-40 74 v22 M-12 74 v22 M16 74 v22 M40 74 v22"/>
+    </g>
+    <text x="0" y="8" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="26" font-weight="700" fill="#ffffff" letter-spacing="2">GPU</text>
+  </g>
+
+  <!-- title band -->
+  <text x="600" y="612" text-anchor="middle" font-family="'Georgia',serif" font-size="34" font-weight="600" fill="#ffffff">엔비디아에서 엔비디아로</text>
+  <text x="600" y="648" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="16" letter-spacing="3" fill="#8ea2ff">AI CIRCULAR FINANCING &amp; THE BUBBLE DEBATE</text>
+</svg>
