@@ -362,6 +362,14 @@ window.WORKS = {
 
   /* ========================= 특허 ========================= */
   patents: [
+    { slug: "pat-mmwave-pointcloud-geopositioning", kind: "특허 출원", order: 4,
+      title: "mmWave 레이더 센서를 이용한 포인트 클라우드 클러스터링 기반 지리참조 위치 측위 방법",
+      titleEn: "Geo-referenced Positioning Method using Point Cloud Clustering with mmWave Radar Sensor",
+      venue: "출원 10-2025-0119952", date: "2025.08.27 출원", role: "발명",
+      links: { article: "articles/mmwave-georeferencing/" },
+      tags: ["mmWave", "지리참조", "특허"],
+      sum: ["mmWave 레이더가 포착한 포인트 클라우드를 클러스터링해 지리좌표계 기준으로 대상의 위치를 측정하는 방법. 카메라 없이 실내 공간을 지리참조 측위한다."],
+      why: "분산 mmWave 레이더 실내 측위·지리참조 연구(APCC 2024 발표 논문 기반)의 지식재산 성과 — KAIST 출원." },
     { slug: "pat-hierarchical-chatbot", kind: "특허 출원", order: 3,
       title: "선택적 적시 챗봇 프로비저닝 기능을 구비한 계층적 다중 챗봇 디지털 헬스케어 시스템",
       titleEn: "Hierarchical Multi-Chatbot Digital Healthcare System with Selective Just-in-time Chatbot Provisioning",
