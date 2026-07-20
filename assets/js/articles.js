@@ -15,7 +15,7 @@ window.ARTICLES = [
     cat: "AI · 기술해설", catClass: "", catLabel: "AI 에이전트",
     date: "2026-07-18", read: "14분", cover: "articles/mcp-agent-interop-standard/images/cover.svg",
     tags: ["MCP", "AI에이전트", "상호운용성", "Anthropic"],
-    feature: "특별기획"
+    feature: "특별기고"
   },
   {
     id: 16, slug: "ai-datacenter-power-crunch", path: "articles/ai-datacenter-power-crunch/",
@@ -24,7 +24,7 @@ window.ARTICLES = [
     cat: "Tech · 이슈", catClass: "", catLabel: "AI 인프라",
     date: "2026-07-17", read: "14분", cover: "articles/ai-datacenter-power-crunch/images/cover.svg",
     tags: ["데이터센터", "전력", "AI인프라", "전력망"],
-    feature: "특별기획"
+    feature: "특별기고"
   },
   {
     id: 15, slug: "ai-circular-financing-bubble", path: "articles/ai-circular-financing-bubble/",
@@ -33,7 +33,7 @@ window.ARTICLES = [
     cat: "Tech · 이슈", catClass: "", catLabel: "AI 산업",
     date: "2026-07-16", read: "14분", cover: "articles/ai-circular-financing-bubble/images/cover.svg",
     tags: ["엔비디아", "OpenAI", "AI버블", "순환투자"],
-    feature: "특별기획"
+    feature: "특별기고"
   },
   {
     id: 14, slug: "abliterated-ai-safety", path: "articles/abliterated-ai-safety/",

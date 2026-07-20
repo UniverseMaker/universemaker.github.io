@@ -86,7 +86,7 @@ window.SITE = {
   },
   footer: {
     brand: "D. PARK",
-    blurb: "직접 만들고 연구한 것들, 그 과정에서 든 생각을 적어 둡니다.",
+    blurb: "AI &amp; Software Systems Engineer · KAIST",
     nav: [
       { label:"Home", href:"index.html" },
       { label:"Profile", href:"profile.html" },

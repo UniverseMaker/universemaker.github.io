@@ -207,6 +207,17 @@
       return !!opt.showFeatureInAll;
     }
     var activeFilter = ALL_FILTER;
+    /* URL 쿼리 ?cat= 로 초기 선택 칩 결정: cat=feature → 특별기고(__feature).
+       카테고리명(공백 등 URL 인코딩 포함)과 일치하면 그 카테고리 칩을 초기 선택.
+       파라미터가 없거나 인식 불가하면 기존대로 '전체'(__all). */
+    (function () {
+      var m = /[?&]cat=([^&#]*)/.exec(location.search);
+      if (!m) return;
+      var val = "";
+      try { val = decodeURIComponent(m[1].replace(/\+/g, " ")); } catch (e) { val = m[1]; }
+      if (val === "feature" || val === FEATURE_FILTER) activeFilter = FEATURE_FILTER;
+      else if (val && posts.some(function (a) { return a.cat === val; })) activeFilter = val;
+    })();
     /* 현재 칩 + 토글 정책에 따라 걸러진 목록 */
     function filteredPosts() {
       var showAll = showFeatureInAll();
@@ -223,11 +234,13 @@
       var chipSource = posts.filter(function (a) { return showFeatureInAll() || !a.feature; });
       var cats = [];
       chipSource.forEach(function (a) { if (a.cat && cats.indexOf(a.cat) < 0) cats.push(a.cat); });
-      var chips = ['<button class="pf-chip is-active" type="button" data-filter="' + ALL_FILTER + '" aria-pressed="true">전체</button>']
-        .concat(cats.map(function (c) {
-          return '<button class="pf-chip" type="button" data-filter="' + esc(c) + '" aria-pressed="false">' + esc(c) + '</button>';
-        }))
-        .concat(['<button class="pf-chip" type="button" data-filter="' + FEATURE_FILTER + '" aria-pressed="false">' + FEATURE_LABEL + '</button>']);
+      function chipHTML(filter, label) {
+        var on = activeFilter === filter;
+        return '<button class="pf-chip' + (on ? ' is-active' : '') + '" type="button" data-filter="' + esc(filter) + '" aria-pressed="' + (on ? 'true' : 'false') + '">' + esc(label) + '</button>';
+      }
+      var chips = [chipHTML(ALL_FILTER, "전체")]
+        .concat(cats.map(function (c) { return chipHTML(c, c); }))
+        .concat([chipHTML(FEATURE_FILTER, FEATURE_LABEL)]);
       filterEl.innerHTML = chips.join("");
       filterEl.addEventListener("click", function (e) {
         var btn = e.target.closest(".pf-chip");
