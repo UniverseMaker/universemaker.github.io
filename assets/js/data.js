@@ -61,7 +61,7 @@ window.SITE = {
   promo: {
     enabled: true,
     href: "works/ieee-access-distributed-mmwave/",
-    badge: "NEW · 게재",
+    badge: "NEW · 신규 게재",
     text: "<b>IEEE Access</b> 신규 논문 게재 완료 — 분산 mmWave 레이더 기반 실내 인체 탐지·지리참조",
     cta: "논문 보기 →"
   },
