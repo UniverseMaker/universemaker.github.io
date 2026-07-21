@@ -438,7 +438,7 @@ window.WORKS = {
     { slug:"pf-site-ctkorea", cat:"웹 · 서비스", order:20, title:"한국문화콘텐츠기술학회(KOCTA) 웹사이트", period:"2024", org:"ctkorea.org", cover:"assets/img/portfolio/site-ctkorea.jpg", tags:["웹","학회"], links:{ url:"https://ctkorea.org" }, desc:["한국문화콘텐츠기술학회 공식 웹사이트 제작 — 논문 투고·학술대회·회원 자료 제공."] },
     { slug:"pf-site-crc", cat:"웹 · 서비스", order:19, title:"KAIST 융복합연구센터 웹사이트", period:"2024", org:"crc.kaist.ac.kr", cover:"assets/img/portfolio/site-crc-kaist.jpg", tags:["웹","KAIST"], links:{ url:"https://crc.kaist.ac.kr" }, desc:["KAIST 공과대학 융복합연구센터 공식 웹사이트 제작."] },
     { slug:"pf-site-daeseungpark", cat:"웹 · 서비스", order:25, title:"개인 리서치 저널 daeseungpark.com", period:"2025", org:"daeseungpark.com", cover:"assets/img/portfolio/site-daeseungpark.jpg", tags:["웹","저널"], links:{ url:"https://daeseungpark.com" }, desc:["생성형 AI·시계열 예측·대화형 시스템 연구를 기록하는 개인 리서치 저널 사이트."] },
-    { slug:"pf-flowboard", cat:"웹 · 서비스", order:32, title:"Flowboard (공개 예정)", period:"개발 중", org:"공개 예정", cover:"assets/portfolio/pf-flowboard/00-flowboard.jpg", tags:["서비스","공개예정"], links:{}, figs:[{src:"assets/portfolio/pf-flowboard/00-flowboard.jpg", cap:"FlowBoard — 칸반 보드 화면"},{src:"assets/portfolio/pf-flowboard/01.png",cap:"FlowBoard — PMS/ITS 화면 1"},{src:"assets/portfolio/pf-flowboard/02.png",cap:"FlowBoard — PMS/ITS 화면 2"},{src:"assets/portfolio/pf-flowboard/03.png",cap:"FlowBoard — PMS/ITS 화면 3"},{src:"assets/portfolio/pf-flowboard/04.png",cap:"FlowBoard — PMS/ITS 화면 4"},{src:"assets/portfolio/pf-flowboard/05.png",cap:"FlowBoard — PMS/ITS 화면 5"},{src:"assets/portfolio/pf-flowboard/06.png",cap:"FlowBoard — PMS/ITS 화면 6"}], desc:["Jira·Redmine 개념을 결합한 프로젝트 관리 시스템(PMS/ITS) — 칸반 보드·스프린트·간트·리포트를 갖춘 협업 도구."] },
+    { slug:"pf-flowboard", cat:"웹 · 서비스", order:32, title:"Flowboard (공개 예정)", period:"개발 중", org:"공개 예정", cover:"assets/portfolio/pf-flowboard/00-flowboard.jpg", tags:["서비스","공개예정"], links:{ demo:"http://service.daeseungpark.com/flowboard" }, figs:[{src:"assets/portfolio/pf-flowboard/00-flowboard.jpg", cap:"FlowBoard — 칸반 보드 화면"},{src:"assets/portfolio/pf-flowboard/01.png",cap:"FlowBoard — PMS/ITS 화면 1"},{src:"assets/portfolio/pf-flowboard/02.png",cap:"FlowBoard — PMS/ITS 화면 2"},{src:"assets/portfolio/pf-flowboard/03.png",cap:"FlowBoard — PMS/ITS 화면 3"},{src:"assets/portfolio/pf-flowboard/04.png",cap:"FlowBoard — PMS/ITS 화면 4"},{src:"assets/portfolio/pf-flowboard/05.png",cap:"FlowBoard — PMS/ITS 화면 5"},{src:"assets/portfolio/pf-flowboard/06.png",cap:"FlowBoard — PMS/ITS 화면 6"}], desc:["Jira·Redmine 개념을 결합한 프로젝트 관리 시스템(PMS/ITS) — 칸반 보드·스프린트·간트·리포트를 갖춘 협업 도구."] },
     { slug: "pf-geollm", cat: "AI · R&D", order: 30,
       title: "GeoLLM — 지리정보 질의응답 시스템",
       period: "2023–2026 · KAIST", org: "국토부·국토지리정보원 연계",
@@ -538,14 +538,6 @@ window.WORKS = {
       tags:["실내측위","주차","앱"],
       figs:[{src:"assets/portfolio/pf-incheon-parking-nav/cover.jpg", cap:"첨단기술·주소정보 융합 실시간 실내·외 길안내 서비스 구성"}],
       desc:["첨단기술과 주소정보를 융합한 실시간 실내·외 길안내 서비스. 집→실외 내비게이션→실내 주차장→주차 위치→보행 내비게이션→출국장까지 인천공항 주차 동선을 연속 안내한다."] },
-
-    /* ---- 신규: 두바이 경찰청 기술 시연 (E: 발표자료 PDF) ---- */
-    { slug:"pf-dubai-police-demo", cat:"AI · R&D", order:26,
-      title:"두바이 경찰청 기술 시연 (KAIST 공공안전기술)",
-      period:"2025", org:"KAIST 공과대학 융복합연구센터",
-      cover:"assets/portfolio/pf-dubai-police-demo/cover.jpg",
-      tags:["공공안전","시연","AI"],
-      desc:["두바이 경찰청 대상 KAIST 공공안전기술(Public Safety Technology) 기술 시연 및 발표를 수행했다."] },
 
     /* ---- 신규: 항공촬영 기반 월동채소 재배·출하면적 조사 (E: 최종보고서 PDF → 그라데이션) ---- */
     { slug:"pf-winter-veg-remote-sensing", cat:"AI · R&D", order:27,
