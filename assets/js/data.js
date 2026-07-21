@@ -108,7 +108,7 @@ window.WORKS = {
       slug:"ieee-access-distributed-mmwave", kind:"SCIE", order:2026.05,
       title:"분산 mmWave 레이더를 활용한 복잡 실내 환경의 강건한 인체 탐지 및 지리참조",
       titleEn:"Toward Robust Human Detection and Geo-Referencing in Complex Indoor Environments via Distributed mmWave Radar",
-      venue:"IEEE Access", date:"2026.07.14", role:"주저자",
+      venue:"IEEE Access", date:"2026.07.14", role:"주저자", impactFactor:"4.2",
       links:{ ieee:"https://ieeexplore.ieee.org/document/11609228", article:"articles/mmwave-georeferencing/" },
       tags:["mmWave","지리참조","실내측위"],
       figs:[
@@ -126,7 +126,7 @@ window.WORKS = {
       slug: "ieee-access-geo-kg", kind: "SCIE", order: 2026.03,
       title: "지역 단위 도시 인프라 분석을 위한 선언적 지리 지식그래프 프레임워크",
       titleEn: "A Declarative Geographic Knowledge Graph Framework for District-Scale Urban Infrastructure Analysis",
-      venue: "IEEE Access", date: "2026.06.22", role: "공동저자(제2저자)",
+      venue: "IEEE Access", date: "2026.06.22", role: "공동저자(제2저자)", impactFactor: "4.2",
       links: { doi: "10.1109/ACCESS.2026.3705784", article: "articles/geollm-knowledge-graph/" },
       tags: ["지식그래프", "GIS", "도시인프라"],
       figs: [
@@ -139,7 +139,7 @@ window.WORKS = {
       slug: "ieee-access-gnlm", kind: "SCIE", order: 2026.02,
       title: "GNLM: 지리 질의응답을 위한 도로명주소 기반 공간추론 그래프-네이티브 언어모델",
       titleEn: "GNLM: A Graph-Native Language Model With Road Name Address-Based Spatial Reasoning for Geographic Question Answering",
-      venue: "IEEE Access", date: "2026.05.21", role: "공동저자(제2저자)",
+      venue: "IEEE Access", date: "2026.05.21", role: "공동저자(제2저자)", impactFactor: "4.2",
       links: { doi: "10.1109/ACCESS.2026.3695549", article: "articles/geollm-knowledge-graph/" },
       tags: ["GeoLLM", "지식그래프", "QA"],
       figs: [
@@ -153,7 +153,7 @@ window.WORKS = {
       slug: "ieee-access-spatial-repr", kind: "SCIE", order: 2026.01,
       title: "LLM 기반 공간추론을 위한 과제 지향 공간 표현: 다층 통제 실증 프레임워크",
       titleEn: "Task-Oriented Spatial Representations for LLM-Based Spatial Reasoning: An Empirical Framework With Multi-Layer Controls",
-      venue: "IEEE Access", date: "2026.05.06", role: "공동저자(제2저자)",
+      venue: "IEEE Access", date: "2026.05.06", role: "공동저자(제2저자)", impactFactor: "4.2",
       links: { doi: "10.1109/ACCESS.2026.3690723", article: "articles/llm-spatial-reasoning/" },
       tags: ["LLM", "공간추론", "평가"],
       sum: ["좌표·명칭·행정구역·관계·거리의 5단계 공간추상화 계층을 설계하고, 6개 대형언어모델을 7,650문항으로 평가해 공간추론 능력을 해부한다."],
@@ -164,7 +164,7 @@ window.WORKS = {
       slug: "jwe-prompt-engineering", kind: "SCIE", order: 2024.02,
       title: "대형언어모델 기반 생성형 AI를 위한 프롬프트 엔지니어링 성능 개선 연구",
       titleEn: "A Study on Performance Improvement of Prompt Engineering for Generative AI with a Large Language Model",
-      venue: "Journal of Web Engineering", date: "2024.02.22", role: "주저자",
+      venue: "Journal of Web Engineering", date: "2024.02.22", role: "주저자", impactFactor: "1.6",
       links: { doi: "10.13052/jwe1540-9589.2285", article: "articles/prompt-engineering/" },
       tags: ["프롬프트엔지니어링", "생성형AI", "LLM"],
       sum: ["프롬프트 설계가 생성형 AI 성능에 미치는 영향을 정량적으로 다룬다. 역할 부여·단계적 추론·예시 제공·출력형식 고정·평가 루프 등 재현 가능한 설계 지렛대를 실험한다."],
@@ -174,7 +174,7 @@ window.WORKS = {
       slug: "cmes-bert-health", kind: "SCIE", order: 2022.09,
       title: "텍스트 기반 건강상담 데이터의 BERT 분류 성능 연구",
       titleEn: "A Study of BERT-Based Classification Performance of Text-Based Health Counseling Data",
-      venue: "CMES — Computer Modeling in Engineering & Sciences", date: "2022.09.29", role: "공동저자(제2저자)",
+      venue: "CMES — Computer Modeling in Engineering & Sciences", date: "2022.09.29", role: "공동저자(제2저자)", impactFactor: "2.9",
       links: { doi: "10.32604/cmes.2022.022465", article: "articles/bert-medical-classification/" },
       tags: ["헬스케어NLP", "BERT", "텍스트분류"],
       figs: [
@@ -190,7 +190,7 @@ window.WORKS = {
       slug: "iceccme2026-predictive-load-balancing", kind: "국제학술", order: 2026.10,
       title: "분산 미시교통 시뮬레이션을 위한 시공간 그래프 신경망 기반 예측적 부하 분산",
       titleEn: "Predictive Load Balancing via Spatio-Temporal Graph Neural Networks for Distributed Microscopic Traffic Simulation",
-      venue: "ICECCME 2026 (Bali, Indonesia) · 발표 예정", date: "2026.10.15–17", role: "주저자(제1저자)",
+      venue: "ICECCME 2026 (Bali, Indonesia) · 발표 예정", date: "2026.10.15–17", role: "주저자",
       links: {},
       tags: ["분산 시뮬레이션", "ST-GNN", "교통 디지털트윈", "부하 분산"],
       sum: [

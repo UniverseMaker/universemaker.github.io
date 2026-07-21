@@ -427,7 +427,7 @@
       '<div class="work-main">' +
         '<a class="work-title" href="' + detail + '">' + esc(w.title) + '</a>' +
         (w.titleEn ? '<div class="work-en">' + esc(w.titleEn) + '</div>' : '') +
-        '<div class="work-meta">' + esc(w.venue) + ' · ' + esc(w.date) + (w.role ? ' · <b>' + esc(w.role) + '</b>' : '') + '</div>' +
+        '<div class="work-meta">' + esc(w.venue) + ' · ' + esc(w.date) + (w.role ? ' · <b>' + esc(w.role) + '</b>' : '') + (w.impactFactor ? ' <span class="work-if" title="Impact Factor · JCR 2025">IF ' + esc(w.impactFactor) + '</span>' : '') + '</div>' +
       '</div>' +
       '<div class="work-links"><a class="wl-detail" href="' + detail + '">상세</a>' +
         (ext ? '<a class="wl-ext" href="' + ext + '" target="_blank" rel="noopener">원문 ↗</a>' : '') +
@@ -661,7 +661,7 @@
         '<h1 class="wd-title">' + esc(w.title) + '</h1>' +
         (w.titleEn ? '<p class="wd-en">' + esc(w.titleEn) + '</p>' : '') +
         (w.award ? '<div class="wd-award">🏆 ' + esc(w.award) + '</div>' : '') +
-        '<div class="wd-meta">' + [w.venue, w.date, w.role, w.period, w.org].filter(Boolean).map(esc).join(' · ') + '</div>' +
+        '<div class="wd-meta">' + [w.venue, w.date, w.role, w.period, w.org].filter(Boolean).map(esc).join(' · ') + (w.impactFactor ? ' <span class="work-if" title="Impact Factor · JCR 2025">IF ' + esc(w.impactFactor) + '</span> <span class="wd-if-src">JCR 2025</span>' : '') + '</div>' +
         (w.authors ? '<div class="wd-authors"><b>저자</b> ' + esc(w.authors) + '</div>' : '') +
         coverHtml +
         (figs ? '<div class="wd-figs">' + figs + '</div>' : '') +
