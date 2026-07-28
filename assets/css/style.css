@@ -224,6 +224,9 @@ body[data-theme="light"][data-hero="photo"] .feat-large:hover .bg::after {
 .post-card h3 { font-family: var(--display); font-size: 1.22rem; font-weight: 600; line-height: 1.25; margin: 0 0 8px; letter-spacing: -.01em; }
 .post-card:hover h3 { color: var(--accent-ink); }
 .post-card p { color: var(--muted); font-size: .9rem; margin: 0 0 12px; flex: 1; }
+/* Home "최신 기고" (#latestGrid) only: clamp title to 2 lines, summary to 4 lines */
+#latestGrid .post-card h3 { display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:2; line-clamp:2; overflow:hidden; }
+#latestGrid .post-card p { display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:4; line-clamp:4; overflow:hidden; }
 
 /* horizontal list card */
 .list-card { display: grid; grid-template-columns: 116px 1fr; gap: 16px; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--line); }
