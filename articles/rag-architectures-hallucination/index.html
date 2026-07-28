@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>검색이 지능을 구원하는 네 가지 방법 — Lexical·Semantic·Hybrid·Graph RAG와 환각의 해부 - Daeseung Park Journal</title>
+<meta name="description" content="검색증강생성(RAG)의 네 가지 검색 아키텍처 — Lexical(BM25)·Semantic(Dense)·Hybrid(RRF·재순위)·Graph(GraphRAG) — 를 원리부터 강약점까지 해부하고, RAG가 환각(hallucination)을 줄이는 메커니즘과 여전히 환각하는 지점, 그리고 완화·평가 기법을 논문 수준으로 정리한다.">
+<link rel="canonical" href="https://daeseungpark.com/articles/rag-architectures-hallucination/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="D. PARK Journal">
+<meta property="og:title" content="검색이 지능을 구원하는 네 가지 방법 — Lexical·Semantic·Hybrid·Graph RAG와 환각의 해부">
+<meta property="og:description" content="네 가지 RAG 검색 아키텍처의 원리와 강약점, 그리고 환각을 줄이는 메커니즘과 남은 실패 지점·완화·평가 기법을 해부한다.">
+<meta property="og:url" content="https://daeseungpark.com/articles/rag-architectures-hallucination/">
+<meta property="og:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="검색이 지능을 구원하는 네 가지 방법 — Lexical·Semantic·Hybrid·Graph RAG와 환각의 해부">
+<meta name="twitter:description" content="RAG 검색 아키텍처 4종의 원리·강약점과 환각의 발생·완화·평가를 논문 수준으로 해부한다.">
+<meta name="twitter:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"검색이 지능을 구원하는 네 가지 방법 — Lexical·Semantic·Hybrid·Graph RAG와 환각의 해부","author":{"@type":"Person","name":"박대승","alternateName":"Daeseung Park"},"publisher":{"@type":"Organization","name":"D. PARK Journal"},"image":"https://daeseungpark.com/assets/img/profile/img3.jpg","mainEntityOfPage":"https://daeseungpark.com/articles/rag-architectures-hallucination/","inLanguage":"ko","datePublished":"2026-07-27"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Noto+Serif+KR:wght@400;600&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/css/article.css">
+</head>
+<body data-base="../../">
+<div class="progress-bar" id="progress"></div>
+<div class="topbar no-print">
+  <div class="container-x">
+    <span class="tb-date" id="today">—</span>
+    <div class="tb-links">
+      <a href="../../index.html">Home</a>
+      <a href="https://github.com/UniverseMaker" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener">ORCID</a>
+      <a href="../../index.html#contact">Contact</a>
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header no-print">
+  <div class="container-x nav-row">
+    <a href="../../index.html" class="brand">D<span class="dot">.</span> PARK <small>Journal</small></a>
+    <nav class="main-nav">
+      <a href="../../index.html">Home</a>
+      <a href="../../profile.html">Profile</a>
+      <a href="../../articles.html" class="active">Articles</a>
+      <a href="../../index.html#contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="테마 전환"><span id="themeIcon">☾</span></button>
+      <button class="print-cta" id="printBtn">🖶 인쇄 / PDF</button>
+      <button class="icon-btn nav-toggle" id="navToggle" aria-label="메뉴">≡</button>
+    </div>
+  </div>
+</header>
+
+<div class="ticker no-print">
+  <div class="container-x">
+    <span class="label">Trending</span>
+    <div class="items" id="tickerItems"></div>
+  </div>
+</div>
+
+<article data-article-id="18">
+  <div class="article-wrap">
+    <!-- Masthead -->
+    <header class="art-head">
+      <span class="cat-pill">AI · 기술해설</span>
+      <h1>검색이 지능을 구원하는 네 가지 방법</h1>
+      <p class="deck">대형언어모델의 지식은 학습이 끝나는 순간 굳어 버린다. 굳은 지식은 낡고, 출처를 감추며, 때로 그럴듯한 거짓을 지어낸다. <em>검색증강생성(RAG)</em>은 모델 바깥의 문서를 끌어와 그 빈틈을 메우려는 시도다. 이 글은 검색을 떠받치는 네 가지 아키텍처 — Lexical·Semantic·Hybrid·Graph — 를 해부하고, 그것이 환각(hallucination)을 어떻게 줄이는지, 그리고 무엇이 여전히 남는지를 짚는다.</p>
+      <div class="art-byline">
+        <div class="av">DP</div>
+        <div class="who">
+          <b>박대승 (Daeseung Park)</b>
+          <span>AI &amp; Software Systems Engineer · KAIST</span>
+          <span>2026년 7월 · 18분 읽기</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="art-cover"><img src="images/cover.svg" alt="RAG 검색 아키텍처 4종(Lexical·Semantic·Hybrid·Graph)과 환각 개념도" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;"></div>
+
+    <!-- Summary -->
+    <div class="summary-box">
+      <span class="tag">1분 요약</span>
+      언어모델이 스스로 외운 지식(<strong>파라메트릭 지식, parametric knowledge</strong>)은 정적이고 불투명하며 환각을 일으킨다. <strong>검색증강생성(Retrieval-Augmented Generation, RAG)</strong>은 질문마다 외부 문서를 검색해 근거로 붙여, 이 세 약점을 동시에 공략한다. 그러나 “무엇을 어떻게 검색하느냐”가 곧 답의 품질을 좌우한다. 검색 아키텍처는 크게 넷이다. 단어를 그대로 맞추는 <strong>Lexical(희소·BM25)</strong>, 의미를 벡터로 맞추는 <strong>Semantic(밀집·임베딩+ANN)</strong>, 둘을 융합하고 재순위하는 <strong>Hybrid(RRF·cross-encoder·ColBERT)</strong>, 그리고 지식그래프로 전역 맥락을 세우는 <strong>Graph(GraphRAG)</strong>다. 네 방식은 서로를 대체하기보다 보완한다. 한편 RAG는 환각을 줄이지만 없애지는 못한다. 검색 실패·노이즈 문맥·문맥 무시·지식 충돌·“lost in the middle”이라는 틈이 남고, 이를 메우려 재순위·자기성찰(Self-RAG)·검색 보정(CRAG)·근거성 검증·재검색 루프가 동원된다. 결론은 단순하다. <strong>단일 정답은 없다.</strong> 질의 유형에 맞춰 아키텍처를 고르고, 검증 루프로 환각을 눌러야 한다.
+    </div>
+
+    <!-- Body -->
+    <div class="prose">
+      <span class="chapter-label">Chapter 1. 왜 검색인가</span>
+      <h2>굳어 버린 지식과 외부 기억의 결합</h2>
+      <p>대형언어모델은 방대한 텍스트를 삼켜 그 통계적 규칙을 수십억 개의 가중치 속에 압축한다. 이렇게 모델 안에 녹아든 지식을 <strong>파라메트릭 지식(parametric knowledge)</strong>이라 부른다. 놀랍도록 유창하지만, 이 지식에는 세 가지 구조적 약점이 있다. 첫째, <em>정적</em>이다. 학습이 끝난 시점에 세상이 멈춰 버려, 그 이후의 사실을 알지 못한다. 둘째, <em>불투명</em>하다. 어떤 답이 어느 문서에서 왔는지 되짚을 수 없어, 근거를 요구받으면 침묵하거나 지어낸다. 셋째, 바로 그 지어냄 — <em>환각(hallucination)</em> — 이 유창함의 그림자처럼 따라붙는다. 모델은 “모른다”보다 “그럴듯한 무언가”를 더 자연스럽게 생성하도록 훈련되어 있기 때문이다.</p>
+
+      <p>이 세 약점을 한꺼번에 겨눈 발상이 <strong>검색증강생성(Retrieval-Augmented Generation, RAG)</strong>이다. 2020년 Lewis 등은 지식을 모델 가중치 안에만 가두지 말고, 질문이 들어올 때마다 외부 문서 집합에서 관련 조각을 <em>검색(retrieve)</em>해 입력에 덧붙인 뒤 답을 <em>생성(generate)</em>하자고 제안했다. 모델의 파라메트릭 지식에 <strong>비파라메트릭(non-parametric) 외부 기억</strong>을 결합한 것이다. 외부 문서는 언제든 갈아 끼울 수 있으니 정적이지 않고, 답에 출처를 붙일 수 있으니 불투명하지 않으며, 근거에 매인 답은 지어냄의 여지가 줄어든다.</p>
+
+      <div class="pullquote">모델을 더 키우는 대신, 모델 바깥에 기억을 두었다. RAG의 본질은 ‘무엇을 아느냐’가 아니라 ‘무엇을 찾아오느냐’다.</div>
+
+      <p>그런데 여기서 조용히 무게중심이 옮겨 간다. 답의 품질이 모델의 지능만큼이나, 어쩌면 그 이상으로 <strong>검색기(retriever)의 품질</strong>에 달리게 되는 것이다. 관련 없는 문서를 끌어오면 모델은 그 노이즈에 휘둘리고, 정작 필요한 문서를 놓치면 여전히 지어낸다. 결국 RAG의 성패는 “언어모델을 어떻게 쓰느냐”가 아니라 “<em>무엇을 어떻게 검색하느냐</em>”로 수렴한다. 이 글이 검색 아키텍처 네 가지를 하나씩 뜯어보는 이유가 여기에 있다. 아래 그림은 그 넷을 한눈에 대비한 것이다.</p>
+
+      <figure>
+        <svg viewBox="0 0 760 430" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="RAG 검색 아키텍처 4종 파이프라인 비교" style="width:100%;height:auto;display:block;">
+          <defs>
+            <marker id="a1" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 Z" fill="#5b6b9c"/></marker>
+          </defs>
+          <!-- lane labels -->
+          <g font-family="'Segoe UI',sans-serif" font-size="13" font-weight="700">
+            <text x="16" y="58" fill="#2233c4">Lexical</text>
+            <text x="16" y="158" fill="#0f8a55">Semantic</text>
+            <text x="16" y="258" fill="#7a4c00">Hybrid</text>
+            <text x="16" y="358" fill="#6a1fb0">Graph</text>
+          </g>
+          <!-- common query column -->
+          <g font-family="'Segoe UI',sans-serif" font-size="11" text-anchor="middle">
+            <!-- Lexical lane -->
+            <rect x="90" y="34" width="90" height="40" rx="8" fill="#eef1ff" stroke="#2233c4" stroke-width="1.8"/><text x="135" y="58" fill="#1a2350">질의 · 단어</text>
+            <rect x="250" y="34" width="110" height="40" rx="8" fill="#eef1ff" stroke="#2233c4" stroke-width="1.8"/><text x="305" y="52" fill="#1a2350">역색인</text><text x="305" y="67" fill="#1a2350" font-size="10">BM25 점수</text>
+            <rect x="430" y="34" width="110" height="40" rx="8" fill="#ffffff" stroke="#2233c4" stroke-width="1.8"/><text x="485" y="58" fill="#1a2350">정확 일치 문서</text>
+            <!-- Semantic lane -->
+            <rect x="90" y="134" width="90" height="40" rx="8" fill="#e6f7ee" stroke="#0f8a55" stroke-width="1.8"/><text x="135" y="158" fill="#0c4a2e">질의 · 의미</text>
+            <rect x="250" y="134" width="110" height="40" rx="8" fill="#e6f7ee" stroke="#0f8a55" stroke-width="1.8"/><text x="305" y="152" fill="#0c4a2e">임베딩</text><text x="305" y="167" fill="#0c4a2e" font-size="10">ANN · HNSW</text>
+            <rect x="430" y="134" width="110" height="40" rx="8" fill="#ffffff" stroke="#0f8a55" stroke-width="1.8"/><text x="485" y="158" fill="#0c4a2e">의미 유사 문서</text>
+            <!-- Hybrid lane -->
+            <rect x="90" y="234" width="90" height="40" rx="8" fill="#fff4e0" stroke="#c47f13" stroke-width="1.8"/><text x="135" y="258" fill="#7a4c00">질의</text>
+            <rect x="250" y="222" width="110" height="26" rx="7" fill="#eef1ff" stroke="#2233c4" stroke-width="1.5"/><text x="305" y="239" fill="#1a2350" font-size="10">BM25 순위</text>
+            <rect x="250" y="256" width="110" height="26" rx="7" fill="#e6f7ee" stroke="#0f8a55" stroke-width="1.5"/><text x="305" y="273" fill="#0c4a2e" font-size="10">Dense 순위</text>
+            <rect x="430" y="234" width="110" height="40" rx="8" fill="#fff4e0" stroke="#c47f13" stroke-width="1.8"/><text x="485" y="252" fill="#7a4c00">RRF 융합</text><text x="485" y="267" fill="#7a4c00" font-size="10">+ 재순위</text>
+            <!-- Graph lane -->
+            <rect x="90" y="334" width="90" height="40" rx="8" fill="#f3e8ff" stroke="#6a1fb0" stroke-width="1.8"/><text x="135" y="358" fill="#4a1585">질의</text>
+            <rect x="250" y="334" width="110" height="40" rx="8" fill="#f3e8ff" stroke="#6a1fb0" stroke-width="1.8"/><text x="305" y="352" fill="#4a1585">지식그래프</text><text x="305" y="367" fill="#4a1585" font-size="10">엔티티·관계</text>
+            <rect x="430" y="334" width="110" height="40" rx="8" fill="#ffffff" stroke="#6a1fb0" stroke-width="1.8"/><text x="485" y="352" fill="#4a1585">커뮤니티 요약</text><text x="485" y="367" fill="#4a1585" font-size="10">로컬·글로벌</text>
+          </g>
+          <!-- converging arrows to LLM -->
+          <g stroke="#5b6b9c" stroke-width="1.8" fill="none" marker-end="url(#a1)">
+            <path d="M180 54 H246"/><path d="M360 54 H426"/>
+            <path d="M180 154 H246"/><path d="M360 154 H426"/>
+            <path d="M180 254 H246"/><path d="M360 235 H426 L426 250"/><path d="M360 269 H426"/>
+            <path d="M180 354 H246"/><path d="M360 354 H426"/>
+            <path d="M540 54 C 600 54, 640 160, 648 200"/>
+            <path d="M540 154 C 600 154, 630 185, 646 200"/>
+            <path d="M540 254 C 600 254, 630 225, 646 214"/>
+            <path d="M540 354 C 600 354, 640 250, 648 214"/>
+          </g>
+          <rect x="650" y="182" width="96" height="66" rx="12" fill="url(#llm)" stroke="#1b2461" stroke-width="2"/>
+          <defs><linearGradient id="llm" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3a4cf0"/><stop offset="1" stop-color="#1b2461"/></linearGradient></defs>
+          <text x="698" y="212" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="15" font-weight="700" fill="#ffffff">LLM</text>
+          <text x="698" y="232" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="10" fill="#cdd6ff">생성</text>
+          <text x="698" y="404" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="11" fill="#5b6b9c">네 검색기가 각기 다른 방식으로</text>
+          <text x="698" y="420" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="11" fill="#5b6b9c">문맥을 모아 생성기에 넘긴다</text>
+        </svg>
+        <figcaption>네 가지 RAG 검색 아키텍처의 파이프라인 대비. Lexical은 단어를 역색인으로 정확히 맞추고, Semantic은 의미를 벡터 근접으로 찾으며, Hybrid는 둘의 순위를 RRF로 융합·재순위하고, Graph는 지식그래프의 커뮤니티 요약으로 전역 맥락을 세운다.</figcaption>
+      </figure>
+
+      <span class="chapter-label">Chapter 2. Lexical RAG</span>
+      <h2>단어를 그대로 맞추는 힘 — 역색인과 BM25</h2>
+      <p>가장 오래됐고 가장 견고한 검색은 단어를 그대로 맞추는 방식이다. 이를 <strong>희소 검색(sparse retrieval)</strong> 혹은 어휘 검색(lexical retrieval)이라 한다. 핵심 자료구조는 <strong>역색인(inverted index)</strong>이다. 각 단어(term)마다 그 단어가 등장하는 문서 목록을 미리 만들어 두어, 질의어가 들어오면 해당 목록을 즉시 끌어올린다. 그리고 그 문서들을 얼마나 관련 있는지 점수로 매기는 대표적 함수가 <strong>BM25</strong>다.</p>
+
+      <p>BM25는 정보검색의 <em>확률적 적합성 프레임워크(probabilistic relevance framework)</em>에서 유도된 랭킹 함수로, 세 가지 직관을 정교하게 버무린다. 첫째는 <strong>단어 빈도(term frequency, TF)의 포화</strong>다. 어떤 단어가 문서에 많이 나올수록 관련성이 높지만, 무한정 비례하지는 않는다. 열 번 나온 단어가 다섯 번 나온 단어보다 두 배로 중요하지는 않다는 뜻이다. BM25는 <em>k1</em>이라는 계수(대략 1.2~2.0)로 이 포화 곡선을 조절한다. 둘째는 <strong>역문서빈도(inverse document frequency, IDF)</strong>다. 모든 문서에 흔한 단어(‘the’, ‘그리고’)는 변별력이 없으니 가중치를 낮추고, 드문 단어일수록 높인다. 셋째는 <strong>문서 길이 정규화(length normalization)</strong>로, 긴 문서가 단지 길다는 이유로 더 많은 단어를 품어 유리해지지 않도록 <em>b</em> 계수(대략 0.75)로 보정한다.</p>
+
+      <div class="callout"><b>BM25를 한 문장으로.</b> “드문 단어일수록(IDF 높음), 이 문서에 적당히 자주 나오되(TF 포화), 문서가 쓸데없이 길어서 그런 게 아니라면(길이 정규화) 관련성이 높다.” 세 직관을 곱하고 더한 이 단순한 식이 수십 년간 검색의 기본 기준선(baseline)으로 살아남았다.</div>
+
+      <p>어휘 검색의 강점은 분명하다. 질의어와 문서의 단어가 정확히 일치할 때 <strong>정확용어(exact match)</strong>를 놓치지 않는다. 제품 코드, 오류 메시지, 사람 이름, 법조문 번호처럼 <strong>희귀어(rare terms)</strong>나 고유 식별자를 다룰 때 특히 강하다. 왜 그 문서가 뽑혔는지 <strong>해석 가능(interpretable)</strong>하고 — “질의어 X가 여기 있다” — 계산이 값싸며 대규모로 잘 확장된다. Lucene, Elasticsearch, 그리고 연구용 표준 도구 Anserini가 이 계열을 대표한다.</p>
+
+      <p>그러나 치명적 약점이 하나 있다. <strong>어휘 불일치(vocabulary mismatch)</strong>다. 사용자가 “자동차”를 찾는데 문서에는 “차량”이라고만 쓰여 있으면, 단어가 다르다는 이유만으로 놓친다. 의미가 같아도 표면형이 다르면 검색되지 않는 것이다. 이 한계가 다음 아키텍처를 불러왔다.</p>
+
+      <span class="chapter-label">Chapter 3. Semantic RAG</span>
+      <h2>의미를 벡터로 맞추다 — 임베딩과 근사최근접</h2>
+      <p><strong>의미 검색(semantic retrieval)</strong> 혹은 <strong>밀집 검색(dense retrieval)</strong>은 단어의 표면형 대신 <em>의미</em>를 맞춘다. 질의와 문서를 각각 고차원 실수 벡터(embedding)로 바꾼 뒤, 벡터 공간에서 가까운 것을 관련 있다고 본다. 의미가 비슷하면 표현이 달라도 벡터가 가까워지므로, 어휘 불일치 문제가 자연스럽게 풀린다. “자동차”와 “차량”은 다른 단어지만 이웃한 좌표에 놓인다.</p>
+
+      <p>이 접근의 대표 구조가 <strong>바이-인코더(bi-encoder)</strong>다. 질의와 문서를 <em>독립적으로</em> 인코딩해 각각 하나의 벡터로 만든다. 질문응답용으로 설계된 <strong>DPR(Dense Passage Retrieval)</strong>은 질의 인코더와 passage 인코더를 따로 두고 대조 학습으로 정렬시켰는데, Natural Questions 벤치마크에서 BM25 대비 상위 20개 재현율(recall@20)을 약 20%포인트 끌어올린 것으로 보고된다. 문장 임베딩 계열의 <strong>SBERT(Sentence-BERT)</strong>는 바이-인코더의 실용적 이점을 극적으로 보여 줬다. 문장 쌍을 하나씩 비교하는 방식으로 유사 쌍을 찾으면 약 65시간이 걸리던 작업이, 문장을 미리 벡터로 인코딩해 두면 약 5초로 줄었다. 문서를 <em>사전에 한 번만</em> 벡터화해 인덱스에 담아 두는 이 구조가 대규모 의미 검색을 가능케 한 열쇠다.</p>
+
+      <p>문서가 수백만, 수억 개면 질의 벡터와 모든 문서 벡터를 일일이 비교할 수 없다. 그래서 <strong>근사최근접탐색(Approximate Nearest Neighbor, ANN)</strong>을 쓴다. 대표 알고리즘 <strong>HNSW(Hierarchical Navigable Small World)</strong>는 벡터들을 여러 층의 근접 그래프로 엮어, 성긴 상위 층에서 대략의 방향을 잡고 촘촘한 하위 층으로 내려가며 이웃을 좁힌다. 정확 탐색의 선형 비용 대신 대체로 <em>로그 스케일</em>에 가까운 탐색으로, 약간의 정확도를 내주고 속도를 크게 얻는다.</p>
+
+      <div class="pullquote">Lexical은 “같은 단어인가”를 묻고, Semantic은 “같은 뜻인가”를 묻는다. 두 물음은 자주 다른 답을 내놓는다.</div>
+
+      <p>밀집 검색의 강점은 <strong>의미·동의어·다국어</strong>다. 표현이 달라도, 심지어 언어가 달라도 의미가 통하면 찾아낸다. 대신 약점도 뚜렷하다. 첫째, <strong>정확용어와 희귀 엔티티</strong>에 약하다. 학습 때 거의 못 본 제품 코드나 신조어는 벡터 공간에서 자리를 잘 못 잡아, 오히려 BM25가 이길 때가 많다. 둘째, <strong>도메인 갭(domain gap)</strong>이다. 임베딩 모델이 학습한 분포와 동떨어진 전문 도메인(의료·법률·사내 문서)에서는 성능이 떨어진다. 셋째, <strong>청킹 민감성(chunking sensitivity)</strong>이다. 문서를 어떤 크기로 잘라 벡터화하느냐에 따라 결과가 크게 흔들린다. 너무 잘게 자르면 맥락이 끊기고, 너무 크게 자르면 한 벡터에 여러 주제가 섞여 초점이 흐려진다.</p>
+
+      <span class="chapter-label">Chapter 4. Hybrid RAG</span>
+      <h2>희소와 밀집을 함께 — RRF 융합과 재순위</h2>
+      <p>Lexical과 Semantic의 강약점을 나란히 놓으면, 둘이 <em>상보적(complementary)</em>이라는 사실이 드러난다. 하나가 약한 곳에서 다른 하나가 강하다. 그래서 실무의 자연스러운 답은 “둘 다 쓰자”다. 이것이 <strong>하이브리드 검색(hybrid retrieval)</strong>이다. 다만 두 검색기의 결과를 어떻게 <em>합칠지</em>가 문제다. BM25 점수와 코사인 유사도는 척도도 분포도 달라, 단순히 더할 수 없다.</p>
+
+      <p>가장 널리 쓰이는 우아한 해법이 <strong>RRF(Reciprocal Rank Fusion, 상호순위융합)</strong>다. 핵심 착상은 점수를 버리고 <em>순위</em>만 쓰는 것이다. 각 검색기가 매긴 순위의 역수를 더해 최종 점수를 만든다.</p>
+
+      <figure>
+        <svg viewBox="0 0 760 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="RRF 상호순위융합 흐름과 수식" style="width:100%;height:auto;display:block;">
+          <defs>
+            <marker id="a2" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 Z" fill="#5b6b9c"/></marker>
+          </defs>
+          <!-- BM25 ranked list -->
+          <rect x="20" y="30" width="150" height="150" rx="10" fill="#eef1ff" stroke="#2233c4" stroke-width="2"/>
+          <text x="95" y="52" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="13" font-weight="700" fill="#1a2350">BM25 순위</text>
+          <g font-family="'Segoe UI',sans-serif" font-size="11.5" fill="#1a2350">
+            <text x="36" y="80">1. 문서 A</text><text x="36" y="104">2. 문서 C</text><text x="36" y="128">3. 문서 B</text><text x="36" y="152">4. 문서 D</text>
+          </g>
+          <!-- Dense ranked list -->
+          <rect x="20" y="190" width="150" height="110" rx="10" fill="#e6f7ee" stroke="#0f8a55" stroke-width="2"/>
+          <text x="95" y="212" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="13" font-weight="700" fill="#0c4a2e">Dense 순위</text>
+          <g font-family="'Segoe UI',sans-serif" font-size="11.5" fill="#0c4a2e">
+            <text x="36" y="240">1. 문서 B</text><text x="36" y="264">2. 문서 A</text><text x="36" y="288">3. 문서 E</text>
+          </g>
+          <!-- RRF box -->
+          <rect x="250" y="95" width="250" height="130" rx="12" fill="#fff4e0" stroke="#c47f13" stroke-width="2.2"/>
+          <text x="375" y="122" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="14" font-weight="700" fill="#7a4c00">RRF 융합</text>
+          <text x="375" y="156" text-anchor="middle" font-family="'Georgia',serif" font-size="19" fill="#5a3600">RRF(d) = &#8721; 1 / (k + rank&#8341;(d))</text>
+          <text x="375" y="184" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="11.5" fill="#7a4c00">순위만 사용 · 점수 정규화 불필요</text>
+          <text x="375" y="204" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="11.5" fill="#7a4c00">k = 60 (경험적 기본값)</text>
+          <!-- cross-encoder rerank -->
+          <rect x="560" y="60" width="180" height="90" rx="10" fill="#f3e8ff" stroke="#6a1fb0" stroke-width="2"/>
+          <text x="650" y="88" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="12.5" font-weight="700" fill="#4a1585">Cross-encoder</text>
+          <text x="650" y="108" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="10.5" fill="#4a1585">질의·문서 동시 인코딩</text>
+          <text x="650" y="126" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="10.5" fill="#4a1585">정확 ↑ · 비용 ↑</text>
+          <text x="650" y="143" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="10.5" fill="#6a1fb0">(ColBERT = late interaction)</text>
+          <rect x="560" y="170" width="180" height="70" rx="10" fill="#ffffff" stroke="#4a1585" stroke-width="2"/>
+          <text x="650" y="200" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="12.5" font-weight="700" fill="#4a1585">최종 상위 문서</text>
+          <text x="650" y="220" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="10.5" fill="#4a1585">→ LLM 문맥</text>
+          <!-- arrows -->
+          <g stroke="#5b6b9c" stroke-width="2" fill="none" marker-end="url(#a2)">
+            <path d="M170 105 H246"/>
+            <path d="M170 235 C 210 235, 220 180, 246 165"/>
+            <path d="M500 140 C 530 140, 535 110, 556 105"/>
+            <path d="M650 150 V166"/>
+          </g>
+        </svg>
+        <figcaption>Hybrid 검색의 융합·재순위 흐름. BM25와 Dense가 각각 매긴 <em>순위</em>를 RRF가 역수 합으로 융합한다(점수 정규화 불필요, k=60이 경험적 기본값). 이어 cross-encoder(또는 late interaction 방식인 ColBERT)가 상위 후보만 정밀 재순위해 최종 문맥을 고른다.</figcaption>
+      </figure>
+
+      <p>RRF의 미덕은 단순함에 있다. 순위의 역수만 더하므로 <strong>점수 정규화가 필요 없고</strong>, 계수 <em>k</em>는 특정 상위 문서가 결과를 독식하지 못하도록 완충하는 역할을 하며 경험적으로 <strong>60</strong>이 기본값으로 쓰인다. 원 논문에서 RRF는 개별 검색 시스템은 물론 Condorcet 방식 같은 다른 순위 결합법보다도 나은 성능을 보였다. 겸손한 식이 복잡한 학습형 결합을 종종 능가하는, 정보검색의 오래된 교훈이다.</p>
+
+      <p>융합으로 후보를 모았다면, 마지막 정밀 손질이 <strong>재순위(re-ranking)</strong>다. 여기서 <strong>cross-encoder</strong>가 등장한다. 바이-인코더가 질의와 문서를 <em>따로</em> 인코딩하는 것과 달리, cross-encoder는 질의와 문서를 <em>하나의 입력으로 붙여 동시에</em> 인코딩해 둘의 상호작용을 직접 본다. 그만큼 정확하지만, 문서마다 모델을 다시 돌려야 해 비용이 크다. 그래서 검색 전체가 아니라 상위 소수 후보에만 적용한다. 그 중간 지점을 노린 것이 <strong>ColBERT</strong>의 <em>지연 상호작용(late interaction)</em>이다. 토큰 수준 임베딩을 미리 계산해 두고 질의 시점에만 가볍게 상호작용시켜, cross-encoder의 정확성과 바이-인코더의 확장성 사이에서 절충한다.</p>
+
+      <p>이 모든 선택은 <strong>BEIR</strong> 벤치마크의 교훈 위에 서 있다. 다양한 도메인의 검색 과제를 <em>제로샷(zero-shot)</em>으로 평가한 BEIR에서, BM25는 학습 없이도 여러 도메인에 걸쳐 놀랍도록 견고한 기준선으로 남았고, 밀집 검색 단독은 학습 분포를 벗어나면 <em>일반화</em>에 약점을 보였다. 반면 재순위와 late interaction 계열은 평균적으로 가장 높은 성능을 냈지만 그만큼 계산 비용이 컸다. 요컨대 <strong>공짜 점심은 없다</strong>. 견고함·성능·비용의 삼각형에서 어디에 설지 고르는 일이 하이브리드 설계의 본질이다.</p>
+
+      <span class="chapter-label">Chapter 5. Graph RAG</span>
+      <h2>점이 아니라 그물로 — 지식그래프 기반 검색</h2>
+      <p>앞의 세 방식은 모두 문서를 <em>서로 독립된 조각</em>으로 다룬다. 질의와 각 조각의 관련도를 재서 상위 몇 개를 뽑을 뿐, 조각들 사이의 관계는 보지 않는다. 이 구조는 “A 조각 안에 답이 있는” 국소적 질문에는 잘 듣지만, “이 코퍼스 전체에서 반복되는 주제는 무엇인가” 같은 <strong>전역적 이해(sensemaking)</strong>나, 여러 문서를 건너뛰며 근거를 이어야 하는 <strong>멀티홉(multi-hop)</strong> 질문에는 취약하다. 필요한 근거가 한 조각에 모여 있지 않기 때문이다.</p>
+
+      <p>Microsoft가 2024년 제안한 <strong>GraphRAG</strong>는 발상을 뒤집는다. 검색하기 전에 먼저 코퍼스로부터 <strong>지식그래프(knowledge graph)</strong>를 세운다. 언어모델이 문서를 훑어 <em>엔티티(entity)</em>와 그들 사이의 <em>관계(relation)</em>를 추출하고, 이 그래프에서 촘촘히 연결된 노드 무리를 <strong>커뮤니티(community)</strong>로 묶는다(계층적 커뮤니티 탐지). 그런 뒤 각 커뮤니티에 대해 언어모델이 <strong>요약(community summary)</strong>을 미리 만들어 둔다. 검색은 원문 조각이 아니라 이 구조화된 요약 위에서 이뤄진다.</p>
+
+      <figure>
+        <svg viewBox="0 0 760 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="GraphRAG 로컬 질의와 글로벌 질의 비교" style="width:100%;height:auto;display:block;">
+          <defs>
+            <marker id="a3" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 Z" fill="#6a1fb0"/></marker>
+          </defs>
+          <line x1="380" y1="20" x2="380" y2="320" stroke="#ddd" stroke-width="1.5" stroke-dasharray="4 5"/>
+          <!-- LOCAL (left) -->
+          <text x="30" y="40" font-family="'Segoe UI',sans-serif" font-size="14" font-weight="700" fill="#6a1fb0">로컬 질의 (local)</text>
+          <text x="30" y="58" font-family="'Segoe UI',sans-serif" font-size="11" fill="#555">특정 엔티티 근방을 탐색</text>
+          <g stroke="#6a1fb0" stroke-width="1.6">
+            <line x1="150" y1="150" x2="90" y2="110"/><line x1="150" y1="150" x2="95" y2="200"/>
+            <line x1="150" y1="150" x2="220" y2="105"/><line x1="150" y1="150" x2="235" y2="180"/>
+            <line x1="220" y1="105" x2="290" y2="130"/>
+          </g>
+          <g fill="#f3e8ff" stroke="#6a1fb0" stroke-width="2">
+            <circle cx="150" cy="150" r="26"/><circle cx="90" cy="110" r="16"/><circle cx="95" cy="200" r="16"/>
+            <circle cx="220" cy="105" r="16"/><circle cx="235" cy="180" r="16"/><circle cx="290" cy="130" r="14"/>
+          </g>
+          <text x="150" y="155" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="12" font-weight="700" fill="#4a1585">엔티티</text>
+          <text x="200" y="270" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="11.5" fill="#4a1585">→ 근방 엔티티·관계·원문을 모아 답</text>
+          <text x="200" y="290" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="11" fill="#777">멀티홉 · 구체적 사실에 강함</text>
+          <!-- GLOBAL (right) -->
+          <text x="410" y="40" font-family="'Segoe UI',sans-serif" font-size="14" font-weight="700" fill="#0f8a55">글로벌 질의 (global)</text>
+          <text x="410" y="58" font-family="'Segoe UI',sans-serif" font-size="11" fill="#555">커뮤니티 요약을 map-reduce</text>
+          <g fill="#e6f7ee" stroke="#0f8a55" stroke-width="2">
+            <rect x="410" y="80" width="90" height="34" rx="8"/><rect x="520" y="80" width="90" height="34" rx="8"/><rect x="630" y="80" width="90" height="34" rx="8"/>
+          </g>
+          <g font-family="'Segoe UI',sans-serif" font-size="10.5" fill="#0c4a2e" text-anchor="middle">
+            <text x="455" y="101">커뮤니티 1</text><text x="565" y="101">커뮤니티 2</text><text x="675" y="101">커뮤니티 3</text>
+          </g>
+          <g stroke="#0f8a55" stroke-width="1.6" fill="none" marker-end="url(#a3)">
+            <path d="M455 114 V150"/><path d="M565 114 V150"/><path d="M675 114 V150"/>
+          </g>
+          <rect x="470" y="152" width="200" height="34" rx="8" fill="#d8f0e2" stroke="#0f8a55" stroke-width="2"/>
+          <text x="570" y="174" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="11.5" font-weight="700" fill="#0c4a2e">부분 답변 (map)</text>
+          <g stroke="#0f8a55" stroke-width="1.6" fill="none" marker-end="url(#a3)"><path d="M570 186 V214"/></g>
+          <rect x="470" y="216" width="200" height="38" rx="8" fill="#0f8a55"/>
+          <text x="570" y="240" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="12.5" font-weight="700" fill="#ffffff">종합 답변 (reduce)</text>
+          <text x="570" y="288" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="11.5" fill="#0c4a2e">전역 요약·주제 파악에 강함</text>
+          <text x="570" y="308" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="11" fill="#777">포괄성·다양성 ↑ (vs 벡터 RAG)</text>
+        </svg>
+        <figcaption>GraphRAG의 두 질의 모드. <b>로컬(local)</b>은 특정 엔티티의 근방 그래프를 탐색해 구체적·멀티홉 질문에 답하고, <b>글로벌(global)</b>은 커뮤니티 요약들을 map-reduce로 종합해 코퍼스 전체의 주제를 파악한다.</figcaption>
+      </figure>
+
+      <p>질의는 두 방식으로 나뉜다. <strong>로컬(local) 질의</strong>는 특정 엔티티의 근방 — 그와 연결된 관계·이웃 엔티티·관련 원문 — 을 모아 답한다. 구체적 사실이나 멀티홉 추론에 어울린다. <strong>글로벌(global) 질의</strong>는 관련 커뮤니티 요약들을 각각 부분 답변으로 만든 뒤(map) 하나로 종합하는(reduce) <em>map-reduce</em>로 코퍼스 전체를 조망한다. Microsoft의 보고에 따르면, 약 100만 토큰 규모 코퍼스에 대한 <strong>글로벌 sensemaking 질문</strong>에서 GraphRAG는 통상의 벡터 RAG보다 답의 <em>포괄성(comprehensiveness)</em>과 <em>다양성(diversity)</em>에서 앞섰다.</p>
+
+      <div class="pullquote">다른 셋이 “어느 조각에 답이 있나”를 묻는다면, Graph는 “조각들이 모여 무엇을 말하나”를 묻는다.</div>
+
+      <p>대가는 <strong>구축 비용</strong>이다. 그래프를 세우려면 코퍼스 전체를 언어모델로 훑어 엔티티·관계를 추출하고 커뮤니티마다 요약을 생성해야 하니, 인덱싱 단계의 계산·시간·금전 비용이 크다. 게다가 추출 과정 자체가 언어모델에 의존하므로, 여기서 생긴 <strong>추출 오류가 그래프에 각인되어 하류로 전파(error propagation)</strong>될 위험이 있다. 잘못 이어진 관계 하나가 이후 모든 질의의 근거를 오염시킬 수 있다는 뜻이다.</p>
+
+      <h3>네 아키텍처 한눈에</h3>
+      <p>지금까지의 논의를 한 표로 압축하면 다음과 같다. 이 표는 대체가 아니라 <em>선택의 지도</em>로 읽는 편이 옳다.</p>
+
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+      <table style="min-width:640px;">
+        <thead><tr><th>구분</th><th>원리</th><th>강점</th><th>약점</th><th>대표 기술</th><th>적합 질의</th></tr></thead>
+        <tbody>
+          <tr><td><b>Lexical</b><br>(희소)</td><td>역색인·단어 일치, BM25 점수(TF 포화·IDF·길이 정규화)</td><td>정확용어·희귀어·해석 가능·저비용·견고</td><td>어휘 불일치(동의어·다른 표현 놓침)</td><td>Lucene·Elasticsearch·Anserini</td><td>고유명사·코드·정확 키워드</td></tr>
+          <tr><td><b>Semantic</b><br>(밀집)</td><td>bi-encoder 임베딩 + ANN(HNSW) 벡터 근접</td><td>의미·동의어·다국어</td><td>정확용어·희귀 엔티티·도메인 갭·청킹 민감</td><td>DPR·SBERT·HNSW</td><td>개념·의도 중심 자연어 질의</td></tr>
+          <tr><td><b>Hybrid</b></td><td>희소+밀집 융합(RRF, k=60) + cross-encoder/ColBERT 재순위</td><td>상보성으로 견고·고성능</td><td>파이프라인 복잡·재순위 비용</td><td>RRF·Cross-encoder·ColBERT</td><td>범용·고정밀 프로덕션 검색</td></tr>
+          <tr><td><b>Graph</b></td><td>LLM 추출 지식그래프→커뮤니티 요약→로컬/글로벌</td><td>전역 sensemaking·멀티홉</td><td>구축 비용·추출 오류 전파</td><td>Microsoft GraphRAG</td><td>전체 주제 파악·다문서 추론</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <span class="chapter-label">Chapter 6. 환각의 해부</span>
+      <h2>RAG는 환각을 줄이지만, 없애지 못한다</h2>
+      <p>이제 이 글의 심장으로 들어간다. RAG가 등장한 가장 큰 이유가 환각이었으니, 그것이 정말 얼마나 해결되는지를 정직하게 따져야 한다. 먼저 <strong>환각(hallucination)</strong>을 정의하자. 환각은 크게 두 축으로 나뉜다. 하나는 <strong>내재적(intrinsic) 환각</strong>으로, 생성한 내용이 <em>주어진 소스와 모순</em>되는 경우다. 다른 하나는 <strong>외재적(extrinsic) 환각</strong>으로, 소스만으로는 <em>참·거짓을 검증할 수 없는</em> 내용을 지어내는 경우다. 이와 겹치되 다른 구분으로 <strong>사실성(factuality)</strong>과 <strong>충실성(faithfulness)</strong>이 있다. 사실성은 “세상의 진실과 맞는가”이고, 충실성은 “주어진 근거에 충실한가”이다. RAG가 직접 겨누는 것은 주로 <em>충실성</em>이다. 근거를 붙여 그 근거에 답을 매어 두려는 것이기 때문이다.</p>
+
+      <p>그렇다면 RAG는 <em>어떻게</em> 환각을 줄이는가. 답이 파라메트릭 기억이 아니라 눈앞의 검색 문맥에 근거하도록 조건을 바꾸기 때문이다. 최신 사실을 외부에서 공급하니 지식 노후로 인한 오류가 줄고, 근거 문서를 함께 제시하니 <strong>인용(citation)</strong>으로 답을 검증할 길이 열린다. 모델이 “모른다”라고 말할 근거 — 검색 결과가 비었다는 신호 — 도 생긴다.</p>
+
+      <p>그러나 여기서 냉정해야 한다. RAG는 환각을 <em>줄이되 없애지 못한다</em>. 오히려 검색이라는 새 단계가 새로운 실패 지점을 들여온다. 실무에서 자주 관찰되는 실패는 다음 네 갈래로 정리된다.</p>
+
+      <figure>
+        <svg viewBox="0 0 760 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="RAG 환각 발생 지점 4곳과 완화 루프" style="width:100%;height:auto;display:block;">
+          <defs>
+            <marker id="a4" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 Z" fill="#5b6b9c"/></marker>
+            <marker id="a4r" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 Z" fill="#0f8a55"/></marker>
+          </defs>
+          <!-- main pipeline -->
+          <g font-family="'Segoe UI',sans-serif" font-size="12" text-anchor="middle">
+            <rect x="20" y="70" width="120" height="48" rx="9" fill="#eef1ff" stroke="#2233c4" stroke-width="1.8"/><text x="80" y="99" fill="#1a2350" font-weight="700">질의</text>
+            <rect x="185" y="70" width="120" height="48" rx="9" fill="#eef1ff" stroke="#2233c4" stroke-width="1.8"/><text x="245" y="99" fill="#1a2350" font-weight="700">검색</text>
+            <rect x="350" y="70" width="120" height="48" rx="9" fill="#eef1ff" stroke="#2233c4" stroke-width="1.8"/><text x="410" y="92" fill="#1a2350" font-weight="700">문맥 구성</text><text x="410" y="108" fill="#1a2350" font-size="10">(순서·길이)</text>
+            <rect x="515" y="70" width="120" height="48" rx="9" fill="#eef1ff" stroke="#2233c4" stroke-width="1.8"/><text x="575" y="99" fill="#1a2350" font-weight="700">생성</text>
+            <rect x="660" y="70" width="90" height="48" rx="9" fill="#ffffff" stroke="#1b2461" stroke-width="2"/><text x="705" y="99" fill="#1a2350" font-weight="700">답변</text>
+          </g>
+          <g stroke="#5b6b9c" stroke-width="2" fill="none" marker-end="url(#a4)">
+            <path d="M140 94 H181"/><path d="M305 94 H346"/><path d="M470 94 H511"/><path d="M635 94 H656"/>
+          </g>
+          <!-- failure points -->
+          <g font-family="'Segoe UI',sans-serif" font-size="10.5" text-anchor="middle">
+            <g><path d="M245 118 V150" stroke="#c0392b" stroke-width="1.5" stroke-dasharray="3 3"/><rect x="168" y="150" width="154" height="52" rx="8" fill="#fdecec" stroke="#c0392b" stroke-width="1.6"/><text x="245" y="170" fill="#7a1710" font-weight="700">① 검색 실패</text><text x="245" y="186" fill="#7a1710">필요 문서 못 찾음</text><text x="245" y="199" fill="#7a1710">→ 빈·엉뚱한 근거</text></g>
+            <g><path d="M410 118 V150" stroke="#c0392b" stroke-width="1.5" stroke-dasharray="3 3"/><rect x="333" y="150" width="154" height="52" rx="8" fill="#fdecec" stroke="#c0392b" stroke-width="1.6"/><text x="410" y="170" fill="#7a1710" font-weight="700">② 노이즈 문맥</text><text x="410" y="186" fill="#7a1710">무관 문서 혼입 ·</text><text x="410" y="199" fill="#7a1710">lost in the middle</text></g>
+            <g><path d="M575 118 V150" stroke="#c0392b" stroke-width="1.5" stroke-dasharray="3 3"/><rect x="498" y="150" width="154" height="52" rx="8" fill="#fdecec" stroke="#c0392b" stroke-width="1.6"/><text x="575" y="170" fill="#7a1710" font-weight="700">③ 문맥 무시</text><text x="575" y="186" fill="#7a1710">근거 있어도 파라메트릭</text><text x="575" y="199" fill="#7a1710">지식으로 답</text></g>
+            <g><path d="M575 118 V132" stroke="#c0392b" stroke-width="0" /><rect x="498" y="214" width="154" height="40" rx="8" fill="#fdecec" stroke="#c0392b" stroke-width="1.6"/><text x="575" y="231" fill="#7a1710" font-weight="700">④ 지식 충돌</text><text x="575" y="246" fill="#7a1710">소스 vs 내부지식 상충</text></g>
+          </g>
+          <!-- mitigation loop -->
+          <rect x="120" y="286" width="520" height="56" rx="12" fill="#e6f7ee" stroke="#0f8a55" stroke-width="2"/>
+          <text x="380" y="308" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="12.5" font-weight="700" fill="#0c4a2e">완화 루프</text>
+          <text x="380" y="328" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="11" fill="#0c4a2e">재순위·필터 · Self-RAG(자기성찰) · CRAG(검색 보정) · 근거성 검증·인용 · 신뢰도 임계 시 재검색</text>
+          <g stroke="#0f8a55" stroke-width="2" fill="none" marker-end="url(#a4r)">
+            <path d="M120 314 C 60 314, 60 94, 176 94"/>
+          </g>
+          <text x="52" y="205" font-family="'Segoe UI',sans-serif" font-size="10" fill="#0f8a55" text-anchor="middle" transform="rotate(-90 52 205)">재검색 (re-retrieve)</text>
+        </svg>
+        <figcaption>RAG 파이프라인에 환각이 스며드는 네 지점(①검색 실패 ②노이즈 문맥·lost in the middle ③문맥 무시 ④지식 충돌)과, 이를 누르는 완화 루프(재순위·필터, Self-RAG, CRAG, 근거성·인용 검증, 신뢰도 임계 시 재검색).</figcaption>
+      </figure>
+
+      <p>첫째, <strong>검색 실패</strong>다. 애초에 필요한 문서를 못 찾으면, 모델은 빈 근거 위에서 다시 지어낸다. 둘째, <strong>노이즈 문맥</strong>이다. 무관한 문서가 섞여 들어오면 모델이 그쪽에 휘둘린다. 특히 문맥이 길어질수록 <strong>“lost in the middle”</strong> 현상이 나타나, 관련 정보가 프롬프트의 <em>중간</em>에 놓이면 앞·뒤에 놓였을 때보다 활용률이 눈에 띄게 떨어진다. 셋째, <strong>문맥 무시</strong>다. 근거가 멀쩡히 있어도 모델이 그것을 읽지 않고 자기 파라메트릭 기억으로 답해 버린다. 넷째, <strong>지식 충돌(knowledge conflict)</strong>이다. 검색된 소스와 모델의 내부 지식이 서로 다를 때, 어느 쪽을 믿을지에서 오류가 갈린다.</p>
+
+      <div class="callout"><b>왜 “충실성”과 “사실성”을 구분해야 하나.</b> RAG가 근거에 충실하게(faithful) 답했더라도, 그 근거 문서 자체가 틀렸다면 답은 사실이 아니다(not factual). 반대로 근거를 무시하고 우연히 맞는 답을 낼 수도 있다. 그래서 RAG 시스템은 두 축을 따로 평가해야 한다. 근거에 매였는가, 그리고 그 근거가 옳았는가.</div>
+
+      <h3>환각을 누르는 기법들</h3>
+      <p>완화의 첫 갈래는 <strong>검색 품질 자체를 높이는 것</strong>이다. 재순위와 필터링으로 노이즈를 걷어 내고, 관련 문서를 프롬프트의 <em>가장자리</em>에 배치해 lost in the middle을 완화한다. 근본적으로, 앞서 본 하이브리드 설계가 곧 환각 완화 설계이기도 하다. 좋은 근거가 좋은 답의 전제이기 때문이다.</p>
+
+      <p>둘째 갈래는 <strong>생성 단계에 자기점검을 심는 것</strong>이다. <strong>Self-RAG</strong>는 모델이 “지금 검색이 필요한가”, “이 문서가 관련 있는가”, “내 답이 근거에 뒷받침되는가”를 스스로 판단하도록 <em>반영 토큰(reflection tokens)</em>을 생성하게 훈련한다. 검색과 생성을 무조건 하는 대신, 필요할 때만 검색하고 자기 답을 스스로 비평하게 만드는 것이다. <strong>CRAG(Corrective RAG)</strong>는 <em>검색 평가기(retrieval evaluator)</em>를 두어 검색 결과의 신뢰도를 매기고, 낮으면 웹 검색 등으로 보정하거나 문서를 정제한 뒤에야 생성으로 넘긴다. 두 방법 모두 “검색했으니 됐다”는 안이함을 거부하고, <strong>근거의 질을 되묻는 루프</strong>를 파이프라인에 새겨 넣는다.</p>
+
+      <p>셋째 갈래는 <strong>근거성 검증과 재검색</strong>이다. 생성된 각 문장이 실제로 근거 문서에 뒷받침되는지 확인하고(groundedness check), 인용을 강제하며, 신뢰도가 임계 이하이면 답을 내보내지 않고 다시 검색한다. 요컨대 “한 번 찾아 한 번 답한다”는 단선적 흐름을, <strong>검증과 재시도가 있는 순환</strong>으로 바꾸는 것이 핵심이다.</p>
+
+      <h3>어떻게 측정하나</h3>
+      <p>완화만큼 중요한 것이 측정이다. 무엇을 못 재면 무엇을 못 고친다. <strong>RAGAS</strong>는 RAG를 세 축으로 평가하는 대표 프레임워크다. <em>충실성(faithfulness)</em> — 답이 검색 문맥에 뒷받침되는가, <em>답변 관련성(answer relevance)</em> — 답이 질문에 맞는가, <em>문맥 정밀도/관련성(context precision·relevance)</em> — 검색된 문맥이 정말 필요한 것이었는가. 생성과 검색을 분리해 각각의 책임을 물을 수 있다는 점이 이 접근의 미덕이다. 한편 <strong>RAGTruth</strong>는 대규모 언어모델 응답에 <em>단어 수준(word-level)</em>으로 환각을 주석한 코퍼스로, 환각 탐지 모델을 학습·평가할 정밀한 바탕을 제공한다. 앞서 언급한 실무 관찰 — 청킹·검색 실패·문맥 통합 등 — 을 정리한 “7 Failure Points” 유형화는, 이런 평가가 어디를 봐야 하는지에 대한 실전 지도가 된다.</p>
+
+      <span class="chapter-label">Chapter 7. 맺음말</span>
+      <h2>단일 정답은 없다 — 선택과 검증의 설계</h2>
+      <p>네 아키텍처를 지나오며 반복된 결론은 하나다. <strong>보편적 최선은 없다</strong>. 정확한 키워드·코드·고유명사가 중요한 질의에는 Lexical이, 개념과 의도를 자연어로 묻는 질의에는 Semantic이, 대부분의 프로덕션 검색에는 둘을 융합·재순위한 Hybrid가, 코퍼스 전체의 주제를 조망하거나 여러 문서를 이어야 하는 질의에는 Graph가 어울린다. 실전 시스템은 이들을 배타적으로 고르기보다 <em>상보적으로 조합</em>한다. 하이브리드가 기본선이 되고, 필요에 따라 그래프 층을 얹는 식이다.</p>
+
+      <div class="pullquote">검색은 지능을 구원하지만, 완전히는 아니다. 남은 몫은 검증 루프가 갚는다.</div>
+
+      <p>환각에 대해서도 태도는 같다. RAG는 은탄환이 아니라 <em>확률을 낮추는 장치</em>다. 좋은 검색으로 근거의 질을 높이고, 자기성찰과 검색 보정으로 나쁜 근거를 걸러 내며, 근거성 검증과 재검색으로 마지막까지 답을 되묻는 — 이 <strong>검증 루프(verification loop)</strong>가 있어야 비로소 환각이 실용적 수준으로 눌린다. 그리고 그 눌린 정도를 RAGAS·RAGTruth 같은 잣대로 계속 재야 한다. 측정 없는 개선은 착각이기 때문이다.</p>
+
+      <p>결국 RAG 설계의 성숙도는 “어떤 검색기를 쓰는가”라는 질문에서, “<em>질의마다 알맞은 검색을 고르고, 그 결과를 어떻게 검증하는가</em>”라는 질문으로 옮겨 간다. 검색이 지능을 구원하는 네 가지 방법은 서로의 약점을 메우는 네 개의 손이고, 환각은 그 손들이 함께 눌러야 하는 하나의 그림자다. 완벽한 검색기 하나를 찾는 대신, 상보와 검증으로 짜인 <strong>시스템</strong>을 설계하는 것 — 그것이 이 분야가 도달한, 그리고 당분간 머무를 실용적 지혜다.</p>
+
+      <div class="references">
+        <h4>참고문헌 (References)</h4>
+        <ol>
+          <li>Lewis et al., “Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks,” NeurIPS 2020. RAG의 원 논문 — 파라메트릭+비파라메트릭 지식 결합. <a href="https://arxiv.org/abs/2005.11401" target="_blank" rel="noopener">arxiv.org/abs/2005.11401</a></li>
+          <li>Robertson &amp; Zaragoza, “The Probabilistic Relevance Framework: BM25 and Beyond,” 2009. BM25의 확률적 적합성 프레임워크(TF 포화·IDF·길이 정규화). <a href="https://dl.acm.org/doi/abs/10.1561/1500000019" target="_blank" rel="noopener">dl.acm.org/doi/abs/10.1561/1500000019</a></li>
+          <li>Karpukhin et al., “Dense Passage Retrieval for Open-Domain QA,” EMNLP 2020(DPR). NQ에서 BM25 대비 recall@20 향상. <a href="https://arxiv.org/abs/2004.04906" target="_blank" rel="noopener">arxiv.org/abs/2004.04906</a></li>
+          <li>Reimers &amp; Gurevych, “Sentence-BERT,” EMNLP 2019(SBERT). 바이-인코더 사전 인코딩의 대규모 유사도 탐색 이점. <a href="https://arxiv.org/abs/1908.10084" target="_blank" rel="noopener">arxiv.org/abs/1908.10084</a></li>
+          <li>Malkov &amp; Yashunin, “Efficient and robust ANN using HNSW graphs,” 2016/2018. 계층적 근접 그래프 기반 근사최근접탐색. <a href="https://arxiv.org/abs/1603.09320" target="_blank" rel="noopener">arxiv.org/abs/1603.09320</a></li>
+          <li>Khattab &amp; Zaharia, “ColBERT: Efficient and Effective Passage Search via Contextualized Late Interaction over BERT,” SIGIR 2020. <a href="https://arxiv.org/abs/2004.12832" target="_blank" rel="noopener">arxiv.org/abs/2004.12832</a></li>
+          <li>Cormack et al., “Reciprocal Rank Fusion outperforms Condorcet and individual Rank Learning Methods,” SIGIR 2009(RRF, k=60). <a href="https://dl.acm.org/doi/10.1145/1571941.1572114" target="_blank" rel="noopener">dl.acm.org/doi/10.1145/1571941.1572114</a></li>
+          <li>Thakur et al., “BEIR: A Heterogeneous Benchmark for Zero-shot Evaluation of IR Models,” NeurIPS 2021. BM25 견고성·재순위 강세·밀집 단독의 일반화 약점. <a href="https://arxiv.org/abs/2104.08663" target="_blank" rel="noopener">arxiv.org/abs/2104.08663</a></li>
+          <li>Edge et al., “From Local to Global: A Graph RAG Approach to Query-Focused Summarization,” Microsoft 2024(GraphRAG). 커뮤니티 요약·글로벌 sensemaking. <a href="https://arxiv.org/abs/2404.16130" target="_blank" rel="noopener">arxiv.org/abs/2404.16130</a></li>
+          <li>Ji et al., “Survey of Hallucination in Natural Language Generation,” ACM Computing Surveys 2023. intrinsic/extrinsic, factuality/faithfulness. <a href="https://dl.acm.org/doi/10.1145/3571730" target="_blank" rel="noopener">dl.acm.org/doi/10.1145/3571730</a></li>
+          <li>Huang et al., “A Survey on Hallucination in Large Language Models,” 2023. 환각의 원인·탐지·완화 종합. <a href="https://arxiv.org/abs/2311.05232" target="_blank" rel="noopener">arxiv.org/abs/2311.05232</a></li>
+          <li>Liu et al., “Lost in the Middle: How Language Models Use Long Contexts,” 2023. 중간 위치 정보의 활용률 저하. <a href="https://arxiv.org/abs/2307.03172" target="_blank" rel="noopener">arxiv.org/abs/2307.03172</a></li>
+          <li>Asai et al., “Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection,” 2023. 반영 토큰 기반 자기성찰. <a href="https://arxiv.org/abs/2310.11511" target="_blank" rel="noopener">arxiv.org/abs/2310.11511</a></li>
+          <li>Yan et al., “Corrective Retrieval-Augmented Generation (CRAG),” 2024. 검색 평가기 + 보정. <a href="https://arxiv.org/abs/2401.15884" target="_blank" rel="noopener">arxiv.org/abs/2401.15884</a></li>
+          <li>Es et al., “RAGAS: Automated Evaluation of Retrieval Augmented Generation,” 2023. faithfulness·answer relevance·context relevance. <a href="https://arxiv.org/abs/2309.15217" target="_blank" rel="noopener">arxiv.org/abs/2309.15217</a></li>
+          <li>Niu et al., “RAGTruth: A Hallucination Corpus for Developing Trustworthy RAG,” 2023/2024. 단어 수준 환각 주석 코퍼스. <a href="https://arxiv.org/abs/2401.00396" target="_blank" rel="noopener">arxiv.org/abs/2401.00396</a></li>
+          <li>Barnett et al., “Seven Failure Points When Engineering a Retrieval Augmented Generation System,” 2024. 청킹·검색 실패 등 실무 실패 유형. <a href="https://arxiv.org/abs/2401.05856" target="_blank" rel="noopener">arxiv.org/abs/2401.05856</a></li>
+        </ol>
+        <p style="margin-top:12px;font-style:italic;">본문의 구체 수치(예: DPR recall@20 약 20%p 향상, SBERT 65시간→약 5초, RRF k=60)는 각 원문에서 보고된 값을 인용한 것이며, 실제 성능은 데이터·설정에 따라 달라질 수 있다.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer of article -->
+  <div class="art-foot">
+    <div class="art-tags">
+      <a href="#">#RAG</a><a href="#">#검색증강생성</a><a href="#">#벡터검색</a><a href="#">#GraphRAG</a><a href="#">#환각</a>
+    </div>
+    <div class="author-card">
+      <div class="av">DP</div>
+      <div class="who">
+        <b>박대승 · Daeseung Park</b>
+        <p>KAIST 연구원. 대형언어모델, 시계열 예측, 대화형 AI를 연구합니다. 연구의 과정을 가능한 한 정확하고 읽기 좋게 기록하려 합니다.</p>
+      </div>
+    </div>
+
+    <div class="read-next no-print">
+        <div class="section-head" style="margin-bottom:20px;"><h2 style="font-size:1.3rem;">다음 글</h2></div>
+        <div class="grid grid-2" id="readNext"></div>
+      </div>
+      <nav class="post-nav no-print" id="postNav"></nav>
+    </div>
+</article>
+
+<div class="print-footer">Daeseung Park · D. PARK Journal — 검색이 지능을 구원하는 네 가지 방법: Lexical·Semantic·Hybrid·Graph RAG와 환각의 해부</div>
+
+<footer class="site-footer no-print">
+  <div class="container-x">
+    <div class="footer-bottom" style="border:0;padding-top:0;">
+      <span>© 2026 Daeseung Park. All rights reserved.</span>
+      <span><a href="../../index.html">← 저널 홈</a></span>
+    </div>
+  </div>
+</footer>
+
+<div class="mobile-nav" id="mobileNav">
+  <button class="icon-btn close" id="navClose" aria-label="닫기">✕</button>
+  <a href="../../index.html">Home</a>
+  <a href="../../profile.html">Profile</a>
+  <a href="../../articles.html">Articles</a>
+  <a href="../../index.html#contact">Contact</a>
+</div>
+
+<script src="../../assets/js/data.js"></script>
+<script src="../../assets/js/articles.js"></script>
+<script src="../../assets/js/main.js"></script>
+</body>
+</html>

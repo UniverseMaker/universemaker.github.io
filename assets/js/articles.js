@@ -9,6 +9,14 @@
    ============================================================ */
 window.ARTICLES = [
   {
+    id: 18, slug: "rag-architectures-hallucination", path: "articles/rag-architectures-hallucination/",
+    title: "검색이 지능을 구원하는 네 가지 방법 — Lexical·Semantic·Hybrid·Graph RAG와 환각의 해부",
+    deck: "대형언어모델의 지식은 학습이 끝나는 순간 굳어 버린다. 검색증강생성(RAG)은 모델 바깥의 문서를 끌어와 그 빈틈을 메운다. Lexical·Semantic·Hybrid·Graph 네 검색 아키텍처를 원리부터 해부하고, 그것이 환각을 어떻게 줄이며 무엇이 여전히 남는지를 짚는다.",
+    cat: "AI · 기술해설", catClass: "", catLabel: "RAG · 검색증강",
+    date: "2026-07-27", read: "18분", cover: "articles/rag-architectures-hallucination/images/cover.svg",
+    tags: ["RAG", "검색증강생성", "벡터검색", "GraphRAG", "환각"]
+  },
+  {
     id: 17, slug: "mcp-agent-interop-standard", path: "articles/mcp-agent-interop-standard/",
     title: "AI의 HTTP가 된 프로토콜: MCP와 상호운용성 표준 전쟁",
     deck: "챗봇이 ‘행동하는 에이전트’로 바뀌는 순간, 병목은 지능이 아니라 연결의 표준이 된다. Anthropic이 공개한 MCP가 사실상 표준이 되기까지, 그 구조와 정치학, 남은 보안 숙제를 해부한다.",
