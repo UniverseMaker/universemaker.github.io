@@ -74,6 +74,7 @@
   function base() { return document.body.getAttribute("data-base") || ""; }
   function pad(n) { return String(n).padStart(2, "0"); }
   function shortTitle(t) { return t.split(":")[0].trim(); }
+  function clip(t, n) { t = String(t); return t.length > n ? t.slice(0, n).replace(/\s+$/, "") + "…" : t; }
   function coverEl(a, cls) {
     cls = cls || "";
     if (/^fill-/.test(a.cover)) return '<div class="ph ' + a.cover + ' fill-grid ' + cls + '"></div>';
@@ -125,7 +126,7 @@
   /* 최신 기고 그리드: 특별기획(feature) 글은 제외 — 특별기획은 아래 #homeFeature 섹션에 따로 노출되므로 중복 방지 */
   var latest = setHTML("latestGrid", posts.filter(function (a) { return !a.feature; }).slice(0, 6).map(card).join(""));
   if (latest) observeReveal(latest);
-  setHTML("tickerItems", posts.slice(0, 6).map(function (a) { return '<a href="' + base() + a.path + '">' + shortTitle(a.title) + '</a>'; }).join(""));
+  setHTML("tickerItems", posts.slice(0, 6).map(function (a) { return '<a href="' + base() + a.path + '">' + clip(shortTitle(a.title), 30) + '</a>'; }).join(""));
   setHTML("recentList", posts.slice(0, 3).map(function (a, i, arr) { return listCard(a, i === arr.length - 1); }).join("")); // legacy sidebar (홈에 없으면 no-op)
   var feat = setHTML("homeFeature", posts.filter(function (a) { return a.feature; }).map(featureCard).join(""));
   if (feat) observeReveal(feat);
@@ -333,7 +334,7 @@
            '<a href="mailto:'+L.emailPrimary+'" aria-label="Email">@</a>'+
          '</div></div>'+
        '<div><h6>둘러보기</h6><ul>'+nav+'</ul></div>'+
-       '<div><h6>기고문</h6><ul>'+arts+'</ul></div>'+
+       '<div><h6>기고문</h6><ul class="ft-arts">'+arts+'</ul></div>'+
        '<div><h6>Contact</h6><ul>'+
          '<li><a href="mailto:'+L.emailPrimary+'">'+L.emailPrimary+'</a></li>'+
          '<li><a href="mailto:'+L.emailKaist+'">'+L.emailKaist+'</a></li>'+

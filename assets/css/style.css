@@ -270,6 +270,8 @@ body[data-theme="light"][data-hero="photo"] .feat-large:hover .bg::after {
 .site-footer a:hover { color: #fff; }
 .footer-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1.2fr; gap: 36px; padding-bottom: 36px; border-bottom: 1px solid rgba(255,255,255,.12); }
 .footer-grid ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 9px; font-size: .9rem; }
+.footer-grid > div { min-width: 0; }
+.ft-arts a { display: block; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .footer-brand { font-family: var(--display); font-size: 1.7rem; color: #fff; margin-bottom: 12px; }
 .footer-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 22px; font-size: .82rem; color: rgba(255,255,255,.5); }
 .social { display: flex; gap: 10px; }
