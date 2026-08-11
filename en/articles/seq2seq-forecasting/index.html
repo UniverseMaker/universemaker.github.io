@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-prerendered="1"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Translating Time Series: Forecasting the Future with Seq2Seq - Daeseung Park Journal</title>
+<meta name="description" content="How the encoder–decoder architecture once used for machine translation came to forecast water temperature, power demand, and nuclear generation.">
+<link rel="canonical" href="https://daeseungpark.com/en/articles/seq2seq-forecasting/"><link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/seq2seq-forecasting/"><link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/seq2seq-forecasting/"><link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/seq2seq-forecasting/"><meta property="og:locale:alternate" content="ko_KR">
+<!-- seo-i18n:start -->
+
+
+
+
+<!-- seo-i18n:end -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="D. PARK Journal">
+<meta property="og:title" content="Translating Time Series: Forecasting the Future with Seq2Seq">
+<meta property="og:description" content="How the encoder–decoder architecture once used for machine translation came to forecast water temperature, power demand, and nuclear generation.">
+<meta property="og:url" content="https://daeseungpark.com/en/articles/seq2seq-forecasting/">
+<meta property="og:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Translating Time Series: Forecasting the Future with Seq2Seq">
+<meta name="twitter:description" content="How the encoder–decoder architecture once used for machine translation came to forecast water temperature, power demand, and nuclear generation.">
+<meta name="twitter:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Translating Time Series: Forecasting the Future with Seq2Seq","author":{"@type":"Person","name":"박대승","alternateName":"Daeseung Park"},"publisher":{"@type":"Organization","name":"D. PARK Journal"},"image":"https://daeseungpark.com/assets/img/profile/img3.jpg","mainEntityOfPage":"https://daeseungpark.com/articles/seq2seq-forecasting/","inLanguage":"en","datePublished":"2026-06"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&amp;family=Noto+Serif+KR:wght@400;600&amp;family=Noto+Sans+KR:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="../../../assets/css/style.css">
+<link rel="stylesheet" href="../../../assets/css/article.css">
+<script src="https://www.googletagmanager.com/gtag/js?id=G-1MMKKGR3MF"></script><style id="aiTrialStyle">#aiTrialBtn{position:fixed;right:22px;bottom:22px;z-index:940;display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border:0;border-radius:999px;cursor:pointer;font-family:"Pretendard",system-ui,sans-serif;font-weight:700;font-size:.92rem;color:#fff;background:linear-gradient(135deg,#5b6cff,#8b5bff);box-shadow:0 8px 24px rgba(70,70,140,.35);transition:transform .2s,box-shadow .2s,opacity .2s;}#aiTrialBtn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(70,70,140,.45);}#aiTrialBtn.active{opacity:.5;}#aiTrialBtn .ai-ic{font-size:1.05rem;line-height:1;}#aiTrialBtn .ai-b{font-size:.6rem;font-weight:800;background:rgba(255,255,255,.28);padding:2px 6px;border-radius:999px;letter-spacing:.5px;}#aiTrialPanel{position:fixed;right:22px;bottom:84px;z-index:945;width:380px;max-width:calc(100vw - 32px);height:560px;max-height:calc(100vh - 120px);background:var(--bg,#fff);border:1px solid var(--line,#e6e6e6);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.28);opacity:0;transform:translateY(12px) scale(.98);pointer-events:none;transition:opacity .22s,transform .22s;}#aiTrialPanel.open{opacity:1;transform:none;pointer-events:auto;}#aiTrialPanel .ai-head{display:flex;align-items:center;justify-content:space-between;padding:10px 8px 10px 14px;border-bottom:1px solid var(--line,#e6e6e6);}#aiTrialPanel .ai-ti{font-family:"Pretendard",system-ui,sans-serif;font-size:.9rem;color:var(--ink,#15171a);}#aiTrialPanel .ai-badge{font-size:.64rem;color:#7b83ff;border:1px solid #7b83ff;border-radius:999px;padding:1px 6px;margin-left:5px;}#aiTrialPanel .ai-actions{display:flex;gap:2px;}#aiTrialPanel .ai-x{border:0;background:transparent;cursor:pointer;font-size:1rem;line-height:1;padding:6px 9px;border-radius:8px;color:var(--ink,#15171a);opacity:.65;}#aiTrialPanel .ai-x:hover{opacity:1;background:rgba(125,125,140,.14);}#aiTrialPanel .ai-body{position:relative;flex:1;min-height:0;background:var(--bg,#fff);}#aiTrialPanel .ai-open{font-family:"Pretendard",system-ui,sans-serif;font-size:.78rem;font-weight:700;color:#7b83ff;padding:6px 10px;border-radius:8px;text-decoration:none;white-space:nowrap;}#aiTrialPanel .ai-open:hover{background:rgba(125,125,140,.14);}#aiTrialPanel iframe{position:relative;width:100%;height:100%;border:0;display:block;background:var(--bg,#fff);}@media (max-width:640px){#aiTrialBtn{right:16px;bottom:16px;padding:11px 15px;font-size:.86rem;}}</style></head>
+<body data-base="../../">
+<div class="progress-bar" id="progress"></div>
+<div class="topbar no-print">
+  <div class="container-x">
+    <span class="tb-date" id="today">Friday, August 7, 2026</span>
+    <div class="tb-links"><a href="https://ai.daeseungpark.com/chat/" target="_blank" rel="noopener">Abliterated AI</a><a href="https://tcc.daeseungpark.com/" target="_blank" rel="noopener">Mission Control(TCC)</a><a href="../../profile.html">Profile</a><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener">GitHub</a><a href="https://scholar.google.com/citations?hl=ko&amp;user=qVom0QUAAAAJ" target="_blank" rel="noopener">Scholar</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener">ORCID</a><a href="https://hub.docker.com/u/daeseungpark" target="_blank" rel="noopener">Docker</a><a href="https://codespectrum.net" target="_blank" rel="noopener">Blog</a><a href="../../profile.html#contact">Contact</a><a href="../../notices.html">Notice</a><a href="/articles/seq2seq-forecasting/" class="tb-lang-link" aria-label="Language">한국어</a></div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header no-print">
+  <div class="container-x nav-row">
+    <a href="../../index.html" class="brand">D<span class="dot">.</span> PARK <small>Journal</small></a>
+    <nav class="main-nav"><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">☾</span></button>
+      <button class="print-cta" id="printBtn">🖶 Print / PDF</button>
+      <button class="icon-btn nav-toggle" id="navToggle" aria-label="Menu">≡</button>
+    </div>
+  </div>
+</header>
+
+<div class="ticker no-print">
+  <div class="container-x">
+    <span class="label">Trending</span>
+    <div class="items" id="tickerItems"><a href="../../articles/rag-architectures-hallucination/">Four Ways Retrieval Rescues In…</a><a href="../../articles/mcp-agent-interop-standard/">The Protocol That Became AI's…</a><a href="../../articles/ai-datacenter-power-crunch/">AI's Real Limit Is Electricity</a><a href="../../articles/ai-circular-financing-bubble/">From NVIDIA to NVIDIA</a><a href="../../articles/abliterated-ai-safety/">The Model With Refusal Erased</a><a href="../../articles/llm-spatial-reasoning/">Do LLMs Understand Space? A 7,…</a></div>
+  </div>
+</div>
+
+<article data-article-id="2">
+  <div class="article-wrap">
+    <!-- Masthead -->
+    <header class="art-head">
+      <span class="cat-pill">AI · Explainer</span>
+      <h1>Translating Time Series: Forecasting the Future with Seq2Seq</h1>
+      <p class="deck">How the encoder–decoder architecture once used for machine translation came to forecast water temperature, power demand, and nuclear generation.</p>
+      <div class="art-byline">
+        <div class="av">DP</div>
+        <div class="who">
+          <b>Daeseung Park</b>
+          <span>AI &amp; Software Systems Engineer · KAIST</span>
+          <span>June 2026 · 13 min read</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="art-cover"><img src="../../../assets/img/extracted/portfolio/seq2seq-gru-encoder-decoder-arch.png" alt="Model architecture applying the Seq2Seq encoder–decoder to power-generation time-series forecasting" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+
+    <!-- Summary -->
+    <div class="summary-box">
+      <span class="tag">1-min summary</span>
+      Seq2Seq (the encoder–decoder) was originally devised to “translate” a sentence in one language into a sentence in another. Yet time-series forecasting — carrying a window of past observations forward into a window of the future — is at bottom the same problem: mapping one ordered sequence onto another. Drawing on real projects — short-term sea-surface-temperature forecasting in Korea’s East Sea, short-term electricity-demand forecasting, and reactor power-generation forecasting for Korea Hydro &amp; Nuclear Power (KHNP) — this piece unpacks the idea of turning a translator into a forecaster. It covers why ARIMA and single-step LSTMs falter in the face of abrupt regime changes and multivariate context, how to feed environmental variables into the encoder for multivariate inference, and the villain that every time-series model eventually meets: phase lag.
+    </div>
+
+    <!-- Body -->
+    <div class="prose">
+      <span class="chapter-label">Chapter 1. The Idea</span>
+      <h2>Forecasting the Future Resembles Translating a Sentence</h2>
+      <p>In 2014, an architecture appeared that changed the landscape of machine translation. An encoder compresses an entire input sentence into a single “context vector,” and a decoder starts from that context to unfurl a sentence in the target language one word at a time — the so-called Seq2Seq (sequence-to-sequence) model. It reads the Korean sentence “나는 사과를 먹었다” whole, distills it into a condensate of meaning, and from that generates “I ate an apple” word by word.</p>
+      <p>When I first met this architecture, what came to mind was not translation but the sea. It was around the time I was wrestling with the task of forecasting the water temperature of the East Sea — reading in a fortnight’s records of water temperature, air temperature, and wind speed to sketch out the water temperature for the days ahead. Looked at closely, this is structurally identical to translation. <strong>The input is an ordered sequence (a window of past observations), and the output is an ordered sequence too (a window of future predictions).</strong> One is a run of words and the other a run of numbers, but the skeleton — “carry one ordered run over into another” — is the same.</p>
+
+      <div class="pullquote">Carrying a sentence across and sketching the future are one and the same problem: mapping one ordered sequence onto another.</div>
+
+      <p>This analogy is powerful because it is more than a mere figure of speech. Just as the encoder in translation compresses the “meaning” of a sentence, in time series the encoder compresses the “state” of the input window — what phase this system is currently in. The decoder then unfolds the future starting from that state. All it took to turn a translator into a forecaster was to swap the vocabulary dictionary for a space of real numbers; the grammar of learning could be borrowed wholesale.</p>
+
+      <span class="chapter-label">Chapter 2. The Limits</span>
+      <h2>Why ARIMA and Single-Step LSTMs Falter</h2>
+      <p>So what were the existing methods missing? ARIMA, the classic of time-series forecasting, rests on the assumptions that the data are stationary and that the future is a linear extension of the past. When water temperature rises and falls gently with the seasons, it is excellent. But in a regime change — where cold and warm currents collide and the water temperature swings sharply within a few days — or at the moment a heat wave or cold snap wrenches the electricity-demand curve, the assumptions themselves collapse.</p>
+      <p>The naive deep-learning approach — an LSTM that looks only one step ahead — falls into a similar trap. If you predict the next single point, feed that prediction back into the input to predict the point after it, and stitch the future together this way, small errors amplify at every step until, days later, the curve drifts somewhere entirely wrong. The more fundamental problem is the <em>scope of context</em>. A single-step model tends to lean too heavily on the immediately preceding state, and so it easily misses the “big picture” that the whole input window is telling it.</p>
+
+      <p>Here the Seq2Seq idea offers a remedy. <strong>First encode the entire input window into a single context, then decode the whole future horizon at once.</strong> Instead of groping toward the future one point at a time, the model first renders a condensed judgment — “this system is in such-and-such a phase” — and unfolds several steps from there. In the East Sea short-term water-temperature task, the encoder–decoder taking multivariate input traced a markedly more stable trajectory through abrupt-change regions than a single-variable, single-step baseline did.</p>
+
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+        <table>
+        <thead><tr><th>Approach</th><th>Strengths</th><th>Weaknesses</th></tr></thead>
+        <tbody>
+          <tr><td>ARIMA</td><td>Easy to interpret; strong in stationary regimes</td><td>Fragile to abrupt change, multivariate inputs, and nonlinearity</td></tr>
+          <tr><td>Single-step LSTM</td><td>Learns nonlinear patterns</td><td>Error accumulation; over-reliance on the latest value</td></tr>
+          <tr><td>Seq2Seq (multivariate)</td><td>Encodes long context, integrates multiple variables, outputs multiple steps</td><td>Data and tuning cost; a tendency toward phase lag</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <span class="chapter-label">Chapter 3. Going Multivariate</span>
+      <h2>What It Means to Feed Environmental Variables into the Encoder</h2>
+      <p>Time-series forecasting gets interesting precisely when the target variable alone does not determine the future. Water temperature is a function of air temperature, wind speed, and insolation; electricity demand is a function of temperature, day of the week, and time of day; a reactor’s power output is a function of outside-air temperature, cooling conditions, and operating characteristics. How you channel these <em>exogenous variables</em> into the model is the heart of multivariate forecasting.</p>
+      <p>This is exactly where the elegance of the encoder–decoder shines. The encoder is, after all, a device that takes a sequence and compresses it into context. So there is no reason to place only the target variable at each time step of that sequence. <strong>Feed the encoder a multidimensional vector bundling [target variable, environmental variable 1, environmental variable 2, …] at every time step, and the model learns the interactions among the variables as well.</strong> This was precisely the approach I took in KHNP’s reactor power-generation task — combining the reactor’s operating characteristics and environmental variables in the encoder input so that the model learned not simple autoregression but a “conditional future.”</p>
+
+      <div class="callout"><b>Practical tip.</b> When feeding exogenous variables into the encoder, if some are <em>already known</em> for the future window (calendar information, scheduled maintenance, weather-agency forecasts, and the like), provide them to the decoder input as well. Tell the decoder “the future temperature will be such-and-such,” and the model calibrates its output to that condition. Don’t leave the model to guess at a future it could simply be told.<p></p></div>
+
+      <figure>
+        <div class="fig-box"><img src="../../../assets/img/extracted/portfolio/seq2seq-learning-inference-phase.png" alt="Difference in data flow between the training and inference phases of Seq2Seq" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+        <figcaption>The difference in data flow between training and inference: during training, the ground-truth sequence is fed into the decoder (teacher forcing) for stable learning; during inference, the decoder feeds its own previous output back in, unfolding the future window one step at a time.</figcaption>
+      </figure>
+
+      <figure>
+        <div class="fig-box"><img src="../../../assets/img/extracted/portfolio/khnp-pearson-correlation-heatmap.png" alt="Pearson correlation heatmap of 64 parameters" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+        <figcaption>A Pearson correlation heatmap of the 64 parameters collected in the KHNP project. By selecting the variables with a clear correlation to power output and combining them as encoder input, we avoided the curse of dimensionality that comes from indiscriminately adding variables.</figcaption>
+      </figure>
+
+      <figure>
+        <div class="fig-box"><img src="../../../assets/img/extracted/portfolio/khnp-reactor-pwr-bwr-diagram.png" alt="Conceptual diagram of the power-generation structure of pressurized water and boiling water reactors (PWR/BWR)" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+        <figcaption>A conceptual diagram of the power-generation structure of a pressurized water reactor (PWR) and a boiling water reactor (BWR). Only by understanding the physical context in which a reactor’s operating characteristics and cooling conditions affect power output could we decide which environmental variables to channel into the model.</figcaption>
+      </figure>
+
+      <p>The short-term electricity-demand comparison study taught the same lesson. When you pit several architectures against one another on the same data, the winner is not simply the more complex model; what decides the contest is <em>how richly, yet how free of noise, a model takes in context</em>. Add variables indiscriminately and the curse of dimensionality follows; cut too many and you blind yourself to the very clues that determine the future. Multivariate design is, in the end, the work of deciding what to listen to and what to let pass.</p>
+
+      <span class="chapter-label">Chapter 4. Phase Lag</span>
+      <h2>The Model That Trails the Real Curve by a Beat</h2>
+      <p>Work with time-series forecasting models long enough and you will inevitably meet a recurring villain: the phenomenon in which the predicted curve “trails” the ground-truth curve by a beat, or half a beat — phase lag. On the graph it looks plausible. The shape is similar and the error (MSE) comes out small. But look closely and the model has not forecast the future at all; it has merely <strong>taken the most recent value, tweaked it slightly, and copied it forward into the future</strong>. It always reacts late when an inflection point arrives. At the very moment forecasting is most needed — the moment a trend bends — it is most powerless.</p>
+
+      <div class="pullquote">A model caught in phase lag only pretends to forecast the future; in truth it is copying the most recent past into it.</div>
+
+      <p>This trap is dangerous because the standard loss function rewards it as a “good prediction.” When the curve is gentle, “nudging the latest value slightly forward” is the safest strategy for minimizing mean squared error, and the model cleverly hits on the laziest answer. What helped? In my experience, three things. First, forcing the model to output a <em>sufficiently long horizon</em> all at once — multi-step decoding — leaves it unable to survive on copying the latest value and pushes it to learn the trend. Second, including the rate of change (differences) or the inflection itself among the prediction targets raises sensitivity to turning points. Third, the <em>injection of known future variables</em> mentioned earlier: if the decoder knows in advance that the future temperature will drop, it flags the point where the water temperature will bend without falling behind.</p>
+
+      <figure>
+        <div class="fig-box"><img src="../../../assets/img/extracted/portfolio/khnp-gru-forecast-result-3months.png" alt="GRU-based three-month power-generation forecast result" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+        <figcaption>A GRU-based three-month power-generation forecast. Once multi-step decoding was enforced, the model could no longer get by on copying the latest value and began to learn the trend.</figcaption>
+      </figure>
+
+      <figure>
+        <div class="fig-box"><img src="../../../assets/img/extracted/portfolio/seq2seq-final-forecast-r2-0927.png" alt="Final Seq2Seq power-generation forecast, coefficient of determination R² 0.9274" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+        <figcaption>The final Seq2Seq forecast (R² 0.9274). The multivariate encoder–decoder, with environmental variables combined into the encoder, tracks the actual power-generation curve closely and without phase lag.</figcaption>
+      </figure>
+
+      <span class="chapter-label">Chapter 5. Honest Limits</span>
+      <h2>When Not to Use Seq2Seq</h2>
+      <p>Finally, for balance, I want to be clear that this architecture is no panacea. For a problem with short data, simple patterns, and only strong seasonality, ARIMA or exponential smoothing is faster, easier to interpret, and often more accurate. Seq2Seq demands no small amount of training data and tuning effort, and if poorly designed it falls straight into the phase lag we saw above.</p>
+      <p>Moreover, in domains where “explanation” matters more than the result — regulatory reporting, safety review — an interpretable model takes priority over a black-box neural network. And when the forecast horizon is extremely long (months or years) or the input window must be very long, it is better to consider an attention-based architecture or the Transformer family than a plain encoder–decoder, because cramming all of the past into a single context vector creates an information bottleneck.</p>
+
+      <span class="chapter-label">Closing</span>
+      <h2>From Translator to Forecaster</h2>
+      <p>The journey by which an architecture born for machine translation came to forecast the sea’s temperature, a city’s electricity demand, and a reactor’s output shows how lightly a good abstraction crosses the borders between fields. The key lay not in imitating the form but in sharing the structure. Whether sentences or time series, the moment you recognize the same skeleton — “carry one ordered sequence over into another” — a tool from one side takes on new life in the other. Even the grand task of forecasting the future may, in the end, be nothing more than carefully translating one sentence, the past, into another, the future.</p>
+
+      <div class="references">
+        <h4>References</h4>
+        <ol>
+          <li>D. Park et al., “Short-term Sea Surface Temperature Forecasting in the Korean East Sea using Multi-parameters with a Sequence-to-Sequence Model,” <em>Proc. ICTC 2023</em> (first author).</li>
+          <li>D. Park et al., “A Comparative Study on Short-term Electricity Demand Prediction Models,” <em>Proc. ICTC 2023</em>.</li>
+          <li>Korea Hydro &amp; Nuclear Power (KHNP) reactor power-generation forecasting project — based on multivariate sequence-to-sequence learning with environmental variables combined into the encoder.</li>
+          <li>The examples and trends in this article are illustrative; specific performance varies with the data, architecture, and hyperparameters.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer of article -->
+  <div class="art-foot">
+    <div class="art-tags">
+      <a href="#">#TimeSeriesForecasting</a><a href="#">#Seq2Seq</a><a href="#">#EncoderDecoder</a><a href="#">#MultivariateLearning</a>
+    </div>
+    <div class="author-card">
+      <div class="av">DP</div>
+      <div class="who">
+        <b>Daeseung Park</b>
+        <p>Research Engineer at KAIST. I study large language models, time-series forecasting, and conversational AI, and I try to record the process of my research as accurately and readably as I can.</p>
+      </div>
+    </div>
+
+    <div class="read-next no-print">
+        <div class="section-head" style="margin-bottom:20px;"><h2 style="font-size:1.3rem;">Read next</h2></div>
+        <div class="grid grid-2" id="readNext"><a href="../../articles/rag-architectures-hallucination/" class="post-card fade-up"><div class="thumb"><img class="ph " src="../../../articles/rag-architectures-hallucination/images/cover.svg" alt="" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;"><span class="cat-pill">AI · Explainer</span><span class="num">18</span></div><span class="cat">RAG · Retrieval-Augmented</span><h3>Four Ways Retrieval Rescues Intelligence — Lexical, Semantic, Hybrid, and Graph RAG, and the Anatomy of Hallucination</h3><p>A large language model's knowledge freezes the moment training ends. Retrieval-augmented generation (RAG) fills that gap by pulling in documents from outside the model. We dissect four retrieval architectures — Lexical, Semantic, Hybrid, and Graph — from first principles, and examine how they reduce hallucination and what still remains.</p><div class="meta"><span class="by">Daeseung Park</span><span class="dot-sep">18 min read</span></div></a><a href="../../articles/mcp-agent-interop-standard/" class="post-card fade-up"><div class="thumb"><img class="ph " src="../../../articles/mcp-agent-interop-standard/images/cover.svg" alt="" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;"><span class="cat-pill">AI · Explainer</span><span class="num">17</span></div><span class="cat">AI Agents</span><h3>The Protocol That Became AI's HTTP: MCP and the Interoperability-Standard War</h3><p>The moment chatbots turn into 'acting agents,' the bottleneck is no longer intelligence but the standard for connection. We anatomize how Anthropic's MCP became the de facto standard — its architecture, its politics, and the security homework that remains.</p><div class="meta"><span class="by">Daeseung Park</span><span class="dot-sep">14 min read</span></div></a></div>
+      </div>
+      <nav class="post-nav no-print" id="postNav"><a class="pn" href="../../articles/prompt-engineering/"><span class="pn-dir">‹ Previous</span><span class="pn-t">The Science of Prompt Engineering</span></a><a class="pn pn-list" href="../../articles.html">List</a><a class="pn pn-right" href="../../articles/infection-curve/"><span class="pn-dir">Next ›</span><span class="pn-t">Drawing the Epidemic Curve in Advance</span></a></nav>
+    </div>
+</article>
+
+<div class="print-footer">Daeseung Park · D. PARK Journal — Translating Time Series: Forecasting the Future with Seq2Seq</div>
+
+<footer class="site-footer no-print" id="contact"><div class="container-x"><div class="footer-grid"><div><div class="footer-brand">D. PARK</div><p style="max-width:34ch;">AI &amp; Software Systems Engineer · KAIST</p><div class="social" style="margin-top:16px;"><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener" aria-label="GitHub">GH</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener" aria-label="ORCID">iD</a><a href="mailto:dspark@daeseungpark.com" aria-label="Email">@</a></div></div><div><h6>Browse</h6><ul><li><a href="../../index.html">Home</a></li><li><a href="../../profile.html">Profile</a></li><li><a href="../../articles.html">Articles</a></li><li><a href="../../research.html">Research</a></li><li><a href="../../notices.html">Notice</a></li></ul></div><div><h6>Articles</h6><ul class="ft-arts"><li><a href="../../articles/rag-architectures-hallucination/">Four Ways Retrieval Rescues Intelligence — Lexical, Semantic, Hybrid, and Graph RAG, and the Anatomy of Hallucination</a></li><li><a href="../../articles/mcp-agent-interop-standard/">The Protocol That Became AI's HTTP</a></li><li><a href="../../articles/ai-datacenter-power-crunch/">AI's Real Limit Is Electricity</a></li><li><a href="../../articles/ai-circular-financing-bubble/">From NVIDIA to NVIDIA</a></li><li><a href="../../articles/abliterated-ai-safety/">The Model With Refusal Erased</a></li></ul></div><div><h6>Contact</h6><ul><li><a href="mailto:dspark@daeseungpark.com">dspark@daeseungpark.com</a></li><li><a href="mailto:dspark@kaist.ac.kr">dspark@kaist.ac.kr</a></li><li><a href="tel:+821064547777">Phone (KR) +82 10 6454 7777</a></li><li><a href="tel:+16574109449">Phone (US) +1 657 410 9449</a></li><li>KAIST, Daejeon, Korea</li></ul></div></div><div class="footer-bottom"><span>© 2026 Daeseung Park. All rights reserved.</span><span>Designed &amp; built as a personal journal for Daeseung Park.</span></div></div></footer>
+
+<div class="mobile-nav" id="mobileNav"><button class="icon-btn close" id="navClose" aria-label="Close">✕</button><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></div>
+
+<script src="../../../assets/js/data.js"></script>
+<script src="../../../assets/js/articles.js"></script>
+<script src="../../../assets/js/i18n-en.js"></script><script src="../../../assets/js/main.js"></script>
+
+
+</body></html>

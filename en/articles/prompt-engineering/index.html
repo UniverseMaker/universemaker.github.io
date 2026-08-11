@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-prerendered="1"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Science of Prompt Engineering: Design Principles That Raise Language-Model Performance - Daeseung Park Journal</title>
+<meta name="description" content="Even the same model answers differently depending on how you ask. How to treat prompting as 'engineering' rather than a 'knack.'">
+<link rel="canonical" href="https://daeseungpark.com/en/articles/prompt-engineering/"><link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/prompt-engineering/"><link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/prompt-engineering/"><link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/prompt-engineering/"><meta property="og:locale:alternate" content="ko_KR">
+<!-- seo-i18n:start -->
+
+
+
+
+<!-- seo-i18n:end -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="D. PARK Journal">
+<meta property="og:title" content="The Science of Prompt Engineering: Design Principles That Raise Language-Model Performance">
+<meta property="og:description" content="Even the same model answers differently depending on how you ask. How to treat prompting as 'engineering' rather than a 'knack.'">
+<meta property="og:url" content="https://daeseungpark.com/en/articles/prompt-engineering/">
+<meta property="og:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Science of Prompt Engineering: Design Principles That Raise Language-Model Performance">
+<meta name="twitter:description" content="Even the same model answers differently depending on how you ask. How to treat prompting as 'engineering' rather than a 'knack.'">
+<meta name="twitter:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"The Science of Prompt Engineering: Design Principles That Raise Language-Model Performance","author":{"@type":"Person","name":"박대승","alternateName":"Daeseung Park"},"publisher":{"@type":"Organization","name":"D. PARK Journal"},"image":"https://daeseungpark.com/assets/img/profile/img3.jpg","mainEntityOfPage":"https://daeseungpark.com/articles/prompt-engineering/","inLanguage":"en","datePublished":"2026-06"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&amp;family=Noto+Serif+KR:wght@400;600&amp;family=Noto+Sans+KR:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="../../../assets/css/style.css">
+<link rel="stylesheet" href="../../../assets/css/article.css">
+<script src="https://www.googletagmanager.com/gtag/js?id=G-1MMKKGR3MF"></script><style id="aiTrialStyle">#aiTrialBtn{position:fixed;right:22px;bottom:22px;z-index:940;display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border:0;border-radius:999px;cursor:pointer;font-family:"Pretendard",system-ui,sans-serif;font-weight:700;font-size:.92rem;color:#fff;background:linear-gradient(135deg,#5b6cff,#8b5bff);box-shadow:0 8px 24px rgba(70,70,140,.35);transition:transform .2s,box-shadow .2s,opacity .2s;}#aiTrialBtn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(70,70,140,.45);}#aiTrialBtn.active{opacity:.5;}#aiTrialBtn .ai-ic{font-size:1.05rem;line-height:1;}#aiTrialBtn .ai-b{font-size:.6rem;font-weight:800;background:rgba(255,255,255,.28);padding:2px 6px;border-radius:999px;letter-spacing:.5px;}#aiTrialPanel{position:fixed;right:22px;bottom:84px;z-index:945;width:380px;max-width:calc(100vw - 32px);height:560px;max-height:calc(100vh - 120px);background:var(--bg,#fff);border:1px solid var(--line,#e6e6e6);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.28);opacity:0;transform:translateY(12px) scale(.98);pointer-events:none;transition:opacity .22s,transform .22s;}#aiTrialPanel.open{opacity:1;transform:none;pointer-events:auto;}#aiTrialPanel .ai-head{display:flex;align-items:center;justify-content:space-between;padding:10px 8px 10px 14px;border-bottom:1px solid var(--line,#e6e6e6);}#aiTrialPanel .ai-ti{font-family:"Pretendard",system-ui,sans-serif;font-size:.9rem;color:var(--ink,#15171a);}#aiTrialPanel .ai-badge{font-size:.64rem;color:#7b83ff;border:1px solid #7b83ff;border-radius:999px;padding:1px 6px;margin-left:5px;}#aiTrialPanel .ai-actions{display:flex;gap:2px;}#aiTrialPanel .ai-x{border:0;background:transparent;cursor:pointer;font-size:1rem;line-height:1;padding:6px 9px;border-radius:8px;color:var(--ink,#15171a);opacity:.65;}#aiTrialPanel .ai-x:hover{opacity:1;background:rgba(125,125,140,.14);}#aiTrialPanel .ai-body{position:relative;flex:1;min-height:0;background:var(--bg,#fff);}#aiTrialPanel .ai-open{font-family:"Pretendard",system-ui,sans-serif;font-size:.78rem;font-weight:700;color:#7b83ff;padding:6px 10px;border-radius:8px;text-decoration:none;white-space:nowrap;}#aiTrialPanel .ai-open:hover{background:rgba(125,125,140,.14);}#aiTrialPanel iframe{position:relative;width:100%;height:100%;border:0;display:block;background:var(--bg,#fff);}@media (max-width:640px){#aiTrialBtn{right:16px;bottom:16px;padding:11px 15px;font-size:.86rem;}}</style></head>
+<body data-base="../../">
+<div class="progress-bar" id="progress"></div>
+<div class="topbar no-print">
+  <div class="container-x">
+    <span class="tb-date" id="today">Friday, August 7, 2026</span>
+    <div class="tb-links"><a href="https://ai.daeseungpark.com/chat/" target="_blank" rel="noopener">Abliterated AI</a><a href="https://tcc.daeseungpark.com/" target="_blank" rel="noopener">Mission Control(TCC)</a><a href="../../profile.html">Profile</a><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener">GitHub</a><a href="https://scholar.google.com/citations?hl=ko&amp;user=qVom0QUAAAAJ" target="_blank" rel="noopener">Scholar</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener">ORCID</a><a href="https://hub.docker.com/u/daeseungpark" target="_blank" rel="noopener">Docker</a><a href="https://codespectrum.net" target="_blank" rel="noopener">Blog</a><a href="../../profile.html#contact">Contact</a><a href="../../notices.html">Notice</a><a href="/articles/prompt-engineering/" class="tb-lang-link" aria-label="Language">한국어</a></div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header no-print">
+  <div class="container-x nav-row">
+    <a href="../../index.html" class="brand">D<span class="dot">.</span> PARK <small>Journal</small></a>
+    <nav class="main-nav"><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">☾</span></button>
+      <button class="print-cta" id="printBtn">🖶 Print / PDF</button>
+      <button class="icon-btn nav-toggle" id="navToggle" aria-label="Menu">≡</button>
+    </div>
+  </div>
+</header>
+
+<div class="ticker no-print">
+  <div class="container-x">
+    <span class="label">Trending</span>
+    <div class="items" id="tickerItems"><a href="../../articles/rag-architectures-hallucination/">Four Ways Retrieval Rescues In…</a><a href="../../articles/mcp-agent-interop-standard/">The Protocol That Became AI's…</a><a href="../../articles/ai-datacenter-power-crunch/">AI's Real Limit Is Electricity</a><a href="../../articles/ai-circular-financing-bubble/">From NVIDIA to NVIDIA</a><a href="../../articles/abliterated-ai-safety/">The Model With Refusal Erased</a><a href="../../articles/llm-spatial-reasoning/">Do LLMs Understand Space? A 7,…</a></div>
+  </div>
+</div>
+
+<article data-article-id="1">
+  <div class="article-wrap">
+    <!-- Masthead -->
+    <header class="art-head">
+      <span class="cat-pill">AI · Explainer</span>
+      <h1>The Science of Prompt Engineering: Design Principles That Raise Language-Model Performance</h1>
+      <p class="deck">Even the same model answers differently depending on how you ask. How to treat prompting as 'engineering' rather than a 'knack.'</p>
+      <div class="art-byline">
+        <div class="av">DP</div>
+        <div class="who">
+          <b>Daeseung Park</b>
+          <span>AI &amp; Software Systems Engineer · KAIST</span>
+          <span>June 2026 · 14 min read</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="art-cover"><div class="fill-1 fill-grid" style="position:absolute;inset:0;"></div></div>
+
+    <!-- Summary -->
+    <div class="summary-box">
+      <span class="tag">1-min summary</span>
+      The performance of a large language model (LLM) is not decided by model size alone. Even with the same model, how you compose the input — that is, prompt design — can swing accuracy by tens of percentage points. This piece proposes treating a prompt not as a lucky ‘incantation’ but as a reproducible ‘experiment.’ Assigning a role, step-by-step reasoning (Chain-of-Thought), worked examples (few-shot), locking down the output format, and a systematic evaluation loop — we walk through five levers that raise results without changing the model.
+    </div>
+
+    <!-- Body -->
+    <div class="prose">
+      <span class="chapter-label">Chapter 1. The Problem</span>
+      <h2>Why the Same Model Is Brilliant Some Days and Dim on Others</h2>
+      <p>Anyone new to language models runs into the same bewilderment first. The model that wrote flawless code yesterday returns nonsense to the same request today. The model has not changed. What changed is the sentence we handed it. A single space, the order of the examples, the presence or absence of one line — “think step by step” — these seemingly trivial differences decide the outcome.</p>
+      <p>This is not a bug; it is the very nature of a language model. An LLM is not a database that ‘looks up’ facts but a probabilistic machine that ‘predicts’ the most plausible token to follow a given context. The context we supply — the prompt — is therefore the initial condition that sets the model’s path of thought. Change the initial condition and the trajectory changes with it. Prompt engineering is the work of designing that initial condition so the intended result emerges.</p>
+
+      <div class="pullquote">A prompt is not an incantation cast on the model; it is the initial condition that sets the model’s path of thought.</div>
+
+      <p>I have published a study quantifying how prompt design for generative AI affects performance in the <em>Journal of Web Engineering</em> (SCIE). The most important lesson from that work turned out to be surprisingly simple. <strong>A prompt is not a matter of intuition but a thing to be measured.</strong> What can be measured can be improved, and what can be improved becomes engineering.</p>
+
+      <span class="chapter-label">Chapter 2. Five Levers</span>
+      <h2>How to Change the Result Without Changing the Model</h2>
+      <p>Switching to a bigger model is the most expensive fix and sometimes the laziest. Before you reach for it, there are five design levers worth checking. Each helps on its own, but together they work by multiplication.</p>
+
+      <h3>1. Fix the role and context first</h3>
+      <p>“Review this code” and “You are a security-focused code reviewer with fifteen years of experience; flag the vulnerabilities in the code below in order of severity” produce entirely different answers. When you assign a role, the model narrows its output to the distribution of contexts in which that role is active. A vague question invites a vague average; a specific role invites specific expertise.</p>
+
+      <h3>2. Force the reasoning to unfold (Chain-of-Thought)</h3>
+      <p>On hard reasoning problems, telling the model to “just give the answer” makes it wrong often. Ask it instead to “lay out the reasoning step by step, then draw a conclusion,” and accuracy climbs noticeably. The reason is that when the model ‘unfolds’ its intermediate reasoning into output tokens, those tokens in turn become the context for the next step and sustain a longer chain of thought. Make the thinking visible, and the thinking grows more accurate.</p>
+
+      <div class="callout"><b>Practical tip.</b> You often want to hide the reasoning from the end user. In that case, still have the model reason step by step, but instruct it to “print the conclusion only on the last line, in the form <code>Final answer:</code>,” and then extract just that line in post-processing. You get accuracy and a clean output at once.<p></p></div>
+
+      <h3>3. Show with examples instead of explaining in words (Few-shot)</h3>
+      <p>The trickier the desired output format or tone, the more overwhelmingly effective it is to show two or three good examples rather than spell out the rules at length. A model follows the pattern of concrete cases better than an abstract description of a rule. The examples must be ‘representative,’ though. Feed it an exceptional or ambiguous example and the model mistakes the exception for the rule.</p>
+
+      <h3>4. Turn the output format into a contract</h3>
+      <p>The moment you integrate a prompt into a system, a human-readable answer becomes secondary and a ‘machine-parseable answer’ becomes the point. A JSON schema, a fixed header, an agreed delimiter — nailing the output format down as an explicit contract sharply cuts the chance that downstream code breaks. When you enforce a format, it helps to add a negative instruction alongside it: “output only the format below and attach no other explanation.”</p>
+
+      <h3>5. Do not try to get it right in one shot</h3>
+      <p>A good prompt is never finished in one pass. The proper method is to build a small evaluation set (20–50 representative inputs) and run a loop that tweaks the prompt bit by bit while measuring accuracy and format-compliance. With that loop, the impression “this looks better” turns into the fact “this is eight percentage points higher.”</p>
+
+      <span class="chapter-label">Chapter 3. Measurement</span>
+      <h2>What It Means to Treat a Prompt as an Experiment</h2>
+      <p>This is where the ‘engineering’ truly begins. The moment we judge which of two prompts is better by impression, we step into the realm of superstition. The procedure I adopted in my research is simple but strict.</p>
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+        <table>
+        <thead><tr><th>Step</th><th>What you do</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr><td>1. Define the task</td><td>State the definition of success in one sentence</td><td>Evaluation criteria</td></tr>
+          <tr><td>2. Build the evaluation set</td><td>Representative inputs + answers / scoring rules</td><td>A fixed test set</td></tr>
+          <tr><td>3. Draft candidates</td><td>2–5 prompt variants</td><td>A comparison group</td></tr>
+          <tr><td>4. Measure</td><td>Score them against the same set</td><td>Quantitative scores</td></tr>
+          <tr><td>5. Iterate</td><td>Adopt the winner, analyze the failures</td><td>The next hypothesis</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p>The real value of this procedure lies not in the scores themselves but in the fact that it <strong>forces you to look at the failures</strong>. Gather where and how the model goes wrong, and the direction for the next prompt rises naturally out of the data. Instead of a vague “make it better,” you get a concrete diagnosis: “it breaks the format on this type of input.”</p>
+
+      <figure>
+        <div class="fig-box"><div class="fill-6 fill-grid" style="position:absolute;inset:0;"></div></div>
+        <figcaption>The prompt-improvement loop: define → evaluation set → variants → measure → iterate. This is the cycle to run before you reach for a different model.</figcaption>
+      </figure>
+
+      <span class="chapter-label">Chapter 4. Pitfalls</span>
+      <h2>Three Common Misconceptions</h2>
+      <p><strong>First, the illusion that longer is better.</strong> A model does not grow smarter as the prompt grows longer. If anything, the key instruction gets buried in the noise and ignored. A good prompt is not long but ‘dense.’ Every sentence should bear on the output.</p>
+      <p><strong>Second, the illusion that once it works, you are done.</strong> When the model version goes up, the same prompt can behave differently. Version-control your prompts as you would code, and run a regression test with your evaluation set every time the model updates.</p>
+      <p><strong>Third, the illusion that the model ‘understands.’</strong> A model does not grasp meaning; it stitches patterns together. “Just handle it well on your own” is therefore the most dangerous instruction of all. Whatever we leave unspecified, the model fills in with the average. And the average is exactly what mediocrity is.</p>
+
+      <div class="pullquote">Whatever we leave unspecified, the model fills in with the average. And the average is exactly what mediocrity is.</div>
+
+      <span class="chapter-label">Closing</span>
+      <h2>From Incantation to Design</h2>
+      <p>Prompt engineering is not a matter of reciting magic spells. It is a thoroughly engineering activity: understanding how the model works, deliberately designing the initial condition that is the input, and measuring and improving the result. Models will only grow more powerful. Yet the ability to design ‘what to ask, and how’ remains the human’s share, no matter how far the model advances. The old truth that good questions make good answers only grows sharper in the age of AI.</p>
+
+      <div class="references">
+        <h4>References</h4>
+        <ol>
+          <li>D. Park et al., “A Study on Performance Improvement of Prompt Engineering for Generative AI with a Large Language Model,” <em>Journal of Web Engineering</em> (SCIE), 2024.</li>
+          <li>The examples and figures in the text are meant to illustrate general tendencies; specific values vary with the task, the model, and the evaluation set.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer of article -->
+  <div class="art-foot">
+    <div class="art-tags">
+      <a href="#">#PromptEngineering</a><a href="#">#LargeLanguageModels</a><a href="#">#GenerativeAI</a><a href="#">#ChainOfThought</a>
+    </div>
+    <div class="author-card">
+      <div class="av">DP</div>
+      <div class="who">
+        <b>Daeseung Park</b>
+        <p>Researcher at KAIST. I study large language models, time-series forecasting, and conversational AI, and I try to record the research process as accurately and readably as I can.</p>
+      </div>
+    </div>
+
+    <div class="read-next no-print">
+        <div class="section-head" style="margin-bottom:20px;"><h2 style="font-size:1.3rem;">Read next</h2></div>
+        <div class="grid grid-2" id="readNext"><a href="../../articles/rag-architectures-hallucination/" class="post-card fade-up"><div class="thumb"><img class="ph " src="../../../articles/rag-architectures-hallucination/images/cover.svg" alt="" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;"><span class="cat-pill">AI · Explainer</span><span class="num">18</span></div><span class="cat">RAG · Retrieval-Augmented</span><h3>Four Ways Retrieval Rescues Intelligence — Lexical, Semantic, Hybrid, and Graph RAG, and the Anatomy of Hallucination</h3><p>A large language model's knowledge freezes the moment training ends. Retrieval-augmented generation (RAG) fills that gap by pulling in documents from outside the model. We dissect four retrieval architectures — Lexical, Semantic, Hybrid, and Graph — from first principles, and examine how they reduce hallucination and what still remains.</p><div class="meta"><span class="by">Daeseung Park</span><span class="dot-sep">18 min read</span></div></a><a href="../../articles/mcp-agent-interop-standard/" class="post-card fade-up"><div class="thumb"><img class="ph " src="../../../articles/mcp-agent-interop-standard/images/cover.svg" alt="" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;"><span class="cat-pill">AI · Explainer</span><span class="num">17</span></div><span class="cat">AI Agents</span><h3>The Protocol That Became AI's HTTP: MCP and the Interoperability-Standard War</h3><p>The moment chatbots turn into 'acting agents,' the bottleneck is no longer intelligence but the standard for connection. We anatomize how Anthropic's MCP became the de facto standard — its architecture, its politics, and the security homework that remains.</p><div class="meta"><span class="by">Daeseung Park</span><span class="dot-sep">14 min read</span></div></a></div>
+      </div>
+      <nav class="post-nav no-print" id="postNav"><span class="pn empty"><span class="pn-dir">‹ Previous</span><span class="pn-t">None</span></span><a class="pn pn-list" href="../../articles.html">List</a><a class="pn pn-right" href="../../articles/seq2seq-forecasting/"><span class="pn-dir">Next ›</span><span class="pn-t">Translating Time Series</span></a></nav>
+    </div>
+</article>
+
+<div class="print-footer">Daeseung Park · D. PARK Journal — The Science of Prompt Engineering: Design Principles That Raise Language-Model Performance</div>
+
+<footer class="site-footer no-print" id="contact"><div class="container-x"><div class="footer-grid"><div><div class="footer-brand">D. PARK</div><p style="max-width:34ch;">AI &amp; Software Systems Engineer · KAIST</p><div class="social" style="margin-top:16px;"><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener" aria-label="GitHub">GH</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener" aria-label="ORCID">iD</a><a href="mailto:dspark@daeseungpark.com" aria-label="Email">@</a></div></div><div><h6>Browse</h6><ul><li><a href="../../index.html">Home</a></li><li><a href="../../profile.html">Profile</a></li><li><a href="../../articles.html">Articles</a></li><li><a href="../../research.html">Research</a></li><li><a href="../../notices.html">Notice</a></li></ul></div><div><h6>Articles</h6><ul class="ft-arts"><li><a href="../../articles/rag-architectures-hallucination/">Four Ways Retrieval Rescues Intelligence — Lexical, Semantic, Hybrid, and Graph RAG, and the Anatomy of Hallucination</a></li><li><a href="../../articles/mcp-agent-interop-standard/">The Protocol That Became AI's HTTP</a></li><li><a href="../../articles/ai-datacenter-power-crunch/">AI's Real Limit Is Electricity</a></li><li><a href="../../articles/ai-circular-financing-bubble/">From NVIDIA to NVIDIA</a></li><li><a href="../../articles/abliterated-ai-safety/">The Model With Refusal Erased</a></li></ul></div><div><h6>Contact</h6><ul><li><a href="mailto:dspark@daeseungpark.com">dspark@daeseungpark.com</a></li><li><a href="mailto:dspark@kaist.ac.kr">dspark@kaist.ac.kr</a></li><li><a href="tel:+821064547777">Phone (KR) +82 10 6454 7777</a></li><li><a href="tel:+16574109449">Phone (US) +1 657 410 9449</a></li><li>KAIST, Daejeon, Korea</li></ul></div></div><div class="footer-bottom"><span>© 2026 Daeseung Park. All rights reserved.</span><span>Designed &amp; built as a personal journal for Daeseung Park.</span></div></div></footer>
+
+<div class="mobile-nav" id="mobileNav"><button class="icon-btn close" id="navClose" aria-label="Close">✕</button><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></div>
+
+<script src="../../../assets/js/data.js"></script>
+<script src="../../../assets/js/articles.js"></script>
+<script src="../../../assets/js/i18n-en.js"></script><script src="../../../assets/js/main.js"></script>
+
+
+</body></html>

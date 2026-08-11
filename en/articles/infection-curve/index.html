@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-prerendered="1"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Drawing the Epidemic Curve in Advance: A Forecast Model with Reduced Phase Lag - Daeseung Park Journal</title>
+<meta name="description" content="How a model that trailed rapidly changing case counts by a few days was made to react 'on time.'">
+<link rel="canonical" href="https://daeseungpark.com/en/articles/infection-curve/"><link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/infection-curve/"><link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/infection-curve/"><link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/infection-curve/"><meta property="og:locale:alternate" content="ko_KR">
+<!-- seo-i18n:start -->
+
+
+
+
+<!-- seo-i18n:end -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="D. PARK Journal">
+<meta property="og:title" content="Drawing the Epidemic Curve in Advance: A Forecast Model with Reduced Phase Lag">
+<meta property="og:description" content="How a model that trailed rapidly changing case counts by a few days was made to react 'on time.'">
+<meta property="og:url" content="https://daeseungpark.com/en/articles/infection-curve/">
+<meta property="og:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Drawing the Epidemic Curve in Advance: A Forecast Model with Reduced Phase Lag">
+<meta name="twitter:description" content="How a model that trailed rapidly changing case counts by a few days was made to react 'on time.'">
+<meta name="twitter:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Drawing the Epidemic Curve in Advance: A Forecast Model with Reduced Phase Lag","author":{"@type":"Person","name":"박대승","alternateName":"Daeseung Park"},"publisher":{"@type":"Organization","name":"D. PARK Journal"},"image":"https://daeseungpark.com/assets/img/profile/img3.jpg","mainEntityOfPage":"https://daeseungpark.com/articles/infection-curve/","inLanguage":"en","datePublished":"2026-06"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&amp;family=Noto+Serif+KR:wght@400;600&amp;family=Noto+Sans+KR:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="../../../assets/css/style.css">
+<link rel="stylesheet" href="../../../assets/css/article.css">
+<script src="https://www.googletagmanager.com/gtag/js?id=G-1MMKKGR3MF"></script><style id="aiTrialStyle">#aiTrialBtn{position:fixed;right:22px;bottom:22px;z-index:940;display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border:0;border-radius:999px;cursor:pointer;font-family:"Pretendard",system-ui,sans-serif;font-weight:700;font-size:.92rem;color:#fff;background:linear-gradient(135deg,#5b6cff,#8b5bff);box-shadow:0 8px 24px rgba(70,70,140,.35);transition:transform .2s,box-shadow .2s,opacity .2s;}#aiTrialBtn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(70,70,140,.45);}#aiTrialBtn.active{opacity:.5;}#aiTrialBtn .ai-ic{font-size:1.05rem;line-height:1;}#aiTrialBtn .ai-b{font-size:.6rem;font-weight:800;background:rgba(255,255,255,.28);padding:2px 6px;border-radius:999px;letter-spacing:.5px;}#aiTrialPanel{position:fixed;right:22px;bottom:84px;z-index:945;width:380px;max-width:calc(100vw - 32px);height:560px;max-height:calc(100vh - 120px);background:var(--bg,#fff);border:1px solid var(--line,#e6e6e6);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.28);opacity:0;transform:translateY(12px) scale(.98);pointer-events:none;transition:opacity .22s,transform .22s;}#aiTrialPanel.open{opacity:1;transform:none;pointer-events:auto;}#aiTrialPanel .ai-head{display:flex;align-items:center;justify-content:space-between;padding:10px 8px 10px 14px;border-bottom:1px solid var(--line,#e6e6e6);}#aiTrialPanel .ai-ti{font-family:"Pretendard",system-ui,sans-serif;font-size:.9rem;color:var(--ink,#15171a);}#aiTrialPanel .ai-badge{font-size:.64rem;color:#7b83ff;border:1px solid #7b83ff;border-radius:999px;padding:1px 6px;margin-left:5px;}#aiTrialPanel .ai-actions{display:flex;gap:2px;}#aiTrialPanel .ai-x{border:0;background:transparent;cursor:pointer;font-size:1rem;line-height:1;padding:6px 9px;border-radius:8px;color:var(--ink,#15171a);opacity:.65;}#aiTrialPanel .ai-x:hover{opacity:1;background:rgba(125,125,140,.14);}#aiTrialPanel .ai-body{position:relative;flex:1;min-height:0;background:var(--bg,#fff);}#aiTrialPanel .ai-open{font-family:"Pretendard",system-ui,sans-serif;font-size:.78rem;font-weight:700;color:#7b83ff;padding:6px 10px;border-radius:8px;text-decoration:none;white-space:nowrap;}#aiTrialPanel .ai-open:hover{background:rgba(125,125,140,.14);}#aiTrialPanel iframe{position:relative;width:100%;height:100%;border:0;display:block;background:var(--bg,#fff);}@media (max-width:640px){#aiTrialBtn{right:16px;bottom:16px;padding:11px 15px;font-size:.86rem;}}</style></head>
+<body data-base="../../">
+<div class="progress-bar" id="progress"></div>
+<div class="topbar no-print">
+  <div class="container-x">
+    <span class="tb-date" id="today">Friday, August 7, 2026</span>
+    <div class="tb-links"><a href="https://ai.daeseungpark.com/chat/" target="_blank" rel="noopener">Abliterated AI</a><a href="https://tcc.daeseungpark.com/" target="_blank" rel="noopener">Mission Control(TCC)</a><a href="../../profile.html">Profile</a><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener">GitHub</a><a href="https://scholar.google.com/citations?hl=ko&amp;user=qVom0QUAAAAJ" target="_blank" rel="noopener">Scholar</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener">ORCID</a><a href="https://hub.docker.com/u/daeseungpark" target="_blank" rel="noopener">Docker</a><a href="https://codespectrum.net" target="_blank" rel="noopener">Blog</a><a href="../../profile.html#contact">Contact</a><a href="../../notices.html">Notice</a><a href="/articles/infection-curve/" class="tb-lang-link" aria-label="Language">한국어</a></div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header no-print">
+  <div class="container-x nav-row">
+    <a href="../../index.html" class="brand">D<span class="dot">.</span> PARK <small>Journal</small></a>
+    <nav class="main-nav"><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">☾</span></button>
+      <button class="print-cta" id="printBtn">🖶 Print / PDF</button>
+      <button class="icon-btn nav-toggle" id="navToggle" aria-label="Menu">≡</button>
+    </div>
+  </div>
+</header>
+
+<div class="ticker no-print">
+  <div class="container-x">
+    <span class="label">Trending</span>
+    <div class="items" id="tickerItems"><a href="../../articles/rag-architectures-hallucination/">Four Ways Retrieval Rescues In…</a><a href="../../articles/mcp-agent-interop-standard/">The Protocol That Became AI's…</a><a href="../../articles/ai-datacenter-power-crunch/">AI's Real Limit Is Electricity</a><a href="../../articles/ai-circular-financing-bubble/">From NVIDIA to NVIDIA</a><a href="../../articles/abliterated-ai-safety/">The Model With Refusal Erased</a><a href="../../articles/llm-spatial-reasoning/">Do LLMs Understand Space? A 7,…</a></div>
+  </div>
+</div>
+
+<article data-article-id="3">
+  <div class="article-wrap">
+    <!-- Masthead -->
+    <header class="art-head">
+      <span class="cat-pill red">Research · Retrospective</span>
+      <h1>Drawing the Epidemic Curve in Advance: A Forecast Model with Reduced Phase Lag</h1>
+      <p class="deck">How a model that trailed rapidly changing case counts by a few days was made to react 'on time.'</p>
+      <div class="art-byline">
+        <div class="av">DP</div>
+        <div class="who">
+          <b>Daeseung Park</b>
+          <span>AI &amp; Software Systems Engineer · KAIST</span>
+          <span>June 2026 · 15 min read</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="art-cover"><img src="../../../assets/img/extracted/research/quarantine-iot-databroker-dashboard.png" alt="KAIST DATA Broker-based IoT control dashboard for quarantine equipment" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+
+    <!-- Summary -->
+    <div class="summary-box">
+      <span class="tag">1-min summary</span>
+      On the Ministry of the Interior and Safety's project "Development of Technology for Predicting and Intelligently Blocking the Overseas Inflow of Emerging Infectious Diseases," I took on two tasks. One was to design an AI agent that assists epidemiological investigators in their work; the other was to build a time-series model that forecasts the number of infections. In the latter, the biggest enemy was not accuracy but "phase delay." If you copy yesterday's number almost verbatim, the error looks small, yet the curve is shifted a few days to the right of reality — useless on the front lines of disease control. This is a retrospective on how a loss function makes a model lazy, how I pursued a model that responds to inflection points while reducing lag, and what I had to choose between accuracy metrics and real-world usefulness.
+    </div>
+
+    <!-- Body -->
+    <div class="prose">
+      <span class="chapter-label">Chapter 1. The Problem No One Warns You About in Advance</span>
+      <h2>Copy Yesterday's Number and You Get an "Accurate" Model</h2>
+      <p>When I first trained the infection-count forecasting model and brought up the validation graph, I felt a moment of relief. The predicted curve lay almost perfectly on top of the actual curve. The error metrics were small, too. Everything seemed to be working. But at some point, as I overlaid the two curves and scanned along the horizontal axis with my eyes, a chill ran down my spine. The predicted curve did not "resemble" the actual curve — it was the actual curve "pushed" a few days to the right.</p>
+      <p>This is the most insidious trap in time-series forecasting: <strong>phase delay</strong>. Intuitively, it works like this. When you ask a model to predict tomorrow's infection count, the easiest strategy it discovers is "just output today's number." Because an infection curve rarely changes drastically from one day to the next, even copying yesterday's value verbatim keeps the average error small enough. The model was not predicting the future — it was reading the past one step late.</p>
+
+      <div class="pullquote">A model with phase delay does not predict the future. It merely reads the past a few days late — accurately.</div>
+
+      <p>On the front lines of disease control, this delay is fatal. The inflection point where infections begin to surge is the moment you decide whether to add isolation beds, tighten quarantine, and redeploy personnel. But if the model "notifies" you of that inflection point a few days late, its forecast is nothing more than an after-the-fact report confirming what has already happened. A small error guarantees nothing. Only when the curve bends and the forecast bends along with it, right at that spot, does it become useful.</p>
+
+      <span class="chapter-label">Chapter 2. The Loss Function Rewards Laziness</span>
+      <h2>Why MSE Makes a Model a Beat Late</h2>
+      <p>Why does the model learn such a lazy strategy? The culprit was the loss function we had thoughtlessly chosen: mean squared error (MSE). MSE squares the difference between the predicted and actual values and averages it. Over most of the intervals where the curve moves gently, the "delayed-copy" strategy of simply outputting yesterday's value minimizes MSE. That is because making one or two large errors at inflection points is, on average, worse than steadily making small errors while lagging one step behind across every interval.</p>
+      <p>In other words, the moment we ask the model to "reduce the overall average error," it converges on the safest average strategy — imitating the past. The loss function never told it what we really wanted ("catch the inflection point on time"); the model faithfully did only what we said ("reduce the average error"). The model was honest. What was lazy was our objective function.</p>
+
+      <div class="callout"><b>Practical insight.</b> When evaluating time-series forecasting performance, don't look at error metrics alone — also measure <strong>the lag at which the cross-correlation between the predicted and actual curves is maximized</strong>. If that lag is not zero, your "accurate" model is in fact a model that is several days late. This one line of diagnosis keeps you from being fooled by a small error.<p></p></div>
+
+      <p>So I reset the direction of the modeling. The key was to move away from a structure that rewards the model for fitting the "flat intervals" well, and instead to induce it to respond sensitively at "the moments when change occurs." I redesigned the training signal to put greater weight on sharp fluctuations and inflection points, and made the model watch not only the "value" of the curve but also the "change in its slope." The goal was clear: not to fit the numbers more accurately, but to fit them <em>on time</em>.</p>
+
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+        <table>
+        <thead><tr><th>By the metrics</th><th>Model A (delayed-copy)</th><th>Model B (inflection-responsive)</th></tr></thead>
+        <tbody>
+          <tr><td>Average error (MSE)</td><td>Very low</td><td>Somewhat higher</td></tr>
+          <tr><td>Phase delay (lag)</td><td>+3–4 days</td><td>0–1 days</td></tr>
+          <tr><td>Inflection-point capture</td><td>Confirmed days later</td><td>Same-day response</td></tr>
+          <tr><td>Use in disease-control decisions</td><td>After-the-fact report</td><td>Pre-emptive alert</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p>The figures in the table are only illustrative examples meant to show a trend, but the message is clear. Model A, "more accurate" by the metrics, can be the "more useless" model in the field. The inference performance we needed to raise was not a lower error but <strong>the ability to respond on time</strong>, and only once we changed the evaluation criteria this way did the model begin to move in the right direction.</p>
+
+      <span class="chapter-label">Chapter 3. An Agent That Assists Epidemiological Investigators</span>
+      <h2>Not Replacing People, but Lightening Their Work</h2>
+      <p>The other axis of the project was an AI agent to assist epidemiological investigators. When I first took on this work, I imagined a "system that automates investigation." But as I looked closely at what real epidemiological investigators do, I realized how naive that idea was. Epidemiological investigation is work that happens between people. Asking about a confirmed patient's movements, cross-checking scattered records, inferring the most plausible route among contradictory statements — it is highly contextual work in which judgment intervenes.</p>
+
+      <div class="pullquote">What the field needed was not an AI to replace people, but an AI to clear away the drudgery so that people could judge better.</div>
+
+      <p>So I changed the agent's design principle. Rather than replacing the investigator, it would slot naturally into the workflow they were already following. It organized the fragmentary information the investigator had gathered into a structured timeline, pointed out in advance the clues in vast records that might serve as connecting links, and searched for similar past cases to present as reference material — an assistant that left the judgment to people while quickly gathering the raw material that judgment required.</p>
+      <p>This shift in perspective was not merely a matter of humility but of practicality. In a public-safety domain that carries responsibility, the authority and accountability for the final judgment had to remain with people. There is a world of difference between an AI asserting "this movement is the source of infection" and one suggesting "this movement overlaps with two other cases — would you like to check?" The two build entirely different structures of trust. Only the latter was accepted in the field.</p>
+
+      <span class="chapter-label">Chapter 4. The Tension Between Accuracy and Usefulness</span>
+      <h2>In Public Safety, "When You Warn" Matters More Than "How Accurate You Are"</h2>
+      <p>A tension ran through the entire project. A model's accuracy metrics and its operational usefulness in the field are not the same thing. If anything, the two often collided. Tune the model to respond sensitively to inflection points, and small false alarms increase over the flat intervals. Conversely, make it conservative to reduce false alarms, and its response dulls just when a real surge begins.</p>
+      <p>This trade-off was not a purely technical problem but a question of value judgment. In infectious-disease control, the cost of a "missed inflection point" and the cost of a "false alarm" are not symmetric. A single missed surge can lead to uncontrollable spread, whereas a single false alarm ends in wasted resources and eroded trust. But when false alarms repeat, the field eventually starts to ignore the alarms altogether — the "boy who cried wolf" problem. So where to set the sensitivity was a matter to be decided not by statistics but by policy consensus.</p>
+
+      <figure>
+        <div class="fig-box"><div class="fill-2 fill-grid" style="position:absolute;inset:0;"></div></div>
+        <figcaption>The actual curve (bold line) and the predictions of the two models. The delayed-copy model trails the curve pushed a few days back, while the inflection-responsive model bends together with it at the inflection point. The image is an illustrative example meant to explain the trend.</figcaption>
+      </figure>
+
+      <p>At this stage I redefined the model not as a "machine that produces the right answer" but as a "tool that supports decision-making." Instead of throwing out a single number, the model would present scenarios together with a band of uncertainty. Not "N people tomorrow," but rather "at the current trend, there are signs of entering a surge phase, and that point is likely within roughly a few days" — information a person can actually use for judgment. Raising the inference performance and delivering that performance in a trustworthy form were two separate tasks.</p>
+
+      <span class="chapter-label">Chapter 5. Connecting the Forecast to the Field</span>
+      <h2>From Drawing the Curve to the Gateway That Screens People</h2>
+      <p>If the forecasting model and the agent were the brain that judged "when and how to respond," the project also had a physical gateway where that judgment actually took effect — an intelligent quarantine platform. When the infection curve points to a surge phase, the last place that signal must reach is, in the end, the entrances through which people pass. No matter how sophisticated the forecast, if it is not connected to equipment in the field it stays an after-the-fact report. So we widened our view to connect the forecasting-and-judgment layer to the quarantine tunnel and its control system.</p>
+
+      <figure>
+        <div class="fig-box"><img src="../../../assets/img/extracted/research/quarantine-tunnel-cad-model.png" alt="3D CAD model of the intelligent quarantine tunnel" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+        <figcaption>A 3D CAD model of the intelligent quarantine tunnel. It was designed to perform disinfection and measurement without obstructing the movement of the people passing through.</figcaption>
+      </figure>
+
+      <figure>
+        <div class="fig-box"><img src="../../../assets/img/extracted/research/quarantine-tunnel-airflow-diagram.png" alt="Airflow control schematic of the quarantine tunnel, with FFU and air curtain" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+        <figcaption>A schematic of the quarantine tunnel's airflow control (FFU and air curtain). We controlled the direction and pressure of the airflow at the design stage so that contaminated air would not leak outward.</figcaption>
+      </figure>
+
+      <p>It was not enough for this equipment to operate individually. Only when many quarantine tunnels and measurement devices are monitored in real time from a single control screen and operated remotely can the field respond at a unified pace to the phase changes the forecast points to. The KAIST DATA Broker–based IoT control dashboard shown on this article's cover played exactly that role — a bridge that gathered the states of scattered equipment in one place and carried the signals coming down from the forecasting-and-judgment layer into physical response.</p>
+
+      <span class="chapter-label">Closing</span>
+      <h2>What It Means to Forecast Under Non-Stationarity and High Responsibility</h2>
+      <p>The greatest lesson this project left me with is that good forecasting is not about producing a small error but about <strong>giving the right signal on time</strong>. In non-stationary data like an infection curve, whose statistical properties change from moment to moment, the ability to fit the past average well can be unrelated to the ability to fit the future well. If anything, the more faithful you are to the past, the more insensitive you become to the future. A model follows the goal we set with brutal honesty. So before blaming a lazy model, we should first suspect what we designed it to reward.</p>
+      <p>And in a public domain that carries responsibility, the value of a forecasting model is not measured by its accuracy alone. When to warn, who makes the final judgment, how to manage the trust cost of false alarms — a model that cannot answer all these operational questions cannot enter the field, no matter how precise it is. Drawing the curve in advance turned out to be a matter of technology and, at the same time, a matter of judgment and trust.</p>
+
+      <div class="references">
+        <h4>References</h4>
+        <ol>
+          <li>Ministry of the Interior and Safety, R&amp;D project "Development of Technology for Predicting and Intelligently Blocking the Overseas Inflow of Emerging Infectious Diseases" (a retrospective based on the author's participation).</li>
+          <li>The graphs, figures, and tables in this article are illustrative examples meant to explain general trends and concepts; they do not reproduce the specific results or metrics of the actual project.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer of article -->
+  <div class="art-foot">
+    <div class="art-tags">
+      <a href="#">#TimeSeriesForecasting</a><a href="#">#PhaseDelay</a><a href="#">#EpidemicModeling</a><a href="#">#PublicSafetyAI</a>
+    </div>
+    <div class="author-card">
+      <div class="av">DP</div>
+      <div class="who">
+        <b>Daeseung Park</b>
+        <p>Researcher at KAIST. I study large language models, time-series forecasting, and conversational AI, and I try to record the research process as accurately and readably as I can.</p>
+      </div>
+    </div>
+
+    <div class="read-next no-print">
+        <div class="section-head" style="margin-bottom:20px;"><h2 style="font-size:1.3rem;">Read next</h2></div>
+        <div class="grid grid-2" id="readNext"><a href="../../articles/rag-architectures-hallucination/" class="post-card fade-up"><div class="thumb"><img class="ph " src="../../../articles/rag-architectures-hallucination/images/cover.svg" alt="" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;"><span class="cat-pill">AI · Explainer</span><span class="num">18</span></div><span class="cat">RAG · Retrieval-Augmented</span><h3>Four Ways Retrieval Rescues Intelligence — Lexical, Semantic, Hybrid, and Graph RAG, and the Anatomy of Hallucination</h3><p>A large language model's knowledge freezes the moment training ends. Retrieval-augmented generation (RAG) fills that gap by pulling in documents from outside the model. We dissect four retrieval architectures — Lexical, Semantic, Hybrid, and Graph — from first principles, and examine how they reduce hallucination and what still remains.</p><div class="meta"><span class="by">Daeseung Park</span><span class="dot-sep">18 min read</span></div></a><a href="../../articles/mcp-agent-interop-standard/" class="post-card fade-up"><div class="thumb"><img class="ph " src="../../../articles/mcp-agent-interop-standard/images/cover.svg" alt="" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;"><span class="cat-pill">AI · Explainer</span><span class="num">17</span></div><span class="cat">AI Agents</span><h3>The Protocol That Became AI's HTTP: MCP and the Interoperability-Standard War</h3><p>The moment chatbots turn into 'acting agents,' the bottleneck is no longer intelligence but the standard for connection. We anatomize how Anthropic's MCP became the de facto standard — its architecture, its politics, and the security homework that remains.</p><div class="meta"><span class="by">Daeseung Park</span><span class="dot-sep">14 min read</span></div></a></div>
+      </div>
+      <nav class="post-nav no-print" id="postNav"><a class="pn" href="../../articles/seq2seq-forecasting/"><span class="pn-dir">‹ Previous</span><span class="pn-t">Translating Time Series</span></a><a class="pn pn-list" href="../../articles.html">List</a><a class="pn pn-right" href="../../articles/edge-llm/"><span class="pn-dir">Next ›</span><span class="pn-t">Language Models That Infer Without a GPU</span></a></nav>
+    </div>
+</article>
+
+<div class="print-footer">Daeseung Park · D. PARK Journal — Drawing the Epidemic Curve in Advance: A Forecast Model with Reduced Phase Lag</div>
+
+<footer class="site-footer no-print" id="contact"><div class="container-x"><div class="footer-grid"><div><div class="footer-brand">D. PARK</div><p style="max-width:34ch;">AI &amp; Software Systems Engineer · KAIST</p><div class="social" style="margin-top:16px;"><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener" aria-label="GitHub">GH</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener" aria-label="ORCID">iD</a><a href="mailto:dspark@daeseungpark.com" aria-label="Email">@</a></div></div><div><h6>Browse</h6><ul><li><a href="../../index.html">Home</a></li><li><a href="../../profile.html">Profile</a></li><li><a href="../../articles.html">Articles</a></li><li><a href="../../research.html">Research</a></li><li><a href="../../notices.html">Notice</a></li></ul></div><div><h6>Articles</h6><ul class="ft-arts"><li><a href="../../articles/rag-architectures-hallucination/">Four Ways Retrieval Rescues Intelligence — Lexical, Semantic, Hybrid, and Graph RAG, and the Anatomy of Hallucination</a></li><li><a href="../../articles/mcp-agent-interop-standard/">The Protocol That Became AI's HTTP</a></li><li><a href="../../articles/ai-datacenter-power-crunch/">AI's Real Limit Is Electricity</a></li><li><a href="../../articles/ai-circular-financing-bubble/">From NVIDIA to NVIDIA</a></li><li><a href="../../articles/abliterated-ai-safety/">The Model With Refusal Erased</a></li></ul></div><div><h6>Contact</h6><ul><li><a href="mailto:dspark@daeseungpark.com">dspark@daeseungpark.com</a></li><li><a href="mailto:dspark@kaist.ac.kr">dspark@kaist.ac.kr</a></li><li><a href="tel:+821064547777">Phone (KR) +82 10 6454 7777</a></li><li><a href="tel:+16574109449">Phone (US) +1 657 410 9449</a></li><li>KAIST, Daejeon, Korea</li></ul></div></div><div class="footer-bottom"><span>© 2026 Daeseung Park. All rights reserved.</span><span>Designed &amp; built as a personal journal for Daeseung Park.</span></div></div></footer>
+
+<div class="mobile-nav" id="mobileNav"><button class="icon-btn close" id="navClose" aria-label="Close">✕</button><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></div>
+
+<script src="../../../assets/js/data.js"></script>
+<script src="../../../assets/js/articles.js"></script>
+<script src="../../../assets/js/i18n-en.js"></script><script src="../../../assets/js/main.js"></script>
+
+
+</body></html>

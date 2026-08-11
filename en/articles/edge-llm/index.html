@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-prerendered="1"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Language Models That Infer Without a GPU: Lightweight LLMs and GeoLLM for the Field - Daeseung Park Journal</title>
+<meta name="description" content="On underground-utility sites with no server and no GPU, how can a language model work at all?">
+<link rel="canonical" href="https://daeseungpark.com/en/articles/edge-llm/"><link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/edge-llm/"><link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/edge-llm/"><link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/edge-llm/"><meta property="og:locale:alternate" content="ko_KR">
+<!-- seo-i18n:start -->
+
+
+
+
+<!-- seo-i18n:end -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="D. PARK Journal">
+<meta property="og:title" content="Language Models That Infer Without a GPU: Lightweight LLMs and GeoLLM for the Field">
+<meta property="og:description" content="On underground-utility sites with no server and no GPU, how can a language model work at all?">
+<meta property="og:url" content="https://daeseungpark.com/en/articles/edge-llm/">
+<meta property="og:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Language Models That Infer Without a GPU: Lightweight LLMs and GeoLLM for the Field">
+<meta name="twitter:description" content="On underground-utility sites with no server and no GPU, how can a language model work at all?">
+<meta name="twitter:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Language Models That Infer Without a GPU: Lightweight LLMs and GeoLLM for the Field","author":{"@type":"Person","name":"박대승","alternateName":"Daeseung Park"},"publisher":{"@type":"Organization","name":"D. PARK Journal"},"image":"https://daeseungpark.com/assets/img/profile/img3.jpg","mainEntityOfPage":"https://daeseungpark.com/articles/edge-llm/","inLanguage":"en","datePublished":"2026-06"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&amp;family=Noto+Serif+KR:wght@400;600&amp;family=Noto+Sans+KR:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="../../../assets/css/style.css">
+<link rel="stylesheet" href="../../../assets/css/article.css">
+<script src="https://www.googletagmanager.com/gtag/js?id=G-1MMKKGR3MF"></script><style id="aiTrialStyle">#aiTrialBtn{position:fixed;right:22px;bottom:22px;z-index:940;display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border:0;border-radius:999px;cursor:pointer;font-family:"Pretendard",system-ui,sans-serif;font-weight:700;font-size:.92rem;color:#fff;background:linear-gradient(135deg,#5b6cff,#8b5bff);box-shadow:0 8px 24px rgba(70,70,140,.35);transition:transform .2s,box-shadow .2s,opacity .2s;}#aiTrialBtn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(70,70,140,.45);}#aiTrialBtn.active{opacity:.5;}#aiTrialBtn .ai-ic{font-size:1.05rem;line-height:1;}#aiTrialBtn .ai-b{font-size:.6rem;font-weight:800;background:rgba(255,255,255,.28);padding:2px 6px;border-radius:999px;letter-spacing:.5px;}#aiTrialPanel{position:fixed;right:22px;bottom:84px;z-index:945;width:380px;max-width:calc(100vw - 32px);height:560px;max-height:calc(100vh - 120px);background:var(--bg,#fff);border:1px solid var(--line,#e6e6e6);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.28);opacity:0;transform:translateY(12px) scale(.98);pointer-events:none;transition:opacity .22s,transform .22s;}#aiTrialPanel.open{opacity:1;transform:none;pointer-events:auto;}#aiTrialPanel .ai-head{display:flex;align-items:center;justify-content:space-between;padding:10px 8px 10px 14px;border-bottom:1px solid var(--line,#e6e6e6);}#aiTrialPanel .ai-ti{font-family:"Pretendard",system-ui,sans-serif;font-size:.9rem;color:var(--ink,#15171a);}#aiTrialPanel .ai-badge{font-size:.64rem;color:#7b83ff;border:1px solid #7b83ff;border-radius:999px;padding:1px 6px;margin-left:5px;}#aiTrialPanel .ai-actions{display:flex;gap:2px;}#aiTrialPanel .ai-x{border:0;background:transparent;cursor:pointer;font-size:1rem;line-height:1;padding:6px 9px;border-radius:8px;color:var(--ink,#15171a);opacity:.65;}#aiTrialPanel .ai-x:hover{opacity:1;background:rgba(125,125,140,.14);}#aiTrialPanel .ai-body{position:relative;flex:1;min-height:0;background:var(--bg,#fff);}#aiTrialPanel .ai-open{font-family:"Pretendard",system-ui,sans-serif;font-size:.78rem;font-weight:700;color:#7b83ff;padding:6px 10px;border-radius:8px;text-decoration:none;white-space:nowrap;}#aiTrialPanel .ai-open:hover{background:rgba(125,125,140,.14);}#aiTrialPanel iframe{position:relative;width:100%;height:100%;border:0;display:block;background:var(--bg,#fff);}@media (max-width:640px){#aiTrialBtn{right:16px;bottom:16px;padding:11px 15px;font-size:.86rem;}}</style></head>
+<body data-base="../../">
+<div class="progress-bar" id="progress"></div>
+<div class="topbar no-print">
+  <div class="container-x">
+    <span class="tb-date" id="today">Friday, August 7, 2026</span>
+    <div class="tb-links"><a href="https://ai.daeseungpark.com/chat/" target="_blank" rel="noopener">Abliterated AI</a><a href="https://tcc.daeseungpark.com/" target="_blank" rel="noopener">Mission Control(TCC)</a><a href="../../profile.html">Profile</a><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener">GitHub</a><a href="https://scholar.google.com/citations?hl=ko&amp;user=qVom0QUAAAAJ" target="_blank" rel="noopener">Scholar</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener">ORCID</a><a href="https://hub.docker.com/u/daeseungpark" target="_blank" rel="noopener">Docker</a><a href="https://codespectrum.net" target="_blank" rel="noopener">Blog</a><a href="../../profile.html#contact">Contact</a><a href="../../notices.html">Notice</a><a href="/articles/edge-llm/" class="tb-lang-link" aria-label="Language">한국어</a></div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header no-print">
+  <div class="container-x nav-row">
+    <a href="../../index.html" class="brand">D<span class="dot">.</span> PARK <small>Journal</small></a>
+    <nav class="main-nav"><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">☾</span></button>
+      <button class="print-cta" id="printBtn">🖶 Print / PDF</button>
+      <button class="icon-btn nav-toggle" id="navToggle" aria-label="Menu">≡</button>
+    </div>
+  </div>
+</header>
+
+<div class="ticker no-print">
+  <div class="container-x">
+    <span class="label">Trending</span>
+    <div class="items" id="tickerItems"><a href="../../articles/rag-architectures-hallucination/">Four Ways Retrieval Rescues In…</a><a href="../../articles/mcp-agent-interop-standard/">The Protocol That Became AI's…</a><a href="../../articles/ai-datacenter-power-crunch/">AI's Real Limit Is Electricity</a><a href="../../articles/ai-circular-financing-bubble/">From NVIDIA to NVIDIA</a><a href="../../articles/abliterated-ai-safety/">The Model With Refusal Erased</a><a href="../../articles/llm-spatial-reasoning/">Do LLMs Understand Space? A 7,…</a></div>
+  </div>
+</div>
+
+<article data-article-id="4">
+  <div class="article-wrap">
+    <!-- Masthead -->
+    <header class="art-head">
+      <span class="cat-pill">AI · Explainer</span>
+      <h1>Language Models That Infer Without a GPU: Lightweight LLMs and GeoLLM for the Field</h1>
+      <p class="deck">On underground-utility sites with no server and no GPU, how can a language model work at all?</p>
+      <div class="art-byline">
+        <div class="av">DP</div>
+        <div class="who">
+          <b>Daeseung Park</b>
+          <span>AI &amp; Software Systems Engineer · KAIST</span>
+          <span>June 2026 · 14 min read</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="art-cover"><div class="fill-7 fill-grid" style="position:absolute;inset:0;"></div></div>
+
+    <!-- Summary -->
+    <div class="summary-box">
+      <span class="tag">1-min summary</span>
+      Large language models keep growing, yet the ‘field’ where a model has to do its work keeps shrinking. An underground-utility inspection vehicle, an aging PC in a fire-department situation room, an underground space where the internet cuts out — none of these has a GPU or a stable network. This article begins from a constraint met in the Daejeon Metropolitan City·LX·KAIST consortium’s ‘immersive fire-safety city’ project: an environment where <strong>training is done on GPUs but inference has to run on CPU alone</strong>. From lightweighting (distillation, quantization, pruning, caching), to the strategy of narrowing the task, to GeoLLM that grounds a model in the data of the land, to variable-layer learning that lifts training efficiency — we look at why a ‘small, sharp model’ is another future for AI.
+    </div>
+
+    <!-- Body -->
+    <div class="prose">
+      <span class="chapter-label">Chapter 1. Constraints Turn Everything Upside Down</span>
+      <h2>When You Can’t Send a GPU to the Field</h2>
+      <p>Growing a model in the lab is fun. A bigger model, a longer context, more parameters. Every time the benchmark score rises, we believe we have moved closer to a better answer. But if the place that model must leave for is not a data center but ‘the field,’ the story flips entirely.</p>
+      <p>The Daejeon Metropolitan City·LX·KAIST consortium’s ‘convergence-data-driven immersive fire-safety city’ project that I took part in was one such case. The goal was clear: to <strong>predict damage to underground facilities</strong> such as water mains, gas pipes, and power conduits, and to have a language generation model propose fitting maintenance measures. The problem lay in where this model had to work. Inspection vehicles, field terminals, aging situation-room PCs — once training was finished, inference had to run <strong>on CPU alone, without a GPU</strong>.</p>
+      <p>This single line of constraint changes the entire design. In a cloud environment, “let’s make the model bigger” is a reasonable opening move. But in an underground environment with no GPU, tight power, and a dropping network, that option is closed off from the start. Here, “smaller and faster” is not an optimization that concedes performance but a <strong>requirement</strong> — without it, nothing runs at all.</p>
+
+      <div class="pullquote">In the field, “smaller and faster” is not an optimization that shaves performance but a requirement — without it, nothing runs at all.</div>
+
+      <p>The moment ‘a bigger model’ becomes the wrong answer arrives more often than you would think. Cost (running an inference server), power (a field terminal’s battery), connectivity (communication blackouts underground or in disasters), and response latency (a situation room cannot afford to wait several seconds) all collide head-on with model size. A good engineer looks not for “the smartest model” but for “the smallest model that is smart enough within these constraints.”</p>
+
+      <span class="chapter-label">Chapter 2. The Techniques That Make CPU Inference Possible</span>
+      <h2>Making It Small Is a Matter of Taking Away</h2>
+      <p>Running a large model at practical speed on a CPU is not magic. It is engineering that combines a handful of well-known techniques to suit the nature of the task. The key is to shrink while measuring ‘what can be removed without the answer wavering.’</p>
+
+      <h3>1. A Smaller Model, and Knowledge Distillation</h3>
+      <p>The most direct approach is to use a small model from the start. But a merely small model often falls short. So we use <strong>knowledge distillation</strong>. When you train a small ‘student model’ by treating the outputs of a large, smart ‘teacher model’ as ground truth, the small model absorbs much of the large model’s judgment tendencies. In a narrow output space like our project’s ‘underground-facility damage type → maintenance phrasing,’ a distilled compact model comes surprisingly close to the original’s quality.</p>
+
+      <h3>2. Quantization: Lowering Precision to Cut Weight</h3>
+      <p>Representing a model’s weights as 8-bit — sometimes 4-bit — integers instead of 32-bit floating point sharply reduces memory and computation. Because CPUs are strong at integer arithmetic, quantization pays off especially in GPU-less environments. The price is a slight loss of accuracy, and in narrow tasks that loss often stays within practical limits.</p>
+
+      <h3>3. Pruning, Caching, and Narrowing the Task</h3>
+      <p><strong>Pruning</strong> cuts low-contribution connections to make the model sparse. <strong>Caching</strong> reuses the intermediate computations of recurring input patterns to shorten response time. But the most underrated lever lies elsewhere: <strong>narrowing the task</strong>. Rather than trying to build an all-purpose assistant, if you focus on the single job of “writing an underground-facility damage report in a standard format,” the model capacity you need shrinks in itself.</p>
+
+      <div class="callout"><b>Practical tip.</b> Don’t lightweight all at once; apply one technique at a time and, each time, measure accuracy and latency together on the same evaluation set. For instance, if accuracy falls below the threshold after 4-bit quantization, ‘mixed precision’ — rolling back only the sensitive layers to 8 bits — is often the answer. If you don’t know what you lose when you take something away, lightweighting becomes a gamble.<p></p></div>
+
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+        <table>
+        <thead><tr><th>Lightweighting technique</th><th>Main effect</th><th>Cost / trade-off</th></tr></thead>
+        <tbody>
+          <tr><td>Knowledge distillation</td><td>Small model approaches large-model quality</td><td>Requires teacher-model training and a distillation pipeline</td></tr>
+          <tr><td>Quantization (8/4-bit)</td><td>Sharp cut in memory and compute, CPU-friendly</td><td>Precision loss; watch sensitive layers</td></tr>
+          <tr><td>Pruning</td><td>Sparsification reduces model size and compute</td><td>Too aggressive and accuracy plunges</td></tr>
+          <tr><td>Caching</td><td>Shortens response latency for repeated inputs</td><td>Higher memory use; limited applicability</td></tr>
+          <tr><td>Narrowing the task</td><td>Reduces the required capacity itself</td><td>Gives up generality — an intended trade-off</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p>No row in this table is ‘free.’ Cutting weight concedes something. Engineering is not accepting that concession blindly but <strong>confirming by measurement how far you can concede while still holding the quality the field demands</strong>.</p>
+
+      <div class="pullquote">Making it small is a matter of taking away. The key is to shrink while measuring whether the answer wavers when you remove something.</div>
+
+      <span class="chapter-label">Chapter 3. GeoLLM — A Language Model Grounded in the Land</span>
+      <h2>Making It Reason About Places, Not Just Text</h2>
+      <p>If lightweighting is a matter of ‘small,’ GeoLLM is a matter of ‘sharp.’ A general language model learns the world’s text. So when asked “is the risk for this area’s underground facilities high?” it runs the danger of producing a plausible but ungrounded sentence — because what the model has seen is ‘words,’ not ‘the land.’</p>
+      <p><strong>GeoLLM</strong> is research that grounds a language model in spatial and land data. It connects structured, spatial data — parcel numbers, zoning, the burial depth and deterioration of underground facilities, relationships with adjacent facilities, ground characteristics — directly to the model’s reasoning. The model then answers on the basis of <strong>the actual data of that place</strong> rather than the statistical average of text. Reasoning whose grounds can be traced becomes possible, of the form: “this segment is a cast-iron pipe buried more than 30 years ago and has a history of adjacent excavation, so it is a priority for inspection.”</p>
+
+      <figure>
+        <div class="fig-box"><img src="../../../assets/img/extracted/research/geollm-gis-homevalue-choropleth.png" alt="Indicator-based GIS choropleth visualization" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+        <figcaption>An indicator-based GIS choropleth visualization — an example use of a lightweight GeoLLM’s geographic reasoning. When spatial and land data are connected to a language model’s reasoning, the model answers on the basis of ‘the facts of a place’ rather than ‘the average of words.’</figcaption>
+      </figure>
+
+      <p>Here an important insight emerges. <strong>In narrow tasks, domain grounding yields a bigger gain than model size.</strong> In a limited domain like underground-facility maintenance, connecting a model accurately to high-quality spatial data raises the accuracy rate more than multiplying the parameters tenfold. And a model grounded in its domain is allowed to be small. Grounding becomes the very justification for lightweighting. ‘Small’ and ‘sharp’ do not conflict; they help each other.</p>
+
+      <span class="chapter-label">Chapter 4. Variable-Layer Learning</span>
+      <h2>Not Every Input Needs the Same Depth of Thought</h2>
+      <p>If lightweighting is about shrinking a finished model, <strong>variable-layer learning</strong> is an attempt to raise efficiency from the training stage itself. The core intuition is simple: does a neural network really need to use every layer, for every input, the same way every time?</p>
+      <p>Easy inputs can be judged well enough with only the shallow layers, and only hard inputs need the deep layers brought in. Variable-layer learning flexibly adjusts this ‘depth used’ according to the input and the training situation. As a result it cuts unnecessary computation so training runs faster, and the role of each layer grows clearer, tending even to improve generalization performance.</p>
+      <p>Why this idea fits field models well is clear. Better training efficiency yields a better-trained model from the same resources, and a structure that at inference time handles ‘easy inputs shallowly’ leads directly to a <strong>shorter average response time in CPU environments</strong>. The techniques for making it small and the techniques for training it smartly point to the same place.</p>
+
+      <span class="chapter-label">Closing</span>
+      <h2>The Vast Cloud and the Small, Sharp Edge</h2>
+      <p>When we picture AI’s future, we often look in only one direction: ‘a bigger cloud model.’ But the place a model actually has to work is not only the data center. A GPU-less inspection vehicle, an underground where communication drops, a situation room that cannot wait even a few seconds — at these edges, the answer is not a giant model but a <strong>small, sharp model</strong>.</p>
+      <p>Predicting underground-facility damage and drafting maintenance phrasing does not require a model that knows all the world’s text. It only needs to be grounded in the data of that place, run fast on a CPU, and be accurate enough. The vast cloud and the small edge do not compete. They are two different paths by which AI reaches the world, and a good engineer first reads which path the task demands. The future belongs not only to bigger models but also to <strong>small models that have read their constraints precisely</strong>.</p>
+
+      <div class="references">
+        <h4>References</h4>
+        <ol>
+          <li>Daejeon Metropolitan City · LX Korea Land and Geospatial Informatix Corporation · KAIST consortium, ‘convergence-data-driven immersive fire-safety city’ project — underground-facility damage prediction and maintenance-measure generation (language model), CPU-based field inference environment.</li>
+          <li>On GeoLLM: research on language-model reasoning and generation grounded in land and spatial data.</li>
+          <li>The figures and examples in the text are meant to illustrate general tendencies; specific values vary with the project, model, and data.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer of article -->
+  <div class="art-foot">
+    <div class="art-tags">
+      <a href="#">#ModelCompression</a><a href="#">#OnDeviceAI</a><a href="#">#GeoLLM</a><a href="#">#AdaptiveLayerTraining</a>
+    </div>
+    <div class="author-card">
+      <div class="av">DP</div>
+      <div class="who">
+        <b>Daeseung Park</b>
+        <p>Research Engineer at KAIST. I study large language models, time-series forecasting, and conversational AI, and I try to record the process of my research as accurately and readably as I can.</p>
+      </div>
+    </div>
+
+    <div class="read-next no-print">
+        <div class="section-head" style="margin-bottom:20px;"><h2 style="font-size:1.3rem;">Read next</h2></div>
+        <div class="grid grid-2" id="readNext"><a href="../../articles/rag-architectures-hallucination/" class="post-card fade-up"><div class="thumb"><img class="ph " src="../../../articles/rag-architectures-hallucination/images/cover.svg" alt="" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;"><span class="cat-pill">AI · Explainer</span><span class="num">18</span></div><span class="cat">RAG · Retrieval-Augmented</span><h3>Four Ways Retrieval Rescues Intelligence — Lexical, Semantic, Hybrid, and Graph RAG, and the Anatomy of Hallucination</h3><p>A large language model's knowledge freezes the moment training ends. Retrieval-augmented generation (RAG) fills that gap by pulling in documents from outside the model. We dissect four retrieval architectures — Lexical, Semantic, Hybrid, and Graph — from first principles, and examine how they reduce hallucination and what still remains.</p><div class="meta"><span class="by">Daeseung Park</span><span class="dot-sep">18 min read</span></div></a><a href="../../articles/mcp-agent-interop-standard/" class="post-card fade-up"><div class="thumb"><img class="ph " src="../../../articles/mcp-agent-interop-standard/images/cover.svg" alt="" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;"><span class="cat-pill">AI · Explainer</span><span class="num">17</span></div><span class="cat">AI Agents</span><h3>The Protocol That Became AI's HTTP: MCP and the Interoperability-Standard War</h3><p>The moment chatbots turn into 'acting agents,' the bottleneck is no longer intelligence but the standard for connection. We anatomize how Anthropic's MCP became the de facto standard — its architecture, its politics, and the security homework that remains.</p><div class="meta"><span class="by">Daeseung Park</span><span class="dot-sep">14 min read</span></div></a></div>
+      </div>
+      <nav class="post-nav no-print" id="postNav"><a class="pn" href="../../articles/infection-curve/"><span class="pn-dir">‹ Previous</span><span class="pn-t">Drawing the Epidemic Curve in Advance</span></a><a class="pn pn-list" href="../../articles.html">List</a><a class="pn pn-right" href="../../articles/empathetic-chatbot/"><span class="pn-dir">Next ›</span><span class="pn-t">The Empathetic Machine</span></a></nav>
+    </div>
+</article>
+
+<div class="print-footer">Daeseung Park · D. PARK Journal — Language Models That Infer Without a GPU: Lightweight LLMs and GeoLLM for the Field</div>
+
+<footer class="site-footer no-print" id="contact"><div class="container-x"><div class="footer-grid"><div><div class="footer-brand">D. PARK</div><p style="max-width:34ch;">AI &amp; Software Systems Engineer · KAIST</p><div class="social" style="margin-top:16px;"><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener" aria-label="GitHub">GH</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener" aria-label="ORCID">iD</a><a href="mailto:dspark@daeseungpark.com" aria-label="Email">@</a></div></div><div><h6>Browse</h6><ul><li><a href="../../index.html">Home</a></li><li><a href="../../profile.html">Profile</a></li><li><a href="../../articles.html">Articles</a></li><li><a href="../../research.html">Research</a></li><li><a href="../../notices.html">Notice</a></li></ul></div><div><h6>Articles</h6><ul class="ft-arts"><li><a href="../../articles/rag-architectures-hallucination/">Four Ways Retrieval Rescues Intelligence — Lexical, Semantic, Hybrid, and Graph RAG, and the Anatomy of Hallucination</a></li><li><a href="../../articles/mcp-agent-interop-standard/">The Protocol That Became AI's HTTP</a></li><li><a href="../../articles/ai-datacenter-power-crunch/">AI's Real Limit Is Electricity</a></li><li><a href="../../articles/ai-circular-financing-bubble/">From NVIDIA to NVIDIA</a></li><li><a href="../../articles/abliterated-ai-safety/">The Model With Refusal Erased</a></li></ul></div><div><h6>Contact</h6><ul><li><a href="mailto:dspark@daeseungpark.com">dspark@daeseungpark.com</a></li><li><a href="mailto:dspark@kaist.ac.kr">dspark@kaist.ac.kr</a></li><li><a href="tel:+821064547777">Phone (KR) +82 10 6454 7777</a></li><li><a href="tel:+16574109449">Phone (US) +1 657 410 9449</a></li><li>KAIST, Daejeon, Korea</li></ul></div></div><div class="footer-bottom"><span>© 2026 Daeseung Park. All rights reserved.</span><span>Designed &amp; built as a personal journal for Daeseung Park.</span></div></div></footer>
+
+<div class="mobile-nav" id="mobileNav"><button class="icon-btn close" id="navClose" aria-label="Close">✕</button><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></div>
+
+<script src="../../../assets/js/data.js"></script>
+<script src="../../../assets/js/articles.js"></script>
+<script src="../../../assets/js/i18n-en.js"></script><script src="../../../assets/js/main.js"></script>
+
+
+</body></html>

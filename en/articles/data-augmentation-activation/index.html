@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-prerendered="1"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data and Activation Functions: Two Small Levers - Daeseung Park Journal</title>
+<meta name="description" content="How to raise neural-network performance without enlarging the model — expanding data with synonym clusters and combining activation functions asymmetrically.">
+<link rel="canonical" href="https://daeseungpark.com/en/articles/data-augmentation-activation/"><link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/data-augmentation-activation/"><link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/data-augmentation-activation/"><link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/data-augmentation-activation/"><meta property="og:locale:alternate" content="ko_KR">
+<!-- seo-i18n:start -->
+
+
+
+
+<!-- seo-i18n:end -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="D. PARK Journal">
+<meta property="og:title" content="Data and Activation Functions: Two Small Levers">
+<meta property="og:description" content="How to raise neural-network performance without enlarging the model — expanding data with synonym clusters and combining activation functions asymmetrically.">
+<meta property="og:url" content="https://daeseungpark.com/en/articles/data-augmentation-activation/">
+<meta property="og:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Data and Activation Functions: Two Small Levers">
+<meta name="twitter:description" content="How to raise neural-network performance without enlarging the model — expanding data with synonym clusters and combining activation functions asymmetrically.">
+<meta name="twitter:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Data and Activation Functions: Two Small Levers","author":{"@type":"Person","name":"박대승","alternateName":"Daeseung Park"},"publisher":{"@type":"Organization","name":"D. PARK Journal"},"image":"https://daeseungpark.com/assets/img/profile/img3.jpg","mainEntityOfPage":"https://daeseungpark.com/articles/data-augmentation-activation/","inLanguage":"en","datePublished":"2026-06"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&amp;family=Noto+Serif+KR:wght@400;600&amp;family=Noto+Sans+KR:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="../../../assets/css/style.css">
+<link rel="stylesheet" href="../../../assets/css/article.css">
+<script src="https://www.googletagmanager.com/gtag/js?id=G-1MMKKGR3MF"></script><style id="aiTrialStyle">#aiTrialBtn{position:fixed;right:22px;bottom:22px;z-index:940;display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border:0;border-radius:999px;cursor:pointer;font-family:"Pretendard",system-ui,sans-serif;font-weight:700;font-size:.92rem;color:#fff;background:linear-gradient(135deg,#5b6cff,#8b5bff);box-shadow:0 8px 24px rgba(70,70,140,.35);transition:transform .2s,box-shadow .2s,opacity .2s;}#aiTrialBtn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(70,70,140,.45);}#aiTrialBtn.active{opacity:.5;}#aiTrialBtn .ai-ic{font-size:1.05rem;line-height:1;}#aiTrialBtn .ai-b{font-size:.6rem;font-weight:800;background:rgba(255,255,255,.28);padding:2px 6px;border-radius:999px;letter-spacing:.5px;}#aiTrialPanel{position:fixed;right:22px;bottom:84px;z-index:945;width:380px;max-width:calc(100vw - 32px);height:560px;max-height:calc(100vh - 120px);background:var(--bg,#fff);border:1px solid var(--line,#e6e6e6);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.28);opacity:0;transform:translateY(12px) scale(.98);pointer-events:none;transition:opacity .22s,transform .22s;}#aiTrialPanel.open{opacity:1;transform:none;pointer-events:auto;}#aiTrialPanel .ai-head{display:flex;align-items:center;justify-content:space-between;padding:10px 8px 10px 14px;border-bottom:1px solid var(--line,#e6e6e6);}#aiTrialPanel .ai-ti{font-family:"Pretendard",system-ui,sans-serif;font-size:.9rem;color:var(--ink,#15171a);}#aiTrialPanel .ai-badge{font-size:.64rem;color:#7b83ff;border:1px solid #7b83ff;border-radius:999px;padding:1px 6px;margin-left:5px;}#aiTrialPanel .ai-actions{display:flex;gap:2px;}#aiTrialPanel .ai-x{border:0;background:transparent;cursor:pointer;font-size:1rem;line-height:1;padding:6px 9px;border-radius:8px;color:var(--ink,#15171a);opacity:.65;}#aiTrialPanel .ai-x:hover{opacity:1;background:rgba(125,125,140,.14);}#aiTrialPanel .ai-body{position:relative;flex:1;min-height:0;background:var(--bg,#fff);}#aiTrialPanel .ai-open{font-family:"Pretendard",system-ui,sans-serif;font-size:.78rem;font-weight:700;color:#7b83ff;padding:6px 10px;border-radius:8px;text-decoration:none;white-space:nowrap;}#aiTrialPanel .ai-open:hover{background:rgba(125,125,140,.14);}#aiTrialPanel iframe{position:relative;width:100%;height:100%;border:0;display:block;background:var(--bg,#fff);}@media (max-width:640px){#aiTrialBtn{right:16px;bottom:16px;padding:11px 15px;font-size:.86rem;}}</style></head>
+<body data-base="../../">
+<div class="progress-bar" id="progress"></div>
+<div class="topbar no-print">
+  <div class="container-x">
+    <span class="tb-date" id="today">Friday, August 7, 2026</span>
+    <div class="tb-links"><a href="https://ai.daeseungpark.com/chat/" target="_blank" rel="noopener">Abliterated AI</a><a href="https://tcc.daeseungpark.com/" target="_blank" rel="noopener">Mission Control(TCC)</a><a href="../../profile.html">Profile</a><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener">GitHub</a><a href="https://scholar.google.com/citations?hl=ko&amp;user=qVom0QUAAAAJ" target="_blank" rel="noopener">Scholar</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener">ORCID</a><a href="https://hub.docker.com/u/daeseungpark" target="_blank" rel="noopener">Docker</a><a href="https://codespectrum.net" target="_blank" rel="noopener">Blog</a><a href="../../profile.html#contact">Contact</a><a href="../../notices.html">Notice</a><a href="/articles/data-augmentation-activation/" class="tb-lang-link" aria-label="Language">한국어</a></div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header no-print">
+  <div class="container-x nav-row">
+    <a href="../../index.html" class="brand">D<span class="dot">.</span> PARK <small>Journal</small></a>
+    <nav class="main-nav"><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">☾</span></button>
+      <button class="print-cta" id="printBtn">🖶 Print / PDF</button>
+      <button class="icon-btn nav-toggle" id="navToggle" aria-label="Menu">≡</button>
+    </div>
+  </div>
+</header>
+
+<div class="ticker no-print">
+  <div class="container-x">
+    <span class="label">Trending</span>
+    <div class="items" id="tickerItems"><a href="../../articles/rag-architectures-hallucination/">Four Ways Retrieval Rescues In…</a><a href="../../articles/mcp-agent-interop-standard/">The Protocol That Became AI's…</a><a href="../../articles/ai-datacenter-power-crunch/">AI's Real Limit Is Electricity</a><a href="../../articles/ai-circular-financing-bubble/">From NVIDIA to NVIDIA</a><a href="../../articles/abliterated-ai-safety/">The Model With Refusal Erased</a><a href="../../articles/llm-spatial-reasoning/">Do LLMs Understand Space? A 7,…</a></div>
+  </div>
+</div>
+
+<article data-article-id="8">
+  <div class="article-wrap">
+    <!-- Masthead -->
+    <header class="art-head">
+      <span class="cat-pill">AI · Explainer</span>
+      <h1>Data and Activation Functions: Two Small Levers</h1>
+      <p class="deck">How to raise neural-network performance without enlarging the model — expanding data with synonym clusters and combining activation functions asymmetrically.</p>
+      <div class="art-byline">
+        <div class="av">DP</div>
+        <div class="who">
+          <b>Daeseung Park</b>
+          <span>AI &amp; Software Systems Engineer · KAIST</span>
+          <span>June 2026 · 14 min read</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="art-cover"><img src="../../../assets/img/extracted/portfolio/wordcluster-accuracy-heatmap.png" alt="단어군집 확장 정확도 히트맵" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+
+    <!-- Summary -->
+    <div class="summary-box">
+      <span class="tag">1-min summary</span>
+      There is more than one route to better neural-network performance, and “a bigger model” is only one of them. This piece looks at two levers that multiply performance without touching model size. First, a technique that expands the words in the training data into their Standard Korean Dictionary synonyms as whole “groups.” Validated across 108 experimental models spanning CNN, RNN, LSTM, BiLSTM, GRU, and KoBERT, the recurrent-network family improved by an average of 0.75 percentage points and up to 2.68 percentage points. Second, an architectural technique that combines the Exponential Linear Unit (ELU) with the logistic and Tanh functions asymmetrically across layers to ease the vanishing gradient. It yielded an average gain of 1.024 percentage points, with the ELU-Tanh pairing reaching a top accuracy of 0.9600. Both experiments point the same way — before you scale a model up, check the small components that “work by multiplication” first.
+    </div>
+
+    <!-- Body -->
+    <div class="prose">
+      <span class="chapter-label">Chapter 1. Framing the Problem</span>
+      <h2>The Power of Small Levers</h2>
+      <p>When a neural network underperforms, the first prescription that comes to mind is usually “make it bigger.” Stack more layers, add more parameters, switch to a heavier pretrained model. This direction certainly works, but it is also the most expensive and the laziest fix. Compute cost climbs steeply with size, while the accuracy gain begins to flatten past a certain point. So before scaling a model up, I always ask two questions first: is there a way to use the data better, and is there room to change the small parts inside the network?</p>
+      <p>These two questions look trivial, but they actually target the points where performance works by “multiplication.” Training data seeps into every step of learning, and the activation function is passed through once by the output of every single neuron. The more repeatedly an element intervenes across the whole pipeline, the more even a tiny improvement, once it accumulates, produces a difference you cannot ignore. Through two studies I led as first author, this piece records how far these two “small levers” actually moved the needle.</p>
+
+      <div class="pullquote">Before you scale a model up, first check the levers that are small but “work by multiplication” — like the data and the activation function.</div>
+
+      <p>One side is <strong>how to grow the data</strong>. We expand the words appearing in training sentences into their Standard Korean Dictionary synonyms, group by group, producing richer expressive variation from the same data. The other side is <strong>how to change the architecture</strong>. By combining different activation functions asymmetrically across layers, we ease the vanishing gradient that chronically afflicts deep networks. The approaches differ, but the philosophy is one — gain performance through composition, not size.</p>
+
+      <span class="chapter-label">Chapter 2. How to Grow the Data</span>
+      <h2>Expanding Training Data with Synonym Clusters</h2>
+      <p>In natural language processing, data augmentation always carries a subtle problem. With an image, you can flip it, crop it, and change its brightness, and a “cat” is still a cat; but a sentence can lose its meaning from changing a single word. That is why coarse augmentation such as random substitution or deletion is especially risky in Korean. So I chose augmentation that respects the semantic structure of the language: substituting a word with candidates close in meaning, grounded in the <em>synonym</em> relations registered in the National Institute of Korean Language’s Standard Korean Dictionary.</p>
+      <p>The key is that, instead of swapping individual words one at a time, we <strong>expanded words as groups (word clusters)</strong>. We treat a word as a bundle of the words that stand in a synonym relation to it, and generate expressive variation by moving among that bundle within a training sentence. This way, the meaning of the original text is preserved while the model learns multiple surface forms of the same concept. Because it is rooted in a validated knowledge resource — a dictionary — the risk of an augmented sentence veering off into an unintended meaning is low.</p>
+
+      <figure>
+        <div class="fig-box"><img src="../../../assets/img/extracted/portfolio/wordcluster-synonym-expansion-diagram.png" alt="Conceptual diagram of Standard Korean Dictionary synonym-based word-group expansion" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+        <figcaption>A conceptual diagram of expanding an original word into a bundle of semantically close candidates through the synonym relations of the Standard Korean Dictionary. Group-level expansion, not individual substitution, is the key.</figcaption>
+      </figure>
+
+      <p>We designed the validation to be as broad as possible. To show that this is not a fluke that works only in one particular structure, we lined up several architectures from different representational families side by side. From the convolutional CNN, through the recurrent RNN, LSTM, BiLSTM, and GRU, to the pretrained transformer KoBERT — crossing data conditions with hyperparameters, we built <strong>a total of 108 experimental models</strong> and compared accuracy before and after augmentation, condition by condition.</p>
+
+      <div class="callout"><b>Why dictionary-based.</b> One could also pull synonyms by the cosine similarity of word embeddings, but in that case antonyms or hypernyms and hyponyms easily slip in as being “close.” The synonym relations of the Standard Korean Dictionary are human-vetted lexical grounds, so the reliability of the augmentation is underwritten by the data resource itself. Rather than one of knowledge resources and statistical methods being absolutely right, for a task where preserving Korean meaning matters, the dictionary was the safer starting point.<p></p></div>
+
+      <span class="chapter-label">Chapter 3. Results and Interpretation</span>
+      <h2>Where, and by How Much</h2>
+      <p>The results split sharply by architectural family. The effect of synonym-cluster expansion appeared most consistently in the <strong>recurrent-network family</strong>. Performance improved by an average of <strong>0.75 percentage points</strong>, and rose by up to <strong>2.68 percentage points</strong> depending on the condition. In recurrent structures, where representations accumulate sequentially along a time axis, I read the learning of diverse surface forms of the same meaning as having especially helped contextual generalization.</p>
+
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+        <table>
+        <thead><tr><th>Item</th><th>Detail</th></tr></thead>
+        <tbody>
+          <tr><td>Augmentation basis</td><td>Standard Korean Dictionary synonym relations (group-level expansion)</td></tr>
+          <tr><td>Number of experimental models</td><td>108 total (CNN · RNN · LSTM · BiLSTM · GRU · KoBERT)</td></tr>
+          <tr><td>Average gain, recurrent networks</td><td>+0.75 percentage points</td></tr>
+          <tr><td>Maximum gain</td><td>+2.68 percentage points</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <p>In absolute terms, 0.75 percentage points may look modest. But the character of this gain deserves emphasis. First, it is a gain obtained <strong>from data already in hand</strong>, without collecting anything new — which means the labeling cost is zero. Second, since it is obtained while leaving model size and structure untouched, it can be <strong>stacked</strong> on top of other improvement techniques. As the heatmap above shows, the magnitude of the effect varies with architecture and condition, but the direction was, on the whole, consistently positive (+). A near-free lever usually looks like this — undramatic, but almost always helpful.</p>
+
+      <figure>
+        <div class="fig-box"><img src="../../../assets/img/extracted/portfolio/wordcluster-accuracy-heatmap.png" alt="Accuracy heatmap of experimental models by condition" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+        <figcaption>Accuracy heatmap of the experimental models by condition. Across the 108 combinations, the direction of the augmentation effect was, on the whole, consistently positive (+).</figcaption>
+      </figure>
+
+      <p>The caveats are just as clear. This method is strong in languages and domains where synonym resources are well developed. For text heavy with neologisms, technical jargon, or proper nouns not registered in the dictionary, there are few candidates to expand in the first place, so the effect is limited. Moreover, substituting a polysemous word without context can turn into noise, so expansion must always be capped by preservation of the original meaning.</p>
+
+      <span class="chapter-label">Chapter 4. How to Change the Activation Function</span>
+      <h2>Asymmetric ELU-Tanh Combinations and the Vanishing Gradient</h2>
+      <p>The second lever lies outside the data, inside the network. The wall most commonly hit when training a deep network is the <strong>vanishing gradient</strong>. When the error signal is propagated back to the earlier layers, if the activation function’s gradient is small, the signal converges rapidly toward zero as the terms multiply. As a result, the layers near the input effectively stop learning. The shape of the activation function, in effect, decides whether the learning signal lives or dies.</p>
+      <p>The traditionally used logistic (sigmoid) and Tanh functions are vulnerable to this problem, because their gradients fall to almost zero at the two ends where the output saturates. The Exponential Linear Unit (ELU), by contrast, keeps its gradient close to the identity in the positive region and saturates smoothly in the negative region, pushing the output mean toward zero to stabilize learning. Here I went one step further and experimented with <strong>combining different activation functions “asymmetrically” across layers</strong>. Instead of using the same function in every layer, I mixed ELU with the logistic and Tanh functions according to layer position, arranging things so that each function’s strengths compensate for another’s weaknesses.</p>
+
+      <div class="pullquote">The shape of the activation function decides whether the learning signal lives or dies. Instead of repeating the same function, I combined them asymmetrically so that each covers the other’s weakness.</div>
+
+      <p>The heart of the idea is to stop playing the game of finding “a single optimal activation function.” Some layers benefit from passing signal through broadly; others benefit from gently pressing the output down. If the demands differ layer by layer, it is only natural to use a different function layer by layer. The asymmetric combination translates that intuition into a design.</p>
+
+      <span class="chapter-label">Chapter 5. Results</span>
+      <h2>+1.024 Percentage Points, and ELU-Tanh</h2>
+      <p>Comparing many combinations systematically, the asymmetric combination showed an <strong>average improvement of 1.024 percentage points</strong> over a single-activation-function baseline. Among them, the <strong>ELU-Tanh combination</strong> was best, at an accuracy of <strong>0.9600</strong>. I read this as a division of labor clicking into place: ELU generously preserving the gradient at the front stages to carry the learning signal through to the earlier layers, and Tanh then gently tidying the output around zero.</p>
+
+      <figure>
+        <div class="fig-box"><img src="../../../assets/img/extracted/portfolio/activation-functions-comparison-graph.png" alt="Performance comparison graph across activation functions" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+        <figcaption>Performance comparison across activation functions. Configurations that combined different functions layer by layer generally outperformed those repeating a single function.</figcaption>
+      </figure>
+
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+        <table>
+        <thead><tr><th>Configuration</th><th>Character</th><th>Accuracy</th></tr></thead>
+        <tbody>
+          <tr><td>Single activation function (baseline)</td><td>Same function in every layer</td><td>Baseline</td></tr>
+          <tr><td>Asymmetric combination (average)</td><td>Mix of different functions per layer</td><td>+1.024%p</td></tr>
+          <tr><td>ELU-Tanh combination</td><td>Top-performing configuration</td><td>0.9600</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <figure>
+        <div class="fig-box"><img src="../../../assets/img/extracted/portfolio/activation-elu-tanh-result-table.png" alt="Result table for the asymmetric ELU-Tanh combination" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+        <figcaption>Result table for the asymmetric ELU-Tanh combination. The division of labor — front-stage ELU preserving the gradient, back-stage Tanh tidying the output — led to the top performance.</figcaption>
+      </figure>
+
+      <p>The appeal of this result, too, resembles that of the earlier data augmentation: it is a gain obtained purely by <strong>changing the arrangement of the components</strong>, without increasing the parameter count. Because an activation function is a design choice rather than a learnable weight, it pushes up accuracy at almost no added compute cost. That said, the optimal combination can shift with the task, the data, and the depth, so it is more accurate to take this as “the search space of asymmetric combinations is open” than as “ELU-Tanh is always the answer.”</p>
+
+      <span class="chapter-label">Closing</span>
+      <h2>By Composition, Not Size</h2>
+      <p>The two studies touched different points, but they point to the same conclusion. Synonym-cluster expansion on the data side, and asymmetric activation-function combination on the architecture side, each pushed performance up while leaving the model’s size untouched. The gains — up to 2.68 percentage points and an average of 1.024 percentage points, respectively — are not dramatic. But the real value of gains like these is that they demand almost no labeling cost and almost no compute cost, and that they can be stacked with each other and with other improvement techniques.</p>
+      <p>A bigger model is always tempting. But smoothing out first the points that work multiplicatively on the performance you end up with — the data that seeps into every training step, the activation function that every neuron passes through — is more honest engineering and usually more economical. The decision to scale a model up loses nothing by being made only after you have pulled every one of these small levers.</p>
+
+      <div class="references">
+        <h4>References</h4>
+        <ol>
+          <li>Daeseung Park et al., “Performance Improvement of RNN Algorithm using Word Group Expansion Technique,” <em>Journal of Industrial Convergence</em>, Korean Society of Industrial Management, Vol. 20, No. 4, 2022. DOI: 10.22678/jic.2022.20.4.023.</li>
+          <li>Daeseung Park et al., A study on mitigating the vanishing gradient through activation functions that asymmetrically combine the Exponential Linear Unit (ELU) with the logistic and Tanh functions (domestic conference presentation, first author).</li>
+          <li>The figures in the text (average +0.75%p and maximum +2.68%p; average +1.024%p; ELU-Tanh 0.9600; 108 experimental models) are the values reported in the studies above, and the specific values may vary with the task, the data, and the evaluation conditions.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer of article -->
+  <div class="art-foot">
+    <div class="art-tags">
+      <a href="#">#DataAugmentation</a><a href="#">#ActivationFunctions</a><a href="#">#RNN</a><a href="#">#KoBERT</a>
+    </div>
+    <div class="author-card">
+      <div class="av">DP</div>
+      <div class="who">
+        <b>Daeseung Park</b>
+        <p>Research Engineer at KAIST. I study large language models, time-series forecasting, and conversational AI, and I try to record the process of my research as accurately and readably as I can.</p>
+      </div>
+    </div>
+
+    <div class="read-next no-print">
+        <div class="section-head" style="margin-bottom:20px;"><h2 style="font-size:1.3rem;">Read next</h2></div>
+        <div class="grid grid-2" id="readNext"><a href="../../articles/rag-architectures-hallucination/" class="post-card fade-up"><div class="thumb"><img class="ph " src="../../../articles/rag-architectures-hallucination/images/cover.svg" alt="" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;"><span class="cat-pill">AI · Explainer</span><span class="num">18</span></div><span class="cat">RAG · Retrieval-Augmented</span><h3>Four Ways Retrieval Rescues Intelligence — Lexical, Semantic, Hybrid, and Graph RAG, and the Anatomy of Hallucination</h3><p>A large language model's knowledge freezes the moment training ends. Retrieval-augmented generation (RAG) fills that gap by pulling in documents from outside the model. We dissect four retrieval architectures — Lexical, Semantic, Hybrid, and Graph — from first principles, and examine how they reduce hallucination and what still remains.</p><div class="meta"><span class="by">Daeseung Park</span><span class="dot-sep">18 min read</span></div></a><a href="../../articles/mcp-agent-interop-standard/" class="post-card fade-up"><div class="thumb"><img class="ph " src="../../../articles/mcp-agent-interop-standard/images/cover.svg" alt="" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;"><span class="cat-pill">AI · Explainer</span><span class="num">17</span></div><span class="cat">AI Agents</span><h3>The Protocol That Became AI's HTTP: MCP and the Interoperability-Standard War</h3><p>The moment chatbots turn into 'acting agents,' the bottleneck is no longer intelligence but the standard for connection. We anatomize how Anthropic's MCP became the de facto standard — its architecture, its politics, and the security homework that remains.</p><div class="meta"><span class="by">Daeseung Park</span><span class="dot-sep">14 min read</span></div></a></div>
+      </div>
+      <nav class="post-nav no-print" id="postNav"><a class="pn" href="../../articles/bert-medical-classification/"><span class="pn-dir">‹ Previous</span><span class="pn-t">Which Department Should I Go To? Classifying Health-Counseling Posts with BERT</span></a><a class="pn pn-list" href="../../articles.html">List</a><a class="pn pn-right" href="../../articles/waterpipe-prediction/"><span class="pn-dir">Next ›</span><span class="pn-t">Predicting the Unseen Pipe</span></a></nav>
+    </div>
+</article>
+
+<div class="print-footer">Daeseung Park · D. PARK Journal — Data and Activation Functions: Two Small Levers</div>
+
+<footer class="site-footer no-print" id="contact"><div class="container-x"><div class="footer-grid"><div><div class="footer-brand">D. PARK</div><p style="max-width:34ch;">AI &amp; Software Systems Engineer · KAIST</p><div class="social" style="margin-top:16px;"><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener" aria-label="GitHub">GH</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener" aria-label="ORCID">iD</a><a href="mailto:dspark@daeseungpark.com" aria-label="Email">@</a></div></div><div><h6>Browse</h6><ul><li><a href="../../index.html">Home</a></li><li><a href="../../profile.html">Profile</a></li><li><a href="../../articles.html">Articles</a></li><li><a href="../../research.html">Research</a></li><li><a href="../../notices.html">Notice</a></li></ul></div><div><h6>Articles</h6><ul class="ft-arts"><li><a href="../../articles/rag-architectures-hallucination/">Four Ways Retrieval Rescues Intelligence — Lexical, Semantic, Hybrid, and Graph RAG, and the Anatomy of Hallucination</a></li><li><a href="../../articles/mcp-agent-interop-standard/">The Protocol That Became AI's HTTP</a></li><li><a href="../../articles/ai-datacenter-power-crunch/">AI's Real Limit Is Electricity</a></li><li><a href="../../articles/ai-circular-financing-bubble/">From NVIDIA to NVIDIA</a></li><li><a href="../../articles/abliterated-ai-safety/">The Model With Refusal Erased</a></li></ul></div><div><h6>Contact</h6><ul><li><a href="mailto:dspark@daeseungpark.com">dspark@daeseungpark.com</a></li><li><a href="mailto:dspark@kaist.ac.kr">dspark@kaist.ac.kr</a></li><li><a href="tel:+821064547777">Phone (KR) +82 10 6454 7777</a></li><li><a href="tel:+16574109449">Phone (US) +1 657 410 9449</a></li><li>KAIST, Daejeon, Korea</li></ul></div></div><div class="footer-bottom"><span>© 2026 Daeseung Park. All rights reserved.</span><span>Designed &amp; built as a personal journal for Daeseung Park.</span></div></div></footer>
+
+<div class="mobile-nav" id="mobileNav"><button class="icon-btn close" id="navClose" aria-label="Close">✕</button><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></div>
+
+<script src="../../../assets/js/data.js"></script>
+<script src="../../../assets/js/articles.js"></script>
+<script src="../../../assets/js/i18n-en.js"></script><script src="../../../assets/js/main.js"></script>
+
+
+</body></html>

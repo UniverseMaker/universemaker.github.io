@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-prerendered="1"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Time Is Performance: Accelerating Simulation with Adaptive Parallelism - Daeseung Park Journal</title>
+<meta name="description" content="City-scale traffic simulation gets slower the more accurate it becomes. A record of APE, in which AI predicts load and distributes computation across 24 cores.">
+<link rel="canonical" href="https://daeseungpark.com/en/articles/parallel-simulation-ape/"><link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/parallel-simulation-ape/"><link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/parallel-simulation-ape/"><link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/parallel-simulation-ape/"><meta property="og:locale:alternate" content="ko_KR">
+<!-- seo-i18n:start -->
+
+
+
+
+<!-- seo-i18n:end -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="D. PARK Journal">
+<meta property="og:title" content="Time Is Performance: Accelerating Simulation with Adaptive Parallelism">
+<meta property="og:description" content="City-scale traffic simulation gets slower the more accurate it becomes. A record of APE, in which AI predicts load and distributes computation across 24 cores.">
+<meta property="og:url" content="https://daeseungpark.com/en/articles/parallel-simulation-ape/">
+<meta property="og:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Time Is Performance: Accelerating Simulation with Adaptive Parallelism">
+<meta name="twitter:description" content="City-scale traffic simulation gets slower the more accurate it becomes. A record of APE, in which AI predicts load and distributes computation across 24 cores.">
+<meta name="twitter:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Time Is Performance: Accelerating Simulation with Adaptive Parallelism","author":{"@type":"Person","name":"박대승","alternateName":"Daeseung Park"},"publisher":{"@type":"Organization","name":"D. PARK Journal"},"image":"https://daeseungpark.com/assets/img/profile/img3.jpg","mainEntityOfPage":"https://daeseungpark.com/articles/parallel-simulation-ape/","inLanguage":"en","datePublished":"2026-07"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&amp;family=Noto+Serif+KR:wght@400;600&amp;family=Noto+Sans+KR:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="../../../assets/css/style.css">
+<link rel="stylesheet" href="../../../assets/css/article.css">
+<script src="https://www.googletagmanager.com/gtag/js?id=G-1MMKKGR3MF"></script><style id="aiTrialStyle">#aiTrialBtn{position:fixed;right:22px;bottom:22px;z-index:940;display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border:0;border-radius:999px;cursor:pointer;font-family:"Pretendard",system-ui,sans-serif;font-weight:700;font-size:.92rem;color:#fff;background:linear-gradient(135deg,#5b6cff,#8b5bff);box-shadow:0 8px 24px rgba(70,70,140,.35);transition:transform .2s,box-shadow .2s,opacity .2s;}#aiTrialBtn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(70,70,140,.45);}#aiTrialBtn.active{opacity:.5;}#aiTrialBtn .ai-ic{font-size:1.05rem;line-height:1;}#aiTrialBtn .ai-b{font-size:.6rem;font-weight:800;background:rgba(255,255,255,.28);padding:2px 6px;border-radius:999px;letter-spacing:.5px;}#aiTrialPanel{position:fixed;right:22px;bottom:84px;z-index:945;width:380px;max-width:calc(100vw - 32px);height:560px;max-height:calc(100vh - 120px);background:var(--bg,#fff);border:1px solid var(--line,#e6e6e6);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.28);opacity:0;transform:translateY(12px) scale(.98);pointer-events:none;transition:opacity .22s,transform .22s;}#aiTrialPanel.open{opacity:1;transform:none;pointer-events:auto;}#aiTrialPanel .ai-head{display:flex;align-items:center;justify-content:space-between;padding:10px 8px 10px 14px;border-bottom:1px solid var(--line,#e6e6e6);}#aiTrialPanel .ai-ti{font-family:"Pretendard",system-ui,sans-serif;font-size:.9rem;color:var(--ink,#15171a);}#aiTrialPanel .ai-badge{font-size:.64rem;color:#7b83ff;border:1px solid #7b83ff;border-radius:999px;padding:1px 6px;margin-left:5px;}#aiTrialPanel .ai-actions{display:flex;gap:2px;}#aiTrialPanel .ai-x{border:0;background:transparent;cursor:pointer;font-size:1rem;line-height:1;padding:6px 9px;border-radius:8px;color:var(--ink,#15171a);opacity:.65;}#aiTrialPanel .ai-x:hover{opacity:1;background:rgba(125,125,140,.14);}#aiTrialPanel .ai-body{position:relative;flex:1;min-height:0;background:var(--bg,#fff);}#aiTrialPanel .ai-open{font-family:"Pretendard",system-ui,sans-serif;font-size:.78rem;font-weight:700;color:#7b83ff;padding:6px 10px;border-radius:8px;text-decoration:none;white-space:nowrap;}#aiTrialPanel .ai-open:hover{background:rgba(125,125,140,.14);}#aiTrialPanel iframe{position:relative;width:100%;height:100%;border:0;display:block;background:var(--bg,#fff);}@media (max-width:640px){#aiTrialBtn{right:16px;bottom:16px;padding:11px 15px;font-size:.86rem;}}</style></head>
+<body data-base="../../">
+<div class="progress-bar" id="progress"></div>
+<div class="topbar no-print">
+  <div class="container-x">
+    <span class="tb-date" id="today">Friday, August 7, 2026</span>
+    <div class="tb-links"><a href="https://ai.daeseungpark.com/chat/" target="_blank" rel="noopener">Abliterated AI</a><a href="https://tcc.daeseungpark.com/" target="_blank" rel="noopener">Mission Control(TCC)</a><a href="../../profile.html">Profile</a><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener">GitHub</a><a href="https://scholar.google.com/citations?hl=ko&amp;user=qVom0QUAAAAJ" target="_blank" rel="noopener">Scholar</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener">ORCID</a><a href="https://hub.docker.com/u/daeseungpark" target="_blank" rel="noopener">Docker</a><a href="https://codespectrum.net" target="_blank" rel="noopener">Blog</a><a href="../../profile.html#contact">Contact</a><a href="../../notices.html">Notice</a><a href="/articles/parallel-simulation-ape/" class="tb-lang-link" aria-label="Language">한국어</a></div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header no-print">
+  <div class="container-x nav-row">
+    <a href="../../index.html" class="brand">D<span class="dot">.</span> PARK <small>Journal</small></a>
+    <nav class="main-nav"><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">☾</span></button>
+      <button class="print-cta" id="printBtn">🖶 Print / PDF</button>
+      <button class="icon-btn nav-toggle" id="navToggle" aria-label="Menu">≡</button>
+    </div>
+  </div>
+</header>
+
+<div class="ticker no-print">
+  <div class="container-x">
+    <span class="label">Trending</span>
+    <div class="items" id="tickerItems"><a href="../../articles/rag-architectures-hallucination/">Four Ways Retrieval Rescues In…</a><a href="../../articles/mcp-agent-interop-standard/">The Protocol That Became AI's…</a><a href="../../articles/ai-datacenter-power-crunch/">AI's Real Limit Is Electricity</a><a href="../../articles/ai-circular-financing-bubble/">From NVIDIA to NVIDIA</a><a href="../../articles/abliterated-ai-safety/">The Model With Refusal Erased</a><a href="../../articles/llm-spatial-reasoning/">Do LLMs Understand Space? A 7,…</a></div>
+  </div>
+</div>
+
+<article data-article-id="10">
+  <div class="article-wrap">
+    <!-- Masthead -->
+    <header class="art-head">
+      <span class="cat-pill">AI · Explainer</span>
+      <h1>Time Is Performance: Accelerating Simulation with Adaptive Parallelism</h1>
+      <p class="deck">City-scale traffic simulation gets slower the more accurate it becomes. A record of APE, in which AI predicts load and distributes computation across 24 cores.</p>
+      <div class="art-byline">
+        <div class="av">DP</div>
+        <div class="who">
+          <b>Daeseung Park</b>
+          <span>AI &amp; Software Systems Engineer · KAIST</span>
+          <span>July 2026 · 12 min read</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="art-cover"><img src="../../../assets/img/extracted/research/ape-cpu-utilization-24core.png" alt="24-core parallel utilization" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+
+    <!-- Summary -->
+    <div class="summary-box">
+      <span class="tag">1-min summary</span>
+      In next-generation AI-fused mobility simulation for metropolitan-scale cities, the biggest bottleneck is not the model's accuracy but its <b>execution time</b>. NextSim, a microscopic traffic simulator, sees its runtime explode as the number of agents and the size of the road network grow, making real-time use impossible on a single thread. We designed a method in which AI predicts the load arising in each simulation cycle and adaptively distributes it across many cores (APE, Adaptive Parallel Execution). On an i9-13900K with 24 cores (32 logical processors), per-cycle times swung wildly from about 4,360 ms to 13,585 ms; the goal is to flatten this load imbalance with adaptive distribution so that core utilization becomes uniform. Against a total run of about 119,131 ms, we aim to <b>cut simulation time by 50%</b>. The point is a single one — in simulation, ‘time’ is performance.
+    </div>
+
+    <!-- Body -->
+<div class="prose">
+      <span class="chapter-label">Chapter 1. The Problem</span>
+      <h2>Why Is Simulation Slow?</h2>
+      <p>Traffic simulation means relocating an entire city inside a computer. Hundreds of thousands of vehicles and pedestrians move toward their own destinations, signals change, and at every intersection yielding and congestion are computed moment by moment. Because this kind of microscopic simulation tracks each individual object on the road one by one, it comes closest to reality but carries the highest computational cost. That was precisely the wall we ran into in the next-generation AI-fused mobility simulation project for metropolitan-scale cities (a consortium of the Ministry of Science and ICT and KAIST, 2024.07–2027.12). The computational cost of the NextSim simulator was the bottleneck of the entire workflow.</p>
+      <p>The root of the slowness lies in a multiplication of scale. As the number of agents (vehicles and pedestrians) grows and the nodes and links of the road network become denser, the interactions to be processed in each simulation cycle grow not linearly but faster than that. At the scale of a large city, imitating one hour of reality can mean waiting hours in front of the machine. The problem is not simply that “it takes a long time.” When a simulation is slower than reality, it is no longer a tool that aids decisions but merely after-the-fact analysis.</p>
+
+      <div class="pullquote">When a simulation runs slower than reality, it becomes not a decision-making tool but an after-the-fact report.</div>
+
+      <p>At this point a shift in perspective was needed. Until now, the quality of a simulation has largely been discussed in terms of <em>how closely it resembles reality</em> — that is, the model's accuracy. But in settings such as traffic control or policy experiments, where a judgment must be made immediately from the results, <strong>how quickly it delivers an answer</strong> governs performance just as much as accuracy does. However sophisticated the model, a late answer is worth half as much. Our task was not to make the model more accurate, but to make an already accurate model run <em>on time</em>.</p>
+
+      <figure>
+        <div class="fig-box"><img src="../../../assets/img/extracted/research/ape-nextsim-simulation-console.png" alt="NextSim simulation console" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+        <figcaption>The NextSim traffic-simulation console. Each cycle's elapsed time is recorded in the log. Some cycles finish in a few thousand milliseconds; others take three times as long — this variance is the very face of the bottleneck we set out to attack.</figcaption>
+      </figure>
+
+      <span class="chapter-label">Chapter 2. Anatomy of the Bottleneck</span>
+      <h2>The Real Bottleneck: Load Imbalance</h2>
+      <p>To narrow the symptom of “it's slow” down to a cause, you have to look at the logs. NextSim's console stamps the elapsed time for every cycle. Gathering those numbers, the story emerged. Some cycles finished in about 4,360 ms, while others shot up to 13,585 ms. Within the same simulation, one cycle takes more than three times as long as another. The total run time came to about 119,131 ms.</p>
+      <p>That variance itself is the true identity of the bottleneck. In microscopic simulation, the amount of computation is not uniform over time. A cycle in which vehicles crowd into a particular area — like the morning rush hour — is heavy, while a quiet cycle is light. Some districts of the road network are dense with intersections and see interactions explode, while others are sparse. In other words, the computational load is <strong>uneven</strong> along both the time axis and the space axis. Yet if you divide computing resources while ignoring this imbalance, the core handed a light share finishes early and sits idle, while the core handed a heavy share falls behind. The whole cycle always waits for the <em>core that finishes last</em>.</p>
+
+      <div class="callout"><b>The first law of parallel processing.</b> When a single cycle is split across many cores, that cycle's elapsed time is determined not by the average of the cores but by the <b>slowest core</b>. So “we divided up the work” does not mean “we got faster.” If the shares are uneven, no matter how many cores you add, a single heaviest piece holds the whole thing back. The success or failure of parallelization rests not on the number of cores but on the <b>balance of the load</b>.<p></p></div>
+
+      <p>In short, the opponent we had to fight was not a “slow simulator” but an “imbalanced load.” Merely moving from a single thread to parallel execution is not enough. As long as the load fluctuates over time and space, unless we read those fluctuations in real time and reallocate resources, most of the gains from parallelization leak away as waiting time.</p>
+
+      <span class="chapter-label">Chapter 3. The Design</span>
+      <h2>Adaptive Parallel Processing — Predict the Load, Then Divide</h2>
+      <p>The solution is called APE, Adaptive Parallel Execution. The core idea is this: rather than mechanically splitting each cycle into equal parts, <strong>predict the computational load of the coming cycle in advance</strong> and divide adaptively so that the heavy and light shares are roughly equal across cores. This is where AI comes in. The load does not spike at random. Rules are hidden in observable signals such as the time of day, the elapsed-time pattern of the immediately preceding cycles, and the density of each district. From these signals, the AI estimates “which district will be how heavy in the next cycle” and assigns work to the cores according to that estimate.</p>
+      <p>Here is where this approach parts ways with static partitioning. Static partitioning cuts the road network once, assigns fixed shares to each core, and is done. When the load shifts over time, that fixed assignment soon becomes an outdated map. Adaptive partitioning, by contrast, asks anew at every cycle, “where is the heavy load right now?” and redraws the shares accordingly. When the load moves from the city center to the outskirts, the resources move with it.</p>
+
+      <div class="pullquote">Adding cores is easy. The hard part is making all those added cores finish their work at the same time.</div>
+
+      <p>There is one balancing point the design must not miss. The more finely we predict the load and the smaller the pieces we divide it into, the better the balance — but prediction and redistribution themselves consume computation. If the orchestration cost exceeds the time saved by parallelization, the tail wags the dog. So APE aims not for “perfect balance” but for “sufficient balance obtained cheaply.” Keep the prediction light, and redistribute only when the shift in load is significant — this restraint is what decides real-world performance.</p>
+
+      <span class="chapter-label">Chapter 4. Measurement</span>
+      <h2>On 24 Cores, and a Target of 50%</h2>
+      <p>The experimental setup is an Intel Core i9-13900K with 24 cores (32 logical processors combining performance and efficiency cores). On it, APE's goal is clear. Rather than a picture in which only certain cores glow red while the rest idle in blue, the aim is one in which <strong>all cores work evenly and simultaneously</strong>. That is exactly the state the parallel-utilization monitor in the cover image is reaching for — thirty-two processor graphs rising and falling together at roughly the same height.</p>
+      <p>The table below summarizes the essence of the problem in numbers. The bottleneck lies not in the average but in the variance.</p>
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+        <table>
+        <thead><tr><th>Item</th><th>Observed value</th><th>Meaning</th></tr></thead>
+        <tbody>
+          <tr><td>Minimum cycle time</td><td>about 4,360 ms</td><td>A light (quiet) cycle</td></tr>
+          <tr><td>Maximum cycle time</td><td>about 13,585 ms</td><td>A heavy (congested) cycle</td></tr>
+          <tr><td>Variance between cycles</td><td>about 3.1×</td><td>The scale of the load imbalance</td></tr>
+          <tr><td>Total run time</td><td>about 119,131 ms</td><td>The baseline for improvement</td></tr>
+          <tr><td>Environment</td><td>i9-13900K · 24 cores (32 logical)</td><td>The stage for parallelization</td></tr>
+          <tr><td>Target</td><td>simulation time −50%</td><td>The threshold for real-time use</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p>The third row of the table is the heart of this study. A variance of more than threefold between cycles also means that the waste recoverable through parallelization is that large. If we can scatter the work of a heavy cycle evenly across many cores and exploit the slack of a light cycle, the sum of the ‘slowest pieces’ that dominated total run time shrinks. The 50% reduction we are aiming for comes from here — not by inventing new computation, but by arranging computation we were already doing <em>without waiting</em>.</p>
+      <p>Of course, 50% is not an easy number. Prediction error, data synchronization between cores, and the limits of cache and memory bandwidth all eat away at the theoretical ceiling. But the moment we pull the baseline of about 119,131 ms down by half, the simulation becomes a qualitatively different thing. When a scenario that took a whole night finishes in half a day, and half a day shrinks to a few hours, only then does the real-time loop of “run it and judge” become possible.</p>
+
+      <span class="chapter-label">Chapter 5. Implications</span>
+      <h2>Time Is Performance — Beyond the Model, Toward the System</h2>
+      <p>The message this study delivers goes beyond any individual optimization technique. When we discuss the value of an AI system, we often fix our gaze on the model's accuracy. But in domains like simulation, where the result leads directly to a decision, accuracy alone does not complete performance. However correct the answer, if it arrives late its worth is diminished. Here, <strong>time is not a secondary metric but performance itself</strong>.</p>
+      <p>That is why APE is not a pure model problem but a systems-engineering problem. How to predict the load, how to distribute it across cores, and how to hold down the orchestration cost — the balance of these three decides the final speed. Halving execution time while preserving the model's accuracy cannot be solved by one smarter predictor. You have to coordinate the entire system in which prediction, distribution, and synchronization interlock.</p>
+
+      <p>This perspective is not confined to traffic. Large-scale physics simulation, agent-based social simulation, real-time digital twins — every system whose computational load fluctuates across time and space shares the same bottleneck. The load is never uniform, and the ability to divide a non-uniform load uniformly is what determines scalability. What APE aims at is not merely speeding up a single simulator, but the broader problem of ‘how to tame a fluctuating load in real time.’</p>
+
+      <span class="chapter-label">Closing</span>
+      <h2>Designing Away the Waiting</h2>
+      <p>A good simulation begins with resembling reality, but a useful simulation is completed by answering on time. We did not make NextSim smarter. Instead, we rearranged the computation it was already doing so that AI predicts the load and scatters it evenly across 24 cores. The goal is not flashy — eliminate idle cores, reduce the drag of the slowest core, and thereby reclaim half the time. But that half turns the simulation from an after-the-fact report into a real-time decision-making tool. However far models advance, designing ‘when the answer arrives’ remains the engineer's job. Because time is performance.</p>
+
+      <div class="references">
+        <h4>References</h4>
+        <ol>
+          <li>Next-generation AI-fused mobility simulation for metropolitan-scale cities, a research project of the Ministry of Science and ICT–KAIST consortium (2024.07–2027.12).</li>
+          <li>NextSim microscopic traffic simulator execution log and CPU parallel-utilization monitor (Intel Core i9-13900K, 24 cores · 32 logical processors).</li>
+          <li>The cycle times, variance, and total run time in the text (about 4,360–13,585 ms, about 119,131 ms) are measured observations in a specific execution environment and vary with the road network, scenario, and environment. The ‘50% reduction’ is a research target.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer of article -->
+  <div class="art-foot">
+    <div class="art-tags">
+      <a href="#">#ParallelProcessing</a><a href="#">#Simulation</a><a href="#">#Mobility</a><a href="#">#HPC</a>
+    </div>
+    <div class="author-card">
+      <div class="av">DP</div>
+      <div class="who">
+        <b>Daeseung Park</b>
+        <p>Research Engineer at KAIST. I study large language models, time-series forecasting, and conversational AI, and I try to record the process of my research as accurately and readably as I can.</p>
+      </div>
+    </div>
+
+    <div class="read-next no-print">
+        <div class="section-head" style="margin-bottom:20px;"><h2 style="font-size:1.3rem;">Read next</h2></div>
+        <div class="grid grid-2" id="readNext"><a href="../../articles/rag-architectures-hallucination/" class="post-card fade-up"><div class="thumb"><img class="ph " src="../../../articles/rag-architectures-hallucination/images/cover.svg" alt="" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;"><span class="cat-pill">AI · Explainer</span><span class="num">18</span></div><span class="cat">RAG · Retrieval-Augmented</span><h3>Four Ways Retrieval Rescues Intelligence — Lexical, Semantic, Hybrid, and Graph RAG, and the Anatomy of Hallucination</h3><p>A large language model's knowledge freezes the moment training ends. Retrieval-augmented generation (RAG) fills that gap by pulling in documents from outside the model. We dissect four retrieval architectures — Lexical, Semantic, Hybrid, and Graph — from first principles, and examine how they reduce hallucination and what still remains.</p><div class="meta"><span class="by">Daeseung Park</span><span class="dot-sep">18 min read</span></div></a><a href="../../articles/mcp-agent-interop-standard/" class="post-card fade-up"><div class="thumb"><img class="ph " src="../../../articles/mcp-agent-interop-standard/images/cover.svg" alt="" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;"><span class="cat-pill">AI · Explainer</span><span class="num">17</span></div><span class="cat">AI Agents</span><h3>The Protocol That Became AI's HTTP: MCP and the Interoperability-Standard War</h3><p>The moment chatbots turn into 'acting agents,' the bottleneck is no longer intelligence but the standard for connection. We anatomize how Anthropic's MCP became the de facto standard — its architecture, its politics, and the security homework that remains.</p><div class="meta"><span class="by">Daeseung Park</span><span class="dot-sep">14 min read</span></div></a></div>
+      </div>
+      <nav class="post-nav no-print" id="postNav"><a class="pn" href="../../articles/waterpipe-prediction/"><span class="pn-dir">‹ Previous</span><span class="pn-t">Predicting the Unseen Pipe</span></a><a class="pn pn-list" href="../../articles.html">List</a><a class="pn pn-right" href="../../articles/mmwave-georeferencing/"><span class="pn-dir">Next ›</span><span class="pn-t">Drawing People on a Map Without a Camera</span></a></nav>
+    </div>
+</article>
+
+<div class="print-footer">Daeseung Park · D. PARK Journal — Time Is Performance: Accelerating Simulation with Adaptive Parallelism</div>
+
+<footer class="site-footer no-print" id="contact"><div class="container-x"><div class="footer-grid"><div><div class="footer-brand">D. PARK</div><p style="max-width:34ch;">AI &amp; Software Systems Engineer · KAIST</p><div class="social" style="margin-top:16px;"><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener" aria-label="GitHub">GH</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener" aria-label="ORCID">iD</a><a href="mailto:dspark@daeseungpark.com" aria-label="Email">@</a></div></div><div><h6>Browse</h6><ul><li><a href="../../index.html">Home</a></li><li><a href="../../profile.html">Profile</a></li><li><a href="../../articles.html">Articles</a></li><li><a href="../../research.html">Research</a></li><li><a href="../../notices.html">Notice</a></li></ul></div><div><h6>Articles</h6><ul class="ft-arts"><li><a href="../../articles/rag-architectures-hallucination/">Four Ways Retrieval Rescues Intelligence — Lexical, Semantic, Hybrid, and Graph RAG, and the Anatomy of Hallucination</a></li><li><a href="../../articles/mcp-agent-interop-standard/">The Protocol That Became AI's HTTP</a></li><li><a href="../../articles/ai-datacenter-power-crunch/">AI's Real Limit Is Electricity</a></li><li><a href="../../articles/ai-circular-financing-bubble/">From NVIDIA to NVIDIA</a></li><li><a href="../../articles/abliterated-ai-safety/">The Model With Refusal Erased</a></li></ul></div><div><h6>Contact</h6><ul><li><a href="mailto:dspark@daeseungpark.com">dspark@daeseungpark.com</a></li><li><a href="mailto:dspark@kaist.ac.kr">dspark@kaist.ac.kr</a></li><li><a href="tel:+821064547777">Phone (KR) +82 10 6454 7777</a></li><li><a href="tel:+16574109449">Phone (US) +1 657 410 9449</a></li><li>KAIST, Daejeon, Korea</li></ul></div></div><div class="footer-bottom"><span>© 2026 Daeseung Park. All rights reserved.</span><span>Designed &amp; built as a personal journal for Daeseung Park.</span></div></div></footer>
+
+<div class="mobile-nav" id="mobileNav"><button class="icon-btn close" id="navClose" aria-label="Close">✕</button><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></div>
+
+<script src="../../../assets/js/data.js"></script>
+<script src="../../../assets/js/articles.js"></script>
+<script src="../../../assets/js/i18n-en.js"></script><script src="../../../assets/js/main.js"></script>
+
+
+</body></html>

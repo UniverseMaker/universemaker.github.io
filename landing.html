@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daeseung Park · 박대승 — AI & Software Systems Engineer</title>
+<meta name="description" content="박대승 — AI·소프트웨어 시스템 엔지니어. 대형언어모델, 시계열 예측, 대화형 AI, mmWave 실내측위를 연구하는 KAIST 연구원의 랜딩 페이지.">
+<!-- seo-i18n:start -->
+<link rel="canonical" href="https://daeseungpark.com/landing.html">
+<link rel="alternate" hreflang="ko" href="https://daeseungpark.com/landing.html">
+<link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/landing.html">
+<link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/landing.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:locale:alternate" content="en_US">
+<!-- seo-i18n:end -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="D. PARK Journal">
+<meta property="og:title" content="Daeseung Park — AI &amp; Software Systems Engineer">
+<meta property="og:description" content="박대승 — AI·소프트웨어 시스템 엔지니어. 대형언어모델, 시계열 예측, 대화형 AI, mmWave 실내측위를 연구하는 KAIST 연구원의 랜딩 페이지.">
+<meta property="og:url" content="https://daeseungpark.com/landing.html">
+<meta property="og:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Daeseung Park — AI &amp; Software Systems Engineer">
+<meta name="twitter:description" content="박대승 — AI·소프트웨어 시스템 엔지니어. 대형언어모델, 시계열 예측, 대화형 AI, mmWave 실내측위를 연구하는 KAIST 연구원의 랜딩 페이지.">
+<meta name="twitter:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","inLanguage":"ko","@type":"Person","name":"Daeseung Park","alternateName":"박대승","jobTitle":"AI & Software Systems Engineer","affiliation":{"@type":"Organization","name":"KAIST"},"url":"https://daeseungpark.com/landing.html","image":"https://daeseungpark.com/assets/img/profile/img3.jpg","sameAs":["https://github.com/UniverseMaker","https://orcid.org/0009-0002-3044-2689","https://scholar.google.com/citations?hl=ko&user=qVom0QUAAAAJ","https://www.linkedin.com/in/daeseungpark","https://hub.docker.com/u/daeseungpark","https://codespectrum.net"]}</script>
+<style>
+  /* ============================================================
+     Daeseung Park — 독립 랜딩페이지 (자기완결형, 인라인 CSS/JS)
+     기존 사이트 콘텐츠 기반 · 이미지는 기존 assets 참조
+     ============================================================ */
+  :root{
+    --bg:#f7f6f3; --bg-soft:#efeee9; --surface:#ffffff; --surface-2:#f3f2ee;
+    --ink:#16181d; --ink-soft:#41454e; --muted:#767b86; --line:rgba(20,22,30,.10);
+    --accent:#4f5bd5; --accent-2:#8b6cff; --accent-ink:#3540b0;
+    --hero-scrim-1:rgba(9,11,28,.34); --hero-scrim-2:rgba(9,11,28,.82);
+    --shadow:0 18px 48px -22px rgba(20,22,40,.28);
+    --card-shadow:0 12px 34px -20px rgba(20,22,40,.30);
+    --radius:20px;
+    --serif:"Iowan Old Style","Palatino Linotype","Noto Serif KR",Georgia,"Times New Roman",serif;
+    --sans:"Pretendard","Apple SD Gothic Neo","Malgun Gothic","Segoe UI",system-ui,-apple-system,sans-serif;
+    --maxw:1180px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0c0e18; --bg-soft:#101324; --surface:#151829; --surface-2:#1b1f34;
+      --ink:#f2f3f8; --ink-soft:#c4c8d6; --muted:#8b90a3; --line:rgba(255,255,255,.11);
+      --accent:#8b9bff; --accent-2:#b49bff; --accent-ink:#aeb8ff;
+      --hero-scrim-1:rgba(4,5,14,.42); --hero-scrim-2:rgba(4,5,14,.90);
+      --shadow:0 22px 56px -24px rgba(0,0,0,.66);
+      --card-shadow:0 16px 40px -22px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0c0e18; --bg-soft:#101324; --surface:#151829; --surface-2:#1b1f34;
+    --ink:#f2f3f8; --ink-soft:#c4c8d6; --muted:#8b90a3; --line:rgba(255,255,255,.11);
+    --accent:#8b9bff; --accent-2:#b49bff; --accent-ink:#aeb8ff;
+    --hero-scrim-1:rgba(4,5,14,.42); --hero-scrim-2:rgba(4,5,14,.90);
+    --shadow:0 22px 56px -24px rgba(0,0,0,.66);
+    --card-shadow:0 16px 40px -22px rgba(0,0,0,.6);
+  }
+  :root[data-theme="light"]{
+    --bg:#f7f6f3; --bg-soft:#efeee9; --surface:#ffffff; --surface-2:#f3f2ee;
+    --ink:#16181d; --ink-soft:#41454e; --muted:#767b86; --line:rgba(20,22,30,.10);
+    --accent:#4f5bd5; --accent-2:#8b6cff; --accent-ink:#3540b0;
+    --hero-scrim-1:rgba(9,11,28,.34); --hero-scrim-2:rgba(9,11,28,.82);
+    --shadow:0 18px 48px -22px rgba(20,22,40,.28);
+    --card-shadow:0 12px 34px -20px rgba(20,22,40,.30);
+  }
+
+  *,*::before,*::after{box-sizing:border-box;}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:var(--sans); font-size:16px; line-height:1.6;
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+    overflow-x:hidden;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+  h1,h2,h3{margin:0;line-height:1.15;font-weight:600;letter-spacing:-.01em;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(18px,4vw,40px);}
+
+  /* ---------- Top mini bar ---------- */
+  .topmini{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px clamp(18px,4vw,40px);
+    background:transparent;transition:background .3s ease,box-shadow .3s ease,backdrop-filter .3s;
+    pointer-events:none;
+  }
+  .topmini.solid{
+    background:color-mix(in srgb,var(--bg) 82%,transparent);
+    backdrop-filter:saturate(160%) blur(14px);
+    box-shadow:0 1px 0 var(--line);
+  }
+  .topmini a,.topmini button{pointer-events:auto;}
+  .brand{
+    font-family:var(--serif);font-size:1.15rem;font-weight:600;color:#fff;
+    letter-spacing:.01em;text-shadow:0 1px 14px rgba(0,0,0,.4);transition:color .3s;
+  }
+  .brand .dot{color:var(--accent-2);}
+  .topmini.solid .brand{color:var(--ink);text-shadow:none;}
+  .topmini-r{display:flex;align-items:center;gap:6px;}
+  .mini-link{
+    color:rgba(255,255,255,.92);font-size:.82rem;font-weight:500;
+    padding:7px 12px;border-radius:999px;text-shadow:0 1px 10px rgba(0,0,0,.35);
+    transition:background .2s,color .3s;
+  }
+  .topmini.solid .mini-link{color:var(--ink-soft);text-shadow:none;}
+  .mini-link:hover{background:rgba(255,255,255,.16);}
+  .topmini.solid .mini-link:hover{background:var(--surface-2);color:var(--ink);}
+  .theme-btn{
+    pointer-events:auto;display:inline-grid;place-items:center;
+    width:38px;height:38px;border-radius:999px;border:1px solid rgba(255,255,255,.3);
+    background:rgba(255,255,255,.12);color:#fff;cursor:pointer;font-size:1rem;
+    backdrop-filter:blur(6px);transition:transform .2s,background .3s,color .3s,border-color .3s;
+  }
+  .topmini.solid .theme-btn{border-color:var(--line);background:var(--surface-2);color:var(--ink);}
+  .theme-btn:hover{transform:translateY(-1px);}
+  @media(max-width:640px){.mini-link.hide-sm{display:none;}}
+  .tb-lang-link{color:rgba(255,255,255,.82);font-size:.82rem;font-weight:600;text-shadow:0 1px 10px rgba(0,0,0,.35);padding:5px 9px;border-radius:8px;line-height:1;}
+  .tb-lang-link:hover{background:rgba(255,255,255,.16);color:#fff;}
+  .topmini.solid .tb-lang-link{color:var(--ink-soft);text-shadow:none;}
+  .topmini.solid .tb-lang-link:hover{background:var(--surface-2);color:var(--ink);}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;min-height:100svh;min-height:100vh;
+    display:flex;align-items:flex-end;
+    padding:120px 0 clamp(48px,8vh,90px);
+    color:#fff;overflow:hidden;isolation:isolate;
+  }
+  .hero-bg{
+    position:absolute;inset:0;z-index:-2;
+    background:#11132a url("assets/img/profile/img2.jpg") center 16% / cover no-repeat;
+    transform:scale(1.06);
+    animation:heroZoom 18s ease-out forwards;
+  }
+  @keyframes heroZoom{to{transform:scale(1);}}
+  .hero-scrim{
+    position:absolute;inset:0;z-index:-1;
+    background:
+      radial-gradient(120% 90% at 78% 8%, rgba(139,108,255,.28), transparent 55%),
+      linear-gradient(180deg, var(--hero-scrim-1) 0%, rgba(9,11,28,.30) 42%, var(--hero-scrim-2) 100%);
+  }
+  @media (prefers-reduced-motion: reduce){.hero-bg{animation:none;transform:none;}}
+  .hero-inner{width:100%;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:9px;
+    font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    color:rgba(255,255,255,.86);
+    padding:7px 15px;border-radius:999px;
+    background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);
+    backdrop-filter:blur(8px);
+  }
+  .eyebrow .pulse{width:8px;height:8px;border-radius:50%;background:#7bffb0;box-shadow:0 0 0 0 rgba(123,255,176,.7);animation:pulse 2.2s infinite;}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(123,255,176,.6);}70%{box-shadow:0 0 0 9px rgba(123,255,176,0);}100%{box-shadow:0 0 0 0 rgba(123,255,176,0);}}
+  .hero h1{
+    font-family:var(--serif);font-weight:600;
+    font-size:clamp(2.6rem,7.5vw,5.4rem);line-height:1.02;letter-spacing:-.02em;
+    margin:22px 0 6px;text-shadow:0 4px 30px rgba(0,0,0,.35);
+  }
+  .hero h1 .ko{display:block;font-size:.52em;font-weight:500;color:rgba(255,255,255,.9);margin-top:.15em;letter-spacing:0;}
+  .hero .role{
+    font-size:clamp(1rem,2.4vw,1.34rem);font-weight:500;color:#fff;
+    margin:0 0 14px;letter-spacing:.005em;
+  }
+  .hero .role b{color:#c7ccff;font-weight:600;}
+  .hero .tagline{
+    max-width:52ch;font-size:clamp(1rem,1.7vw,1.16rem);line-height:1.72;
+    color:rgba(255,255,255,.88);margin:0 0 30px;
+  }
+  .hero-cta{display:flex;flex-wrap:wrap;gap:12px;}
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;
+    font-size:.96rem;font-weight:600;padding:14px 26px;border-radius:999px;
+    cursor:pointer;border:1px solid transparent;transition:transform .18s,box-shadow .25s,background .25s,color .25s,border-color .25s;
+    will-change:transform;
+  }
+  .btn svg{width:17px;height:17px;transition:transform .2s;}
+  .btn:hover svg{transform:translateX(3px);}
+  .btn-primary{
+    background:linear-gradient(120deg,var(--accent),var(--accent-2));color:#fff;
+    box-shadow:0 14px 34px -14px rgba(79,91,213,.75);
+  }
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 20px 44px -16px rgba(79,91,213,.9);}
+  .btn-ghost{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.34);backdrop-filter:blur(8px);}
+  .btn-ghost:hover{background:rgba(255,255,255,.22);transform:translateY(-2px);}
+  .scroll-hint{
+    position:absolute;left:50%;bottom:26px;transform:translateX(-50%);z-index:1;
+    color:rgba(255,255,255,.7);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;
+    display:flex;flex-direction:column;align-items:center;gap:7px;
+  }
+  .scroll-hint .mouse{width:22px;height:36px;border:2px solid rgba(255,255,255,.6);border-radius:12px;position:relative;}
+  .scroll-hint .mouse::after{content:"";position:absolute;left:50%;top:6px;width:3px;height:7px;background:#fff;border-radius:2px;transform:translateX(-50%);animation:wheel 1.6s infinite;}
+  @keyframes wheel{0%{opacity:0;transform:translate(-50%,0);}40%{opacity:1;}100%{opacity:0;transform:translate(-50%,10px);}}
+  @media(max-width:640px){.scroll-hint{display:none;}}
+
+  /* ---------- generic section ---------- */
+  section.block{padding:clamp(64px,10vh,120px) 0;}
+  .sec-head{max-width:640px;margin-bottom:clamp(34px,5vh,56px);}
+  .kicker{font-size:.76rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-ink);}
+  .sec-head h2{font-family:var(--serif);font-size:clamp(1.8rem,4.2vw,2.7rem);margin:12px 0 12px;letter-spacing:-.015em;}
+  .sec-head p{color:var(--ink-soft);font-size:1.03rem;margin:0;line-height:1.7;}
+
+  /* ---------- Stats ---------- */
+  .stats-band{background:var(--bg-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .stats-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,3vw,30px);}
+  .stat{
+    text-align:center;padding:clamp(24px,4vw,40px) 14px;border-radius:var(--radius);
+    background:var(--surface);border:1px solid var(--line);box-shadow:var(--card-shadow);
+  }
+  .stat .num{
+    font-family:var(--serif);font-weight:600;line-height:1;
+    font-size:clamp(2.6rem,7vw,4.2rem);
+    background:linear-gradient(120deg,var(--accent),var(--accent-2));
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:var(--accent);
+  }
+  .stat .lab{margin-top:12px;font-size:.94rem;font-weight:600;color:var(--ink);letter-spacing:.01em;}
+  .stat .sub{margin-top:3px;font-size:.8rem;color:var(--muted);}
+
+  /* ---------- Interests chips ---------- */
+  .chips{display:flex;flex-wrap:wrap;gap:12px;}
+  .chip{
+    display:inline-flex;align-items:center;gap:9px;
+    padding:12px 20px;border-radius:14px;font-size:.98rem;font-weight:500;
+    background:var(--surface);border:1px solid var(--line);color:var(--ink);
+    box-shadow:0 6px 18px -14px rgba(20,22,40,.4);
+    transition:transform .2s,box-shadow .25s,border-color .25s;
+  }
+  .chip:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--accent) 45%,var(--line));box-shadow:0 14px 26px -16px rgba(79,91,213,.5);}
+  .chip .dot{width:9px;height:9px;border-radius:50%;background:linear-gradient(120deg,var(--accent),var(--accent-2));flex:none;}
+
+  /* ---------- Highlights cards ---------- */
+  .hl-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;}
+  .hl{
+    display:flex;flex-direction:column;gap:12px;
+    padding:28px 26px;border-radius:var(--radius);
+    background:var(--surface);border:1px solid var(--line);box-shadow:var(--card-shadow);
+    position:relative;overflow:hidden;transition:transform .25s,box-shadow .3s;
+  }
+  .hl::before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:linear-gradient(90deg,var(--accent),var(--accent-2));opacity:.9;}
+  .hl:hover{transform:translateY(-5px);box-shadow:0 26px 52px -26px rgba(20,22,40,.5);}
+  .hl .tag{align-self:flex-start;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-ink);background:color-mix(in srgb,var(--accent) 12%,transparent);padding:5px 11px;border-radius:999px;}
+  .hl h3{font-family:var(--serif);font-size:1.18rem;line-height:1.3;color:var(--ink);}
+  .hl p{margin:0;color:var(--ink-soft);font-size:.94rem;line-height:1.6;}
+  .hl .meta{margin-top:auto;padding-top:6px;font-size:.82rem;color:var(--muted);font-weight:500;}
+  .hl .meta b{color:var(--accent-ink);font-weight:700;}
+
+  /* ---------- Articles preview ---------- */
+  .art-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;}
+  .art{
+    display:flex;flex-direction:column;
+    border-radius:var(--radius);overflow:hidden;
+    background:var(--surface);border:1px solid var(--line);box-shadow:var(--card-shadow);
+    transition:transform .25s,box-shadow .3s;
+  }
+  .art:hover{transform:translateY(-5px);box-shadow:0 26px 52px -26px rgba(20,22,40,.5);}
+  .art .art-top{padding:22px 24px 0;}
+  .art .cat{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-ink);}
+  .art h3{font-family:var(--serif);font-size:1.14rem;line-height:1.34;margin:11px 0 0;color:var(--ink);
+    display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+  .art p{padding:0 24px;margin:12px 0 0;color:var(--ink-soft);font-size:.92rem;line-height:1.62;
+    display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;}
+  .art .art-foot{margin-top:auto;padding:18px 24px 22px;display:flex;align-items:center;justify-content:space-between;font-size:.8rem;color:var(--muted);}
+  .art .art-foot .read-more{color:var(--accent-ink);font-weight:600;display:inline-flex;align-items:center;gap:5px;}
+  .art .art-foot .read-more svg{width:14px;height:14px;transition:transform .2s;}
+  .art:hover .read-more svg{transform:translateX(3px);}
+  .more-row{margin-top:34px;}
+  .link-arrow{display:inline-flex;align-items:center;gap:8px;font-weight:600;color:var(--accent-ink);font-size:.98rem;}
+  .link-arrow svg{width:16px;height:16px;transition:transform .2s;}
+  .link-arrow:hover svg{transform:translateX(4px);}
+
+  /* ---------- Contact CTA ---------- */
+  .cta-band{position:relative;overflow:hidden;color:#fff;background:#0d1030;isolation:isolate;}
+  .cta-band .glow{position:absolute;inset:0;z-index:-1;
+    background:
+      radial-gradient(80% 120% at 15% 10%, rgba(139,108,255,.5), transparent 55%),
+      radial-gradient(70% 120% at 90% 90%, rgba(79,91,213,.55), transparent 55%),
+      linear-gradient(120deg,#12143a,#0b0d24);}
+  .cta-inner{text-align:center;padding:clamp(64px,10vh,110px) 0;}
+  .cta-inner h2{font-family:var(--serif);font-size:clamp(2rem,5vw,3.2rem);letter-spacing:-.02em;margin:0 0 16px;}
+  .cta-inner p{max-width:56ch;margin:0 auto 30px;color:rgba(255,255,255,.85);font-size:1.06rem;line-height:1.7;}
+  .cta-links{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:36px;}
+  .cta-mail{
+    display:inline-flex;align-items:center;gap:10px;font-size:1.02rem;font-weight:600;
+    padding:15px 30px;border-radius:999px;background:#fff;color:#1a1c3d;
+    transition:transform .18s,box-shadow .25s;box-shadow:0 16px 40px -16px rgba(0,0,0,.6);
+  }
+  .cta-mail:hover{transform:translateY(-2px);box-shadow:0 22px 50px -18px rgba(0,0,0,.7);}
+  .cta-mail.alt{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.32);box-shadow:none;}
+  .cta-mail.alt:hover{background:rgba(255,255,255,.18);}
+  .socials{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;}
+  .socials a{
+    display:inline-flex;align-items:center;gap:7px;font-size:.86rem;font-weight:500;
+    color:rgba(255,255,255,.82);padding:9px 16px;border-radius:999px;
+    border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);
+    transition:background .2s,color .2s,transform .2s;
+  }
+  .socials a:hover{background:rgba(255,255,255,.16);color:#fff;transform:translateY(-2px);}
+
+  /* ---------- Footer ---------- */
+  footer.foot{background:var(--bg-soft);border-top:1px solid var(--line);}
+  .foot-inner{padding:34px 0;display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;}
+  .foot .who{display:flex;align-items:center;gap:14px;}
+  .foot .who img{width:46px;height:46px;border-radius:50%;object-fit:cover;border:1px solid var(--line);}
+  .foot .who b{display:block;font-family:var(--serif);font-size:1.02rem;color:var(--ink);}
+  .foot .who span{font-size:.84rem;color:var(--muted);}
+  .foot .copy{font-size:.82rem;color:var(--muted);}
+  .foot .copy a{color:var(--accent-ink);font-weight:600;}
+
+  /* ---------- reveal animation ---------- */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1);}
+  .reveal.in{opacity:1;transform:none;}
+  .reveal.d1{transition-delay:.08s;} .reveal.d2{transition-delay:.16s;} .reveal.d3{transition-delay:.24s;} .reveal.d4{transition-delay:.32s;}
+  @media (prefers-reduced-motion: reduce){.reveal{opacity:1;transform:none;transition:none;}}
+
+  /* ---------- responsive ---------- */
+  @media(max-width:900px){
+    .hl-grid,.art-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+  }
+  @media(max-width:620px){
+    .stats-grid{grid-template-columns:1fr;}
+    .hl-grid,.art-grid{grid-template-columns:1fr;}
+    .hero{padding-top:104px;}
+    .btn{flex:1 1 auto;justify-content:center;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== Top mini bar ===== -->
+<div class="topmini" id="topmini">
+  <a class="brand" href="index.html">D<span class="dot">.</span> PARK</a>
+  <div class="topmini-r">
+    <a class="mini-link hide-sm" href="profile.html">Profile</a>
+    <a class="mini-link hide-sm" href="articles.html">Articles</a>
+    <a class="mini-link hide-sm" href="works.html">Publications</a>
+    <a href="en/landing.html" class="tb-lang-link" aria-label="Language">English</a>
+    <button class="theme-btn" id="themeToggle" aria-label="라이트/다크 테마 전환"><span id="themeIcon">☾</span></button>
+  </div>
+</div>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+  <div class="hero-bg" role="img" aria-label="박대승 인물 사진"></div>
+  <div class="hero-scrim"></div>
+  <div class="wrap hero-inner">
+    <span class="eyebrow reveal in"><span class="pulse" aria-hidden="true"></span>AI &amp; Software Systems Engineer · KAIST</span>
+    <h1 class="reveal in d1">Daeseung&nbsp;Park<span class="ko">박대승</span></h1>
+    <p class="role reveal in d2">대형언어모델과 <b>시계열 예측</b>, <b>대화형 AI</b>를 연구하는 KAIST 연구원</p>
+    <p class="tagline reveal in d3">문제의 본질을 코드로 옮기는 일을 합니다. 논문의 한 줄로 압축되기 전, 연구가 실제로 어떻게 흘러갔는지 — 그 판단과 시행착오까지 — 기록합니다.</p>
+    <div class="hero-cta reveal in d4">
+      <a class="btn btn-primary" href="profile.html">프로필 전체 보기
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a class="btn btn-ghost" href="articles.html">기고문 읽기</a>
+    </div>
+  </div>
+  <div class="scroll-hint" aria-hidden="true"><span class="mouse"></span>SCROLL</div>
+</header>
+
+<!-- ===== Stats ===== -->
+<section class="block stats-band">
+  <div class="wrap">
+    <div class="stats-grid">
+      <div class="stat reveal"><div class="num" data-count="25">0</div><div class="lab">Publications</div><div class="sub">SCIE · KCI · 국제·국내 학술</div></div>
+      <div class="stat reveal d1"><div class="num" data-count="10">0</div><div class="lab">Patents &amp; Software</div><div class="sub">특허 4건 · SW 등록 6건</div></div>
+      <div class="stat reveal d2"><div class="num" data-count="24">0</div><div class="lab">R&amp;D Projects</div><div class="sub">국가·지자체·산학 연구과제</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Interests ===== -->
+<section class="block">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Research Focus</span>
+      <h2>무엇을 연구하는가</h2>
+      <p>생성형 AI부터 mmWave 센싱까지, 언어와 공간·시간을 다루는 문제를 폭넓게 연구합니다.</p>
+    </div>
+    <div class="chips reveal d1">
+      <span class="chip"><span class="dot"></span>생성형 AI · LLM</span>
+      <span class="chip"><span class="dot"></span>시계열 예측</span>
+      <span class="chip"><span class="dot"></span>대화형 AI</span>
+      <span class="chip"><span class="dot"></span>실내측위 · mmWave 센싱</span>
+      <span class="chip"><span class="dot"></span>지식그래프 · GeoLLM</span>
+      <span class="chip"><span class="dot"></span>분산처리 · 시뮬레이션</span>
+      <span class="chip"><span class="dot"></span>AI 안전</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Highlights ===== -->
+<section class="block stats-band">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Selected Work</span>
+      <h2>대표 성과</h2>
+      <p>최근 게재 논문과 특허, 그리고 현장에 적용한 대표 연구·산출물입니다.</p>
+    </div>
+    <div class="hl-grid">
+      <a class="hl reveal" href="works.html">
+        <span class="tag">SCIE · IEEE Access</span>
+        <h3>분산 mmWave 레이더로 복잡 실내 환경의 인체를 탐지·지리참조</h3>
+        <p>카메라 없이 평균 위치오차 0.59 m — 영상 기반(6.04 m) 대비 약 10배 개선. 대전 월드컵경기장 60일 실증.</p>
+        <span class="meta">IEEE Access · <b>IF 4.2</b> · 주저자 · 2026.07</span>
+      </a>
+      <a class="hl reveal d1" href="works.html">
+        <span class="tag">특허 출원 · KAIST</span>
+        <h3>mmWave 포인트 클라우드 클러스터링 기반 지리참조 측위 방법</h3>
+        <p>레이더 점군을 클러스터링해 지리좌표계 기준으로 위치를 산출하는 방법. APCC 2024 논문 기반 지식재산 성과.</p>
+        <span class="meta">출원 10-2025-0119952 · 2025.08.27</span>
+      </a>
+      <a class="hl reveal d2" href="portfolio.html">
+        <span class="tag">AI · R&amp;D</span>
+        <h3>GeoLLM — 지식그래프 기반 지리 질의응답</h3>
+        <p>Llama-3 8B 파인튜닝 + RAG + 지식그래프(GNLM)로 지도 질의응답 정확도 <b>88.4%</b> 달성.</p>
+        <span class="meta">국토지리정보원 연계 · 2023–2026</span>
+      </a>
+      <a class="hl reveal" href="portfolio.html">
+        <span class="tag">AI · R&amp;D</span>
+        <h3>상수도 관로 파손·누수 예측 시스템</h3>
+        <p>불규칙 시계열로 파손·누수를 예측하고 언어모델로 보전방안까지 추론해 안전관리 플랫폼에 배포.</p>
+        <span class="meta">대전시 · 한국수자원공사 · 2024–2025</span>
+      </a>
+      <a class="hl reveal d1" href="portfolio.html">
+        <span class="tag">IoT · 관제</span>
+        <h3>mmWave 분산 재실 모니터링</h3>
+        <p>60 GHz 다중 레이더를 분산 배치하고 MQTT로 통합 관제해 경기장 규모 실내 재실 현황을 실시간 파악.</p>
+        <span class="meta">대전 월드컵경기장 실증 · 2024–2026</span>
+      </a>
+      <a class="hl reveal d2" href="works.html">
+        <span class="tag">🏆 수상 · 국내학술</span>
+        <h3>실내 이동 네트워크 자동 생성 도구 연구</h3>
+        <p>SHP 기반 실내공간을 정량 분할해 노드-링크 네트워크를 자동 생성. 한국디지털콘텐츠학회 <b>우수논문상</b>.</p>
+        <span class="meta">DCS 2026 하계학술대회 · 2026.07</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Articles preview ===== -->
+<section class="block">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">From the Journal</span>
+      <h2>최신 기고</h2>
+      <p>AI·LLM 기술 해설과 연구 회고를 담은 기고문. 지금 주목할 주제부터 읽어 보세요.</p>
+    </div>
+    <div class="art-grid">
+      <a class="art reveal" href="articles/rag-architectures-hallucination/">
+        <div class="art-top"><span class="cat">RAG · 검색증강</span>
+          <h3>검색이 지능을 구원하는 네 가지 방법 — Lexical·Semantic·Hybrid·Graph RAG와 환각의 해부</h3></div>
+        <p>대형언어모델의 지식은 학습이 끝나는 순간 굳어 버린다. 검색증강생성(RAG)은 모델 바깥의 문서를 끌어와 그 빈틈을 메운다. 네 검색 아키텍처를 원리부터 해부하고 환각을 어떻게 줄이는지 짚는다.</p>
+        <div class="art-foot"><span>2026.07.27 · 18분</span><span class="read-more">읽기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+      </a>
+      <a class="art reveal d1" href="articles/mcp-agent-interop-standard/">
+        <div class="art-top"><span class="cat">AI 에이전트</span>
+          <h3>AI의 HTTP가 된 프로토콜: MCP와 상호운용성 표준 전쟁</h3></div>
+        <p>챗봇이 ‘행동하는 에이전트’로 바뀌는 순간, 병목은 지능이 아니라 연결의 표준이 된다. Anthropic이 공개한 MCP가 사실상 표준이 되기까지, 그 구조와 정치학, 남은 보안 숙제를 해부한다.</p>
+        <div class="art-foot"><span>2026.07.18 · 14분</span><span class="read-more">읽기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+      </a>
+      <a class="art reveal d2" href="articles/ai-datacenter-power-crunch/">
+        <div class="art-top"><span class="cat">AI 인프라</span>
+          <h3>AI의 진짜 한계는 전기다</h3></div>
+        <p>데이터센터 전력은 2024년 약 415 TWh에서 2030년 약 945 TWh로 6년 만에 두 배가 된다. 진짜 병목은 GPU가 아니라, 발전소에서 랙까지 전기를 미는 전력망이다.</p>
+        <div class="art-foot"><span>2026.07.17 · 14분</span><span class="read-more">읽기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+      </a>
+    </div>
+    <div class="more-row reveal">
+      <a class="link-arrow" href="articles.html">전체 기고문 보기
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Contact CTA ===== -->
+<section class="cta-band">
+  <div class="glow" aria-hidden="true"></div>
+  <div class="wrap cta-inner reveal">
+    <h2>함께 만들 문제를 찾고 있습니다</h2>
+    <p>연구 협업, 기술 자문, 그리고 흥미로운 문제에 대한 대화를 언제든 환영합니다.</p>
+    <div class="cta-links">
+      <a class="cta-mail" href="mailto:dspark@daeseungpark.com">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+        dspark@daeseungpark.com
+      </a>
+      <a class="cta-mail alt" href="mailto:dspark@kaist.ac.kr">dspark@kaist.ac.kr</a>
+    </div>
+    <div class="socials">
+      <a href="https://github.com/UniverseMaker" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener">ORCID</a>
+      <a href="https://scholar.google.com/citations?hl=ko&user=qVom0QUAAAAJ" target="_blank" rel="noopener">Google Scholar</a>
+      <a href="https://www.linkedin.com/in/daeseungpark" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="portfolio.html">Portfolio</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer class="foot">
+  <div class="wrap foot-inner">
+    <div class="who">
+      <img src="assets/img/profile/img3.jpg" alt="박대승 프로필 사진">
+      <div><b>Daeseung Park · 박대승</b><span>AI &amp; Software Systems Engineer · KAIST</span></div>
+    </div>
+    <div class="copy">© 2026 Daeseung Park. Explore the full journal at <a href="index.html">D. PARK Journal →</a></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- Theme ---------- */
+  var root=document.documentElement, icon=document.getElementById("themeIcon");
+  function apply(t){root.setAttribute("data-theme",t);icon.textContent=(t==="dark")?"☀":"☾";}
+  var saved;
+  try{saved=localStorage.getItem("dp-landing-theme");}catch(e){}
+  if(saved){apply(saved);}
+  else{apply(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");}
+  document.getElementById("themeToggle").addEventListener("click",function(){
+    var next=root.getAttribute("data-theme")==="dark"?"light":"dark";
+    apply(next);
+    try{localStorage.setItem("dp-landing-theme",next);}catch(e){}
+  });
+
+  /* ---------- Top bar solid on scroll ---------- */
+  var bar=document.getElementById("topmini");
+  function onScroll(){ if(window.scrollY>60) bar.classList.add("solid"); else bar.classList.remove("solid"); }
+  onScroll(); window.addEventListener("scroll",onScroll,{passive:true});
+
+  /* ---------- Reveal on scroll ---------- */
+  var reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var revs=[].slice.call(document.querySelectorAll(".reveal:not(.in)"));
+  if(reduce||!("IntersectionObserver" in window)){
+    revs.forEach(function(el){el.classList.add("in");});
+  } else {
+    var ro=new IntersectionObserver(function(ents){
+      ents.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); ro.unobserve(e.target); } });
+    },{threshold:.16,rootMargin:"0px 0px -8% 0px"});
+    revs.forEach(function(el){ro.observe(el);});
+  }
+
+  /* ---------- Count-up ---------- */
+  function countUp(el){
+    var target=parseInt(el.getAttribute("data-count"),10)||0;
+    if(reduce){el.textContent=target;return;}
+    var start=null, dur=1400;
+    function step(ts){
+      if(!start)start=ts;
+      var p=Math.min((ts-start)/dur,1);
+      var eased=1-Math.pow(1-p,3);
+      el.textContent=Math.round(eased*target);
+      if(p<1)requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  var nums=[].slice.call(document.querySelectorAll(".num[data-count]"));
+  if(!("IntersectionObserver" in window)){
+    nums.forEach(countUp);
+  } else {
+    var co=new IntersectionObserver(function(ents){
+      ents.forEach(function(e){ if(e.isIntersecting){ countUp(e.target); co.unobserve(e.target); } });
+    },{threshold:.5});
+    nums.forEach(function(el){co.observe(el);});
+  }
+})();
+</script>
+</body>
+</html>

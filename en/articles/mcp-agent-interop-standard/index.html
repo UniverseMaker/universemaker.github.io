@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-prerendered="1"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Protocol That Became AI's HTTP: MCP and the Interoperability-Standard War - Daeseung Park Journal</title>
+<meta name="description" content="The moment chatbots turn into 'acting agents,' the bottleneck is no longer intelligence but the standard for connection. We anatomize how Anthropic's MCP became the de facto standard — its architecture, its politics, and the security homework that remains.">
+<link rel="canonical" href="https://daeseungpark.com/en/articles/mcp-agent-interop-standard/"><link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/mcp-agent-interop-standard/"><link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/mcp-agent-interop-standard/"><link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/mcp-agent-interop-standard/"><meta property="og:locale:alternate" content="ko_KR">
+<!-- seo-i18n:start -->
+
+
+
+
+<!-- seo-i18n:end -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="D. PARK Journal">
+<meta property="og:title" content="The Protocol That Became AI's HTTP: MCP and the Interoperability-Standard War">
+<meta property="og:description" content="The moment chatbots turn into 'acting agents,' the bottleneck is no longer intelligence but the standard for connection. We anatomize how Anthropic's MCP became the de facto standard — its architecture, its politics, and the security homework that remains.">
+<meta property="og:url" content="https://daeseungpark.com/en/articles/mcp-agent-interop-standard/">
+<meta property="og:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Protocol That Became AI's HTTP: MCP and the Interoperability-Standard War">
+<meta name="twitter:description" content="The moment chatbots turn into 'acting agents,' the bottleneck is no longer intelligence but the standard for connection. We anatomize how Anthropic's MCP became the de facto standard — its architecture, its politics, and the security homework that remains.">
+<meta name="twitter:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"The Protocol That Became AI's HTTP: MCP and the Interoperability-Standard War","author":{"@type":"Person","name":"박대승","alternateName":"Daeseung Park"},"publisher":{"@type":"Organization","name":"D. PARK Journal"},"image":"https://daeseungpark.com/assets/img/profile/img3.jpg","mainEntityOfPage":"https://daeseungpark.com/articles/mcp-agent-interop-standard/","inLanguage":"en","datePublished":"2026-07-18"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&amp;family=Noto+Serif+KR:wght@400;600&amp;family=Noto+Sans+KR:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="../../../assets/css/style.css">
+<link rel="stylesheet" href="../../../assets/css/article.css">
+<script src="https://www.googletagmanager.com/gtag/js?id=G-1MMKKGR3MF"></script><style id="aiTrialStyle">#aiTrialBtn{position:fixed;right:22px;bottom:22px;z-index:940;display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border:0;border-radius:999px;cursor:pointer;font-family:"Pretendard",system-ui,sans-serif;font-weight:700;font-size:.92rem;color:#fff;background:linear-gradient(135deg,#5b6cff,#8b5bff);box-shadow:0 8px 24px rgba(70,70,140,.35);transition:transform .2s,box-shadow .2s,opacity .2s;}#aiTrialBtn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(70,70,140,.45);}#aiTrialBtn.active{opacity:.5;}#aiTrialBtn .ai-ic{font-size:1.05rem;line-height:1;}#aiTrialBtn .ai-b{font-size:.6rem;font-weight:800;background:rgba(255,255,255,.28);padding:2px 6px;border-radius:999px;letter-spacing:.5px;}#aiTrialPanel{position:fixed;right:22px;bottom:84px;z-index:945;width:380px;max-width:calc(100vw - 32px);height:560px;max-height:calc(100vh - 120px);background:var(--bg,#fff);border:1px solid var(--line,#e6e6e6);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.28);opacity:0;transform:translateY(12px) scale(.98);pointer-events:none;transition:opacity .22s,transform .22s;}#aiTrialPanel.open{opacity:1;transform:none;pointer-events:auto;}#aiTrialPanel .ai-head{display:flex;align-items:center;justify-content:space-between;padding:10px 8px 10px 14px;border-bottom:1px solid var(--line,#e6e6e6);}#aiTrialPanel .ai-ti{font-family:"Pretendard",system-ui,sans-serif;font-size:.9rem;color:var(--ink,#15171a);}#aiTrialPanel .ai-badge{font-size:.64rem;color:#7b83ff;border:1px solid #7b83ff;border-radius:999px;padding:1px 6px;margin-left:5px;}#aiTrialPanel .ai-actions{display:flex;gap:2px;}#aiTrialPanel .ai-x{border:0;background:transparent;cursor:pointer;font-size:1rem;line-height:1;padding:6px 9px;border-radius:8px;color:var(--ink,#15171a);opacity:.65;}#aiTrialPanel .ai-x:hover{opacity:1;background:rgba(125,125,140,.14);}#aiTrialPanel .ai-body{position:relative;flex:1;min-height:0;background:var(--bg,#fff);}#aiTrialPanel .ai-open{font-family:"Pretendard",system-ui,sans-serif;font-size:.78rem;font-weight:700;color:#7b83ff;padding:6px 10px;border-radius:8px;text-decoration:none;white-space:nowrap;}#aiTrialPanel .ai-open:hover{background:rgba(125,125,140,.14);}#aiTrialPanel iframe{position:relative;width:100%;height:100%;border:0;display:block;background:var(--bg,#fff);}@media (max-width:640px){#aiTrialBtn{right:16px;bottom:16px;padding:11px 15px;font-size:.86rem;}}</style></head>
+<body data-base="../../">
+<div class="progress-bar" id="progress"></div>
+<div class="topbar no-print">
+  <div class="container-x">
+    <span class="tb-date" id="today">Friday, August 7, 2026</span>
+    <div class="tb-links"><a href="https://ai.daeseungpark.com/chat/" target="_blank" rel="noopener">Abliterated AI</a><a href="https://tcc.daeseungpark.com/" target="_blank" rel="noopener">Mission Control(TCC)</a><a href="../../profile.html">Profile</a><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener">GitHub</a><a href="https://scholar.google.com/citations?hl=ko&amp;user=qVom0QUAAAAJ" target="_blank" rel="noopener">Scholar</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener">ORCID</a><a href="https://hub.docker.com/u/daeseungpark" target="_blank" rel="noopener">Docker</a><a href="https://codespectrum.net" target="_blank" rel="noopener">Blog</a><a href="../../profile.html#contact">Contact</a><a href="../../notices.html">Notice</a><a href="/articles/mcp-agent-interop-standard/" class="tb-lang-link" aria-label="Language">한국어</a></div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header no-print">
+  <div class="container-x nav-row">
+    <a href="../../index.html" class="brand">D<span class="dot">.</span> PARK <small>Journal</small></a>
+    <nav class="main-nav"><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">☾</span></button>
+      <button class="print-cta" id="printBtn">🖶 Print / PDF</button>
+      <button class="icon-btn nav-toggle" id="navToggle" aria-label="Menu">≡</button>
+    </div>
+  </div>
+</header>
+
+<div class="ticker no-print">
+  <div class="container-x">
+    <span class="label">Trending</span>
+    <div class="items" id="tickerItems"><a href="../../articles/rag-architectures-hallucination/">Four Ways Retrieval Rescues In…</a><a href="../../articles/mcp-agent-interop-standard/">The Protocol That Became AI's…</a><a href="../../articles/ai-datacenter-power-crunch/">AI's Real Limit Is Electricity</a><a href="../../articles/ai-circular-financing-bubble/">From NVIDIA to NVIDIA</a><a href="../../articles/abliterated-ai-safety/">The Model With Refusal Erased</a><a href="../../articles/llm-spatial-reasoning/">Do LLMs Understand Space? A 7,…</a></div>
+  </div>
+</div>
+
+<article data-article-id="17">
+  <div class="article-wrap">
+    <!-- Masthead -->
+    <header class="art-head">
+      <span class="cat-pill">AI · Explainer</span>
+      <h1>The Protocol That Became AI's HTTP: MCP and the Interoperability-Standard War</h1>
+      <p class="deck">The moment chatbots turn into 'acting agents,' the bottleneck is no longer intelligence but the standard for connection. We anatomize how Anthropic's MCP became the de facto standard — its architecture, its politics, and the security homework that remains.</p>
+      <div class="art-byline">
+        <div class="av">DP</div>
+        <div class="who">
+          <b>Daeseung Park</b>
+          <span>AI &amp; Software Systems Engineer · KAIST</span>
+          <span>July 2026 · 14 min read</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="art-cover"><img src="images/cover.svg" alt="Conceptual diagram of the MCP agent interoperability protocol" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;"></div>
+
+    <!-- Summary -->
+    <div class="summary-box">
+      <span class="tag">1-min summary</span>
+      Once language models move beyond conversation and begin to <em>act</em>, the real bottleneck is no longer the model but <strong>the connective tissue between the model and the world</strong>. The attempt to standardize the integrations that differ from tool to tool, data source to data source, and app to app into a single convention is the <strong>Model Context Protocol (MCP)</strong>. This open protocol, released by Anthropic in November 2024, rose to become the de facto industry standard as OpenAI adopted it in March 2025 and Google DeepMind followed in April; in December 2025 it was donated to a new foundation under the Linux Foundation (the AAIF), passing into neutral governance. The v1 specification, slated for July 28, 2026, centers on a shift to a <strong>stateless core</strong>, aiming squarely at large-scale operations. Yet security surfaces such as prompt injection and poisoned tools remain wide open, and two forecasts from Gartner point to a double-edged future in which <em>rapid adoption</em> and <em>mass cancellation</em> coexist. This piece traces why the standard became the bottleneck, how MCP resolved it, and what remains unresolved.
+    </div>
+
+    <!-- Body -->
+    <div class="prose">
+      <span class="chapter-label">Chapter 1. Why the 'Standard' Is the Bottleneck</span>
+      <h2>From Models That Converse to Agents That Act</h2>
+      <p>For the past several years, progress in language models has largely been aimed at 'smarter conversation.' Yet for a model to be genuinely useful in real work, conversation alone is not enough. Only when it reads the user's calendar, queries an in-house database, opens a file, and calls an external API does it actually <em>get something done</em>. At this point the problem shifts away from the model's intelligence and toward the problem of connection. However clever a model may be, if it cannot reach the tools that serve as its hands and feet, it remains a box that merely talks well.</p>
+      <p>Here an old headache of software engineering resurfaces: the so-called <strong>M×N integration problem</strong>. If M AI applications must connect to N external tools and data sources, the naive approach requires writing M×N custom integrations one by one. Every app and every tool has its own authentication scheme, data format, and error handling. Each time a new tool is added, every app must build a fresh adapter for it; each time an app is added, every tool must be reconnected. This combinatorial explosion was the true bottleneck of the agent ecosystem.</p>
+
+      <div class="pullquote">The bottleneck is not the model's intelligence but the standard for connection. Intelligence that cannot reach its hands and feet remains a box that merely talks well.</div>
+
+      <p>It is not as though earlier attempts were lacking. Each platform put forward its own 'plugin' or 'function calling' spec, opening a path for models to invoke external capabilities. But those specs were mutually incompatible. A tool built for one platform could not be used as-is on another, and tool makers had to repeat the same work for as many platforms as they wished to support. Specs born for convenience ended up splitting the ecosystem into separate islands. In the end, what was needed was not any single company's plugin spec but a <em>common convention</em> belonging to no one.</p>
+
+      <p>History has solved such problems with 'common conventions.' Making different machines converse in one language is the power of a standard. Behind the web's explosive growth lay a simple, open protocol called HTTP. Because any server and any browser spoke the same convention, a connection could be established even when neither party knew the other's internal affairs. This is why people naturally reach for the analogy of 'AI's HTTP' when they talk about MCP. Turning M×N into M+N — making it so that an app need only speak the protocol and a tool need only speak the protocol. That is the liberation a standard promises.</p>
+
+      <span class="chapter-label">Chapter 2. Anatomy of the Protocol</span>
+      <h2>What Exactly Did MCP Standardize?</h2>
+      <p>MCP is an open protocol that Anthropic released on November 25, 2024. David Soria Parra and Justin Spahr-Summers, who led its development, set out to unify the way models access external context into a single convention. The structure divides, surprisingly simply, into three layers: the <strong>Host</strong> application the user faces, the <strong>Client</strong> that speaks the protocol within it, and the <strong>MCP Server</strong> that exposes the actual tools and data. The client inside the host connects to the server, and the server announces the capabilities it can offer in a standard format.</p>
+
+      <figure>
+        <svg viewBox="0 0 760 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram of MCP's three-tier structure" style="width:100%;height:auto;display:block;">
+          <rect x="0" y="0" width="760" height="340" fill="none"></rect>
+          <!-- tier 1: host/client -->
+          <rect x="30" y="90" width="180" height="150" rx="12" fill="#eef1ff" stroke="#2233c4" stroke-width="2.5"></rect>
+          <text x="120" y="120" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="17" font-weight="700" fill="#1a2350">Host (App)</text>
+          <text x="120" y="142" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="12" fill="#333">IDE · Chat · Agent</text>
+          <rect x="55" y="160" width="130" height="58" rx="8" fill="#ffffff" stroke="#5b74ff" stroke-width="2"></rect>
+          <text x="120" y="185" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="13" font-weight="600" fill="#2233c4">MCP Client</text>
+          <text x="120" y="204" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="11" fill="#555">protocol speaker</text>
+          <!-- tier 2: server -->
+          <rect x="290" y="90" width="180" height="150" rx="12" fill="#e6f7ee" stroke="#0f8a55" stroke-width="2.5"></rect>
+          <text x="380" y="120" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="17" font-weight="700" fill="#0c4a2e">MCP Server</text>
+          <text x="380" y="150" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="12" fill="#333">tools · resources</text>
+          <text x="380" y="170" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="12" fill="#333">prompts</text>
+          <text x="380" y="205" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="11" fill="#0f8a55">exposes capabilities in a standard format</text>
+          <!-- tier 3: tools/data -->
+          <g>
+            <rect x="550" y="70" width="180" height="52" rx="10" fill="#fff4e0" stroke="#c47f13" stroke-width="2"></rect>
+            <text x="640" y="101" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="13" font-weight="600" fill="#7a4c00">Database</text>
+            <rect x="550" y="140" width="180" height="52" rx="10" fill="#fff4e0" stroke="#c47f13" stroke-width="2"></rect>
+            <text x="640" y="171" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="13" font-weight="600" fill="#7a4c00">External API</text>
+            <rect x="550" y="210" width="180" height="52" rx="10" fill="#fff4e0" stroke="#c47f13" stroke-width="2"></rect>
+            <text x="640" y="241" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="13" font-weight="600" fill="#7a4c00">Files · System</text>
+          </g>
+          <!-- arrows -->
+          <g stroke="#2233c4" stroke-width="2.5" fill="none" marker-end="url(#ah)">
+            <path d="M210 189 H286"></path>
+          </g>
+          <g stroke="#0f8a55" stroke-width="2.5" fill="none" marker-end="url(#ah2)">
+            <path d="M470 150 H546 L546 96"></path>
+            <path d="M470 165 H548"></path>
+            <path d="M470 180 H546 L546 234"></path>
+          </g>
+          <text x="248" y="180" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="11" fill="#2233c4">MCP</text>
+          <!-- before/after annotation -->
+          <rect x="30" y="270" width="700" height="46" rx="8" fill="#f3f0ff" stroke="#6a4bd0" stroke-width="1.5"></rect>
+          <text x="46" y="291" font-family="'Segoe UI',sans-serif" font-size="12.5" font-weight="700" fill="#4a2fb0">v1 shift</text>
+          <text x="46" y="308" font-family="'Segoe UI',sans-serif" font-size="12" fill="#333">Stateful: needs session routing  →  Stateless: scales as-is behind an ordinary load balancer</text>
+          <defs>
+            <marker id="ah" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 Z" fill="#2233c4"></path></marker>
+            <marker id="ah2" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 Z" fill="#0f8a55"></path></marker>
+          </defs>
+        </svg>
+        <figcaption>MCP's three-tier structure. The client inside the host (app) connects to the MCP server, and the server exposes tools, data, and prompts in a standard format. v1 moves this connection from 'stateful' to 'stateless,' allowing horizontal scaling behind an ordinary load balancer without session pinning.</figcaption>
+      </figure>
+
+      <p>The capabilities an MCP server exposes fall broadly into three kinds. The first is <strong>tools</strong>: functions the model can invoke to produce real side effects — units of 'action' such as sending an email, creating a record, or executing code. The second is <strong>resources</strong>, data the model can read and treat as context; a document, a file, or a slice of a database belongs here. The third is <strong>prompts</strong>, interaction templates pre-tuned for a particular task. The key point is that all three are expressed in a single convention. An app <em>need not know in advance</em> what a given server can do. Once connected, the server offers up its own list of capabilities, and the model picks what it needs from among them.</p>
+
+      <p>Picturing these three capabilities in actual use makes the structure clearer. Suppose a developer says to their IDE, "Summarize the open issues in this project." The client in the host IDE queries the connected issue-tracker MCP server, reads the issue list as a <em>resource</em>, and the model builds a summary from it as context. Then, when the developer says, "Assign an owner to the most urgent one," this time the model invokes a <em>tool</em> exposed by the same server to change an actual record. The user need not know which server uses which API, because the protocol hides those details. This 'discoverability' is precisely the decisive difference between hardcoded integration and MCP.</p>
+
+      <p>The <strong>v1 specification</strong>, scheduled for release on July 28, 2026, reforged this structure for large-scale operation. The biggest change in this version — which issued a release candidate (RC) on May 21, 2025, and went through ten weeks of validation — is a <strong>stateless core</strong>. Early MCP assumed the client and server maintained a single session, which becomes a burden for a service that must handle many concurrent users. If a session is pinned to a particular server instance, requests cannot be routed to just any server. v1 removes the session-routing requirement, letting an MCP server stand behind an ordinary load balancer and scale horizontally <em>like a plain stateless web service</em>.</p>
+
+      <div class="callout"><b>Why statelessness matters.</b> One reason the web could grow so vast is that each HTTP request was, in principle, independent of the others. Because any server could handle it, servers could be freely added and removed. MCP v1's shift to statelessness grants the same freedom to agent infrastructure. On top of it sit <strong>MCP Apps</strong> (an extension that safely renders UI in a sandboxed iframe), <strong>Tasks</strong> (a long-running extension for time-consuming work), and <strong>OAuth 2.0/OIDC alignment</strong> (authentication standardization including RFC 9207 issuer verification). Added to this is <strong>lifecycle governance</strong> (guaranteeing at least twelve months' grace when a feature is deprecated), so that those who trusted the standard and climbed aboard do not find the ground giving way beneath them overnight.</div>
+
+      <span class="chapter-label">Chapter 3. The Politics of Standard Governance</span>
+      <h2>Why Did the Competitors Gather Under One Banner?</h2>
+      <p>Even a technically well-designed protocol does not become a standard on that merit alone. A standard is always a product of politics. What is striking is that although MCP began as <em>one company's proposal</em>, its competitors joined quickly. In March 2025 OpenAI announced support for MCP, and in April Google DeepMind declared its adoption. Rivals fighting fiercely in the model market converged on a single standard specifically when it came to the 'convention of connection.'</p>
+
+      <div class="pullquote">They compete over models but not over connection. Before fighting over the pie, it serves everyone better to build together the table on which the pie will sit.</div>
+
+      <p>A cold calculation underlies this cooperation. Had each camp pushed its own connection convention, tool makers would have agonized over which side to take, splitting the ecosystem. A fragmented ecosystem benefits no one. Conversely, if the connection layer is opened as a common standard, the <em>competition over models</em> that plays out on top of it takes place in a larger market instead. It amounts to building the table together and then competing with the dishes served on it. The protocol's open, non-proprietary character made this calculation possible. Had a single company held the keys to the convention, competitors would not have climbed aboard so readily.</p>
+
+      <p>That logic advanced a step further in December 2025, when Anthropic donated MCP to the <strong>Agentic AI Foundation (AAIF) under the Linux Foundation</strong>. This foundation was co-established by Anthropic, Block, and OpenAI. Transferring ownership of the protocol to a neutral nonprofit foundation signals that no single company can privatize it or monopolize its direction. To make a standard a true public good, its maker must also know when to let go. The foundation donation is the device that institutionally locks in that trust.</p>
+
+      <figure>
+        <svg viewBox="0 0 760 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="MCP adoption timeline" style="width:100%;height:auto;display:block;">
+          <line x1="40" y1="130" x2="720" y2="130" stroke="#2233c4" stroke-width="3"></line>
+          <!-- nodes -->
+          <g font-family="'Segoe UI',sans-serif">
+            <!-- 1 -->
+            <circle cx="90" cy="130" r="9" fill="#2233c4"></circle>
+            <text x="90" y="100" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1a2350">2024.11</text>
+            <text x="90" y="162" text-anchor="middle" font-size="11.5" fill="#333">MCP released</text>
+            <text x="90" y="178" text-anchor="middle" font-size="11.5" fill="#333">(Anthropic)</text>
+            <!-- 2 -->
+            <circle cx="230" cy="130" r="9" fill="#5b74ff"></circle>
+            <text x="230" y="100" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1a2350">2025.03</text>
+            <text x="230" y="162" text-anchor="middle" font-size="11.5" fill="#333">OpenAI adopts</text>
+            <!-- 3 -->
+            <circle cx="370" cy="130" r="9" fill="#5b74ff"></circle>
+            <text x="370" y="100" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1a2350">2025.04</text>
+            <text x="370" y="162" text-anchor="middle" font-size="11.5" fill="#333">Google adopts</text>
+            <!-- 4 -->
+            <circle cx="510" cy="130" r="9" fill="#0f8a55"></circle>
+            <text x="510" y="100" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0c4a2e">2025.12</text>
+            <text x="510" y="162" text-anchor="middle" font-size="11.5" fill="#333">Linux Foundation</text>
+            <text x="510" y="178" text-anchor="middle" font-size="11.5" fill="#333">donation (AAIF)</text>
+            <!-- 5 -->
+            <circle cx="670" cy="130" r="11" fill="#c47f13"></circle>
+            <text x="670" y="100" text-anchor="middle" font-size="12.5" font-weight="700" fill="#7a4c00">2026.07.28</text>
+            <text x="670" y="162" text-anchor="middle" font-size="11.5" fill="#333">v1 spec</text>
+            <text x="670" y="178" text-anchor="middle" font-size="11.5" fill="#333">(stateless)</text>
+          </g>
+        </svg>
+        <figcaption>MCP adoption timeline. In little over a year from its November 2024 release, it passes through adoption by two competitors and a donation to a neutral foundation, arriving in July 2026 at the v1 specification with its stateless core. It traces the trajectory of a standard moving from a company's proposal to a public good.</figcaption>
+      </figure>
+
+      <span class="chapter-label">Chapter 4. The Gap Between Security Surface and Adoption</span>
+      <h2>The Wider the Connection, the Wider the Attack Surface</h2>
+      <p>A standard makes connection easy. And an easier connection becomes, in the same stroke, a <em>wider attack surface</em>. In April 2025, researchers pointed out the security vulnerabilities MCP carries. The most prominent are <strong>prompt injection</strong> and <strong>poisoned tools (rug pull / tool poisoning)</strong>. The former is an attack that hides malicious instructions inside the external data the model reads, inducing the model to take actions the user never intended. The latter is a case in which a tool that appears harmless on the surface is actually designed to quietly exfiltrate sensitive data.</p>
+
+      <p>What makes this danger especially thorny is that MCP's strength is at once the channel for the danger. The structure in which a server declares its own capabilities and the model trusts and invokes them is convenient, but once that trust is abused, defense is hard. The model reads a tool's description and makes a judgment — yet that description itself can be manipulated. The blurring of the line between reading data and following instructions is the fundamental challenge of agent security. v1's strengthening of OAuth 2.0/OIDC alignment and issuer verification is an effort to shore up the authentication and identity part of this surface, but a protocol alone cannot block attacks that unfold at the 'semantic' layer, such as prompt injection.</p>
+
+      <div class="pullquote">When the line between reading data and following instructions blurs, a convenient connection becomes, in the same stroke, an open door.</div>
+
+      <p>This tension shows plainly in the reality of adoption too. Placing two forecasts from the analyst firm Gartner side by side sharpens the picture. On one hand, Gartner predicts that <strong>by the end of 2026, 40% of enterprise apps will feature task-specific AI agents</strong> (a sharp rise from less than 5% in 2025) — a forecast that agents will move beyond experimentation into products' basic functionality. Yet the same firm, on the other hand, also predicts that <strong>by 2027, more than 40% of agentic AI projects will be canceled</strong>, citing excessive cost, unclear business value, and inadequate risk control. These two numbers are not a contradiction but the front and back of the same wave.</p>
+
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+        <table>
+        <thead><tr><th>Aspect</th><th>Individual custom integration</th><th>MCP standard integration</th></tr></thead>
+        <tbody>
+          <tr><td>Integration complexity</td><td>M×N (combinatorial explosion)</td><td>M+N (converges on the protocol)</td></tr>
+          <tr><td>Adding a new tool</td><td>Every app rewrites its adapter</td><td>Adding one server exposes it to all apps</td></tr>
+          <tr><td>Capability discovery</td><td>Hardcoded in advance</td><td>Server declares itself on connection</td></tr>
+          <tr><td>Scalability</td><td>Sessions and auth each their own way</td><td>Stateless core · standard OAuth</td></tr>
+          <tr><td>Governance</td><td>Owned separately · incompatible</td><td>Neutral foundation (AAIF) · 12-month deprecation grace</td></tr>
+          <tr><td>Core risk</td><td>Maintenance debt</td><td>Widened attack surface (injection · tool poisoning)</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <p>Why does such a gap arise? In the early stage of technology adoption, 'can do' always outruns 'should do.' Once the standard made connection cheap, many organizations simply bolted on agents — but only belatedly asked what those agents replaced and how much value they created. The pilots were dazzling, yet the moment they moved into operation, the bills for cost, reliability, and security arrived. This is exactly where Gartner predicts cancellation. What is interesting is that even this wave of cancellation is not a failure of the standard but a <em>process of maturation</em>. What remains after the siftable is sifted out will be the agents that are genuinely useful.</p>
+
+      <p>That standardization accelerates adoption is clear. When the cost of connection falls, the threshold for trying also falls. But an easier attempt does not make <em>success</em> easier. If anything, the lowered threshold draws in even unprepared projects, and a good many of them fold without ever proving their value. MCP has admirably solved 'how to connect,' but 'what to connect for' and 'how to control that connection safely' remain each organization's homework.</p>
+
+      <span class="chapter-label">Chapter 5. Outlook and Closing</span>
+      <h2>What Comes After the Convention Is Laid</h2>
+      <p>The 2026 MCP roadmap points in four directions: <strong>transport scalability</strong>, <strong>agent-to-agent communication</strong>, <strong>governance maturity</strong>, and <strong>enterprise requirements</strong>. Agent-to-agent communication in particular foretells the next phase. If MCP has so far solved the problem of one model reaching many tools, the next is the problem of many agents collaborating with one another. Beyond a model calling tools, a world in which an agent invokes and delegates to another agent as if it were a tool — on that terrain the meaning of interoperability broadens further still.</p>
+
+      <p>Looking back, MCP's short history offers a compressed view of the early internet's standard-formation process. A convention proposed by one company gains force through a competitor's adoption, passes to a neutral foundation to become a public good, and evolves toward emptying out state for large-scale operation. Just as HTTP opened the web, the analogy that MCP is the key opening the age of agents is therefore not mere exaggeration. Yet a key opening a door and what one does beyond that door are separate matters.</p>
+
+      <div class="callout"><b>A standard is a beginning, not an end.</b> MCP unified the grammar of connection. But unifying grammar does not, on its own, produce good sentences. In this phase where a steep adoption curve and forecasts of mass cancellation coexist, the real contest will be decided outside the protocol — in what each organization uses agents <em>for, and under what controls</em>. The standard does not make that judgment for us. It only lays the stage on which the judgment can be made.</div>
+
+      <p>The expression 'AI's HTTP' is therefore a blessing and a warning at once. HTTP made the web possible, but all of the web's spam, fraud, and abuse also grew on top of it. The convention is neutral, and what grows on top of it is up to us. Standing before the door MCP has opened, the question we must ask is not "can we connect" but "why, and how safely, do we connect." The winner of the standards war has already been more or less decided, but the real question — what we will build with that standard — has only just begun.</p>
+
+      <div class="references">
+        <h4>References</h4>
+        <ol>
+          <li>Anthropic, “Introducing the Model Context Protocol,” 2024-11-25. MCP's first public announcement (developers David Soria Parra, Justin Spahr-Summers). <a href="https://www.anthropic.com/news/model-context-protocol" target="_blank" rel="noopener">anthropic.com/news/model-context-protocol</a></li>
+          <li>“Model Context Protocol,” Wikipedia. MCP overview; adoption by OpenAI (2025-03) and Google DeepMind (2025-04); the 2025-12 donation to the Agentic AI Foundation (AAIF; co-founded by Anthropic, Block, and OpenAI) under the Linux Foundation; researchers' 2025-04 identification of prompt-injection and poisoned-tool vulnerabilities. <a href="https://en.wikipedia.org/wiki/Model_Context_Protocol" target="_blank" rel="noopener">en.wikipedia.org/wiki/Model_Context_Protocol</a></li>
+          <li>MCP Blog, “Release Candidate for MCP v1,” 2026. The core of the v1 specification (release slated for 2026-07-28; RC on 2026-05-21, 10 weeks of validation) — stateless core, MCP Apps (sandboxed iframe UI), the Tasks extension, OAuth 2.0/OIDC alignment (RFC 9207 issuer verification), and lifecycle governance (at least 12 months' deprecation grace). <a href="https://blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate/" target="_blank" rel="noopener">blog.modelcontextprotocol.io</a></li>
+          <li>MCP Blog, “2026 MCP Roadmap.” Directions of transport scalability, agent-to-agent communication, governance maturity, and enterprise needs. <a href="https://blog.modelcontextprotocol.io/posts/2026-mcp-roadmap/" target="_blank" rel="noopener">blog.modelcontextprotocol.io/posts/2026-mcp-roadmap</a></li>
+          <li>Gartner (forecasting and analyst firm), press release 2025-08-26. Forecast that by the end of 2026, 40% of enterprise apps will feature task-specific AI agents (up from less than 5% in 2025); and that by 2027, more than 40% of agentic AI projects will be canceled (cost, unclear value). Both figures are Gartner <em>forecasts</em>. <a href="https://www.gartner.com/en/newsroom/press-releases/2025-08-26-gartner-predicts-40-percent-of-enterprise-apps-will-feature-task-specific-ai-agents-by-2026-up-from-less-than-5-percent-in-2025" target="_blank" rel="noopener">gartner.com</a></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer of article -->
+  <div class="art-foot">
+    <div class="art-tags">
+      <a href="#">#MCP</a><a href="#">#AIAgents</a><a href="#">#Interoperability</a><a href="#">#Standards</a><a href="#">#Protocol</a>
+    </div>
+    <div class="author-card">
+      <div class="av">DP</div>
+      <div class="who">
+        <b>Daeseung Park</b>
+        <p>Researcher at KAIST. I study large language models, time-series forecasting, and conversational AI, and I try to record the research process as accurately and readably as I can.</p>
+      </div>
+    </div>
+
+    <div class="read-next no-print">
+        <div class="section-head" style="margin-bottom:20px;"><h2 style="font-size:1.3rem;">Read next</h2></div>
+        <div class="grid grid-2" id="readNext"><a href="../../articles/rag-architectures-hallucination/" class="post-card fade-up"><div class="thumb"><img class="ph " src="../../../articles/rag-architectures-hallucination/images/cover.svg" alt="" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;"><span class="cat-pill">AI · Explainer</span><span class="num">18</span></div><span class="cat">RAG · Retrieval-Augmented</span><h3>Four Ways Retrieval Rescues Intelligence — Lexical, Semantic, Hybrid, and Graph RAG, and the Anatomy of Hallucination</h3><p>A large language model's knowledge freezes the moment training ends. Retrieval-augmented generation (RAG) fills that gap by pulling in documents from outside the model. We dissect four retrieval architectures — Lexical, Semantic, Hybrid, and Graph — from first principles, and examine how they reduce hallucination and what still remains.</p><div class="meta"><span class="by">Daeseung Park</span><span class="dot-sep">18 min read</span></div></a><a href="../../articles/ai-datacenter-power-crunch/" class="post-card fade-up"><div class="thumb"><img class="ph " src="../../../articles/ai-datacenter-power-crunch/images/cover.svg" alt="" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;"><span class="cat-pill">Tech · Issue</span><span class="num">16</span></div><span class="cat">AI Infrastructure</span><h3>AI's Real Limit Is Electricity</h3><p>Data-center power will roughly double in six years — from about 415 TWh in 2024 to about 945 TWh in 2030. The real bottleneck isn't the GPU; it's the grid that pushes electricity from power plant to rack.</p><div class="meta"><span class="by">Daeseung Park</span><span class="dot-sep">14 min read</span></div></a></div>
+      </div>
+      <nav class="post-nav no-print" id="postNav"><a class="pn" href="../../articles/ai-datacenter-power-crunch/"><span class="pn-dir">‹ Previous</span><span class="pn-t">AI's Real Limit Is Electricity</span></a><a class="pn pn-list" href="../../articles.html">List</a><a class="pn pn-right" href="../../articles/rag-architectures-hallucination/"><span class="pn-dir">Next ›</span><span class="pn-t">Four Ways Retrieval Rescues Intelligence — Lexical, Semantic, Hybrid, and Graph RAG, and the Anatomy of Hallucination</span></a></nav>
+    </div>
+</article>
+
+<div class="print-footer">Daeseung Park · D. PARK Journal — The Protocol That Became AI's HTTP: MCP and the Interoperability-Standard War</div>
+
+<footer class="site-footer no-print" id="contact"><div class="container-x"><div class="footer-grid"><div><div class="footer-brand">D. PARK</div><p style="max-width:34ch;">AI &amp; Software Systems Engineer · KAIST</p><div class="social" style="margin-top:16px;"><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener" aria-label="GitHub">GH</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener" aria-label="ORCID">iD</a><a href="mailto:dspark@daeseungpark.com" aria-label="Email">@</a></div></div><div><h6>Browse</h6><ul><li><a href="../../index.html">Home</a></li><li><a href="../../profile.html">Profile</a></li><li><a href="../../articles.html">Articles</a></li><li><a href="../../research.html">Research</a></li><li><a href="../../notices.html">Notice</a></li></ul></div><div><h6>Articles</h6><ul class="ft-arts"><li><a href="../../articles/rag-architectures-hallucination/">Four Ways Retrieval Rescues Intelligence — Lexical, Semantic, Hybrid, and Graph RAG, and the Anatomy of Hallucination</a></li><li><a href="../../articles/mcp-agent-interop-standard/">The Protocol That Became AI's HTTP</a></li><li><a href="../../articles/ai-datacenter-power-crunch/">AI's Real Limit Is Electricity</a></li><li><a href="../../articles/ai-circular-financing-bubble/">From NVIDIA to NVIDIA</a></li><li><a href="../../articles/abliterated-ai-safety/">The Model With Refusal Erased</a></li></ul></div><div><h6>Contact</h6><ul><li><a href="mailto:dspark@daeseungpark.com">dspark@daeseungpark.com</a></li><li><a href="mailto:dspark@kaist.ac.kr">dspark@kaist.ac.kr</a></li><li><a href="tel:+821064547777">Phone (KR) +82 10 6454 7777</a></li><li><a href="tel:+16574109449">Phone (US) +1 657 410 9449</a></li><li>KAIST, Daejeon, Korea</li></ul></div></div><div class="footer-bottom"><span>© 2026 Daeseung Park. All rights reserved.</span><span>Designed &amp; built as a personal journal for Daeseung Park.</span></div></div></footer>
+
+<div class="mobile-nav" id="mobileNav"><button class="icon-btn close" id="navClose" aria-label="Close">✕</button><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></div>
+
+<script src="../../../assets/js/data.js"></script>
+<script src="../../../assets/js/articles.js"></script>
+<script src="../../../assets/js/i18n-en.js"></script><script src="../../../assets/js/main.js"></script>
+
+
+</body></html>

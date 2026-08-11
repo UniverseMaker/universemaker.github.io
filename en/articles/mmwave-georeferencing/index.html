@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-prerendered="1"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Drawing People on a Map Without a Camera: mmWave Geo-Referencing - Daeseung Park Journal</title>
+<meta name="description" content="Millimeter-wave radar sees a person not as an image but as a cluster of 'points.' The story of geo-referencing indoors with 3.5 cm average error, then scaling it to a stadium.">
+<link rel="canonical" href="https://daeseungpark.com/en/articles/mmwave-georeferencing/"><link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/mmwave-georeferencing/"><link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/mmwave-georeferencing/"><link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/mmwave-georeferencing/"><meta property="og:locale:alternate" content="ko_KR">
+<!-- seo-i18n:start -->
+
+
+
+
+<!-- seo-i18n:end -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="D. PARK Journal">
+<meta property="og:title" content="Drawing People on a Map Without a Camera: mmWave Geo-Referencing">
+<meta property="og:description" content="Millimeter-wave radar sees a person not as an image but as a cluster of 'points.' The story of geo-referencing indoors with 3.5 cm average error, then scaling it to a stadium.">
+<meta property="og:url" content="https://daeseungpark.com/en/articles/mmwave-georeferencing/">
+<meta property="og:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Drawing People on a Map Without a Camera: mmWave Geo-Referencing">
+<meta name="twitter:description" content="Millimeter-wave radar sees a person not as an image but as a cluster of 'points.' The story of geo-referencing indoors with 3.5 cm average error, then scaling it to a stadium.">
+<meta name="twitter:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Drawing People on a Map Without a Camera: mmWave Geo-Referencing","author":{"@type":"Person","name":"박대승","alternateName":"Daeseung Park"},"publisher":{"@type":"Organization","name":"D. PARK Journal"},"image":"https://daeseungpark.com/assets/img/profile/img3.jpg","mainEntityOfPage":"https://daeseungpark.com/articles/mmwave-georeferencing/","inLanguage":"en","datePublished":"2026-07"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&amp;family=Noto+Serif+KR:wght@400;600&amp;family=Noto+Sans+KR:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="../../../assets/css/style.css">
+<link rel="stylesheet" href="../../../assets/css/article.css">
+<script src="https://www.googletagmanager.com/gtag/js?id=G-1MMKKGR3MF"></script><style id="aiTrialStyle">#aiTrialBtn{position:fixed;right:22px;bottom:22px;z-index:940;display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border:0;border-radius:999px;cursor:pointer;font-family:"Pretendard",system-ui,sans-serif;font-weight:700;font-size:.92rem;color:#fff;background:linear-gradient(135deg,#5b6cff,#8b5bff);box-shadow:0 8px 24px rgba(70,70,140,.35);transition:transform .2s,box-shadow .2s,opacity .2s;}#aiTrialBtn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(70,70,140,.45);}#aiTrialBtn.active{opacity:.5;}#aiTrialBtn .ai-ic{font-size:1.05rem;line-height:1;}#aiTrialBtn .ai-b{font-size:.6rem;font-weight:800;background:rgba(255,255,255,.28);padding:2px 6px;border-radius:999px;letter-spacing:.5px;}#aiTrialPanel{position:fixed;right:22px;bottom:84px;z-index:945;width:380px;max-width:calc(100vw - 32px);height:560px;max-height:calc(100vh - 120px);background:var(--bg,#fff);border:1px solid var(--line,#e6e6e6);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.28);opacity:0;transform:translateY(12px) scale(.98);pointer-events:none;transition:opacity .22s,transform .22s;}#aiTrialPanel.open{opacity:1;transform:none;pointer-events:auto;}#aiTrialPanel .ai-head{display:flex;align-items:center;justify-content:space-between;padding:10px 8px 10px 14px;border-bottom:1px solid var(--line,#e6e6e6);}#aiTrialPanel .ai-ti{font-family:"Pretendard",system-ui,sans-serif;font-size:.9rem;color:var(--ink,#15171a);}#aiTrialPanel .ai-badge{font-size:.64rem;color:#7b83ff;border:1px solid #7b83ff;border-radius:999px;padding:1px 6px;margin-left:5px;}#aiTrialPanel .ai-actions{display:flex;gap:2px;}#aiTrialPanel .ai-x{border:0;background:transparent;cursor:pointer;font-size:1rem;line-height:1;padding:6px 9px;border-radius:8px;color:var(--ink,#15171a);opacity:.65;}#aiTrialPanel .ai-x:hover{opacity:1;background:rgba(125,125,140,.14);}#aiTrialPanel .ai-body{position:relative;flex:1;min-height:0;background:var(--bg,#fff);}#aiTrialPanel .ai-open{font-family:"Pretendard",system-ui,sans-serif;font-size:.78rem;font-weight:700;color:#7b83ff;padding:6px 10px;border-radius:8px;text-decoration:none;white-space:nowrap;}#aiTrialPanel .ai-open:hover{background:rgba(125,125,140,.14);}#aiTrialPanel iframe{position:relative;width:100%;height:100%;border:0;display:block;background:var(--bg,#fff);}@media (max-width:640px){#aiTrialBtn{right:16px;bottom:16px;padding:11px 15px;font-size:.86rem;}}</style></head>
+<body data-base="../../">
+<div class="progress-bar" id="progress"></div>
+<div class="topbar no-print">
+  <div class="container-x">
+    <span class="tb-date" id="today">Friday, August 7, 2026</span>
+    <div class="tb-links"><a href="https://ai.daeseungpark.com/chat/" target="_blank" rel="noopener">Abliterated AI</a><a href="https://tcc.daeseungpark.com/" target="_blank" rel="noopener">Mission Control(TCC)</a><a href="../../profile.html">Profile</a><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener">GitHub</a><a href="https://scholar.google.com/citations?hl=ko&amp;user=qVom0QUAAAAJ" target="_blank" rel="noopener">Scholar</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener">ORCID</a><a href="https://hub.docker.com/u/daeseungpark" target="_blank" rel="noopener">Docker</a><a href="https://codespectrum.net" target="_blank" rel="noopener">Blog</a><a href="../../profile.html#contact">Contact</a><a href="../../notices.html">Notice</a><a href="/articles/mmwave-georeferencing/" class="tb-lang-link" aria-label="Language">한국어</a></div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header no-print">
+  <div class="container-x nav-row">
+    <a href="../../index.html" class="brand">D<span class="dot">.</span> PARK <small>Journal</small></a>
+    <nav class="main-nav"><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">☾</span></button>
+      <button class="print-cta" id="printBtn">🖶 Print / PDF</button>
+      <button class="icon-btn nav-toggle" id="navToggle" aria-label="Menu">≡</button>
+    </div>
+  </div>
+</header>
+
+<div class="ticker no-print">
+  <div class="container-x">
+    <span class="label">Trending</span>
+    <div class="items" id="tickerItems"><a href="../../articles/rag-architectures-hallucination/">Four Ways Retrieval Rescues In…</a><a href="../../articles/mcp-agent-interop-standard/">The Protocol That Became AI's…</a><a href="../../articles/ai-datacenter-power-crunch/">AI's Real Limit Is Electricity</a><a href="../../articles/ai-circular-financing-bubble/">From NVIDIA to NVIDIA</a><a href="../../articles/abliterated-ai-safety/">The Model With Refusal Erased</a><a href="../../articles/llm-spatial-reasoning/">Do LLMs Understand Space? A 7,…</a></div>
+  </div>
+</div>
+
+<article data-article-id="11">
+  <div class="article-wrap">
+    <!-- Masthead -->
+    <header class="art-head">
+      <span class="cat-pill">Research · Retrospective</span>
+      <h1>Drawing People on a Map Without a Camera: mmWave Geo-Referencing</h1>
+      <p class="deck">Millimeter-wave radar sees a person not as an image but as a cluster of 'points.' The story of geo-referencing indoors with 3.5 cm average error, then scaling it to a stadium.</p>
+      <div class="art-byline">
+        <div class="av">DP</div>
+        <div class="who">
+          <b>Daeseung Park</b>
+          <span>AI &amp; Software Systems Engineer · KAIST</span>
+          <span>July 2026 · 15 min read</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="art-cover"><img src="../../../assets/img/extracted/research/mmwave-localization-concept.png" alt="Conceptual diagram of mmWave geo-referencing" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+
+    <!-- Summary -->
+    <div class="summary-box">
+      <span class="tag">1-min summary</span>
+      For a long time, figuring out where people are indoors was the camera's job. But CCTV-based positioning invades privacy, goes blind in the dark, and—above all—the pixel coordinates on a screen cannot tell you a person's actual position on a map. This piece looks back at a study in geo-referencing: detecting people as a point cloud with a 60 GHz millimeter-wave (mmWave) FMCW radar, clustering those points expressed in spherical coordinates, and then combining them with the sensor's installation data (GIS) to recover real latitude and longitude. In field experiments the average geo-referencing error was about 3.5 cm, a 95.33% improvement in precision over the conventional CCTV approach (APCC 2024, first author). We then scaled a single sensor into a distributed array of many sensors, attached an MQTT pipeline and integrated control, and drew the zone-by-zone occupancy at the Daejeon World Cup Stadium in real time—without a single camera.
+    </div>
+
+    <!-- Body -->
+    <div class="prose">
+      <span class="chapter-label">Chapter 1. The Problem</span>
+      <h2>The Old Question of “How Many People, and Where”</h2>
+      <p>Anyone who has ever run a large indoor space eventually gets stuck on the same question. Right now, inside this building, in which zone, how many people are there? When a fire breaks out, on which floor are the people who still haven't escaped concentrated? Is a crowd building up dangerously at a particular gate of the stadium? The most familiar way to get answers is the camera. But the camera carries three fundamental limitations.</p>
+      <p>The first is privacy. Blanketing an entire space with devices that identify people face by face is a bargain—accepting surveillance as the price of safety. The second is physical fragility. When lighting is low, smoke fills the air, or backlight is severe, image recognition collapses rapidly. The very disaster situations in which a person's location matters most are precisely the situations a camera sees worst. The third, and the most often overlooked, is the <strong>absence of a coordinate system</strong>. Even if a camera tells you “there is a person in the top-left of the frame,” it cannot say where that is on the building's floor plan, or what its latitude and longitude are. A pixel is not a map.</p>
+
+      <div class="pullquote">A camera can tell you “where on the screen” a person is, but it can never tell you “where on the map” they are.</div>
+
+      <p>The problem I latched onto was exactly this third one. Was there no sensor that could avoid identifying people, stay steady even in the dark, and move its detections directly onto real coordinates on a map? I chose millimeter-wave (mmWave) radar as the candidate, and this piece is a retrospective on how that choice led to an average geo-referencing precision of 3.5 cm.</p>
+
+      <span class="chapter-label">Chapter 2. How mmWave Works</span>
+      <h2>The Radar Sees a Person as “Points”</h2>
+      <p>Millimeter-wave radar uses radio waves in the 60 GHz band, with wavelengths on the order of a few millimeters. The method we used is FMCW (Frequency-Modulated Continuous Wave): it emits a continuous wave whose frequency is modulated over time like a sawtooth, and reads the frequency difference against the returning signal. From this single measurement, the radar obtains four physical quantities at once—the <em>range</em> to the object (from the frequency difference), the object's <em>velocity</em> (from the Doppler phase shift), and the <em>azimuth</em> and <em>elevation</em> angles (from the phase differences produced by the antenna array).</p>
+      <p>These four values—range r, azimuth φ, elevation θ, and velocity—are essentially the description of a single point in polar (spherical) coordinates. When a person stands in front of the radar, reflections occur from the many surfaces of the body and dozens of points come back. To the radar, a person is not a face or a silhouette but a cluster of points floating in the air—a <strong>point cloud</strong>. This very property sidesteps the privacy problem at its root, because what comes back is not “who” but only the geometric information that “something is somewhere, moving at some speed.”</p>
+
+      <figure>
+        <div class="fig-box"><img src="../../../assets/img/extracted/research/mmwave-spherical-coordinates.png" alt="Definition of the spherical coordinate system" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+        <figcaption>Definition of the spherical coordinate system (r, φ, θ). The range, azimuth, and elevation that the radar measures describe a single point in 3D space in polar coordinates, and this mathematical representation is the starting point for every coordinate transformation that follows.</figcaption>
+      </figure>
+
+      <p>But points scattered across spherical coordinates are awkward to handle as they are. In coordinates where angle and distance are intermingled, even the distance calculation for judging “did these two points come from the same person” is not intuitive. So the first step is a dimensional transformation that projects these points into a Cartesian coordinate system, returning them to the x, y, z of the Euclidean space we know. Only with this conversion from polar to Cartesian coordinates does clustering—“grouping nearby points together”—come about naturally.</p>
+
+      <span class="chapter-label">Chapter 3. Method</span>
+      <h2>Points into People, People into Coordinates</h2>
+      <p>The core pipeline can be summarized in three steps. <strong>Group the point cloud into individual people (clustering), find each person's center, and return that center to real latitude and longitude (geo-referencing).</strong> Let's take them one at a time.</p>
+
+      <h3>1. Point-Cloud Clustering — Separating Multiple People</h3>
+      <p>When there are two people in a space, the point cloud gathers into two groups. Applying density-based clustering to the points converted into Cartesian coordinates, nearby points are bound into a single cluster, and each cluster corresponds to one person. For each cluster, taking the centroid of the points gives that person's representative position, and averaging the Doppler velocities tells you whether that person is moving. The figure below is an actual processing result that separates two people into Cluster 0 and Cluster 1 and computes each one's latitude, longitude, height, range, and velocity.</p>
+
+      <figure>
+        <div class="fig-box"><img src="../../../assets/img/extracted/research/mmwave-pointcloud-cluster-dual.png" alt="Point-cloud clustering for two subjects" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+        <figcaption>Point-cloud clustering for two subjects. Density-based clustering separates the two people into Cluster 0/1, and latitude, longitude, height, range, and velocity are computed for each cluster. The color and grouping of the points correspond to one person each.</figcaption>
+      </figure>
+
+      <p>The principle stays the same as the number of people grows. When three people are standing, three groups form; each group is wrapped in a bounding box, and the number of points, the signal-to-noise ratio (SNR), and the computed latitude and longitude are recorded together. The more points there are (e.g., 184 vs. 57 vs. 59), the stronger that subject's reflection and the more stable the cluster. This metadata later becomes the basis for judging which cluster to trust.</p>
+
+      <figure>
+        <div class="fig-box"><img src="../../../assets/img/extracted/research/mmwave-pointcloud-cluster-bbox.png" alt="Bounding-box clustering for three subjects" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+        <figcaption>Bounding-box clustering for three subjects. The point counts of the three clusters (184/57/59), the SNR, and the latitude and longitude are shown together. The point count serves as an indicator of reflection strength and cluster reliability.</figcaption>
+      </figure>
+
+      <h3>2. Geo-referencing — Returning Relative Coordinates to Absolute Coordinates</h3>
+      <p>What we have obtained so far is, after all, <em>relative coordinates with the sensor as the origin</em>. A value like “2 m to the right and 3 m forward from the front of the radar” cannot become a point on a map unless we know where and in which direction that radar is installed. So in the final step, the sensor's GIS installation data—the latitude and longitude of the installation point, the installation height, and the direction it faces—is combined with the relative coordinates of the cluster center. Rotating the relative coordinates by the installation bearing and translating them by the installation point recovers each person's position as real latitude, longitude, and altitude. This is geo-referencing. Now each person that emerged from the point cloud becomes a single point on the world map.</p>
+
+      <div class="callout"><b>Why “recover”?</b> In the forward direction, satellites and maps hand us Earth coordinates. We do the opposite: starting from the relative angles and distances the radar measured from its own viewpoint, we reconstruct Earth coordinates. If the sensor's installation data is inaccurate, this entire reconstruction goes off, so in practice the surveying precision at the time of installation becomes the upper bound on the final precision.</div>
+
+      <span class="chapter-label">Chapter 4. Validation</span>
+      <h2>The Number 3.5 Centimeters</h2>
+      <p>A method being plausible and a method being actually accurate are entirely different matters. To verify precision, we drew a reference grid on a gymnasium floor and mounted the radar on a tripod. Having a person stand at each known point of the grid, we repeatedly measured the difference between the coordinates the radar computed by geo-referencing and the actual surveyed coordinates. The markings on the floor served as the ground truth.</p>
+
+      <figure>
+        <div class="fig-box"><img src="../../../assets/img/extracted/research/mmwave-field-experiment-gym.png" alt="Gymnasium field experiment" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+        <figcaption>Gymnasium field experiment. Geo-referencing error was measured repeatedly using a radar fixed on a tripod and a reference grid on the floor. The known coordinates of the grid become the ground truth for evaluating precision.</figcaption>
+      </figure>
+
+      <p>The result exceeded our expectations. The average geo-referencing error was about <strong>3.5 cm</strong>—meaning a person's position can be plotted on a map with an error the size of a single palm. Compared with the CCTV-based approach under the same conditions, precision improved by <strong>95.33%</strong>. This work was presented as a first-author paper at APCC 2024 (Bali) and is registered in IEEE Xplore under document number 10767948. The table below summarizes the difference in character between the two approaches.</p>
+
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+        <table>
+        <thead><tr><th>Comparison item</th><th>CCTV (pixel-based)</th><th>mmWave geo-referencing</th></tr></thead>
+        <tbody>
+          <tr><td>What is measured</td><td>Image pixels (face/silhouette)</td><td>Reflected point cloud (geometric information)</td></tr>
+          <tr><td>Privacy</td><td>Personally identifiable</td><td>Non-identifying (who is unknown)</td></tr>
+          <tr><td>Low light / smoke</td><td>Recognition plummets</td><td>Almost no effect</td></tr>
+          <tr><td>Output coordinates</td><td>Relative position within the frame</td><td>Real latitude, longitude, altitude</td></tr>
+          <tr><td>Multiple people</td><td>Vulnerable under occlusion</td><td>Separated and tracked by cluster</td></tr>
+          <tr><td>Geo-referencing precision</td><td>Baseline</td><td>Average error about 3.5 cm (95.33% improvement over baseline)</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <p>Of course, I want to be clear that this number was obtained in a controlled experimental environment. In spaces with severe multipath off the walls, in situations where subjects stand overlapping one another, and at sites where the installation survey is inaccurate, the error can grow larger. Even so, a palm-sized average error was enough to give evidential support to the possibility of registering an indoor space onto a map without using a camera.</p>
+
+      <div class="pullquote">If a person can be plotted on a map with an error the size of a single palm, without ever being identified—then safety and privacy are no longer things that must be traded against each other.</div>
+
+      <span class="chapter-label">Chapter 5. Scaling</span>
+      <h2>From a Single Radar to an Entire Stadium</h2>
+      <p>Once a single sensor gave palm-sized precision, the next question came naturally. What if not one but dozens; not one room but an entire stadium? A single radar's field of view (FOV) is limited to a fan shape. So to cover an entire space, you have to place several units at different points and overlap their fans. Each sensor geo-references the subjects within its own field of view onto latitude and longitude, and the results from the different sensors merge into a single picture on the same absolute coordinate system.</p>
+
+      <figure>
+        <div class="fig-box"><img src="../../../assets/img/extracted/research/mmwave-stadium-sensor-coverage-map.png" alt="Multi-sensor FOV over a stadium" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+        <figcaption>A coverage map placing the FOVs (fans) of multiple sensors over the stadium floor plan. Each sensor detects moving and stationary subjects in its assigned zone, and the overlapping fans cover the entire space.</figcaption>
+      </figure>
+
+      <p>A distributed layout demands a communication architecture. To gather the occupancy data that each of dozens of 60 GHz sensors computes into a center, we needed lightweight, real-time messaging. So we chose a lightweight MQTT-based pipeline. Each sensor (publisher) emits the occupancy information for its zone as a topic, and the integrated Ground Control System subscribes to these and gathers them onto a single screen. We built scaling into the design from the start, so that adding another sensor amounts to nothing more than opening one more topic.</p>
+
+      <p>The stage where we actually validated this architecture was the Daejeon World Cup Stadium. We divided the stadium floor plan into zones and overlaid the real-time occupancy of each zone onto a control dashboard. Which zone was crowded and where was emptying out appeared as numbers and colors on the floor plan—without a single camera. It was the moment the original goal—drawing a large-scale indoor distribution of people onto a map in real time while protecting privacy—worked at stadium scale.</p>
+
+      <figure>
+        <div class="fig-box"><img src="../../../assets/img/extracted/research/mmwave-stadium-dashboard-floorplan.png" alt="Integrated control for the Daejeon World Cup Stadium" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+        <figcaption>Integrated control screen for the Daejeon World Cup Stadium. The occupancy status of each zone is displayed in real time, linked to the stadium floor plan. The distribution of people is read from numbers and colors alone, with no camera footage.</figcaption>
+      </figure>
+
+      <span class="chapter-label">Closing</span>
+      <h2>What It Means to Draw People on a Map</h2>
+      <p>What this study left me was not a single number, 3.5 cm. It was a shift in perspective. For a long time we set “seeing people better” as the goal, and so we built sharper cameras. But what safety and operations truly needed was not the face but the <em>location</em>. Once we erased the face and kept only the location, the old dilemma of privacy vanished as a problem in itself. A sensor that sees less gave a more useful answer.</p>
+      <p>Of course, mmWave is no cure-all. Its precision is bound to the installation survey, and extreme multipath and dense crowds remain difficult homework. This system is a tool to aid human judgment, not a referee that replaces it, and especially when it is used for public safety, that boundary must be kept clear. Even so, I believe the direction is distinct. Drawing exactly where a person is onto a map without identifying them—that one quiet point could become the first coordinate for finding someone in a moment of crisis.</p>
+
+      <div class="references">
+        <h4>References</h4>
+        <ol>
+          <li>D. Park et al., “mmWave Radar-based Indoor Geo-referencing for Occupancy Localization,” <em>Proc. APCC 2024</em> (Asia-Pacific Conference on Communications), Bali, Indonesia, 2024. IEEE Xplore Document 10767948. (first author)</li>
+          <li>The geo-referencing precision cited in the text (average error about 3.5 cm, a 95.33% improvement over CCTV) was obtained in controlled field experiments and may vary with site conditions such as installation-survey precision, multipath, and subject density.</li>
+          <li>The multi-sensor distributed layout, MQTT pipeline, and integrated control are based on the demonstration at the Daejeon World Cup Stadium; the specific configuration is adjusted according to the deployment environment.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer of article -->
+  <div class="art-foot">
+    <div class="art-tags">
+      <a href="#">#mmWave</a><a href="#">#GeoReferencing</a><a href="#">#IndoorLocalization</a><a href="#">#PointCloud</a>
+    </div>
+    <div class="author-card">
+      <div class="av">DP</div>
+      <div class="who">
+        <b>Daeseung Park</b>
+        <p>A researcher at KAIST, studying large language models, time-series forecasting, and conversational AI. I try to record the process of research as accurately and as readably as I can.</p>
+      </div>
+    </div>
+
+    <div class="read-next no-print">
+        <div class="section-head" style="margin-bottom:20px;"><h2 style="font-size:1.3rem;">Read next</h2></div>
+        <div class="grid grid-2" id="readNext"><a href="../../articles/rag-architectures-hallucination/" class="post-card fade-up"><div class="thumb"><img class="ph " src="../../../articles/rag-architectures-hallucination/images/cover.svg" alt="" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;"><span class="cat-pill">AI · Explainer</span><span class="num">18</span></div><span class="cat">RAG · Retrieval-Augmented</span><h3>Four Ways Retrieval Rescues Intelligence — Lexical, Semantic, Hybrid, and Graph RAG, and the Anatomy of Hallucination</h3><p>A large language model's knowledge freezes the moment training ends. Retrieval-augmented generation (RAG) fills that gap by pulling in documents from outside the model. We dissect four retrieval architectures — Lexical, Semantic, Hybrid, and Graph — from first principles, and examine how they reduce hallucination and what still remains.</p><div class="meta"><span class="by">Daeseung Park</span><span class="dot-sep">18 min read</span></div></a><a href="../../articles/mcp-agent-interop-standard/" class="post-card fade-up"><div class="thumb"><img class="ph " src="../../../articles/mcp-agent-interop-standard/images/cover.svg" alt="" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;"><span class="cat-pill">AI · Explainer</span><span class="num">17</span></div><span class="cat">AI Agents</span><h3>The Protocol That Became AI's HTTP: MCP and the Interoperability-Standard War</h3><p>The moment chatbots turn into 'acting agents,' the bottleneck is no longer intelligence but the standard for connection. We anatomize how Anthropic's MCP became the de facto standard — its architecture, its politics, and the security homework that remains.</p><div class="meta"><span class="by">Daeseung Park</span><span class="dot-sep">14 min read</span></div></a></div>
+      </div>
+      <nav class="post-nav no-print" id="postNav"><a class="pn" href="../../articles/parallel-simulation-ape/"><span class="pn-dir">‹ Previous</span><span class="pn-t">Time Is Performance</span></a><a class="pn pn-list" href="../../articles.html">List</a><a class="pn pn-right" href="../../articles/geollm-knowledge-graph/"><span class="pn-dir">Next ›</span><span class="pn-t">The Language Model That Reads Maps</span></a></nav>
+    </div>
+</article>
+
+<div class="print-footer">Daeseung Park · D. PARK Journal — Drawing People on a Map Without a Camera: mmWave Geo-Referencing</div>
+
+<footer class="site-footer no-print" id="contact"><div class="container-x"><div class="footer-grid"><div><div class="footer-brand">D. PARK</div><p style="max-width:34ch;">AI &amp; Software Systems Engineer · KAIST</p><div class="social" style="margin-top:16px;"><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener" aria-label="GitHub">GH</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener" aria-label="ORCID">iD</a><a href="mailto:dspark@daeseungpark.com" aria-label="Email">@</a></div></div><div><h6>Browse</h6><ul><li><a href="../../index.html">Home</a></li><li><a href="../../profile.html">Profile</a></li><li><a href="../../articles.html">Articles</a></li><li><a href="../../research.html">Research</a></li><li><a href="../../notices.html">Notice</a></li></ul></div><div><h6>Articles</h6><ul class="ft-arts"><li><a href="../../articles/rag-architectures-hallucination/">Four Ways Retrieval Rescues Intelligence — Lexical, Semantic, Hybrid, and Graph RAG, and the Anatomy of Hallucination</a></li><li><a href="../../articles/mcp-agent-interop-standard/">The Protocol That Became AI's HTTP</a></li><li><a href="../../articles/ai-datacenter-power-crunch/">AI's Real Limit Is Electricity</a></li><li><a href="../../articles/ai-circular-financing-bubble/">From NVIDIA to NVIDIA</a></li><li><a href="../../articles/abliterated-ai-safety/">The Model With Refusal Erased</a></li></ul></div><div><h6>Contact</h6><ul><li><a href="mailto:dspark@daeseungpark.com">dspark@daeseungpark.com</a></li><li><a href="mailto:dspark@kaist.ac.kr">dspark@kaist.ac.kr</a></li><li><a href="tel:+821064547777">Phone (KR) +82 10 6454 7777</a></li><li><a href="tel:+16574109449">Phone (US) +1 657 410 9449</a></li><li>KAIST, Daejeon, Korea</li></ul></div></div><div class="footer-bottom"><span>© 2026 Daeseung Park. All rights reserved.</span><span>Designed &amp; built as a personal journal for Daeseung Park.</span></div></div></footer>
+
+<div class="mobile-nav" id="mobileNav"><button class="icon-btn close" id="navClose" aria-label="Close">✕</button><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></div>
+
+<script src="../../../assets/js/data.js"></script>
+<script src="../../../assets/js/articles.js"></script>
+<script src="../../../assets/js/i18n-en.js"></script><script src="../../../assets/js/main.js"></script>
+
+
+</body></html>

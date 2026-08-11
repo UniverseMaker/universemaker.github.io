@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-prerendered="1"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>From NVIDIA to NVIDIA - Daeseung Park Journal</title>
+<meta name="description" content="NVIDIA is investing up to $100 billion in OpenAI. We calmly dissect — through an engineer's eyes — the loop of money circling a single company that is supplier, customer, and investor at once, and the 'bubble' debate around it.">
+<link rel="canonical" href="https://daeseungpark.com/en/articles/ai-circular-financing-bubble/"><link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/ai-circular-financing-bubble/"><link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/ai-circular-financing-bubble/"><link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/ai-circular-financing-bubble/"><meta property="og:locale:alternate" content="ko_KR">
+<!-- seo-i18n:start -->
+
+
+
+
+<!-- seo-i18n:end -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="D. PARK Journal">
+<meta property="og:title" content="From NVIDIA to NVIDIA">
+<meta property="og:description" content="NVIDIA is investing up to $100 billion in OpenAI. We calmly dissect — through an engineer's eyes — the loop of money circling a single company that is supplier, customer, and investor at once, and the 'bubble' debate around it.">
+<meta property="og:url" content="https://daeseungpark.com/en/articles/ai-circular-financing-bubble/">
+<meta property="og:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="From NVIDIA to NVIDIA">
+<meta name="twitter:description" content="NVIDIA is investing up to $100 billion in OpenAI. We calmly dissect — through an engineer's eyes — the loop of money circling a single company that is supplier, customer, and investor at once, and the 'bubble' debate around it.">
+<meta name="twitter:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"From NVIDIA to NVIDIA","author":{"@type":"Person","name":"박대승","alternateName":"Daeseung Park"},"publisher":{"@type":"Organization","name":"D. PARK Journal"},"image":"https://daeseungpark.com/assets/img/profile/img3.jpg","mainEntityOfPage":"https://daeseungpark.com/articles/ai-circular-financing-bubble/","inLanguage":"en","datePublished":"2026-07-16"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&amp;family=Noto+Serif+KR:wght@400;600&amp;family=Noto+Sans+KR:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="../../../assets/css/style.css">
+<link rel="stylesheet" href="../../../assets/css/article.css">
+<script src="https://www.googletagmanager.com/gtag/js?id=G-1MMKKGR3MF"></script><style id="aiTrialStyle">#aiTrialBtn{position:fixed;right:22px;bottom:22px;z-index:940;display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border:0;border-radius:999px;cursor:pointer;font-family:"Pretendard",system-ui,sans-serif;font-weight:700;font-size:.92rem;color:#fff;background:linear-gradient(135deg,#5b6cff,#8b5bff);box-shadow:0 8px 24px rgba(70,70,140,.35);transition:transform .2s,box-shadow .2s,opacity .2s;}#aiTrialBtn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(70,70,140,.45);}#aiTrialBtn.active{opacity:.5;}#aiTrialBtn .ai-ic{font-size:1.05rem;line-height:1;}#aiTrialBtn .ai-b{font-size:.6rem;font-weight:800;background:rgba(255,255,255,.28);padding:2px 6px;border-radius:999px;letter-spacing:.5px;}#aiTrialPanel{position:fixed;right:22px;bottom:84px;z-index:945;width:380px;max-width:calc(100vw - 32px);height:560px;max-height:calc(100vh - 120px);background:var(--bg,#fff);border:1px solid var(--line,#e6e6e6);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.28);opacity:0;transform:translateY(12px) scale(.98);pointer-events:none;transition:opacity .22s,transform .22s;}#aiTrialPanel.open{opacity:1;transform:none;pointer-events:auto;}#aiTrialPanel .ai-head{display:flex;align-items:center;justify-content:space-between;padding:10px 8px 10px 14px;border-bottom:1px solid var(--line,#e6e6e6);}#aiTrialPanel .ai-ti{font-family:"Pretendard",system-ui,sans-serif;font-size:.9rem;color:var(--ink,#15171a);}#aiTrialPanel .ai-badge{font-size:.64rem;color:#7b83ff;border:1px solid #7b83ff;border-radius:999px;padding:1px 6px;margin-left:5px;}#aiTrialPanel .ai-actions{display:flex;gap:2px;}#aiTrialPanel .ai-x{border:0;background:transparent;cursor:pointer;font-size:1rem;line-height:1;padding:6px 9px;border-radius:8px;color:var(--ink,#15171a);opacity:.65;}#aiTrialPanel .ai-x:hover{opacity:1;background:rgba(125,125,140,.14);}#aiTrialPanel .ai-body{position:relative;flex:1;min-height:0;background:var(--bg,#fff);}#aiTrialPanel .ai-open{font-family:"Pretendard",system-ui,sans-serif;font-size:.78rem;font-weight:700;color:#7b83ff;padding:6px 10px;border-radius:8px;text-decoration:none;white-space:nowrap;}#aiTrialPanel .ai-open:hover{background:rgba(125,125,140,.14);}#aiTrialPanel iframe{position:relative;width:100%;height:100%;border:0;display:block;background:var(--bg,#fff);}@media (max-width:640px){#aiTrialBtn{right:16px;bottom:16px;padding:11px 15px;font-size:.86rem;}}</style></head>
+<body data-base="../../">
+<div class="progress-bar" id="progress"></div>
+<div class="topbar no-print">
+  <div class="container-x">
+    <span class="tb-date" id="today">Friday, August 7, 2026</span>
+    <div class="tb-links"><a href="https://ai.daeseungpark.com/chat/" target="_blank" rel="noopener">Abliterated AI</a><a href="https://tcc.daeseungpark.com/" target="_blank" rel="noopener">Mission Control(TCC)</a><a href="../../profile.html">Profile</a><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener">GitHub</a><a href="https://scholar.google.com/citations?hl=ko&amp;user=qVom0QUAAAAJ" target="_blank" rel="noopener">Scholar</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener">ORCID</a><a href="https://hub.docker.com/u/daeseungpark" target="_blank" rel="noopener">Docker</a><a href="https://codespectrum.net" target="_blank" rel="noopener">Blog</a><a href="../../profile.html#contact">Contact</a><a href="../../notices.html">Notice</a><a href="/articles/ai-circular-financing-bubble/" class="tb-lang-link" aria-label="Language">한국어</a></div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header no-print">
+  <div class="container-x nav-row">
+    <a href="../../index.html" class="brand">D<span class="dot">.</span> PARK <small>Journal</small></a>
+    <nav class="main-nav"><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">☾</span></button>
+      <button class="print-cta" id="printBtn">🖶 Print / PDF</button>
+      <button class="icon-btn nav-toggle" id="navToggle" aria-label="Menu">≡</button>
+    </div>
+  </div>
+</header>
+
+<div class="ticker no-print">
+  <div class="container-x">
+    <span class="label">Trending</span>
+    <div class="items" id="tickerItems"><a href="../../articles/rag-architectures-hallucination/">Four Ways Retrieval Rescues In…</a><a href="../../articles/mcp-agent-interop-standard/">The Protocol That Became AI's…</a><a href="../../articles/ai-datacenter-power-crunch/">AI's Real Limit Is Electricity</a><a href="../../articles/ai-circular-financing-bubble/">From NVIDIA to NVIDIA</a><a href="../../articles/abliterated-ai-safety/">The Model With Refusal Erased</a><a href="../../articles/llm-spatial-reasoning/">Do LLMs Understand Space? A 7,…</a></div>
+  </div>
+</div>
+
+<article data-article-id="15">
+  <div class="article-wrap">
+    <!-- Masthead -->
+    <header class="art-head">
+      <span class="cat-pill">Tech · Issue</span>
+      <h1>From NVIDIA to NVIDIA</h1>
+      <p class="deck">NVIDIA is investing up to $100 billion in OpenAI. We calmly dissect — through an engineer's eyes — the loop of money circling a single company that is supplier, customer, and investor at once, and the 'bubble' debate around it.</p>
+      <div class="art-byline">
+        <div class="av">DP</div>
+        <div class="who">
+          <b>Daeseung Park</b>
+          <span>AI &amp; Software Systems Engineer · KAIST</span>
+          <span>July 2026 · 14 min read</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="art-cover"><img src="images/cover.svg" alt="Conceptual illustration of a loop of money circulating between AI chips and the cloud" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+
+    <!-- Summary -->
+    <div class="summary-box">
+      <span class="tag">1-min summary</span>
+      In September 2025, NVIDIA and OpenAI announced a strategic partnership to <strong>deploy systems totaling 10 gigawatts (GW) and to have NVIDIA invest up to $100 billion in OpenAI in stages.</strong> Pick the structure apart and it turns strange. NVIDIA puts money into OpenAI as an equity investment, and OpenAI, standing on that capital base, turns around and buys NVIDIA chips <em>in cash.</em> Money leaves NVIDIA, passes through OpenAI and the data centers, and comes back as NVIDIA revenue — a <strong>circular financing structure</strong> in which a single company is at once supplier, customer, and investor. Skeptics see it as a self-dealing bubble that manufactures its own revenue; optimists see ordinary infrastructure finance that front-loads funding for explosively growing AI demand. This piece separates the announced facts from analysts' estimates, breaks the loop of money down into a diagram, and then weighs — evenly from both sides — the unit economics of capital expenditure against revenue, along with the conditions under which the loop holds and the conditions under which it breaks. <em>This article is not investment advice.</em>
+    </div>
+
+    <!-- Body -->
+    <div class="prose">
+      <span class="chapter-label">Chapter 1. The Money Comes Full Circle</span>
+      <h2>A Deal Where the Same Name Appears Three Times</h2>
+      <p>Picture a single flow-of-funds chart. Follow the arrows and the money starts at NVIDIA, flows into OpenAI, leaves OpenAI as payment for chips, moves on to data centers and the cloud, and finally returns to NVIDIA's revenue account. The same company's name is written at both the start and the end. At both ends of the supply chain — and on the investment line running between them — one name appears three times over.</p>
+      <p>Why the picture makes people uneasy is intuitive enough. If a company funds its own customer, and that customer uses the money to buy the company's own products, is the "revenue" that results genuine market demand, or just a number circling around the ledger? That "AI bubble" hardened into a discourse of its own after the autumn of 2025 rests precisely on the scent of this circularity.</p>
+      <p>But drawing conclusions from a scent alone is not the engineer's way. Let us begin by distinguishing exactly what has been announced, and where certainty ends and estimation begins.</p>
+
+      <div class="pullquote">When the same company's name is written at both the start and the finish, may we still call it revenue?</div>
+
+      <span class="chapter-label">Chapter 2. The Facts of the Deal</span>
+      <h2>What Was Announced, and What Is Not Yet Settled</h2>
+      <p>On September 22, 2025, NVIDIA and OpenAI formally announced a strategic partnership. It came down to three points. First, they would <strong>deploy 10GW of NVIDIA systems</strong> going forward. Second, to support that build-out, <strong>NVIDIA would invest up to $100 billion in OpenAI in stages.</strong> Third, the first 1GW would begin operating on NVIDIA's next-generation <strong>Vera Rubin platform</strong> in the <strong>second half of 2026.</strong> By NVIDIA's own account, a scale of 10GW corresponds to roughly <strong>4 to 5 million GPUs.</strong></p>
+      <p>What matters is the direction of the money. Piecing together the announcement and the follow-up reporting, <strong>OpenAI pays cash for the chips and systems,</strong> while <strong>NVIDIA invests in OpenAI in the form of a non-controlling equity stake.</strong> The money NVIDIA invests does not come back "tagged" directly as OpenAI's chip payment — but in the big picture the two flows are interlocked within the same partnership. It is a structure in which the supplier takes an equity position in its customer's capital structure, and that customer becomes the supplier's largest source of revenue.</p>
+
+      <div class="callout"><b>First, to be clear.</b> This article <strong>is not investment advice,</strong> and it does not recommend buying or selling any particular security. Among the financial figures that appear here, those confirmed by announcements or disclosures and those that are <strong>analysts' estimates</strong> are clearly distinguished in the text. Estimates can shift greatly depending on their assumptions and should not be read as established fact. Sources are collected in the references at the end.</div>
+
+      <p>And one more thing. This partnership was an announcement with the character of a <strong>letter of intent (LOI),</strong> and for several months afterward it <strong>remained unconfirmed as a final contract.</strong> In November 2025, NVIDIA included risk language to the effect that there was "no assurance" the deal with OpenAI would be reached, and its chief financial officer (CFO), Colette Kress, described the agreement as <em>"still not definitive."</em> As late as December, the $100 billion agreement was reported to be at a pre-signing stage. So we must keep in mind throughout that what we are dealing with is not "already-hardened fact" but <strong>an announced broad framework plus details still left open.</strong></p>
+
+      <div class="pullquote">What we are dealing with is not hardened fact, but an announced framework and details still left open.</div>
+
+      <span class="chapter-label">Chapter 3. Taking the Structure Apart</span>
+      <h2>Who Sells to Whom, and Who Funds Whom</h2>
+      <p>To see the loop for what it is, we have to peel the arrows apart one by one. In this partnership NVIDIA wears three hats at once: the <strong>supplier</strong> that sells the chips, the <strong>investor</strong> in the company those chips run on, and the potential <strong>customer and validator</strong> of the services that company builds. The diagram below is a simplified view of how these three roles close into a single loop.</p>
+
+      <figure>
+        <div style="background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:20px;">
+        <svg viewBox="0 0 720 470" width="100%" height="auto" role="img" aria-label="A circular flow-of-funds diagram running from NVIDIA through OpenAI and the data centers and back to NVIDIA" style="display:block;font-family:var(--sans);">
+          <defs>
+            <marker id="a1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 z" fill="var(--accent)"></path>
+            </marker>
+          </defs>
+          <!-- curved arrows forming the loop -->
+          <g fill="none" stroke="var(--accent)" stroke-width="3" marker-end="url(#a1)" opacity="0.9">
+            <path d="M300 118 C 420 118, 520 150, 560 210"></path>
+            <path d="M560 300 C 520 372, 430 400, 300 400"></path>
+            <path d="M170 372 C 120 300, 120 210, 160 150"></path>
+          </g>
+          <!-- node: NVIDIA -->
+          <g>
+            <rect x="150" y="60" width="200" height="70" rx="12" fill="var(--bg)" stroke="var(--ink)" stroke-width="2"></rect>
+            <text x="250" y="90" text-anchor="middle" font-size="20" font-weight="700" fill="var(--ink)">NVIDIA</text>
+            <text x="250" y="112" text-anchor="middle" font-size="12.5" fill="var(--muted)">Supplier · Investor · Validator</text>
+          </g>
+          <!-- node: OpenAI -->
+          <g>
+            <rect x="500" y="205" width="190" height="70" rx="12" fill="var(--bg)" stroke="var(--ink)" stroke-width="2"></rect>
+            <text x="595" y="235" text-anchor="middle" font-size="19" font-weight="700" fill="var(--ink)">OpenAI</text>
+            <text x="595" y="257" text-anchor="middle" font-size="12.5" fill="var(--muted)">Model &amp; service development</text>
+          </g>
+          <!-- node: DataCenter -->
+          <g>
+            <rect x="150" y="345" width="220" height="70" rx="12" fill="var(--bg)" stroke="var(--ink)" stroke-width="2"></rect>
+            <text x="260" y="375" text-anchor="middle" font-size="18" font-weight="700" fill="var(--ink)">Data centers · Cloud</text>
+            <text x="260" y="397" text-anchor="middle" font-size="12.5" fill="var(--muted)">10GW · 4–5 million GPUs</text>
+          </g>
+          <!-- edge labels -->
+          <g font-size="13" fill="var(--ink-soft)" text-anchor="middle">
+            <rect x="392" y="120" width="196" height="46" rx="8" fill="var(--surface-2)"></rect>
+            <text x="490" y="138" font-weight="700">① Equity (non-controlling)</text>
+            <text x="490" y="156">Up to $100B · staged</text>
+
+            <rect x="360" y="300" width="170" height="46" rx="8" fill="var(--surface-2)"></rect>
+            <text x="445" y="318" font-weight="700">② Chip &amp; system order</text>
+            <text x="445" y="336">Paid in cash</text>
+
+            <rect x="30" y="212" width="150" height="46" rx="8" fill="var(--surface-2)"></rect>
+            <text x="105" y="230" font-weight="700">③ GPU revenue</text>
+            <text x="105" y="248">Returns to NVIDIA</text>
+          </g>
+        </svg>
+        </div>
+        <figcaption>Figure 1. The circular flow of funds. NVIDIA's investment (①) flows into OpenAI; OpenAI buys chips and systems in cash (②); and that payment, by way of data-center construction, returns to NVIDIA as revenue (③). A single company doubles as supplier, investor, and validator, and the loop closes. The investment does not come back directly earmarked as chip payment, but the three flows interlock within the same partnership.</figcaption>
+      </figure>
+
+      <p>The heart of the skeptical view is that ① and ③ in this diagram come out of, and return to, effectively the same pocket. Put bluntly, the supplier is financing its own revenue, so that revenue is no proof of "outside demand." What is more, this structure is not confined to the NVIDIA–OpenAI pair. Bloomberg visualized the mutual payments and the equity and cloud contracts among Microsoft, OpenAI, and NVIDIA as a single "circular deals" map, in which the three companies are entangled as customer, investor, and infrastructure supplier to one another.</p>
+      <p>The counterargument is far from weak. <em>Vendor financing</em> — a supplier shouldering part of a large customer's upfront investment — is a long-standing practice in the telecom and semiconductor industries, and is not in itself evidence of fraud or a bubble. Equity investment and the sale of goods are, in accounting terms, separate transactions, and NVIDIA's stake is a non-controlling minority interest that cannot compel OpenAI's purchasing decisions. The problem is not the fact that the structure is circular, but <strong>whether enough real end demand to sustain the loop arrives in time.</strong> So the next chapter turns to the numbers.</p>
+
+      <span class="chapter-label">Chapter 4. Unit Economics</span>
+      <h2>Revenue Rises Gently; Capex Goes Vertical</h2>
+      <p>The center of gravity in this debate rests, in the end, on a single question: <strong>when do the curves of money going in (capital expenditure) and money coming out (revenue) meet?</strong> From here on, one must read with the clear understanding that these are not announced facts but <strong>analysts' estimates.</strong> An insight note from the asset manager Man Group put forward the following figures.</p>
+
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+      <table style="min-width:460px;">
+        <thead><tr><th>Item</th><th>Scale</th><th>Nature</th></tr></thead>
+        <tbody>
+          <tr><td>OpenAI 2025 revenue</td><td>≈ $13B</td><td>[analyst estimate]</td></tr>
+          <tr><td>8-year capex commitment (cumulative)</td><td>≈ $1.4T</td><td>[analyst estimate]</td></tr>
+          <tr><td>Projected single-year operating loss, 2028</td><td>≈ $74B</td><td>[analyst estimate]</td></tr>
+          <tr><td>NVIDIA → OpenAI investment commitment</td><td>Up to $100B</td><td>Announced (LOI, unconfirmed)</td></tr>
+          <tr><td>Deployment scale</td><td>10GW · 4–5 million GPUs</td><td>Announced</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <p>There is no need to take this table at face value. The point lies rather in the <em>gap in scale.</em> On one side is revenue on the order of $13 billion a year; on the other, a spending commitment of $1.4 trillion spread over eight years. The two differ by orders of magnitude. That this gap will be filled by explosive future demand growth is the premise of the optimists; that it will not be filled is the premise of the skeptics.</p>
+      <p>Why is the capex curve so steep? Large-scale AI infrastructure front-loads three kinds of cost: the <strong>upfront investment</strong> in GPUs and systems, the rapid <strong>depreciation</strong> of that hardware, and the enormous <strong>power bills</strong> of running it around the clock. Semiconductor generations are short, so their economic life expires within a few years, and 10GW of power is comparable to the consumption of an entire city. In other words, the money goes in heavily <em>now,</em> while the revenue that would justify the investment follows <em>later,</em> and gently. The figure below expresses this asymmetry conceptually.</p>
+
+      <figure>
+        <div style="background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:20px;">
+        <svg viewBox="0 0 720 420" width="100%" height="auto" role="img" aria-label="Conceptual graph of the capex curve and the revenue curve. Capex surges while revenue rises gently, showing both a soft-landing scenario where demand catches up and a rupture scenario where the gap widens" style="display:block;font-family:var(--sans);">
+          <!-- axes -->
+          <g stroke="var(--muted)" stroke-width="1.5">
+            <path d="M70 350 H660" fill="none"></path>
+            <path d="M70 350 V50" fill="none"></path>
+          </g>
+          <g font-size="12.5" fill="var(--muted)">
+            <text x="70" y="372" text-anchor="middle">Now</text>
+            <text x="660" y="372" text-anchor="end">Time →</text>
+            <text x="44" y="56" text-anchor="end" font-size="12">$</text>
+            <text x="30" y="205" text-anchor="middle" transform="rotate(-90 30 205)">Cumulative amount</text>
+          </g>
+          <!-- capex curve: steep -->
+          <path d="M70 340 C 240 320, 360 210, 470 110 S 600 60, 640 55" fill="none" stroke="var(--accent)" stroke-width="3.5"></path>
+          <!-- revenue curve: gentle -->
+          <path d="M70 345 C 260 338, 420 315, 540 285 S 630 262, 660 250" fill="none" stroke="var(--ink)" stroke-width="3.5"></path>
+          <!-- catch-up (soft landing) dashed scenario -->
+          <path d="M540 285 C 600 250, 630 130, 648 70" fill="none" stroke="var(--ink)" stroke-width="2.4" stroke-dasharray="7 6" opacity="0.85"></path>
+          <!-- divergence gap shading -->
+          <path d="M470 110 C 540 120, 600 130, 640 55 L 640 250 C 600 262, 560 272, 540 285 C 500 300, 430 150, 470 110 Z" fill="var(--accent)" opacity="0.08"></path>
+          <!-- divergence marker -->
+          <circle cx="470" cy="110" r="5" fill="var(--accent)"></circle>
+          <text x="452" y="102" text-anchor="end" font-size="12.5" fill="var(--ink-soft)" font-weight="700">Divergence point</text>
+          <!-- labels -->
+          <g font-size="13.5" font-weight="700">
+            <text x="640" y="42" text-anchor="end" fill="var(--accent)">Capex</text>
+            <text x="660" y="240" text-anchor="end" fill="var(--ink)">Revenue (base)</text>
+          </g>
+          <text x="648" y="60" text-anchor="end" font-size="12" fill="var(--muted)">┈ Soft landing as demand catches up</text>
+        </svg>
+        </div>
+        <figcaption>Figure 2. The capex curve versus the revenue curve (conceptual; not actual figures). Capex (the heavy line) climbs steeply because of upfront investment, depreciation, and power costs, while revenue (the black line) rises gently. The dashed line marks the <strong>soft-landing scenario,</strong> in which demand catches up late and the two curves converge; the widening gap of the solid lines marks the <strong>rupture (divergence) scenario,</strong> where demand fails to keep up.</figcaption>
+      </figure>
+
+      <div class="pullquote">The question is not "fake or real," but "does demand catch up to the curve in time."</div>
+
+      <span class="chapter-label">Chapter 5. Conditions of the Loop</span>
+      <h2>The Path Where It Holds, and the Path Where It Breaks</h2>
+      <p>A circular structure is neither good nor evil in itself. Whether it becomes "growth funded ahead of time" or "a self-inflated bubble" depends on a handful of conditions. Let us set the bull case and the bear case on the same scale.</p>
+
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+      <table style="min-width:520px;">
+        <thead><tr><th>Issue</th><th>Loop holds (bull case)</th><th>Loop breaks (bear case)</th></tr></thead>
+        <tbody>
+          <tr><td>End demand</td><td>Enterprise and consumer AI spending surges every year and catches up to the curve</td><td>Real usage and billing cannot keep pace with the speed of infrastructure investment</td></tr>
+          <tr><td>Circular structure</td><td>Standard vendor financing; equity and sales are separate</td><td>Self-referential growth in which the supplier funds its own revenue</td></tr>
+          <tr><td>Unit economics</td><td>Inference costs plunge as model efficiency and chip performance improve</td><td>Depreciation and power costs erode gross margin</td></tr>
+          <tr><td>Financing</td><td>Ultra-low rates and abundant capital underpin the infrastructure</td><td>If rates and liquidity tighten, capex commitments get canceled</td></tr>
+          <tr><td>Contract status</td><td>Staged execution allows adjustment as demand is observed</td><td>Whether the LOI firms into a final contract is still uncertain</td></tr>
+          <tr><td>Concentration risk</td><td>Concentrating resources in leaders secures economies of scale</td><td>The whole system is coupled to a few firms and a few chips</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <p>The path where the loop holds converges, in the end, on one thing: <strong>the money poured into infrastructure ahead of time being repaid by the real end demand that follows.</strong> If enterprises gain genuine productivity from AI and willingly pay for it, and if inference costs fall quickly through hardware and model efficiency so that gross margins recover, then the capex curve and the revenue curve will meet — belatedly, but they will meet. The staged-execution structure favors this scenario, because if demand is lukewarm the next tranche of investment can simply be slowed. Indeed, the very fact that the partnership has stayed "unconfirmed" for months can be read as a signal that both sides are leaving themselves room to adjust the pace.</p>
+      <p>The path where it breaks is the opposite. If end demand fails to arrive as expected while depreciation and power costs gnaw at gross margin, then at some stage a capex commitment gets canceled or postponed. In that moment one link of the loop snaps, and the supplier's "revenue outlook" is the first thing to shake. What magnifies the problem is <strong>concentration.</strong> When the entire system is tightly coupled to a handful of leading firms and a specific chip architecture, a crack in one link spreads easily to the whole. The reason bubble fears mounted around November 2025 — grounded in data-center investment excessive relative to revenue — was precisely this chain effect.</p>
+
+      <div class="callout"><b>The trap in the word "bubble."</b> Bubble debates are often mistaken for "is this technology real or fake?" But the internet was real, and the dot-com bubble of 2000 was real too — the two hold at the same time. The reality of a technology and the overheating of asset prices and investment pace are separate matters. Today's issue is not the usefulness of AI, but <strong>how far the speed of infrastructure investment has outrun the speed of demand,</strong> and whether capital can endure that lag.</div>
+
+      <span class="chapter-label">Closing</span>
+      <h2>Not "Fake or Real," but "In Time or Not"</h2>
+      <p>Looking at this debate as an engineer, I keep thinking of a system's <em>latency</em> and <em>buffer.</em> Investment in AI infrastructure is a vast buffer filled in advance with future demand. A large buffer absorbs a surge of requests smoothly, but whatever is stocked and not sold becomes a cost in its own right. The circular financing structure is a financial device for stacking this buffer faster and larger than anyone else. Whether it was a shrewd preemptive investment or reckless overcapacity will only be settled after <strong>demand — a lagging indicator — arrives.</strong></p>
+      <p>So I have no wish to close this matter with the binary of "bubble or not." Acknowledging the announced facts as facts (10GW, up to $100 billion, an unconfirmed LOI) and holding the estimates in parentheses as estimates (Man Group's revenue, capex, and loss projections), the dashboard we actually need to watch narrows to a single gauge: <strong>is end demand catching up to the capex curve in time?</strong> Which way that needle moves is what turns the same circular picture into either "growth pulled forward" or "an inflated bubble."</p>
+      <p>The loop in which money leaves NVIDIA and returns to NVIDIA is, in itself, neither guilty nor innocent. What would make the loop guilty is not the circularity but the <em>gap</em> — a situation in which no one fills the lag opened up between investment and demand. What we are witnessing now is a single bet, as vast in its uncertainty as in its scale, placed across that lag.</p>
+
+      <div class="references">
+        <h4>References</h4>
+        <ol>
+          <li>NVIDIA, “OpenAI and NVIDIA Announce Strategic Partnership to Deploy 10GW of NVIDIA Systems” (2025-09-22). 10GW deployment; up to $100B staged investment; first 1GW on Vera Rubin in H2 2026. <a href="https://nvidianews.nvidia.com/news/openai-and-nvidia-announce-strategic-partnership-to-deploy-10gw-of-nvidia-systems" target="_blank" rel="noopener">https://nvidianews.nvidia.com/news/openai-and-nvidia-announce-strategic-partnership-to-deploy-10gw-of-nvidia-systems</a></li>
+          <li>OpenAI, “OpenAI and NVIDIA announce strategic partnership” (2025-09-22). <a href="https://openai.com/index/openai-nvidia-systems-partnership/" target="_blank" rel="noopener">https://openai.com/index/openai-nvidia-systems-partnership/</a></li>
+          <li>CNBC, “Nvidia to invest up to $100 billion in OpenAI” (2025-09-22). Structure: OpenAI pays cash; NVIDIA takes a non-controlling equity stake. <a href="https://www.cnbc.com/2025/09/22/nvidia-openai-data-center.html" target="_blank" rel="noopener">https://www.cnbc.com/2025/09/22/nvidia-openai-data-center.html</a></li>
+          <li>CNBC, “Nvidia says no assurance of deal with OpenAI after $100 billion pact” (2025-11-19). Not a definitive deal. <a href="https://www.cnbc.com/2025/11/19/nvidia-says-no-assurance-of-deal-with-openai-after-100-billion-pact.html" target="_blank" rel="noopener">https://www.cnbc.com/2025/11/19/nvidia-says-no-assurance-of-deal-with-openai-after-100-billion-pact.html</a></li>
+          <li>Fortune, “Nvidia–OpenAI $100 billion deal not signed yet, Colette Kress” (2025-12-02). CFO: “still not definitive.” <a href="https://fortune.com/2025/12/02/nvidia-openai-deal-not-signed-yet-100-billion-rally-colette-kress/" target="_blank" rel="noopener">https://fortune.com/2025/12/02/nvidia-openai-deal-not-signed-yet-100-billion-rally-colette-kress/</a></li>
+          <li>Man Group, “The AI Bubble.” [analyst estimate] OpenAI 2025 revenue ≈ $13B; 8-year capex commitment ≈ $1.4T; projected 2028 operating loss ≈ $74B. The financial figures in this article rest on these estimates and are not established fact. <a href="https://www.man.com/insights/the-ai-bubble" target="_blank" rel="noopener">https://www.man.com/insights/the-ai-bubble</a></li>
+          <li>Bloomberg, “AI’s Circular Deals” (2026). Visualization of the mutual payments and circular deals among Microsoft, OpenAI, and NVIDIA. <a href="https://www.bloomberg.com/graphics/2026-ai-circular-deals/" target="_blank" rel="noopener">https://www.bloomberg.com/graphics/2026-ai-circular-deals/</a></li>
+          <li>NPR, “The AI bubble question: revenue, data centers, and the risk of a bust” (2025-11-23). Concern over data-center investment overheating relative to revenue. <a href="https://www.npr.org/2025/11/23/nx-s1-5615410/ai-bubble-nvidia-openai-revenue-bust-data-centers" target="_blank" rel="noopener">https://www.npr.org/2025/11/23/nx-s1-5615410/ai-bubble-nvidia-openai-revenue-bust-data-centers</a></li>
+          <li>“AI bubble,” Wikipedia. An overview of the “AI bubble” discourse. <a href="https://en.wikipedia.org/wiki/AI_bubble" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/AI_bubble</a></li>
+          <li>Figures 1 and 2 are original diagrams drawn by the author, simplifying the structures and concepts from the sources above; the curves in Figure 2 are conceptual representations, not actual figures. This article is not investment advice.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer of article -->
+  <div class="art-foot">
+    <div class="art-tags">
+      <a href="#">#AIBubble</a><a href="#">#CircularFinancing</a><a href="#">#NVIDIA</a><a href="#">#OpenAI</a><a href="#">#DataCenters</a>
+    </div>
+    <div class="author-card">
+      <div class="av">DP</div>
+      <div class="who">
+        <b>Daeseung Park</b>
+        <p>A researcher at KAIST studying large language models, time-series forecasting, and conversational AI. I try to record the process of research as accurately and as readably as I can.</p>
+      </div>
+    </div>
+
+    <div class="read-next no-print">
+        <div class="section-head" style="margin-bottom:20px;"><h2 style="font-size:1.3rem;">Read next</h2></div>
+        <div class="grid grid-2" id="readNext"><a href="../../articles/rag-architectures-hallucination/" class="post-card fade-up"><div class="thumb"><img class="ph " src="../../../articles/rag-architectures-hallucination/images/cover.svg" alt="" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;"><span class="cat-pill">AI · Explainer</span><span class="num">18</span></div><span class="cat">RAG · Retrieval-Augmented</span><h3>Four Ways Retrieval Rescues Intelligence — Lexical, Semantic, Hybrid, and Graph RAG, and the Anatomy of Hallucination</h3><p>A large language model's knowledge freezes the moment training ends. Retrieval-augmented generation (RAG) fills that gap by pulling in documents from outside the model. We dissect four retrieval architectures — Lexical, Semantic, Hybrid, and Graph — from first principles, and examine how they reduce hallucination and what still remains.</p><div class="meta"><span class="by">Daeseung Park</span><span class="dot-sep">18 min read</span></div></a><a href="../../articles/mcp-agent-interop-standard/" class="post-card fade-up"><div class="thumb"><img class="ph " src="../../../articles/mcp-agent-interop-standard/images/cover.svg" alt="" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;"><span class="cat-pill">AI · Explainer</span><span class="num">17</span></div><span class="cat">AI Agents</span><h3>The Protocol That Became AI's HTTP: MCP and the Interoperability-Standard War</h3><p>The moment chatbots turn into 'acting agents,' the bottleneck is no longer intelligence but the standard for connection. We anatomize how Anthropic's MCP became the de facto standard — its architecture, its politics, and the security homework that remains.</p><div class="meta"><span class="by">Daeseung Park</span><span class="dot-sep">14 min read</span></div></a></div>
+      </div>
+      <nav class="post-nav no-print" id="postNav"><a class="pn" href="../../articles/abliterated-ai-safety/"><span class="pn-dir">‹ Previous</span><span class="pn-t">The Model With Refusal Erased</span></a><a class="pn pn-list" href="../../articles.html">List</a><a class="pn pn-right" href="../../articles/ai-datacenter-power-crunch/"><span class="pn-dir">Next ›</span><span class="pn-t">AI's Real Limit Is Electricity</span></a></nav>
+    </div>
+</article>
+
+<div class="print-footer">Daeseung Park · D. PARK Journal — From NVIDIA to NVIDIA: The Economics of AI Circular Financing and the Bubble Debate</div>
+
+<footer class="site-footer no-print" id="contact"><div class="container-x"><div class="footer-grid"><div><div class="footer-brand">D. PARK</div><p style="max-width:34ch;">AI &amp; Software Systems Engineer · KAIST</p><div class="social" style="margin-top:16px;"><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener" aria-label="GitHub">GH</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener" aria-label="ORCID">iD</a><a href="mailto:dspark@daeseungpark.com" aria-label="Email">@</a></div></div><div><h6>Browse</h6><ul><li><a href="../../index.html">Home</a></li><li><a href="../../profile.html">Profile</a></li><li><a href="../../articles.html">Articles</a></li><li><a href="../../research.html">Research</a></li><li><a href="../../notices.html">Notice</a></li></ul></div><div><h6>Articles</h6><ul class="ft-arts"><li><a href="../../articles/rag-architectures-hallucination/">Four Ways Retrieval Rescues Intelligence — Lexical, Semantic, Hybrid, and Graph RAG, and the Anatomy of Hallucination</a></li><li><a href="../../articles/mcp-agent-interop-standard/">The Protocol That Became AI's HTTP</a></li><li><a href="../../articles/ai-datacenter-power-crunch/">AI's Real Limit Is Electricity</a></li><li><a href="../../articles/ai-circular-financing-bubble/">From NVIDIA to NVIDIA</a></li><li><a href="../../articles/abliterated-ai-safety/">The Model With Refusal Erased</a></li></ul></div><div><h6>Contact</h6><ul><li><a href="mailto:dspark@daeseungpark.com">dspark@daeseungpark.com</a></li><li><a href="mailto:dspark@kaist.ac.kr">dspark@kaist.ac.kr</a></li><li><a href="tel:+821064547777">Phone (KR) +82 10 6454 7777</a></li><li><a href="tel:+16574109449">Phone (US) +1 657 410 9449</a></li><li>KAIST, Daejeon, Korea</li></ul></div></div><div class="footer-bottom"><span>© 2026 Daeseung Park. All rights reserved.</span><span>Designed &amp; built as a personal journal for Daeseung Park.</span></div></div></footer>
+
+<div class="mobile-nav" id="mobileNav"><button class="icon-btn close" id="navClose" aria-label="Close">✕</button><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></div>
+
+<script src="../../../assets/js/data.js"></script>
+<script src="../../../assets/js/articles.js"></script>
+<script src="../../../assets/js/i18n-en.js"></script><script src="../../../assets/js/main.js"></script>
+
+
+</body></html>

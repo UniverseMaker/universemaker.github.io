@@ -1,11 +1,17 @@
 <!DOCTYPE html>
-<html lang="ko" data-theme="light">
+<html lang="ko" data-theme="light" data-prerendered="1">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GeoLLM — 지리정보 질의응답 시스템 - Daeseung Park Journal</title>
 <meta name="description" content="Llama-3 8B 파인튜닝 + RAG(FAISS/PostGIS) + Function Calling 5단계 파이프라인으로 지도 질의에 답하는 지리특화 언어모델. 지식그래프(GNLM)로 QA 정확도 88.4% 달성.">
 <link rel="canonical" href="https://daeseungpark.com/works/pf-geollm/">
+<!-- seo-i18n:start -->
+<link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-geollm/">
+<link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-geollm/">
+<link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-geollm/">
+<meta property="og:locale:alternate" content="en_US">
+<!-- seo-i18n:end -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="D. PARK Journal">
 <meta property="og:title" content="GeoLLM — 지리정보 질의응답 시스템">
@@ -29,14 +35,14 @@
 <div class="topbar">
   <div class="container-x">
     <span class="tb-date" id="today">—</span>
-    <div class="tb-links"><!-- SITE 렌더 --></div>
+    <div class="tb-links" data-prerendered="1"><a href="https://ai.daeseungpark.com/chat/" target="_blank" rel="noopener">Abliterated AI</a><a href="https://tcc.daeseungpark.com/" target="_blank" rel="noopener">Mission Control(TCC)</a><a href="../../profile.html">Profile</a><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener">GitHub</a><a href="https://scholar.google.com/citations?hl=ko&amp;user=qVom0QUAAAAJ" target="_blank" rel="noopener">Scholar</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener">ORCID</a><a href="https://hub.docker.com/u/daeseungpark" target="_blank" rel="noopener">Docker</a><a href="https://codespectrum.net" target="_blank" rel="noopener">Blog</a><a href="../../profile.html#contact">Contact</a><a href="../../notices.html">Notice</a><a href="/en/works/pf-geollm/" class="tb-lang-link" aria-label="Language">English</a></div>
   </div>
 </div>
 
 <header class="site-header">
   <div class="container-x nav-row">
     <a href="../../index.html" class="brand">D<span class="dot">.</span> PARK <small>Journal</small></a>
-    <nav class="main-nav"><!-- SITE 렌더 --></nav>
+    <nav class="main-nav" data-prerendered="1"><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></nav>
     <div class="nav-actions">
       <button class="icon-btn" id="themeToggle" aria-label="테마 전환"><span id="themeIcon">☾</span></button>
       <a href="../../profile.html" class="btn-x" style="padding:9px 16px;">프로필 보기</a>
@@ -48,24 +54,15 @@
 <div class="ticker">
   <div class="container-x">
     <span class="label">Trending</span>
-    <div class="items" id="tickerItems"></div>
+    <div class="items" id="tickerItems" data-prerendered="1"><a href="../../articles/rag-architectures-hallucination/">검색이 지능을 구원하는 네 가지 방법 — Lexical…</a><a href="../../articles/mcp-agent-interop-standard/">AI의 HTTP가 된 프로토콜</a><a href="../../articles/ai-datacenter-power-crunch/">AI의 진짜 한계는 전기다</a><a href="../../articles/ai-circular-financing-bubble/">엔비디아에서 엔비디아로</a><a href="../../articles/abliterated-ai-safety/">거부를 지운 모델</a><a href="../../articles/llm-spatial-reasoning/">LLM은 공간을 이해하는가</a></div>
   </div>
 </div>
 
-<main class="wd-wrap" id="workDetail" data-slug="pf-geollm"><!-- WORKS 상세 렌더 --></main>
+<main class="wd-wrap" id="workDetail" data-slug="pf-geollm" data-prerendered="1"><div class="crumb"><a href="../../index.html">Home</a> / <a href="../../works.html">논문·특허·SW</a> / 포트폴리오</div><span class="work-badge " style="margin-bottom:14px;">AI · R&amp;D</span><h1 class="wd-title">GeoLLM — 지리정보 질의응답 시스템</h1><div class="wd-meta">2023–2026 · KAIST · 국토부·국토지리정보원 연계</div><div class="wd-cover"><img src="../../assets/img/extracted/research/geollm-bot-demo-korean.png" alt="GeoLLM — 지리정보 질의응답 시스템"></div><div class="wd-summary"><p>자연어로 던진 지리 질문 — "우리 동네에서 가장 가까운 소각장은 어디냐", "반경 500m 안의 어린이보호구역을 모두 알려 줘" 같은 공간 질의 — 에 정확히 답하는 지리특화 언어모델(GeoLLM) 시스템이다. 국토교통부·국토지리정보원과 연계한 한국형 지오공간 언어모델(K-GeoLLM) 기획의 맥락에서 KAIST에서 개발했으며, 사용자의 문장을 정확한 공간 연산으로 번역해 실제 GIS 데이터 위에서 답을 구하고 그 결과를 다시 문장과 지도로 돌려주는 것을 목표로 삼았다.</p><p>핵심 성과물은 두 갈래다. 하나는 Llama-3 8B Bilingual을 파인튜닝하고 RAG 검색·PostGIS 함수 호출·지도 시각화를 결합한 5단계 파이프라인(GeoLLM)이고, 다른 하나는 지리 지식을 RDF 트리플 지식그래프로 표현하고 답을 사실로 검증하는 그래프-네이티브 언어모델(GNLM)이다. 250문항 QA 평가에서 GNLM은 88.4% 정확도를 달성해 맥락 없는 순수 LLM(57.1%)과 단순 RAG(31.4%)를 크게 앞섰고, 사실 검증 계층의 정확도는 96.7%에 이르렀다.</p></div><h4 class="wd-h4">구조 · 설계</h4><p class="wd-block">GeoLLM 파이프라인은 다섯 단계로 흐른다. ① 의도 인식 — few-shot 프롬프트와 개체명 인식(NER)으로 질의 유형(최근접·버퍼·거리)과 지명·시설명을 추출한다. ② RAG 검색 — FAISS 벡터 DB에서 의미적으로 가까운 문서를 찾고 동시에 PostgreSQL/PostGIS에서 실제 공간 레코드를 조회한다. ③ 함수 호출 — ST_DWithin(반경 내 포함)·ST_Distance(거리 계산) 같은 PostGIS 공간 함수를 JSON 툴 콜로 호출해 위상 연산은 전적으로 DB가 수행한다. ④ 결과 종합 — DB가 보증한 좌표·거리·목록을 모델이 자연어로 엮는다. ⑤ 지도 시각화 — Leaflet 지도 위에 결과를 얹는다. 개체 매칭·함수 호출 실패에 대비한 LLM Fallback 이중화 설계를 두었다. 기반 모델은 한국어·영어를 함께 다루는 Llama-3 8B Bilingual, LoRA/PEFT 기반 SFT로 파인튜닝했고 학습은 NVIDIA A6000 GPU 2장으로 진행했다. GNLM 갈래는 노드 58,882개·관계 80,088개로 이루어진 도로명주소 기반 RDF 지식그래프 위에 14개 추론 전략을 라우팅하는 Reasoning Router와 답을 그래프에 재대조하는 Fact Validation Layer를 결합한다.</p><h4 class="wd-h4">설계 목표</h4><p class="wd-block">언어의 유연함과 기하학의 엄밀함을 한 파이프라인 안에서 화해시키는 것이 목표였다. LLM은 거리·포함·인접 같은 공간 관계를 계산하지 못하고 그럴듯하지만 틀린 답(환각)을 지어내는데, 계산의 책임을 계산 엔진(PostGIS)과 지식그래프에 되돌려 주어 이 빈틈을 메우고자 했다. 8B라는 모델 크기는 의도적 선택으로, 공공 데이터를 온프레미스로 다루는 환경에서 거대 상용 모델에 데이터를 넘기지 않고도 굴러가야 했기 때문이다.</p><div class="wd-links"><a class="btn-x btn-ghost" href="../../articles/geollm-knowledge-graph/">관련 기고문 읽기 →</a></div><div style="margin-top:32px;"><a href="../../works.html">← 전체 목록</a></div></main>
 
-<footer class="site-footer" id="contact">
-  <div class="container-x">
-    <div class="footer-bottom" style="border:0;padding-top:0;">
-      <span>© 2026 Daeseung Park. All rights reserved.</span>
-      <span><a href="../../works.html">← 목록</a></span>
-    </div>
-  </div>
-</footer>
+<footer class="site-footer" id="contact" data-prerendered="1"><div class="container-x"><div class="footer-grid"><div><div class="footer-brand">D. PARK</div><p style="max-width:34ch;">AI &amp; Software Systems Engineer · KAIST</p><div class="social" style="margin-top:16px;"><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener" aria-label="GitHub">GH</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener" aria-label="ORCID">iD</a><a href="mailto:dspark@daeseungpark.com" aria-label="Email">@</a></div></div><div><h6>둘러보기</h6><ul><li><a href="../../index.html">Home</a></li><li><a href="../../profile.html">Profile</a></li><li><a href="../../articles.html">Articles</a></li><li><a href="../../research.html">Research</a></li><li><a href="../../notices.html">Notice</a></li></ul></div><div><h6>기고문</h6><ul class="ft-arts"><li><a href="../../articles/rag-architectures-hallucination/">검색이 지능을 구원하는 네 가지 방법 — Lexical·Semantic·Hybrid·Graph RAG와 환각의 해부</a></li><li><a href="../../articles/mcp-agent-interop-standard/">AI의 HTTP가 된 프로토콜</a></li><li><a href="../../articles/ai-datacenter-power-crunch/">AI의 진짜 한계는 전기다</a></li><li><a href="../../articles/ai-circular-financing-bubble/">엔비디아에서 엔비디아로</a></li><li><a href="../../articles/abliterated-ai-safety/">거부를 지운 모델</a></li></ul></div><div><h6>Contact</h6><ul><li><a href="mailto:dspark@daeseungpark.com">dspark@daeseungpark.com</a></li><li><a href="mailto:dspark@kaist.ac.kr">dspark@kaist.ac.kr</a></li><li><a href="tel:+821064547777">Phone (KR) +82 10 6454 7777</a></li><li><a href="tel:+16574109449">Phone (US) +1 657 410 9449</a></li><li>KAIST, Daejeon, Korea</li></ul></div></div><div class="footer-bottom"><span>© 2026 Daeseung Park. All rights reserved.</span><span>Designed &amp; built as a personal journal for Daeseung Park.</span></div></div></footer>
 
-<div class="mobile-nav" id="mobileNav">
-  <button class="icon-btn close" id="navClose" aria-label="닫기">✕</button>
-</div>
+<div class="mobile-nav" id="mobileNav" data-prerendered="1"><button class="icon-btn close" id="navClose" aria-label="닫기">✕</button><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></div>
 
 <script src="../../assets/js/data.js"></script>
 <script src="../../assets/js/content-pubs-a.js"></script>

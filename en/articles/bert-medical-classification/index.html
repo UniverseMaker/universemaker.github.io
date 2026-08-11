@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-prerendered="1"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Which Department Should I Go To? Classifying Health-Counseling Posts with BERT - Daeseung Park Journal</title>
+<meta name="description" content="In an era where non-face-to-face care is routine, people describe symptoms in sentences instead of diagnoses. A face-off among five models that read those clumsy sentences and route to the right department.">
+<link rel="canonical" href="https://daeseungpark.com/en/articles/bert-medical-classification/"><link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/bert-medical-classification/"><link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/bert-medical-classification/"><link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/bert-medical-classification/"><meta property="og:locale:alternate" content="ko_KR">
+<!-- seo-i18n:start -->
+
+
+
+
+<!-- seo-i18n:end -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="D. PARK Journal">
+<meta property="og:title" content="Which Department Should I Go To? Classifying Health-Counseling Posts with BERT">
+<meta property="og:description" content="In an era where non-face-to-face care is routine, people describe symptoms in sentences instead of diagnoses. A face-off among five models that read those clumsy sentences and route to the right department.">
+<meta property="og:url" content="https://daeseungpark.com/en/articles/bert-medical-classification/">
+<meta property="og:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Which Department Should I Go To? Classifying Health-Counseling Posts with BERT">
+<meta name="twitter:description" content="In an era where non-face-to-face care is routine, people describe symptoms in sentences instead of diagnoses. A face-off among five models that read those clumsy sentences and route to the right department.">
+<meta name="twitter:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Which Department Should I Go To? Classifying Health-Counseling Posts with BERT","author":{"@type":"Person","name":"박대승","alternateName":"Daeseung Park"},"publisher":{"@type":"Organization","name":"D. PARK Journal"},"image":"https://daeseungpark.com/assets/img/profile/img3.jpg","mainEntityOfPage":"https://daeseungpark.com/articles/bert-medical-classification/","inLanguage":"en","datePublished":"2026-06"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&amp;family=Noto+Serif+KR:wght@400;600&amp;family=Noto+Sans+KR:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="../../../assets/css/style.css">
+<link rel="stylesheet" href="../../../assets/css/article.css">
+<script src="https://www.googletagmanager.com/gtag/js?id=G-1MMKKGR3MF"></script><style id="aiTrialStyle">#aiTrialBtn{position:fixed;right:22px;bottom:22px;z-index:940;display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border:0;border-radius:999px;cursor:pointer;font-family:"Pretendard",system-ui,sans-serif;font-weight:700;font-size:.92rem;color:#fff;background:linear-gradient(135deg,#5b6cff,#8b5bff);box-shadow:0 8px 24px rgba(70,70,140,.35);transition:transform .2s,box-shadow .2s,opacity .2s;}#aiTrialBtn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(70,70,140,.45);}#aiTrialBtn.active{opacity:.5;}#aiTrialBtn .ai-ic{font-size:1.05rem;line-height:1;}#aiTrialBtn .ai-b{font-size:.6rem;font-weight:800;background:rgba(255,255,255,.28);padding:2px 6px;border-radius:999px;letter-spacing:.5px;}#aiTrialPanel{position:fixed;right:22px;bottom:84px;z-index:945;width:380px;max-width:calc(100vw - 32px);height:560px;max-height:calc(100vh - 120px);background:var(--bg,#fff);border:1px solid var(--line,#e6e6e6);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.28);opacity:0;transform:translateY(12px) scale(.98);pointer-events:none;transition:opacity .22s,transform .22s;}#aiTrialPanel.open{opacity:1;transform:none;pointer-events:auto;}#aiTrialPanel .ai-head{display:flex;align-items:center;justify-content:space-between;padding:10px 8px 10px 14px;border-bottom:1px solid var(--line,#e6e6e6);}#aiTrialPanel .ai-ti{font-family:"Pretendard",system-ui,sans-serif;font-size:.9rem;color:var(--ink,#15171a);}#aiTrialPanel .ai-badge{font-size:.64rem;color:#7b83ff;border:1px solid #7b83ff;border-radius:999px;padding:1px 6px;margin-left:5px;}#aiTrialPanel .ai-actions{display:flex;gap:2px;}#aiTrialPanel .ai-x{border:0;background:transparent;cursor:pointer;font-size:1rem;line-height:1;padding:6px 9px;border-radius:8px;color:var(--ink,#15171a);opacity:.65;}#aiTrialPanel .ai-x:hover{opacity:1;background:rgba(125,125,140,.14);}#aiTrialPanel .ai-body{position:relative;flex:1;min-height:0;background:var(--bg,#fff);}#aiTrialPanel .ai-open{font-family:"Pretendard",system-ui,sans-serif;font-size:.78rem;font-weight:700;color:#7b83ff;padding:6px 10px;border-radius:8px;text-decoration:none;white-space:nowrap;}#aiTrialPanel .ai-open:hover{background:rgba(125,125,140,.14);}#aiTrialPanel iframe{position:relative;width:100%;height:100%;border:0;display:block;background:var(--bg,#fff);}@media (max-width:640px){#aiTrialBtn{right:16px;bottom:16px;padding:11px 15px;font-size:.86rem;}}</style></head>
+<body data-base="../../">
+<div class="progress-bar" id="progress"></div>
+<div class="topbar no-print">
+  <div class="container-x">
+    <span class="tb-date" id="today">Friday, August 7, 2026</span>
+    <div class="tb-links"><a href="https://ai.daeseungpark.com/chat/" target="_blank" rel="noopener">Abliterated AI</a><a href="https://tcc.daeseungpark.com/" target="_blank" rel="noopener">Mission Control(TCC)</a><a href="../../profile.html">Profile</a><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener">GitHub</a><a href="https://scholar.google.com/citations?hl=ko&amp;user=qVom0QUAAAAJ" target="_blank" rel="noopener">Scholar</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener">ORCID</a><a href="https://hub.docker.com/u/daeseungpark" target="_blank" rel="noopener">Docker</a><a href="https://codespectrum.net" target="_blank" rel="noopener">Blog</a><a href="../../profile.html#contact">Contact</a><a href="../../notices.html">Notice</a><a href="/articles/bert-medical-classification/" class="tb-lang-link" aria-label="Language">한국어</a></div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header no-print">
+  <div class="container-x nav-row">
+    <a href="../../index.html" class="brand">D<span class="dot">.</span> PARK <small>Journal</small></a>
+    <nav class="main-nav"><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">☾</span></button>
+      <button class="print-cta" id="printBtn">🖶 Print / PDF</button>
+      <button class="icon-btn nav-toggle" id="navToggle" aria-label="Menu">≡</button>
+    </div>
+  </div>
+</header>
+
+<div class="ticker no-print">
+  <div class="container-x">
+    <span class="label">Trending</span>
+    <div class="items" id="tickerItems"><a href="../../articles/rag-architectures-hallucination/">Four Ways Retrieval Rescues In…</a><a href="../../articles/mcp-agent-interop-standard/">The Protocol That Became AI's…</a><a href="../../articles/ai-datacenter-power-crunch/">AI's Real Limit Is Electricity</a><a href="../../articles/ai-circular-financing-bubble/">From NVIDIA to NVIDIA</a><a href="../../articles/abliterated-ai-safety/">The Model With Refusal Erased</a><a href="../../articles/llm-spatial-reasoning/">Do LLMs Understand Space? A 7,…</a></div>
+  </div>
+</div>
+
+<article data-article-id="7">
+  <div class="article-wrap">
+    <!-- Masthead -->
+    <header class="art-head">
+      <span class="cat-pill">Research · Retrospective</span>
+      <h1>Which Department Should I Go To? Classifying Health-Counseling Posts with BERT</h1>
+      <p class="deck">In an era where non-face-to-face care is routine, people describe symptoms in sentences instead of diagnoses. A face-off among five models that read those clumsy sentences and route to the right department.</p>
+      <div class="art-byline">
+        <div class="av">DP</div>
+        <div class="who">
+          <b>Daeseung Park</b>
+          <span>AI &amp; Software Systems Engineer · KAIST</span>
+          <span>June 2026 · 13 min read</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="art-cover"><img src="../../../assets/img/extracted/portfolio/bert-health-model-comparison-chart.png" alt="Comparison of classification accuracy by model" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+
+    <!-- Summary -->
+    <div class="summary-box">
+      <span class="tag">1-min summary</span>
+      The post-pandemic spread of non-face-to-face care created a new bottleneck. Users describe their symptoms in everyday language rather than medical terms, yet deciding which department each post should go to is still left to humans. We gathered health-counseling texts that carried answers from licensed specialists, framed the task of automatically classifying them into nine medical departments, and pitted five models — RNN, GRU, LSTM, CNN, and BERT — against one another on the same data. The result came down in favor of the pretrained language model. BERT led with 76.3% accuracy, while the traditional recurrent-network family fell clearly behind. This piece looks back on how the experiment was designed, why BERT won, and the limits to keep in mind when carrying the result into practice.
+    </div>
+
+    <!-- Body -->
+    <div class="prose">
+      <span class="chapter-label">Chapter 1. Framing the Problem</span>
+      <h2>“This symptom — which department do I go to?”</h2>
+      <p>The first question a user faces on a telehealth platform is, paradoxically, one they cannot answer. In front of the empty “Describe your symptoms” box, people do not write a disease name. They cannot. Had they known the name, they would not have needed the consultation in the first place. Instead they write things like: “My chest has been burning for days and I cough at night.” “My fingertips tingle and my neck feels stiff.” These sentences are written in the vocabulary of everyday life, not the vocabulary of a medical textbook.</p>
+      <p>The trouble comes next. Reading these clumsy sentences and judging “this is gastroenterology” or “you should see both orthopedics and neurology” — this routing is the very first gateway of non-face-to-face care. When the gateway is blocked, users waste time in the wrong department and the care they actually need is delayed. As consultation requests surged after COVID-19, having a person clear each one through this gateway by hand ran into its limits.</p>
+
+      <div class="pullquote">People do not write a disease name. Had they known the name, they would not have needed the consultation. They describe their symptoms in the language of everyday life.</div>
+
+      <p>The study I took part in as second author began from the problem of automating this gateway: letting a machine read a health-counseling post written in natural language and judge which department it belongs to. On the surface it looks like an ordinary text-classification problem, but the medical domain carries its own difficulties. Symptom descriptions are vague and ambiguous, signals for several departments are tangled within a single sentence, and above all, clean data worth training on is in absolutely short supply. Which model holds up best under these constraints — that was our question.</p>
+
+      <span class="chapter-label">Chapter 2. Data and Task</span>
+      <h2>A specialist’s answer becomes the answer key</h2>
+      <p>To solve a classification problem you need ground truth. But where would we get the correct answer to “which department does this symptom post belong to”? Here the character of the data was decisive. What we collected was not merely symptom posts but <strong>health-counseling texts to which specialists had actually written answers</strong>. In other words, each question already carried the context of a department that an expert had judged, and we could use this to label every post into one of nine medical-department categories.</p>
+      <p>I want to stress this point. Good labels come before a good model. Without the trustworthy signal of a specialist’s answer, what we trained on would ultimately have been someone’s subjective guess. The work of cleaning the data — stripping out promotional, duplicate, and non-medical text, balancing the categories, and excluding posts that were too short or impossible to judge — is unglamorous, but it was the foundation that held up the credibility of the whole experiment.</p>
+
+      <div class="callout"><b>Task definition.</b> The input is a health-counseling text a user wrote in natural language; the output is one of nine medical departments. We formalized it as a multi-class, single-label classification problem. In practice this output leads directly to the routing decision of “which department to guide them to.”</div>
+
+      <p>One thing must be made clear up front. The purpose of this system is not diagnosis. When the model answers “gastroenterology,” it is not diagnosing a disease but <em>connecting</em> a person to the appropriate specialist. The final judgment always belongs to a medical professional, and the automatic classifier is only a signpost pointing the way toward that judgment. In the medical domain, this boundary cannot be stressed too much.</p>
+
+      <span class="chapter-label">Chapter 3. A Contest of Five Models</span>
+      <h2>Same data, different architectures</h2>
+      <p>The principle of a fair comparison is simple: the same data, the same evaluation set, the same scoring criteria. On top of that we placed five different architectures. The recurrent-network family that reads text sequentially — RNN, and its refinements GRU and LSTM — then CNN, which captures local patterns, and finally BERT, the transformer pretrained on a large corpus. These differ in the very way they understand text.</p>
+      <p>A recurrent network scans a sentence one token at a time from left to right, updating its memory. It is intuitive, but as sentences grow longer it suffers from the long-range dependency problem, where earlier information fades. GRU and LSTM try to hold on to this memory with gating structures, while CNN abandons sequentiality altogether and catches local lexical patterns with filters. BERT is different again: it places the whole sentence at once and uses attention to compute the relationship each word forms with every other word in the sentence — its bidirectional context.</p>
+
+      <figure>
+        <div class="fig-box"><img src="../../../assets/img/extracted/portfolio/bert-health-model-comparison-chart.png" alt="Classification-accuracy comparison across five models on health-counseling text" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+        <figcaption>Classification-accuracy comparison of five models on health-counseling text. Pretrained BERT leads, with the traditional recurrent-network family following behind.</figcaption>
+      </figure>
+
+      <p>The results are summarized in the table below. Ranked by accuracy, BERT was highest at 76.3%, with CNN (74.2%) close behind. LSTM (71.7%) and GRU (70.1%) formed a middle group, while the basic RNN stopped at 58%, revealing a clear gap.</p>
+
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+        <table>
+        <thead><tr><th>Model</th><th>Family</th><th>Accuracy</th></tr></thead>
+        <tbody>
+          <tr><td>BERT</td><td>Pretrained transformer</td><td>76.3%</td></tr>
+          <tr><td>CNN</td><td>Convolutional network</td><td>74.2%</td></tr>
+          <tr><td>LSTM</td><td>Recurrent network (gated)</td><td>71.7%</td></tr>
+          <tr><td>GRU</td><td>Recurrent network (gated)</td><td>70.1%</td></tr>
+          <tr><td>RNN</td><td>Basic recurrent network</td><td>58%</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p>Accuracy alone cannot settle which model is better. Especially in medical data, where category frequencies are uneven, one must also look at recall and precision, and at the F1 score that is their harmonic mean. There is a trap: if answers are funneled into a few common departments, accuracy can look high while rare departments are not caught at all. We cross-checked each model on these metrics, and BERT showed a stable balance across the board, not just in accuracy.</p>
+
+      <figure>
+        <div class="fig-box"><img src="../../../assets/img/extracted/portfolio/bert-health-simulation-results-table.png" alt="Simulation results table of recall, precision, F1, and accuracy by model" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+        <figcaption>Simulation results of recall, precision, F1, and accuracy by model. We looked together at the balance behind the single number of accuracy.</figcaption>
+      </figure>
+
+      <span class="chapter-label">Chapter 4. Why BERT Won</span>
+      <h2>Two levers: pretraining and context</h2>
+      <p>BERT’s victory was no accident. At the root of its edge lie two structural advantages. The first is <strong>pretraining</strong>. The moment BERT first sees our health-counseling data, it arrives having already learned the statistical structure of language from a vast general corpus. That “burning” is close to “aching,” that “the pit of the stomach” is a body part, that a negation flips a sentence’s meaning — it already possesses these fundamentals of language.</p>
+      <p>Why is this decisive? As noted earlier, clean labeled data in the medical domain is in absolutely short supply. Training a recurrent network from scratch means learning the fundamentals of language and domain knowledge at the same time from this scarce data. A pretrained model, by contrast, already has the fundamentals and only needs to adapt to the domain data through <em>transfer learning</em>. This ability to capture context even with little data shines especially where data is precious, as in medicine.</p>
+
+      <div class="pullquote">A pretrained model arrives already possessing the fundamentals of language. The scarcer the data in a medical domain, the more decisive this difference at the starting line becomes.</div>
+
+      <p>The second is <strong>bidirectional context embedding</strong>. Whereas a recurrent network scans a sentence in one direction and gradually forgets earlier information, BERT uses its attention mechanism to look at all the words in a sentence at once. In “my neck is swollen and painful,” whether “neck” means the throat or the cervical spine is decided only through its relationship with the surrounding words — and BERT computes that relationship bidirectionally. Given the nature of health-counseling text, where symptom descriptions are ambiguous and several signals are tangled within a sentence, it becomes clear why this capacity to grasp context made a real difference.</p>
+      <p>What is interesting is that CNN trailed BERT only slightly while outperforming the recurrent-network family. This suggests that in short counseling texts, the local patterns of key symptom keywords — particular combinations of words — become a strong signal for classification. Conversely, the poor showing of the basic RNN (58%) empirically demonstrates just how painfully the long-range dependency problem and training instability play out on real data.</p>
+
+      <span class="chapter-label">Chapter 5. Limits and Implications</span>
+      <h2>Reading the number 76% honestly</h2>
+      <p>76.3% is the top score the best model produced. It also means it is wrong two or so times out of ten. When carrying this number into practice, we must honestly acknowledge three things.</p>
+      <p><strong>First, this is classification, not diagnosis.</strong> As stressed earlier, the model’s output is department guidance, not a medical judgment. It cannot stand in for diagnosis at 76% accuracy, but it is useful enough as a first step in connecting a person to the right specialist. The system assists experts; it does not replace them.</p>
+      <p><strong>Second, bias in the data is bias in the model.</strong> If the training data held many consultations from a particular department, the model tends to funnel answers toward that department. The risk of missing a rare but important department — a signal that requires emergency care — hides behind the accuracy number. That is why we looked at recall too, and in a real service, categories that must not be missed require their own safeguards.</p>
+      <p><strong>Third, language keeps changing.</strong> The way people express symptoms, newly coined words, and trending conditions all shift over time. A model trained once is not valid forever. Just as prompts are version-controlled like code, a classification model must also be periodically re-validated and updated with new data.</p>
+
+      <span class="chapter-label">Closing</span>
+      <h2>A technology that respects clumsy sentences</h2>
+      <p>The biggest lesson this study left me lay beyond its technical conclusion. When people are ill, they cannot pick the exact words. Not dismissing those clumsy sentences, but faithfully reading the signals within them and connecting them to the right help — that is the task that language technology in the age of non-face-to-face care must take on. That the pretrained language model did this better was, in the end, because it understood human language more deeply. BERT’s 76.3% was not a destination but a single signpost on the way to a technology that respects clumsy sentences.</p>
+
+      <div class="references">
+        <h4>References</h4>
+        <ol>
+          <li>Y. Kim, D. Park et al., “A Study of BERT-Based Classification Performance of Text-Based Health Counseling Data,” <em>Computer Modeling in Engineering &amp; Sciences (CMES)</em> (SCIE), 2022. DOI: 10.32604/cmes.2022.022465. (Second author)</li>
+          <li>The accuracy figures in the text (BERT 76.3%, CNN 74.2%, LSTM 71.7%, GRU 70.1%, RNN 58%) are the experimental results of the paper above; reproduced values may vary depending on the data, preprocessing, and evaluation-set composition.</li>
+          <li>This system is intended for department guidance and does not replace medical diagnosis or the judgment of a professional.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer of article -->
+  <div class="art-foot">
+    <div class="art-tags">
+      <a href="#">#HealthcareNLP</a><a href="#">#BERT</a><a href="#">#TextClassification</a><a href="#">#TransferLearning</a>
+    </div>
+    <div class="author-card">
+      <div class="av">DP</div>
+      <div class="who">
+        <b>Daeseung Park</b>
+        <p>Research Engineer at KAIST. I study large language models, time-series forecasting, and conversational AI, and I try to record the process of my research as accurately and readably as I can.</p>
+      </div>
+    </div>
+
+    <div class="read-next no-print">
+        <div class="section-head" style="margin-bottom:20px;"><h2 style="font-size:1.3rem;">Read next</h2></div>
+        <div class="grid grid-2" id="readNext"><a href="../../articles/rag-architectures-hallucination/" class="post-card fade-up"><div class="thumb"><img class="ph " src="../../../articles/rag-architectures-hallucination/images/cover.svg" alt="" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;"><span class="cat-pill">AI · Explainer</span><span class="num">18</span></div><span class="cat">RAG · Retrieval-Augmented</span><h3>Four Ways Retrieval Rescues Intelligence — Lexical, Semantic, Hybrid, and Graph RAG, and the Anatomy of Hallucination</h3><p>A large language model's knowledge freezes the moment training ends. Retrieval-augmented generation (RAG) fills that gap by pulling in documents from outside the model. We dissect four retrieval architectures — Lexical, Semantic, Hybrid, and Graph — from first principles, and examine how they reduce hallucination and what still remains.</p><div class="meta"><span class="by">Daeseung Park</span><span class="dot-sep">18 min read</span></div></a><a href="../../articles/mcp-agent-interop-standard/" class="post-card fade-up"><div class="thumb"><img class="ph " src="../../../articles/mcp-agent-interop-standard/images/cover.svg" alt="" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;"><span class="cat-pill">AI · Explainer</span><span class="num">17</span></div><span class="cat">AI Agents</span><h3>The Protocol That Became AI's HTTP: MCP and the Interoperability-Standard War</h3><p>The moment chatbots turn into 'acting agents,' the bottleneck is no longer intelligence but the standard for connection. We anatomize how Anthropic's MCP became the de facto standard — its architecture, its politics, and the security homework that remains.</p><div class="meta"><span class="by">Daeseung Park</span><span class="dot-sep">14 min read</span></div></a></div>
+      </div>
+      <nav class="post-nav no-print" id="postNav"><a class="pn" href="../../articles/contactless-biosignals/"><span class="pn-dir">‹ Previous</span><span class="pn-t">Reading Biosignals Without Contact</span></a><a class="pn pn-list" href="../../articles.html">List</a><a class="pn pn-right" href="../../articles/data-augmentation-activation/"><span class="pn-dir">Next ›</span><span class="pn-t">Data and Activation Functions</span></a></nav>
+    </div>
+</article>
+
+<div class="print-footer">Daeseung Park · D. PARK Journal — Which Department Should I Go To? Classifying Health-Counseling Posts with BERT</div>
+
+<footer class="site-footer no-print" id="contact"><div class="container-x"><div class="footer-grid"><div><div class="footer-brand">D. PARK</div><p style="max-width:34ch;">AI &amp; Software Systems Engineer · KAIST</p><div class="social" style="margin-top:16px;"><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener" aria-label="GitHub">GH</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener" aria-label="ORCID">iD</a><a href="mailto:dspark@daeseungpark.com" aria-label="Email">@</a></div></div><div><h6>Browse</h6><ul><li><a href="../../index.html">Home</a></li><li><a href="../../profile.html">Profile</a></li><li><a href="../../articles.html">Articles</a></li><li><a href="../../research.html">Research</a></li><li><a href="../../notices.html">Notice</a></li></ul></div><div><h6>Articles</h6><ul class="ft-arts"><li><a href="../../articles/rag-architectures-hallucination/">Four Ways Retrieval Rescues Intelligence — Lexical, Semantic, Hybrid, and Graph RAG, and the Anatomy of Hallucination</a></li><li><a href="../../articles/mcp-agent-interop-standard/">The Protocol That Became AI's HTTP</a></li><li><a href="../../articles/ai-datacenter-power-crunch/">AI's Real Limit Is Electricity</a></li><li><a href="../../articles/ai-circular-financing-bubble/">From NVIDIA to NVIDIA</a></li><li><a href="../../articles/abliterated-ai-safety/">The Model With Refusal Erased</a></li></ul></div><div><h6>Contact</h6><ul><li><a href="mailto:dspark@daeseungpark.com">dspark@daeseungpark.com</a></li><li><a href="mailto:dspark@kaist.ac.kr">dspark@kaist.ac.kr</a></li><li><a href="tel:+821064547777">Phone (KR) +82 10 6454 7777</a></li><li><a href="tel:+16574109449">Phone (US) +1 657 410 9449</a></li><li>KAIST, Daejeon, Korea</li></ul></div></div><div class="footer-bottom"><span>© 2026 Daeseung Park. All rights reserved.</span><span>Designed &amp; built as a personal journal for Daeseung Park.</span></div></div></footer>
+
+<div class="mobile-nav" id="mobileNav"><button class="icon-btn close" id="navClose" aria-label="Close">✕</button><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></div>
+
+<script src="../../../assets/js/data.js"></script>
+<script src="../../../assets/js/articles.js"></script>
+<script src="../../../assets/js/i18n-en.js"></script><script src="../../../assets/js/main.js"></script>
+
+
+</body></html>

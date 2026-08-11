@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-prerendered="1"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart-Mirror Contactless Biosignal Measurement - Daeseung Park Journal</title>
+<meta name="description" content="라즈베리파이 기반 스마트 미러에 카메라를 달아, 거울 앞에 선 사람의 얼굴에서 비접촉으로 맥박 등 생체신호를 측정하는 헬스 모니터링 시스템이다. 손목에 무엇도 채우지 않고 피부에 닿는 것 없이, 화면 앞에 잠시 서 있기만 하면 광용적맥파(PPG, Photoplethysmography) 원리로 심박을 추정한다.">
+<link rel="canonical" href="https://daeseungpark.com/en/works/pf-smart-mirror/"><link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-smart-mirror/"><link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-smart-mirror/"><link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-smart-mirror/"><meta property="og:locale:alternate" content="ko_KR">
+<!-- seo-i18n:start -->
+
+
+
+
+<!-- seo-i18n:end -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="D. PARK Journal">
+<meta property="og:title" content="Smart-Mirror Contactless Biosignal Measurement">
+<meta property="og:description" content="라즈베리파이 기반 스마트 미러에 카메라를 달아, 거울 앞에 선 사람의 얼굴에서 비접촉으로 맥박 등 생체신호를 측정하는 헬스 모니터링 시스템이다. 손목에 무엇도 채우지 않고 피부에 닿는 것 없이, 화면 앞에 잠시 서 있기만 하면 광용적맥파(PPG, Photoplethysmography) 원리로 심박을 추정한다.">
+<meta property="og:url" content="https://daeseungpark.com/en/works/pf-smart-mirror/">
+<meta property="og:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Smart-Mirror Contactless Biosignal Measurement">
+<meta name="twitter:description" content="라즈베리파이 기반 스마트 미러에 카메라를 달아, 거울 앞에 선 사람의 얼굴에서 비접촉으로 맥박 등 생체신호를 측정하는 헬스 모니터링 시스템이다. 손목에 무엇도 채우지 않고 피부에 닿는 것 없이, 화면 앞에 잠시 서 있기만 하면 광용적맥파(PPG, Photoplethysmography) 원리로 심박을 추정한다.">
+<meta name="twitter:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"스마트미러 비접촉 생체신호 측정","description":"카메라 기반 PPG로 맥박 등 생체신호를 비접촉 측정하는 스마트미러 헬스 모니터링.","author":{"@type":"Person","name":"박대승","alternateName":"Daeseung Park"},"url":"https://daeseungpark.com/works/pf-smart-mirror/","inLanguage":"en"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&amp;family=Noto+Serif+KR:wght@400;600&amp;family=Noto+Sans+KR:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="../../../assets/css/style.css">
+<script src="https://www.googletagmanager.com/gtag/js?id=G-1MMKKGR3MF"></script><style id="aiTrialStyle">#aiTrialBtn{position:fixed;right:22px;bottom:22px;z-index:940;display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border:0;border-radius:999px;cursor:pointer;font-family:"Pretendard",system-ui,sans-serif;font-weight:700;font-size:.92rem;color:#fff;background:linear-gradient(135deg,#5b6cff,#8b5bff);box-shadow:0 8px 24px rgba(70,70,140,.35);transition:transform .2s,box-shadow .2s,opacity .2s;}#aiTrialBtn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(70,70,140,.45);}#aiTrialBtn.active{opacity:.5;}#aiTrialBtn .ai-ic{font-size:1.05rem;line-height:1;}#aiTrialBtn .ai-b{font-size:.6rem;font-weight:800;background:rgba(255,255,255,.28);padding:2px 6px;border-radius:999px;letter-spacing:.5px;}#aiTrialPanel{position:fixed;right:22px;bottom:84px;z-index:945;width:380px;max-width:calc(100vw - 32px);height:560px;max-height:calc(100vh - 120px);background:var(--bg,#fff);border:1px solid var(--line,#e6e6e6);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.28);opacity:0;transform:translateY(12px) scale(.98);pointer-events:none;transition:opacity .22s,transform .22s;}#aiTrialPanel.open{opacity:1;transform:none;pointer-events:auto;}#aiTrialPanel .ai-head{display:flex;align-items:center;justify-content:space-between;padding:10px 8px 10px 14px;border-bottom:1px solid var(--line,#e6e6e6);}#aiTrialPanel .ai-ti{font-family:"Pretendard",system-ui,sans-serif;font-size:.9rem;color:var(--ink,#15171a);}#aiTrialPanel .ai-badge{font-size:.64rem;color:#7b83ff;border:1px solid #7b83ff;border-radius:999px;padding:1px 6px;margin-left:5px;}#aiTrialPanel .ai-actions{display:flex;gap:2px;}#aiTrialPanel .ai-x{border:0;background:transparent;cursor:pointer;font-size:1rem;line-height:1;padding:6px 9px;border-radius:8px;color:var(--ink,#15171a);opacity:.65;}#aiTrialPanel .ai-x:hover{opacity:1;background:rgba(125,125,140,.14);}#aiTrialPanel .ai-body{position:relative;flex:1;min-height:0;background:var(--bg,#fff);}#aiTrialPanel .ai-open{font-family:"Pretendard",system-ui,sans-serif;font-size:.78rem;font-weight:700;color:#7b83ff;padding:6px 10px;border-radius:8px;text-decoration:none;white-space:nowrap;}#aiTrialPanel .ai-open:hover{background:rgba(125,125,140,.14);}#aiTrialPanel iframe{position:relative;width:100%;height:100%;border:0;display:block;background:var(--bg,#fff);}@media (max-width:640px){#aiTrialBtn{right:16px;bottom:16px;padding:11px 15px;font-size:.86rem;}}</style></head>
+<body data-base="../../">
+
+<div class="topbar">
+  <div class="container-x">
+    <span class="tb-date" id="today">Friday, August 7, 2026</span>
+    <div class="tb-links"><a href="https://ai.daeseungpark.com/chat/" target="_blank" rel="noopener">Abliterated AI</a><a href="https://tcc.daeseungpark.com/" target="_blank" rel="noopener">Mission Control(TCC)</a><a href="../../profile.html">Profile</a><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener">GitHub</a><a href="https://scholar.google.com/citations?hl=ko&amp;user=qVom0QUAAAAJ" target="_blank" rel="noopener">Scholar</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener">ORCID</a><a href="https://hub.docker.com/u/daeseungpark" target="_blank" rel="noopener">Docker</a><a href="https://codespectrum.net" target="_blank" rel="noopener">Blog</a><a href="../../profile.html#contact">Contact</a><a href="../../notices.html">Notice</a><a href="/works/pf-smart-mirror/" class="tb-lang-link" aria-label="Language">한국어</a></div>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="container-x nav-row">
+    <a href="../../index.html" class="brand">D<span class="dot">.</span> PARK <small>Journal</small></a>
+    <nav class="main-nav"><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">☾</span></button>
+      <a href="../../profile.html" class="btn-x" style="padding:9px 16px;">View profile</a>
+      <button class="icon-btn nav-toggle" id="navToggle" aria-label="Menu">≡</button>
+    </div>
+  </div>
+</header>
+
+<div class="ticker">
+  <div class="container-x">
+    <span class="label">Trending</span>
+    <div class="items" id="tickerItems"><a href="../../articles/rag-architectures-hallucination/">Four Ways Retrieval Rescues In…</a><a href="../../articles/mcp-agent-interop-standard/">The Protocol That Became AI's…</a><a href="../../articles/ai-datacenter-power-crunch/">AI's Real Limit Is Electricity</a><a href="../../articles/ai-circular-financing-bubble/">From NVIDIA to NVIDIA</a><a href="../../articles/abliterated-ai-safety/">The Model With Refusal Erased</a><a href="../../articles/llm-spatial-reasoning/">Do LLMs Understand Space? A 7,…</a></div>
+  </div>
+</div>
+
+<main class="wd-wrap" id="workDetail" data-slug="pf-smart-mirror"><div class="crumb"><a href="../../index.html">Home</a> / <a href="../../works.html">Publications · Patents · SW</a> / Portfolio</div><span class="work-badge " style="margin-bottom:14px;">AI · R&amp;D</span><h1 class="wd-title">Smart-Mirror Contactless Biosignal Measurement</h1><p class="wd-en">스마트미러 비접촉 생체신호 측정</p><div class="wd-meta">2023 · Contactless-care R&amp;D</div><div class="ko-notice" role="note">이 글의 상세 본문(구조·설계·기여)은 한국어로 제공됩니다 · Detailed sections below are in Korean</div><div class="wd-cover"><img src="../../../assets/portfolio/pf-smart-mirror/01-diagram.svg" alt="Smart-Mirror Contactless Biosignal Measurement"></div><div class="wd-figs"><figure class="wd-fig"><div class="wd-figbox"><img src="../../../assets/portfolio/pf-smart-mirror/01-diagram.svg" alt="Contactless biosignal (rPPG) measurement pipeline"></div><figcaption>Contactless biosignal (rPPG) measurement pipeline</figcaption></figure></div><div class="wd-summary"><p>라즈베리파이 기반 스마트 미러에 카메라를 달아, 거울 앞에 선 사람의 얼굴에서 비접촉으로 맥박 등 생체신호를 측정하는 헬스 모니터링 시스템이다. 손목에 무엇도 채우지 않고 피부에 닿는 것 없이, 화면 앞에 잠시 서 있기만 하면 광용적맥파(PPG, Photoplethysmography) 원리로 심박을 추정한다.</p><p>언택트 의료 R&amp;D(정부과제)의 맥락에서 개발했다. 심장이 박동할 때마다 혈액이 모세혈관으로 밀려들어 피부가 아주 조금 더 많은 빛(특히 헤모글로빈이 잘 흡수하는 녹색 파장)을 흡수하면서 피부 밝기가 심장 리듬을 따라 미세하게 오르내리는데, 사람 눈에는 안 보이는 이 떨림을 평범한 카메라로 붙잡아 맥박을 읽어낸다.</p></div><h4 class="wd-h4">Structure · Design</h4><p class="wd-block">파이프라인은 얼굴 검출 → 관심 영역(이마·뺨 등 피부가 잘 드러난 영역) 색상 추적 → 대역통과 필터 → 주파수 분석 → 신뢰도 평가로 흐른다. 프레임마다 관심 영역의 평균 색상을 기록해 시간 신호를 만들고, 그 안에 숨은 심박 주기를 신호처리로 끄집어낸다. 강건함은 여러 겹의 방어선에서 나왔다. (1) 얼굴 검출로 관심 영역을 매 프레임 다시 잡아 머리의 작은 움직임을 따라가고, (2) 심박이 존재할 수 있는 주파수 대역(약 0.7~4Hz, 분당 42~240회)만 통과시키는 대역통과 필터로 형광등 깜빡임·그림자 같은 조명 잡음을 깎아내며, (3) 여러 색 채널을 결합해 움직임 성분과 맥박 성분을 분리해 신호 대 잡음비를 끌어올린다. (4) 무엇보다 신뢰도가 낮은 구간에서는 값을 내놓지 않고 '측정 중…'이라 솔직히 표시한다.</p><h4 class="wd-h4">Design goals</h4><p class="wd-block">비접촉 측정을 택한 이유는 세 가지다. 위생 — 공공 공간에서 같은 접촉 센서를 돌려 쓰는 거부감을 없앤다. 일상성 — 무언가를 '착용'하는 순간 의료 행위가 되지만, 거울 앞에서 양치하는 30초 동안 맥박이 슬그머니 읽히면 생활의 일부가 된다. 접근성 — 기기 조작이 서툴거나 손이 불편한 사람도 그저 서 있기만 하면 된다. 가장 중요한 설계 결정은 '언제나 숫자를 보여주는 시스템'이 아니라 '잴 수 있을 때만 조용히 알려주는 시스템'으로 방향을 튼 것이었다. 움직임·조명이 흔들리는 동안에는 신뢰할 수 없으므로, 신호 안정성을 스스로 평가해 기준을 넘을 때만 결과를 띄우게 했다 — 틀린 숫자보다 침묵이 낫다는 원칙이다.</p><div class="wd-links"><a class="btn-x btn-ghost" href="../../articles/contactless-biosignals/">Read related article →</a></div><div style="margin-top:32px;"><a href="../../works.html">← Back to all</a></div></main>
+
+<footer class="site-footer" id="contact"><div class="container-x"><div class="footer-grid"><div><div class="footer-brand">D. PARK</div><p style="max-width:34ch;">AI &amp; Software Systems Engineer · KAIST</p><div class="social" style="margin-top:16px;"><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener" aria-label="GitHub">GH</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener" aria-label="ORCID">iD</a><a href="mailto:dspark@daeseungpark.com" aria-label="Email">@</a></div></div><div><h6>Browse</h6><ul><li><a href="../../index.html">Home</a></li><li><a href="../../profile.html">Profile</a></li><li><a href="../../articles.html">Articles</a></li><li><a href="../../research.html">Research</a></li><li><a href="../../notices.html">Notice</a></li></ul></div><div><h6>Articles</h6><ul class="ft-arts"><li><a href="../../articles/rag-architectures-hallucination/">Four Ways Retrieval Rescues Intelligence — Lexical, Semantic, Hybrid, and Graph RAG, and the Anatomy of Hallucination</a></li><li><a href="../../articles/mcp-agent-interop-standard/">The Protocol That Became AI's HTTP</a></li><li><a href="../../articles/ai-datacenter-power-crunch/">AI's Real Limit Is Electricity</a></li><li><a href="../../articles/ai-circular-financing-bubble/">From NVIDIA to NVIDIA</a></li><li><a href="../../articles/abliterated-ai-safety/">The Model With Refusal Erased</a></li></ul></div><div><h6>Contact</h6><ul><li><a href="mailto:dspark@daeseungpark.com">dspark@daeseungpark.com</a></li><li><a href="mailto:dspark@kaist.ac.kr">dspark@kaist.ac.kr</a></li><li><a href="tel:+821064547777">Phone (KR) +82 10 6454 7777</a></li><li><a href="tel:+16574109449">Phone (US) +1 657 410 9449</a></li><li>KAIST, Daejeon, Korea</li></ul></div></div><div class="footer-bottom"><span>© 2026 Daeseung Park. All rights reserved.</span><span>Designed &amp; built as a personal journal for Daeseung Park.</span></div></div></footer>
+
+<div class="mobile-nav" id="mobileNav"><button class="icon-btn close" id="navClose" aria-label="Close">✕</button><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></div>
+
+<script src="../../../assets/js/data.js"></script>
+<script src="../../../assets/js/content-pubs-a.js"></script>
+<script src="../../../assets/js/content-pubs-b.js"></script>
+<script src="../../../assets/js/content-patents-sw.js"></script>
+<script src="../../../assets/js/content-portfolio.js"></script>
+<script src="../../../assets/js/articles.js"></script>
+<script src="../../../assets/js/i18n-en.js"></script><script src="../../../assets/js/main.js"></script>
+
+
+<button id="aiTrialBtn" type="button" aria-label="Use the uncensored AI preview"><span class="ai-ic">🔓</span><span class="ai-tx">Uncensored AI</span><span class="ai-b">β</span></button></body></html>

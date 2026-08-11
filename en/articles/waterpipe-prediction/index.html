@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-prerendered="1"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Predicting the Unseen Pipe: Irregular Time Series, Ensembles, and Language Models - Daeseung Park Journal</title>
+<meta name="description" content="Beneath the city, water pipes that might burst at any moment. We went beyond 'when will it burst' to 'what to fix and how,' tying it all into one system.">
+<link rel="canonical" href="https://daeseungpark.com/en/articles/waterpipe-prediction/"><link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/waterpipe-prediction/"><link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/waterpipe-prediction/"><link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/waterpipe-prediction/"><meta property="og:locale:alternate" content="ko_KR">
+<!-- seo-i18n:start -->
+
+
+
+
+<!-- seo-i18n:end -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="D. PARK Journal">
+<meta property="og:title" content="Predicting the Unseen Pipe: Irregular Time Series, Ensembles, and Language Models">
+<meta property="og:description" content="Beneath the city, water pipes that might burst at any moment. We went beyond 'when will it burst' to 'what to fix and how,' tying it all into one system.">
+<meta property="og:url" content="https://daeseungpark.com/en/articles/waterpipe-prediction/">
+<meta property="og:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Predicting the Unseen Pipe: Irregular Time Series, Ensembles, and Language Models">
+<meta name="twitter:description" content="Beneath the city, water pipes that might burst at any moment. We went beyond 'when will it burst' to 'what to fix and how,' tying it all into one system.">
+<meta name="twitter:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Predicting the Unseen Pipe: Irregular Time Series, Ensembles, and Language Models","author":{"@type":"Person","name":"박대승","alternateName":"Daeseung Park"},"publisher":{"@type":"Organization","name":"D. PARK Journal"},"image":"https://daeseungpark.com/assets/img/profile/img3.jpg","mainEntityOfPage":"https://daeseungpark.com/articles/waterpipe-prediction/","inLanguage":"en","datePublished":"2026-06"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&amp;family=Noto+Serif+KR:wght@400;600&amp;family=Noto+Sans+KR:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="../../../assets/css/style.css">
+<link rel="stylesheet" href="../../../assets/css/article.css">
+<script src="https://www.googletagmanager.com/gtag/js?id=G-1MMKKGR3MF"></script><style id="aiTrialStyle">#aiTrialBtn{position:fixed;right:22px;bottom:22px;z-index:940;display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border:0;border-radius:999px;cursor:pointer;font-family:"Pretendard",system-ui,sans-serif;font-weight:700;font-size:.92rem;color:#fff;background:linear-gradient(135deg,#5b6cff,#8b5bff);box-shadow:0 8px 24px rgba(70,70,140,.35);transition:transform .2s,box-shadow .2s,opacity .2s;}#aiTrialBtn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(70,70,140,.45);}#aiTrialBtn.active{opacity:.5;}#aiTrialBtn .ai-ic{font-size:1.05rem;line-height:1;}#aiTrialBtn .ai-b{font-size:.6rem;font-weight:800;background:rgba(255,255,255,.28);padding:2px 6px;border-radius:999px;letter-spacing:.5px;}#aiTrialPanel{position:fixed;right:22px;bottom:84px;z-index:945;width:380px;max-width:calc(100vw - 32px);height:560px;max-height:calc(100vh - 120px);background:var(--bg,#fff);border:1px solid var(--line,#e6e6e6);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.28);opacity:0;transform:translateY(12px) scale(.98);pointer-events:none;transition:opacity .22s,transform .22s;}#aiTrialPanel.open{opacity:1;transform:none;pointer-events:auto;}#aiTrialPanel .ai-head{display:flex;align-items:center;justify-content:space-between;padding:10px 8px 10px 14px;border-bottom:1px solid var(--line,#e6e6e6);}#aiTrialPanel .ai-ti{font-family:"Pretendard",system-ui,sans-serif;font-size:.9rem;color:var(--ink,#15171a);}#aiTrialPanel .ai-badge{font-size:.64rem;color:#7b83ff;border:1px solid #7b83ff;border-radius:999px;padding:1px 6px;margin-left:5px;}#aiTrialPanel .ai-actions{display:flex;gap:2px;}#aiTrialPanel .ai-x{border:0;background:transparent;cursor:pointer;font-size:1rem;line-height:1;padding:6px 9px;border-radius:8px;color:var(--ink,#15171a);opacity:.65;}#aiTrialPanel .ai-x:hover{opacity:1;background:rgba(125,125,140,.14);}#aiTrialPanel .ai-body{position:relative;flex:1;min-height:0;background:var(--bg,#fff);}#aiTrialPanel .ai-open{font-family:"Pretendard",system-ui,sans-serif;font-size:.78rem;font-weight:700;color:#7b83ff;padding:6px 10px;border-radius:8px;text-decoration:none;white-space:nowrap;}#aiTrialPanel .ai-open:hover{background:rgba(125,125,140,.14);}#aiTrialPanel iframe{position:relative;width:100%;height:100%;border:0;display:block;background:var(--bg,#fff);}@media (max-width:640px){#aiTrialBtn{right:16px;bottom:16px;padding:11px 15px;font-size:.86rem;}}</style></head>
+<body data-base="../../">
+<div class="progress-bar" id="progress"></div>
+<div class="topbar no-print">
+  <div class="container-x">
+    <span class="tb-date" id="today">Friday, August 7, 2026</span>
+    <div class="tb-links"><a href="https://ai.daeseungpark.com/chat/" target="_blank" rel="noopener">Abliterated AI</a><a href="https://tcc.daeseungpark.com/" target="_blank" rel="noopener">Mission Control(TCC)</a><a href="../../profile.html">Profile</a><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener">GitHub</a><a href="https://scholar.google.com/citations?hl=ko&amp;user=qVom0QUAAAAJ" target="_blank" rel="noopener">Scholar</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener">ORCID</a><a href="https://hub.docker.com/u/daeseungpark" target="_blank" rel="noopener">Docker</a><a href="https://codespectrum.net" target="_blank" rel="noopener">Blog</a><a href="../../profile.html#contact">Contact</a><a href="../../notices.html">Notice</a><a href="/articles/waterpipe-prediction/" class="tb-lang-link" aria-label="Language">한국어</a></div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header no-print">
+  <div class="container-x nav-row">
+    <a href="../../index.html" class="brand">D<span class="dot">.</span> PARK <small>Journal</small></a>
+    <nav class="main-nav"><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">☾</span></button>
+      <button class="print-cta" id="printBtn">🖶 Print / PDF</button>
+      <button class="icon-btn nav-toggle" id="navToggle" aria-label="Menu">≡</button>
+    </div>
+  </div>
+</header>
+
+<div class="ticker no-print">
+  <div class="container-x">
+    <span class="label">Trending</span>
+    <div class="items" id="tickerItems"><a href="../../articles/rag-architectures-hallucination/">Four Ways Retrieval Rescues In…</a><a href="../../articles/mcp-agent-interop-standard/">The Protocol That Became AI's…</a><a href="../../articles/ai-datacenter-power-crunch/">AI's Real Limit Is Electricity</a><a href="../../articles/ai-circular-financing-bubble/">From NVIDIA to NVIDIA</a><a href="../../articles/abliterated-ai-safety/">The Model With Refusal Erased</a><a href="../../articles/llm-spatial-reasoning/">Do LLMs Understand Space? A 7,…</a></div>
+  </div>
+</div>
+
+<article data-article-id="9">
+  <div class="article-wrap">
+    <!-- Masthead -->
+    <header class="art-head">
+      <span class="cat-pill">Research · Retrospective</span>
+      <h1>Predicting the Unseen Pipe: Irregular Time Series, Ensembles, and Language Models</h1>
+      <p class="deck">Beneath the city, water pipes that might burst at any moment. We went beyond 'when will it burst' to 'what to fix and how,' tying it all into one system.</p>
+      <div class="art-byline">
+        <div class="av">DP</div>
+        <div class="who">
+          <b>Daeseung Park</b>
+          <span>AI &amp; Software Systems Engineer · KAIST</span>
+          <span>June 2026 · 14 min read</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="art-cover"><img src="../../../assets/img/extracted/portfolio/waterpipe-lstm-pipeline-diagram.png" alt="Water-pipe prediction pipeline" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+
+    <!-- Summary -->
+    <div class="summary-box">
+      <span class="tag">1-min summary</span>
+      A retrospective on the AI portion of a water-pipe safety-management R&amp;D program (2024–2026) carried out jointly by the City of Daejeon, K-water, and AST Holdings. The goal was twofold. First, to predict breaks and leaks in the city's underground water pipes <strong>before</strong> they happen. Second, not to stop at prediction but to go all the way to proposing a <strong>maintenance plan</strong>. The biggest challenge was the irregular time series peculiar to waterworks data — missing values, outliers, and non-uniform sampling. We compared DNN, LSTM, Stateful-LSTM, and LSTM-Attention by MAPE to choose a status-prediction model, then bound several recurrent networks together with ensemble voting. On top of that we layered Bi-LSTM, Transformer, and BERT-family language models to generate, in plain sentences, "what to fix and how," and deployed the whole thing as an API on a digital-twin safety-management platform.
+    </div>
+
+    <!-- Body -->
+    <div class="prose">
+      <span class="chapter-label">Chapter 1. The Unseen Danger Underground</span>
+      <h2>The timetable flowing beneath our feet</h2>
+      <p>A city's water pipes rarely catch the eye. The moment we feel their presence usually arrives with bad news: a road caving in at its center, a perfectly ordinary alley turned into a flood overnight, or the smell of earth in the tap water. Pipes age in silence, and the moment that aging crosses some threshold it bursts into view aboveground as a break or a leak. The trouble is that the threshold differs for every pipe and every segment, varying with the year of burial, the soil, and the water pressure.</p>
+      <p>The traditional approach was reactive. Fix it when it bursts, patch it when it leaks. But for underground infrastructure the cost of reacting after the fact is unusually high. The excavation itself paralyzes the city's functions, spreads into secondary accidents, and demands an enormous budget to repair. So the question we posed reversed the direction. <em>Could we know before it bursts?</em> From the faint tremors in the data a pipe leaves behind, could we read the timetable of an accident that had not yet come, and read it early?</p>
+
+      <div class="pullquote">Pipes age in silence. What we set out to do is to read that silent timetable early, through data.</div>
+
+      <p>This question soon took concrete shape as a national R&amp;D project carried out jointly by the City of Daejeon, K-water, and AST Holdings (Jan 2024 – Dec 2026, with a budget of roughly 1.6 billion won). I was responsible for the AI prediction and inference part of the project. The project's very title — "Prediction of Water-Pipe Breaks and Leaks from Irregular Time Series" — was already an honest warning of the difficulties that lay ahead.</p>
+
+      <span class="chapter-label">Chapter 2. The Challenge of an Irregular Time Series</span>
+      <h2>Clean data existed nowhere</h2>
+      <p>Anyone who has worked with time-series forecasting knows it. The time series in textbooks line up neatly at equal intervals, but real-world time series do not. Water-pipe data was close to the extreme of that "do not." On some days the sensors spat out a value every minute; on others, once a day. Communication failures left whole hours blank, and uncalibrated instruments left behind physically impossible outliers. A large portion of the data we worked with was AIHub-based open assets, but being publicly available and being immediately usable for training are two entirely different stories.</p>
+      <p>So the first phase of the project was not the model but the data. How should we fill in the missing values — we had to separate the segments where simple linear interpolation was enough from those where filling in that way would instead manufacture a fake trend. How should we filter the outliers — we had to distinguish an abrupt change that was a true precursor to an accident from one that was merely a measurement error. How should we align the non-uniform sampling — we had to minimize the information lost when forcing irregular observations onto an equally spaced grid.</p>
+
+      <div class="callout"><b>A lesson from the field.</b> We discarded the easy rule "always remove outliers" early on. In waterworks the most valuable signal is often hidden inside the very values that fall outside the normal range. In the end the outlier-handling pipeline was redesigned around "classification and flagging" rather than "deletion" — instead of erasing an outlier, we chose to tell the model that it was one.<p></p></div>
+
+      <figure>
+        <div class="fig-box"><img src="../../../assets/img/extracted/portfolio/waterpipe-lstm-pipeline-diagram.png" alt="LSTM pipeline for water-pipe data processing and prediction" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+        <figcaption>The LSTM pipeline for water-pipe data processing and prediction. The flow runs from raw measurement → missing-value and outlier handling → alignment and normalization → sequence learning. We spent more time on this front end than on the model design itself.</figcaption>
+      </figure>
+
+      <p>Looking back, more than half of the project's total effort went into this front end. Before drawing any dazzling model architecture, the first job was to make the data speak for itself. And the quality of this tedious preprocessing quietly set the ceiling on all the prediction performance that followed.</p>
+
+      <span class="chapter-label">Chapter 3. Status Prediction — Ensemble Design and a MAPE Comparison</span>
+      <h2>Which model reads a pipe's future best</h2>
+      <p>Once the data was ready, the model experiments began in earnest. From the start we did not bet on a single model. Instead we made candidates of differing character compete under the same conditions. We standardized on MAPE (mean absolute percentage error) as the benchmark metric — because the scale of the values differed greatly from one pipe segment to another, a relative error guaranteed a fairer comparison than an absolute one.</p>
+      <p>The simplest DNN was fast, precisely because it ignored the temporal order, but shallow. The standard LSTM captured the flow of the sequence; the Stateful-LSTM carried state across batches and so was strong on long-range dependencies; and the LSTM-Attention weighted, on its own, which observation at which point mattered most for the prediction. Below is a summary of the tendencies observed in the experiments — note that the concrete figures are <em>illustrative</em> and vary with the project, the segment, and the evaluation set.</p>
+
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+      <table>
+        <thead><tr><th>Model</th><th>Characteristics</th><th>Relative MAPE (illustrative)</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>DNN</td><td>Ignores temporal order, lightweight</td><td>Highest (baseline)</td><td>Fast but shallow</td></tr>
+          <tr><td>LSTM</td><td>Learns sequence flow</td><td>Medium</td><td>Solid fundamentals</td></tr>
+          <tr><td>Stateful-LSTM</td><td>Retains state across batches</td><td>Low</td><td>Strong on long dependencies</td></tr>
+          <tr><td>LSTM-Attention</td><td>Weights decisive time steps</td><td>Lowest</td><td>Higher interpretability</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <p>The conclusion of the comparison was not "pick a single winner." Different models exhibited different types of failure. Some were strong on the gentle aging trend; others were sensitive to abruptly changing anomalies. So instead of lining them up in a single rank, we decided to bind them into one team. We combined LSTM, GRU, and Attentive-RNN through ensemble voting, designed so that the weaknesses of the individual models would cancel one another out.</p>
+
+      <div class="pullquote">Different models are wrong in different ways. The real value of an ensemble lies not in accuracy but in the diversity of ways it can be wrong.</div>
+
+      <p>What we obtained this way was the system's first axis, "break-and-leak status prediction." This layer, which puts out as a probability when and to what degree a given segment will be at risk in the future, was meaningful in its own right. But we did not want to stop here.</p>
+
+      <span class="chapter-label">Chapter 4. Maintenance Inference — Extending the Answer with a Language Model</span>
+      <h2>The question after "when will it burst"</h2>
+      <p>Suppose the prediction model tells us "the break risk for this segment is high." To the person on the ground this is only half an answer. The next question follows immediately. <em>So what should be done, and how?</em> Replace or repair? Which segment takes priority? Which construction method is appropriate? This realm of prescription was precisely the final bridge that turns the value of a prediction into a field decision.</p>
+      <p>So we layered a second axis onto the system: a language-generation layer that classifies the damage grade and infers, in sentences, the corresponding maintenance plan. Taking risk level, pipe attributes, and history data as inputs, Bi-LSTM, Transformer, and BERT-family models were made to generate prescriptions in practical, working language — such as "this segment is grade High for deterioration, a priority for repair, and partial rehabilitation should be considered."</p>
+
+      <figure>
+        <div class="fig-box"><img src="../../../assets/img/extracted/portfolio/waterpipe-damage-leak-model-arch.png" alt="Architecture of the break-and-leak prediction model" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+        <figcaption>The architecture of the break-and-leak prediction model. The recurrent-network ensemble (status prediction) and the language model (maintenance inference) are joined into a single pipeline.</figcaption>
+      </figure>
+
+      <p>This two-stage structure — a design that layers prescription on top of prediction — was the most contested yet most rewarding decision of the project. The reason it was contested is clear: you cannot trust a prescription generated by a language model at face value. So from the very start we nailed down one principle. <strong>This system does not replace expert judgment. It assists it.</strong> A generated maintenance plan is not the final decision but a grounded draft from which the person in charge begins their review.</p>
+
+      <div class="callout"><b>An attitude toward safety.</b> In infrastructure where public safety is at stake, AI's role must be clear. Our system's language-model output is always confined to a tone of "recommend and review," and is presented together with the risk-level rationale. Leaving the center of gravity of judgment with the human expert to the very end — this was a design constraint that took priority over convenience.<p></p></div>
+
+      <figure>
+        <div class="fig-box"><img src="../../../assets/img/extracted/portfolio/waterpipe-damage-classification-flow.png" alt="Flow from damage-grade classification to maintenance-plan inference" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+        <figcaption>The flow leading from damage-grade classification to maintenance-plan inference. Risk prediction passes through grade classification and connects to the language model's prescription generation.</figcaption>
+      </figure>
+
+      <span class="chapter-label">Chapter 5. Platform Deployment and Implications</span>
+      <h2>Planting the model in the city</h2>
+      <p>There is a wide gap between a model that runs well in the lab and a system that is used in a city. The final phase was to bind these two axes — status prediction and maintenance inference — into one and deploy them as an API on an integrated safety-management (digital-twin) platform. On top of the digital twin, an administrator could now look down on the underground pipe network like a map and check, together, the risk level and recommended maintenance plan for each segment.</p>
+      <p>There was a reason for the decision to deploy as an API. Rather than embedding the model into one particular screen, opening it up as a service lets it combine flexibly with the platform's other functions and be swapped out behind the scenes as the model improves in the future. Establishing prediction not as a single component but as a continuously updated capability — that was the true intent behind the API form.</p>
+      <p>The biggest implication this project left me with is that "the completion of a prediction is not the prediction." However accurate a risk number may be, if it is not translated into the field's next action it remains a report in a drawer. Only when all three steps were in place — reading the future with recurrent networks, extending an answer to that future with a language model, and placing it in human hands through the platform — did it finally become a "system."</p>
+
+      <span class="chapter-label">Closing</span>
+      <h2>A voice for the silent infrastructure</h2>
+      <p>Water pipes will remain hard to see going forward. But that silence does not itself mean safety. This project was an attempt to listen to the underground silence with data as a stethoscope, to read the timetable of breaks and leaks early, and to extend that, in language, to what should be done next. The irregular time series was never fully tamed in the end, and the language model's prescriptions still require human review. Even so, the direction is clear: to have AI watch over the aging of city infrastructure on our behalf, so that people can focus on better judgment. Making the unseen predictable — that, I believe, is the first step toward rewriting this underground timetable.</p>
+
+      <div class="references">
+        <h4>References</h4>
+        <ol>
+          <li>"Prediction of Water-Pipe Breaks and Leaks from Irregular Time Series and Inference of Maintenance Plans," national R&amp;D project (City of Daejeon, K-water, AST Holdings, Jan 2024 – Dec 2026).</li>
+          <li>The training data drew on AIHub-based open assets and data collected within the project.</li>
+          <li>The model-comparison figures in the text (MAPE, etc.) are illustrative examples meant to explain general tendencies; concrete values vary with the project, the segment, and the evaluation set.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer of article -->
+  <div class="art-foot">
+    <div class="art-tags">
+      <a href="#">#TimeSeriesForecasting</a><a href="#">#UrbanInfrastructure</a><a href="#">#Ensemble</a><a href="#">#DigitalTwin</a>
+    </div>
+    <div class="author-card">
+      <div class="av">DP</div>
+      <div class="who">
+        <b>Daeseung Park</b>
+        <p>Research Engineer at KAIST. I study large language models, time-series forecasting, and conversational AI, and I try to record the process of my research as accurately and readably as I can.</p>
+      </div>
+    </div>
+
+    <div class="read-next no-print">
+        <div class="section-head" style="margin-bottom:20px;"><h2 style="font-size:1.3rem;">Read next</h2></div>
+        <div class="grid grid-2" id="readNext"><a href="../../articles/rag-architectures-hallucination/" class="post-card fade-up"><div class="thumb"><img class="ph " src="../../../articles/rag-architectures-hallucination/images/cover.svg" alt="" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;"><span class="cat-pill">AI · Explainer</span><span class="num">18</span></div><span class="cat">RAG · Retrieval-Augmented</span><h3>Four Ways Retrieval Rescues Intelligence — Lexical, Semantic, Hybrid, and Graph RAG, and the Anatomy of Hallucination</h3><p>A large language model's knowledge freezes the moment training ends. Retrieval-augmented generation (RAG) fills that gap by pulling in documents from outside the model. We dissect four retrieval architectures — Lexical, Semantic, Hybrid, and Graph — from first principles, and examine how they reduce hallucination and what still remains.</p><div class="meta"><span class="by">Daeseung Park</span><span class="dot-sep">18 min read</span></div></a><a href="../../articles/mcp-agent-interop-standard/" class="post-card fade-up"><div class="thumb"><img class="ph " src="../../../articles/mcp-agent-interop-standard/images/cover.svg" alt="" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;"><span class="cat-pill">AI · Explainer</span><span class="num">17</span></div><span class="cat">AI Agents</span><h3>The Protocol That Became AI's HTTP: MCP and the Interoperability-Standard War</h3><p>The moment chatbots turn into 'acting agents,' the bottleneck is no longer intelligence but the standard for connection. We anatomize how Anthropic's MCP became the de facto standard — its architecture, its politics, and the security homework that remains.</p><div class="meta"><span class="by">Daeseung Park</span><span class="dot-sep">14 min read</span></div></a></div>
+      </div>
+      <nav class="post-nav no-print" id="postNav"><a class="pn" href="../../articles/data-augmentation-activation/"><span class="pn-dir">‹ Previous</span><span class="pn-t">Data and Activation Functions</span></a><a class="pn pn-list" href="../../articles.html">List</a><a class="pn pn-right" href="../../articles/parallel-simulation-ape/"><span class="pn-dir">Next ›</span><span class="pn-t">Time Is Performance</span></a></nav>
+    </div>
+</article>
+
+<div class="print-footer">Daeseung Park · D. PARK Journal — Predicting the Unseen Pipe: Irregular Time Series, Ensembles, and Language Models</div>
+
+<footer class="site-footer no-print" id="contact"><div class="container-x"><div class="footer-grid"><div><div class="footer-brand">D. PARK</div><p style="max-width:34ch;">AI &amp; Software Systems Engineer · KAIST</p><div class="social" style="margin-top:16px;"><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener" aria-label="GitHub">GH</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener" aria-label="ORCID">iD</a><a href="mailto:dspark@daeseungpark.com" aria-label="Email">@</a></div></div><div><h6>Browse</h6><ul><li><a href="../../index.html">Home</a></li><li><a href="../../profile.html">Profile</a></li><li><a href="../../articles.html">Articles</a></li><li><a href="../../research.html">Research</a></li><li><a href="../../notices.html">Notice</a></li></ul></div><div><h6>Articles</h6><ul class="ft-arts"><li><a href="../../articles/rag-architectures-hallucination/">Four Ways Retrieval Rescues Intelligence — Lexical, Semantic, Hybrid, and Graph RAG, and the Anatomy of Hallucination</a></li><li><a href="../../articles/mcp-agent-interop-standard/">The Protocol That Became AI's HTTP</a></li><li><a href="../../articles/ai-datacenter-power-crunch/">AI's Real Limit Is Electricity</a></li><li><a href="../../articles/ai-circular-financing-bubble/">From NVIDIA to NVIDIA</a></li><li><a href="../../articles/abliterated-ai-safety/">The Model With Refusal Erased</a></li></ul></div><div><h6>Contact</h6><ul><li><a href="mailto:dspark@daeseungpark.com">dspark@daeseungpark.com</a></li><li><a href="mailto:dspark@kaist.ac.kr">dspark@kaist.ac.kr</a></li><li><a href="tel:+821064547777">Phone (KR) +82 10 6454 7777</a></li><li><a href="tel:+16574109449">Phone (US) +1 657 410 9449</a></li><li>KAIST, Daejeon, Korea</li></ul></div></div><div class="footer-bottom"><span>© 2026 Daeseung Park. All rights reserved.</span><span>Designed &amp; built as a personal journal for Daeseung Park.</span></div></div></footer>
+
+<div class="mobile-nav" id="mobileNav"><button class="icon-btn close" id="navClose" aria-label="Close">✕</button><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></div>
+
+<script src="../../../assets/js/data.js"></script>
+<script src="../../../assets/js/articles.js"></script>
+<script src="../../../assets/js/i18n-en.js"></script><script src="../../../assets/js/main.js"></script>
+
+
+</body></html>

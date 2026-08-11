@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-prerendered="1"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI's Real Limit Is Electricity - Daeseung Park Journal</title>
+<meta name="description" content="Data-center power will roughly double in six years — from about 415 TWh in 2024 to about 945 TWh in 2030. The real bottleneck isn't the GPU; it's the grid that pushes electricity from power plant to rack.">
+<link rel="canonical" href="https://daeseungpark.com/en/articles/ai-datacenter-power-crunch/"><link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/ai-datacenter-power-crunch/"><link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/ai-datacenter-power-crunch/"><link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/ai-datacenter-power-crunch/"><meta property="og:locale:alternate" content="ko_KR">
+<!-- seo-i18n:start -->
+
+
+
+
+<!-- seo-i18n:end -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="D. PARK Journal">
+<meta property="og:title" content="AI's Real Limit Is Electricity">
+<meta property="og:description" content="Data-center power will roughly double in six years — from about 415 TWh in 2024 to about 945 TWh in 2030. The real bottleneck isn't the GPU; it's the grid that pushes electricity from power plant to rack.">
+<meta property="og:url" content="https://daeseungpark.com/en/articles/ai-datacenter-power-crunch/">
+<meta property="og:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI's Real Limit Is Electricity">
+<meta name="twitter:description" content="Data-center power will roughly double in six years — from about 415 TWh in 2024 to about 945 TWh in 2030. The real bottleneck isn't the GPU; it's the grid that pushes electricity from power plant to rack.">
+<meta name="twitter:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"AI's Real Limit Is Electricity","author":{"@type":"Person","name":"박대승","alternateName":"Daeseung Park"},"publisher":{"@type":"Organization","name":"D. PARK Journal"},"image":"https://daeseungpark.com/assets/img/profile/img3.jpg","mainEntityOfPage":"https://daeseungpark.com/articles/ai-datacenter-power-crunch/","inLanguage":"en","datePublished":"2026-07-17"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&amp;family=Noto+Serif+KR:wght@400;600&amp;family=Noto+Sans+KR:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="../../../assets/css/style.css">
+<link rel="stylesheet" href="../../../assets/css/article.css">
+<script src="https://www.googletagmanager.com/gtag/js?id=G-1MMKKGR3MF"></script><style id="aiTrialStyle">#aiTrialBtn{position:fixed;right:22px;bottom:22px;z-index:940;display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border:0;border-radius:999px;cursor:pointer;font-family:"Pretendard",system-ui,sans-serif;font-weight:700;font-size:.92rem;color:#fff;background:linear-gradient(135deg,#5b6cff,#8b5bff);box-shadow:0 8px 24px rgba(70,70,140,.35);transition:transform .2s,box-shadow .2s,opacity .2s;}#aiTrialBtn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(70,70,140,.45);}#aiTrialBtn.active{opacity:.5;}#aiTrialBtn .ai-ic{font-size:1.05rem;line-height:1;}#aiTrialBtn .ai-b{font-size:.6rem;font-weight:800;background:rgba(255,255,255,.28);padding:2px 6px;border-radius:999px;letter-spacing:.5px;}#aiTrialPanel{position:fixed;right:22px;bottom:84px;z-index:945;width:380px;max-width:calc(100vw - 32px);height:560px;max-height:calc(100vh - 120px);background:var(--bg,#fff);border:1px solid var(--line,#e6e6e6);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.28);opacity:0;transform:translateY(12px) scale(.98);pointer-events:none;transition:opacity .22s,transform .22s;}#aiTrialPanel.open{opacity:1;transform:none;pointer-events:auto;}#aiTrialPanel .ai-head{display:flex;align-items:center;justify-content:space-between;padding:10px 8px 10px 14px;border-bottom:1px solid var(--line,#e6e6e6);}#aiTrialPanel .ai-ti{font-family:"Pretendard",system-ui,sans-serif;font-size:.9rem;color:var(--ink,#15171a);}#aiTrialPanel .ai-badge{font-size:.64rem;color:#7b83ff;border:1px solid #7b83ff;border-radius:999px;padding:1px 6px;margin-left:5px;}#aiTrialPanel .ai-actions{display:flex;gap:2px;}#aiTrialPanel .ai-x{border:0;background:transparent;cursor:pointer;font-size:1rem;line-height:1;padding:6px 9px;border-radius:8px;color:var(--ink,#15171a);opacity:.65;}#aiTrialPanel .ai-x:hover{opacity:1;background:rgba(125,125,140,.14);}#aiTrialPanel .ai-body{position:relative;flex:1;min-height:0;background:var(--bg,#fff);}#aiTrialPanel .ai-open{font-family:"Pretendard",system-ui,sans-serif;font-size:.78rem;font-weight:700;color:#7b83ff;padding:6px 10px;border-radius:8px;text-decoration:none;white-space:nowrap;}#aiTrialPanel .ai-open:hover{background:rgba(125,125,140,.14);}#aiTrialPanel iframe{position:relative;width:100%;height:100%;border:0;display:block;background:var(--bg,#fff);}@media (max-width:640px){#aiTrialBtn{right:16px;bottom:16px;padding:11px 15px;font-size:.86rem;}}</style></head>
+<body data-base="../../">
+<div class="progress-bar" id="progress"></div>
+<div class="topbar no-print">
+  <div class="container-x">
+    <span class="tb-date" id="today">Friday, August 7, 2026</span>
+    <div class="tb-links"><a href="https://ai.daeseungpark.com/chat/" target="_blank" rel="noopener">Abliterated AI</a><a href="https://tcc.daeseungpark.com/" target="_blank" rel="noopener">Mission Control(TCC)</a><a href="../../profile.html">Profile</a><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener">GitHub</a><a href="https://scholar.google.com/citations?hl=ko&amp;user=qVom0QUAAAAJ" target="_blank" rel="noopener">Scholar</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener">ORCID</a><a href="https://hub.docker.com/u/daeseungpark" target="_blank" rel="noopener">Docker</a><a href="https://codespectrum.net" target="_blank" rel="noopener">Blog</a><a href="../../profile.html#contact">Contact</a><a href="../../notices.html">Notice</a><a href="/articles/ai-datacenter-power-crunch/" class="tb-lang-link" aria-label="Language">한국어</a></div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header no-print">
+  <div class="container-x nav-row">
+    <a href="../../index.html" class="brand">D<span class="dot">.</span> PARK <small>Journal</small></a>
+    <nav class="main-nav"><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">☾</span></button>
+      <button class="print-cta" id="printBtn">🖶 Print / PDF</button>
+      <button class="icon-btn nav-toggle" id="navToggle" aria-label="Menu">≡</button>
+    </div>
+  </div>
+</header>
+
+<div class="ticker no-print">
+  <div class="container-x">
+    <span class="label">Trending</span>
+    <div class="items" id="tickerItems"><a href="../../articles/rag-architectures-hallucination/">Four Ways Retrieval Rescues In…</a><a href="../../articles/mcp-agent-interop-standard/">The Protocol That Became AI's…</a><a href="../../articles/ai-datacenter-power-crunch/">AI's Real Limit Is Electricity</a><a href="../../articles/ai-circular-financing-bubble/">From NVIDIA to NVIDIA</a><a href="../../articles/abliterated-ai-safety/">The Model With Refusal Erased</a><a href="../../articles/llm-spatial-reasoning/">Do LLMs Understand Space? A 7,…</a></div>
+  </div>
+</div>
+
+<article data-article-id="16">
+  <div class="article-wrap">
+    <!-- Masthead -->
+    <header class="art-head">
+      <span class="cat-pill">Tech · Issue</span>
+      <h1>AI's Real Limit Is Electricity</h1>
+      <p class="deck">Data-center power will roughly double in six years — from about 415 TWh in 2024 to about 945 TWh in 2030. The real bottleneck isn't the GPU; it's the grid that pushes electricity from power plant to rack.</p>
+      <div class="art-byline">
+        <div class="av">DP</div>
+        <div class="who">
+          <b>Daeseung Park</b>
+          <span>AI &amp; Software Systems Engineer · KAIST</span>
+          <span>July 2026 · 14 min read</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="art-cover"><img src="images/cover.svg" alt="Conceptual diagram of grid-to-chip, where the power grid meets the AI chip" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;"></div>
+
+    <!-- Summary -->
+    <div class="summary-box">
+      <span class="tag">1-min summary</span>
+      The battleground of the AI race is usually framed in terms of bigger models and faster GPUs. Yet the International Energy Agency's <strong>Energy and AI (2025)</strong> paints a different picture. Global data-center electricity demand will grow from about <strong>415 TWh</strong> in 2024 to about <strong>945 TWh</strong> in 2030 — <strong>nearly double</strong> — climbing roughly 15% a year over 2024–2030, more than four times the pace of every other electricity-consuming sector. About 80% of that growth is concentrated in the United States and China. The problem is that no matter how fast you can build chips, the grid that generates electricity and <em>carries it</em> cannot keep up. Adding generation, building transmission lines, and expanding substation capacity each take years to well over a decade. This piece sizes up the number 945 TWh, explains why the physical "grid-to-chip" bottleneck arises along the path from power plant to GPU rack, weighs the resulting local-electricity-rate and environmental debates from both sides, and then lays out the mitigations: nuclear, SMRs, and geothermal; renewables plus storage; and software-level efficiency.
+    </div>
+
+    <!-- Body -->
+    <div class="prose">
+      <span class="chapter-label">Chapter 1. Redefining the Bottleneck</span>
+      <h2>It Isn't GPUs That Are Scarce — It's Electricity</h2>
+      <p>For the past two years, the story of the AI industry has revolved around a single component: the GPU. Who had secured the most accelerators, and how fast the next-generation chip would be, read almost like the very yardstick of competitiveness. But the operators who have actually built and run large data centers now point, in near-unison, to a constraint that is not the chip. Their first question today is: "Where, and when, can we get the electricity?" When the primary criterion for choosing a site becomes neither fiber nor labor but <strong>available power</strong>, it means the industry's bottleneck has quietly shifted.</p>
+      <p>To understand this shift you have to change one assumption. A GPU is a <em>product</em> — built in a factory and shipped by boat. Electricity is a <em>flow</em> that must be consumed the instant it is produced. It is hard to store, moving it requires physical infrastructure, and that infrastructure takes years from groundbreaking to completion. Chip supply can be expanded within one or two years by adding foundry capacity, but the transmission and substation equipment needed to newly deliver hundreds of megawatts to a single region takes five years — sometimes more than ten — for permitting and construction alone. That simple fact, that the two clocks run at different speeds, draws the new limit line for AI infrastructure.</p>
+
+      <div class="pullquote">A GPU is a product you can ship; electricity is a flow that must be consumed the moment it is made. The two clocks run at different speeds.</div>
+
+      <p>This shift is audible in the industry's own vocabulary. A few years ago, the opening page of a data-center business plan led with cooling methods and network latency. Today that space is taken by the "interconnection" schedule and how much contracted power can be secured. The queue between applying to a utility for a large new supply and actually receiving electricity has stretched to years in some regions, and that waiting time itself has become the variable that decides whether a project succeeds. Compute can be bought instantly with money, but contracted power at a specific location has become a resource you must line up and wait for, however much money you have.</p>
+      <p>So this piece re-reads AI not as "a problem of models" but as "a problem of infrastructure." No matter how clever the algorithm, if the electrons that run it do not flow to the right place at the right time, nothing happens. The number 945 TWh is a coordinate that compresses that physical reality.</p>
+
+      <span class="chapter-label">Chapter 2. The Scale of the Number</span>
+      <h2>945 TWh — Doubling in Six Years</h2>
+      <p>First, let's get the scale right. According to the IEA's <em>Energy and AI</em> (April 2025), global data-center electricity consumption rises from about <strong>415 TWh</strong> in 2024 to about <strong>945 TWh</strong> in 2030 — nearly double in six years. Annualized, that is roughly 15% growth per year, <strong>more than four times</strong> the average growth rate of other electricity-consuming sectors over the same period. In absolute terms alone, 945 TWh amounts to less than 3% of global electricity consumption in 2030. In the big picture, data centers are still a "small slice."</p>
+      <p>But the heart of the issue is not the <em>total</em> — it is the <em>rate of growth and the concentration</em>. Grids fail not at the national average but at specific nodes. The IEA reckons that about <strong>80% of this growth occurs in the United States and China</strong>. The U.S. grows by roughly +240 TWh (about +130%) and China by roughly +175 TWh (about +170%) by 2030. On top of that, data centers cluster in a handful of regions — drawn to places where cheap land, communications backbone, and tax incentives overlap. Even if the figure is under 3% in national statistics, once that load condenses near a single county or a single substation, the grid there exceeds its design headroom.</p>
+
+      <figure>
+        <svg viewBox="0 0 760 400" width="100%" role="img" aria-label="Bar chart of data-center power demand growth: from 415 TWh in 2024 to 945 TWh in 2030, roughly doubling">
+          <rect x="0" y="0" width="760" height="400" fill="none"></rect>
+          <!-- axes -->
+          <line x1="90" y1="40" x2="90" y2="330" stroke="#1b2350" stroke-width="2"></line>
+          <line x1="90" y1="330" x2="720" y2="330" stroke="#1b2350" stroke-width="2"></line>
+          <!-- y gridlines + labels -->
+          <g stroke="#c8cde6" stroke-width="1" opacity="0.7">
+            <line x1="90" y1="270" x2="720" y2="270"></line>
+            <line x1="90" y1="210" x2="720" y2="210"></line>
+            <line x1="90" y1="150" x2="720" y2="150"></line>
+            <line x1="90" y1="90" x2="720" y2="90"></line>
+          </g>
+          <g font-family="'Segoe UI',sans-serif" font-size="14" fill="#333a5c" text-anchor="end">
+            <text x="80" y="335">0</text>
+            <text x="80" y="275">250</text>
+            <text x="80" y="215">500</text>
+            <text x="80" y="155">750</text>
+            <text x="80" y="95">1000</text>
+          </g>
+          <text x="30" y="185" font-family="'Segoe UI',sans-serif" font-size="14" fill="#333a5c" transform="rotate(-90 30 185)" text-anchor="middle">Electricity consumption (TWh)</text>
+          <!-- 2024 bar: 415 -> height scale: 60px per 250 TWh => 415*0.24 = 99.6 -->
+          <rect x="180" y="230.4" width="120" height="99.6" rx="4" fill="#5b74ff"></rect>
+          <text x="240" y="215" font-family="'Segoe UI',sans-serif" font-size="20" font-weight="700" fill="#2233c4" text-anchor="middle">415</text>
+          <text x="240" y="352" font-family="'Segoe UI',sans-serif" font-size="15" fill="#1b2350" text-anchor="middle">2024</text>
+          <!-- 2030 bar: 945 -> 945*0.24 = 226.8 -->
+          <rect x="470" y="103.2" width="120" height="226.8" rx="4" fill="#ff8a5b"></rect>
+          <text x="530" y="88" font-family="'Segoe UI',sans-serif" font-size="20" font-weight="700" fill="#c0491f" text-anchor="middle">945</text>
+          <text x="530" y="352" font-family="'Segoe UI',sans-serif" font-size="15" fill="#1b2350" text-anchor="middle">2030</text>
+          <!-- growth arrow -->
+          <path d="M305 200 C 385 150, 400 150, 465 130" stroke="#1b2350" stroke-width="2" fill="none" marker-end="url(#ah)"></path>
+          <defs>
+            <marker id="ah" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto"><path d="M0 0 L7 3 L0 6 Z" fill="#1b2350"></path></marker>
+          </defs>
+          <text x="385" y="140" font-family="'Segoe UI',sans-serif" font-size="15" font-weight="600" fill="#1b2350" text-anchor="middle">~2x · ~15%/yr</text>
+        </svg>
+        <figcaption>Data-center power demand nearly doubles in six years, from about 415 TWh in 2024 to about 945 TWh in 2030 (IEA, 2025). At roughly 15% annual growth, that is more than four times the pace of other electricity sectors (about 4%). Bar heights are proportional to the left axis (TWh).</figcaption>
+      </figure>
+
+      <p>Why concentration matters is captured by the "trap of the average." At the national level, data-center load has room to be absorbed gradually. But actual power planning and equipment are built around regional grids, not the nation as a whole. When multi-gigawatt load piles into one region over a short span, that region's generation reserve and transmission capacity hit their limits almost at once. Even national totals like the U.S. +240 TWh or China's +175 TWh actually condense into a few clusters and show up as localized shocks on regional grids. The faster the growth, and the tighter the geographic concentration, the worse the bottleneck — which is why a data center that is a "small slice" nationally is anything but small to the person running the grid.</p>
+      <p>The supply mix matters too. The IEA projects that renewables will fill roughly half of this increase, while natural gas covers about +175 TWh and nuclear and geothermal emerge as new drivers. In other words, 945 TWh is not filled by a "renewables-versus-fossil" binary. Because a data center must run around the clock without interruption, intermittent renewables alone are not enough, and gas and nuclear are called in to supply steady baseload. The speed of growth, the regional concentration, and the mixed supply sources — the bottleneck is born where these three overlap.</p>
+
+      <div class="callout"><b>There is more than one forecast.</b> If the IEA's 945 TWh (about 2x) is one primary projection, the market-research firm <strong>Gartner</strong> <em>forecasts</em> that data-center power demand will grow <strong>26% in 2026</strong> alone, that AI-optimized servers will account for 31% of data-center power in 2026, and that they will overtake conventional general-purpose servers in 2027 (announced June 2026). Because methodologies and timeframes differ by institution, it is safer to read the numbers not as a "single truth" but as a "converging direction." And the direction is clear — a steep climb.</div>
+
+      <span class="chapter-label">Chapter 3. Grid-to-Chip</span>
+      <h2>The Path Electricity Travels, From Power Plant to Rack</h2>
+      <p>"Grid-to-chip" is a way of viewing, as a single whole, every layer that electricity passes through as it sets out from the power plant and finally reaches the GPU silicon. If any one link in this chain is narrow, then no matter how wide the links before and after it, total throughput is trapped by that narrow link. The chain divides roughly into five layers — generation (nuclear, gas, renewables), transmission (high-voltage, long-distance), substation (voltage step-down and distribution), the data center's incoming-power equipment, and, inside the rack, power distribution and cooling.</p>
+
+      <figure>
+        <svg viewBox="0 0 760 430" width="100%" role="img" aria-label="Grid-to-chip layer diagram: from generation through transmission, substation, data center, to the GPU rack, with the bottleneck points">
+          <defs>
+            <marker id="fa" markerWidth="12" markerHeight="12" refX="8" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#1b2350"></path></marker>
+          </defs>
+          <!-- layer boxes -->
+          <g font-family="'Segoe UI',sans-serif" text-anchor="middle">
+            <!-- 1 generation -->
+            <rect x="40" y="60" width="120" height="88" rx="10" fill="#eef1ff" stroke="#2233c4" stroke-width="2"></rect>
+            <text x="100" y="92" font-size="15" font-weight="700" fill="#1b2350">Generation</text>
+            <text x="100" y="114" font-size="12" fill="#333a5c">Nuclear · Gas</text>
+            <text x="100" y="131" font-size="12" fill="#333a5c">Renewables · Geo</text>
+            <!-- 2 transmission -->
+            <rect x="190" y="60" width="120" height="88" rx="10" fill="#eef1ff" stroke="#2233c4" stroke-width="2"></rect>
+            <text x="250" y="92" font-size="15" font-weight="700" fill="#1b2350">Transmission</text>
+            <text x="250" y="114" font-size="12" fill="#333a5c">High-voltage</text>
+            <text x="250" y="131" font-size="12" fill="#333a5c">Long-distance</text>
+            <!-- 3 substation -->
+            <rect x="340" y="60" width="120" height="88" rx="10" fill="#eef1ff" stroke="#2233c4" stroke-width="2"></rect>
+            <text x="400" y="92" font-size="15" font-weight="700" fill="#1b2350">Substation</text>
+            <text x="400" y="114" font-size="12" fill="#333a5c">Step-down</text>
+            <text x="400" y="131" font-size="12" fill="#333a5c">Distribution</text>
+            <!-- 4 datacenter -->
+            <rect x="490" y="60" width="120" height="88" rx="10" fill="#eef1ff" stroke="#2233c4" stroke-width="2"></rect>
+            <text x="550" y="92" font-size="15" font-weight="700" fill="#1b2350">Data center</text>
+            <text x="550" y="114" font-size="12" fill="#333a5c">Intake · UPS</text>
+            <text x="550" y="131" font-size="12" fill="#333a5c">Cooling</text>
+            <!-- 5 rack -->
+            <rect x="640" y="60" width="90" height="88" rx="10" fill="#e6fbf1" stroke="#0f9e6e" stroke-width="2"></rect>
+            <text x="685" y="92" font-size="15" font-weight="700" fill="#0b6b4b">GPU rack</text>
+            <text x="685" y="114" font-size="12" fill="#237a5c">High-density</text>
+            <text x="685" y="131" font-size="12" fill="#237a5c">Power dist.</text>
+          </g>
+          <!-- flow arrows -->
+          <g stroke="#1b2350" stroke-width="2.5" fill="none">
+            <line x1="160" y1="104" x2="186" y2="104" marker-end="url(#fa)"></line>
+            <line x1="310" y1="104" x2="336" y2="104" marker-end="url(#fa)"></line>
+            <line x1="460" y1="104" x2="486" y2="104" marker-end="url(#fa)"></line>
+            <line x1="610" y1="104" x2="636" y2="104" marker-end="url(#fa)"></line>
+          </g>
+          <!-- bottleneck markers -->
+          <g>
+            <!-- between transmission-substation -->
+            <path d="M323 155 L323 205" stroke="#c0491f" stroke-width="2" stroke-dasharray="4 3"></path>
+            <rect x="200" y="210" width="250" height="66" rx="8" fill="#fff1eb" stroke="#c0491f" stroke-width="2"></rect>
+            <text x="325" y="234" font-family="'Segoe UI',sans-serif" font-size="13" font-weight="700" fill="#c0491f" text-anchor="middle">Bottleneck 1: Grid buildout delay</text>
+            <text x="325" y="256" font-family="'Segoe UI',sans-serif" font-size="12" fill="#7a3016" text-anchor="middle">Permit + build 5–10 yrs · aging grid</text>
+            <!-- between datacenter-rack -->
+            <path d="M660 155 L660 315" stroke="#c0491f" stroke-width="2" stroke-dasharray="4 3"></path>
+            <rect x="500" y="320" width="240" height="66" rx="8" fill="#fff1eb" stroke="#c0491f" stroke-width="2"></rect>
+            <text x="620" y="344" font-family="'Segoe UI',sans-serif" font-size="13" font-weight="700" fill="#c0491f" text-anchor="middle">Bottleneck 2: Rack density · cooling</text>
+            <text x="620" y="366" font-family="'Segoe UI',sans-serif" font-size="12" fill="#7a3016" text-anchor="middle">Tens of kW/rack · heat + power limits</text>
+          </g>
+          <text x="385" y="35" font-family="'Segoe UI',sans-serif" font-size="16" font-weight="700" fill="#1b2350" text-anchor="middle">Grid-to-Chip: the five layers electricity crosses</text>
+        </svg>
+        <figcaption>The grid-to-chip chain runs generation → transmission → substation → data center → GPU rack. Bottlenecks arise mainly in two places: (1) where transmission and substation buildout is delayed by permitting and construction and an aging grid cannot handle the surging load, and (2) inside the data center, where power density per rack soars and distribution and cooling hit their limits.</figcaption>
+      </figure>
+
+      <p>The bottleneck concentrates in the physical infrastructure at the front of the chain. Harvard's Belfer Center, analyzing the U.S. grid, notes that much of the transmission and distribution equipment was built to design headroom set decades ago and is now <strong>aging</strong>, leaving too little design margin to absorb the sharp load increase that AI data centers bring. The problem is not simply how much power is generated. Even if there is surplus electricity at the plant, it is of no use without transmission lines to carry it to where the data center sits and substation capacity to step the voltage down for delivery. And building or expanding that equipment takes years, as noted above.</p>
+      <p>At the far end of the chain — <em>inside</em> the data center — a bottleneck also appears. AI training GPUs push several times the power of older servers into a single rack. Once consumption per rack soars into the tens of kilowatts, the distribution that safely apportions that electricity and the cooling that removes the resulting heat become new constraints. Even when power has been drawn in, delivering it to the chips "densely" and cooling them becomes an engineering challenge in itself. In the end, grid-to-chip is not the problem of any single layer but a <strong>system bottleneck</strong> produced by five layers moving at different speeds.</p>
+
+      <p>What makes this chain especially tricky is that each layer has a different lead time and a different owner. Power plants belong to generators, the transmission network to the grid operator, substations and distribution to the utility, and the data center's internal equipment to the operator. Because a single chain is held in pieces by several parties, when one layer becomes a bottleneck the others cannot immediately fill the gap. Moreover, a grid must be operated with reserve (margin) for stability, yet a data center imposes a nearly constant, high load around the clock and erodes that margin quickly. Unlike ordinary demand that spikes momentarily, load that stays high day and night keeps equipment running near its limit at all times. So even for the same total consumption, data-center load weighs more heavily on the grid.</p>
+
+      <div class="pullquote">Even with surplus electricity at the plant, without transmission lines to carry it and substation capacity to step it down, the GPU does not switch on.</div>
+
+      <span class="chapter-label">Chapter 4. Equity and the Environment</span>
+      <h2>Who Pays for This Electricity?</h2>
+      <p>Here the issue moves beyond engineering into society. When data centers arrive in a region at scale, the region's entire electricity-demand landscape is transformed. The U.S. state of Virginia has become the symbol of this debate. According to data cited by the Belfer Center, data centers consumed about <strong>26%</strong> of Virginia's total electricity as of 2023, and the Electric Power Research Institute (EPRI) projected that, depending on conditions, the share could reach <strong>41–59%</strong> by 2030 (a conditional figure that varies by region and scenario). A situation in which a particular class of industrial facility uses nearly half of a state's power makes political questions about how to share rates and infrastructure investment impossible to avoid.</p>
+      <p>At the core of the equity debate is <strong>cost shifting</strong>. When transmission and substation equipment is built out to meet surging data-center load, much of that investment is recovered through the rate base. In other words, part of the cost of the grid reinforced for data centers can end up on the electricity bills of the ordinary households and small businesses living in that region. The pattern — in which the profits of the IT industry concentrate in a few firms while the infrastructure costs disperse across the community — breeds the backlash of "Why should we pay for someone else's AI electricity?" Add to this the environmental burdens: water consumption for cooling, and carbon and air emissions from new gas generation.</p>
+
+      <div class="callout"><b>"One AI query = 1,000x a search" should be cited with care.</b> The widely repeated comparison that "a single AI task uses up to 1,000 times the electricity of an ordinary web search" is an <em>estimate</em>, and it varies widely with model size, task type, and hardware. Passing off the ceiling for one specific condition as a general fact distorts the debate. This piece too cites the figure only as an "estimate that conveys a sense of scale," not as precise grounds for policy.</div>
+
+      <p>For balance, though, the other side must be laid out honestly too. First, data centers generate tax revenue, jobs, and infrastructure investment for a region, and the increased power demand can even become a catalyst that <em>accelerates the modernization</em> of an aging grid. Second, several large operators have pledged to tie their new power demand to carbon-free procurement, and are in fact leading the way in nuclear and geothermal contracts. Third, thanks to economies of scale, hyperscale data centers are often more efficient per unit of computation than small, distributed servers. In short, this problem does not simplify into a "data center = evil" frame. The point is <strong>not whether they exist, but who shares the costs and benefits, and how</strong>. In rate design, applying a separate tariff to data centers so that infrastructure costs are assigned to the party that causes them, and mandating carbon-free procurement for new load, are among the tools discussed for balancing this scale.</p>
+
+      <p>Another axis that makes this distribution problem hard is the <strong>mismatch in speed</strong>. A data center can be built in a few months and immediately start drawing load. But the transmission and substation reinforcement to handle that load takes years. The gap in between is filled by running existing equipment harder, hastily bringing in gas generation, or, at worst, crowding out other demand. Either way, cost and risk arise, and who bears them circles back to the equity debate. In the end, the root of the rate and environmental debates is precisely the physical lead time of grid-to-chip seen in the previous chapter. Much of what looks like social conflict is, in fact, the shadow of an engineering constraint: the grid cannot grow fast.</p>
+
+      <div class="pullquote">The point is not whether data centers exist, but who shares the costs and benefits of that electricity, and how.</div>
+
+      <span class="chapter-label">Chapter 5. Mitigations</span>
+      <h2>Three Exits — Generation, Storage, Software</h2>
+      <p>If the bottleneck is physical, the exits span both physics and software. The mitigations fall into three broad branches. The first is <strong>adding supply</strong>. To supply large-scale baseload stably around the clock, nuclear is a strong candidate — and standardized small modular reactors (SMRs) draw attention precisely because they can be distributed near data centers. That said, SMRs still have limited commercial track record and long permitting and construction lead times. Geothermal offers 24-hour carbon-free baseload but is constrained by location. The second branch is <strong>absorbing variability</strong>. Pairing renewables such as solar and wind with large-scale battery energy storage (BESS) can buffer intermittency, but seasonal long-duration storage remains expensive and immature.</p>
+      <p>The third branch — and the most interesting to a systems engineer's eye — is the software mitigation of <strong>making demand itself smart</strong>. The prime example is improving PUE (power usage effectiveness) by cutting cooling and power losses, and <em>workload scheduling</em>, which shifts delay-tolerant workloads such as training to times and regions where power is surplus or cheap. It means redesigning the data center not as a fixed load but as a <strong>flexible load</strong> that modulates its consumption according to the grid's condition. Adding generation takes ten years; fixing the scheduler takes a few months. If supply-side solutions are fundamental but slow, demand-side solutions are fast-acting but partial. The real 945 TWh can only be handled by pushing all three at once.</p>
+
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+        <table>
+        <thead><tr><th>Mitigation</th><th>Strengths</th><th>Limits · risks</th><th>Time horizon</th></tr></thead>
+        <tbody>
+          <tr><td>Nuclear · SMR</td><td>24-hour carbon-free baseload, high density</td><td>Long permitting/construction, limited SMR track record</td><td>Long term (5–10 yrs+)</td></tr>
+          <tr><td>Geothermal</td><td>Steady 24-hour carbon-free, land-efficient</td><td>Location constraints, upfront drilling cost</td><td>Mid–long term</td></tr>
+          <tr><td>Renewables + battery storage</td><td>Fast to build, low marginal cost</td><td>Intermittency, immature/costly long-duration storage</td><td>Mid term</td></tr>
+          <tr><td>Natural gas</td><td>Immediate stable supply, flexibility</td><td>Carbon/air emissions, stranded-asset risk</td><td>Short–mid term</td></tr>
+          <tr><td>PUE improvement · cooling efficiency</td><td>Immediate savings on existing equipment</td><td>Physical ceiling on savings</td><td>Short term</td></tr>
+          <tr><td>Workload scheduling (flexible load)</td><td>Deployable within months, spreads grid burden</td><td>Unsuited to delay-sensitive tasks, complex to coordinate</td><td>Short term</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <p>Priorities among these three branches shift with time. This year's and next year's load must be met within the limits of equipment already built and power already contracted, so in the short term, demand-side mitigations like PUE improvement and scheduling are effectively the only fast-acting levers. Conversely, what actually underpins 945 TWh in 2030 is generation and transmission that must break ground now to be completed by then — that is, supply-side decisions. The trouble is that these two time horizons easily betray each other. Lean only on short-term demand management, and long-term supply investment is deferred; trust only in supply expansion and neglect demand, and the bottleneck arrives before the equipment is finished. In the end, mitigation is not a question of "what to choose" but of "in what order to stack them."</p>
+      <p>An increasingly prominent compromise among the three branches is <strong>co-location</strong> — building generation and the data center side by side. Rather than routing through the congested public transmission network, a data center is placed next to the generating equipment to bypass the interconnection queue itself. Typical forms pair it with land adjacent to a nuclear plant or with dedicated gas or geothermal generation. Attractive in that it skips the transmission and substation bottleneck, this approach nonetheless invites another debate. If a data center effectively monopolizes a given amount of generation, the share left for the public grid shrinks, affecting the whole region's rates and stability. A solution that bypasses the bottleneck thus reignites the equity problem — and here too the question of "distributing costs and benefits," seen earlier, returns.</p>
+      <p>The structure revealed by the table is clear. The more fundamental the solution, the longer it takes; the more immediately applicable it is, the lower its ceiling on savings. So there is no single "silver bullet." Only a <strong>portfolio strategy</strong> — stacking solutions with different time horizons, with nuclear and geothermal laying down long-term baseload, renewables plus storage absorbing mid-term variability, and PUE and scheduling putting out the short-term fires — is realistic.</p>
+
+      <span class="chapter-label">Conclusion</span>
+      <h2>Redrawing the Future at the Speed of Electrons</h2>
+      <p>When we talk about the limits of AI, we usually think of parameter counts or benchmark scores. But what the coordinate 945 TWh tells us is that this technology's growth curve is, in the end, <strong>tethered to the curve of a physical infrastructure: the power grid</strong>. Algorithms evolve at the speed of software, but the electricity that runs them flows only at the speed of power plants, transmission towers, and substations. The gap between these two speeds will define the real bottleneck of AI infrastructure for the next several years.</p>
+      <p>This perspective even changes the yardstick by which we measure AI's progress. Until now, the measures of advancement have been conspicuous ones like model size and benchmark scores. But the realistic measure in the 945 TWh era lies rather in the unseen: the efficiency of delivering the same performance on less power, the flexibility of finding idle power and moving load to it, and the negotiating power to procure electricity without conflict with local communities. The next round of the AI race is likely to be scored not in parameters but in kilowatt-hours (kWh). The winner is not whoever uses more electricity, but whoever extracts more intelligence from the same electricity.</p>
+      <p>If so, the answer lies not on one side but in <em>alignment</em>. Chip design and grid design must not run on separate tracks, and operators' expansion plans and communities' rate and environmental burdens must be coordinated at one table. Push all three branches at once — add generation, buffer with storage, and make demand flexible through software — but pair them with institutions that honestly assign the costs and benefits to those who cause them and those who benefit. If AI's real limit is electricity, its real competitiveness will come not from a faster chip but from the <strong>ability to make electrons flow at the right time, to the right place, at a fair price</strong>.</p>
+
+      <div class="references">
+        <h4>References</h4>
+        <ol>
+          <li>IEA (primary projection), <em>Energy and AI</em>, April 2025. Data-center power demand 2024 ≈415 TWh → 2030 ≈945 TWh (about 2x), less than 3% of global electricity in 2030, ~15% annual growth over 2024–2030 (4x+ other sectors), ~80% of growth in the U.S. and China (U.S. +240 TWh/+130%, China +175 TWh/+170%), half of the increase from renewables, with natural gas +175 TWh and nuclear/geothermal as drivers. <a href="https://www.iea.org/reports/energy-and-ai/energy-demand-from-ai" target="_blank" rel="noopener">iea.org/reports/energy-and-ai/energy-demand-from-ai</a> ; commentary: <a href="https://www.datacenterdynamics.com/en/news/iea-data-center-energy-consumption-set-to-double-by-2030-to-945twh/" target="_blank" rel="noopener">datacenterdynamics.com</a></li>
+          <li>Gartner (forecast, 2026-06-10). Data-center power demand +26% in 2026; AI-optimized servers to make up 31% of data-center power in 2026 and to overtake conventional servers in 2027. <a href="https://www.gartner.com/en/newsroom/press-releases/2026-06-10-gartner-says-data-center-electricity-demand-to-grow-26-percent-in-2026" target="_blank" rel="noopener">gartner.com</a></li>
+          <li>Harvard Belfer Center, “AI, Data Centers, and the U.S. Electric Grid.” Analysis of U.S. grid aging and design headroom being exceeded amid surging AI load. [Secondary / partially verified] Virginia data centers consumed about 26% of the state's power in 2023; EPRI projects 41–59% by 2030 (a conditional figure by region and scenario). <a href="https://www.belfercenter.org/research-analysis/ai-data-centers-us-electric-grid" target="_blank" rel="noopener">belfercenter.org/research-analysis/ai-data-centers-us-electric-grid</a></li>
+          <li>[Partially verified / estimate] “A single AI task uses up to 1,000 times the electricity of an ordinary web search” is a widely cited estimate that varies greatly with model, task, and hardware. It must always be cited as an “estimate.” Brookings, “Global energy demands within the AI regulatory landscape.” <a href="https://www.brookings.edu/articles/global-energy-demands-within-the-ai-regulatory-landscape/" target="_blank" rel="noopener">brookings.edu</a></li>
+          <li>The figures in this piece (the growth bars and the grid-to-chip layer diagram) are conceptual illustrations the author produced from the figures in the sources above. The bottleneck points (transmission/substation delay, rack density) summarize discussions from the Belfer Center and industry; they are illustrative representations meant to explain structure, not quantitative values for any specific facility.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer of article -->
+  <div class="art-foot">
+    <div class="art-tags">
+      <a href="#">#AIInfrastructure</a><a href="#">#DataCenters</a><a href="#">#PowerGrid</a><a href="#">#Energy</a><a href="#">#GridToChip</a>
+    </div>
+    <div class="author-card">
+      <div class="av">DP</div>
+      <div class="who">
+        <b>Daeseung Park</b>
+        <p>Research Engineer at KAIST. I study large language models, time-series forecasting, and conversational AI, and I try to record the process of my research as accurately and readably as I can.</p>
+      </div>
+    </div>
+
+    <div class="read-next no-print">
+        <div class="section-head" style="margin-bottom:20px;"><h2 style="font-size:1.3rem;">Read next</h2></div>
+        <div class="grid grid-2" id="readNext"><a href="../../articles/rag-architectures-hallucination/" class="post-card fade-up"><div class="thumb"><img class="ph " src="../../../articles/rag-architectures-hallucination/images/cover.svg" alt="" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;"><span class="cat-pill">AI · Explainer</span><span class="num">18</span></div><span class="cat">RAG · Retrieval-Augmented</span><h3>Four Ways Retrieval Rescues Intelligence — Lexical, Semantic, Hybrid, and Graph RAG, and the Anatomy of Hallucination</h3><p>A large language model's knowledge freezes the moment training ends. Retrieval-augmented generation (RAG) fills that gap by pulling in documents from outside the model. We dissect four retrieval architectures — Lexical, Semantic, Hybrid, and Graph — from first principles, and examine how they reduce hallucination and what still remains.</p><div class="meta"><span class="by">Daeseung Park</span><span class="dot-sep">18 min read</span></div></a><a href="../../articles/mcp-agent-interop-standard/" class="post-card fade-up"><div class="thumb"><img class="ph " src="../../../articles/mcp-agent-interop-standard/images/cover.svg" alt="" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;"><span class="cat-pill">AI · Explainer</span><span class="num">17</span></div><span class="cat">AI Agents</span><h3>The Protocol That Became AI's HTTP: MCP and the Interoperability-Standard War</h3><p>The moment chatbots turn into 'acting agents,' the bottleneck is no longer intelligence but the standard for connection. We anatomize how Anthropic's MCP became the de facto standard — its architecture, its politics, and the security homework that remains.</p><div class="meta"><span class="by">Daeseung Park</span><span class="dot-sep">14 min read</span></div></a></div>
+      </div>
+      <nav class="post-nav no-print" id="postNav"><a class="pn" href="../../articles/ai-circular-financing-bubble/"><span class="pn-dir">‹ Previous</span><span class="pn-t">From NVIDIA to NVIDIA</span></a><a class="pn pn-list" href="../../articles.html">List</a><a class="pn pn-right" href="../../articles/mcp-agent-interop-standard/"><span class="pn-dir">Next ›</span><span class="pn-t">The Protocol That Became AI's HTTP</span></a></nav>
+    </div>
+</article>
+
+<div class="print-footer">Daeseung Park · D. PARK Journal — AI's Real Limit Is Electricity: The Grid-to-Chip Bottleneck of the 945 TWh Era</div>
+
+<footer class="site-footer no-print" id="contact"><div class="container-x"><div class="footer-grid"><div><div class="footer-brand">D. PARK</div><p style="max-width:34ch;">AI &amp; Software Systems Engineer · KAIST</p><div class="social" style="margin-top:16px;"><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener" aria-label="GitHub">GH</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener" aria-label="ORCID">iD</a><a href="mailto:dspark@daeseungpark.com" aria-label="Email">@</a></div></div><div><h6>Browse</h6><ul><li><a href="../../index.html">Home</a></li><li><a href="../../profile.html">Profile</a></li><li><a href="../../articles.html">Articles</a></li><li><a href="../../research.html">Research</a></li><li><a href="../../notices.html">Notice</a></li></ul></div><div><h6>Articles</h6><ul class="ft-arts"><li><a href="../../articles/rag-architectures-hallucination/">Four Ways Retrieval Rescues Intelligence — Lexical, Semantic, Hybrid, and Graph RAG, and the Anatomy of Hallucination</a></li><li><a href="../../articles/mcp-agent-interop-standard/">The Protocol That Became AI's HTTP</a></li><li><a href="../../articles/ai-datacenter-power-crunch/">AI's Real Limit Is Electricity</a></li><li><a href="../../articles/ai-circular-financing-bubble/">From NVIDIA to NVIDIA</a></li><li><a href="../../articles/abliterated-ai-safety/">The Model With Refusal Erased</a></li></ul></div><div><h6>Contact</h6><ul><li><a href="mailto:dspark@daeseungpark.com">dspark@daeseungpark.com</a></li><li><a href="mailto:dspark@kaist.ac.kr">dspark@kaist.ac.kr</a></li><li><a href="tel:+821064547777">Phone (KR) +82 10 6454 7777</a></li><li><a href="tel:+16574109449">Phone (US) +1 657 410 9449</a></li><li>KAIST, Daejeon, Korea</li></ul></div></div><div class="footer-bottom"><span>© 2026 Daeseung Park. All rights reserved.</span><span>Designed &amp; built as a personal journal for Daeseung Park.</span></div></div></footer>
+
+<div class="mobile-nav" id="mobileNav"><button class="icon-btn close" id="navClose" aria-label="Close">✕</button><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></div>
+
+<script src="../../../assets/js/data.js"></script>
+<script src="../../../assets/js/articles.js"></script>
+<script src="../../../assets/js/i18n-en.js"></script><script src="../../../assets/js/main.js"></script>
+
+
+</body></html>

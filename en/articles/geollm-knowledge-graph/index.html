@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-prerendered="1"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Language Model That Reads Maps: GeoLLM and Knowledge Graphs - Daeseung Park Journal</title>
+<meta name="description" content="Asked 'where is the nearest incinerator,' a language model gives a plausible but wrong answer. A build log of GeoLLM/GNLM that filled that gap with RAG, PostGIS, and a knowledge graph.">
+<link rel="canonical" href="https://daeseungpark.com/en/articles/geollm-knowledge-graph/"><link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/geollm-knowledge-graph/"><link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/geollm-knowledge-graph/"><link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/geollm-knowledge-graph/"><meta property="og:locale:alternate" content="ko_KR">
+<!-- seo-i18n:start -->
+
+
+
+
+<!-- seo-i18n:end -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="D. PARK Journal">
+<meta property="og:title" content="The Language Model That Reads Maps: GeoLLM and Knowledge Graphs">
+<meta property="og:description" content="Asked 'where is the nearest incinerator,' a language model gives a plausible but wrong answer. A build log of GeoLLM/GNLM that filled that gap with RAG, PostGIS, and a knowledge graph.">
+<meta property="og:url" content="https://daeseungpark.com/en/articles/geollm-knowledge-graph/">
+<meta property="og:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Language Model That Reads Maps: GeoLLM and Knowledge Graphs">
+<meta name="twitter:description" content="Asked 'where is the nearest incinerator,' a language model gives a plausible but wrong answer. A build log of GeoLLM/GNLM that filled that gap with RAG, PostGIS, and a knowledge graph.">
+<meta name="twitter:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"The Language Model That Reads Maps: GeoLLM and Knowledge Graphs","author":{"@type":"Person","name":"박대승","alternateName":"Daeseung Park"},"publisher":{"@type":"Organization","name":"D. PARK Journal"},"image":"https://daeseungpark.com/assets/img/profile/img3.jpg","mainEntityOfPage":"https://daeseungpark.com/articles/geollm-knowledge-graph/","inLanguage":"en","datePublished":"2026-07"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&amp;family=Noto+Serif+KR:wght@400;600&amp;family=Noto+Sans+KR:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="../../../assets/css/style.css">
+<link rel="stylesheet" href="../../../assets/css/article.css">
+<script src="https://www.googletagmanager.com/gtag/js?id=G-1MMKKGR3MF"></script><style id="aiTrialStyle">#aiTrialBtn{position:fixed;right:22px;bottom:22px;z-index:940;display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border:0;border-radius:999px;cursor:pointer;font-family:"Pretendard",system-ui,sans-serif;font-weight:700;font-size:.92rem;color:#fff;background:linear-gradient(135deg,#5b6cff,#8b5bff);box-shadow:0 8px 24px rgba(70,70,140,.35);transition:transform .2s,box-shadow .2s,opacity .2s;}#aiTrialBtn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(70,70,140,.45);}#aiTrialBtn.active{opacity:.5;}#aiTrialBtn .ai-ic{font-size:1.05rem;line-height:1;}#aiTrialBtn .ai-b{font-size:.6rem;font-weight:800;background:rgba(255,255,255,.28);padding:2px 6px;border-radius:999px;letter-spacing:.5px;}#aiTrialPanel{position:fixed;right:22px;bottom:84px;z-index:945;width:380px;max-width:calc(100vw - 32px);height:560px;max-height:calc(100vh - 120px);background:var(--bg,#fff);border:1px solid var(--line,#e6e6e6);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.28);opacity:0;transform:translateY(12px) scale(.98);pointer-events:none;transition:opacity .22s,transform .22s;}#aiTrialPanel.open{opacity:1;transform:none;pointer-events:auto;}#aiTrialPanel .ai-head{display:flex;align-items:center;justify-content:space-between;padding:10px 8px 10px 14px;border-bottom:1px solid var(--line,#e6e6e6);}#aiTrialPanel .ai-ti{font-family:"Pretendard",system-ui,sans-serif;font-size:.9rem;color:var(--ink,#15171a);}#aiTrialPanel .ai-badge{font-size:.64rem;color:#7b83ff;border:1px solid #7b83ff;border-radius:999px;padding:1px 6px;margin-left:5px;}#aiTrialPanel .ai-actions{display:flex;gap:2px;}#aiTrialPanel .ai-x{border:0;background:transparent;cursor:pointer;font-size:1rem;line-height:1;padding:6px 9px;border-radius:8px;color:var(--ink,#15171a);opacity:.65;}#aiTrialPanel .ai-x:hover{opacity:1;background:rgba(125,125,140,.14);}#aiTrialPanel .ai-body{position:relative;flex:1;min-height:0;background:var(--bg,#fff);}#aiTrialPanel .ai-open{font-family:"Pretendard",system-ui,sans-serif;font-size:.78rem;font-weight:700;color:#7b83ff;padding:6px 10px;border-radius:8px;text-decoration:none;white-space:nowrap;}#aiTrialPanel .ai-open:hover{background:rgba(125,125,140,.14);}#aiTrialPanel iframe{position:relative;width:100%;height:100%;border:0;display:block;background:var(--bg,#fff);}@media (max-width:640px){#aiTrialBtn{right:16px;bottom:16px;padding:11px 15px;font-size:.86rem;}}</style></head>
+<body data-base="../../">
+<div class="progress-bar" id="progress"></div>
+<div class="topbar no-print">
+  <div class="container-x">
+    <span class="tb-date" id="today">Friday, August 7, 2026</span>
+    <div class="tb-links"><a href="https://ai.daeseungpark.com/chat/" target="_blank" rel="noopener">Abliterated AI</a><a href="https://tcc.daeseungpark.com/" target="_blank" rel="noopener">Mission Control(TCC)</a><a href="../../profile.html">Profile</a><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener">GitHub</a><a href="https://scholar.google.com/citations?hl=ko&amp;user=qVom0QUAAAAJ" target="_blank" rel="noopener">Scholar</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener">ORCID</a><a href="https://hub.docker.com/u/daeseungpark" target="_blank" rel="noopener">Docker</a><a href="https://codespectrum.net" target="_blank" rel="noopener">Blog</a><a href="../../profile.html#contact">Contact</a><a href="../../notices.html">Notice</a><a href="/articles/geollm-knowledge-graph/" class="tb-lang-link" aria-label="Language">한국어</a></div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header no-print">
+  <div class="container-x nav-row">
+    <a href="../../index.html" class="brand">D<span class="dot">.</span> PARK <small>Journal</small></a>
+    <nav class="main-nav"><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">☾</span></button>
+      <button class="print-cta" id="printBtn">🖶 Print / PDF</button>
+      <button class="icon-btn nav-toggle" id="navToggle" aria-label="Menu">≡</button>
+    </div>
+  </div>
+</header>
+
+<div class="ticker no-print">
+  <div class="container-x">
+    <span class="label">Trending</span>
+    <div class="items" id="tickerItems"><a href="../../articles/rag-architectures-hallucination/">Four Ways Retrieval Rescues In…</a><a href="../../articles/mcp-agent-interop-standard/">The Protocol That Became AI's…</a><a href="../../articles/ai-datacenter-power-crunch/">AI's Real Limit Is Electricity</a><a href="../../articles/ai-circular-financing-bubble/">From NVIDIA to NVIDIA</a><a href="../../articles/abliterated-ai-safety/">The Model With Refusal Erased</a><a href="../../articles/llm-spatial-reasoning/">Do LLMs Understand Space? A 7,…</a></div>
+  </div>
+</div>
+
+<article data-article-id="12">
+  <div class="article-wrap">
+    <!-- Masthead -->
+    <header class="art-head">
+      <span class="cat-pill">AI · Explainer</span>
+      <h1>The Language Model That Reads Maps: GeoLLM and Knowledge Graphs</h1>
+      <p class="deck">Asked 'where is the nearest incinerator,' a language model gives a plausible but wrong answer. A build log of GeoLLM/GNLM that filled that gap with RAG, PostGIS, and a knowledge graph.</p>
+      <div class="art-byline">
+        <div class="av">DP</div>
+        <div class="who">
+          <b>Daeseung Park</b>
+          <span>AI &amp; Software Systems Engineer · KAIST</span>
+          <span>July 2026 · 15 min read</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="art-cover">
+      <img src="../../../assets/img/extracted/research/geollm-bot-demo-korean.png" alt="GeoLMM-BOT demo" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+    </div>
+
+    <!-- Summary -->
+    <div class="summary-box">
+      <span class="tag">1-min summary</span>
+      Large language models (LLMs) handle language well but are surprisingly weak at geography. Spatial queries like “the nearest,” “within a 1 km radius,” or “across an administrative boundary” demand operations on coordinates, distances, and topology — computation for which a model that predicts the next token probabilistically is fundamentally ill-suited. We approached the problem along two tracks. One is <strong>GeoLLM</strong> — a five-stage pipeline that wraps a fine-tuned language model with intent recognition, RAG retrieval, PostGIS function calls, and map visualization. The other is <strong>GNLM (Graph-Native Language Model)</strong> — structuring geographic information as an RDF knowledge graph and validating answers against facts. On a 250-question QA set, GNLM scored 88.4%, far ahead of a bare LLM with no context (57.1%) and plain RAG (31.4%). And an unexpected finding — small 8B-class open models beat large commercial ones by 7–11 percentage points. For geographic QA, <em>structure</em> mattered more than model size.
+    </div>
+
+    <!-- Body -->
+    <div class="prose">
+      <span class="chapter-label">Chapter 1. The Problem</span>
+      <h2>Why Language Models Can't Read Maps</h2>
+      <p>Ask a language model “how far is it from Seoul to Busan,” and a plausible number comes back — because that fact appeared often in its training data. But ask it to “list every school zone within a 500 m radius of my location,” and the story changes. The model doesn't know my coordinates, has no means to perform the topological operation that “within 500 m” requires, and holds no up-to-date boundary data for school zones. Yet it does not fall silent. Confidently, it fabricates a list — and gets it wrong.</p>
+      <p>This is less a defect of the model than a mismatch of kind. An LLM is not an engine that ‘computes’ facts on a coordinate system; it is a machine that ‘predicts’ the most plausible sentence to follow a context. The spatial relations at the heart of geographic queries — distance, containment, adjacency — are solved precisely only by geometric computation, not by the statistical patterns of text. The two worlds run on different grammars. So when a geographic question is handed to a language model whole, the model fills the gap with what it does best — making things up. This is the phenomenon we commonly call hallucination.</p>
+
+      <div class="pullquote">A language model does not compute geography. Where computation is called for, it fills the space with invented words.</div>
+
+      <p>At KAIST, I took up this problem while planning a Korean geospatial language model (K-GeoLLM) in partnership with the Ministry of Land, Infrastructure and Transport and the National Geographic Information Institute. The goal was clear: when a user poses a geographic question in natural language, the system translates it into precise spatial operations, computes the answer over real GIS data, and returns the result as human-readable text and a map. It was a matter of reconciling the flexibility of language with the rigor of geometry inside a single pipeline.</p>
+
+      <figure>
+        <div class="fig-box"><img src="../../../assets/img/extracted/research/geollm-bot-demo-korean.png" alt="GeoLMM-BOT Korean demo" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+        <figcaption>GeoLMM-BOT: a Korean-language demo that pairs an OpenStreetMap heatmap to generate a narrative answer to the query “impact of siting a landfill.”</figcaption>
+      </figure>
+
+      <span class="chapter-label">Chapter 2. The Five-Stage GeoLLM Pipeline</span>
+      <h2>Translating Language into Spatial Operations</h2>
+      <p>The first approach used the language model as the ‘brain’ of the pipeline while delegating the actual computation to a dedicated engine. For the base model we chose Llama-3 8B Bilingual, which handles Korean and English together, and adapted it to the geographic domain through LoRA/PEFT-based SFT (supervised fine-tuning). Training ran on two NVIDIA A6000 GPUs. The 8B size was a deliberate choice — in an environment that must handle public data on-premises, the system had to run without handing that data over to a giant commercial model.</p>
+      <p>The pipeline flows through five stages.</p>
+
+      <h3>① Intent Recognition</h3>
+      <p>First, the system classifies what the user's sentence is asking for. “The nearest ○○” is a nearest-neighbor query, “○○ within a radius” is a buffer query, and “from A to B” is a distance query. Combining few-shot prompting with named-entity recognition (NER), it extracts both the query type and entities such as place names and facility names. If this stage wavers, every downstream computation points in the wrong direction — so it is the gate we labored over most.</p>
+
+      <h3>② RAG Retrieval</h3>
+      <p>Next, the system pulls in the context and data related to the query. It finds semantically close documents in a FAISS vector database while, at the same time, querying actual spatial records in PostgreSQL/PostGIS. If the vector search narrows down “what the question is about,” the relational and spatial database supplies “the source data for the answer.” Their roles differ.</p>
+
+      <h3>③ Function Calling</h3>
+      <p>This is the core. The model does not ‘imagine’ distances or containment relationships on its own. Instead it invokes PostGIS spatial functions such as <code>ST_DWithin</code> (containment within a radius) and <code>ST_Distance</code> (distance calculation) as JSON-form tool calls. The topological operations are performed entirely by the database; the model only decides which function to call with which arguments. Responsibility for computation is handed back to the computation engine.</p>
+
+      <div class="callout"><b>Redundancy by design.</b> Spatial queries do not always succeed. An entity name may fail to match the database, or a function call may fail. When this happens, the system does not die quietly; it switches to an <b>LLM Fallback</b> that, using only the retrieved context, returns an answer that states its limits — something like “an exact coordinate calculation isn't possible, but within the known range…”. It is a compromise that suppresses hallucination while avoiding total silence.<p></p></div>
+
+      <h3>④ Result Synthesis</h3>
+      <p>The model weaves the coordinates, distances, and lists returned by the database back into natural language. Here the model does only what it is good at — turning tables into prose, adding context, and organizing it to read well. Since the numbers are values guaranteed by the computation engine, there is less room to make them up.</p>
+
+      <h3>⑤ Map Visualization</h3>
+      <p>Finally, the results are laid over a Leaflet-based map. Spatial relationships that don't quite register from text alone are grasped at once when seen as points and radii on a map. The reliability of the answer, too, is confirmed by eye.</p>
+
+      <figure>
+        <div class="fig-box"><img src="../../../assets/img/extracted/research/geollm-bot-demo-bangladesh.png" alt="Geospatial LLM English demo" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+        <figcaption>A geospatial LLM demo that returned an administrative-boundary GIS download link and major cities in response to an English query — showing a pipeline design that is not tied to a single language.</figcaption>
+      </figure>
+
+      <span class="chapter-label">Chapter 3. GNLM and Fact Validation</span>
+      <h2>Reweaving the Map as a Knowledge Graph</h2>
+      <p>As the pipeline matured, a more fundamental question arose: could geographic information be represented, from the start, in a structure that language models handle well? What emerged was <strong>GNLM (Graph-Native Language Model)</strong>. The key was to represent geographic knowledge not as text but as a knowledge graph of <strong>RDF triples (subject–relation–object)</strong>. The graph we built consisted of 58,882 nodes and 80,088 relations — a structure capable of road-name-address-based spatial reasoning.</p>
+      <p>The power of a knowledge graph comes from making relations explicit. Facts like “this building abuts this road” or “this administrative dong belongs to this district” are not scattered through text but nailed down as traversable edges. On top of this we placed a <strong>14-Strategy Reasoning Router</strong> — a mechanism that routes each incoming question, according to its character, to a strategy for traversing the graph. Nearest-neighbor search, path tracing, attribute lookup, aggregation — because the optimal path differs from question to question.</p>
+
+      <div class="pullquote">In a knowledge graph, “close” is not a sentence but an edge. The model cannot invent that edge — it can only follow it.</div>
+
+      <p>And as a last line of defense we placed a <strong>Fact Validation Layer</strong>. Rather than emitting the model's generated answer as is, this stage cross-checks the factual claims within it against the knowledge graph to confirm they are supported. Any claim of a relation absent from the graph is filtered out. This validation layer reached 96.7% accuracy, serving as the final lock that upholds the answer's reliability.</p>
+
+      <span class="chapter-label">Chapter 4. Measurement</span>
+      <h2>Structure Beats Size</h2>
+      <p>We scored the three approaches on the same 250-question QA set. The results came down firmly on the side of structure.</p>
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+        <table>
+        <thead><tr><th>Approach</th><th>Composition</th><th>QA Accuracy</th></tr></thead>
+        <tbody>
+          <tr><td>Bare LLM</td><td>Model alone, no context</td><td>57.1%</td></tr>
+          <tr><td>Plain RAG</td><td>Vector retrieval + generation</td><td>31.4%</td></tr>
+          <tr><td><strong>GNLM</strong></td><td><strong>Knowledge graph + validation</strong></td><td><strong>88.4%</strong></td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p>What stands out is how poorly plain RAG did. Adding context actually made it worse than the bare LLM. In geographic queries, the “semantically similar” documents that vector search pulled in were routinely at odds with the exact coordinates and relations actually needed. Similarity is not the right answer in geography. GNLM, by contrast — holding relations explicitly and validating its answers — climbed to 88.4%. <em>How</em> the data is structured mattered more than <em>how much</em> is retrieved.</p>
+
+      <span class="chapter-label">Chapter 5. An Unexpected Finding</span>
+      <h2>Why an 8B Model Beat GPT-5.2</h2>
+      <p>The biggest surprise of the experiment lay elsewhere. When we swapped various models into the same GNLM structure and compared them, small open models like qwen3:8b and llama3.1:8b beat large commercial ones like GPT-5.2 and Claude Sonnet 4.5 by 7–11 percentage points. It ran against common sense. Isn't a bigger model supposed to do better?</p>
+      <p>The answer lay in the division of labor. Within the GNLM structure, the language model's job is not ‘to remember knowledge’ but ‘to traverse the graph and weave validated facts into sentences.’ The source of fact is the knowledge graph, and truth is adjudicated by the validation layer. In this structure, how faithfully the model follows the given structure matters more than how much it knows. A large model's vast parametric knowledge was, if anything, surplus — and at times it erred by putting its own memory ahead of the facts the graph had supplied.</p>
+
+      <div class="callout"><b>A note on interpretation.</b> This result does not mean “smaller models are always better.” Precisely, it means “within a well-designed knowledge graph and validation structure, the advantage of model size disappears for the specific task of geographic QA.” Structure did not replace the model; it changed the nature of what the model is asked to do.<p></p></div>
+
+      <figure>
+        <div class="fig-box"><img src="../../../assets/img/extracted/research/geollm-gis-homevalue-choropleth.png" alt="Indicator-based GIS choropleth map" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+        <figcaption>An indicator-based GIS choropleth (home values): a before-and-after comparison of new-building and indicator simulation. The direction is to connect the results of spatial queries to policy judgment.</figcaption>
+      </figure>
+
+      <span class="chapter-label">Closing</span>
+      <h2>Build the Structure Before Scaling the Model</h2>
+      <p>The view through the narrow window of geographic QA is, in fact, a question posed to generative AI as a whole. When we try to raise performance, we reflexively reach for a bigger model. But the experience of GeoLLM and GNLM pointed the other way. Redefine the problem with the right structure — leave computation to the computation engine, facts to the knowledge graph, and validation to the validation layer — and even an 8B model could outperform giant commercial ones.</p>
+      <p>One thing must be made clear, though. This system does not <em>replace</em> sensitive judgments such as public policy or land-use planning. The answers to questions like where to site an incinerator, the impact of a landfill, or shifts in home values touch citizens' lives directly. GeoLLM is only an <strong>assistive tool</strong> that hands accurate spatial information quickly to the experts who make such judgments; the final decision-maker must always be a person. The virtue of a good tool lies in honestly revealing its own limits. The more powerful the model becomes, the more important it is to design those limits.</p>
+
+      <div class="references">
+        <h4>References</h4>
+        <ol>
+          <li>D. Park et al. (second author), “A Declarative Geographic Knowledge Graph Framework,” <em>IEEE Access</em>, 2026. DOI: 10.1109/ACCESS.2026.3695549.</li>
+          <li>D. Park et al. (second author), “GNLM: A Graph-Native Language Model With Road Name Address-Based Spatial Reasoning,” <em>IEEE Access</em>, 2026. DOI: 10.1109/ACCESS.2026.3705784.</li>
+          <li>The figures in this article (QA accuracy, node and relation counts, model comparisons, etc.) are representative results from the studies; specific values may vary depending on the dataset, evaluation set, and model version.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer of article -->
+  <div class="art-foot">
+    <div class="art-tags">
+      <a href="#">#GeoLLM</a><a href="#">#KnowledgeGraph</a><a href="#">#RAG</a><a href="#">#PostGIS</a>
+    </div>
+    <div class="author-card">
+      <div class="av">DP</div>
+      <div class="who">
+        <b>Daeseung Park</b>
+        <p>Research Engineer at KAIST. I study large language models, time-series forecasting, and conversational AI, and I try to record the process of my research as accurately and readably as I can.</p>
+      </div>
+    </div>
+
+    <div class="read-next no-print">
+        <div class="section-head" style="margin-bottom:20px;"><h2 style="font-size:1.3rem;">Read next</h2></div>
+        <div class="grid grid-2" id="readNext"><a href="../../articles/rag-architectures-hallucination/" class="post-card fade-up"><div class="thumb"><img class="ph " src="../../../articles/rag-architectures-hallucination/images/cover.svg" alt="" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;"><span class="cat-pill">AI · Explainer</span><span class="num">18</span></div><span class="cat">RAG · Retrieval-Augmented</span><h3>Four Ways Retrieval Rescues Intelligence — Lexical, Semantic, Hybrid, and Graph RAG, and the Anatomy of Hallucination</h3><p>A large language model's knowledge freezes the moment training ends. Retrieval-augmented generation (RAG) fills that gap by pulling in documents from outside the model. We dissect four retrieval architectures — Lexical, Semantic, Hybrid, and Graph — from first principles, and examine how they reduce hallucination and what still remains.</p><div class="meta"><span class="by">Daeseung Park</span><span class="dot-sep">18 min read</span></div></a><a href="../../articles/mcp-agent-interop-standard/" class="post-card fade-up"><div class="thumb"><img class="ph " src="../../../articles/mcp-agent-interop-standard/images/cover.svg" alt="" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;"><span class="cat-pill">AI · Explainer</span><span class="num">17</span></div><span class="cat">AI Agents</span><h3>The Protocol That Became AI's HTTP: MCP and the Interoperability-Standard War</h3><p>The moment chatbots turn into 'acting agents,' the bottleneck is no longer intelligence but the standard for connection. We anatomize how Anthropic's MCP became the de facto standard — its architecture, its politics, and the security homework that remains.</p><div class="meta"><span class="by">Daeseung Park</span><span class="dot-sep">14 min read</span></div></a></div>
+      </div>
+      <nav class="post-nav no-print" id="postNav"><a class="pn" href="../../articles/mmwave-georeferencing/"><span class="pn-dir">‹ Previous</span><span class="pn-t">Drawing People on a Map Without a Camera</span></a><a class="pn pn-list" href="../../articles.html">List</a><a class="pn pn-right" href="../../articles/llm-spatial-reasoning/"><span class="pn-dir">Next ›</span><span class="pn-t">Do LLMs Understand Space? A 7,650-Question Spatial-Reasoning Benchmark</span></a></nav>
+    </div>
+</article>
+
+<div class="print-footer">Daeseung Park · D. PARK Journal — The Language Model That Reads Maps: GeoLLM and Knowledge Graphs</div>
+
+<footer class="site-footer no-print" id="contact"><div class="container-x"><div class="footer-grid"><div><div class="footer-brand">D. PARK</div><p style="max-width:34ch;">AI &amp; Software Systems Engineer · KAIST</p><div class="social" style="margin-top:16px;"><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener" aria-label="GitHub">GH</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener" aria-label="ORCID">iD</a><a href="mailto:dspark@daeseungpark.com" aria-label="Email">@</a></div></div><div><h6>Browse</h6><ul><li><a href="../../index.html">Home</a></li><li><a href="../../profile.html">Profile</a></li><li><a href="../../articles.html">Articles</a></li><li><a href="../../research.html">Research</a></li><li><a href="../../notices.html">Notice</a></li></ul></div><div><h6>Articles</h6><ul class="ft-arts"><li><a href="../../articles/rag-architectures-hallucination/">Four Ways Retrieval Rescues Intelligence — Lexical, Semantic, Hybrid, and Graph RAG, and the Anatomy of Hallucination</a></li><li><a href="../../articles/mcp-agent-interop-standard/">The Protocol That Became AI's HTTP</a></li><li><a href="../../articles/ai-datacenter-power-crunch/">AI's Real Limit Is Electricity</a></li><li><a href="../../articles/ai-circular-financing-bubble/">From NVIDIA to NVIDIA</a></li><li><a href="../../articles/abliterated-ai-safety/">The Model With Refusal Erased</a></li></ul></div><div><h6>Contact</h6><ul><li><a href="mailto:dspark@daeseungpark.com">dspark@daeseungpark.com</a></li><li><a href="mailto:dspark@kaist.ac.kr">dspark@kaist.ac.kr</a></li><li><a href="tel:+821064547777">Phone (KR) +82 10 6454 7777</a></li><li><a href="tel:+16574109449">Phone (US) +1 657 410 9449</a></li><li>KAIST, Daejeon, Korea</li></ul></div></div><div class="footer-bottom"><span>© 2026 Daeseung Park. All rights reserved.</span><span>Designed &amp; built as a personal journal for Daeseung Park.</span></div></div></footer>
+
+<div class="mobile-nav" id="mobileNav"><button class="icon-btn close" id="navClose" aria-label="Close">✕</button><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></div>
+
+<script src="../../../assets/js/data.js"></script>
+<script src="../../../assets/js/articles.js"></script>
+<script src="../../../assets/js/i18n-en.js"></script><script src="../../../assets/js/main.js"></script>
+
+
+</body></html>

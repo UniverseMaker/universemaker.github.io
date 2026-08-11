@@ -1,11 +1,17 @@
 <!DOCTYPE html>
-<html lang="ko" data-theme="light">
+<html lang="ko" data-theme="light" data-prerendered="1">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>데이터와 활성함수, 두 개의 작은 지렛대 - Daeseung Park Journal</title>
 <meta name="description" content="모델을 키우기 전에 점검할 두 축 — 유의어 군집으로 학습데이터를 늘리는 법과 ELU·Tanh 비대칭 조합으로 활성함수를 바꾸는 법.">
 <link rel="canonical" href="https://daeseungpark.com/articles/data-augmentation-activation/">
+<!-- seo-i18n:start -->
+<link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/data-augmentation-activation/">
+<link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/data-augmentation-activation/">
+<link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/data-augmentation-activation/">
+<meta property="og:locale:alternate" content="en_US">
+<!-- seo-i18n:end -->
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="D. PARK Journal">
 <meta property="og:title" content="데이터와 활성함수, 두 개의 작은 지렛대">
@@ -30,12 +36,7 @@
 <div class="topbar no-print">
   <div class="container-x">
     <span class="tb-date" id="today">—</span>
-    <div class="tb-links">
-      <a href="../../index.html">Home</a>
-      <a href="https://github.com/UniverseMaker" target="_blank" rel="noopener">GitHub</a>
-      <a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener">ORCID</a>
-      <a href="../../index.html#contact">Contact</a>
-    </div>
+    <div class="tb-links" data-prerendered="1"><a href="https://ai.daeseungpark.com/chat/" target="_blank" rel="noopener">Abliterated AI</a><a href="https://tcc.daeseungpark.com/" target="_blank" rel="noopener">Mission Control(TCC)</a><a href="../../profile.html">Profile</a><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener">GitHub</a><a href="https://scholar.google.com/citations?hl=ko&amp;user=qVom0QUAAAAJ" target="_blank" rel="noopener">Scholar</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener">ORCID</a><a href="https://hub.docker.com/u/daeseungpark" target="_blank" rel="noopener">Docker</a><a href="https://codespectrum.net" target="_blank" rel="noopener">Blog</a><a href="../../profile.html#contact">Contact</a><a href="../../notices.html">Notice</a><a href="/en/articles/data-augmentation-activation/" class="tb-lang-link" aria-label="Language">English</a></div>
   </div>
 </div>
 
@@ -43,12 +44,7 @@
 <header class="site-header no-print">
   <div class="container-x nav-row">
     <a href="../../index.html" class="brand">D<span class="dot">.</span> PARK <small>Journal</small></a>
-    <nav class="main-nav">
-      <a href="../../index.html">Home</a>
-      <a href="../../profile.html">Profile</a>
-      <a href="../../articles.html" class="active">Articles</a>
-      <a href="../../index.html#contact">Contact</a>
-    </nav>
+    <nav class="main-nav" data-prerendered="1"><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></nav>
     <div class="nav-actions">
       <button class="icon-btn" id="themeToggle" aria-label="테마 전환"><span id="themeIcon">☾</span></button>
       <button class="print-cta" id="printBtn">🖶 인쇄 / PDF</button>
@@ -60,7 +56,7 @@
 <div class="ticker no-print">
   <div class="container-x">
     <span class="label">Trending</span>
-    <div class="items" id="tickerItems"></div>
+    <div class="items" id="tickerItems" data-prerendered="1"><a href="../../articles/rag-architectures-hallucination/">검색이 지능을 구원하는 네 가지 방법 — Lexical…</a><a href="../../articles/mcp-agent-interop-standard/">AI의 HTTP가 된 프로토콜</a><a href="../../articles/ai-datacenter-power-crunch/">AI의 진짜 한계는 전기다</a><a href="../../articles/ai-circular-financing-bubble/">엔비디아에서 엔비디아로</a><a href="../../articles/abliterated-ai-safety/">거부를 지운 모델</a><a href="../../articles/llm-spatial-reasoning/">LLM은 공간을 이해하는가</a></div>
   </div>
 </div>
 
@@ -202,30 +198,17 @@
 
     <div class="read-next no-print">
         <div class="section-head" style="margin-bottom:20px;"><h2 style="font-size:1.3rem;">다음 글</h2></div>
-        <div class="grid grid-2" id="readNext"></div>
+        <div class="grid grid-2" id="readNext" data-prerendered="1"><a href="../../articles/rag-architectures-hallucination/" class="post-card fade-up"><div class="thumb"><img class="ph " src="../../articles/rag-architectures-hallucination/images/cover.svg" alt="" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;"><span class="cat-pill">AI · 기술해설</span><span class="num">18</span></div><span class="cat">RAG · 검색증강</span><h3>검색이 지능을 구원하는 네 가지 방법 — Lexical·Semantic·Hybrid·Graph RAG와 환각의 해부</h3><p>대형언어모델의 지식은 학습이 끝나는 순간 굳어 버린다. 검색증강생성(RAG)은 모델 바깥의 문서를 끌어와 그 빈틈을 메운다. Lexical·Semantic·Hybrid·Graph 네 검색 아키텍처를 원리부터 해부하고, 그것이 환각을 어떻게 줄이며 무엇이 여전히 남는지를 짚는다.</p><div class="meta"><span class="by">박대승</span><span class="dot-sep">18분 읽기</span></div></a><a href="../../articles/mcp-agent-interop-standard/" class="post-card fade-up"><div class="thumb"><img class="ph " src="../../articles/mcp-agent-interop-standard/images/cover.svg" alt="" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;"><span class="cat-pill">AI · 기술해설</span><span class="num">17</span></div><span class="cat">AI 에이전트</span><h3>AI의 HTTP가 된 프로토콜: MCP와 상호운용성 표준 전쟁</h3><p>챗봇이 ‘행동하는 에이전트’로 바뀌는 순간, 병목은 지능이 아니라 연결의 표준이 된다. Anthropic이 공개한 MCP가 사실상 표준이 되기까지, 그 구조와 정치학, 남은 보안 숙제를 해부한다.</p><div class="meta"><span class="by">박대승</span><span class="dot-sep">14분 읽기</span></div></a></div>
       </div>
-      <nav class="post-nav no-print" id="postNav"></nav>
+      <nav class="post-nav no-print" id="postNav" data-prerendered="1"><a class="pn" href="../../articles/bert-medical-classification/"><span class="pn-dir">‹ 이전 글</span><span class="pn-t">어느 과로 가야 할까</span></a><a class="pn pn-list" href="../../articles.html">목록</a><a class="pn pn-right" href="../../articles/waterpipe-prediction/"><span class="pn-dir">다음 글 ›</span><span class="pn-t">보이지 않는 관로를 예측하다</span></a></nav>
     </div>
 </article>
 
 <div class="print-footer">Daeseung Park · D. PARK Journal — 데이터와 활성함수, 두 개의 작은 지렛대</div>
 
-<footer class="site-footer no-print">
-  <div class="container-x">
-    <div class="footer-bottom" style="border:0;padding-top:0;">
-      <span>© 2026 Daeseung Park. All rights reserved.</span>
-      <span><a href="../../index.html">← 저널 홈</a></span>
-    </div>
-  </div>
-</footer>
+<footer class="site-footer no-print" id="contact" data-prerendered="1"><div class="container-x"><div class="footer-grid"><div><div class="footer-brand">D. PARK</div><p style="max-width:34ch;">AI &amp; Software Systems Engineer · KAIST</p><div class="social" style="margin-top:16px;"><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener" aria-label="GitHub">GH</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener" aria-label="ORCID">iD</a><a href="mailto:dspark@daeseungpark.com" aria-label="Email">@</a></div></div><div><h6>둘러보기</h6><ul><li><a href="../../index.html">Home</a></li><li><a href="../../profile.html">Profile</a></li><li><a href="../../articles.html">Articles</a></li><li><a href="../../research.html">Research</a></li><li><a href="../../notices.html">Notice</a></li></ul></div><div><h6>기고문</h6><ul class="ft-arts"><li><a href="../../articles/rag-architectures-hallucination/">검색이 지능을 구원하는 네 가지 방법 — Lexical·Semantic·Hybrid·Graph RAG와 환각의 해부</a></li><li><a href="../../articles/mcp-agent-interop-standard/">AI의 HTTP가 된 프로토콜</a></li><li><a href="../../articles/ai-datacenter-power-crunch/">AI의 진짜 한계는 전기다</a></li><li><a href="../../articles/ai-circular-financing-bubble/">엔비디아에서 엔비디아로</a></li><li><a href="../../articles/abliterated-ai-safety/">거부를 지운 모델</a></li></ul></div><div><h6>Contact</h6><ul><li><a href="mailto:dspark@daeseungpark.com">dspark@daeseungpark.com</a></li><li><a href="mailto:dspark@kaist.ac.kr">dspark@kaist.ac.kr</a></li><li><a href="tel:+821064547777">Phone (KR) +82 10 6454 7777</a></li><li><a href="tel:+16574109449">Phone (US) +1 657 410 9449</a></li><li>KAIST, Daejeon, Korea</li></ul></div></div><div class="footer-bottom"><span>© 2026 Daeseung Park. All rights reserved.</span><span>Designed &amp; built as a personal journal for Daeseung Park.</span></div></div></footer>
 
-<div class="mobile-nav" id="mobileNav">
-  <button class="icon-btn close" id="navClose" aria-label="닫기">✕</button>
-  <a href="../../index.html">Home</a>
-  <a href="../../profile.html">Profile</a>
-  <a href="../../articles.html">Articles</a>
-  <a href="../../index.html#contact">Contact</a>
-</div>
+<div class="mobile-nav" id="mobileNav" data-prerendered="1"><button class="icon-btn close" id="navClose" aria-label="닫기">✕</button><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></div>
 
 <script src="../../assets/js/data.js"></script>
 <script src="../../assets/js/articles.js"></script>

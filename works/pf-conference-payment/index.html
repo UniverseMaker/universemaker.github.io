@@ -1,11 +1,17 @@
 <!DOCTYPE html>
-<html lang="ko" data-theme="light">
+<html lang="ko" data-theme="light" data-prerendered="1">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>학회 결제 시스템 - Daeseung Park Journal</title>
 <meta name="description" content="학회 참가 등록과 결제를 처리하는 웹 시스템 개발.">
 <link rel="canonical" href="https://daeseungpark.com/works/pf-conference-payment/">
+<!-- seo-i18n:start -->
+<link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-conference-payment/">
+<link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-conference-payment/">
+<link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-conference-payment/">
+<meta property="og:locale:alternate" content="en_US">
+<!-- seo-i18n:end -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="D. PARK Journal">
 <meta property="og:title" content="학회 결제 시스템">
@@ -29,14 +35,14 @@
 <div class="topbar">
   <div class="container-x">
     <span class="tb-date" id="today">—</span>
-    <div class="tb-links"><!-- SITE 렌더 --></div>
+    <div class="tb-links" data-prerendered="1"><a href="https://ai.daeseungpark.com/chat/" target="_blank" rel="noopener">Abliterated AI</a><a href="https://tcc.daeseungpark.com/" target="_blank" rel="noopener">Mission Control(TCC)</a><a href="../../profile.html">Profile</a><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener">GitHub</a><a href="https://scholar.google.com/citations?hl=ko&amp;user=qVom0QUAAAAJ" target="_blank" rel="noopener">Scholar</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener">ORCID</a><a href="https://hub.docker.com/u/daeseungpark" target="_blank" rel="noopener">Docker</a><a href="https://codespectrum.net" target="_blank" rel="noopener">Blog</a><a href="../../profile.html#contact">Contact</a><a href="../../notices.html">Notice</a><a href="/en/works/pf-conference-payment/" class="tb-lang-link" aria-label="Language">English</a></div>
   </div>
 </div>
 
 <header class="site-header">
   <div class="container-x nav-row">
     <a href="../../index.html" class="brand">D<span class="dot">.</span> PARK <small>Journal</small></a>
-    <nav class="main-nav"><!-- SITE 렌더 --></nav>
+    <nav class="main-nav" data-prerendered="1"><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></nav>
     <div class="nav-actions">
       <button class="icon-btn" id="themeToggle" aria-label="테마 전환"><span id="themeIcon">☾</span></button>
       <a href="../../profile.html" class="btn-x" style="padding:9px 16px;">프로필 보기</a>
@@ -48,24 +54,15 @@
 <div class="ticker">
   <div class="container-x">
     <span class="label">Trending</span>
-    <div class="items" id="tickerItems"></div>
+    <div class="items" id="tickerItems" data-prerendered="1"><a href="../../articles/rag-architectures-hallucination/">검색이 지능을 구원하는 네 가지 방법 — Lexical…</a><a href="../../articles/mcp-agent-interop-standard/">AI의 HTTP가 된 프로토콜</a><a href="../../articles/ai-datacenter-power-crunch/">AI의 진짜 한계는 전기다</a><a href="../../articles/ai-circular-financing-bubble/">엔비디아에서 엔비디아로</a><a href="../../articles/abliterated-ai-safety/">거부를 지운 모델</a><a href="../../articles/llm-spatial-reasoning/">LLM은 공간을 이해하는가</a></div>
   </div>
 </div>
 
-<main class="wd-wrap" id="workDetail" data-slug="pf-conference-payment"><!-- WORKS 상세 렌더 --></main>
+<main class="wd-wrap" id="workDetail" data-slug="pf-conference-payment" data-prerendered="1"><div class="crumb"><a href="../../index.html">Home</a> / <a href="../../works.html">논문·특허·SW</a> / 포트폴리오</div><span class="work-badge " style="margin-bottom:14px;">웹 · 서비스</span><h1 class="wd-title">학회 결제 시스템</h1><div class="wd-meta">2024 · 학술 행사 등록·결제</div><div class="wd-cover"><img src="../../assets/portfolio/pf-conference-payment/new-payexpress.jpg" alt="학회 결제 시스템"></div><div class="wd-figs"><figure class="wd-fig"><div class="wd-figbox"><img src="../../assets/portfolio/pf-conference-payment/new-payexpress.jpg" alt="PAYEXPRESS — 학회 등록·결제 시스템(EEECS)"></div><figcaption>PAYEXPRESS — 학회 등록·결제 시스템(EEECS)</figcaption></figure></div><div class="wd-summary"><p>학술 행사의 참가 등록과 결제를 처리하는 웹 시스템이다. 학회 참가자가 온라인으로 참가 신청을 하고 등록비를 결제하는 전 과정을 웹에서 처리할 수 있도록 개발했다.</p><p>참가 신청 정보 입력, 등록 유형·요금 산정, 결제 처리, 등록 확인에 이르는 학회 등록 업무의 흐름을 웹 애플리케이션으로 구현한 성과물이다.</p></div><h4 class="wd-h4">구조 · 설계</h4><p class="wd-block">참가자가 정보를 입력하고 신청하는 프런트엔드, 등록 정보와 결제 상태를 저장·관리하는 서버·데이터베이스, 그리고 외부 결제 처리 연동으로 이어지는 웹 애플리케이션 구조다. 참가 등록 폼 → 요금 산정 → 결제 → 등록 확정·조회로 흐르는 업무 프로세스를 웹으로 옮겼다.</p><h4 class="wd-h4">설계 목표</h4><p class="wd-block">오프라인·수작업으로 이뤄지던 학회 참가 등록과 요금 수납을, 온라인에서 신청과 결제를 한 흐름으로 처리하도록 자동화하는 것이 목표였다. 참가자에게는 편리한 온라인 등록 경험을, 주최 측에는 등록·결제 현황을 체계적으로 관리할 수 있는 수단을 제공하고자 했다.</p><div class="wd-links"><a class="btn-x" href="https://ic-eeecs.org/registration.html" target="_blank" rel="noopener">링크 ↗</a></div><div style="margin-top:32px;"><a href="../../works.html">← 전체 목록</a></div></main>
 
-<footer class="site-footer" id="contact">
-  <div class="container-x">
-    <div class="footer-bottom" style="border:0;padding-top:0;">
-      <span>© 2026 Daeseung Park. All rights reserved.</span>
-      <span><a href="../../works.html">← 목록</a></span>
-    </div>
-  </div>
-</footer>
+<footer class="site-footer" id="contact" data-prerendered="1"><div class="container-x"><div class="footer-grid"><div><div class="footer-brand">D. PARK</div><p style="max-width:34ch;">AI &amp; Software Systems Engineer · KAIST</p><div class="social" style="margin-top:16px;"><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener" aria-label="GitHub">GH</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener" aria-label="ORCID">iD</a><a href="mailto:dspark@daeseungpark.com" aria-label="Email">@</a></div></div><div><h6>둘러보기</h6><ul><li><a href="../../index.html">Home</a></li><li><a href="../../profile.html">Profile</a></li><li><a href="../../articles.html">Articles</a></li><li><a href="../../research.html">Research</a></li><li><a href="../../notices.html">Notice</a></li></ul></div><div><h6>기고문</h6><ul class="ft-arts"><li><a href="../../articles/rag-architectures-hallucination/">검색이 지능을 구원하는 네 가지 방법 — Lexical·Semantic·Hybrid·Graph RAG와 환각의 해부</a></li><li><a href="../../articles/mcp-agent-interop-standard/">AI의 HTTP가 된 프로토콜</a></li><li><a href="../../articles/ai-datacenter-power-crunch/">AI의 진짜 한계는 전기다</a></li><li><a href="../../articles/ai-circular-financing-bubble/">엔비디아에서 엔비디아로</a></li><li><a href="../../articles/abliterated-ai-safety/">거부를 지운 모델</a></li></ul></div><div><h6>Contact</h6><ul><li><a href="mailto:dspark@daeseungpark.com">dspark@daeseungpark.com</a></li><li><a href="mailto:dspark@kaist.ac.kr">dspark@kaist.ac.kr</a></li><li><a href="tel:+821064547777">Phone (KR) +82 10 6454 7777</a></li><li><a href="tel:+16574109449">Phone (US) +1 657 410 9449</a></li><li>KAIST, Daejeon, Korea</li></ul></div></div><div class="footer-bottom"><span>© 2026 Daeseung Park. All rights reserved.</span><span>Designed &amp; built as a personal journal for Daeseung Park.</span></div></div></footer>
 
-<div class="mobile-nav" id="mobileNav">
-  <button class="icon-btn close" id="navClose" aria-label="닫기">✕</button>
-</div>
+<div class="mobile-nav" id="mobileNav" data-prerendered="1"><button class="icon-btn close" id="navClose" aria-label="닫기">✕</button><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></div>
 
 <script src="../../assets/js/data.js"></script>
 <script src="../../assets/js/content-pubs-a.js"></script>

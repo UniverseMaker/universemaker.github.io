@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-prerendered="1"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Do LLMs Understand Space? A 7,650-Question Spatial-Reasoning Benchmark - Daeseung Park Journal</title>
+<meta name="description" content="Reading a map is second nature to people. Dissecting six large language models across 7,650 questions, we re-weighed what it really means to 'understand space.'">
+<link rel="canonical" href="https://daeseungpark.com/en/articles/llm-spatial-reasoning/"><link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/llm-spatial-reasoning/"><link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/llm-spatial-reasoning/"><link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/llm-spatial-reasoning/"><meta property="og:locale:alternate" content="ko_KR">
+<!-- seo-i18n:start -->
+
+
+
+
+<!-- seo-i18n:end -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="D. PARK Journal">
+<meta property="og:title" content="Do LLMs Understand Space? A 7,650-Question Spatial-Reasoning Benchmark">
+<meta property="og:description" content="Reading a map is second nature to people. Dissecting six large language models across 7,650 questions, we re-weighed what it really means to 'understand space.'">
+<meta property="og:url" content="https://daeseungpark.com/en/articles/llm-spatial-reasoning/">
+<meta property="og:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Do LLMs Understand Space? A 7,650-Question Spatial-Reasoning Benchmark">
+<meta name="twitter:description" content="Reading a map is second nature to people. Dissecting six large language models across 7,650 questions, we re-weighed what it really means to 'understand space.'">
+<meta name="twitter:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Do LLMs Understand Space? A 7,650-Question Spatial-Reasoning Benchmark","author":{"@type":"Person","name":"박대승","alternateName":"Daeseung Park"},"publisher":{"@type":"Organization","name":"D. PARK Journal"},"image":"https://daeseungpark.com/assets/img/profile/img3.jpg","mainEntityOfPage":"https://daeseungpark.com/articles/llm-spatial-reasoning/","inLanguage":"en","datePublished":"2026-07"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&amp;family=Noto+Serif+KR:wght@400;600&amp;family=Noto+Sans+KR:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="../../../assets/css/style.css">
+<link rel="stylesheet" href="../../../assets/css/article.css">
+<script src="https://www.googletagmanager.com/gtag/js?id=G-1MMKKGR3MF"></script><style id="aiTrialStyle">#aiTrialBtn{position:fixed;right:22px;bottom:22px;z-index:940;display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border:0;border-radius:999px;cursor:pointer;font-family:"Pretendard",system-ui,sans-serif;font-weight:700;font-size:.92rem;color:#fff;background:linear-gradient(135deg,#5b6cff,#8b5bff);box-shadow:0 8px 24px rgba(70,70,140,.35);transition:transform .2s,box-shadow .2s,opacity .2s;}#aiTrialBtn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(70,70,140,.45);}#aiTrialBtn.active{opacity:.5;}#aiTrialBtn .ai-ic{font-size:1.05rem;line-height:1;}#aiTrialBtn .ai-b{font-size:.6rem;font-weight:800;background:rgba(255,255,255,.28);padding:2px 6px;border-radius:999px;letter-spacing:.5px;}#aiTrialPanel{position:fixed;right:22px;bottom:84px;z-index:945;width:380px;max-width:calc(100vw - 32px);height:560px;max-height:calc(100vh - 120px);background:var(--bg,#fff);border:1px solid var(--line,#e6e6e6);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.28);opacity:0;transform:translateY(12px) scale(.98);pointer-events:none;transition:opacity .22s,transform .22s;}#aiTrialPanel.open{opacity:1;transform:none;pointer-events:auto;}#aiTrialPanel .ai-head{display:flex;align-items:center;justify-content:space-between;padding:10px 8px 10px 14px;border-bottom:1px solid var(--line,#e6e6e6);}#aiTrialPanel .ai-ti{font-family:"Pretendard",system-ui,sans-serif;font-size:.9rem;color:var(--ink,#15171a);}#aiTrialPanel .ai-badge{font-size:.64rem;color:#7b83ff;border:1px solid #7b83ff;border-radius:999px;padding:1px 6px;margin-left:5px;}#aiTrialPanel .ai-actions{display:flex;gap:2px;}#aiTrialPanel .ai-x{border:0;background:transparent;cursor:pointer;font-size:1rem;line-height:1;padding:6px 9px;border-radius:8px;color:var(--ink,#15171a);opacity:.65;}#aiTrialPanel .ai-x:hover{opacity:1;background:rgba(125,125,140,.14);}#aiTrialPanel .ai-body{position:relative;flex:1;min-height:0;background:var(--bg,#fff);}#aiTrialPanel .ai-open{font-family:"Pretendard",system-ui,sans-serif;font-size:.78rem;font-weight:700;color:#7b83ff;padding:6px 10px;border-radius:8px;text-decoration:none;white-space:nowrap;}#aiTrialPanel .ai-open:hover{background:rgba(125,125,140,.14);}#aiTrialPanel iframe{position:relative;width:100%;height:100%;border:0;display:block;background:var(--bg,#fff);}@media (max-width:640px){#aiTrialBtn{right:16px;bottom:16px;padding:11px 15px;font-size:.86rem;}}</style></head>
+<body data-base="../../">
+<div class="progress-bar" id="progress"></div>
+<div class="topbar no-print">
+  <div class="container-x">
+    <span class="tb-date" id="today">Friday, August 7, 2026</span>
+    <div class="tb-links"><a href="https://ai.daeseungpark.com/chat/" target="_blank" rel="noopener">Abliterated AI</a><a href="https://tcc.daeseungpark.com/" target="_blank" rel="noopener">Mission Control(TCC)</a><a href="../../profile.html">Profile</a><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener">GitHub</a><a href="https://scholar.google.com/citations?hl=ko&amp;user=qVom0QUAAAAJ" target="_blank" rel="noopener">Scholar</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener">ORCID</a><a href="https://hub.docker.com/u/daeseungpark" target="_blank" rel="noopener">Docker</a><a href="https://codespectrum.net" target="_blank" rel="noopener">Blog</a><a href="../../profile.html#contact">Contact</a><a href="../../notices.html">Notice</a><a href="/articles/llm-spatial-reasoning/" class="tb-lang-link" aria-label="Language">한국어</a></div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header no-print">
+  <div class="container-x nav-row">
+    <a href="../../index.html" class="brand">D<span class="dot">.</span> PARK <small>Journal</small></a>
+    <nav class="main-nav"><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">☾</span></button>
+      <button class="print-cta" id="printBtn">🖶 Print / PDF</button>
+      <button class="icon-btn nav-toggle" id="navToggle" aria-label="Menu">≡</button>
+    </div>
+  </div>
+</header>
+
+<div class="ticker no-print">
+  <div class="container-x">
+    <span class="label">Trending</span>
+    <div class="items" id="tickerItems"><a href="../../articles/rag-architectures-hallucination/">Four Ways Retrieval Rescues In…</a><a href="../../articles/mcp-agent-interop-standard/">The Protocol That Became AI's…</a><a href="../../articles/ai-datacenter-power-crunch/">AI's Real Limit Is Electricity</a><a href="../../articles/ai-circular-financing-bubble/">From NVIDIA to NVIDIA</a><a href="../../articles/abliterated-ai-safety/">The Model With Refusal Erased</a><a href="../../articles/llm-spatial-reasoning/">Do LLMs Understand Space? A 7,…</a></div>
+  </div>
+</div>
+
+<article data-article-id="13">
+  <div class="article-wrap">
+    <!-- Masthead -->
+    <header class="art-head">
+      <span class="cat-pill">Research · Retrospective</span>
+      <h1>Do LLMs Understand Space? A 7,650-Question Spatial-Reasoning Benchmark</h1>
+      <p class="deck">Reading a map is second nature to people. Dissecting six large language models across 7,650 questions, we re-weighed what it really means to 'understand space.'</p>
+      <div class="art-byline">
+        <div class="av">DP</div>
+        <div class="who">
+          <b>Daeseung Park</b>
+          <span>AI &amp; Software Systems Engineer · KAIST</span>
+          <span>July 2026 · 14 min read</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="art-cover"><div class="fill-5 fill-grid" style="position:absolute;inset:0;"></div></div>
+
+    <!-- Summary -->
+    <div class="summary-box">
+      <span class="tag">1-min summary</span>
+      That a large language model (LLM) can say “Seoul is north of Busan” does not mean it truly <em>understands space</em>. We split spatial reasoning into five abstraction layers — coordinates, place names, administrative regions, relations, and distance — and tested six models (gpt-oss:20b, qwen3:8b, gemma3:27b, llama3.1:8b, GPT-5.2, Claude Sonnet 4.5) across 7,650 questions. Three things stood out sharply. Asking about the relations among three objects at once collapsed accuracy by 19.7 percentage points on average (relational interference); supplying context suited to the task lifted it by 18.3 points (context priority); and depending on how coordinates were expressed, accuracy swung by as much as 84.1 points. The conclusion converges on one point — spatial-reasoning performance is decided not by the <strong>amount of information</strong> but by its <strong>fit to the task</strong> (the Model-Fit Heuristic).
+    </div>
+
+    <!-- Body -->
+    <div class="prose">
+      <span class="chapter-label">Chapter 1. The Question</span>
+      <h2>What Does It Mean to ‘Know Space’?</h2>
+      <p>The question that gripped me at the start of this research was a humble one. At home with map apps, we answer “which way is Seoul Station from Gangnam Station?” in half a second. Yet within that brief answer, a surprising number of layers of thought lie stacked one on another. We recognize the two points as locations, convert those locations into coordinates, translate the difference between the coordinates into the relation we call direction, and finally express that relation in natural language. Because in a person all of these steps are fused into one and handled in an instant, we mistake it for ‘a single ability.’</p>
+      <p>Put the same question to a language model, and these fused layers come apart and reveal themselves one by one. Some models read coordinates precisely but cannot carry them over into direction; others describe relations plausibly yet have no sense of distance. Having seen the sentence “A is north of B” countless times across vast amounts of text, an LLM is adept at <em>generating</em> such sentences. But the ability to produce sentences and the ability to represent space are not the same. Measuring that gap quantitatively was the goal of this research.</p>
+
+      <div class="pullquote">The ability to produce sentences and the ability to represent space are not the same. Measuring that gap was what this research was about.</div>
+
+      <p>This work was carried out at KAIST as part of an IITP project (2024.07–2027.12), and its results appeared in <em>IEEE Access</em> (2026, SCIE). Let me set down first the one sentence that sums up the methodology. <strong>We did not ask “is the LLM good at spatial reasoning?” — we asked “at which layer of spatial reasoning, and under what conditions, does it break down?”</strong> A good benchmark leaves behind not a score but a map of failure.</p>
+
+      <span class="chapter-label">Chapter 2. Designing the Layers</span>
+      <h2>Cutting Space into Five Layers</h2>
+      <p>Lump spatial reasoning together as a single ability and you cannot tell what it fails at. So we divided the ways of handling space into five layers by level of abstraction. The lower you go, the more concrete the information; the higher you go, the heavier the reasoning load. Coordinates need only be read, whereas distance requires converting two coordinates into a relation and then quantifying that relation back into a magnitude.</p>
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+        <table>
+        <thead><tr><th>Layer</th><th>What is abstracted</th><th>Example query</th><th>Ability required</th><th>Difficulty</th></tr></thead>
+        <tbody>
+          <tr><td>① Coordinates <span style="opacity:.6">coordinates</span></td><td>Numeric coordinates (lat/long)</td><td>“Where is (37.50, 127.03)?”</td><td>Numeric parsing / ordering</td><td>Low</td></tr>
+          <tr><td>② Place name <span style="opacity:.6">place name</span></td><td>Place names / proper nouns</td><td>“What are the coordinates of Gangnam Station?”</td><td>Linking name ↔ location</td><td>Low</td></tr>
+          <tr><td>③ Admin. region <span style="opacity:.6">admin. region</span></td><td>Containment / membership relations</td><td>“Which district is Gangnam Station in?”</td><td>Hierarchical containment inference</td><td>Medium</td></tr>
+          <tr><td>④ Relations <span style="opacity:.6">spatial relations</span></td><td>Direction / adjacency / ordering</td><td>“Which side of B is A on?”</td><td>Relative-position conversion</td><td>High</td></tr>
+          <tr><td>⑤ Distance <span style="opacity:.6">distance</span></td><td>Quantitative separation</td><td>“How many km apart are A and B?”</td><td>Quantifying the relation</td><td>Highest</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p>This hierarchy is not a mere classification table but a <strong>coordinate system for diagnosis</strong>. Lay out a model’s accuracy layer by layer and its cognitive profile takes shape. If it does well at the lower layers (①②) but plunges at the higher ones (④⑤), the model ‘remembers’ space but cannot ‘compute’ it. Conversely, if it is uniformly low across all layers, its spatial representation was impoverished to begin with. Dividing space into layers let us tell apart entirely different failure structures behind one and the same total score.</p>
+
+      <div class="callout"><b>Design principle.</b> The questions at each layer were built in isolation, <em>so that they borrow as little of other layers’ abilities as possible</em>. A relation question (④), for example, was given the coordinates alongside it so it could be solved without knowing the place name (②). Only then can we separate “wrong at the relation” from “wrong because it did not know the name.” Dividing into layers is not enough; controlling the interference between layers is what turns it into a real diagnosis.</div>
+
+      <span class="chapter-label">Chapter 3. The Experimental Setup</span>
+      <h2>Six Models, 7,650 Questions</h2>
+      <p>For a fair comparison we chose six models of differing character. Open-weight models that can be run locally — gpt-oss:20b, qwen3:8b, gemma3:27b, llama3.1:8b — gave us a range of scale and lineage, while top-tier commercial models — GPT-5.2, Claude Sonnet 4.5 — let us see the current ceiling of the technology at the same time. Line them all up on one axis, from 8B-class small models through 27B-class mid-size models to the frontier models, and you can tease apart whether a performance gap comes from scale or from something else.</p>
+      <p>The questions numbered 7,650 in all, spread across the five layers. Each was designed so that its answer could be scored mechanically, ruling out human subjectivity, and the same spatial fact was asked in several different phrasings so we could isolate <em>the effect of the form of expression on accuracy</em>. This last device becomes the key that reveals the third finding we will see later — coordinate fragility. In the end the experiment was a matter of measuring “how much the answer wavers when the same thing is asked differently.”</p>
+
+      <div class="pullquote">In the end, the experiment was a matter of measuring how much a model’s answer wavers when the same thing is asked in a different way.</div>
+
+      <span class="chapter-label">Chapter 4. Three Findings</span>
+      <h2>Three Points Where Models Break Down</h2>
+      <p>As the 7,650 questions piled up, three signals surfaced repeatedly out of the noise. Each points a different way. One tells us what breaks a model down, one tells us what keeps it alive, and the last tells us how unstable a model is. The effect sizes are reported as means and standard deviations across the six models.</p>
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+        <table>
+        <thead><tr><th>Finding</th><th>What was changed</th><th>Change in accuracy</th><th>Interpretation</th></tr></thead>
+        <tbody>
+          <tr><td><b>① Relational interference</b><br><span style="opacity:.6">relational interference</span></td><td>Two-object relation → three-object relation query</td><td style="color:#b91c1c;font-weight:600">−19.7 ± 7.0 %p</td><td>When the objects grow to three, the model cannot hold the relative positions simultaneously and collapses</td></tr>
+          <tr><td><b>② Context priority</b><br><span style="opacity:.6">context priority</span></td><td>Providing context suited to the task</td><td style="color:#15803d;font-weight:600">+18.3 ± 4.9 %p</td><td>Appropriate context yields a large gain — but only when it is ‘appropriate’</td></tr>
+          <tr><td><b>③ Coordinate fragility</b><br><span style="opacity:.6">coordinate fragility</span></td><td>Swapping the coordinate representation / conversion</td><td style="color:#b45309;font-weight:600">+2.7 ~ +84.1 %p</td><td>Even for the same coordinates, changing the representation makes accuracy swing to extremes</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3>① Relational Interference — It Breaks at Three</h3>
+      <p>A relation between two objects, as in “A is north of B,” most models handled with ease. But ask about the relations among three objects at once — “list A, B, and C from north to south” — and accuracy sank by 19.7 percentage points on average. As the 7.0-point standard deviation shows, the degree varied from model to model, but <em>the direction was, without exception, downward</em>. A person lays all three points onto a mental map at once, whereas the models seemed to process relations only locally. Grasp one relation and another slipped away.</p>
+
+      <h3>② Context Priority — The Right Context Is Medicine</h3>
+      <p>A finding pointing the opposite way. Supplying context that fit the task — coordinates for a distance query, relative positions for a direction query — raised accuracy by 18.3 points. What is notable is that the effect appeared not with ‘the more context, the better’ but with ‘giving the right context.’ Context mismatched to the task was, if anything, a hindrance. The seed of the conclusion is already visible here — what matters is not quantity but fit.</p>
+
+      <h3>③ Coordinate Fragility — Representation Governs Performance</h3>
+      <p>The most startling finding. When we presented one and the same location in different formats — decimal coordinates, degrees-minutes-seconds, relative offsets — accuracy spread by anywhere from 2.7 to 84.1 percentage points depending on the format. A gap of 84 points is essentially the distance between ‘almost never right’ and ‘almost always right.’ This means the model does not stably represent the coordinate as an <em>object</em> but is held captive by the coordinate’s <em>surface form</em>. It was handling strings, not space.</p>
+
+      <span class="chapter-label">Chapter 5. Implications</span>
+      <h2>The Model-Fit Heuristic — Fit, Not Quantity</h2>
+      <p>Set the three findings side by side and they converge on a single principle. Relational interference shows breakdown when <em>more</em> information is piled on (three objects); context priority shows survival when the <em>right</em> information is added; coordinate fragility shows that <em>the format of the same information</em> decides success or failure. In all three cases the deciding variable was not the total amount of information (Information Density) but its fit to the task (Task Relevance). We named this tendency the <strong>Model-Fit Heuristic</strong>.</p>
+      <p>The practical implication runs against intuition. The common reflex when handing an LLM a spatial task is “add more context.” But our data point the other way. <strong>Rather than piling on indiscriminately, it is better to pick the representation that fits the task.</strong> Coordinates for a distance question, relative positions for a direction question, a hierarchy for a membership question — providing the information at the layer the task demands, in the form that suits that layer, was the lever of performance.</p>
+
+      <div class="callout"><b>A one-line guideline.</b> When you are unsure whether to add more information to a prompt, ask first — “is this information needed for <em>this task</em>, or does it merely look related?” Relatedness and fit are not the same. The Model-Fit Heuristic tells you to choose the latter.</div>
+
+      <p>One thing must be added in humility. These results are tendencies observed over six models and a particular set of questions, and the numbers may change as model generations turn over. Indeed, the frontier models (GPT-5.2, Claude Sonnet 4.5) were more stable than the smaller ones on all three effects. But the <em>direction</em> held regardless of scale — even the frontier models declined on three-object relations and wavered with coordinate formats. Scale only eases the symptoms; it does not remove the underlying problem of spatial representation.</p>
+
+      <span class="chapter-label">Closing</span>
+      <h2>What It Means to Read a Map</h2>
+      <p>Having finished the research, I can no longer use a map app as absent-mindedly as before. I now know that in a single glance at the screen, coordinates and names and relations and distances are being processed, silently, layered one on another. The LLM imitates that layering, but it still handles each layer separately — and, at that, at the mercy of surface form. The honest answer to the opening question, ‘does it understand space?’, is this — <em>it depends on which layer, and in what form, you ask.</em></p>
+      <p>So what this research leaves behind is not a leaderboard but a way of use. Rather than blaming the model’s limits, we pick the representation that fits the task — that is the surest lever we hold right now. While we wait for a machine that understands space, we must first learn how to hand space to the machine in a form it can understand.</p>
+
+      <div class="references">
+        <h4>References</h4>
+        <ol>
+          <li>D. Park <em>et al.</em>, “Task-Oriented Spatial Representations for LLM-Based Spatial Reasoning: An Empirical Framework With Multi-Layer Controls,” <em>IEEE Access</em> (SCIE), 2026. DOI: <a href="https://doi.org/10.1109/ACCESS.2026.3690723" target="_blank" rel="noopener">10.1109/ACCESS.2026.3690723</a>. (second author)</li>
+          <li>Conducted as part of a KAIST · IITP project (2024.07–2027.12). Models evaluated: gpt-oss:20b, qwen3:8b, gemma3:27b, llama3.1:8b, GPT-5.2, Claude Sonnet 4.5 (7,650 questions in total).</li>
+          <li>The effect sizes in the text are means ± standard deviations across the six models; the values may vary with the model, the questions, and the evaluation conditions.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer of article -->
+  <div class="art-foot">
+    <div class="art-tags">
+      <a href="#">#LLM</a><a href="#">#SpatialReasoning</a><a href="#">#Benchmark</a><a href="#">#Evaluation</a>
+    </div>
+    <div class="author-card">
+      <div class="av">DP</div>
+      <div class="who">
+        <b>Daeseung Park</b>
+        <p>Research Engineer at KAIST. I study large language models, time-series forecasting, and conversational AI, and I try to record the process of my research as accurately and readably as I can.</p>
+      </div>
+    </div>
+
+    <div class="read-next no-print">
+        <div class="section-head" style="margin-bottom:20px;"><h2 style="font-size:1.3rem;">Read next</h2></div>
+        <div class="grid grid-2" id="readNext"><a href="../../articles/rag-architectures-hallucination/" class="post-card fade-up"><div class="thumb"><img class="ph " src="../../../articles/rag-architectures-hallucination/images/cover.svg" alt="" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;"><span class="cat-pill">AI · Explainer</span><span class="num">18</span></div><span class="cat">RAG · Retrieval-Augmented</span><h3>Four Ways Retrieval Rescues Intelligence — Lexical, Semantic, Hybrid, and Graph RAG, and the Anatomy of Hallucination</h3><p>A large language model's knowledge freezes the moment training ends. Retrieval-augmented generation (RAG) fills that gap by pulling in documents from outside the model. We dissect four retrieval architectures — Lexical, Semantic, Hybrid, and Graph — from first principles, and examine how they reduce hallucination and what still remains.</p><div class="meta"><span class="by">Daeseung Park</span><span class="dot-sep">18 min read</span></div></a><a href="../../articles/mcp-agent-interop-standard/" class="post-card fade-up"><div class="thumb"><img class="ph " src="../../../articles/mcp-agent-interop-standard/images/cover.svg" alt="" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;"><span class="cat-pill">AI · Explainer</span><span class="num">17</span></div><span class="cat">AI Agents</span><h3>The Protocol That Became AI's HTTP: MCP and the Interoperability-Standard War</h3><p>The moment chatbots turn into 'acting agents,' the bottleneck is no longer intelligence but the standard for connection. We anatomize how Anthropic's MCP became the de facto standard — its architecture, its politics, and the security homework that remains.</p><div class="meta"><span class="by">Daeseung Park</span><span class="dot-sep">14 min read</span></div></a></div>
+      </div>
+      <nav class="post-nav no-print" id="postNav"><a class="pn" href="../../articles/geollm-knowledge-graph/"><span class="pn-dir">‹ Previous</span><span class="pn-t">The Language Model That Reads Maps</span></a><a class="pn pn-list" href="../../articles.html">List</a><a class="pn pn-right" href="../../articles/abliterated-ai-safety/"><span class="pn-dir">Next ›</span><span class="pn-t">The Model With Refusal Erased</span></a></nav>
+    </div>
+</article>
+
+<div class="print-footer">Daeseung Park · D. PARK Journal — Do LLMs Understand Space? A 7,650-Question Spatial-Reasoning Benchmark</div>
+
+<footer class="site-footer no-print" id="contact"><div class="container-x"><div class="footer-grid"><div><div class="footer-brand">D. PARK</div><p style="max-width:34ch;">AI &amp; Software Systems Engineer · KAIST</p><div class="social" style="margin-top:16px;"><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener" aria-label="GitHub">GH</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener" aria-label="ORCID">iD</a><a href="mailto:dspark@daeseungpark.com" aria-label="Email">@</a></div></div><div><h6>Browse</h6><ul><li><a href="../../index.html">Home</a></li><li><a href="../../profile.html">Profile</a></li><li><a href="../../articles.html">Articles</a></li><li><a href="../../research.html">Research</a></li><li><a href="../../notices.html">Notice</a></li></ul></div><div><h6>Articles</h6><ul class="ft-arts"><li><a href="../../articles/rag-architectures-hallucination/">Four Ways Retrieval Rescues Intelligence — Lexical, Semantic, Hybrid, and Graph RAG, and the Anatomy of Hallucination</a></li><li><a href="../../articles/mcp-agent-interop-standard/">The Protocol That Became AI's HTTP</a></li><li><a href="../../articles/ai-datacenter-power-crunch/">AI's Real Limit Is Electricity</a></li><li><a href="../../articles/ai-circular-financing-bubble/">From NVIDIA to NVIDIA</a></li><li><a href="../../articles/abliterated-ai-safety/">The Model With Refusal Erased</a></li></ul></div><div><h6>Contact</h6><ul><li><a href="mailto:dspark@daeseungpark.com">dspark@daeseungpark.com</a></li><li><a href="mailto:dspark@kaist.ac.kr">dspark@kaist.ac.kr</a></li><li><a href="tel:+821064547777">Phone (KR) +82 10 6454 7777</a></li><li><a href="tel:+16574109449">Phone (US) +1 657 410 9449</a></li><li>KAIST, Daejeon, Korea</li></ul></div></div><div class="footer-bottom"><span>© 2026 Daeseung Park. All rights reserved.</span><span>Designed &amp; built as a personal journal for Daeseung Park.</span></div></div></footer>
+
+<div class="mobile-nav" id="mobileNav"><button class="icon-btn close" id="navClose" aria-label="Close">✕</button><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></div>
+
+<script src="../../../assets/js/data.js"></script>
+<script src="../../../assets/js/articles.js"></script>
+<script src="../../../assets/js/i18n-en.js"></script><script src="../../../assets/js/main.js"></script>
+
+
+</body></html>

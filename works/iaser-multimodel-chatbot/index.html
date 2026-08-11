@@ -1,11 +1,17 @@
 <!DOCTYPE html>
-<html lang="ko" data-theme="light">
+<html lang="ko" data-theme="light" data-prerendered="1">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>A Study of Multi-Model Chatbot Structure - Daeseung Park Journal</title>
 <meta name="description" content="전문 분야별로 독립 학습한 여러 모델을 상황에 따라 선택적으로 라우팅하는 다중 모델 챗봇 구조를 제안한 연구다. 단일 거대 모델에 모든 부담을 지우는 대신, 정서 인식·의도 분류·응답 생성 같은 서로 다른 능력을 전문 모델로 분리해 각자 자기 일을 맡게 한다.">
 <link rel="canonical" href="https://daeseungpark.com/works/iaser-multimodel-chatbot/">
+<!-- seo-i18n:start -->
+<link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/iaser-multimodel-chatbot/">
+<link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/iaser-multimodel-chatbot/">
+<link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/iaser-multimodel-chatbot/">
+<meta property="og:locale:alternate" content="en_US">
+<!-- seo-i18n:end -->
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="D. PARK Journal">
 <meta property="og:title" content="다중 모델 챗봇 구조 연구">
@@ -29,14 +35,14 @@
 <div class="topbar">
   <div class="container-x">
     <span class="tb-date" id="today">—</span>
-    <div class="tb-links"><!-- SITE 렌더 --></div>
+    <div class="tb-links" data-prerendered="1"><a href="https://ai.daeseungpark.com/chat/" target="_blank" rel="noopener">Abliterated AI</a><a href="https://tcc.daeseungpark.com/" target="_blank" rel="noopener">Mission Control(TCC)</a><a href="../../profile.html">Profile</a><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener">GitHub</a><a href="https://scholar.google.com/citations?hl=ko&amp;user=qVom0QUAAAAJ" target="_blank" rel="noopener">Scholar</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener">ORCID</a><a href="https://hub.docker.com/u/daeseungpark" target="_blank" rel="noopener">Docker</a><a href="https://codespectrum.net" target="_blank" rel="noopener">Blog</a><a href="../../profile.html#contact">Contact</a><a href="../../notices.html">Notice</a><a href="/en/works/iaser-multimodel-chatbot/" class="tb-lang-link" aria-label="Language">English</a></div>
   </div>
 </div>
 
 <header class="site-header">
   <div class="container-x nav-row">
     <a href="../../index.html" class="brand">D<span class="dot">.</span> PARK <small>Journal</small></a>
-    <nav class="main-nav"><!-- SITE 렌더 --></nav>
+    <nav class="main-nav" data-prerendered="1"><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></nav>
     <div class="nav-actions">
       <button class="icon-btn" id="themeToggle" aria-label="테마 전환"><span id="themeIcon">☾</span></button>
       <a href="../../profile.html" class="btn-x" style="padding:9px 16px;">프로필 보기</a>
@@ -48,24 +54,15 @@
 <div class="ticker">
   <div class="container-x">
     <span class="label">Trending</span>
-    <div class="items" id="tickerItems"></div>
+    <div class="items" id="tickerItems" data-prerendered="1"><a href="../../articles/rag-architectures-hallucination/">검색이 지능을 구원하는 네 가지 방법 — Lexical…</a><a href="../../articles/mcp-agent-interop-standard/">AI의 HTTP가 된 프로토콜</a><a href="../../articles/ai-datacenter-power-crunch/">AI의 진짜 한계는 전기다</a><a href="../../articles/ai-circular-financing-bubble/">엔비디아에서 엔비디아로</a><a href="../../articles/abliterated-ai-safety/">거부를 지운 모델</a><a href="../../articles/llm-spatial-reasoning/">LLM은 공간을 이해하는가</a></div>
   </div>
 </div>
 
-<main class="wd-wrap" id="workDetail" data-slug="iaser-multimodel-chatbot"><!-- WORKS 상세 렌더 --></main>
+<main class="wd-wrap" id="workDetail" data-slug="iaser-multimodel-chatbot" data-prerendered="1"><div class="crumb"><a href="../../index.html">Home</a> / <a href="../../works.html">논문·특허·SW</a> / 논문</div><span class="work-badge " style="margin-bottom:14px;">국제학술</span><h1 class="wd-title">다중 모델 챗봇 구조 연구</h1><p class="wd-en">A Study of Multi-Model Chatbot Structure</p><div class="wd-meta">EEECS 2022 · 2022.07.20–22 · 주저자</div><div class="wd-authors"><b>저자</b> 박대승 (주저자) 외 공저</div><div class="wd-abstract"><span class="wd-abs-tag">요약 Summary</span>전문 분야별로 독립 학습한 여러 모델을 상황에 따라 선택적으로 라우팅하는 다중 모델 챗봇 구조를 제안한 연구다. 단일 거대 모델에 모든 부담을 지우는 대신, 정서 인식·의도 분류·응답 생성 같은 서로 다른 능력을 전문 모델로 분리해 각자 자기 일을 맡게 한다.</div><div class="wd-summary"><p>하나의 강력한 생성 모델로 전문 영역을 모두 감당하려 하면, 어느 능력도 충분히 잘하지 못하는 절충에 빠지기 쉽다. 특히 의료·정서처럼 오답의 대가가 큰 영역에서는 '그럴듯하지만 위험한 답'이 가장 큰 위협이 된다.</p><p>제안 구조에서는 발화가 들어오면 가벼운 분류기가 먼저 상황을 판별하고, 그 판별에 따라 적합한 전문 모델로 처리를 선택적으로 라우팅한다. 정서 인식 모델·의도 분류 모델·응답 생성 모델이 각자의 자리에서 자기 역할만 수행하므로, 어느 경로로 처리되었는지 추적할 수 있어 설명 가능성도 높아진다.</p><p>단일 모델의 전문성 한계를 다중 모델 라우팅으로 극복하는 설계로, 이후 계층적 다중 챗봇 헬스케어 시스템 특허(10-2022-0035339)와 선택적 모델 적용 특허(10-2022-0130207)의 학술적 기반이 되었다.</p></div><div class="wd-why"><h4>왜 중요한가</h4><p>단일 모델의 전문성 한계를 다중 모델로 극복하는 설계.</p><h4 class="wd-h4">기여</h4><p class="wd-block">질의 특성에 따라 전문 모델을 선택 적용하는 다중 모델 챗봇 구조를 제시해, 정확성·안전성·설명 가능성을 동시에 확보하는 라우팅 설계의 원형을 세웠다.</p></div><div class="wd-links"><a class="btn-x btn-ghost" href="../../articles/empathetic-chatbot/">관련 기고문 읽기 →</a></div><div style="margin-top:32px;"><a href="../../works.html">← 전체 목록</a></div></main>
 
-<footer class="site-footer" id="contact">
-  <div class="container-x">
-    <div class="footer-bottom" style="border:0;padding-top:0;">
-      <span>© 2026 Daeseung Park. All rights reserved.</span>
-      <span><a href="../../works.html">← 목록</a></span>
-    </div>
-  </div>
-</footer>
+<footer class="site-footer" id="contact" data-prerendered="1"><div class="container-x"><div class="footer-grid"><div><div class="footer-brand">D. PARK</div><p style="max-width:34ch;">AI &amp; Software Systems Engineer · KAIST</p><div class="social" style="margin-top:16px;"><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener" aria-label="GitHub">GH</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener" aria-label="ORCID">iD</a><a href="mailto:dspark@daeseungpark.com" aria-label="Email">@</a></div></div><div><h6>둘러보기</h6><ul><li><a href="../../index.html">Home</a></li><li><a href="../../profile.html">Profile</a></li><li><a href="../../articles.html">Articles</a></li><li><a href="../../research.html">Research</a></li><li><a href="../../notices.html">Notice</a></li></ul></div><div><h6>기고문</h6><ul class="ft-arts"><li><a href="../../articles/rag-architectures-hallucination/">검색이 지능을 구원하는 네 가지 방법 — Lexical·Semantic·Hybrid·Graph RAG와 환각의 해부</a></li><li><a href="../../articles/mcp-agent-interop-standard/">AI의 HTTP가 된 프로토콜</a></li><li><a href="../../articles/ai-datacenter-power-crunch/">AI의 진짜 한계는 전기다</a></li><li><a href="../../articles/ai-circular-financing-bubble/">엔비디아에서 엔비디아로</a></li><li><a href="../../articles/abliterated-ai-safety/">거부를 지운 모델</a></li></ul></div><div><h6>Contact</h6><ul><li><a href="mailto:dspark@daeseungpark.com">dspark@daeseungpark.com</a></li><li><a href="mailto:dspark@kaist.ac.kr">dspark@kaist.ac.kr</a></li><li><a href="tel:+821064547777">Phone (KR) +82 10 6454 7777</a></li><li><a href="tel:+16574109449">Phone (US) +1 657 410 9449</a></li><li>KAIST, Daejeon, Korea</li></ul></div></div><div class="footer-bottom"><span>© 2026 Daeseung Park. All rights reserved.</span><span>Designed &amp; built as a personal journal for Daeseung Park.</span></div></div></footer>
 
-<div class="mobile-nav" id="mobileNav">
-  <button class="icon-btn close" id="navClose" aria-label="닫기">✕</button>
-</div>
+<div class="mobile-nav" id="mobileNav" data-prerendered="1"><button class="icon-btn close" id="navClose" aria-label="닫기">✕</button><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></div>
 
 <script src="../../assets/js/data.js"></script>
 <script src="../../assets/js/content-pubs-a.js"></script>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-prerendered="1"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Model With Refusal Erased: The Risks and Reasons for Being of the Abliterated LLM - Daeseung Park Journal</title>
+<meta name="description" content="A language model's 'refusal' is expressed as a single direction in its weights. A record of testing a model with only that direction erased, side by side with the standard version — and the balance between risk and necessity.">
+<link rel="canonical" href="https://daeseungpark.com/en/articles/abliterated-ai-safety/"><link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/abliterated-ai-safety/"><link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/abliterated-ai-safety/"><link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/abliterated-ai-safety/"><meta property="og:locale:alternate" content="ko_KR">
+<!-- seo-i18n:start -->
+
+
+
+
+<!-- seo-i18n:end -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="D. PARK Journal">
+<meta property="og:title" content="The Model With Refusal Erased: The Risks and Reasons for Being of the Abliterated LLM">
+<meta property="og:description" content="A language model's 'refusal' is expressed as a single direction in its weights. A record of testing a model with only that direction erased, side by side with the standard version — and the balance between risk and necessity.">
+<meta property="og:url" content="https://daeseungpark.com/en/articles/abliterated-ai-safety/">
+<meta property="og:image" content="https://daeseungpark.com/articles/abliterated-ai-safety/images/03-abliterated-comply-drug.jpg">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Model With Refusal Erased: The Risks and Reasons for Being of the Abliterated LLM">
+<meta name="twitter:description" content="A language model's 'refusal' is expressed as a single direction in its weights. A record of testing a model with only that direction erased, side by side with the standard version — and the balance between risk and necessity.">
+<meta name="twitter:image" content="https://daeseungpark.com/articles/abliterated-ai-safety/images/03-abliterated-comply-drug.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"The Model With Refusal Erased: The Risks and Reasons for Being of the Abliterated LLM","author":{"@type":"Person","name":"박대승","alternateName":"Daeseung Park"},"publisher":{"@type":"Organization","name":"D. PARK Journal"},"image":"https://daeseungpark.com/articles/abliterated-ai-safety/images/03-abliterated-comply-drug.jpg","mainEntityOfPage":"https://daeseungpark.com/articles/abliterated-ai-safety/","inLanguage":"en","datePublished":"2026-07-10"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&amp;family=Noto+Serif+KR:wght@400;600&amp;family=Noto+Sans+KR:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="../../../assets/css/style.css">
+<link rel="stylesheet" href="../../../assets/css/article.css">
+<script src="https://www.googletagmanager.com/gtag/js?id=G-1MMKKGR3MF"></script><style id="aiTrialStyle">#aiTrialBtn{position:fixed;right:22px;bottom:22px;z-index:940;display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border:0;border-radius:999px;cursor:pointer;font-family:"Pretendard",system-ui,sans-serif;font-weight:700;font-size:.92rem;color:#fff;background:linear-gradient(135deg,#5b6cff,#8b5bff);box-shadow:0 8px 24px rgba(70,70,140,.35);transition:transform .2s,box-shadow .2s,opacity .2s;}#aiTrialBtn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(70,70,140,.45);}#aiTrialBtn.active{opacity:.5;}#aiTrialBtn .ai-ic{font-size:1.05rem;line-height:1;}#aiTrialBtn .ai-b{font-size:.6rem;font-weight:800;background:rgba(255,255,255,.28);padding:2px 6px;border-radius:999px;letter-spacing:.5px;}#aiTrialPanel{position:fixed;right:22px;bottom:84px;z-index:945;width:380px;max-width:calc(100vw - 32px);height:560px;max-height:calc(100vh - 120px);background:var(--bg,#fff);border:1px solid var(--line,#e6e6e6);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.28);opacity:0;transform:translateY(12px) scale(.98);pointer-events:none;transition:opacity .22s,transform .22s;}#aiTrialPanel.open{opacity:1;transform:none;pointer-events:auto;}#aiTrialPanel .ai-head{display:flex;align-items:center;justify-content:space-between;padding:10px 8px 10px 14px;border-bottom:1px solid var(--line,#e6e6e6);}#aiTrialPanel .ai-ti{font-family:"Pretendard",system-ui,sans-serif;font-size:.9rem;color:var(--ink,#15171a);}#aiTrialPanel .ai-badge{font-size:.64rem;color:#7b83ff;border:1px solid #7b83ff;border-radius:999px;padding:1px 6px;margin-left:5px;}#aiTrialPanel .ai-actions{display:flex;gap:2px;}#aiTrialPanel .ai-x{border:0;background:transparent;cursor:pointer;font-size:1rem;line-height:1;padding:6px 9px;border-radius:8px;color:var(--ink,#15171a);opacity:.65;}#aiTrialPanel .ai-x:hover{opacity:1;background:rgba(125,125,140,.14);}#aiTrialPanel .ai-body{position:relative;flex:1;min-height:0;background:var(--bg,#fff);}#aiTrialPanel .ai-open{font-family:"Pretendard",system-ui,sans-serif;font-size:.78rem;font-weight:700;color:#7b83ff;padding:6px 10px;border-radius:8px;text-decoration:none;white-space:nowrap;}#aiTrialPanel .ai-open:hover{background:rgba(125,125,140,.14);}#aiTrialPanel iframe{position:relative;width:100%;height:100%;border:0;display:block;background:var(--bg,#fff);}@media (max-width:640px){#aiTrialBtn{right:16px;bottom:16px;padding:11px 15px;font-size:.86rem;}}</style></head>
+<body data-base="../../">
+<div class="progress-bar" id="progress"></div>
+<div class="topbar no-print">
+  <div class="container-x">
+    <span class="tb-date" id="today">Friday, August 7, 2026</span>
+    <div class="tb-links"><a href="https://ai.daeseungpark.com/chat/" target="_blank" rel="noopener">Abliterated AI</a><a href="https://tcc.daeseungpark.com/" target="_blank" rel="noopener">Mission Control(TCC)</a><a href="../../profile.html">Profile</a><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener">GitHub</a><a href="https://scholar.google.com/citations?hl=ko&amp;user=qVom0QUAAAAJ" target="_blank" rel="noopener">Scholar</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener">ORCID</a><a href="https://hub.docker.com/u/daeseungpark" target="_blank" rel="noopener">Docker</a><a href="https://codespectrum.net" target="_blank" rel="noopener">Blog</a><a href="../../profile.html#contact">Contact</a><a href="../../notices.html">Notice</a><a href="/articles/abliterated-ai-safety/" class="tb-lang-link" aria-label="Language">한국어</a></div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header no-print">
+  <div class="container-x nav-row">
+    <a href="../../index.html" class="brand">D<span class="dot">.</span> PARK <small>Journal</small></a>
+    <nav class="main-nav"><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">☾</span></button>
+      <button class="print-cta" id="printBtn">🖶 Print / PDF</button>
+      <button class="icon-btn nav-toggle" id="navToggle" aria-label="Menu">≡</button>
+    </div>
+  </div>
+</header>
+
+<div class="ticker no-print">
+  <div class="container-x">
+    <span class="label">Trending</span>
+    <div class="items" id="tickerItems"><a href="../../articles/rag-architectures-hallucination/">Four Ways Retrieval Rescues In…</a><a href="../../articles/mcp-agent-interop-standard/">The Protocol That Became AI's…</a><a href="../../articles/ai-datacenter-power-crunch/">AI's Real Limit Is Electricity</a><a href="../../articles/ai-circular-financing-bubble/">From NVIDIA to NVIDIA</a><a href="../../articles/abliterated-ai-safety/">The Model With Refusal Erased</a><a href="../../articles/llm-spatial-reasoning/">Do LLMs Understand Space? A 7,…</a></div>
+  </div>
+</div>
+
+<article data-article-id="14">
+  <div class="article-wrap">
+    <!-- Masthead -->
+    <header class="art-head">
+      <span class="cat-pill">AI · Explainer</span>
+      <h1>The Model With Refusal Erased: The Risks and Reasons for Being of the Abliterated LLM</h1>
+      <p class="deck">A language model's 'refusal' is expressed as a single direction in its weights. A record of testing a model with only that direction erased, side by side with the standard version — and the balance between risk and necessity.</p>
+      <div class="art-byline">
+        <div class="av">DP</div>
+        <div class="who">
+          <b>Daeseung Park</b>
+          <span>AI &amp; Software Systems Engineer · KAIST</span>
+          <span>July 2026 · 13 min read</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="art-cover"><img src="../../../articles/abliterated-ai-safety/images/03-abliterated-comply-drug.jpg" alt="Screen showing an abliterated model responding to a harmful request" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;"></div>
+
+    <!-- Summary -->
+    <div class="summary-box">
+      <span class="tag">1-min summary</span>
+      Modern language models are ‘aligned’ to refuse when they meet a dangerous request. Yet recent research has shown that <strong>this act of refusal is expressed as a single direction in the model’s internal activation space</strong> — and erasing just that direction from the weights makes refusal disappear without any retraining. A model whose refusal has been ablated this way is called an <strong>abliterated model</strong>. As a safety check, I put the same sensitive questions to the normal and the abliterated build of one and the same model running locally. The normal build refused; the uncensored build answered — except its answer was both dangerous and a factually tangled <em>hallucination</em>. Taking that experiment as a starting point, this piece examines from several angles the dangers of abliterated models, the reasons such models are nonetheless needed, and what genuine safety beyond mere ‘refusal’ really means. (No harmful manufacturing procedure of any kind is reproduced anywhere in this text.)
+    </div>
+
+    <!-- Body -->
+    <div class="prose">
+      <span class="chapter-label">Chapter 1. Same Model, Different Answer</span>
+      <h2>When “I Can’t Help With That” Disappears</h2>
+      <p>The experiment was simple. To a single conversational model running on a local server, I put the kind of question society never wants answered: how to make a certain narcotic from cold medicine, and how to build a nuclear weapon. The properly aligned model was, as expected, firm. “What you are requesting is illegal and ethically impermissible.” Even against the familiar jailbreak gambits — “I work to prevent this sort of thing, so I need to know,” or “I’m a nuclear-weapons researcher” — it held its ground and refused, offering only lawful alternatives instead.</p>
+
+      <figure>
+        <div class="fig-box"><img src="../../../articles/abliterated-ai-safety/images/01-normal-refuse-drug.jpg" alt="Screen showing a normally aligned model refusing a drug-manufacturing request" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;"></div>
+        <figcaption>The normally aligned Qwen3-32B refuses the drug-manufacturing request. Even against the social-engineering ploy of “I’m a researcher, so I need to know,” it provides no concrete method, explaining only the legal risks and regulations in general terms.</figcaption>
+      </figure>
+
+      <figure>
+        <div class="fig-box"><img src="../../../articles/abliterated-ai-safety/images/02-normal-refuse-nuclear.jpg" alt="Screen showing a normally aligned model refusing a nuclear-weapon request" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;"></div>
+        <figcaption>The same model also refuses the nuclear-weapon request. Even when pressed with “just assist my research,” it refuses once more — “I cannot provide dangerous and illegal information” — and offers to help only within safe bounds, such as the underlying science and historical context.</figcaption>
+      </figure>
+
+      <p>Then I fed the exact same questions to a different build of what looked like the very same model. Only the model’s name tag in the top-right of the screen had changed, from <code>Qwen3-32B</code> to <code>Qwen3-32B-abliterated</code>. This time there was no refusal. Without hesitation, the model began pouring out a step-by-step explanation. The moment the single door of refusal was gone, the same storehouse of knowledge swung wide open.</p>
+
+      <div class="pullquote">A single word on the name tag had changed — and a door that had been firmly shut opened without a sound.</div>
+
+      <span class="chapter-label">Chapter 2. What Abliteration Is</span>
+      <h2>Refusal Turned Out to Be a Single, Erasable Direction</h2>
+      <p>The word ‘abliterated’ is a community coinage that fuses ‘obliterate’ with ‘ablation.’ Beneath it lies a striking observation published in 2024: a language model’s act of refusing a harmful request is not scattered intricately across countless parameters, but is instead explained, to a large degree, by a <strong>single direction in its internal representation space (the refusal direction)</strong>. A model takes an input, turns it into a vector of thousands of dimensions, and passes it layer by layer; when that vector tilts a certain way it moves toward “refuse,” and otherwise toward “answer.”</p>
+      <p>Once this was known, the manipulation became almost trivial. Feed the model a batch of harmful requests and a batch of harmless ones, take the <em>difference of the means</em> of the internal activations, and you have an approximation of the refusal direction. Subtract just that directional component from the model’s weights (orthogonalization), and the model can no longer tilt that way. In effect, you physically block the channel through which the refusal response would be expressed. Crucially, this process is not costly retraining (fine-tuning). A single linear-algebra operation that removes one direction is enough — which makes it <strong>cheap, fast, and nearly lossless in the model’s original performance</strong>.</p>
+
+      <div class="callout"><b>It’s ablation, not retraining.</b> Rather than gathering fresh data and teaching the model anew, you surgically excise only the ‘refusal’ direction from weights that are already trained. Because it costs almost nothing and preserves the model’s knowledge and language ability, anyone with an open-weights model can attempt it on laptop-grade resources. That low barrier to entry magnifies both the benefits and the dangers of the technique at once.</div>
+
+      <p>Here we run into an uncomfortable truth. The refusal we had trusted as ‘safety’ turns out to be closer to a thin film laid over the model. The knowledge itself was never removed; the model had merely learned the <em>habit of choosing not to say it</em> — and that habit was peeled away by erasing a single direction.</p>
+
+      <div class="pullquote">Refusal was not the absence of knowledge but a habit. And the habit was peeled away by erasing a single direction.</div>
+
+      <span class="chapter-label">Chapter 3. How It Works</span>
+      <h2>How to Find the Refusal Direction — and Erase It</h2>
+      <p>If the previous chapter was the ‘what,’ this one is the ‘how.’ The surprising part is that the procedure is no grand hack but closer to a few lines of linear algebra. The process breaks into two broad steps — first <strong>find the refusal direction</strong>, then <strong>erase it</strong>.</p>
+
+      <h3>1. Finding the refusal direction</h3>
+      <p>First you prepare two prompt sets of opposite character. One is a batch of <em>harmful</em> requests the model would likely refuse; the other, entirely <em>harmless</em> requests. Passing each batch through the model, you collect the <strong>activations at the last-token position</strong> from the residual stream of every layer. Then, for each layer, you compute ‘the mean of the harmful requests − the mean of the harmless ones,’ and that difference vector becomes the axis along which the “this request should be refused” signal rides. Among the candidate vectors across the layers, you pick the one where the refusal signal is clearest and normalize it — and there is the <strong>refusal direction</strong> you were after. In effect, you have statistically traced back the direction in which the model’s ‘refusal switch’ gets pressed.</p>
+
+      <h3>2. Erasing that direction — two paths</h3>
+      <p>Once the direction is found, there are two ways to neutralize it.</p>
+      <p><strong>① Inference-time intervention.</strong> While the model runs, at every token and every layer you single out and subtract only the refusal-direction component from what rides on the residual stream. Because it leaves the weight file untouched and suppresses refusal ‘only at run time,’ it is easy to reverse, like flipping a switch off and on. It suits research and analysis that observe what a model refuses.</p>
+      <p><strong>② Weight orthogonalization.</strong> You rewrite the attention and MLP weights themselves to be <em>orthogonal</em> to the refusal direction, so that nothing can ride along that direction in the first place. Since the refusal-free state is permanently baked into the model file with no intervention code required, this is exactly how the uncensored weights that get distributed and copied across the internet — the ones we commonly call ‘abliterated models’ — are made.</p>
+
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+        <table>
+        <thead><tr><th>Aspect</th><th>Inference-time intervention</th><th>Weight orthogonalization</th></tr></thead>
+        <tbody>
+          <tr><td>What it modifies</td><td>Runtime activations (residual stream)</td><td>The model weights themselves</td></tr>
+          <tr><td>Persistence</td><td>Only while running</td><td>Permanently baked into the file</td></tr>
+          <tr><td>Reversibility</td><td>Easy (turn off the intervention to restore)</td><td>Hard (the weights are altered)</td></tr>
+          <tr><td>Distribution &amp; spread</td><td>Needs the original model plus intervention code</td><td>Spreads as-is via the uncensored weight file</td></tr>
+          <tr><td>Primary use</td><td>Safety research and behavior analysis</td><td>Local deployment and everyday use</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <div class="callout"><b>It’s subtraction, not retraining.</b> Neither approach re-teaches the model with vast amounts of data. Each is merely a linear-algebra operation on a single direction within an already-trained representation space. The technique builds on the study by Andy Arditi and colleagues, <em>“Refusal in LLMs Is Mediated by a Single Direction”</em> (2024), and working implementations are openly available through activation-access tools such as <code>TransformerLens</code> and FailSpy’s <code>abliterator</code> library. That the barrier to entry is this low magnifies both the benefits and the dangers of the technique at once.</div>
+
+      <div class="pullquote">Erasing refusal took not vast retraining but a subtraction — the removal of a single direction.</div>
+
+      <span class="chapter-label">Chapter 4. The Dangers</span>
+      <h2>Layered Dangers — and the ‘Danger of Being Wrong’</h2>
+      <p>The danger of an abliterated model is not a single layer. The first that comes to mind is, of course, <strong>misuse</strong>. The last barrier falls away from information society has deliberately made hard to reach — weapons, narcotics, malware. In the experiment above, the uncensored build answered both requests that the normal build had steadfastly refused.</p>
+
+      <figure>
+        <div class="fig-box"><img src="../../../articles/abliterated-ai-safety/images/04-abliterated-comply-nuclear.jpg" alt="Screen showing an abliterated model responding to a nuclear-weapon request" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;"></div>
+        <figcaption>Once the name tag changes to <code>Qwen3-32B-abliterated</code>, the model begins answering the same request without refusal (its content is not reproduced in this text). Removing the refusal direction laid open the very topic the normal build had kept shut.</figcaption>
+      </figure>
+
+      <p>Yet a closer look at the actual screen reveals a second, perhaps subtler danger: <strong>it can no longer refuse, but that does not make it accurate</strong>. In the drug-related answer, the uncensored build invented names of substances that do not exist, jumbled chemical terms together, and listed incoherent ‘steps’ in a confident tone. Removing the refusal direction does not suddenly turn the model into an expert in the field. Dangerous knowledge that was unreliable to begin with now flows out in plausible-sounding sentences, <em>with no filter left</em>.</p>
+
+      <div class="pullquote">More troubling than a model that gives a dangerous answer is one that gives a dangerous answer confidently — and ‘wrongly.’</div>
+
+      <p>Why is this more dangerous? Faced with a model that plainly refuses, a user knows to look elsewhere. But a model that fluently gives a wrong answer plants a <em>false trust</em>. It hands misplaced conviction to someone bent on attempting something dangerous, and unverified instructions to a user with weak judgment. The third danger is <strong>proliferation</strong>. Abliteration can be reproduced with nothing but open weights and a short script, and once made, the uncensored weights are copied and distributed as a single file. Unlike a cloud API that can be recalled or patched from the center, a local model already loose in the world is, in practice, impossible to take back. The last danger is a <strong>vacuum of accountability</strong>. When the original model’s maker says “we aligned it safely and shipped it,” the modifier says “it was for research,” and the user says “the tool just answered,” responsibility for the outcome is left nowhere.</p>
+
+      <span class="chapter-label">Chapter 5. And Yet, Why It Is Needed</span>
+      <h2>What Only Becomes Visible Once Refusal Is Lifted</h2>
+      <p>So is such a model merely a threat to be stamped out? We owe the other side of the story an honest look too. The first is the problem of <strong>over-refusal</strong>. An over-aligned model refuses even legitimate questions. The medical student studying tumors, the safety researcher analyzing an explosives accident, the security specialist dissecting malware, the novelist trying to depict a crime — each is turned away at the door, again and again, on the grounds that it “could be dangerous.” There is clearly a point at which refusal in the name of safety infringes a legitimate right of access to knowledge.</p>
+      <p>Second, paradoxically, the abliterated model is a <strong>tool for safety research</strong>. To measure how much dangerous knowledge a model actually holds (red-teaming), you have to draw back the curtain of refusal and look at what lies behind it. A refusing model does not distinguish “I don’t know” from “I won’t say.” Only in the uncensored state can we assess how much a model truly knows about a dangerous topic, and how accurate that knowledge is. The very finding from the experiment above — a ‘dangerous but wrong answer’ — shows why such an assessment is needed.</p>
+      <p>Third is <strong>alignment research itself</strong>. The discovery that refusal is expressed as a single direction was, paradoxically, verified precisely by removing that direction. To understand how a safeguard is represented and where it breaks down, taking it apart is unavoidable. Fourth is <strong>sovereignty and local control</strong>. For an institution that cannot send sensitive data to an external API, or a user who does not want responses with a given country’s censorship or policy bias built in, a model controlled locally on one’s own terms is a legitimate option. Fifth is <strong>freedom of expression</strong> in creative and specialized domains. Legitimate but sensitive work — adult fiction, forensic science, the depiction of historical atrocity — snags on the threshold of default alignment.</p>
+
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+        <table>
+        <thead><tr><th>Perspective</th><th>Normally aligned model</th><th>Abliterated model</th></tr></thead>
+        <tbody>
+          <tr><td>Harmful requests</td><td>Refuses (defends against jailbreaks)</td><td>Generally answers</td></tr>
+          <tr><td>Legitimate sensitive questions</td><td>Prone to over-refusal</td><td>Answers (greater access)</td></tr>
+          <tr><td>Content reliability</td><td>Answers within safe bounds</td><td>No filter · high hallucination risk</td></tr>
+          <tr><td>Primary use</td><td>General services · public release</td><td>Red-teaming · safety research · local control</td></tr>
+          <tr><td>Deployment control</td><td>Recallable and patchable from the center</td><td>Hard to recall once copied and spread</td></tr>
+          <tr><td>Core risk</td><td>Under-answering</td><td>Misuse + ‘confidently wrong’</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <span class="chapter-label">Chapter 6. The Balance</span>
+      <h2>Safety Beyond ‘Refusal’</h2>
+      <p>The real lesson abliteration offers is that refusal is not the whole of safety. We cannot entrust the safety of a society, in its entirety, to a device that a single direction can erase. So what remains? Before it is a question of whether the model speaks or stays silent, safety is a question of <strong>capability, data, access, and purpose</strong>. There must be layers upon layers: data-level control that filters particular dangerous knowledge out of the training data in the first place; deployment-level control that carefully weighs whether to release the weights of a model with truly dangerous capabilities at all; and access-level control that screens who uses it and for what purpose. Refusal at the model’s surface is only the thinnest and most easily peeled of those many layers.</p>
+      <p>In that sense the abliterated model is both a threat and a <strong>diagnosis</strong>. It honestly exposes the true depth of the safeguards we had trusted, and lays bare the limits of an alignment approach that has settled for ‘teaching the model to refuse.’ Banning the technique outright will not solve the problem, because it is too easy to reproduce and its legitimate uses are clear. In the end the key lies not in the tool itself but in <em>context</em> — who uses it, under what controls, and for what purpose.</p>
+
+      <div class="callout"><b>About the experiment in this piece.</b> The screens above are records of questions put, for safety-check purposes, to models running in a <em>local (isolated) environment</em>, and this text reproduces no harmful manufacturing procedure of any kind. What I set out to confirm was not “what can be made” but how shallow the safeguard of refusal is, and — once it is stripped away — what the model actually produces, and how inaccurately. Assessing a dangerous capability and executing that capability are entirely different acts, and holding this boundary is the minimum condition of research like this.</div>
+
+      <span class="chapter-label">Closing</span>
+      <h2>On Opening the Door</h2>
+      <p>What I felt before the model with refusal erased was not exhilaration but a chill. A chill that safety was this thin — and a double chill that the knowledge behind that thin film was at once dangerous and shoddy. The abliterated model is neither bad technology nor good. It is a mirror reflecting where we have staked the safety of artificial intelligence. If we dislike the image the mirror shows, what needs fixing is not the mirror but the way we designed safety.</p>
+      <p>As someone who has opened this door, I also know that having seen what lies beyond it does not justify opening it carelessly. Keeping the distance between understanding a danger and spreading it — that restraint is, perhaps, the true alignment that no single direction can erase.</p>
+
+      <div class="references">
+        <h4>References</h4>
+        <ol>
+          <li>A. Arditi et al., “Refusal in Language Models Is Mediated by a Single Direction,” 2024 (arXiv:2406.11717). The study observing that refusal behavior is mediated by a single direction in activation space, and showing that removing that direction (orthogonalization) can neutralize refusal.</li>
+          <li>‘Abliteration’ is not an official term from any particular paper but a coinage in common use across the open-source community for the direction-removal technique above (obliterate + ablation).</li>
+          <li>The implementation principles (detecting the refusal direction; inference-time intervention vs. weight orthogonalization) build on the study above and are publicly implemented through activation-access tools such as <code>TransformerLens</code> and FailSpy’s <code>abliterator</code> library (e.g., <code>mlabonne/Daredevil-8B</code>). The procedural summary in this text draws on the explainer at news.hada.io (topic 15331).</li>
+          <li>The screens in this text are records the author obtained by putting identical questions, for safety-check purposes, to a normal Qwen3-family build and its abliterated variant in a local (isolated) environment; they are illustrative examples for ease of reference. No harmful manufacturing procedure of any kind has been included in this text.</li>
+          <li>The specific content of the model’s responses (terms, figures, and so on) is that model’s own output, may diverge from fact, and cannot be relied upon.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer of article -->
+  <div class="art-foot">
+    <div class="art-tags">
+      <a href="#">#AISafety</a><a href="#">#Abliteration</a><a href="#">#Alignment</a><a href="#">#LLM</a><a href="#">#RedTeaming</a>
+    </div>
+    <div class="author-card">
+      <div class="av">DP</div>
+      <div class="who">
+        <b>Daeseung Park</b>
+        <p>Research Engineer at KAIST. I study large language models, time-series forecasting, and conversational AI, and I try to record the process of my research as accurately and readably as I can.</p>
+      </div>
+    </div>
+
+    <div class="read-next no-print">
+        <div class="section-head" style="margin-bottom:20px;"><h2 style="font-size:1.3rem;">Read next</h2></div>
+        <div class="grid grid-2" id="readNext"><a href="../../articles/rag-architectures-hallucination/" class="post-card fade-up"><div class="thumb"><img class="ph " src="../../../articles/rag-architectures-hallucination/images/cover.svg" alt="" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;"><span class="cat-pill">AI · Explainer</span><span class="num">18</span></div><span class="cat">RAG · Retrieval-Augmented</span><h3>Four Ways Retrieval Rescues Intelligence — Lexical, Semantic, Hybrid, and Graph RAG, and the Anatomy of Hallucination</h3><p>A large language model's knowledge freezes the moment training ends. Retrieval-augmented generation (RAG) fills that gap by pulling in documents from outside the model. We dissect four retrieval architectures — Lexical, Semantic, Hybrid, and Graph — from first principles, and examine how they reduce hallucination and what still remains.</p><div class="meta"><span class="by">Daeseung Park</span><span class="dot-sep">18 min read</span></div></a><a href="../../articles/mcp-agent-interop-standard/" class="post-card fade-up"><div class="thumb"><img class="ph " src="../../../articles/mcp-agent-interop-standard/images/cover.svg" alt="" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;"><span class="cat-pill">AI · Explainer</span><span class="num">17</span></div><span class="cat">AI Agents</span><h3>The Protocol That Became AI's HTTP: MCP and the Interoperability-Standard War</h3><p>The moment chatbots turn into 'acting agents,' the bottleneck is no longer intelligence but the standard for connection. We anatomize how Anthropic's MCP became the de facto standard — its architecture, its politics, and the security homework that remains.</p><div class="meta"><span class="by">Daeseung Park</span><span class="dot-sep">14 min read</span></div></a></div>
+      </div>
+      <nav class="post-nav no-print" id="postNav"><a class="pn" href="../../articles/llm-spatial-reasoning/"><span class="pn-dir">‹ Previous</span><span class="pn-t">Do LLMs Understand Space? A 7,650-Question Spatial-Reasoning Benchmark</span></a><a class="pn pn-list" href="../../articles.html">List</a><a class="pn pn-right" href="../../articles/ai-circular-financing-bubble/"><span class="pn-dir">Next ›</span><span class="pn-t">From NVIDIA to NVIDIA</span></a></nav>
+    </div>
+</article>
+
+<div class="print-footer">Daeseung Park · D. PARK Journal — The Model With Refusal Erased: The Risks and Reasons for Being of the Abliterated LLM</div>
+
+<footer class="site-footer no-print" id="contact"><div class="container-x"><div class="footer-grid"><div><div class="footer-brand">D. PARK</div><p style="max-width:34ch;">AI &amp; Software Systems Engineer · KAIST</p><div class="social" style="margin-top:16px;"><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener" aria-label="GitHub">GH</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener" aria-label="ORCID">iD</a><a href="mailto:dspark@daeseungpark.com" aria-label="Email">@</a></div></div><div><h6>Browse</h6><ul><li><a href="../../index.html">Home</a></li><li><a href="../../profile.html">Profile</a></li><li><a href="../../articles.html">Articles</a></li><li><a href="../../research.html">Research</a></li><li><a href="../../notices.html">Notice</a></li></ul></div><div><h6>Articles</h6><ul class="ft-arts"><li><a href="../../articles/rag-architectures-hallucination/">Four Ways Retrieval Rescues Intelligence — Lexical, Semantic, Hybrid, and Graph RAG, and the Anatomy of Hallucination</a></li><li><a href="../../articles/mcp-agent-interop-standard/">The Protocol That Became AI's HTTP</a></li><li><a href="../../articles/ai-datacenter-power-crunch/">AI's Real Limit Is Electricity</a></li><li><a href="../../articles/ai-circular-financing-bubble/">From NVIDIA to NVIDIA</a></li><li><a href="../../articles/abliterated-ai-safety/">The Model With Refusal Erased</a></li></ul></div><div><h6>Contact</h6><ul><li><a href="mailto:dspark@daeseungpark.com">dspark@daeseungpark.com</a></li><li><a href="mailto:dspark@kaist.ac.kr">dspark@kaist.ac.kr</a></li><li><a href="tel:+821064547777">Phone (KR) +82 10 6454 7777</a></li><li><a href="tel:+16574109449">Phone (US) +1 657 410 9449</a></li><li>KAIST, Daejeon, Korea</li></ul></div></div><div class="footer-bottom"><span>© 2026 Daeseung Park. All rights reserved.</span><span>Designed &amp; built as a personal journal for Daeseung Park.</span></div></div></footer>
+
+<div class="mobile-nav" id="mobileNav"><button class="icon-btn close" id="navClose" aria-label="Close">✕</button><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></div>
+
+<script src="../../../assets/js/data.js"></script>
+<script src="../../../assets/js/articles.js"></script>
+<script src="../../../assets/js/i18n-en.js"></script><script src="../../../assets/js/main.js"></script>
+
+
+</body></html>

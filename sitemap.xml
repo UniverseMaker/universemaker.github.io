@@ -1,585 +1,1756 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://daeseungpark.com/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://daeseungpark.com/profile.html</loc>
-    <lastmod>2026-07-07</lastmod>
-    <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/profile.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/profile.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/profile.html"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://daeseungpark.com/articles.html</loc>
-    <lastmod>2026-07-07</lastmod>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles.html"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://daeseungpark.com/portfolio.html</loc>
-    <lastmod>2026-07-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://daeseungpark.com/works.html</loc>
-    <lastmod>2026-07-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://daeseungpark.com/research.html</loc>
-    <lastmod>2026-07-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://daeseungpark.com/activity.html</loc>
-    <lastmod>2026-07-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://daeseungpark.com/notices.html</loc>
-    <lastmod>2026-07-07</lastmod>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/portfolio.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/portfolio.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/portfolio.html"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/detail.html</loc>
-    <lastmod>2026-07-07</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://daeseungpark.com/works.html</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works.html"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/articles/llm-spatial-reasoning/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/research.html</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/research.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/research.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/research.html"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/activity.html</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/activity.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/activity.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/activity.html"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/notices.html</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/notices.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/notices.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/notices.html"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/landing.html</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/landing.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/landing.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/landing.html"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/apcc2024-mmwave-pointcloud/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/apcc2024-mmwave-pointcloud/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/apcc2024-mmwave-pointcloud/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/apcc2024-mmwave-pointcloud/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/articles/infection-curve/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/works/cmes-bert-health/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/cmes-bert-health/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/cmes-bert-health/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/cmes-bert-health/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/articles/geollm-knowledge-graph/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/works/dcs2026-indoor-network-tool/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/dcs2026-indoor-network-tool/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/dcs2026-indoor-network-tool/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/dcs2026-indoor-network-tool/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/articles/contactless-biosignals/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/works/dom-dialogflow-healthcare/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/dom-dialogflow-healthcare/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/dom-dialogflow-healthcare/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/dom-dialogflow-healthcare/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/articles/prompt-engineering/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/works/dom-elu-activation/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/dom-elu-activation/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/dom-elu-activation/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/dom-elu-activation/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/articles/seq2seq-forecasting/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/works/dom-opensource-chatbot/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/dom-opensource-chatbot/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/dom-opensource-chatbot/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/dom-opensource-chatbot/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/articles/empathetic-chatbot/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/works/iaser-contactless-mirror/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/iaser-contactless-mirror/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/iaser-contactless-mirror/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/iaser-contactless-mirror/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/articles/mmwave-georeferencing/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/works/iaser-dvi-signage/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/iaser-dvi-signage/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/iaser-dvi-signage/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/iaser-dvi-signage/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/iaser-emotion-chatbot/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/iaser-emotion-chatbot/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/iaser-emotion-chatbot/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/iaser-emotion-chatbot/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/iaser-indoor-signage/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/iaser-indoor-signage/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/iaser-indoor-signage/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/iaser-indoor-signage/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/iaser-ml-signage/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/iaser-ml-signage/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/iaser-ml-signage/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/iaser-ml-signage/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/iaser-multimodel-chatbot/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/iaser-multimodel-chatbot/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/iaser-multimodel-chatbot/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/iaser-multimodel-chatbot/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/iaser-multiturn-weather/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/iaser-multiturn-weather/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/iaser-multiturn-weather/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/iaser-multiturn-weather/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/iaser-proxy-signage/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/iaser-proxy-signage/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/iaser-proxy-signage/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/iaser-proxy-signage/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/iaser-webdb-signage/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/iaser-webdb-signage/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/iaser-webdb-signage/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/iaser-webdb-signage/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/iceccme2026-predictive-load-balancing/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/iceccme2026-predictive-load-balancing/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/iceccme2026-predictive-load-balancing/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/iceccme2026-predictive-load-balancing/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/ictc2023-electricity-demand/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/ictc2023-electricity-demand/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/ictc2023-electricity-demand/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/ictc2023-electricity-demand/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/ictc2023-seq2seq-temp/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/ictc2023-seq2seq-temp/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/ictc2023-seq2seq-temp/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/ictc2023-seq2seq-temp/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/ieee-access-distributed-mmwave/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/ieee-access-distributed-mmwave/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/ieee-access-distributed-mmwave/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/ieee-access-distributed-mmwave/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/ieee-access-geo-kg/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/ieee-access-geo-kg/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/ieee-access-geo-kg/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/ieee-access-geo-kg/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/ieee-access-gnlm/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/ieee-access-gnlm/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/ieee-access-gnlm/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/ieee-access-gnlm/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/ieee-access-spatial-repr/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/ieee-access-spatial-repr/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/ieee-access-spatial-repr/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/ieee-access-spatial-repr/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/jwe-prompt-engineering/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/jwe-prompt-engineering/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/jwe-prompt-engineering/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/jwe-prompt-engineering/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/kci-interactive-signage/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/kci-interactive-signage/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/kci-interactive-signage/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/kci-interactive-signage/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/kci-wordgroup-rnn/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/kci-wordgroup-rnn/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/kci-wordgroup-rnn/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/kci-wordgroup-rnn/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/pat-dualscreen-signage/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pat-dualscreen-signage/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pat-dualscreen-signage/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pat-dualscreen-signage/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/pat-hierarchical-chatbot/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pat-hierarchical-chatbot/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pat-hierarchical-chatbot/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pat-hierarchical-chatbot/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/pat-mmwave-pointcloud-geopositioning/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pat-mmwave-pointcloud-geopositioning/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pat-mmwave-pointcloud-geopositioning/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pat-mmwave-pointcloud-geopositioning/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/pat-multimodel-healthcare/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pat-multimodel-healthcare/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pat-multimodel-healthcare/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pat-multimodel-healthcare/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/pf-3d-audio-ip/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-3d-audio-ip/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-3d-audio-ip/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-3d-audio-ip/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/pf-archive-its/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-archive-its/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-archive-its/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-archive-its/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/pf-brokenprice/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-brokenprice/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-brokenprice/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-brokenprice/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/pf-coding-textutil/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-coding-textutil/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-coding-textutil/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-coding-textutil/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/pf-conference-payment/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-conference-payment/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-conference-payment/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-conference-payment/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/pf-digital-signage/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-digital-signage/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-digital-signage/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-digital-signage/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/pf-drone-cv-damage/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-drone-cv-damage/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-drone-cv-damage/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-drone-cv-damage/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/pf-eyedrive/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-eyedrive/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-eyedrive/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-eyedrive/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/pf-firefighter-sim/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-firefighter-sim/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-firefighter-sim/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-firefighter-sim/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/pf-flowboard/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-flowboard/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-flowboard/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-flowboard/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/pf-geojson-nodenet/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-geojson-nodenet/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-geojson-nodenet/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-geojson-nodenet/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/pf-geollm/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-geollm/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-geollm/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-geollm/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/pf-incheon-parking-nav/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-incheon-parking-nav/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-incheon-parking-nav/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-incheon-parking-nav/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/pf-indoor-nav-frontend/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-indoor-nav-frontend/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-indoor-nav-frontend/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-indoor-nav-frontend/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/pf-indoor-route-php/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-indoor-route-php/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-indoor-route-php/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-indoor-route-php/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/pf-khnp-forecast/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-khnp-forecast/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-khnp-forecast/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-khnp-forecast/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/pf-medical-compress-fw/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-medical-compress-fw/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-medical-compress-fw/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-medical-compress-fw/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/pf-minis-lottery/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-minis-lottery/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-minis-lottery/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-minis-lottery/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/pf-mmwave-monitoring/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-mmwave-monitoring/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-mmwave-monitoring/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-mmwave-monitoring/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/pf-paper-submission/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-paper-submission/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-paper-submission/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-paper-submission/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/pf-rfid-erp/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-rfid-erp/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-rfid-erp/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-rfid-erp/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/pf-rtsp-viewer/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-rtsp-viewer/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-rtsp-viewer/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-rtsp-viewer/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/pf-seq2seq-watertemp/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-seq2seq-watertemp/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-seq2seq-watertemp/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-seq2seq-watertemp/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/pf-site-crc/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-site-crc/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-site-crc/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-site-crc/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/pf-site-ctkorea/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-site-ctkorea/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-site-ctkorea/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-site-ctkorea/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/pf-site-daeseungpark/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-site-daeseungpark/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-site-daeseungpark/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-site-daeseungpark/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/pf-site-eeecs/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-site-eeecs/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-site-eeecs/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-site-eeecs/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/pf-smart-mirror/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-smart-mirror/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-smart-mirror/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-smart-mirror/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/pf-sms-assistance/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-sms-assistance/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-sms-assistance/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-sms-assistance/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/pf-waterpipe/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-waterpipe/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-waterpipe/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-waterpipe/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/pf-winter-veg-remote-sensing/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-winter-veg-remote-sensing/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-winter-veg-remote-sensing/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-winter-veg-remote-sensing/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/sw-2024-analysis/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/sw-2024-analysis/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/sw-2024-analysis/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/sw-2024-analysis/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/sw-dialogflow-tool/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/sw-dialogflow-tool/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/sw-dialogflow-tool/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/sw-dialogflow-tool/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/sw-health-qa-bigdata/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/sw-health-qa-bigdata/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/sw-health-qa-bigdata/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/sw-health-qa-bigdata/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/sw-portal-health-qa/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/sw-portal-health-qa/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/sw-portal-health-qa/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/sw-portal-health-qa/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/sw-rasa-tool/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/sw-rasa-tool/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/sw-rasa-tool/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/sw-rasa-tool/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/sw-signage-template/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/sw-signage-template/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/sw-signage-template/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/sw-signage-template/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/notices/1/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/notices/1/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/notices/1/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/notices/1/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/notices/2/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/notices/2/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/notices/2/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/notices/2/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/notices/3/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/notices/3/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/notices/3/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/notices/3/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/notices/4/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/notices/4/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/notices/4/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/notices/4/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://daeseungpark.com/articles/abliterated-ai-safety/</loc>
-    <lastmod>2026-07-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/abliterated-ai-safety/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/abliterated-ai-safety/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/abliterated-ai-safety/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/articles/rag-architectures-hallucination/</loc>
+    <loc>https://daeseungpark.com/articles/ai-circular-financing-bubble/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/ai-circular-financing-bubble/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/ai-circular-financing-bubble/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/ai-circular-financing-bubble/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/articles/ai-datacenter-power-crunch/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/ai-datacenter-power-crunch/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/ai-datacenter-power-crunch/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/ai-datacenter-power-crunch/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/articles/bert-medical-classification/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/bert-medical-classification/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/bert-medical-classification/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/bert-medical-classification/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/articles/contactless-biosignals/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/contactless-biosignals/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/contactless-biosignals/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/contactless-biosignals/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/articles/data-augmentation-activation/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/data-augmentation-activation/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/data-augmentation-activation/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/data-augmentation-activation/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/articles/edge-llm/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/edge-llm/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/edge-llm/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/edge-llm/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/articles/empathetic-chatbot/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/empathetic-chatbot/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/empathetic-chatbot/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/empathetic-chatbot/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/articles/geollm-knowledge-graph/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/geollm-knowledge-graph/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/geollm-knowledge-graph/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/geollm-knowledge-graph/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/articles/infection-curve/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/infection-curve/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/infection-curve/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/infection-curve/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/articles/llm-spatial-reasoning/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/llm-spatial-reasoning/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/llm-spatial-reasoning/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/llm-spatial-reasoning/"/>
     <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://daeseungpark.com/articles/mcp-agent-interop-standard/</loc>
-    <lastmod>2026-07-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/mcp-agent-interop-standard/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/mcp-agent-interop-standard/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/mcp-agent-interop-standard/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/articles/ai-datacenter-power-crunch/</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://daeseungpark.com/articles/ai-circular-financing-bubble/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <loc>https://daeseungpark.com/articles/mmwave-georeferencing/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/mmwave-georeferencing/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/mmwave-georeferencing/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/mmwave-georeferencing/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://daeseungpark.com/articles/parallel-simulation-ape/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/parallel-simulation-ape/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/parallel-simulation-ape/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/parallel-simulation-ape/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/articles/edge-llm/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/articles/prompt-engineering/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/prompt-engineering/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/prompt-engineering/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/prompt-engineering/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/articles/rag-architectures-hallucination/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/rag-architectures-hallucination/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/rag-architectures-hallucination/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/rag-architectures-hallucination/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/articles/seq2seq-forecasting/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/seq2seq-forecasting/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/seq2seq-forecasting/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/seq2seq-forecasting/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://daeseungpark.com/articles/waterpipe-prediction/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/waterpipe-prediction/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/waterpipe-prediction/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/waterpipe-prediction/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/articles/data-augmentation-activation/</loc>
-    <lastmod>2026-07-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <loc>https://daeseungpark.com/en/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/articles/bert-medical-classification/</loc>
-    <lastmod>2026-07-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <loc>https://daeseungpark.com/en/profile.html</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/profile.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/profile.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/profile.html"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/ieee-access-geo-kg/</loc>
-    <lastmod>2026-07-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <loc>https://daeseungpark.com/en/articles.html</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles.html"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/ieee-access-distributed-mmwave/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <loc>https://daeseungpark.com/en/portfolio.html</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/portfolio.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/portfolio.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/portfolio.html"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/en/works.html</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works.html"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/en/research.html</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/research.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/research.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/research.html"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/en/activity.html</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/activity.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/activity.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/activity.html"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/en/notices.html</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/notices.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/notices.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/notices.html"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/en/landing.html</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/landing.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/landing.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/landing.html"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/iceccme2026-predictive-load-balancing/</loc>
-    <lastmod>2026-07-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://daeseungpark.com/works/dcs2026-indoor-network-tool/</loc>
-    <lastmod>2026-07-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://daeseungpark.com/works/ieee-access-gnlm/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/apcc2024-mmwave-pointcloud/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/apcc2024-mmwave-pointcloud/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/apcc2024-mmwave-pointcloud/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/apcc2024-mmwave-pointcloud/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/ieee-access-spatial-repr/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/cmes-bert-health/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/cmes-bert-health/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/cmes-bert-health/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/cmes-bert-health/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/jwe-prompt-engineering/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/dcs2026-indoor-network-tool/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/dcs2026-indoor-network-tool/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/dcs2026-indoor-network-tool/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/dcs2026-indoor-network-tool/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/cmes-bert-health/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/dom-dialogflow-healthcare/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/dom-dialogflow-healthcare/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/dom-dialogflow-healthcare/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/dom-dialogflow-healthcare/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/apcc2024-mmwave-pointcloud/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/dom-elu-activation/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/dom-elu-activation/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/dom-elu-activation/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/dom-elu-activation/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/ictc2023-seq2seq-temp/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/dom-opensource-chatbot/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/dom-opensource-chatbot/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/dom-opensource-chatbot/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/dom-opensource-chatbot/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/ictc2023-electricity-demand/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/iaser-contactless-mirror/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/iaser-contactless-mirror/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/iaser-contactless-mirror/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/iaser-contactless-mirror/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/iaser-multiturn-weather/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/iaser-dvi-signage/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/iaser-dvi-signage/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/iaser-dvi-signage/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/iaser-dvi-signage/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/iaser-dvi-signage/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/iaser-emotion-chatbot/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/iaser-emotion-chatbot/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/iaser-emotion-chatbot/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/iaser-emotion-chatbot/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/iaser-webdb-signage/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/iaser-indoor-signage/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/iaser-indoor-signage/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/iaser-indoor-signage/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/iaser-indoor-signage/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/iaser-multimodel-chatbot/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/iaser-ml-signage/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/iaser-ml-signage/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/iaser-ml-signage/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/iaser-ml-signage/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/iaser-emotion-chatbot/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/iaser-multimodel-chatbot/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/iaser-multimodel-chatbot/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/iaser-multimodel-chatbot/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/iaser-multimodel-chatbot/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/iaser-indoor-signage/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/iaser-multiturn-weather/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/iaser-multiturn-weather/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/iaser-multiturn-weather/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/iaser-multiturn-weather/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/iaser-contactless-mirror/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/iaser-proxy-signage/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/iaser-proxy-signage/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/iaser-proxy-signage/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/iaser-proxy-signage/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/iaser-ml-signage/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/iaser-webdb-signage/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/iaser-webdb-signage/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/iaser-webdb-signage/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/iaser-webdb-signage/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/iaser-proxy-signage/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/iceccme2026-predictive-load-balancing/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/iceccme2026-predictive-load-balancing/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/iceccme2026-predictive-load-balancing/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/iceccme2026-predictive-load-balancing/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/kci-wordgroup-rnn/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/ictc2023-electricity-demand/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/ictc2023-electricity-demand/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/ictc2023-electricity-demand/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/ictc2023-electricity-demand/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/kci-interactive-signage/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/ictc2023-seq2seq-temp/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/ictc2023-seq2seq-temp/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/ictc2023-seq2seq-temp/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/ictc2023-seq2seq-temp/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/dom-elu-activation/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/ieee-access-distributed-mmwave/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/ieee-access-distributed-mmwave/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/ieee-access-distributed-mmwave/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/ieee-access-distributed-mmwave/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/dom-opensource-chatbot/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/ieee-access-geo-kg/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/ieee-access-geo-kg/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/ieee-access-geo-kg/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/ieee-access-geo-kg/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/dom-dialogflow-healthcare/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/ieee-access-gnlm/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/ieee-access-gnlm/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/ieee-access-gnlm/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/ieee-access-gnlm/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/pat-mmwave-pointcloud-geopositioning/</loc>
-    <lastmod>2026-07-20</lastmod>
+    <loc>https://daeseungpark.com/en/works/ieee-access-spatial-repr/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/ieee-access-spatial-repr/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/ieee-access-spatial-repr/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/ieee-access-spatial-repr/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/pat-hierarchical-chatbot/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/jwe-prompt-engineering/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/jwe-prompt-engineering/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/jwe-prompt-engineering/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/jwe-prompt-engineering/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/pat-multimodel-healthcare/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/kci-interactive-signage/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/kci-interactive-signage/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/kci-interactive-signage/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/kci-interactive-signage/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/pat-dualscreen-signage/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/kci-wordgroup-rnn/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/kci-wordgroup-rnn/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/kci-wordgroup-rnn/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/kci-wordgroup-rnn/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/sw-signage-template/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/pat-dualscreen-signage/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pat-dualscreen-signage/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pat-dualscreen-signage/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pat-dualscreen-signage/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/sw-health-qa-bigdata/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/pat-hierarchical-chatbot/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pat-hierarchical-chatbot/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pat-hierarchical-chatbot/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pat-hierarchical-chatbot/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/sw-portal-health-qa/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/pat-mmwave-pointcloud-geopositioning/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pat-mmwave-pointcloud-geopositioning/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pat-mmwave-pointcloud-geopositioning/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pat-mmwave-pointcloud-geopositioning/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/sw-dialogflow-tool/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/pat-multimodel-healthcare/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pat-multimodel-healthcare/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pat-multimodel-healthcare/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pat-multimodel-healthcare/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/sw-rasa-tool/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/pf-3d-audio-ip/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-3d-audio-ip/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-3d-audio-ip/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-3d-audio-ip/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/sw-2024-analysis/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/pf-archive-its/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-archive-its/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-archive-its/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-archive-its/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/pf-site-eeecs/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/pf-brokenprice/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-brokenprice/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-brokenprice/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-brokenprice/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/pf-site-ctkorea/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/pf-coding-textutil/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-coding-textutil/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-coding-textutil/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-coding-textutil/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/pf-site-crc/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/pf-conference-payment/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-conference-payment/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-conference-payment/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-conference-payment/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/pf-site-daeseungpark/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/pf-digital-signage/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-digital-signage/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-digital-signage/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-digital-signage/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/pf-flowboard/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/pf-drone-cv-damage/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-drone-cv-damage/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-drone-cv-damage/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-drone-cv-damage/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/pf-geollm/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/pf-eyedrive/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-eyedrive/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-eyedrive/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-eyedrive/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/pf-incheon-parking-nav/</loc>
-    <lastmod>2026-07-14</lastmod>
+    <loc>https://daeseungpark.com/en/works/pf-firefighter-sim/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-firefighter-sim/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-firefighter-sim/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-firefighter-sim/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/pf-winter-veg-remote-sensing/</loc>
-    <lastmod>2026-07-14</lastmod>
+    <loc>https://daeseungpark.com/en/works/pf-flowboard/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-flowboard/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-flowboard/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-flowboard/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/pf-firefighter-sim/</loc>
-    <lastmod>2026-07-14</lastmod>
+    <loc>https://daeseungpark.com/en/works/pf-geojson-nodenet/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-geojson-nodenet/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-geojson-nodenet/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-geojson-nodenet/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/pf-eyedrive/</loc>
-    <lastmod>2026-07-14</lastmod>
+    <loc>https://daeseungpark.com/en/works/pf-geollm/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-geollm/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-geollm/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-geollm/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/pf-indoor-nav-frontend/</loc>
-    <lastmod>2026-07-14</lastmod>
+    <loc>https://daeseungpark.com/en/works/pf-incheon-parking-nav/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-incheon-parking-nav/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-incheon-parking-nav/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-incheon-parking-nav/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/pf-indoor-route-php/</loc>
-    <lastmod>2026-07-14</lastmod>
+    <loc>https://daeseungpark.com/en/works/pf-indoor-nav-frontend/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-indoor-nav-frontend/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-indoor-nav-frontend/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-indoor-nav-frontend/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/pf-geojson-nodenet/</loc>
-    <lastmod>2026-07-14</lastmod>
+    <loc>https://daeseungpark.com/en/works/pf-indoor-route-php/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-indoor-route-php/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-indoor-route-php/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-indoor-route-php/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/pf-medical-compress-fw/</loc>
-    <lastmod>2026-07-14</lastmod>
+    <loc>https://daeseungpark.com/en/works/pf-khnp-forecast/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-khnp-forecast/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-khnp-forecast/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-khnp-forecast/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/pf-seq2seq-watertemp/</loc>
-    <lastmod>2026-07-14</lastmod>
+    <loc>https://daeseungpark.com/en/works/pf-medical-compress-fw/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-medical-compress-fw/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-medical-compress-fw/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-medical-compress-fw/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/pf-coding-textutil/</loc>
-    <lastmod>2026-07-14</lastmod>
+    <loc>https://daeseungpark.com/en/works/pf-minis-lottery/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-minis-lottery/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-minis-lottery/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-minis-lottery/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/pf-rtsp-viewer/</loc>
-    <lastmod>2026-07-14</lastmod>
+    <loc>https://daeseungpark.com/en/works/pf-mmwave-monitoring/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-mmwave-monitoring/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-mmwave-monitoring/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-mmwave-monitoring/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/pf-archive-its/</loc>
-    <lastmod>2026-07-14</lastmod>
+    <loc>https://daeseungpark.com/en/works/pf-paper-submission/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-paper-submission/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-paper-submission/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-paper-submission/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/pf-waterpipe/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/pf-rfid-erp/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-rfid-erp/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-rfid-erp/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-rfid-erp/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/pf-khnp-forecast/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/pf-rtsp-viewer/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-rtsp-viewer/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-rtsp-viewer/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-rtsp-viewer/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/pf-mmwave-monitoring/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/pf-seq2seq-watertemp/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-seq2seq-watertemp/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-seq2seq-watertemp/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-seq2seq-watertemp/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/pf-drone-cv-damage/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/pf-site-crc/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-site-crc/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-site-crc/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-site-crc/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/pf-digital-signage/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/pf-site-ctkorea/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-site-ctkorea/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-site-ctkorea/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-site-ctkorea/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/pf-smart-mirror/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/pf-site-daeseungpark/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-site-daeseungpark/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-site-daeseungpark/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-site-daeseungpark/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/pf-3d-audio-ip/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/pf-site-eeecs/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-site-eeecs/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-site-eeecs/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-site-eeecs/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/pf-minis-lottery/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/pf-smart-mirror/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-smart-mirror/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-smart-mirror/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-smart-mirror/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/pf-conference-payment/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/pf-sms-assistance/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-sms-assistance/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-sms-assistance/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-sms-assistance/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/pf-paper-submission/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/pf-waterpipe/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-waterpipe/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-waterpipe/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-waterpipe/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/pf-rfid-erp/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/pf-winter-veg-remote-sensing/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-winter-veg-remote-sensing/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-winter-veg-remote-sensing/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-winter-veg-remote-sensing/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/pf-sms-assistance/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/sw-2024-analysis/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/sw-2024-analysis/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/sw-2024-analysis/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/sw-2024-analysis/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/works/pf-brokenprice/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/sw-dialogflow-tool/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/sw-dialogflow-tool/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/sw-dialogflow-tool/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/sw-dialogflow-tool/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/notices/4/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/sw-health-qa-bigdata/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/sw-health-qa-bigdata/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/sw-health-qa-bigdata/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/sw-health-qa-bigdata/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/notices/3/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/sw-portal-health-qa/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/sw-portal-health-qa/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/sw-portal-health-qa/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/sw-portal-health-qa/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/notices/2/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/sw-rasa-tool/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/sw-rasa-tool/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/sw-rasa-tool/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/sw-rasa-tool/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://daeseungpark.com/notices/1/</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://daeseungpark.com/en/works/sw-signage-template/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/sw-signage-template/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/sw-signage-template/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/sw-signage-template/"/>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/en/notices/1/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/notices/1/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/notices/1/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/notices/1/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/en/notices/2/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/notices/2/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/notices/2/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/notices/2/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/en/notices/3/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/notices/3/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/notices/3/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/notices/3/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/en/notices/4/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/notices/4/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/notices/4/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/notices/4/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/en/articles/abliterated-ai-safety/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/abliterated-ai-safety/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/abliterated-ai-safety/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/abliterated-ai-safety/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/en/articles/ai-circular-financing-bubble/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/ai-circular-financing-bubble/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/ai-circular-financing-bubble/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/ai-circular-financing-bubble/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/en/articles/ai-datacenter-power-crunch/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/ai-datacenter-power-crunch/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/ai-datacenter-power-crunch/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/ai-datacenter-power-crunch/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/en/articles/bert-medical-classification/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/bert-medical-classification/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/bert-medical-classification/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/bert-medical-classification/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/en/articles/contactless-biosignals/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/contactless-biosignals/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/contactless-biosignals/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/contactless-biosignals/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/en/articles/data-augmentation-activation/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/data-augmentation-activation/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/data-augmentation-activation/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/data-augmentation-activation/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/en/articles/edge-llm/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/edge-llm/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/edge-llm/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/edge-llm/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/en/articles/empathetic-chatbot/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/empathetic-chatbot/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/empathetic-chatbot/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/empathetic-chatbot/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/en/articles/geollm-knowledge-graph/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/geollm-knowledge-graph/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/geollm-knowledge-graph/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/geollm-knowledge-graph/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/en/articles/infection-curve/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/infection-curve/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/infection-curve/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/infection-curve/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/en/articles/llm-spatial-reasoning/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/llm-spatial-reasoning/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/llm-spatial-reasoning/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/llm-spatial-reasoning/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/en/articles/mcp-agent-interop-standard/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/mcp-agent-interop-standard/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/mcp-agent-interop-standard/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/mcp-agent-interop-standard/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/en/articles/mmwave-georeferencing/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/mmwave-georeferencing/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/mmwave-georeferencing/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/mmwave-georeferencing/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/en/articles/parallel-simulation-ape/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/parallel-simulation-ape/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/parallel-simulation-ape/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/parallel-simulation-ape/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/en/articles/prompt-engineering/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/prompt-engineering/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/prompt-engineering/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/prompt-engineering/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/en/articles/rag-architectures-hallucination/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/rag-architectures-hallucination/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/rag-architectures-hallucination/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/rag-architectures-hallucination/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/en/articles/seq2seq-forecasting/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/seq2seq-forecasting/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/seq2seq-forecasting/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/seq2seq-forecasting/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/en/articles/waterpipe-prediction/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/waterpipe-prediction/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/waterpipe-prediction/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/waterpipe-prediction/"/>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/detail.html</loc>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
   </url>
 </urlset>

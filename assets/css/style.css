@@ -81,8 +81,13 @@ img { max-width: 100%; display: block; }
 .topbar .container-x { display: flex; align-items: center; justify-content: space-between; height: 40px; }
 .topbar a { color: rgba(255,255,255,.82); }
 .topbar a:hover { color: #fff; }
-.topbar .tb-links { display: flex; gap: 18px; }
+.topbar .tb-links { display: flex; gap: 18px; align-items: center; }
 .topbar .tb-date { color: rgba(255,255,255,.6); }
+/* 언어 링크 (상단 퀵링크 맨 오른쪽, 다른 퀵링크와 동일 스타일) */
+.tb-lang-link { color: rgba(255,255,255,.82); }
+.tb-lang-link:hover { color: #fff; }
+/* 영문 미러: 한국어 장문 본문 안내 배너 */
+.ko-notice { margin: 18px 0 22px; padding: 11px 16px; border-radius: 10px; font-size: .88rem; line-height: 1.5; color: var(--ink-soft); background: color-mix(in srgb, var(--accent) 8%, var(--surface)); border: 1px solid color-mix(in srgb, var(--accent) 26%, var(--line)); }
 
 /* ---------- Header / nav ---------- */
 .site-header { border-bottom: 1px solid var(--line); background: var(--bg); position: sticky; top: 0; z-index: 1020; }
@@ -629,11 +634,11 @@ body[data-theme="light"][data-hero="photo"] .feat-large:hover .bg::after {
 .paper-promo { display:flex; align-items:center; gap:16px; min-height:56px; padding:14px 22px; border-radius:var(--radius); background:linear-gradient(100deg,#232a73,#3a4cf0); color:#fff; box-shadow:var(--shadow-sm); transition:transform .2s, box-shadow .2s; }
 .paper-promo:hover { transform:translateY(-2px); box-shadow:var(--shadow); color:#fff; }
 .paper-promo .pp-badge { flex:none; font-size:.72rem; font-weight:800; letter-spacing:.04em; background:#fff; color:#2233c4; padding:5px 11px; border-radius:999px; }
-.paper-promo .pp-text { flex:1; min-width:0; font-size:.98rem; font-weight:600; line-height:1.35; }
+.paper-promo .pp-text { flex:1; min-width:0; font-size:.98rem; font-weight:600; line-height:1.35; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .paper-promo .pp-text b { font-weight:800; }
 .paper-promo .pp-soon { display:inline-block; margin-left:8px; font-size:.72rem; font-weight:700; background:rgba(255,255,255,.2); padding:3px 9px; border-radius:999px; vertical-align:middle; }
 .paper-promo .pp-cta { flex:none; font-weight:800; font-size:.9rem; }
-@media (max-width:640px){ .paper-promo{ flex-direction:column; align-items:flex-start; gap:8px; } .paper-promo .pp-text{ font-size:.9rem; } }
+@media (max-width:640px){ .paper-promo{ flex-direction:column; align-items:flex-start; gap:8px; } .paper-promo .pp-text{ font-size:.9rem; align-self:stretch; } }
 /* 두 번째 배너(비검열 AI) — 버튼 2개 변형 */
 .paper-promo.ai-promo { background:linear-gradient(100deg,#4b3fb0,#7b5bff); }
 .paper-promo.ai-promo .pp-badge { color:#5b3fd0; }

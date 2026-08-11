@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-prerendered="1"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Four Ways Retrieval Rescues Intelligence — Lexical, Semantic, Hybrid, and Graph RAG, and the Anatomy of Hallucination - Daeseung Park Journal</title>
+<meta name="description" content="A large language model's knowledge freezes the moment training ends. Retrieval-augmented generation (RAG) fills that gap by pulling in documents from outside the model. We dissect four retrieval architectures — Lexical, Semantic, Hybrid, and Graph — from first principles, and examine how they reduce hallucination and what still remains.">
+<link rel="canonical" href="https://daeseungpark.com/en/articles/rag-architectures-hallucination/"><link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/rag-architectures-hallucination/"><link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/rag-architectures-hallucination/"><link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/rag-architectures-hallucination/"><meta property="og:locale:alternate" content="ko_KR">
+<!-- seo-i18n:start -->
+
+
+
+
+<!-- seo-i18n:end -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="D. PARK Journal">
+<meta property="og:title" content="Four Ways Retrieval Rescues Intelligence — Lexical, Semantic, Hybrid, and Graph RAG, and the Anatomy of Hallucination">
+<meta property="og:description" content="A large language model's knowledge freezes the moment training ends. Retrieval-augmented generation (RAG) fills that gap by pulling in documents from outside the model. We dissect four retrieval architectures — Lexical, Semantic, Hybrid, and Graph — from first principles, and examine how they reduce hallucination and what still remains.">
+<meta property="og:url" content="https://daeseungpark.com/en/articles/rag-architectures-hallucination/">
+<meta property="og:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Four Ways Retrieval Rescues Intelligence — Lexical, Semantic, Hybrid, and Graph RAG, and the Anatomy of Hallucination">
+<meta name="twitter:description" content="A large language model's knowledge freezes the moment training ends. Retrieval-augmented generation (RAG) fills that gap by pulling in documents from outside the model. We dissect four retrieval architectures — Lexical, Semantic, Hybrid, and Graph — from first principles, and examine how they reduce hallucination and what still remains.">
+<meta name="twitter:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Four Ways Retrieval Rescues Intelligence — Lexical, Semantic, Hybrid, and Graph RAG, and the Anatomy of Hallucination","author":{"@type":"Person","name":"박대승","alternateName":"Daeseung Park"},"publisher":{"@type":"Organization","name":"D. PARK Journal"},"image":"https://daeseungpark.com/assets/img/profile/img3.jpg","mainEntityOfPage":"https://daeseungpark.com/articles/rag-architectures-hallucination/","inLanguage":"en","datePublished":"2026-07-27"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&amp;family=Noto+Serif+KR:wght@400;600&amp;family=Noto+Sans+KR:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="../../../assets/css/style.css">
+<link rel="stylesheet" href="../../../assets/css/article.css">
+<script src="https://www.googletagmanager.com/gtag/js?id=G-1MMKKGR3MF"></script><style id="aiTrialStyle">#aiTrialBtn{position:fixed;right:22px;bottom:22px;z-index:940;display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border:0;border-radius:999px;cursor:pointer;font-family:"Pretendard",system-ui,sans-serif;font-weight:700;font-size:.92rem;color:#fff;background:linear-gradient(135deg,#5b6cff,#8b5bff);box-shadow:0 8px 24px rgba(70,70,140,.35);transition:transform .2s,box-shadow .2s,opacity .2s;}#aiTrialBtn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(70,70,140,.45);}#aiTrialBtn.active{opacity:.5;}#aiTrialBtn .ai-ic{font-size:1.05rem;line-height:1;}#aiTrialBtn .ai-b{font-size:.6rem;font-weight:800;background:rgba(255,255,255,.28);padding:2px 6px;border-radius:999px;letter-spacing:.5px;}#aiTrialPanel{position:fixed;right:22px;bottom:84px;z-index:945;width:380px;max-width:calc(100vw - 32px);height:560px;max-height:calc(100vh - 120px);background:var(--bg,#fff);border:1px solid var(--line,#e6e6e6);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.28);opacity:0;transform:translateY(12px) scale(.98);pointer-events:none;transition:opacity .22s,transform .22s;}#aiTrialPanel.open{opacity:1;transform:none;pointer-events:auto;}#aiTrialPanel .ai-head{display:flex;align-items:center;justify-content:space-between;padding:10px 8px 10px 14px;border-bottom:1px solid var(--line,#e6e6e6);}#aiTrialPanel .ai-ti{font-family:"Pretendard",system-ui,sans-serif;font-size:.9rem;color:var(--ink,#15171a);}#aiTrialPanel .ai-badge{font-size:.64rem;color:#7b83ff;border:1px solid #7b83ff;border-radius:999px;padding:1px 6px;margin-left:5px;}#aiTrialPanel .ai-actions{display:flex;gap:2px;}#aiTrialPanel .ai-x{border:0;background:transparent;cursor:pointer;font-size:1rem;line-height:1;padding:6px 9px;border-radius:8px;color:var(--ink,#15171a);opacity:.65;}#aiTrialPanel .ai-x:hover{opacity:1;background:rgba(125,125,140,.14);}#aiTrialPanel .ai-body{position:relative;flex:1;min-height:0;background:var(--bg,#fff);}#aiTrialPanel .ai-open{font-family:"Pretendard",system-ui,sans-serif;font-size:.78rem;font-weight:700;color:#7b83ff;padding:6px 10px;border-radius:8px;text-decoration:none;white-space:nowrap;}#aiTrialPanel .ai-open:hover{background:rgba(125,125,140,.14);}#aiTrialPanel iframe{position:relative;width:100%;height:100%;border:0;display:block;background:var(--bg,#fff);}@media (max-width:640px){#aiTrialBtn{right:16px;bottom:16px;padding:11px 15px;font-size:.86rem;}}</style></head>
+<body data-base="../../">
+<div class="progress-bar" id="progress"></div>
+<div class="topbar no-print">
+  <div class="container-x">
+    <span class="tb-date" id="today">Friday, August 7, 2026</span>
+    <div class="tb-links"><a href="https://ai.daeseungpark.com/chat/" target="_blank" rel="noopener">Abliterated AI</a><a href="https://tcc.daeseungpark.com/" target="_blank" rel="noopener">Mission Control(TCC)</a><a href="../../profile.html">Profile</a><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener">GitHub</a><a href="https://scholar.google.com/citations?hl=ko&amp;user=qVom0QUAAAAJ" target="_blank" rel="noopener">Scholar</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener">ORCID</a><a href="https://hub.docker.com/u/daeseungpark" target="_blank" rel="noopener">Docker</a><a href="https://codespectrum.net" target="_blank" rel="noopener">Blog</a><a href="../../profile.html#contact">Contact</a><a href="../../notices.html">Notice</a><a href="/articles/rag-architectures-hallucination/" class="tb-lang-link" aria-label="Language">한국어</a></div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header no-print">
+  <div class="container-x nav-row">
+    <a href="../../index.html" class="brand">D<span class="dot">.</span> PARK <small>Journal</small></a>
+    <nav class="main-nav"><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">☾</span></button>
+      <button class="print-cta" id="printBtn">🖶 Print / PDF</button>
+      <button class="icon-btn nav-toggle" id="navToggle" aria-label="Menu">≡</button>
+    </div>
+  </div>
+</header>
+
+<div class="ticker no-print">
+  <div class="container-x">
+    <span class="label">Trending</span>
+    <div class="items" id="tickerItems"><a href="../../articles/rag-architectures-hallucination/">Four Ways Retrieval Rescues In…</a><a href="../../articles/mcp-agent-interop-standard/">The Protocol That Became AI's…</a><a href="../../articles/ai-datacenter-power-crunch/">AI's Real Limit Is Electricity</a><a href="../../articles/ai-circular-financing-bubble/">From NVIDIA to NVIDIA</a><a href="../../articles/abliterated-ai-safety/">The Model With Refusal Erased</a><a href="../../articles/llm-spatial-reasoning/">Do LLMs Understand Space? A 7,…</a></div>
+  </div>
+</div>
+
+<article data-article-id="18">
+  <div class="article-wrap">
+    <!-- Masthead -->
+    <header class="art-head">
+      <span class="cat-pill">AI · Explainer</span>
+      <h1>Four Ways Retrieval Rescues Intelligence — Lexical, Semantic, Hybrid, and Graph RAG, and the Anatomy of Hallucination</h1>
+      <p class="deck">A large language model's knowledge freezes the moment training ends. Retrieval-augmented generation (RAG) fills that gap by pulling in documents from outside the model. We dissect four retrieval architectures — Lexical, Semantic, Hybrid, and Graph — from first principles, and examine how they reduce hallucination and what still remains.</p>
+      <div class="art-byline">
+        <div class="av">DP</div>
+        <div class="who">
+          <b>Daeseung Park</b>
+          <span>AI &amp; Software Systems Engineer · KAIST</span>
+          <span>July 2026 · 18 min read</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="art-cover"><img src="images/cover.svg" alt="Conceptual diagram of the four RAG retrieval architectures (Lexical, Semantic, Hybrid, Graph) and hallucination" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;"></div>
+
+    <!-- Summary -->
+    <div class="summary-box">
+      <span class="tag">1-min summary</span>
+      The knowledge a language model has memorized on its own (<strong>parametric knowledge</strong>) is static, opaque, and prone to hallucination. <strong>Retrieval-Augmented Generation (RAG)</strong> attacks all three weaknesses at once by retrieving external documents for each question and attaching them as grounding. But “what you retrieve, and how” is precisely what governs the quality of the answer. There are essentially four retrieval architectures: <strong>Lexical (sparse · BM25)</strong>, which matches words literally; <strong>Semantic (dense · embeddings + ANN)</strong>, which matches meaning as vectors; <strong>Hybrid (RRF · cross-encoder · ColBERT)</strong>, which fuses and re-ranks the two; and <strong>Graph (GraphRAG)</strong>, which builds global context from a knowledge graph. The four complement one another rather than replace one another. RAG, for its part, reduces hallucination but does not eliminate it. Gaps remain — retrieval failure, noisy context, context neglect, knowledge conflict, and “lost in the middle” — and to close them we bring in re-ranking, self-reflection (Self-RAG), retrieval correction (CRAG), groundedness verification, and re-retrieval loops. The conclusion is simple. <strong>There is no single right answer.</strong> Choose the architecture to fit the query type, and hold hallucination down with a verification loop.
+    </div>
+
+    <!-- Body -->
+    <div class="prose">
+      <span class="chapter-label">Chapter 1. Why Retrieval</span>
+      <h2>Frozen Knowledge, Joined to an External Memory</h2>
+      <p>A large language model swallows vast amounts of text and compresses its statistical regularities into billions of weights. This knowledge dissolved inside the model is called <strong>parametric knowledge</strong>. Remarkably fluent as it is, this knowledge has three structural weaknesses. First, it is <em>static</em>. The world stops at the moment training ends, so the model knows nothing of facts that came afterward. Second, it is <em>opaque</em>. You cannot trace which answer came from which document, so when asked for evidence the model either falls silent or makes something up. Third, that very fabrication — <em>hallucination</em> — trails fluency like a shadow, because the model is trained to generate “something plausible” more readily than to say “I don’t know.”</p>
+
+      <p>The idea that takes aim at all three weaknesses at once is <strong>Retrieval-Augmented Generation (RAG)</strong>. In 2020, Lewis and colleagues proposed not to lock knowledge inside the model’s weights alone, but, each time a question arrives, to <em>retrieve</em> relevant fragments from an external document collection, append them to the input, and only then <em>generate</em> the answer. It couples the model’s parametric knowledge with a <strong>non-parametric external memory</strong>. External documents can be swapped out at any time, so the system is no longer static; sources can be attached to the answer, so it is no longer opaque; and an answer bound to evidence leaves less room for fabrication.</p>
+
+      <div class="pullquote">Instead of making the model bigger, we placed a memory outside it. The essence of RAG is not ‘what it knows’ but ‘what it fetches.’</div>
+
+      <p>Here, though, the center of gravity quietly shifts. The quality of the answer comes to depend on the quality of the <strong>retriever</strong> as much as — perhaps more than — on the intelligence of the model. Pull in irrelevant documents and the model is swayed by the noise; miss the document that was actually needed and it still makes things up. In the end, the success or failure of RAG converges not on “how you use the language model” but on “<em>what you retrieve, and how</em>.” That is why this article dissects the four retrieval architectures one by one. The figure below contrasts all four at a glance.</p>
+
+      <figure>
+        <svg viewBox="0 0 760 430" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Pipeline comparison of the four RAG retrieval architectures" style="width:100%;height:auto;display:block;">
+          <defs>
+            <marker id="a1" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 Z" fill="#5b6b9c"></path></marker>
+          </defs>
+          <!-- lane labels -->
+          <g font-family="'Segoe UI',sans-serif" font-size="13" font-weight="700">
+            <text x="16" y="58" fill="#2233c4">Lexical</text>
+            <text x="16" y="158" fill="#0f8a55">Semantic</text>
+            <text x="16" y="258" fill="#7a4c00">Hybrid</text>
+            <text x="16" y="358" fill="#6a1fb0">Graph</text>
+          </g>
+          <!-- common query column -->
+          <g font-family="'Segoe UI',sans-serif" font-size="11" text-anchor="middle">
+            <!-- Lexical lane -->
+            <rect x="90" y="34" width="90" height="40" rx="8" fill="#eef1ff" stroke="#2233c4" stroke-width="1.8"></rect><text x="135" y="58" fill="#1a2350">Query · words</text>
+            <rect x="250" y="34" width="110" height="40" rx="8" fill="#eef1ff" stroke="#2233c4" stroke-width="1.8"></rect><text x="305" y="52" fill="#1a2350">Inverted index</text><text x="305" y="67" fill="#1a2350" font-size="10">BM25 score</text>
+            <rect x="430" y="34" width="110" height="40" rx="8" fill="#ffffff" stroke="#2233c4" stroke-width="1.8"></rect><text x="485" y="58" fill="#1a2350">Exact-match docs</text>
+            <!-- Semantic lane -->
+            <rect x="90" y="134" width="90" height="40" rx="8" fill="#e6f7ee" stroke="#0f8a55" stroke-width="1.8"></rect><text x="135" y="158" fill="#0c4a2e">Query · meaning</text>
+            <rect x="250" y="134" width="110" height="40" rx="8" fill="#e6f7ee" stroke="#0f8a55" stroke-width="1.8"></rect><text x="305" y="152" fill="#0c4a2e">Embedding</text><text x="305" y="167" fill="#0c4a2e" font-size="10">ANN · HNSW</text>
+            <rect x="430" y="134" width="110" height="40" rx="8" fill="#ffffff" stroke="#0f8a55" stroke-width="1.8"></rect><text x="485" y="158" fill="#0c4a2e">Semantic matches</text>
+            <!-- Hybrid lane -->
+            <rect x="90" y="234" width="90" height="40" rx="8" fill="#fff4e0" stroke="#c47f13" stroke-width="1.8"></rect><text x="135" y="258" fill="#7a4c00">Query</text>
+            <rect x="250" y="222" width="110" height="26" rx="7" fill="#eef1ff" stroke="#2233c4" stroke-width="1.5"></rect><text x="305" y="239" fill="#1a2350" font-size="10">BM25 rank</text>
+            <rect x="250" y="256" width="110" height="26" rx="7" fill="#e6f7ee" stroke="#0f8a55" stroke-width="1.5"></rect><text x="305" y="273" fill="#0c4a2e" font-size="10">Dense rank</text>
+            <rect x="430" y="234" width="110" height="40" rx="8" fill="#fff4e0" stroke="#c47f13" stroke-width="1.8"></rect><text x="485" y="252" fill="#7a4c00">RRF fusion</text><text x="485" y="267" fill="#7a4c00" font-size="10">+ re-rank</text>
+            <!-- Graph lane -->
+            <rect x="90" y="334" width="90" height="40" rx="8" fill="#f3e8ff" stroke="#6a1fb0" stroke-width="1.8"></rect><text x="135" y="358" fill="#4a1585">Query</text>
+            <rect x="250" y="334" width="110" height="40" rx="8" fill="#f3e8ff" stroke="#6a1fb0" stroke-width="1.8"></rect><text x="305" y="352" fill="#4a1585">Knowledge graph</text><text x="305" y="367" fill="#4a1585" font-size="10">Entities · relations</text>
+            <rect x="430" y="334" width="110" height="40" rx="8" fill="#ffffff" stroke="#6a1fb0" stroke-width="1.8"></rect><text x="485" y="352" fill="#4a1585">Community summary</text><text x="485" y="367" fill="#4a1585" font-size="10">Local · global</text>
+          </g>
+          <!-- converging arrows to LLM -->
+          <g stroke="#5b6b9c" stroke-width="1.8" fill="none" marker-end="url(#a1)">
+            <path d="M180 54 H246"></path><path d="M360 54 H426"></path>
+            <path d="M180 154 H246"></path><path d="M360 154 H426"></path>
+            <path d="M180 254 H246"></path><path d="M360 235 H426 L426 250"></path><path d="M360 269 H426"></path>
+            <path d="M180 354 H246"></path><path d="M360 354 H426"></path>
+            <path d="M540 54 C 600 54, 640 160, 648 200"></path>
+            <path d="M540 154 C 600 154, 630 185, 646 200"></path>
+            <path d="M540 254 C 600 254, 630 225, 646 214"></path>
+            <path d="M540 354 C 600 354, 640 250, 648 214"></path>
+          </g>
+          <rect x="650" y="182" width="96" height="66" rx="12" fill="url(#llm)" stroke="#1b2461" stroke-width="2"></rect>
+          <defs><linearGradient id="llm" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3a4cf0"></stop><stop offset="1" stop-color="#1b2461"></stop></linearGradient></defs>
+          <text x="698" y="212" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="15" font-weight="700" fill="#ffffff">LLM</text>
+          <text x="698" y="232" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="10" fill="#cdd6ff">Generate</text>
+          <text x="698" y="404" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="11" fill="#5b6b9c">Each of the four retrievers gathers</text>
+          <text x="698" y="420" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="11" fill="#5b6b9c">context its own way for the generator</text>
+        </svg>
+        <figcaption>A pipeline comparison of the four RAG retrieval architectures. Lexical matches words exactly through an inverted index; Semantic finds meaning by vector proximity; Hybrid fuses and re-ranks the two rankings with RRF; and Graph builds global context from the community summaries of a knowledge graph.</figcaption>
+      </figure>
+
+      <span class="chapter-label">Chapter 2. Lexical RAG</span>
+      <h2>The Power of Matching Words Literally — Inverted Index and BM25</h2>
+      <p>The oldest and most robust form of retrieval is to match words literally. This is called <strong>sparse retrieval</strong>, or lexical retrieval. Its core data structure is the <strong>inverted index</strong>. For each term, a list of the documents in which that term appears is built in advance, so that when a query term arrives its list can be pulled up instantly. The canonical function for scoring how relevant those documents are is <strong>BM25</strong>.</p>
+
+      <p>BM25 is a ranking function derived from information retrieval’s <em>probabilistic relevance framework</em>, and it blends three intuitions with precision. The first is <strong>term-frequency (TF) saturation</strong>. The more often a term appears in a document, the more relevant it is — but not in unbounded proportion. A term that appears ten times is not twice as important as one that appears five times. BM25 tunes this saturation curve with a coefficient <em>k1</em> (roughly 1.2–2.0). The second is <strong>inverse document frequency (IDF)</strong>. Words common to every document (‘the’, ‘and’) carry no discriminative power, so their weight is lowered, while rarer words are weighted higher. The third is <strong>length normalization</strong>: a coefficient <em>b</em> (about 0.75) corrects for the fact that a long document would otherwise gain an advantage merely by containing more words.</p>
+
+      <div class="callout"><b>BM25 in one sentence.</b> “The rarer a term is (high IDF), the more moderately often it appears in this document (TF saturation), and the less that is merely because the document is needlessly long (length normalization) — the more relevant the document is.” This simple formula, multiplying and summing three intuitions, has survived for decades as the default baseline of retrieval.</div>
+
+      <p>The strengths of lexical retrieval are clear. When the query term and the document’s word match exactly, it never misses the <strong>exact match</strong>. It is especially strong with <strong>rare terms</strong> and unique identifiers — product codes, error messages, people’s names, statute numbers. It is <strong>interpretable</strong>, showing why a document was chosen — “query term X is right here” — and it is cheap to compute and scales well to large collections. Lucene, Elasticsearch, and the research-standard toolkit Anserini represent this family.</p>
+
+      <p>But there is one fatal weakness: <strong>vocabulary mismatch</strong>. If a user searches for “car” but the document says only “automobile,” it is missed for the sole reason that the words differ. Even when the meaning is identical, a different surface form goes unretrieved. This limitation is what summoned the next architecture.</p>
+
+      <span class="chapter-label">Chapter 3. Semantic RAG</span>
+      <h2>Matching Meaning as Vectors — Embeddings and Approximate Nearest Neighbors</h2>
+      <p><strong>Semantic retrieval</strong>, or <strong>dense retrieval</strong>, matches <em>meaning</em> instead of a word’s surface form. It turns both the query and the documents into high-dimensional real-valued vectors (embeddings), then treats those that lie close in the vector space as relevant. When meanings are similar the vectors move close together even if the wording differs, so the vocabulary-mismatch problem dissolves naturally. “Car” and “automobile” are different words but sit at neighboring coordinates.</p>
+
+      <p>The representative architecture of this approach is the <strong>bi-encoder</strong>. It encodes the query and the document <em>independently</em>, turning each into a single vector. <strong>DPR (Dense Passage Retrieval)</strong>, designed for question answering, kept a separate query encoder and passage encoder and aligned them through contrastive learning; on the Natural Questions benchmark it is reported to have raised top-20 recall (recall@20) by about 20 percentage points over BM25. <strong>SBERT (Sentence-BERT)</strong>, from the sentence-embedding lineage, showed the bi-encoder’s practical advantage dramatically. A task of finding similar pairs by comparing sentence pairs one at a time, which took about 65 hours, dropped to about 5 seconds once the sentences were encoded into vectors in advance. Vectorizing each document <em>only once, ahead of time</em> and storing it in an index is the key that made large-scale semantic search possible.</p>
+
+      <p>When documents number in the millions or hundreds of millions, one cannot compare the query vector against every document vector one by one. So we use <strong>Approximate Nearest Neighbor (ANN)</strong> search. The representative algorithm, <strong>HNSW (Hierarchical Navigable Small World)</strong>, weaves the vectors into a multi-layer proximity graph: it takes a rough bearing in the sparse upper layers and narrows in on neighbors as it descends into the denser lower layers. In place of the linear cost of exact search, its cost is roughly <em>logarithmic</em> — giving up a little accuracy to gain a great deal of speed.</p>
+
+      <div class="pullquote">Lexical asks “is it the same word?”; Semantic asks “is it the same meaning?” The two questions often return different answers.</div>
+
+      <p>The strengths of dense retrieval are <strong>meaning, synonyms, and multilinguality</strong>. Even when the wording differs — even when the language differs — it finds what matches in meaning. Its weaknesses are just as distinct. First, it is weak on <strong>exact terms and rare entities</strong>. Product codes or newly coined words it barely saw in training find no good place in the vector space, so BM25 often wins instead. Second, there is the <strong>domain gap</strong>: performance drops in specialized domains (medical, legal, internal corporate documents) far from the distribution the embedding model was trained on. Third, there is <strong>chunking sensitivity</strong>: results swing widely depending on the size at which documents are cut for vectorization. Cut too finely and context is severed; cut too coarsely and several topics blur into a single vector, dulling its focus.</p>
+
+      <span class="chapter-label">Chapter 4. Hybrid RAG</span>
+      <h2>Sparse and Dense Together — RRF Fusion and Re-ranking</h2>
+      <p>Set the strengths and weaknesses of Lexical and Semantic side by side and it becomes clear that the two are <em>complementary</em>: where one is weak, the other is strong. So the natural answer in practice is “use both.” This is <strong>hybrid retrieval</strong>. The problem is only how to <em>combine</em> the two retrievers’ results. BM25 scores and cosine similarities differ in both scale and distribution, so they cannot simply be added.</p>
+
+      <p>The most widely used and elegant solution is <strong>RRF (Reciprocal Rank Fusion)</strong>. Its core idea is to discard the scores and use only the <em>ranks</em>. It forms a final score by summing the reciprocals of the ranks each retriever assigned.</p>
+
+      <figure>
+        <svg viewBox="0 0 760 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="RRF reciprocal rank fusion flow and formula" style="width:100%;height:auto;display:block;">
+          <defs>
+            <marker id="a2" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 Z" fill="#5b6b9c"></path></marker>
+          </defs>
+          <!-- BM25 ranked list -->
+          <rect x="20" y="30" width="150" height="150" rx="10" fill="#eef1ff" stroke="#2233c4" stroke-width="2"></rect>
+          <text x="95" y="52" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="13" font-weight="700" fill="#1a2350">BM25 rank</text>
+          <g font-family="'Segoe UI',sans-serif" font-size="11.5" fill="#1a2350">
+            <text x="36" y="80">1. Doc A</text><text x="36" y="104">2. Doc C</text><text x="36" y="128">3. Doc B</text><text x="36" y="152">4. Doc D</text>
+          </g>
+          <!-- Dense ranked list -->
+          <rect x="20" y="190" width="150" height="110" rx="10" fill="#e6f7ee" stroke="#0f8a55" stroke-width="2"></rect>
+          <text x="95" y="212" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="13" font-weight="700" fill="#0c4a2e">Dense rank</text>
+          <g font-family="'Segoe UI',sans-serif" font-size="11.5" fill="#0c4a2e">
+            <text x="36" y="240">1. Doc B</text><text x="36" y="264">2. Doc A</text><text x="36" y="288">3. Doc E</text>
+          </g>
+          <!-- RRF box -->
+          <rect x="250" y="95" width="250" height="130" rx="12" fill="#fff4e0" stroke="#c47f13" stroke-width="2.2"></rect>
+          <text x="375" y="122" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="14" font-weight="700" fill="#7a4c00">RRF fusion</text>
+          <text x="375" y="156" text-anchor="middle" font-family="'Georgia',serif" font-size="19" fill="#5a3600">RRF(d) = ∑ 1 / (k + rankₕ(d))</text>
+          <text x="375" y="184" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="11.5" fill="#7a4c00">Ranks only · no score normalization</text>
+          <text x="375" y="204" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="11.5" fill="#7a4c00">k = 60 (empirical default)</text>
+          <!-- cross-encoder rerank -->
+          <rect x="560" y="60" width="180" height="90" rx="10" fill="#f3e8ff" stroke="#6a1fb0" stroke-width="2"></rect>
+          <text x="650" y="88" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="12.5" font-weight="700" fill="#4a1585">Cross-encoder</text>
+          <text x="650" y="108" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="10.5" fill="#4a1585">Query + doc encoded jointly</text>
+          <text x="650" y="126" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="10.5" fill="#4a1585">Accuracy ↑ · cost ↑</text>
+          <text x="650" y="143" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="10.5" fill="#6a1fb0">(ColBERT = late interaction)</text>
+          <rect x="560" y="170" width="180" height="70" rx="10" fill="#ffffff" stroke="#4a1585" stroke-width="2"></rect>
+          <text x="650" y="200" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="12.5" font-weight="700" fill="#4a1585">Final top documents</text>
+          <text x="650" y="220" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="10.5" fill="#4a1585">→ LLM context</text>
+          <!-- arrows -->
+          <g stroke="#5b6b9c" stroke-width="2" fill="none" marker-end="url(#a2)">
+            <path d="M170 105 H246"></path>
+            <path d="M170 235 C 210 235, 220 180, 246 165"></path>
+            <path d="M500 140 C 530 140, 535 110, 556 105"></path>
+            <path d="M650 150 V166"></path>
+          </g>
+        </svg>
+        <figcaption>The fusion and re-ranking flow of hybrid retrieval. RRF fuses the <em>ranks</em> assigned separately by BM25 and Dense as a sum of reciprocals (no score normalization needed; k=60 is the empirical default). A cross-encoder (or ColBERT, a late-interaction method) then precisely re-ranks only the top candidates to select the final context.</figcaption>
+      </figure>
+
+      <p>RRF’s virtue lies in its simplicity. Because it merely sums the reciprocals of ranks, <strong>no score normalization is needed</strong>, and the coefficient <em>k</em> acts as a buffer that keeps any single top document from monopolizing the result — empirically, <strong>60</strong> is used as the default. In the original paper, RRF outperformed not only the individual retrieval systems but also other rank-combination methods such as the Condorcet approach. It is an old lesson of information retrieval: a humble formula often surpasses a complex learned combination.</p>
+
+      <p>Once fusion has gathered the candidates, the final fine-tuning step is <strong>re-ranking</strong>. This is where the <strong>cross-encoder</strong> enters. Unlike the bi-encoder, which encodes query and document <em>separately</em>, the cross-encoder joins query and document into <em>a single input and encodes them together</em>, observing their interaction directly. It is accordingly more accurate, but costly, because the model must be run anew for every document. So it is applied not to the whole retrieval but only to a small number of top candidates. Aiming at the middle ground is <strong>ColBERT</strong>’s <em>late interaction</em>: it precomputes token-level embeddings and lets them interact only lightly at query time, striking a compromise between the cross-encoder’s accuracy and the bi-encoder’s scalability.</p>
+
+      <p>All of these choices rest on the lessons of the <strong>BEIR</strong> benchmark. On BEIR, which evaluates retrieval tasks across diverse domains in a <em>zero-shot</em> setting, BM25 remained a surprisingly robust baseline across many domains without any training, while dense retrieval alone showed weakness in <em>generalization</em> once it left its training distribution. Re-ranking and late-interaction methods, by contrast, achieved the highest performance on average — at a correspondingly high computational cost. In short, <strong>there is no free lunch</strong>. Choosing where to stand in the triangle of robustness, performance, and cost is the essence of hybrid design.</p>
+
+      <span class="chapter-label">Chapter 5. Graph RAG</span>
+      <h2>Not Points but a Web — Knowledge-Graph-Based Retrieval</h2>
+      <p>All three preceding methods treat documents as <em>mutually independent fragments</em>. They measure the relevance between the query and each fragment and pull out the top few, but never look at the relationships between the fragments. This works well for local questions where “the answer lies within fragment A,” but is fragile for <strong>global sensemaking</strong> — questions such as “what themes recur across this entire corpus?” — and for <strong>multi-hop</strong> questions that must chain evidence across several documents, because the evidence needed is not gathered within any single fragment.</p>
+
+      <p><strong>GraphRAG</strong>, proposed by Microsoft in 2024, inverts the idea. Before retrieving, it first builds a <strong>knowledge graph</strong> from the corpus. A language model reads through the documents to extract <em>entities</em> and the <em>relations</em> among them, and groups densely connected clusters of nodes in this graph into <strong>communities</strong> (hierarchical community detection). The language model then prepares a <strong>community summary</strong> for each community in advance. Retrieval takes place over these structured summaries rather than over the raw fragments.</p>
+
+      <figure>
+        <svg viewBox="0 0 760 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="GraphRAG local query vs. global query comparison" style="width:100%;height:auto;display:block;">
+          <defs>
+            <marker id="a3" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 Z" fill="#6a1fb0"></path></marker>
+          </defs>
+          <line x1="380" y1="20" x2="380" y2="320" stroke="#ddd" stroke-width="1.5" stroke-dasharray="4 5"></line>
+          <!-- LOCAL (left) -->
+          <text x="30" y="40" font-family="'Segoe UI',sans-serif" font-size="14" font-weight="700" fill="#6a1fb0">Local query</text>
+          <text x="30" y="58" font-family="'Segoe UI',sans-serif" font-size="11" fill="#555">Explore around a specific entity</text>
+          <g stroke="#6a1fb0" stroke-width="1.6">
+            <line x1="150" y1="150" x2="90" y2="110"></line><line x1="150" y1="150" x2="95" y2="200"></line>
+            <line x1="150" y1="150" x2="220" y2="105"></line><line x1="150" y1="150" x2="235" y2="180"></line>
+            <line x1="220" y1="105" x2="290" y2="130"></line>
+          </g>
+          <g fill="#f3e8ff" stroke="#6a1fb0" stroke-width="2">
+            <circle cx="150" cy="150" r="26"></circle><circle cx="90" cy="110" r="16"></circle><circle cx="95" cy="200" r="16"></circle>
+            <circle cx="220" cy="105" r="16"></circle><circle cx="235" cy="180" r="16"></circle><circle cx="290" cy="130" r="14"></circle>
+          </g>
+          <text x="150" y="155" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="12" font-weight="700" fill="#4a1585">Entity</text>
+          <text x="200" y="270" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="11.5" fill="#4a1585">→ Gather nearby entities, relations, source text</text>
+          <text x="200" y="290" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="11" fill="#777">Strong on multi-hop · specific facts</text>
+          <!-- GLOBAL (right) -->
+          <text x="410" y="40" font-family="'Segoe UI',sans-serif" font-size="14" font-weight="700" fill="#0f8a55">Global query</text>
+          <text x="410" y="58" font-family="'Segoe UI',sans-serif" font-size="11" fill="#555">Map-reduce over community summaries</text>
+          <g fill="#e6f7ee" stroke="#0f8a55" stroke-width="2">
+            <rect x="410" y="80" width="90" height="34" rx="8"></rect><rect x="520" y="80" width="90" height="34" rx="8"></rect><rect x="630" y="80" width="90" height="34" rx="8"></rect>
+          </g>
+          <g font-family="'Segoe UI',sans-serif" font-size="10.5" fill="#0c4a2e" text-anchor="middle">
+            <text x="455" y="101">Community 1</text><text x="565" y="101">Community 2</text><text x="675" y="101">Community 3</text>
+          </g>
+          <g stroke="#0f8a55" stroke-width="1.6" fill="none" marker-end="url(#a3)">
+            <path d="M455 114 V150"></path><path d="M565 114 V150"></path><path d="M675 114 V150"></path>
+          </g>
+          <rect x="470" y="152" width="200" height="34" rx="8" fill="#d8f0e2" stroke="#0f8a55" stroke-width="2"></rect>
+          <text x="570" y="174" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="11.5" font-weight="700" fill="#0c4a2e">Partial answers (map)</text>
+          <g stroke="#0f8a55" stroke-width="1.6" fill="none" marker-end="url(#a3)"><path d="M570 186 V214"></path></g>
+          <rect x="470" y="216" width="200" height="38" rx="8" fill="#0f8a55"></rect>
+          <text x="570" y="240" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="12.5" font-weight="700" fill="#ffffff">Synthesized answer (reduce)</text>
+          <text x="570" y="288" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="11.5" fill="#0c4a2e">Strong on global summary · theme discovery</text>
+          <text x="570" y="308" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="11" fill="#777">Comprehensiveness · diversity ↑ (vs vector RAG)</text>
+        </svg>
+        <figcaption>GraphRAG’s two query modes. <b>Local</b> explores the neighborhood graph of a specific entity to answer concrete, multi-hop questions; <b>global</b> synthesizes the community summaries via map-reduce to grasp the themes of the entire corpus.</figcaption>
+      </figure>
+
+      <p>Queries divide into two modes. A <strong>local query</strong> answers by gathering the neighborhood of a specific entity — its connected relations, neighboring entities, and related source text — and suits concrete facts or multi-hop reasoning. A <strong>global query</strong> surveys the whole corpus through <em>map-reduce</em>: it turns each relevant community summary into a partial answer (map), then synthesizes them into one (reduce). According to Microsoft’s report, on <strong>global sensemaking questions</strong> over a corpus of about one million tokens, GraphRAG surpassed ordinary vector RAG in the <em>comprehensiveness</em> and <em>diversity</em> of its answers.</p>
+
+      <div class="pullquote">Where the other three ask “which fragment holds the answer?”, Graph asks “what do the fragments, taken together, say?”</div>
+
+      <p>The price is <strong>construction cost</strong>. Building the graph requires sweeping the entire corpus with a language model to extract entities and relations and generating a summary for every community, so the computational, time, and monetary cost of the indexing stage is high. Moreover, because the extraction process itself depends on a language model, there is a risk that <strong>extraction errors made here are imprinted on the graph and propagate downstream (error propagation)</strong>. A single wrongly drawn relation, in other words, can contaminate the evidence for every later query.</p>
+
+      <h3>The Four Architectures at a Glance</h3>
+      <p>The discussion so far compresses into a single table, below. It is best read not as a ranking of replacements but as a <em>map for choosing</em>.</p>
+
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+      <table style="min-width:640px;">
+        <thead><tr><th>Type</th><th>Principle</th><th>Strengths</th><th>Weaknesses</th><th>Representative tech</th><th>Suited queries</th></tr></thead>
+        <tbody>
+          <tr><td><b>Lexical</b><br>(sparse)</td><td>Inverted index · word match; BM25 score (TF saturation · IDF · length normalization)</td><td>Exact terms · rare words · interpretable · low cost · robust</td><td>Vocabulary mismatch (misses synonyms · alternate wordings)</td><td>Lucene·Elasticsearch·Anserini</td><td>Proper nouns · codes · exact keywords</td></tr>
+          <tr><td><b>Semantic</b><br>(dense)</td><td>Bi-encoder embeddings + ANN (HNSW) vector proximity</td><td>Meaning · synonyms · multilingual</td><td>Exact terms · rare entities · domain gap · chunking-sensitive</td><td>DPR·SBERT·HNSW</td><td>Concept- and intent-centered natural-language queries</td></tr>
+          <tr><td><b>Hybrid</b></td><td>Sparse+dense fusion (RRF, k=60) + cross-encoder/ColBERT re-ranking</td><td>Robust and high-performing through complementarity</td><td>Complex pipeline · re-ranking cost</td><td>RRF·Cross-encoder·ColBERT</td><td>General-purpose · high-precision production search</td></tr>
+          <tr><td><b>Graph</b></td><td>LLM-extracted knowledge graph → community summaries → local/global</td><td>Global sensemaking · multi-hop</td><td>Construction cost · extraction-error propagation</td><td>Microsoft GraphRAG</td><td>Whole-corpus theme discovery · multi-document reasoning</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <span class="chapter-label">Chapter 6. The Anatomy of Hallucination</span>
+      <h2>RAG Reduces Hallucination, but Does Not Eliminate It</h2>
+      <p>Now we enter the heart of this article. Since the biggest reason RAG appeared was hallucination, we must honestly weigh how much it truly resolves. First, let us define <strong>hallucination</strong>. It splits along two main axes. One is <strong>intrinsic hallucination</strong>, where the generated content <em>contradicts the given source</em>. The other is <strong>extrinsic hallucination</strong>, where the model fabricates content whose <em>truth cannot be verified from the source alone</em>. Overlapping but distinct is the pair of <strong>factuality</strong> and <strong>faithfulness</strong>. Factuality asks “does it agree with the truth of the world?”; faithfulness asks “is it faithful to the given evidence?” What RAG aims at directly is chiefly <em>faithfulness</em>, because it attaches evidence and tries to tether the answer to that evidence.</p>
+
+      <p>So <em>how</em> does RAG reduce hallucination? Because it changes the conditions so that the answer is grounded in the retrieval context before it rather than in parametric memory. Supplying up-to-date facts from outside reduces errors caused by stale knowledge; presenting the evidence documents alongside opens a way to verify the answer through <strong>citation</strong>. It also gives the model grounds to say “I don’t know” — the signal that the retrieval came back empty.</p>
+
+      <p>But here we must be sober. RAG <em>reduces hallucination but does not eliminate it</em>. If anything, retrieval as a new stage introduces new points of failure. The failures frequently observed in practice sort into the following four kinds.</p>
+
+      <figure>
+        <svg viewBox="0 0 760 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The four points of hallucination in RAG and the mitigation loop" style="width:100%;height:auto;display:block;">
+          <defs>
+            <marker id="a4" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 Z" fill="#5b6b9c"></path></marker>
+            <marker id="a4r" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 Z" fill="#0f8a55"></path></marker>
+          </defs>
+          <!-- main pipeline -->
+          <g font-family="'Segoe UI',sans-serif" font-size="12" text-anchor="middle">
+            <rect x="20" y="70" width="120" height="48" rx="9" fill="#eef1ff" stroke="#2233c4" stroke-width="1.8"></rect><text x="80" y="99" fill="#1a2350" font-weight="700">Query</text>
+            <rect x="185" y="70" width="120" height="48" rx="9" fill="#eef1ff" stroke="#2233c4" stroke-width="1.8"></rect><text x="245" y="99" fill="#1a2350" font-weight="700">Retrieve</text>
+            <rect x="350" y="70" width="120" height="48" rx="9" fill="#eef1ff" stroke="#2233c4" stroke-width="1.8"></rect><text x="410" y="92" fill="#1a2350" font-weight="700">Context assembly</text><text x="410" y="108" fill="#1a2350" font-size="10">(order · length)</text>
+            <rect x="515" y="70" width="120" height="48" rx="9" fill="#eef1ff" stroke="#2233c4" stroke-width="1.8"></rect><text x="575" y="99" fill="#1a2350" font-weight="700">Generate</text>
+            <rect x="660" y="70" width="90" height="48" rx="9" fill="#ffffff" stroke="#1b2461" stroke-width="2"></rect><text x="705" y="99" fill="#1a2350" font-weight="700">Answer</text>
+          </g>
+          <g stroke="#5b6b9c" stroke-width="2" fill="none" marker-end="url(#a4)">
+            <path d="M140 94 H181"></path><path d="M305 94 H346"></path><path d="M470 94 H511"></path><path d="M635 94 H656"></path>
+          </g>
+          <!-- failure points -->
+          <g font-family="'Segoe UI',sans-serif" font-size="10.5" text-anchor="middle">
+            <g><path d="M245 118 V150" stroke="#c0392b" stroke-width="1.5" stroke-dasharray="3 3"></path><rect x="168" y="150" width="154" height="52" rx="8" fill="#fdecec" stroke="#c0392b" stroke-width="1.6"></rect><text x="245" y="170" fill="#7a1710" font-weight="700">① Retrieval failure</text><text x="245" y="186" fill="#7a1710">Needed doc not found</text><text x="245" y="199" fill="#7a1710">→ empty / wrong evidence</text></g>
+            <g><path d="M410 118 V150" stroke="#c0392b" stroke-width="1.5" stroke-dasharray="3 3"></path><rect x="333" y="150" width="154" height="52" rx="8" fill="#fdecec" stroke="#c0392b" stroke-width="1.6"></rect><text x="410" y="170" fill="#7a1710" font-weight="700">② Noisy context</text><text x="410" y="186" fill="#7a1710">Irrelevant docs mixed in ·</text><text x="410" y="199" fill="#7a1710">lost in the middle</text></g>
+            <g><path d="M575 118 V150" stroke="#c0392b" stroke-width="1.5" stroke-dasharray="3 3"></path><rect x="498" y="150" width="154" height="52" rx="8" fill="#fdecec" stroke="#c0392b" stroke-width="1.6"></rect><text x="575" y="170" fill="#7a1710" font-weight="700">③ Context neglect</text><text x="575" y="186" fill="#7a1710">Evidence present, yet answers</text><text x="575" y="199" fill="#7a1710">from parametric knowledge</text></g>
+            <g><path d="M575 118 V132" stroke="#c0392b" stroke-width="0"></path><rect x="498" y="214" width="154" height="40" rx="8" fill="#fdecec" stroke="#c0392b" stroke-width="1.6"></rect><text x="575" y="231" fill="#7a1710" font-weight="700">④ Knowledge conflict</text><text x="575" y="246" fill="#7a1710">Source vs. internal knowledge clash</text></g>
+          </g>
+          <!-- mitigation loop -->
+          <rect x="120" y="286" width="520" height="56" rx="12" fill="#e6f7ee" stroke="#0f8a55" stroke-width="2"></rect>
+          <text x="380" y="308" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="12.5" font-weight="700" fill="#0c4a2e">Mitigation loop</text>
+          <text x="380" y="328" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="11" fill="#0c4a2e">Re-rank · filter · Self-RAG (self-reflection) · CRAG (retrieval correction) · groundedness · citation · re-retrieve on low confidence</text>
+          <g stroke="#0f8a55" stroke-width="2" fill="none" marker-end="url(#a4r)">
+            <path d="M120 314 C 60 314, 60 94, 176 94"></path>
+          </g>
+          <text x="52" y="205" font-family="'Segoe UI',sans-serif" font-size="10" fill="#0f8a55" text-anchor="middle" transform="rotate(-90 52 205)">re-retrieve</text>
+        </svg>
+        <figcaption>The four points where hallucination seeps into the RAG pipeline (① retrieval failure ② noisy context / lost in the middle ③ context neglect ④ knowledge conflict), and the mitigation loop that holds them down (re-ranking and filtering, Self-RAG, CRAG, groundedness and citation checks, and re-retrieval when confidence falls below threshold).</figcaption>
+      </figure>
+
+      <p>First, <strong>retrieval failure</strong>. If the needed document is never found in the first place, the model makes things up again on top of empty evidence. Second, <strong>noisy context</strong>. When irrelevant documents are mixed in, the model is swayed toward them. In particular, the longer the context grows, the more the <strong>“lost in the middle”</strong> phenomenon appears: when relevant information sits in the <em>middle</em> of the prompt, its utilization drops noticeably compared with when it sits at the front or the back. Third, <strong>context neglect</strong>. Even with evidence plainly present, the model fails to read it and answers from its own parametric memory. Fourth, <strong>knowledge conflict</strong>. When the retrieved source and the model’s internal knowledge diverge, error turns on which of the two it chooses to trust.</p>
+
+      <div class="callout"><b>Why “faithfulness” and “factuality” must be distinguished.</b> Even if RAG answered faithfully to its evidence, the answer is not factual if the evidence document itself is wrong. Conversely, it may ignore the evidence and happen to produce a correct answer. So a RAG system must evaluate the two axes separately: was it bound to the evidence, and was that evidence right?</div>
+
+      <h3>Techniques for Holding Down Hallucination</h3>
+      <p>The first branch of mitigation is to <strong>raise retrieval quality itself</strong>. Re-ranking and filtering strip out noise, and placing relevant documents at the <em>edges</em> of the prompt eases lost in the middle. Fundamentally, the hybrid design seen earlier is itself a hallucination-mitigation design, because good evidence is the premise of a good answer.</p>
+
+      <p>The second branch is to <strong>plant self-checking into the generation stage</strong>. <strong>Self-RAG</strong> trains the model to generate <em>reflection tokens</em> so that it judges for itself whether “retrieval is needed now,” whether “this document is relevant,” and whether “my answer is supported by the evidence.” Instead of retrieving and generating unconditionally, it retrieves only when necessary and critiques its own answer. <strong>CRAG (Corrective RAG)</strong> places a <em>retrieval evaluator</em> that scores the confidence of the retrieval results, and when that is low it corrects them — through a web search, for instance — or refines the documents before passing them on to generation. Both methods reject the complacency of “we retrieved, so we’re done” and carve a <strong>loop that re-interrogates the quality of the evidence</strong> into the pipeline.</p>
+
+      <p>The third branch is <strong>groundedness verification and re-retrieval</strong>. It checks whether each generated sentence is actually supported by the evidence documents (a groundedness check), enforces citation, and — if confidence falls below a threshold — does not emit the answer but retrieves again. In short, the key is to turn the linear flow of “search once, answer once” into a <strong>cycle with verification and retries</strong>.</p>
+
+      <h3>How Do We Measure It?</h3>
+      <p>As important as mitigation is measurement: what you cannot measure, you cannot fix. <strong>RAGAS</strong> is a representative framework that evaluates RAG along three axes — <em>faithfulness</em> (is the answer supported by the retrieval context?), <em>answer relevance</em> (does the answer fit the question?), and <em>context precision/relevance</em> (was the retrieved context really what was needed?). The virtue of this approach is that it separates generation from retrieval and can hold each accountable. <strong>RAGTruth</strong>, meanwhile, is a corpus that annotates hallucinations in large-language-model responses at the <em>word level</em>, providing a precise basis for training and evaluating hallucination-detection models. The “7 Failure Points” taxonomy, which organizes the practical observations mentioned earlier — chunking, retrieval failure, context integration, and so on — becomes a field map for where such evaluation should look.</p>
+
+      <span class="chapter-label">Chapter 7. Closing</span>
+      <h2>There Is No Single Right Answer — Designing for Choice and Verification</h2>
+      <p>Having passed through the four architectures, the repeated conclusion is one: <strong>there is no universal best</strong>. Lexical suits queries where exact keywords, codes, and proper nouns matter; Semantic suits queries that ask about concepts and intent in natural language; Hybrid, fusing and re-ranking the two, suits most production search; and Graph suits queries that survey a whole corpus’s themes or must chain several documents together. Real systems <em>combine these complementarily</em> rather than choosing among them exclusively — hybrid becomes the baseline, with a graph layer laid on top as needed.</p>
+
+      <div class="pullquote">Retrieval rescues intelligence, but not entirely. The remainder is repaid by the verification loop.</div>
+
+      <p>The attitude toward hallucination is the same. RAG is not a silver bullet but a <em>device that lowers the probability</em>. Raising the quality of evidence with good retrieval, filtering out bad evidence with self-reflection and retrieval correction, and re-interrogating the answer to the last with groundedness verification and re-retrieval — only with this <strong>verification loop</strong> is hallucination pressed down to a practical level. And how far it has been pressed must be measured continually with yardsticks like RAGAS and RAGTruth, because improvement without measurement is an illusion.</p>
+
+      <p>In the end, the maturity of RAG design moves from the question “which retriever do we use?” to the question “<em>how do we choose the right retrieval for each query, and how do we verify the result?</em>” The four ways retrieval rescues intelligence are four hands that cover one another’s weaknesses, and hallucination is the single shadow those hands must press down together. Designing a <strong>system</strong> woven from complementarity and verification, rather than searching for one perfect retriever — that is the practical wisdom this field has reached, and where it will remain for some time.</p>
+
+      <div class="references">
+        <h4>References</h4>
+        <ol>
+          <li>Lewis et al., “Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks,” NeurIPS 2020. The original RAG paper — coupling parametric and non-parametric knowledge. <a href="https://arxiv.org/abs/2005.11401" target="_blank" rel="noopener">arxiv.org/abs/2005.11401</a></li>
+          <li>Robertson &amp; Zaragoza, “The Probabilistic Relevance Framework: BM25 and Beyond,” 2009. BM25’s probabilistic relevance framework (TF saturation · IDF · length normalization). <a href="https://dl.acm.org/doi/abs/10.1561/1500000019" target="_blank" rel="noopener">dl.acm.org/doi/abs/10.1561/1500000019</a></li>
+          <li>Karpukhin et al., “Dense Passage Retrieval for Open-Domain QA,” EMNLP 2020 (DPR). Improves recall@20 over BM25 on NQ. <a href="https://arxiv.org/abs/2004.04906" target="_blank" rel="noopener">arxiv.org/abs/2004.04906</a></li>
+          <li>Reimers &amp; Gurevych, “Sentence-BERT,” EMNLP 2019 (SBERT). The large-scale similarity-search advantage of bi-encoder pre-encoding. <a href="https://arxiv.org/abs/1908.10084" target="_blank" rel="noopener">arxiv.org/abs/1908.10084</a></li>
+          <li>Malkov &amp; Yashunin, “Efficient and robust ANN using HNSW graphs,” 2016/2018. Approximate nearest-neighbor search based on a hierarchical proximity graph. <a href="https://arxiv.org/abs/1603.09320" target="_blank" rel="noopener">arxiv.org/abs/1603.09320</a></li>
+          <li>Khattab &amp; Zaharia, “ColBERT: Efficient and Effective Passage Search via Contextualized Late Interaction over BERT,” SIGIR 2020. <a href="https://arxiv.org/abs/2004.12832" target="_blank" rel="noopener">arxiv.org/abs/2004.12832</a></li>
+          <li>Cormack et al., “Reciprocal Rank Fusion outperforms Condorcet and individual Rank Learning Methods,” SIGIR 2009(RRF, k=60). <a href="https://dl.acm.org/doi/10.1145/1571941.1572114" target="_blank" rel="noopener">dl.acm.org/doi/10.1145/1571941.1572114</a></li>
+          <li>Thakur et al., “BEIR: A Heterogeneous Benchmark for Zero-shot Evaluation of IR Models,” NeurIPS 2021. BM25’s robustness, the strength of re-ranking, and the generalization weakness of dense-only. <a href="https://arxiv.org/abs/2104.08663" target="_blank" rel="noopener">arxiv.org/abs/2104.08663</a></li>
+          <li>Edge et al., “From Local to Global: A Graph RAG Approach to Query-Focused Summarization,” Microsoft 2024 (GraphRAG). Community summaries and global sensemaking. <a href="https://arxiv.org/abs/2404.16130" target="_blank" rel="noopener">arxiv.org/abs/2404.16130</a></li>
+          <li>Ji et al., “Survey of Hallucination in Natural Language Generation,” ACM Computing Surveys 2023. Intrinsic/extrinsic, factuality/faithfulness. <a href="https://dl.acm.org/doi/10.1145/3571730" target="_blank" rel="noopener">dl.acm.org/doi/10.1145/3571730</a></li>
+          <li>Huang et al., “A Survey on Hallucination in Large Language Models,” 2023. A synthesis of the causes, detection, and mitigation of hallucination. <a href="https://arxiv.org/abs/2311.05232" target="_blank" rel="noopener">arxiv.org/abs/2311.05232</a></li>
+          <li>Liu et al., “Lost in the Middle: How Language Models Use Long Contexts,” 2023. The drop in utilization of information placed in the middle. <a href="https://arxiv.org/abs/2307.03172" target="_blank" rel="noopener">arxiv.org/abs/2307.03172</a></li>
+          <li>Asai et al., “Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection,” 2023. Self-reflection based on reflection tokens. <a href="https://arxiv.org/abs/2310.11511" target="_blank" rel="noopener">arxiv.org/abs/2310.11511</a></li>
+          <li>Yan et al., “Corrective Retrieval-Augmented Generation (CRAG),” 2024. Retrieval evaluator plus correction. <a href="https://arxiv.org/abs/2401.15884" target="_blank" rel="noopener">arxiv.org/abs/2401.15884</a></li>
+          <li>Es et al., “RAGAS: Automated Evaluation of Retrieval Augmented Generation,” 2023. Faithfulness · answer relevance · context relevance. <a href="https://arxiv.org/abs/2309.15217" target="_blank" rel="noopener">arxiv.org/abs/2309.15217</a></li>
+          <li>Niu et al., “RAGTruth: A Hallucination Corpus for Developing Trustworthy RAG,” 2023/2024. A word-level hallucination-annotated corpus. <a href="https://arxiv.org/abs/2401.00396" target="_blank" rel="noopener">arxiv.org/abs/2401.00396</a></li>
+          <li>Barnett et al., “Seven Failure Points When Engineering a Retrieval Augmented Generation System,” 2024. Practical failure types such as chunking and retrieval failure. <a href="https://arxiv.org/abs/2401.05856" target="_blank" rel="noopener">arxiv.org/abs/2401.05856</a></li>
+        </ol>
+        <p style="margin-top:12px;font-style:italic;">The concrete figures in the text (e.g., DPR’s roughly 20-point recall@20 gain, SBERT’s 65 hours → about 5 seconds, RRF’s k=60) are quoted as reported in the respective original sources; actual performance may vary with data and settings.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer of article -->
+  <div class="art-foot">
+    <div class="art-tags">
+      <a href="#">#RAG</a><a href="#">#RetrievalAugmentedGeneration</a><a href="#">#VectorSearch</a><a href="#">#GraphRAG</a><a href="#">#Hallucination</a>
+    </div>
+    <div class="author-card">
+      <div class="av">DP</div>
+      <div class="who">
+        <b>Daeseung Park</b>
+        <p>Research Engineer at KAIST. I study large language models, time-series forecasting, and conversational AI, and I try to record the process of my research as accurately and readably as I can.</p>
+      </div>
+    </div>
+
+    <div class="read-next no-print">
+        <div class="section-head" style="margin-bottom:20px;"><h2 style="font-size:1.3rem;">Read next</h2></div>
+        <div class="grid grid-2" id="readNext"><a href="../../articles/mcp-agent-interop-standard/" class="post-card fade-up"><div class="thumb"><img class="ph " src="../../../articles/mcp-agent-interop-standard/images/cover.svg" alt="" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;"><span class="cat-pill">AI · Explainer</span><span class="num">17</span></div><span class="cat">AI Agents</span><h3>The Protocol That Became AI's HTTP: MCP and the Interoperability-Standard War</h3><p>The moment chatbots turn into 'acting agents,' the bottleneck is no longer intelligence but the standard for connection. We anatomize how Anthropic's MCP became the de facto standard — its architecture, its politics, and the security homework that remains.</p><div class="meta"><span class="by">Daeseung Park</span><span class="dot-sep">14 min read</span></div></a><a href="../../articles/ai-datacenter-power-crunch/" class="post-card fade-up"><div class="thumb"><img class="ph " src="../../../articles/ai-datacenter-power-crunch/images/cover.svg" alt="" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;"><span class="cat-pill">Tech · Issue</span><span class="num">16</span></div><span class="cat">AI Infrastructure</span><h3>AI's Real Limit Is Electricity</h3><p>Data-center power will roughly double in six years — from about 415 TWh in 2024 to about 945 TWh in 2030. The real bottleneck isn't the GPU; it's the grid that pushes electricity from power plant to rack.</p><div class="meta"><span class="by">Daeseung Park</span><span class="dot-sep">14 min read</span></div></a></div>
+      </div>
+      <nav class="post-nav no-print" id="postNav"><a class="pn" href="../../articles/mcp-agent-interop-standard/"><span class="pn-dir">‹ Previous</span><span class="pn-t">The Protocol That Became AI's HTTP</span></a><a class="pn pn-list" href="../../articles.html">List</a><span class="pn pn-right empty"><span class="pn-dir">Next ›</span><span class="pn-t">None</span></span></nav>
+    </div>
+</article>
+
+<div class="print-footer">Daeseung Park · D. PARK Journal — Four Ways Retrieval Rescues Intelligence: Lexical, Semantic, Hybrid, and Graph RAG, and the Anatomy of Hallucination</div>
+
+<footer class="site-footer no-print" id="contact"><div class="container-x"><div class="footer-grid"><div><div class="footer-brand">D. PARK</div><p style="max-width:34ch;">AI &amp; Software Systems Engineer · KAIST</p><div class="social" style="margin-top:16px;"><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener" aria-label="GitHub">GH</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener" aria-label="ORCID">iD</a><a href="mailto:dspark@daeseungpark.com" aria-label="Email">@</a></div></div><div><h6>Browse</h6><ul><li><a href="../../index.html">Home</a></li><li><a href="../../profile.html">Profile</a></li><li><a href="../../articles.html">Articles</a></li><li><a href="../../research.html">Research</a></li><li><a href="../../notices.html">Notice</a></li></ul></div><div><h6>Articles</h6><ul class="ft-arts"><li><a href="../../articles/rag-architectures-hallucination/">Four Ways Retrieval Rescues Intelligence — Lexical, Semantic, Hybrid, and Graph RAG, and the Anatomy of Hallucination</a></li><li><a href="../../articles/mcp-agent-interop-standard/">The Protocol That Became AI's HTTP</a></li><li><a href="../../articles/ai-datacenter-power-crunch/">AI's Real Limit Is Electricity</a></li><li><a href="../../articles/ai-circular-financing-bubble/">From NVIDIA to NVIDIA</a></li><li><a href="../../articles/abliterated-ai-safety/">The Model With Refusal Erased</a></li></ul></div><div><h6>Contact</h6><ul><li><a href="mailto:dspark@daeseungpark.com">dspark@daeseungpark.com</a></li><li><a href="mailto:dspark@kaist.ac.kr">dspark@kaist.ac.kr</a></li><li><a href="tel:+821064547777">Phone (KR) +82 10 6454 7777</a></li><li><a href="tel:+16574109449">Phone (US) +1 657 410 9449</a></li><li>KAIST, Daejeon, Korea</li></ul></div></div><div class="footer-bottom"><span>© 2026 Daeseung Park. All rights reserved.</span><span>Designed &amp; built as a personal journal for Daeseung Park.</span></div></div></footer>
+
+<div class="mobile-nav" id="mobileNav"><button class="icon-btn close" id="navClose" aria-label="Close">✕</button><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></div>
+
+<script src="../../../assets/js/data.js"></script>
+<script src="../../../assets/js/articles.js"></script>
+<script src="../../../assets/js/i18n-en.js"></script><script src="../../../assets/js/main.js"></script>
+
+
+</body></html>
