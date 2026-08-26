@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light" data-prerendered="1">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>학습이라는 이름의 채굴: 생성형 AI 저작권·데이터 라이선싱 전쟁 - Daeseung Park Journal</title>
+<meta name="description" content="생성형 AI는 인류가 쌓아 온 글·그림·코드를 삼켜 만들어졌다. 웹 크롤링 학습은 공정이용인가, 절도인가. Bartz v. Anthropic 판결과 15억 달러 합의, 언론사·아티스트 소송과 라이선싱 딜, 콘텐츠 시그널·AI 봇 차단, 출처표시(provenance)와 합성데이터, 그리고 한국 저작권법의 좌표를 차분히 해부한다.">
+<link rel="canonical" href="https://daeseungpark.com/articles/genai-copyright-data-licensing/">
+<!-- seo-i18n:start -->
+<link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/genai-copyright-data-licensing/">
+<link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/genai-copyright-data-licensing/">
+<link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/genai-copyright-data-licensing/">
+<meta property="og:locale:alternate" content="en_US">
+<!-- seo-i18n:end -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="D. PARK Journal">
+<meta property="og:title" content="학습이라는 이름의 채굴: 생성형 AI 저작권·데이터 라이선싱 전쟁">
+<meta property="og:description" content="웹 크롤링 학습은 공정이용인가, 절도인가. 소송과 15억 달러 합의, 라이선싱 딜, 콘텐츠 시그널·AI 봇 차단, 출처표시와 합성데이터, 한국 저작권법의 좌표를 해부한다.">
+<meta property="og:url" content="https://daeseungpark.com/articles/genai-copyright-data-licensing/">
+<meta property="og:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="학습이라는 이름의 채굴: 생성형 AI 저작권·데이터 라이선싱 전쟁">
+<meta name="twitter:description" content="웹 크롤링 학습의 공정이용 논쟁, 소송과 라이선싱 딜, 콘텐츠 시그널·AI 봇 차단, 출처표시, 그리고 한국 저작권법의 좌표.">
+<meta name="twitter:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"학습이라는 이름의 채굴: 생성형 AI 저작권·데이터 라이선싱 전쟁","author":{"@type":"Person","name":"박대승","alternateName":"Daeseung Park"},"publisher":{"@type":"Organization","name":"D. PARK Journal"},"image":"https://daeseungpark.com/assets/img/profile/img3.jpg","mainEntityOfPage":"https://daeseungpark.com/articles/genai-copyright-data-licensing/","inLanguage":"ko","datePublished":"2026-08-26"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Noto+Serif+KR:wght@400;600&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/css/article.css">
+</head>
+<body data-base="../../">
+<div class="progress-bar" id="progress"></div>
+<div class="topbar no-print">
+  <div class="container-x">
+    <span class="tb-date" id="today">—</span>
+    <div class="tb-links" data-prerendered="1"><a href="https://ai.daeseungpark.com/chat/" target="_blank" rel="noopener">Abliterated AI</a><a href="https://tcc.daeseungpark.com/" target="_blank" rel="noopener">Mission Control(TCC)</a><a href="../../profile.html">Profile</a><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener">GitHub</a><a href="https://scholar.google.com/citations?hl=ko&amp;user=qVom0QUAAAAJ" target="_blank" rel="noopener">Scholar</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener">ORCID</a><a href="https://hub.docker.com/u/daeseungpark" target="_blank" rel="noopener">Docker</a><a href="https://codespectrum.net" target="_blank" rel="noopener">Blog</a><a href="../../profile.html#contact">Contact</a><a href="../../notices.html">Notice</a><a href="/en/articles/genai-copyright-data-licensing/" class="tb-lang-link" aria-label="Language">English</a></div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header no-print">
+  <div class="container-x nav-row">
+    <a href="../../index.html" class="brand">D<span class="dot">.</span> PARK <small>Journal</small></a>
+    <nav class="main-nav" data-prerendered="1"><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="테마 전환"><span id="themeIcon">☾</span></button>
+      <button class="print-cta" id="printBtn">🖶 인쇄 / PDF</button>
+      <button class="icon-btn nav-toggle" id="navToggle" aria-label="메뉴">≡</button>
+    </div>
+  </div>
+</header>
+
+<div class="ticker no-print">
+  <div class="container-x">
+    <span class="label">Trending</span>
+    <div class="items" id="tickerItems" data-prerendered="1"><a href="../../articles/genai-copyright-data-licensing/">학습이라는 이름의 채굴</a><a href="../../articles/ai-agent-reliability-evals/">데모는 되는데, 프로덕션에서 무너지는 이유</a><a href="../../articles/reasoning-models-test-time-compute/">더 키우기보다 더 생각하게 — 테스트타임 컴퓨트…</a><a href="../../articles/rag-architectures-hallucination/">검색이 지능을 구원하는 네 가지 방법 — Lexical…</a><a href="../../articles/mcp-agent-interop-standard/">AI의 HTTP가 된 프로토콜</a><a href="../../articles/ai-datacenter-power-crunch/">AI의 진짜 한계는 전기다</a></div>
+  </div>
+</div>
+
+<article data-article-id="21">
+  <div class="article-wrap">
+    <!-- Masthead -->
+    <header class="art-head">
+      <span class="cat-pill">Tech · 이슈</span>
+      <h1>학습이라는 이름의 채굴</h1>
+      <p class="deck">생성형 AI는 인류가 수백 년 쌓아 온 글과 그림과 코드를 삼켜 만들어졌다. 그 삼킴은 <em>공정이용</em>이라는 오래된 방패 뒤에 서 있다. 그러나 2025년, 법정과 시장은 방패의 크기를 다시 재기 시작했다. 소송과 15억 달러의 합의, 조용히 확산되는 라이선싱 딜, 웹의 문을 닫는 ‘콘텐츠 시그널’, 그리고 출처를 되묻는 기술 — 학습 데이터를 둘러싼 이 전쟁의 지형을 차분히 그려 본다.</p>
+      <div class="art-byline">
+        <div class="av">DP</div>
+        <div class="who">
+          <b>박대승 (Daeseung Park)</b>
+          <span>AI &amp; Software Systems Engineer · KAIST</span>
+          <span>2026년 8월 · 15분 읽기</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="art-cover"><img src="images/cover.svg" alt="생성형 AI 저작권과 학습데이터 라이선싱 개념도" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;"></div>
+
+    <!-- Summary -->
+    <div class="summary-box">
+      <span class="tag">1분 요약</span>
+      대형 생성모델은 웹에서 긁어모은 방대한 텍스트·이미지로 학습된다. 이 대량 복제가 <strong>공정이용(fair use)</strong>인지가 지난 몇 년간 미국 법정을 달궜다. 2025년 6월, 한 연방법원은 “적법하게 구한 책으로 모델을 학습시키는 행위는 <em>지극히 변형적</em>이라 공정이용”이라면서도 “불법 복제본을 다운로드·보관한 것은 별개의 침해”라고 갈랐고, 그 사건은 <strong>약 15억 달러</strong>라는 기록적 합의로 이어졌다. 뉴욕타임스 대 OpenAI 소송은 여전히 진행 중이다. 소송이 리스크가 되자 시장은 <strong>라이선싱</strong>으로 이동했다 — 다만 무게중심은 ‘학습 데이터’에서 ‘실시간 접근·인용’으로 옮겨 가고 있다. 동시에 크리에이터 진영은 <strong>robots.txt·콘텐츠 시그널·AI 봇 차단</strong>으로 벽을 세우고, <strong>C2PA 출처표시</strong>로 진짜와 합성을 가르려 한다. 한국은 아직 TDM 면책도, 학습데이터 공개 의무도 입법 문턱을 넘지 못했다. 이 글은 그 지형과, 그 위에서 창작자가 어떻게 보상받을 수 있는지를 짚는다. (본문 금액·건수는 보도·공개자료 기준의 <em>추정·발표치</em>다.)
+    </div>
+
+    <!-- Body -->
+    <div class="prose">
+      <span class="chapter-label">Chapter 1. 삼켜진 도서관</span>
+      <h2>공정이용이라는 오래된 방패</h2>
+      <p>생성형 AI를 처음 마주했을 때 사람들이 놀란 것은 그 능력이었지만, 곧 던진 질문은 출처였다. 이 모델은 대체 무엇을 먹고 이렇게 말하게 되었나. 답은 단순하고도 불편하다. 인류가 웹에 올려 둔 거의 모든 것 — 신문 기사와 소설, 블로그와 위키, 사진과 일러스트, 오픈소스 코드와 학술 논문 — 을 대규모로 긁어모아 통계적 패턴으로 압축한 것이 오늘의 대형모델이다. 학습이란 말은 점잖지만, 저작권자의 눈에는 허락 없이 이뤄진 대량 복제에 가깝다.</p>
+      <p>AI 기업들이 이 복제를 정당화하며 내세운 방패가 미국 저작권법의 <strong>공정이용(fair use)</strong>이다. 논리는 이렇다. 모델은 원문을 그대로 되뱉기 위해서가 아니라, 언어의 통계적 구조를 배우기 위해 원문을 ‘읽는다’. 결과물은 원본과 다른 새로운 무엇이므로 이 사용은 <em>변형적(transformative)</em>이고, 따라서 허락 없이도 허용된다는 것이다. 검색엔진이 웹 페이지를 색인하려 복제하는 것이 공정이용으로 인정받아 온 역사가 이 주장을 뒷받침했다.</p>
+      <div class="pullquote">학습이라는 점잖은 말 뒤에는, 허락받지 않은 대량 복제라는 불편한 사실이 서 있다. 문제는 그 복제가 창작인가, 채굴인가이다.</div>
+      <p>반대편의 논리도 만만치 않다. 창작자들은 묻는다. 내 글이 없었다면 이 모델은 이렇게 쓰지 못했을 것이다. 그런데 그 모델은 이제 나와 같은 시장에서 나를 대체하려 한다. 이것이 어떻게 ‘변형’이며, 어떻게 ‘공정’인가. 특히 문제가 된 것은 학습에 쓰인 원본을 <em>어디서 어떻게 구했는가</em>였다. 정식으로 사거나 라이선스한 데이터라면 그나마 낫지만, 저작권을 우회하려 만들어진 이른바 ‘그림자 도서관(shadow library)’에서 통째로 내려받은 것이라면 이야기가 달라진다. 원본을 손에 넣은 방식 자체가 이미 위법일 수 있기 때문이다. 학습의 정당성을 다투기 전에, 재료의 출처부터 문제가 되는 셈이다.</p>
+
+      <span class="chapter-label">Chapter 2. 법정의 저울</span>
+      <h2>2025년, 저울이 기울기 시작하다</h2>
+      <p>추상적 논쟁을 구체적 선으로 바꾼 것은 법정이었다. 2025년 6월 23일, 미국 캘리포니아 북부지방법원은 작가들이 앤스로픽(Anthropic)을 상대로 낸 <strong>Bartz v. Anthropic</strong> 사건에서 주목할 만한 약식판결을 내렸다. 요지는 둘로 갈린다. 첫째, <em>적법하게 취득한</em> 도서로 대형언어모델을 학습시키는 행위 자체는 “지극히(exceedingly) 변형적”이므로 공정이용에 해당한다. 둘째, 그러나 그림자 도서관에서 불법 복제본을 내려받아 보관한 행위는 공정이용의 보호를 받지 못하는 <em>별개의</em> 침해다. 학습은 봐주되, 재료를 훔친 것은 봐주지 않겠다는 뜻이다.</p>
+      <p>이 구분은 실무적으로 결정적이다. 모델을 학습시키는 ‘행위’가 아니라, 학습 코퍼스를 <em>어떻게 확보했는가</em>가 위법성의 경첩(hinge)이 되기 때문이다. 라이선스한 데이터인가, 공개된 웹을 크롤링한 것인가, 아니면 해적판을 통째로 받은 것인가 — 이 세 갈래에서 법적 위험은 전혀 다르게 흐른다. 판결 직후 이 사건은 <strong>약 15억 달러(보도 기준)</strong>라는, AI 저작권 분야에서 유례없는 규모의 합의로 이어졌다. 보도에 따르면 앤스로픽은 그림자 도서관에서 내려받은 것으로 지목된 약 48만 권의 책에 대해 권당 대략 3,000달러 수준을 배상하기로 했다. 학습이 공정이용으로 인정받더라도, <em>재료를 훔친 대가</em>는 따로 치러야 한다는 신호였다.</p>
+
+      <figure>
+        <svg viewBox="0 0 760 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="학습 데이터 출처별 법적 지위 도식" style="width:100%;height:auto;display:block;">
+          <rect x="0" y="0" width="760" height="300" fill="none"/>
+          <text x="380" y="30" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="15" font-weight="700" fill="#1a2350">코퍼스의 출처가 위법성을 가른다</text>
+          <!-- three columns -->
+          <g font-family="'Segoe UI',sans-serif">
+            <!-- licensed -->
+            <rect x="30" y="60" width="220" height="180" rx="12" fill="#e6f7ee" stroke="#0f8a55" stroke-width="2.5"/>
+            <text x="140" y="92" text-anchor="middle" font-size="15" font-weight="700" fill="#0c4a2e">① 라이선스</text>
+            <text x="140" y="120" text-anchor="middle" font-size="12" fill="#333">정식 계약·구매로 확보</text>
+            <text x="140" y="140" text-anchor="middle" font-size="12" fill="#333">출처·대가 명확</text>
+            <rect x="70" y="175" width="140" height="34" rx="17" fill="#0f8a55"/>
+            <text x="140" y="197" text-anchor="middle" font-size="12.5" font-weight="700" fill="#fff">위험 낮음</text>
+            <!-- scraped -->
+            <rect x="270" y="60" width="220" height="180" rx="12" fill="#fff4e0" stroke="#c47f13" stroke-width="2.5"/>
+            <text x="380" y="92" text-anchor="middle" font-size="15" font-weight="700" fill="#7a4c00">② 웹 크롤링</text>
+            <text x="380" y="120" text-anchor="middle" font-size="12" fill="#333">공개 웹 수집</text>
+            <text x="380" y="140" text-anchor="middle" font-size="12" fill="#333">공정이용 여부 다툼</text>
+            <rect x="310" y="175" width="140" height="34" rx="17" fill="#c47f13"/>
+            <text x="380" y="197" text-anchor="middle" font-size="12.5" font-weight="700" fill="#fff">회색지대</text>
+            <!-- pirated -->
+            <rect x="510" y="60" width="220" height="180" rx="12" fill="#fdeaea" stroke="#c0392b" stroke-width="2.5"/>
+            <text x="620" y="92" text-anchor="middle" font-size="15" font-weight="700" fill="#7a1a12">③ 불법 복제</text>
+            <text x="620" y="120" text-anchor="middle" font-size="12" fill="#333">그림자 도서관 등</text>
+            <text x="620" y="140" text-anchor="middle" font-size="12" fill="#333">취득 자체가 침해</text>
+            <rect x="550" y="175" width="140" height="34" rx="17" fill="#c0392b"/>
+            <text x="620" y="197" text-anchor="middle" font-size="12.5" font-weight="700" fill="#fff">위험 높음</text>
+          </g>
+          <text x="380" y="272" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="12" fill="#555">Bartz v. Anthropic(2025): ②의 학습은 변형적이나, ③의 취득·보관은 별개의 침해로 판단</text>
+        </svg>
+        <figcaption>학습 코퍼스의 세 갈래 출처와 법적 지위. 2025년 Bartz v. Anthropic 판결의 핵심은 ‘학습 행위’와 ‘재료 취득 방식’을 분리한 데 있다. 같은 모델이라도 코퍼스를 어떻게 구했느냐에 따라 위법성의 무게가 달라진다.</figcaption>
+      </figure>
+
+      <p>가장 상징적인 전선은 여전히 열려 있다. <strong>뉴욕타임스(NYT) 대 OpenAI·마이크로소프트</strong> 소송에서 NYT는 자사 기사 수백만 건이 허락 없이 복제되어 챗GPT 학습에 쓰였다고 주장한다. 피고 측은 그 사용이 변형적이며 공정이용으로 보호된다고 맞선다. 이 사건이 중요한 이유는, 소설·학술서 같은 정적 저작물이 아니라 <em>매일 갱신되는 저널리즘</em>이 걸려 있기 때문이다. 뉴스 조직의 사업 모델과 AI의 실시간 요약·검색이 정면으로 부딪히는 지점이라, 여기서 나오는 결론은 학습을 넘어 ‘AI가 뉴스를 어떻게 소비해도 되는가’라는 더 넓은 질문으로 번진다.</p>
+      <p>텍스트만의 문제가 아니다. 이미지 쪽 전선은 오히려 더 감정적이다. 사진 아카이브 게티이미지(Getty Images)는 자사 이미지 수백만 장이 무단으로 학습에 쓰였다며 이미지 생성기업 스태빌리티AI(Stability AI)를 영국과 미국에서 걸었고, 개별 일러스트레이터·화가들도 “내 화풍이 학습되어 나를 흉내 내는 그림을 무한히 찍어 낸다”며 집단소송에 나섰다. 글은 문장의 통계로 녹아들지만, 그림에서는 특정 작가의 <em>스타일</em> 자체가 재현되기에 침해의 체감이 훨씬 직접적이다. 화풍은 저작권의 보호 대상이 아니라는 오랜 원칙과, 그럼에도 “이건 명백히 내 것을 베낀 것”이라는 창작자의 직관이 정면으로 부딪힌다. 이 충돌은 텍스트 판례의 논리를 그대로 이미지에 옮길 수 없게 만드는, 또 하나의 미해결 지대다.</p>
+
+      <div class="callout"><b>공정이용의 네 가지 저울추.</b> 미국 법원은 공정이용을 판단할 때 네 요소를 저울에 올린다 — ①사용의 목적과 성격(변형적인가, 상업적인가), ②원저작물의 성격, ③사용된 분량과 비중, ④<strong>원저작물 시장에 미치는 영향</strong>이다. AI 학습 논쟁에서 ①(변형성)은 대체로 AI에 유리하게 기울어 왔지만, 최근 다툼의 무게중심은 ④로 옮겨 가고 있다. 모델이 원저작자와 <em>같은 시장</em>에서 대체재를 쏟아 낸다면, 아무리 변형적이어도 시장을 잠식한 책임은 남는다. ‘변형적이냐’에서 ‘시장을 삼켰느냐’로 질문이 이동하는 중이다.</div>
+
+      <span class="chapter-label">Chapter 3. 소송에서 계약으로</span>
+      <h2>벌금이 무서우면, 값을 치른다</h2>
+      <p>법적 불확실성은 비용이다. 소송에 지면 천문학적 배상이 따르고, 이기더라도 수년의 시간과 평판이 소모된다. 합리적인 기업이라면 이 불확실성을 <em>예측 가능한 지출</em>로 바꾸려 한다. 그 결과가 최근 2년 사이 폭발적으로 늘어난 <strong>콘텐츠 라이선싱 딜</strong>이다. 소송의 반대편에서, AI 기업과 콘텐츠 보유자는 조용히 계약서에 서명하고 있다.</p>
+      <p>보도된 사례만 훑어도 지형이 보인다. OpenAI는 통신·언론사와 가장 공격적으로 계약을 맺어 온 축으로, 공개된 것만 20건이 넘는다. 한 사례에서 OpenAI는 언론사와 다년 계약을 맺으며 지역 뉴스룸 개설 자금까지 댔다고 전해진다. 프랑스의 미스트랄(Mistral)은 AFP 통신과 손잡고 하루 2,300건에 달하는 기사를 6개 언어로 자사 어시스턴트에 공급받기로 했다. 커뮤니티 플랫폼 레딧(Reddit)이 자사 데이터 API 접근을 두고 맺은 계약은 <em>연 7,000만 달러 안팎(보도·미확인)</em>으로 알려졌다. 숫자의 정확도보다 중요한 것은 방향이다 — 데이터는 이제 값이 매겨지는 자산이 되었다.</p>
+      <div class="pullquote">데이터는 더 이상 공짜로 널린 원료가 아니다. 값이 매겨지는 순간, 웹은 도서관에서 시장으로 바뀐다.</div>
+      <p>더 흥미로운 변화는 계약의 <em>성격</em>이다. 초기의 딜이 “과거에 쌓인 아카이브를 학습용으로 넘긴다”는 일회성 성격이었다면, 최근의 무게중심은 <strong>실시간 접근(live access)</strong>과 <strong>인용·링크(attribution)</strong>로 옮겨 가고 있다. AI가 답변 안에 출처를 표시하고 원문으로 트래픽을 돌려보내는 대신, 신선한 데이터를 지속적으로 공급받는 구조다. 학습이 끝나면 굳어 버리는 정적 모델의 약점을, 계약으로 메우는 셈이다. 아래 표는 이 이행을 정리한 것이다.</p>
+
+      <table>
+        <thead><tr><th>구분</th><th>1세대: 학습 데이터 딜</th><th>2세대: 실시간 접근·인용 딜</th></tr></thead>
+        <tbody>
+          <tr><td>거래 대상</td><td>과거 아카이브(정적 코퍼스)</td><td>실시간 피드 + 출처표시·링크</td></tr>
+          <tr><td>목적</td><td>모델 사전학습·미세조정</td><td>답변 근거(grounding)·인용</td></tr>
+          <tr><td>대가 구조</td><td>일시금·정액 위주</td><td>정액 → 사용량 → 동적 과금으로 진화</td></tr>
+          <tr><td>콘텐츠 보유자 이점</td><td>일회성 수익</td><td>지속 수익 + 트래픽·브랜드 노출</td></tr>
+          <tr><td>추세(보도 기준)</td><td>초기 다수</td><td>인용·실시간 딜 급증(2023→2025 수 배)</td></tr>
+        </tbody>
+      </table>
+
+      <p>이 구도는 콘텐츠 보유자에게 양날의 칼이다. 대형 언론사와 거대 플랫폼은 협상력을 가지고 값을 받아 낸다. 그러나 협상 테이블에 앉을 힘이 없는 개인 창작자 — 블로거, 일러스트레이터, 소규모 출판사 — 는 같은 딜에서 배제된다. 라이선싱 시장이 성숙할수록, 데이터의 값은 이미 큰 자에게로 흐른다. 그래서 “AI가 창작자에게 값을 치르게 하자”는 구호는 옳지만, 그 값이 <em>누구에게</em> 돌아가는지를 함께 묻지 않으면 절반의 정의에 그친다.</p>
+
+      <span class="chapter-label">Chapter 4. 벽과 지문</span>
+      <h2>웹은 문을 닫고, 콘텐츠는 지문을 새긴다</h2>
+      <p>계약이 사후적 해법이라면, 크리에이터 진영은 사전적 방어도 세우고 있다. 첫 번째 벽은 오래된 파일 하나에서 시작된다. 웹 크롤러의 행동 규범을 적어 두는 <code>robots.txt</code>다. 원래는 검색엔진을 위한 신사협정이었지만, 이제는 <em>AI 학습 봇을 거부하는</em> 선언의 자리가 되었다. GPTBot·CCBot 같은 알려진 AI 크롤러를 이 파일에서 차단하는 사이트가 급증했다. 고백하자면 이 저널 역시 그렇게 하고 있다 — 지금 읽고 계신 이 글도, 사이트의 robots 설정에서 AI 학습봇의 수집을 명시적으로 막아 둔 상태다. 내가 쓴 글이 어떤 모델의 재료가 되기 전에, 최소한 문 앞에 “허락을 구하라”는 팻말은 붙여 두자는 취지다.</p>
+      <p>문제는 <code>robots.txt</code>가 <em>부탁</em>이지 <em>자물쇠</em>가 아니라는 점이다. 예의 바른 크롤러는 따르지만, 무시하고 긁어가는 쪽을 기술적으로 막지는 못한다. 이 빈틈을 겨냥해 2025년 여러 인프라 사업자가 더 강한 수단을 내놓았다. 대표적으로 클라우드플레어(Cloudflare)는 그해 신규 도메인에 대해 알려진 AI 크롤러를 <strong>기본 차단</strong>하기 시작했고, ‘콘텐츠 시그널(Content Signals)’이라는 기계판독형 정책을 <code>robots.txt</code>에 얹어 검색 색인·AI 입력·AI 학습이라는 <em>용도별</em>로 허용 여부를 구분해 표시할 수 있게 했다. 더 나아가 특정 AI 봇에게는 접근 대신 ‘402 Payment Required(결제 필요)’를 돌려주는 실험도 등장했다. 무단 수집을 막는 데 그치지 않고, <em>접근을 유료화</em>하려는 시도다.</p>
+      <div class="callout"><b>‘콘텐츠 시그널’의 발상.</b> 기존 <code>robots.txt</code>는 “긁어도 되는가/아닌가”만 말할 수 있었다. 콘텐츠 시그널은 여기에 “긁은 <em>다음</em> 무엇에 쓸 수 있는가”라는 층을 더한다. 예컨대 검색 색인은 허용하되 AI 학습은 거부하는 식으로, 같은 페이지에도 용도별로 다른 신호를 붙인다. 다만 이 역시 <em>선언</em>일 뿐 강제력은 없다. 결국 신호(선언)와 방화벽(강제)과 라이선스(대가)가 함께 가야 벽이 완성된다. 규범은 방향을 정하고, 기술은 그것을 집행한다.</div>
+
+      <p>두 번째는 벽이 아니라 <em>지문</em>이다. 콘텐츠가 어디서 왔고 어떻게 만들어졌는지를 콘텐츠 자체에 새겨 두는 <strong>출처표시(provenance)</strong> 기술이다. 그 중심에 C2PA(콘텐츠 출처·진본성 연합)가 만든 ‘콘텐츠 자격증명(Content Credentials)’이 있다. 이미지나 영상에 암호학적으로 서명된 이력을 붙여, 누가·언제·어떤 도구로 만들었는지, <em>AI가 개입했는지</em>, 이후 어떤 편집을 거쳤는지를 기록한다. 2025년 이 규격은 국제표준으로 향하는 단계에 이르렀고, 일부 생성모델은 자사 결과물에 이 자격증명을 붙이겠다고 예고했다. 진짜와 합성을 가르는 라벨을 콘텐츠에 심어, 신뢰의 근거를 만들려는 것이다.</p>
+      <p>그러나 지문에도 한계가 있다. 서명된 메타데이터는 캡처만 하거나 재인코딩하면 떨어져 나갈 수 있고, 워터마크는 편집·변환으로 지워질 수 있다는 연구가 잇따랐다. 출처표시는 진본을 <em>증명</em>할 수는 있어도, 위조를 <em>차단</em>하지는 못한다. 결국 provenance는 만능 자물쇠가 아니라, 신뢰할 만한 출발점을 표시하는 라벨에 가깝다. 여기에 <strong>합성데이터(synthetic data)</strong>라는 변수까지 겹친다. 저작권 분쟁을 피하려 모델이 만든 데이터로 다음 모델을 학습시키는 방식인데, 출처 문제는 줄지 몰라도 원본의 편향과 오류가 되먹임되며 증폭될 위험, 그리고 “합성데이터의 원재료는 결국 누구의 저작물이었나”라는 되물음은 그대로 남는다.</p>
+
+      <span class="chapter-label">Chapter 5. 한국의 좌표, 그리고 보상</span>
+      <h2>면책과 공개 사이에서</h2>
+      <p>이 모든 논쟁을 한국의 좌표계로 옮기면 지형이 조금 다르게 보인다. 미국이 <em>공정이용</em>이라는 유연하지만 예측 어려운 판례법으로 이 문제를 다룬다면, 한국을 비롯한 대륙법계는 저작권 제한을 법조문에 구체적으로 열거하는 방식이다. 그래서 핵심 쟁점은 <strong>텍스트·데이터 마이닝(TDM) 면책 조항</strong>을 저작권법에 새로 넣을 것인가로 모인다. AI 학습 목적의 복제를 일정 조건 아래 허용하자는 것으로, 유럽연합과 일본은 이미 관련 입법을 두고 있다. 한국에서도 TDM 면책을 담은 개정안이 발의됐지만 아직 국회 문턱을 넘지 못했다.</p>
+      <p>반대 방향의 움직임도 있다. 2025년 초, 문화체육관광부는 AI 학습에 사용된 데이터 목록을 공개하도록 하는 저작권법 개정을 추진하겠다고 밝혔다. 학습을 허용하되(면책) 대신 투명성을 요구하는(공개) 두 힘이 맞물리는 형국이다. 그러나 글로벌 빅테크는 학습데이터 공개에 강하게 반대한다 — 무엇을 학습했는지 드러나는 순간, 그것이 곧 소송의 지도이자 경쟁의 정보가 되기 때문이다. 면책과 공개, 이 둘의 균형점을 어디에 찍느냐가 한국형 규율의 성패를 가를 것이다.</p>
+      <div class="pullquote">면책 없이는 산업이 위축되고, 공개 없이는 창작이 고갈된다. 규율의 기술은 이 둘 사이 어디에 선을 긋느냐에 있다.</div>
+      <p>그리고 마지막으로 남는, 가장 근본적인 질문 — <strong>창작자 보상</strong>이다. 라이선싱은 큰 콘텐츠 보유자에게는 답이 되지만, 이름 없는 다수의 창작자에게는 닿지 않는다. 논의되는 대안은 몇 갈래다. 개별 계약을 넘어 음악의 저작권 신탁처럼 <em>집중관리단체</em>가 대량으로 협상하고 분배하는 모델, AI 서비스 매출의 일부를 걷어 창작자 풀에 배분하는 <em>기금·부담금(levy)</em> 모델, 그리고 provenance 기술로 어떤 데이터가 실제로 기여했는지 추적해 그만큼 값을 치르는 <em>사용량 기반 보상</em>이다. 어느 것도 완전하지 않지만, 공통의 전제는 분명하다. 학습의 열매가 재료를 제공한 이들에게 어떤 형태로든 되돌아가야 한다는 것.</p>
+      <div class="callout"><b>맺으며 — 채굴과 경작 사이.</b> ‘학습’은 채굴이기도 하고 경작이기도 하다. 남의 땅을 허락 없이 파낸다면 채굴이지만, 씨앗을 준 이와 수확을 나눈다면 경작이다. 지금의 저작권·라이선싱 전쟁은 결국 이 둘 사이의 좌표를 정하는 과정이다. 법정은 재료의 출처를 묻기 시작했고, 시장은 데이터에 값을 매기기 시작했으며, 크리에이터는 문을 걸고 지문을 새기기 시작했다. 나는 이 흐름이 AI를 늦추는 족쇄가 아니라, 지속 가능하게 만드는 토대라고 믿는다. 재료를 제공한 이들이 고갈되면, 다음 세대의 모델은 결국 자기 그림자를 먹고 야위어 갈 테니까.</div>
+      <p>내 글에 AI 학습봇 차단 팻말을 붙여 둔 것은, 데이터를 인질로 삼으려는 몸부림이 아니다. 그것은 “연결할 수 있는가”보다 “허락을 구했는가”를 먼저 묻자는, 작은 규범의 제안이다. 표준과 계약과 기술이 그 질문에 제대로 답하는 날, 우리는 비로소 채굴을 경작이라 부를 수 있을 것이다. 그 전까지 이 전쟁은, 아직 끝나지 않았다.</p>
+
+      <div class="references">
+        <h4>참고</h4>
+        <ol>
+          <li>Copyright Alliance, “AI Copyright Lawsuit Developments in 2025: A Year in Review.” 2025년 AI 저작권 소송 동향 개관 — Bartz v. Anthropic 등. <a href="https://copyrightalliance.org/ai-copyright-lawsuit-developments-2025/" target="_blank" rel="noopener">copyrightalliance.org</a></li>
+          <li>APM Law, “A Record $1.5 Billion Compensation for Copyright Infringement in AI Training.” Bartz v. Anthropic 합의(약 15억 달러, 약 48만 권·권당 약 3,000달러; 보도·발표치)와 2025-06-23 약식판결(적법 취득 학습=변형적 공정이용, 그림자 도서관 다운로드·보관은 별개 침해). <a href="https://www.apm.law/a-record-1-5-billion-compensation-for-copyright-infringement-in-ai-training-agreed-in-a-settlement-approved-by-us-federal-court/" target="_blank" rel="noopener">apm.law</a></li>
+          <li>OpenAI, “Reporting the facts about the New York Times’ lawsuit.” NYT 대 OpenAI·Microsoft 소송(기사 수백만 건 학습 주장, 공정이용 항변)에 대한 피고 측 입장. <a href="https://openai.com/new-york-times/" target="_blank" rel="noopener">openai.com/new-york-times</a></li>
+          <li>Digiday, “A timeline of the major deals between publishers and AI tech companies in 2025.” OpenAI–언론사 다수(지역 뉴스룸 자금 포함)·Mistral–AFP(하루 2,300건, 6개 언어)·Reddit 데이터 API 계약(연 7천만 달러 안팎, 보도·미확인) 등 라이선싱 딜 타임라인. <a href="https://digiday.com/media/a-timeline-of-the-major-deals-between-publishers-and-ai-tech-companies-in-2025/" target="_blank" rel="noopener">digiday.com</a></li>
+          <li>Cloudflare Blog, “Control content use for AI training with Cloudflare’s managed robots.txt”; ContentSignals.org. 2025-07 신규 도메인 AI 크롤러 기본 차단, 콘텐츠 시그널(용도별 신호: 검색·AI 입력·AI 학습), 402 Payment Required. robots.txt는 선언일 뿐 강제력 없음. <a href="https://blog.cloudflare.com/control-content-use-for-ai-training/" target="_blank" rel="noopener">blog.cloudflare.com</a> · <a href="https://contentsignals.org/" target="_blank" rel="noopener">contentsignals.org</a></li>
+          <li>Wikipedia, “Content Credentials”; C2PA v2.2(2025-05)·ISO 표준화 진행. 콘텐츠 자격증명이 기록하는 항목(작성자·시각·도구·AI 개입·편집 이력)과 합성 콘텐츠 라벨링. 워터마크·메타데이터의 제거 취약성은 관련 연구에서 지적. <a href="https://en.wikipedia.org/wiki/Content_Credentials" target="_blank" rel="noopener">en.wikipedia.org/wiki/Content_Credentials</a></li>
+          <li>법무부, 「데이터 마이닝(TDM) 면책규정 도입 방향의 검토」; 문화체육관광부 2025-01 AI 학습데이터 목록 공개 저작권법 개정 추진 발표(TokenPost 등 보도). 한국의 TDM 면책 개정안 미통과 현황과 EU·일본 입법 비교. <a href="https://www.moj.go.kr/bbs/moj/166/450511/download.do" target="_blank" rel="noopener">moj.go.kr</a> · <a href="https://www.tokenpost.kr/news/ai/304354" target="_blank" rel="noopener">tokenpost.kr</a></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer of article -->
+  <div class="art-foot">
+    <div class="art-tags">
+      <a href="#">#생성형AI</a><a href="#">#저작권</a><a href="#">#라이선싱</a><a href="#">#공정이용</a><a href="#">#학습데이터</a>
+    </div>
+    <div class="author-card">
+      <div class="av">DP</div>
+      <div class="who">
+        <b>박대승 · Daeseung Park</b>
+        <p>KAIST 연구원. 대형언어모델, 시계열 예측, 대화형 AI를 연구합니다. 연구의 과정을 가능한 한 정확하고 읽기 좋게 기록하려 합니다.</p>
+      </div>
+    </div>
+
+    <div class="read-next no-print">
+        <div class="section-head" style="margin-bottom:20px;"><h2 style="font-size:1.3rem;">다음 글</h2></div>
+        <div class="grid grid-2" id="readNext" data-prerendered="1"><a href="../../articles/ai-agent-reliability-evals/" class="post-card fade-up"><div class="thumb"><img class="ph " src="../../articles/ai-agent-reliability-evals/images/cover.svg" alt="" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;"><span class="cat-pill">AI · 기술해설</span><span class="num">20</span></div><span class="cat">AI 에이전트</span><h3>데모는 되는데, 프로덕션에서 무너지는 이유</h3><p>회의실 시연에서는 흠잡을 데 없던 AI 에이전트가, 막상 실전 트래픽 위에 올려놓으면 무너진다. 문제는 대개 모델의 지능이 아니라 신뢰성이다. 한 번 성공하는 것과 매번 성공하는 것은 전혀 다른 공학이기 때문이다. 이 글은 에이전트가 왜 무너지는지, 그것을 어떻게 평가(evals)하고, 무너져도 안전하도록 어떤 가드레일을 깔아야 하는지를 실전 배치의 관점에서 차분히 정리한다.</p><div class="meta"><span class="by">박대승</span><span class="dot-sep">15분 읽기</span></div></a><a href="../../articles/reasoning-models-test-time-compute/" class="post-card fade-up"><div class="thumb"><img class="ph " src="../../articles/reasoning-models-test-time-compute/images/cover.svg" alt="" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;"><span class="cat-pill">AI · 기술해설</span><span class="num">19</span></div><span class="cat">AI 모델</span><h3>더 키우기보다 더 생각하게: 추론형 LLM과 테스트타임 컴퓨트의 경제학</h3><p>지난 몇 해 AI의 성장 공식은 단순했다. 더 큰 모델, 더 많은 데이터, 더 많은 학습 컴퓨트. 그런데 2024년 말부터 무게중심이 조용히 옮겨갔다. 모델을 키우는 대신 추론하는 순간에 더 오래 생각하게 만드는 쪽으로. 이 글은 그 전환의 배경과 원리, 그리고 토큰·지연·비용이 얽힌 새로운 경제학을 차분히 해부한다.</p><div class="meta"><span class="by">박대승</span><span class="dot-sep">15분 읽기</span></div></a></div>
+      </div>
+      <nav class="post-nav no-print" id="postNav" data-prerendered="1"><a class="pn" href="../../articles/ai-agent-reliability-evals/"><span class="pn-dir">‹ 이전 글</span><span class="pn-t">데모는 되는데, 프로덕션에서 무너지는 이유</span></a><a class="pn pn-list" href="../../articles.html">목록</a><span class="pn pn-right empty"><span class="pn-dir">다음 글 ›</span><span class="pn-t">없음</span></span></nav>
+    </div>
+</article>
+
+<div class="print-footer">Daeseung Park · D. PARK Journal — 학습이라는 이름의 채굴: 생성형 AI 저작권·데이터 라이선싱 전쟁</div>
+
+<footer class="site-footer no-print" id="contact" data-prerendered="1"><div class="container-x"><div class="footer-grid"><div><div class="footer-brand">D. PARK</div><p style="max-width:34ch;">AI &amp; Software Systems Engineer · KAIST</p><div class="social" style="margin-top:16px;"><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener" aria-label="GitHub">GH</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener" aria-label="ORCID">iD</a><a href="mailto:dspark@daeseungpark.com" aria-label="Email">@</a></div></div><div><h6>둘러보기</h6><ul><li><a href="../../index.html">Home</a></li><li><a href="../../profile.html">Profile</a></li><li><a href="../../articles.html">Articles</a></li><li><a href="../../research.html">Research</a></li><li><a href="../../notices.html">Notice</a></li></ul></div><div><h6>기고문</h6><ul class="ft-arts"><li><a href="../../articles/genai-copyright-data-licensing/">학습이라는 이름의 채굴</a></li><li><a href="../../articles/ai-agent-reliability-evals/">데모는 되는데, 프로덕션에서 무너지는 이유</a></li><li><a href="../../articles/reasoning-models-test-time-compute/">더 키우기보다 더 생각하게</a></li><li><a href="../../articles/rag-architectures-hallucination/">검색이 지능을 구원하는 네 가지 방법 — Lexical·Semantic·Hybrid·Graph RAG와 환각의 해부</a></li><li><a href="../../articles/mcp-agent-interop-standard/">AI의 HTTP가 된 프로토콜</a></li></ul></div><div><h6>Contact</h6><ul><li><a href="mailto:dspark@daeseungpark.com">dspark@daeseungpark.com</a></li><li><a href="mailto:dspark@kaist.ac.kr">dspark@kaist.ac.kr</a></li><li><a href="tel:+821064547777">Phone (KR) +82 10 6454 7777</a></li><li><a href="tel:+16574109449">Phone (US) +1 657 410 9449</a></li><li>KAIST, Daejeon, Korea</li></ul></div></div><div class="footer-bottom"><span>© 2026 Daeseung Park. All rights reserved.</span><span>Designed &amp; built as a personal journal for Daeseung Park.</span></div></div></footer>
+
+<div class="mobile-nav" id="mobileNav" data-prerendered="1"><button class="icon-btn close" id="navClose" aria-label="닫기">✕</button><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></div>
+
+
+
+<script src="../../assets/js/main.js"></script>
+</body>
+</html>

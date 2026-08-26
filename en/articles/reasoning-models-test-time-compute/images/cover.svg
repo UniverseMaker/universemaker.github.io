@@ -1,0 +1,64 @@
+<svg viewBox="0 0 1200 675" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Reasoning LLMs and test-time compute scaling concept diagram">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1030"/>
+      <stop offset="0.55" stop-color="#161a4a"/>
+      <stop offset="1" stop-color="#2a1c5c"/>
+    </linearGradient>
+    <linearGradient id="rise" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#5b74ff"/>
+      <stop offset="1" stop-color="#a98bff"/>
+    </linearGradient>
+    <linearGradient id="flat" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#8fa0c8"/>
+      <stop offset="1" stop-color="#586089"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#7d8bff" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#7d8bff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect x="0" y="0" width="1200" height="675" fill="url(#bg)"/>
+  <circle cx="880" cy="210" r="320" fill="url(#glow)"/>
+
+  <!-- faint grid -->
+  <g stroke="#ffffff" stroke-opacity="0.06" stroke-width="1">
+    <line x1="120" y1="150" x2="120" y2="560"/>
+    <line x1="330" y1="150" x2="330" y2="560"/>
+    <line x1="540" y1="150" x2="540" y2="560"/>
+    <line x1="750" y1="150" x2="750" y2="560"/>
+    <line x1="960" y1="150" x2="960" y2="560"/>
+    <line x1="120" y1="200" x2="1080" y2="200"/>
+    <line x1="120" y1="320" x2="1080" y2="320"/>
+    <line x1="120" y1="440" x2="1080" y2="440"/>
+  </g>
+
+  <!-- axes -->
+  <line x1="120" y1="560" x2="1080" y2="560" stroke="#ffffff" stroke-opacity="0.4" stroke-width="2"/>
+  <line x1="120" y1="150" x2="120" y2="560" stroke="#ffffff" stroke-opacity="0.4" stroke-width="2"/>
+
+  <!-- pretraining curve: plateauing -->
+  <path d="M120 520 C 320 360, 520 300, 1080 285" fill="none" stroke="url(#flat)" stroke-width="6" stroke-linecap="round" stroke-dasharray="2 14"/>
+  <text x="1010" y="262" text-anchor="end" font-family="'Segoe UI',system-ui,sans-serif" font-size="26" font-weight="600" fill="#c3ccec">Pre-training scaling · plateau</text>
+
+  <!-- test-time curve: rising -->
+  <path d="M120 540 C 460 520, 700 420, 1080 175" fill="none" stroke="url(#rise)" stroke-width="9" stroke-linecap="round"/>
+  <circle cx="1080" cy="175" r="10" fill="#a98bff"/>
+  <text x="1030" y="150" text-anchor="end" font-family="'Segoe UI',system-ui,sans-serif" font-size="27" font-weight="700" fill="#d9d2ff">Test-time compute · rising</text>
+
+  <!-- axis labels -->
+  <text x="600" y="605" text-anchor="middle" font-family="'Segoe UI',system-ui,sans-serif" font-size="24" fill="#9aa6cc">Compute invested →</text>
+  <text x="92" y="355" text-anchor="middle" font-family="'Segoe UI',system-ui,sans-serif" font-size="24" fill="#9aa6cc" transform="rotate(-90 92 355)">Performance →</text>
+
+  <!-- title block -->
+  <text x="120" y="95" font-family="'Segoe UI',system-ui,sans-serif" font-size="30" font-weight="700" fill="#ffffff" letter-spacing="0.5">Reasoning LLMs &amp; Test-Time Compute</text>
+  <text x="120" y="128" font-family="'Segoe UI',system-ui,sans-serif" font-size="20" fill="#aab4dc">Not bigger, but thinking longer at inference</text>
+
+  <!-- thinking tokens motif -->
+  <g font-family="'Segoe UI',system-ui,sans-serif" font-size="18" fill="#c9d0f0" opacity="0.85">
+    <rect x="470" y="470" width="150" height="34" rx="17" fill="#ffffff" fill-opacity="0.08" stroke="#7d8bff" stroke-opacity="0.5"/>
+    <text x="545" y="493" text-anchor="middle">…thinking</text>
+    <text x="645" y="493">→ answer</text>
+  </g>
+</svg>

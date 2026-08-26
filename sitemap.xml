@@ -722,6 +722,15 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://daeseungpark.com/articles/ai-agent-reliability-evals/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/ai-agent-reliability-evals/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/ai-agent-reliability-evals/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/ai-agent-reliability-evals/"/>
+    <lastmod>2026-08-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://daeseungpark.com/articles/ai-circular-financing-bubble/</loc>
     <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/ai-circular-financing-bubble/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/ai-circular-financing-bubble/"/>
@@ -781,6 +790,15 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/empathetic-chatbot/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/empathetic-chatbot/"/>
     <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/articles/genai-copyright-data-licensing/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/genai-copyright-data-licensing/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/genai-copyright-data-licensing/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/genai-copyright-data-licensing/"/>
+    <lastmod>2026-08-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -853,6 +871,15 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/rag-architectures-hallucination/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/rag-architectures-hallucination/"/>
     <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/articles/reasoning-models-test-time-compute/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/reasoning-models-test-time-compute/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/reasoning-models-test-time-compute/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/reasoning-models-test-time-compute/"/>
+    <lastmod>2026-08-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -1595,6 +1622,15 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://daeseungpark.com/en/articles/ai-agent-reliability-evals/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/ai-agent-reliability-evals/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/ai-agent-reliability-evals/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/ai-agent-reliability-evals/"/>
+    <lastmod>2026-08-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://daeseungpark.com/en/articles/ai-circular-financing-bubble/</loc>
     <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/ai-circular-financing-bubble/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/ai-circular-financing-bubble/"/>
@@ -1654,6 +1690,15 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/empathetic-chatbot/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/empathetic-chatbot/"/>
     <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/en/articles/genai-copyright-data-licensing/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/genai-copyright-data-licensing/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/genai-copyright-data-licensing/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/genai-copyright-data-licensing/"/>
+    <lastmod>2026-08-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -1726,6 +1771,15 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/rag-architectures-hallucination/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/rag-architectures-hallucination/"/>
     <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/en/articles/reasoning-models-test-time-compute/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/reasoning-models-test-time-compute/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/reasoning-models-test-time-compute/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/reasoning-models-test-time-compute/"/>
+    <lastmod>2026-08-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

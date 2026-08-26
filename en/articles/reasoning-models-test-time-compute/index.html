@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-prerendered="1"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bigger Model or Longer Thought? The Economics of Reasoning LLMs and Test-Time Compute - Daeseung Park Journal</title>
+<meta name="description" content="Why the center of gravity shifted from making models bigger to making them think longer at inference. We anatomize the rise of RL-trained reasoning models, the token-latency-cost trade-off, the gap between benchmarks and real work, and what it means for Korean industry and research.">
+<link rel="canonical" href="https://daeseungpark.com/en/articles/reasoning-models-test-time-compute/"><link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/reasoning-models-test-time-compute/"><link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/reasoning-models-test-time-compute/"><link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/reasoning-models-test-time-compute/"><meta property="og:locale:alternate" content="ko_KR">
+<!-- seo-i18n:start -->
+
+
+
+
+<!-- seo-i18n:end -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="D. PARK Journal">
+<meta property="og:title" content="Bigger Model or Longer Thought? The Economics of Reasoning LLMs and Test-Time Compute">
+<meta property="og:description" content="Why the center of gravity shifted from making models bigger to making them think longer at inference. The rise of RL-trained reasoning models and the economics of tokens, latency, and cost.">
+<meta property="og:url" content="https://daeseungpark.com/en/articles/reasoning-models-test-time-compute/">
+<meta property="og:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Bigger Model or Longer Thought? The Economics of Reasoning LLMs and Test-Time Compute">
+<meta name="twitter:description" content="The center of gravity moved from scaling models to thinking longer at inference — the rise of reasoning models and the economics of tokens, latency, and cost.">
+<meta name="twitter:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Bigger Model or Longer Thought? The Economics of Reasoning LLMs and Test-Time Compute","author":{"@type":"Person","name":"박대승","alternateName":"Daeseung Park"},"publisher":{"@type":"Organization","name":"D. PARK Journal"},"image":"https://daeseungpark.com/assets/img/profile/img3.jpg","mainEntityOfPage":"https://daeseungpark.com/articles/reasoning-models-test-time-compute/","inLanguage":"en","datePublished":"2026-08-24"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&amp;family=Noto+Serif+KR:wght@400;600&amp;family=Noto+Sans+KR:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="../../../assets/css/style.css">
+<link rel="stylesheet" href="../../../assets/css/article.css">
+<script src="https://www.googletagmanager.com/gtag/js?id=G-1MMKKGR3MF"></script><style id="aiTrialStyle">#aiTrialBtn{position:fixed;right:22px;bottom:22px;z-index:940;display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border:0;border-radius:999px;cursor:pointer;font-family:"Pretendard",system-ui,sans-serif;font-weight:700;font-size:.92rem;color:#fff;background:linear-gradient(135deg,#5b6cff,#8b5bff);box-shadow:0 8px 24px rgba(70,70,140,.35);transition:transform .2s,box-shadow .2s,opacity .2s;}#aiTrialBtn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(70,70,140,.45);}#aiTrialBtn.active{opacity:.5;}#aiTrialBtn .ai-ic{font-size:1.05rem;line-height:1;}#aiTrialBtn .ai-b{font-size:.6rem;font-weight:800;background:rgba(255,255,255,.28);padding:2px 6px;border-radius:999px;letter-spacing:.5px;}#aiTrialPanel{position:fixed;right:22px;bottom:84px;z-index:945;width:380px;max-width:calc(100vw - 32px);height:560px;max-height:calc(100vh - 120px);background:var(--bg,#fff);border:1px solid var(--line,#e6e6e6);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.28);opacity:0;transform:translateY(12px) scale(.98);pointer-events:none;transition:opacity .22s,transform .22s;}#aiTrialPanel.open{opacity:1;transform:none;pointer-events:auto;}#aiTrialPanel .ai-head{display:flex;align-items:center;justify-content:space-between;padding:10px 8px 10px 14px;border-bottom:1px solid var(--line,#e6e6e6);}#aiTrialPanel .ai-ti{font-family:"Pretendard",system-ui,sans-serif;font-size:.9rem;color:var(--ink,#15171a);}#aiTrialPanel .ai-badge{font-size:.64rem;color:#7b83ff;border:1px solid #7b83ff;border-radius:999px;padding:1px 6px;margin-left:5px;}#aiTrialPanel .ai-actions{display:flex;gap:2px;}#aiTrialPanel .ai-x{border:0;background:transparent;cursor:pointer;font-size:1rem;line-height:1;padding:6px 9px;border-radius:8px;color:var(--ink,#15171a);opacity:.65;}#aiTrialPanel .ai-x:hover{opacity:1;background:rgba(125,125,140,.14);}#aiTrialPanel .ai-body{position:relative;flex:1;min-height:0;background:var(--bg,#fff);}#aiTrialPanel .ai-open{font-family:"Pretendard",system-ui,sans-serif;font-size:.78rem;font-weight:700;color:#7b83ff;padding:6px 10px;border-radius:8px;text-decoration:none;white-space:nowrap;}#aiTrialPanel .ai-open:hover{background:rgba(125,125,140,.14);}#aiTrialPanel iframe{position:relative;width:100%;height:100%;border:0;display:block;background:var(--bg,#fff);}@media (max-width:640px){#aiTrialBtn{right:16px;bottom:16px;padding:11px 15px;font-size:.86rem;}}</style></head>
+<body data-base="../../">
+<div class="progress-bar" id="progress"></div>
+<div class="topbar no-print">
+  <div class="container-x">
+    <span class="tb-date" id="today">Monday, August 24, 2026</span>
+    <div class="tb-links"><a href="https://ai.daeseungpark.com/chat/" target="_blank" rel="noopener">Abliterated AI</a><a href="https://tcc.daeseungpark.com/" target="_blank" rel="noopener">Mission Control(TCC)</a><a href="../../profile.html">Profile</a><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener">GitHub</a><a href="https://scholar.google.com/citations?hl=ko&amp;user=qVom0QUAAAAJ" target="_blank" rel="noopener">Scholar</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener">ORCID</a><a href="https://hub.docker.com/u/daeseungpark" target="_blank" rel="noopener">Docker</a><a href="https://codespectrum.net" target="_blank" rel="noopener">Blog</a><a href="../../profile.html#contact">Contact</a><a href="../../notices.html">Notice</a><a href="/articles/reasoning-models-test-time-compute/" class="tb-lang-link" aria-label="Language">한국어</a></div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header no-print">
+  <div class="container-x nav-row">
+    <a href="../../index.html" class="brand">D<span class="dot">.</span> PARK <small>Journal</small></a>
+    <nav class="main-nav"><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">☾</span></button>
+      <button class="print-cta" id="printBtn">🖶 Print / PDF</button>
+      <button class="icon-btn nav-toggle" id="navToggle" aria-label="Menu">≡</button>
+    </div>
+  </div>
+</header>
+
+<div class="ticker no-print">
+  <div class="container-x">
+    <span class="label">Trending</span>
+    <div class="items" id="tickerItems"><a href="../../articles/genai-copyright-data-licensing/">Mining, Called Learning</a><a href="../../articles/ai-agent-reliability-evals/">It Works in the Demo, Breaks in…</a><a href="../../articles/reasoning-models-test-time-compute/">Bigger Model or Longer Thought?</a><a href="../../articles/rag-architectures-hallucination/">Four Ways Retrieval Rescues In…</a><a href="../../articles/mcp-agent-interop-standard/">The Protocol That Became AI's…</a><a href="../../articles/ai-datacenter-power-crunch/">AI's Real Limit Is Electricity</a></div>
+  </div>
+</div>
+
+<article data-article-id="19">
+  <div class="article-wrap">
+    <!-- Masthead -->
+    <header class="art-head">
+      <span class="cat-pill">AI · Explainer</span>
+      <h1>Not Bigger, but Thinking Longer</h1>
+      <p class="deck">For years AI's growth formula was simple: <em>bigger models, more data, more training compute.</em> Then, from late 2024, the center of gravity quietly shifted — away from scaling the model and toward making it <em>think longer at the moment of inference</em>. This piece calmly anatomizes the background and mechanics of that shift, and the new economics in which tokens, latency, and cost are entangled.</p>
+      <div class="art-byline">
+        <div class="av">DP</div>
+        <div class="who">
+          <b>Daeseung Park</b>
+          <span>AI &amp; Software Systems Engineer · KAIST</span>
+          <span>August 2026 · 15 min read</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="art-cover"><img src="images/cover.svg" alt="Concept diagram of pre-training scaling plateauing while test-time compute rises" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;"></div>
+
+    <!-- Summary -->
+    <div class="summary-box">
+      <span class="tag">1-min summary</span>
+      From 2020 to 2025, AI lived in the age of <strong>pre-training scaling</strong>. The formula ruled: grow the parameters and the data, and performance rises. But that curve began to flatten. Ilya Sutskever said the gains from pre-training had reached a <em>plateau</em> and pointed to a data limit — "we have but one internet." Filling the void is <strong>test-time compute</strong> — spending more computation at inference so the model 'thinks' longer. OpenAI's o1 (September 2024) and then DeepSeek-R1 (early 2025) used <strong>reinforcement-learning (RL) post-training</strong> alone to teach models to generate long chains of thought by themselves, reaching top-tier reasoning without a larger model. Yet this approach burns thousands to tens of thousands of 'thinking tokens' per query, creating a new triangular trade-off among <strong>cost, latency, and accuracy</strong>. Benchmarks are near saturation while the gap with real-world performance stays wide, and a new failure mode — 'overthinking' — has appeared. This piece traces the why, the mechanics, the economics, and the place Korean industry and research might take.
+    </div>
+
+    <!-- Body -->
+    <div class="prose">
+      <span class="chapter-label">Chapter 1. The Direction of Scaling Changed</span>
+      <h2>From Bigger to Longer</h2>
+      <p>For quite a while, progress in artificial intelligence followed a strikingly simple formula. Increase a model's parameters, increase the training data, and increase the training compute to digest them both — and performance improves predictably. These are the so-called <strong>scaling laws</strong>. From 2020 to 2025, I have no hesitation in calling this stretch 'the age of scaling.' In practice, too, "let's wait for a bigger model" was the default answer to almost any problem.</p>
+      <p>Yet signals appeared everywhere that the curve was no longer as steep as before. Ilya Sutskever, a co-founder of OpenAI, said publicly that the gains from scaling pre-training had reached a <em>plateau</em>. One sentence of his compresses the situation: "we have but one internet." Data may look infinite, but the amount of high-quality text one can actually scrape is finite, and much of it has already been consumed by training. The hardware to grow models further exists, but the fresh data to fill that hull is drying up fast.</p>
+
+      <div class="pullquote">Data looks infinite, but there is only one internet. The hardware to grow models exists — but the fresh text to fill them is running dry.</div>
+
+      <p>Here a shift in thinking occurs — the realization that the lever for raising performance does not lie in <em>training</em> alone. People, too, do not answer instantly when they meet a hard problem; they pause and think a little longer. What if we let the model spend more computation before it blurts out an answer? This is the axis called <strong>test-time compute</strong>, or inference-time scaling. Instead of enlarging the parameters, we pour more computation into the moment of inference so the model 'thinks' longer and along more branches.</p>
+
+      <p>NVIDIA's Jensen Huang framed it as three scaling laws now coexisting: pre-training and post-training, which continue, and the newly arrived test-time scaling. He specifically forecast that future performance gains will lean more on <em>inference optimization</em> than on pre-training. In other words, scaling itself has not ended; the <em>place</em> where compute is poured has moved from before training to after inference. This subtle but decisive shift redrew the AI landscape over the past two years.</p>
+
+      <p>A cold piece of accounting hides inside this shift. Pre-training is a massive <em>fixed cost</em>: pour hundreds of billions into baking a model once, and inference afterward is relatively cheap. Test-time compute, by contrast, is a <em>variable cost</em> incurred per query — you pay as you go. This structure lowers the barrier to entry, because you can create value simply by layering a clever reasoning strategy on top of a model someone else has baked, without baking a foundation model yourself. Intelligence changing character from a capital-intensive 'manufacturing' business to an operations-intensive 'service' business — that is the economic essence of this transition.</p>
+
+      <span class="chapter-label">Chapter 2. How Reasoning Models Were Born</span>
+      <h2>Reinforcement Learning Teaches a Model 'How to Think'</h2>
+      <p>What gave the idea of test-time compute a concrete body was the arrival of <strong>reasoning models</strong>. In September 2024, OpenAI released o1, trained with large-scale reinforcement learning. What was new about o1 was not simply that it answered well. It was that, before producing an answer, it unfurled a long, <em>invisible reasoning process</em>, broke the problem into small steps, and caught and revisited its own mistakes. Even after training was over, a new dimension opened: the more computation spent at inference, the better the performance.</p>
+
+      <p>What decisively popularized this current was <strong>DeepSeek-R1</strong>, released in early 2025. DeepSeek not only reproduced reasoning performance rivaling o1 but also disclosed its method in detail in a paper. The core message was provocative: even without elaborate supervised learning, reinforcement learning based on <em>outcome rewards</em> alone can teach a model to lengthen its own reasoning. Indeed, R1 reaches its answer while generating far more tokens per query than a standard model — sometimes 10 to 100 times as many.</p>
+
+      <div class="callout"><b>How R1 was trained.</b> DeepSeek-R1's training is known to proceed in roughly four stages. ① <strong>Cold start</strong>: a small set of high-quality reasoning examples lays the foundation. ② <strong>Reasoning-oriented RL</strong>: an outcome reward of right-or-wrong induces long chains of thought. ③ <strong>Rejection sampling + supervised fine-tuning</strong>: good trajectories from RL are selected and retrained for stability. ④ <strong>RL across all domains</strong>: it extends across diverse tasks. Where pure-RL R1-Zero showed readability and language-mixing problems, this pipeline made up for them. The point is that the 'ability to think' came not from larger parameters but from the <em>way of training</em>.</div>
+
+      <p>This carries a large implication for practitioners: reasoning ability does not necessarily require an enormous model. A well-designed post-training routine can make a relatively small model reason impressively on a given task. In fact, some distilled models in the R1 family were small enough to run on laptops or high-end personal devices. The equation 'intelligence = size' has been shaken. Even for camps that fell behind in the race of scale, a new door — the race of method — has opened.</p>
+
+      <p>There is an intriguing contrast, too. o1 hid its reasoning process and showed only a summary, whereas R1 exposed much of the reasoning trace itself. This transparency is a double-edged sword. It gives researchers a window into <em>why</em> the model answered as it did, but it also opens a path for competitors to distill that trace and catch up quickly. Indeed, R1's disclosed method and reasoning traces triggered an explosion of open-source reasoning models. The speed at which the recipe for making intelligence spreads through a single paper — that is another defining feature of this phase.</p>
+
+      <div class="pullquote">The ability to think came not from larger parameters but from the way of training. The equation 'intelligence equals size' has begun to wobble.</div>
+
+      <span class="chapter-label">Chapter 3. The New Economics of Tokens, Latency, and Cost</span>
+      <h2>Thinking Along Three Paths — and the Bill</h2>
+      <p>The ways to use test-time compute divide broadly into three paths. The first is <strong>parallel scaling</strong>: generate several answers to the same problem at once, then pick the best by majority vote (self-consistency) or by a verifier. The second is <strong>sequential scaling</strong>: review and revise a single answer repeatedly. The third is <strong>internal scaling</strong>, in which the model adjusts the depth of its own reasoning according to the difficulty of the problem. This is what models like o1 and R1 do when they stretch and shrink their chains of thought on their own. In practice, search techniques such as Monte Carlo tree search are sometimes layered on top.</p>
+
+      <p>The catch is that all this 'thinking' comes with a <em>bill</em>. If a standard language model spends around 200–500 tokens per query, a reasoning model burns thousands to tens of thousands of thinking tokens on the same query (reported range: roughly 2,000–30,000). Tokens are GPU time, and GPU time is money and latency. When the amount of thinking rises linearly, so do cost and response time. The prescription 'make it think more' is not free.</p>
+
+      <figure>
+        <svg viewBox="0 0 760 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Concept diagram of accuracy and cost against thinking-token budget" style="width:100%;height:auto;display:block;">
+          <rect x="0" y="0" width="760" height="320" fill="none"></rect>
+          <line x1="70" y1="260" x2="710" y2="260" stroke="#8893b8" stroke-width="2"></line>
+          <line x1="70" y1="40" x2="70" y2="260" stroke="#8893b8" stroke-width="2"></line>
+          <text x="390" y="298" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="13" fill="#555">Thinking-token budget (inference compute) →</text>
+          <text x="30" y="150" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="13" fill="#555" transform="rotate(-90 30 150)">Accuracy / cost →</text>
+          <path d="M70 250 C 200 120, 320 80, 430 78 C 520 77, 600 92, 710 104" fill="none" stroke="#2233c4" stroke-width="4" stroke-linecap="round"></path>
+          <text x="452" y="66" font-family="'Segoe UI',sans-serif" font-size="12.5" font-weight="700" fill="#2233c4">Accuracy</text>
+          <path d="M70 250 L 710 70" fill="none" stroke="#c47f13" stroke-width="4" stroke-linecap="round" stroke-dasharray="7 7"></path>
+          <text x="600" y="96" font-family="'Segoe UI',sans-serif" font-size="12.5" font-weight="700" fill="#a5670a">Cost · latency</text>
+          <line x1="300" y1="82" x2="300" y2="260" stroke="#0f8a55" stroke-width="1.5" stroke-dasharray="4 4"></line>
+          <circle cx="300" cy="86" r="6" fill="#0f8a55"></circle>
+          <text x="300" y="278" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="11.5" fill="#0f8a55">Sweet spot</text>
+          <rect x="560" y="60" width="150" height="52" rx="8" fill="#fbeaea" stroke="#c0392b" stroke-width="1.2"></rect>
+          <text x="635" y="80" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="11" font-weight="700" fill="#c0392b">Overthinking zone</text>
+          <text x="635" y="97" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="10" fill="#a23">cost↑, accuracy flat/down</text>
+        </svg>
+        <figcaption>As thinking tokens grow, accuracy rises but soon flattens; past a certain point, only cost and latency climb linearly. Beyond that, an 'overthinking' zone is even observed, where excess thinking makes the model abandon a correct answer. The real curve differs by task and model; the diagram above is illustrative, meant to show the relationship.</figcaption>
+      </figure>
+
+      <p>Even so, what makes this shift attractive is the <em>unit price</em>. The per-token API price of reasoning models fell fast. DeepSeek-R1's published price, for instance, was reported at roughly $0.55 per million input tokens and $2.19 per million output tokens — nearly 96% cheaper than early o1's $15 input / $60 output. The problem is not the unit price but the <em>quantity</em>. Even if a token gets cheaper, using ten or a hundred times as many tokens per query swells the total again. The heart of reasoning economics is managing the product of the two — 'unit price × amount of thinking.'</p>
+
+      <p>One more hidden axis underpins this economics: the asymmetry that <strong>verification is generally cheaper than generation</strong>. Producing the answer to a hard problem from scratch is difficult, but checking whether a given answer is correct is relatively easy. That is why the strategy of cheaply generating several candidate answers and then filtering for the best with a verifier holds up. Yet on open problems where a reliable verifier is hard to build — creation, strategy, value judgment — this lever works poorly. This is precisely why test-time compute shines especially in domains like mathematics and coding, where the correct answer is clear and automatic grading is possible.</p>
+
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+        <table>
+        <thead><tr><th>Aspect</th><th>Pre-training scaling</th><th>Test-time compute</th></tr></thead>
+        <tbody>
+          <tr><td>When compute is spent</td><td>Training phase (once, upfront)</td><td>Inference phase (per query, on demand)</td></tr>
+          <tr><td>How performance rises</td><td>Bigger model and data</td><td>Longer thinking · multiple attempts</td></tr>
+          <tr><td>Cost structure</td><td>Huge fixed cost, cheap thereafter</td><td>Low entry, variable per-query cost</td></tr>
+          <tr><td>Bottleneck</td><td>Data · capital · power</td><td>Tokens · latency · GPU memory</td></tr>
+          <tr><td>Representative case</td><td>Ultra-large foundation models</td><td>Reasoning models like o1 · DeepSeek-R1</td></tr>
+          <tr><td>New failure mode</td><td>Diminishing returns · data exhaustion</td><td>Overthinking · latency blowup</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <p>For this reason, the practical answer is not 'a model that always thinks deeply' but <strong>tiering the amount of thinking by task</strong>. Turn thinking nearly off for easy jobs like translation or classification, and switch on deep reasoning only for hard ones like mathematical proofs or complex code debugging. Even with the same reasoning model, dynamically adjusting the thinking budget can save several times the cost while preserving quality. Engineering in the reasoning era has become as much about designing 'how much to let it think' as about 'which model to use.'</p>
+
+      <span class="chapter-label">Chapter 4. The Gap Between Benchmarks and Reality</span>
+      <h2>The Scores Hit the Ceiling — So Why Doesn't the Work Get Done?</h2>
+      <p>The rise of reasoning models dramatically lifted benchmark scores. Stanford's AI Index 2025 reported that in a single year MMMU, GPQA, and SWE-Bench scores jumped by 18.8, 48.9, and 67.3 points respectively. MMLU now sits above 88% for nearly every frontier model. The trouble is that the closer scores get to the ceiling, the more a benchmark loses its <em>discriminating power</em>. When top models cluster near a perfect score, the metric can no longer separate 'good' from 'great.'</p>
+
+      <p>This is <strong>benchmark saturation</strong>. A study that systematically examined some sixty benchmarks diagnosed nearly half of them as saturated. Add <em>contamination</em> — benchmark items leaking into training data — and leaderboard scores fail to predict performance in real deployment. Interestingly, benchmarks designed by human experts resisted saturation much longer. The complexity and diversity that people create make it harder for a model that learned only surface regularities to game the task.</p>
+
+      <div class="pullquote">The closer scores get to the ceiling, the more a benchmark loses its power to discriminate. A perfect leaderboard score is not the same as field performance.</div>
+
+      <p>So the weight of evaluation is shifting too. OpenAI's <strong>GDPval</strong> is a set of real-world tasks designed by experts from each industry to be representative of the U.S. economy. Experts then evaluate the model's output to judge whether it beats a human's work. It asks not for an exam score but 'can this job actually be entrusted to it?' The gap revealed by such evaluation is often painful. A model that surpassed humans on benchmarks frequently stumbles on real work, where context, tools, and responsibility are entangled.</p>
+
+      <p>Reasoning models have a pitfall of their own: so-called <strong>overthinking</strong>. Give the model more compute to think longer, and it may second-guess a correct answer it had already reached, re-litigate it, and switch to a wrong one. Accuracy rises with more thinking only up to a point; past it, cost soars while accuracy stalls or even falls. The intuition that 'more thinking is always better' does not always hold — this is the most counterintuitive lesson reasoning economics has met.</p>
+
+      <p>Where this gap hurts most is agents. In an autonomous agent, where not a single inference but dozens of judgments and tool calls link together like a chain, a small error at each step accumulates and can topple the whole result. However high a benchmark's one-shot accuracy, reliability across a long workflow is an entirely separate matter. Moreover, since each step consumes thinking tokens, an agent's cost swells to the cost of one reasoning pass multiplied by the number of steps. An agent that 'thinks more' can be smarter, but it is also more expensive, slower, and harder to predict. These three things, which benchmarks fail to show, often decide success or failure in real deployment.</p>
+
+      <span class="chapter-label">Chapter 5. Korea's Place, and Closing</span>
+      <h2>From Chasing Scale to Competing on Method</h2>
+      <p>This shift offers an unexpected opening for Korean industry and research. In the age of pre-training scaling, the contest was decided by the scale of capital, power, and data. Only a handful able to bear trillion-scale compute could stand at the frontier. But the age of test-time compute is a contest of <em>method</em>. Post-training design, tiering of the thinking budget, combining verifiers and tools, domain-specific reasoning — in these areas even a relatively small team has room to offset scale with cleverness.</p>
+
+      <div class="callout"><b>Practical implications from a Korean vantage.</b> ① <strong>Inference infrastructure</strong>: the bottleneck is no longer only the training cluster but <em>inference serving</em>. Optimizing infrastructure to push large volumes of thinking tokens at low latency and low cost becomes a competitive edge. ② <strong>Small model + good method</strong>: layering a well-designed reasoning post-training routine on a small-to-mid model specialized for the native language and a professional domain is more realistic than chasing ultra-large models, and better on sovereignty and cost. ③ <strong>Localizing evaluation</strong>: a perfect score on an English benchmark does not guarantee Korean-language field performance. Building in-house evaluation sets that capture real industry tasks is urgent. ④ <strong>Governing the thinking budget</strong>: designing where and how much to let a model think is itself the work of managing cost and quality at once.</div>
+
+      <p>What I have repeatedly confirmed while working on applications like time-series forecasting, conversational AI, and indoor positioning is no different. In most real problems, the decisive difference came not from the model's absolute size but from how the problem was decomposed and where the computation was concentrated. Test-time compute has, in effect, given theory and tools to this old engineering intuition. Rather than waiting blindly for a bigger model, designing <em>when and how much</em> to let the model at hand think is often the faster road.</p>
+
+      <p>Of course, this axis is no panacea either. As thinking tokens grow, so do the real-world costs of power, carbon, and latency. With data-center power already flagged as AI's true limit, a method that pours ten times the computation into every query cannot expand without bound. In the end, pre-training and test-time compute are not substitutes but <em>complements</em>. A good base model, with just enough thinking layered on as needed — finding that balance point is the task of the next phase.</p>
+
+      <p>Looking back, scaling has not ended; it has changed shape. The place compute is poured moved from before training to after inference, and the definition of intelligence gained not only 'size' but 'time to think.' The simple slogan 'bigger' turned into a design question: 'when, and how much more, to let it think.' I believe this change makes AI a more manageable technology — and therefore one more people can take part in. The real contest will now be decided not by the size of the model but by what, and how, we let that model think.</p>
+
+      <div class="references">
+        <h4>References</h4>
+        <ol>
+          <li>OpenAI, “Learning to Reason with LLMs” (introducing o1), 2024-09. The reasoning model o1, trained with large-scale RL, and the introduction of inference-time compute scaling. <a href="https://openai.com/index/learning-to-reason-with-llms/" target="_blank" rel="noopener">openai.com/index/learning-to-reason-with-llms</a></li>
+          <li>DeepSeek-AI, “DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning,” arXiv:2501.12948, 2025. A four-stage pipeline (cold start · reasoning RL · rejection sampling + SFT · all-domain RL) that learns chains of thought via outcome-reward RL, reproducing o1-class performance. <a href="https://arxiv.org/abs/2501.12948" target="_blank" rel="noopener">arxiv.org/abs/2501.12948</a></li>
+          <li>Reuters / summary by D. W. Torres, “AI Hits a Wall: Ilya Sutskever on the Plateau of LLM Scaling,” 2024–2025. The plateau of pre-training gains, "we have but one internet," and the framing of 2020–2025 as the 'age of scaling.' <a href="https://dianawolftorres.substack.com/p/ai-hits-a-wall-ilya-sutskever-on" target="_blank" rel="noopener">dianawolftorres.substack.com</a></li>
+          <li>NVIDIA / Jensen Huang, the three scaling laws (pre-training · post-training · test-time) and an inference-optimization-centered outlook. Related coverage and commentary. <a href="https://developer.nvidia.com/blog/automating-gpu-kernel-generation-with-deepseek-r1-and-inference-time-scaling/" target="_blank" rel="noopener">developer.nvidia.com</a></li>
+          <li>DeepSeek R1 inference economics — thinking-token volume (roughly 2,000–30,000 per query vs. 200–500 for standard models) and unit price (about $0.55/M input · $2.19/M output, nearly 96% cheaper than o1), and task-tiering strategy. Cost examples in the body are illustrative. <a href="https://www.spheron.network/blog/reasoning-model-inference-cost-gpu-optimization/" target="_blank" rel="noopener">spheron.network</a></li>
+          <li>Stanford HAI, “AI Index Report 2025.” One-year gains for MMMU · GPQA · SWE-Bench (18.8 · 48.9 · 67.3 points), MMLU above 88%, and other saturation signals. <a href="https://hai.stanford.edu/ai-index/2025-ai-index-report" target="_blank" rel="noopener">hai.stanford.edu/ai-index</a></li>
+          <li>“When AI Benchmarks Plateau: A Systematic Study of Benchmark Saturation,” arXiv, 2026. About half of some sixty benchmarks saturated; expert-designed benchmarks retain discriminating power longer. <a href="https://arxiv.org/html/2602.16763v1" target="_blank" rel="noopener">arxiv.org/html/2602.16763v1</a></li>
+          <li>OpenAI, “GDPval” — a benchmark where experts evaluate model outputs on real-world tasks representative of the economy. On the benchmark–reality gap. <a href="https://openai.com/index/gdpval/" target="_blank" rel="noopener">openai.com/index/gdpval</a></li>
+          <li>“When More Thinking Hurts: Overthinking in LLM Test-Time Compute Scaling,” arXiv:2604.10739, 2026. The overthinking phenomenon in which more thinking makes the model abandon a correct answer. <a href="https://arxiv.org/html/2604.10739v1" target="_blank" rel="noopener">arxiv.org/html/2604.10739v1</a></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer of article -->
+  <div class="art-foot">
+    <div class="art-tags">
+      <a href="#">#ReasoningLLM</a><a href="#">#TestTimeCompute</a><a href="#">#ReinforcementLearning</a><a href="#">#InferenceEconomics</a><a href="#">#ScalingLaws</a>
+    </div>
+    <div class="author-card">
+      <div class="av">DP</div>
+      <div class="who">
+        <b>Daeseung Park</b>
+        <p>Researcher at KAIST. I study large language models, time-series forecasting, and conversational AI, and I try to record the research process as accurately and readably as I can.</p>
+      </div>
+    </div>
+
+    <div class="read-next no-print">
+        <div class="section-head" style="margin-bottom:20px;"><h2 style="font-size:1.3rem;">Read next</h2></div>
+        <div class="grid grid-2" id="readNext"><a href="../../articles/genai-copyright-data-licensing/" class="post-card fade-up"><div class="thumb"><img class="ph " src="../../../articles/genai-copyright-data-licensing/images/cover.svg" alt="" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;"><span class="cat-pill">Tech · Issue</span><span class="num">21</span></div><span class="cat">AI Policy</span><h3>Mining, Called Learning: The Generative-AI Copyright and Data-Licensing War</h3><p>Generative AI was built by swallowing the writing, pictures, and code humanity has piled up over centuries. That swallowing stands behind an old shield called fair use. But in 2025, courts and markets began re-measuring the shield. Lawsuits and a $1.5 billion settlement, licensing deals spreading quietly, "content signals" closing the door on the web, and a technology that asks provenance back — this is a calm map of the war over training data.</p><div class="meta"><span class="by">Daeseung Park</span><span class="dot-sep">15 min read</span></div></a><a href="../../articles/ai-agent-reliability-evals/" class="post-card fade-up"><div class="thumb"><img class="ph " src="../../../articles/ai-agent-reliability-evals/images/cover.svg" alt="" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;"><span class="cat-pill">AI · Explainer</span><span class="num">20</span></div><span class="cat">AI Agents</span><h3>It Works in the Demo, Breaks in Production</h3><p>An AI agent that was faultless in the conference-room demo falls apart the moment you put it on real traffic. The problem is usually not the model's intelligence but its reliability — because succeeding once and succeeding every time are entirely different disciplines of engineering. This piece calmly lays out why agents break, how to evaluate (eval) them, and what guardrails must be in place so that even when they break, they fail safely — all from the standpoint of real deployment.</p><div class="meta"><span class="by">Daeseung Park</span><span class="dot-sep">15 min read</span></div></a></div>
+      </div>
+      <nav class="post-nav no-print" id="postNav"><a class="pn" href="../../articles/rag-architectures-hallucination/"><span class="pn-dir">‹ Previous</span><span class="pn-t">Four Ways Retrieval Rescues Intelligence — Lexical, Semantic, Hybrid, and Graph RAG, and the Anatomy of Hallucination</span></a><a class="pn pn-list" href="../../articles.html">List</a><a class="pn pn-right" href="../../articles/ai-agent-reliability-evals/"><span class="pn-dir">Next ›</span><span class="pn-t">It Works in the Demo, Breaks in Production</span></a></nav>
+    </div>
+</article>
+
+<div class="print-footer">Daeseung Park · D. PARK Journal — Bigger Model or Longer Thought? The Economics of Reasoning LLMs and Test-Time Compute</div>
+
+<footer class="site-footer no-print" id="contact"><div class="container-x"><div class="footer-grid"><div><div class="footer-brand">D. PARK</div><p style="max-width:34ch;">AI &amp; Software Systems Engineer · KAIST</p><div class="social" style="margin-top:16px;"><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener" aria-label="GitHub">GH</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener" aria-label="ORCID">iD</a><a href="mailto:dspark@daeseungpark.com" aria-label="Email">@</a></div></div><div><h6>Browse</h6><ul><li><a href="../../index.html">Home</a></li><li><a href="../../profile.html">Profile</a></li><li><a href="../../articles.html">Articles</a></li><li><a href="../../research.html">Research</a></li><li><a href="../../notices.html">Notice</a></li></ul></div><div><h6>Articles</h6><ul class="ft-arts"><li><a href="../../articles/genai-copyright-data-licensing/">Mining, Called Learning</a></li><li><a href="../../articles/ai-agent-reliability-evals/">It Works in the Demo, Breaks in Production</a></li><li><a href="../../articles/reasoning-models-test-time-compute/">Not Bigger, but Thinking Longer</a></li><li><a href="../../articles/rag-architectures-hallucination/">Four Ways Retrieval Rescues Intelligence — Lexical, Semantic, Hybrid, and Graph RAG, and the Anatomy of Hallucination</a></li><li><a href="../../articles/mcp-agent-interop-standard/">The Protocol That Became AI's HTTP</a></li></ul></div><div><h6>Contact</h6><ul><li><a href="mailto:dspark@daeseungpark.com">dspark@daeseungpark.com</a></li><li><a href="mailto:dspark@kaist.ac.kr">dspark@kaist.ac.kr</a></li><li><a href="tel:+821064547777">Phone (KR) +82 10 6454 7777</a></li><li><a href="tel:+16574109449">Phone (US) +1 657 410 9449</a></li><li>KAIST, Daejeon, Korea</li></ul></div></div><div class="footer-bottom"><span>© 2026 Daeseung Park. All rights reserved.</span><span>Designed &amp; built as a personal journal for Daeseung Park.</span></div></div></footer>
+
+<div class="mobile-nav" id="mobileNav"><button class="icon-btn close" id="navClose" aria-label="Close">✕</button><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></div>
+
+
+
+<script src="../../../assets/js/main.js"></script>
+
+
+</body></html>

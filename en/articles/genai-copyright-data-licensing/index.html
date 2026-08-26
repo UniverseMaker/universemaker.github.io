@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-prerendered="1"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mining, Called Learning: The Generative-AI Copyright and Data-Licensing War - Daeseung Park Journal</title>
+<meta name="description" content="Generative AI was built by swallowing the text, images, and code humanity has piled up. Is web-scraping to train a model fair use, or theft? We anatomize the Bartz v. Anthropic ruling and its $1.5 billion settlement, publisher and artist lawsuits and licensing deals, content signals and AI-bot blocking, provenance and synthetic data, and where Korean copyright law stands.">
+<link rel="canonical" href="https://daeseungpark.com/en/articles/genai-copyright-data-licensing/"><link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/genai-copyright-data-licensing/"><link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/genai-copyright-data-licensing/"><link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/genai-copyright-data-licensing/"><meta property="og:locale:alternate" content="ko_KR">
+<!-- seo-i18n:start -->
+
+
+
+
+<!-- seo-i18n:end -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="D. PARK Journal">
+<meta property="og:title" content="Mining, Called Learning: The Generative-AI Copyright and Data-Licensing War">
+<meta property="og:description" content="Is web-scraping to train a model fair use, or theft? We anatomize the lawsuits and the $1.5B settlement, the licensing deals, content signals and AI-bot blocking, provenance and synthetic data, and where Korean copyright law stands.">
+<meta property="og:url" content="https://daeseungpark.com/en/articles/genai-copyright-data-licensing/">
+<meta property="og:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mining, Called Learning: The Generative-AI Copyright and Data-Licensing War">
+<meta name="twitter:description" content="The fair-use fight over web-scraped training, lawsuits and licensing deals, content signals and AI-bot blocking, provenance, and where Korean copyright law stands.">
+<meta name="twitter:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Mining, Called Learning: The Generative-AI Copyright and Data-Licensing War","author":{"@type":"Person","name":"박대승","alternateName":"Daeseung Park"},"publisher":{"@type":"Organization","name":"D. PARK Journal"},"image":"https://daeseungpark.com/assets/img/profile/img3.jpg","mainEntityOfPage":"https://daeseungpark.com/articles/genai-copyright-data-licensing/","inLanguage":"en","datePublished":"2026-08-26"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&amp;family=Noto+Serif+KR:wght@400;600&amp;family=Noto+Sans+KR:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="../../../assets/css/style.css">
+<link rel="stylesheet" href="../../../assets/css/article.css">
+<script src="https://www.googletagmanager.com/gtag/js?id=G-1MMKKGR3MF"></script><style id="aiTrialStyle">#aiTrialBtn{position:fixed;right:22px;bottom:22px;z-index:940;display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border:0;border-radius:999px;cursor:pointer;font-family:"Pretendard",system-ui,sans-serif;font-weight:700;font-size:.92rem;color:#fff;background:linear-gradient(135deg,#5b6cff,#8b5bff);box-shadow:0 8px 24px rgba(70,70,140,.35);transition:transform .2s,box-shadow .2s,opacity .2s;}#aiTrialBtn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(70,70,140,.45);}#aiTrialBtn.active{opacity:.5;}#aiTrialBtn .ai-ic{font-size:1.05rem;line-height:1;}#aiTrialBtn .ai-b{font-size:.6rem;font-weight:800;background:rgba(255,255,255,.28);padding:2px 6px;border-radius:999px;letter-spacing:.5px;}#aiTrialPanel{position:fixed;right:22px;bottom:84px;z-index:945;width:380px;max-width:calc(100vw - 32px);height:560px;max-height:calc(100vh - 120px);background:var(--bg,#fff);border:1px solid var(--line,#e6e6e6);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.28);opacity:0;transform:translateY(12px) scale(.98);pointer-events:none;transition:opacity .22s,transform .22s;}#aiTrialPanel.open{opacity:1;transform:none;pointer-events:auto;}#aiTrialPanel .ai-head{display:flex;align-items:center;justify-content:space-between;padding:10px 8px 10px 14px;border-bottom:1px solid var(--line,#e6e6e6);}#aiTrialPanel .ai-ti{font-family:"Pretendard",system-ui,sans-serif;font-size:.9rem;color:var(--ink,#15171a);}#aiTrialPanel .ai-badge{font-size:.64rem;color:#7b83ff;border:1px solid #7b83ff;border-radius:999px;padding:1px 6px;margin-left:5px;}#aiTrialPanel .ai-actions{display:flex;gap:2px;}#aiTrialPanel .ai-x{border:0;background:transparent;cursor:pointer;font-size:1rem;line-height:1;padding:6px 9px;border-radius:8px;color:var(--ink,#15171a);opacity:.65;}#aiTrialPanel .ai-x:hover{opacity:1;background:rgba(125,125,140,.14);}#aiTrialPanel .ai-body{position:relative;flex:1;min-height:0;background:var(--bg,#fff);}#aiTrialPanel .ai-open{font-family:"Pretendard",system-ui,sans-serif;font-size:.78rem;font-weight:700;color:#7b83ff;padding:6px 10px;border-radius:8px;text-decoration:none;white-space:nowrap;}#aiTrialPanel .ai-open:hover{background:rgba(125,125,140,.14);}#aiTrialPanel iframe{position:relative;width:100%;height:100%;border:0;display:block;background:var(--bg,#fff);}@media (max-width:640px){#aiTrialBtn{right:16px;bottom:16px;padding:11px 15px;font-size:.86rem;}}</style></head>
+<body data-base="../../">
+<div class="progress-bar" id="progress"></div>
+<div class="topbar no-print">
+  <div class="container-x">
+    <span class="tb-date" id="today">—</span>
+    <div class="tb-links"><a href="https://ai.daeseungpark.com/chat/" target="_blank" rel="noopener">Abliterated AI</a><a href="https://tcc.daeseungpark.com/" target="_blank" rel="noopener">Mission Control(TCC)</a><a href="../../profile.html">Profile</a><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener">GitHub</a><a href="https://scholar.google.com/citations?hl=ko&amp;user=qVom0QUAAAAJ" target="_blank" rel="noopener">Scholar</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener">ORCID</a><a href="https://hub.docker.com/u/daeseungpark" target="_blank" rel="noopener">Docker</a><a href="https://codespectrum.net" target="_blank" rel="noopener">Blog</a><a href="../../profile.html#contact">Contact</a><a href="../../notices.html">Notice</a><a href="/articles/genai-copyright-data-licensing/" class="tb-lang-link" aria-label="Language">한국어</a></div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header no-print">
+  <div class="container-x nav-row">
+    <a href="../../index.html" class="brand">D<span class="dot">.</span> PARK <small>Journal</small></a>
+    <nav class="main-nav"><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">☾</span></button>
+      <button class="print-cta" id="printBtn">🖶 Print / PDF</button>
+      <button class="icon-btn nav-toggle" id="navToggle" aria-label="Menu">≡</button>
+    </div>
+  </div>
+</header>
+
+<div class="ticker no-print">
+  <div class="container-x">
+    <span class="label">Trending</span>
+    <div class="items" id="tickerItems"><a href="../../articles/genai-copyright-data-licensing/">Mining, Called Learning</a><a href="../../articles/ai-agent-reliability-evals/">It Works in the Demo, Breaks in…</a><a href="../../articles/reasoning-models-test-time-compute/">Bigger Model or Longer Thought?</a><a href="../../articles/rag-architectures-hallucination/">Four Ways Retrieval Rescues In…</a><a href="../../articles/mcp-agent-interop-standard/">The Protocol That Became AI's…</a><a href="../../articles/ai-datacenter-power-crunch/">AI's Real Limit Is Electricity</a></div>
+  </div>
+</div>
+
+<article data-article-id="21">
+  <div class="article-wrap">
+    <!-- Masthead -->
+    <header class="art-head">
+      <span class="cat-pill">Tech · Issue</span>
+      <h1>Mining, Called Learning</h1>
+      <p class="deck">Generative AI was built by swallowing the writing, pictures, and code humanity has piled up over centuries. That swallowing stands behind an old shield called <em>fair use</em>. But in 2025, courts and markets began re-measuring the shield. Lawsuits and a $1.5 billion settlement, licensing deals spreading quietly, "content signals" closing the door on the web, and a technology that asks provenance back — this is a calm map of the war over training data.</p>
+      <div class="art-byline">
+        <div class="av">DP</div>
+        <div class="who">
+          <b>Daeseung Park</b>
+          <span>AI &amp; Software Systems Engineer · KAIST</span>
+          <span>August 2026 · 15 min read</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="art-cover"><img src="images/cover.svg" alt="Conceptual illustration of generative-AI copyright and training-data licensing" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;"></div>
+
+    <!-- Summary -->
+    <div class="summary-box">
+      <span class="tag">1-min summary</span>
+      Large generative models are trained on vast text and images scraped from the web. Whether this mass copying counts as <strong>fair use</strong> has kept U.S. courts busy for years. In June 2025, one federal court split the question: training a model on <em>lawfully acquired</em> books is "exceedingly transformative" and thus fair use — but downloading and keeping pirated copies is a <em>separate</em> infringement. That case led to a record settlement of <strong>about $1.5 billion</strong>. The New York Times v. OpenAI suit is still ongoing. As litigation became a risk, the market moved to <strong>licensing</strong> — though the center of gravity is shifting from "training data" to "live access and attribution." Meanwhile creators are building walls with <strong>robots.txt, content signals, and AI-bot blocking</strong>, and trying to separate the real from the synthetic with <strong>C2PA provenance</strong>. Korea has yet to pass either a TDM exemption or a training-data disclosure mandate. This piece maps that terrain — and asks how creators can actually be paid. (Figures for money and deal counts are <em>reported or announced estimates</em>.)
+    </div>
+
+    <!-- Body -->
+    <div class="prose">
+      <span class="chapter-label">Chapter 1. The Swallowed Library</span>
+      <h2>Fair use, the old shield</h2>
+      <p>When people first met generative AI they were struck by its ability, but the question they soon asked was about its sources. What did this model eat to learn to speak like this? The answer is simple and uncomfortable. Almost everything humanity had put on the web — newspaper articles and novels, blogs and wikis, photographs and illustrations, open-source code and scholarly papers — was scraped at scale and compressed into statistical patterns. "Learning" is a polite word, but to a rights holder it looks a lot like mass copying done without permission.</p>
+      <p>The shield AI companies raised to justify this copying is <strong>fair use</strong> under U.S. copyright law. The logic runs like this. A model reads the original not to regurgitate it verbatim, but to learn the statistical structure of language. Because the output is something new and different from the source, the use is <em>transformative</em>, and therefore permitted without permission. The long history of search engines copying web pages in order to index them — recognized as fair use — buttressed the argument.</p>
+      <div class="pullquote">Behind the polite word "learning" stands the uncomfortable fact of unauthorized mass copying. The question is whether that copying is creation, or extraction.</div>
+      <p>The other side's logic is no weaker. Creators ask: without my writing, this model could not write like this. Yet that model now competes with me in the very market I depend on. How is that "transformation," and how is it "fair"? What proved especially thorny was <em>where and how</em> the originals used in training were obtained. Properly bought or licensed data is one thing; a whole corpus downloaded from a so-called "shadow library" built to circumvent copyright is another. The very way the source was acquired may already be unlawful. Before you can argue the legitimacy of the learning, the provenance of the raw material is already in question.</p>
+
+      <span class="chapter-label">Chapter 2. The Scales of the Court</span>
+      <h2>In 2025, the scales began to tip</h2>
+      <p>What turned an abstract debate into a concrete line was the courtroom. On June 23, 2025, the U.S. District Court for the Northern District of California issued a notable summary-judgment order in <strong>Bartz v. Anthropic</strong>, a suit brought by authors against Anthropic. The holding splits in two. First, training a large language model on <em>lawfully acquired</em> books is "exceedingly" transformative and qualifies as fair use. Second, however, downloading and retaining pirated copies from shadow libraries is a <em>separate</em> infringement not protected by fair use. Learning is forgiven; stealing the material is not.</p>
+      <p>This distinction is decisive in practice. What becomes the hinge of liability is not the "act" of training a model, but <em>how the training corpus was obtained</em>. Licensed data, crawled from the open web, or downloaded wholesale as pirated files — legal risk flows very differently along those three paths. Shortly after the ruling, the case led to a settlement of <strong>about $1.5 billion (as reported)</strong>, an unprecedented figure in AI copyright. By reports, Anthropic agreed to pay roughly $3,000 for each of some 480,000 books identified as downloaded from shadow libraries. Even when the learning is deemed fair use, the price of <em>stealing the raw material</em> must be paid separately.</p>
+
+      <figure>
+        <svg viewBox="0 0 760 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Legal status of training data by source" style="width:100%;height:auto;display:block;">
+          <rect x="0" y="0" width="760" height="300" fill="none"/>
+          <text x="380" y="30" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="15" font-weight="700" fill="#1a2350">The source of the corpus divides liability</text>
+          <g font-family="'Segoe UI',sans-serif">
+            <rect x="30" y="60" width="220" height="180" rx="12" fill="#e6f7ee" stroke="#0f8a55" stroke-width="2.5"/>
+            <text x="140" y="92" text-anchor="middle" font-size="15" font-weight="700" fill="#0c4a2e">① Licensed</text>
+            <text x="140" y="120" text-anchor="middle" font-size="12" fill="#333">Obtained by contract/purchase</text>
+            <text x="140" y="140" text-anchor="middle" font-size="12" fill="#333">Clear source and payment</text>
+            <rect x="70" y="175" width="140" height="34" rx="17" fill="#0f8a55"/>
+            <text x="140" y="197" text-anchor="middle" font-size="12.5" font-weight="700" fill="#fff">Low risk</text>
+            <rect x="270" y="60" width="220" height="180" rx="12" fill="#fff4e0" stroke="#c47f13" stroke-width="2.5"/>
+            <text x="380" y="92" text-anchor="middle" font-size="15" font-weight="700" fill="#7a4c00">② Web-scraped</text>
+            <text x="380" y="120" text-anchor="middle" font-size="12" fill="#333">Collected from open web</text>
+            <text x="380" y="140" text-anchor="middle" font-size="12" fill="#333">Fair use contested</text>
+            <rect x="310" y="175" width="140" height="34" rx="17" fill="#c47f13"/>
+            <text x="380" y="197" text-anchor="middle" font-size="12.5" font-weight="700" fill="#fff">Gray zone</text>
+            <rect x="510" y="60" width="220" height="180" rx="12" fill="#fdeaea" stroke="#c0392b" stroke-width="2.5"/>
+            <text x="620" y="92" text-anchor="middle" font-size="15" font-weight="700" fill="#7a1a12">③ Pirated</text>
+            <text x="620" y="120" text-anchor="middle" font-size="12" fill="#333">Shadow libraries, etc.</text>
+            <text x="620" y="140" text-anchor="middle" font-size="12" fill="#333">Acquisition itself infringes</text>
+            <rect x="550" y="175" width="140" height="34" rx="17" fill="#c0392b"/>
+            <text x="620" y="197" text-anchor="middle" font-size="12.5" font-weight="700" fill="#fff">High risk</text>
+          </g>
+          <text x="380" y="272" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="12" fill="#555">Bartz v. Anthropic (2025): training on ② is transformative, but acquiring/keeping ③ is a separate infringement</text>
+        </svg>
+        <figcaption>The three sources of a training corpus and their legal status. The core of the 2025 Bartz v. Anthropic ruling is that it separated the "act of learning" from the "manner of acquiring the material." Even for the same model, the weight of liability shifts with how the corpus was obtained.</figcaption>
+      </figure>
+
+      <p>The most symbolic front is still open. In <strong>The New York Times (NYT) v. OpenAI and Microsoft</strong>, the Times alleges that millions of its articles were copied without permission to train ChatGPT. The defense counters that the use is transformative and protected by fair use. What makes this case important is that what is at stake is not static works like novels or textbooks, but <em>journalism that is refreshed every day</em>. It is the point where a news organization's business model collides head-on with AI's real-time summarizing and search, so the conclusion here spills beyond training into a broader question: how may AI consume the news at all?</p>
+      <p>It is not a text-only problem. The image front is, if anything, more emotional. The photo archive Getty Images sued the image-generation company Stability AI in the U.K. and the U.S., claiming millions of its images were used in training without permission, and individual illustrators and painters filed class actions arguing that "my style is learned and then used to churn out endless imitations of me." Writing dissolves into the statistics of sentences, but in images a particular artist's <em>style</em> itself is reproduced, so the infringement feels far more direct. The old principle that style is not protected by copyright collides head-on with a creator's intuition that "this is plainly a copy of what is mine." This clash is another unresolved zone that keeps the logic of text precedents from mapping cleanly onto images.</p>
+
+      <div class="callout"><b>The four counterweights of fair use.</b> When U.S. courts assess fair use, they place four factors on the scale — ① the purpose and character of the use (transformative or commercial), ② the nature of the original work, ③ the amount and substantiality used, and ④ <strong>the effect on the market for the original</strong>. In the AI-training debate, ① (transformativeness) has largely tilted in AI's favor, but the recent center of gravity is moving toward ④. If a model floods the <em>same market</em> as the original author with substitutes, then however transformative it is, the responsibility for cannibalizing that market remains. The question is shifting from "is it transformative?" to "did it swallow the market?"</div>
+
+      <span class="chapter-label">Chapter 3. From Lawsuits to Contracts</span>
+      <h2>If fines frighten you, pay the price</h2>
+      <p>Legal uncertainty is a cost. Lose a suit and astronomical damages follow; win, and you still burn years and reputation. A rational company tries to convert that uncertainty into <em>predictable spending</em>. The result is the <strong>content-licensing deals</strong> that have exploded over the past two years. On the far side of litigation, AI companies and content owners are quietly signing contracts.</p>
+      <p>Even a glance at reported cases reveals the terrain. OpenAI has been among the most aggressive in striking deals with wire services and news outlets — more than twenty are publicly known. In one case OpenAI reportedly even funded the opening of local newsrooms as part of a multi-year publisher deal. France's Mistral partnered with the AFP news agency to feed its assistant some 2,300 stories a day in six languages. Reddit's deal over access to its data API was reported at <em>around $70 million a year (reported, unconfirmed)</em>. What matters more than the precision of the numbers is the direction: data has become an asset with a price.</p>
+      <div class="pullquote">Data is no longer free raw material lying about. The moment it is priced, the web turns from a library into a marketplace.</div>
+      <p>The more interesting change is in the <em>character</em> of the contracts. Where early deals were one-off — "hand over the accumulated archive for training" — the recent center of gravity is moving toward <strong>live access</strong> and <strong>attribution and links</strong>. Instead, the AI shows sources in its answers and sends traffic back to the original, while receiving a continuous feed of fresh data. It is a way of patching, by contract, the weakness of a static model that freezes once training ends. The table below summarizes this transition.</p>
+
+      <table>
+        <thead><tr><th>Dimension</th><th>Gen 1: Training-data deal</th><th>Gen 2: Live-access &amp; attribution deal</th></tr></thead>
+        <tbody>
+          <tr><td>What is traded</td><td>Past archive (static corpus)</td><td>Real-time feed + attribution/links</td></tr>
+          <tr><td>Purpose</td><td>Pre-training / fine-tuning</td><td>Grounding answers / citation</td></tr>
+          <tr><td>Payment structure</td><td>Mostly lump-sum / flat</td><td>Flat → usage → dynamic pricing</td></tr>
+          <tr><td>Content owner's upside</td><td>One-time revenue</td><td>Recurring revenue + traffic/brand</td></tr>
+          <tr><td>Trend (as reported)</td><td>Many early on</td><td>Attribution/live deals surging (several-fold 2023→2025)</td></tr>
+        </tbody>
+      </table>
+
+      <p>This arrangement is a double-edged sword for content owners. Large publishers and giant platforms have leverage and extract payment. But individual creators with no power to sit at the table — bloggers, illustrators, small presses — are shut out of the same deals. The more the licensing market matures, the more the value of data flows toward those who are already big. So the slogan "make AI pay creators" is right, but unless we also ask <em>to whom</em> that payment returns, it is only half of justice.</p>
+
+      <span class="chapter-label">Chapter 4. Walls and Fingerprints</span>
+      <h2>The web closes its doors; content engraves a fingerprint</h2>
+      <p>If contracts are an after-the-fact remedy, the creator camp is also building preventive defenses. The first wall begins in a single old file: <code>robots.txt</code>, which records the rules of conduct for web crawlers. Originally a gentlemen's agreement for search engines, it has now become the place to declare a refusal of <em>AI training bots</em>. The number of sites blocking known AI crawlers such as GPTBot and CCBot in this file has surged. I will confess that this journal does the same — even the article you are reading now has, in the site's robots settings, an explicit block on collection by AI training bots. Before my writing becomes some model's raw material, the least I can do is post a sign at the door: "ask permission first."</p>
+      <p>The trouble is that <code>robots.txt</code> is a <em>request</em>, not a <em>lock</em>. A polite crawler obeys, but nothing technically stops one that ignores it and scrapes anyway. Aiming at this gap, several infrastructure providers offered stronger tools in 2025. Cloudflare, for one, began <strong>blocking known AI crawlers by default</strong> on new domains that year, and layered a machine-readable policy called "Content Signals" onto <code>robots.txt</code> so that permission could be marked <em>by use case</em> — search indexing, AI input, AI training. It went further with experiments that return "402 Payment Required" to certain AI bots instead of access. The aim is not merely to block unauthorized collection, but to <em>put a price on access</em>.</p>
+      <div class="callout"><b>The idea behind "content signals."</b> Traditional <code>robots.txt</code> could only say "may you scrape or not." Content signals add a layer: "and once scraped, what may it be used for?" You can, for instance, allow search indexing while refusing AI training — attaching different signals to the same page by purpose. But this too is only a <em>declaration</em>, with no force of its own. In the end the wall is complete only when the signal (declaration), the firewall (enforcement), and the license (payment) move together. Norms set the direction; technology enforces it.</div>
+
+      <p>The second is not a wall but a <em>fingerprint</em>: <strong>provenance</strong> technology that engraves into the content itself where it came from and how it was made. At its center is "Content Credentials," created by the C2PA (Coalition for Content Provenance and Authenticity). It attaches a cryptographically signed history to an image or video — recording who made it, when, with what tools, <em>whether AI was involved</em>, and every edit since. In 2025 the specification advanced toward becoming an international standard, and some generative models announced they would attach these credentials to their outputs. The goal is to plant, in the content, a label that separates the real from the synthetic, and so to build a basis for trust.</p>
+      <p>But fingerprints have limits too. Signed metadata can be stripped by a mere screen capture or re-encoding, and watermarks can be erased by editing or conversion, as a run of studies has shown. Provenance can <em>prove</em> the authentic, but it cannot <em>block</em> the forged. In the end it is not an all-purpose lock but a label marking a trustworthy starting point. On top of this comes the variable of <strong>synthetic data</strong> — training the next model on data a model made, to dodge copyright disputes. It may reduce the provenance problem, but it risks feeding back and amplifying the biases and errors of the original, and the question remains: whose work was the raw material of that synthetic data, after all?</p>
+
+      <span class="chapter-label">Chapter 5. Korea's Coordinates, and Compensation</span>
+      <h2>Between exemption and disclosure</h2>
+      <p>Move all of this onto Korea's coordinate system and the terrain looks a little different. Where the U.S. handles the problem through <em>fair use</em> — flexible but hard to predict case law — Korea and other civil-law systems specifically enumerate copyright limitations in statute. So the key issue converges on whether to add a <strong>text-and-data-mining (TDM) exemption</strong> to the Copyright Act. It would permit copying for AI-training purposes under certain conditions; the EU and Japan already have such legislation. In Korea too, amendment bills carrying a TDM exemption have been proposed, but none has yet cleared the National Assembly.</p>
+      <p>There is a countervailing motion as well. In early 2025 the Ministry of Culture, Sports and Tourism said it would push a copyright-law amendment requiring disclosure of the list of data used in AI training. Two forces interlock: allowing learning (exemption) while demanding transparency (disclosure) in return. But global Big Tech strongly opposes disclosing training data — the moment what was learned is revealed, it becomes both a map for lawsuits and competitive intelligence. Where the balance point between exemption and disclosure is set will decide the fate of a Korean-style regime.</p>
+      <div class="pullquote">Without exemption the industry withers; without disclosure creation runs dry. The art of regulation lies in where you draw the line between the two.</div>
+      <p>And finally, the most fundamental question that remains — <strong>compensating creators</strong>. Licensing is an answer for large content owners, but it never reaches the nameless many. The alternatives under discussion run along a few lines: a <em>collective-management</em> model where, as with music-rights trusts, an organization negotiates and distributes in bulk beyond individual contracts; a <em>fund or levy</em> model that collects a slice of AI-service revenue into a creators' pool; and <em>usage-based compensation</em> that uses provenance technology to trace which data actually contributed and pays accordingly. None is complete, but the shared premise is clear: the fruit of learning must return, in some form, to those who supplied the raw material.</p>
+      <div class="callout"><b>In closing — between mining and farming.</b> "Learning" is both mining and farming. Dig up someone else's land without permission and it is mining; share the harvest with whoever gave the seed and it is farming. Today's copyright-and-licensing war is, in the end, the process of fixing the coordinate between these two. Courts have begun to ask about the provenance of the material, markets have begun to price data, and creators have begun to lock doors and engrave fingerprints. I believe this current is not a shackle slowing AI down but the foundation that makes it sustainable. For if those who supplied the material run dry, the next generation of models will end up feeding on their own shadow and wasting away.</div>
+      <p>Posting an AI-training-bot block on my own writing is not a struggle to hold data hostage. It is a small proposal of a norm — that we ask "did you seek permission?" before "can we connect?" On the day standards, contracts, and technology answer that question properly, we will at last be able to call the mining farming. Until then, this war is not yet over.</p>
+
+      <div class="references">
+        <h4>References</h4>
+        <ol>
+          <li>Copyright Alliance, “AI Copyright Lawsuit Developments in 2025: A Year in Review.” Overview of 2025 AI copyright litigation — including Bartz v. Anthropic. <a href="https://copyrightalliance.org/ai-copyright-lawsuit-developments-2025/" target="_blank" rel="noopener">copyrightalliance.org</a></li>
+          <li>APM Law, “A Record $1.5 Billion Compensation for Copyright Infringement in AI Training.” The Bartz v. Anthropic settlement (about $1.5B; ~480,000 books at roughly $3,000 each; reported/announced figures) and the 2025-06-23 summary judgment (training on lawfully acquired works = transformative fair use; downloading/keeping from shadow libraries = separate infringement). <a href="https://www.apm.law/a-record-1-5-billion-compensation-for-copyright-infringement-in-ai-training-agreed-in-a-settlement-approved-by-us-federal-court/" target="_blank" rel="noopener">apm.law</a></li>
+          <li>OpenAI, “Reporting the facts about the New York Times’ lawsuit.” The defense's position in NYT v. OpenAI and Microsoft (allegation that millions of articles were used in training; fair-use defense). <a href="https://openai.com/new-york-times/" target="_blank" rel="noopener">openai.com/new-york-times</a></li>
+          <li>Digiday, “A timeline of the major deals between publishers and AI tech companies in 2025.” A timeline of licensing deals — OpenAI with many outlets (including local-newsroom funding), Mistral–AFP (2,300 stories/day, six languages), Reddit's data-API deal (~$70M/yr, reported/unconfirmed), and more. <a href="https://digiday.com/media/a-timeline-of-the-major-deals-between-publishers-and-ai-tech-companies-in-2025/" target="_blank" rel="noopener">digiday.com</a></li>
+          <li>Cloudflare Blog, “Control content use for AI training with Cloudflare’s managed robots.txt”; ContentSignals.org. Default blocking of AI crawlers on new domains (2025-07), the Content Signals policy (per-use signals: search, AI input, AI training), and 402 Payment Required. robots.txt is a declaration with no enforcement. <a href="https://blog.cloudflare.com/control-content-use-for-ai-training/" target="_blank" rel="noopener">blog.cloudflare.com</a> · <a href="https://contentsignals.org/" target="_blank" rel="noopener">contentsignals.org</a></li>
+          <li>Wikipedia, “Content Credentials”; C2PA v2.2 (2025-05) and ISO standardization in progress. What Content Credentials record (author, time, tools, AI involvement, edit history) and synthetic-content labeling. The vulnerability of watermarks/metadata to stripping is noted in related research. <a href="https://en.wikipedia.org/wiki/Content_Credentials" target="_blank" rel="noopener">en.wikipedia.org/wiki/Content_Credentials</a></li>
+          <li>Ministry of Justice (Korea), “Review of Directions for Introducing a Text-and-Data-Mining (TDM) Exemption”; Ministry of Culture, Sports and Tourism's 2025-01 announcement to pursue a copyright-law amendment requiring disclosure of AI-training-data lists (reported by TokenPost, etc.). Korea's TDM-exemption bills remain unpassed, compared with EU and Japanese legislation. <a href="https://www.moj.go.kr/bbs/moj/166/450511/download.do" target="_blank" rel="noopener">moj.go.kr</a> · <a href="https://www.tokenpost.kr/news/ai/304354" target="_blank" rel="noopener">tokenpost.kr</a></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer of article -->
+  <div class="art-foot">
+    <div class="art-tags">
+      <a href="#">#GenerativeAI</a><a href="#">#Copyright</a><a href="#">#Licensing</a><a href="#">#FairUse</a><a href="#">#TrainingData</a>
+    </div>
+    <div class="author-card">
+      <div class="av">DP</div>
+      <div class="who">
+        <b>Daeseung Park</b>
+        <p>Researcher at KAIST. I study large language models, time-series forecasting, and conversational AI, and I try to record the research process as accurately and readably as I can.</p>
+      </div>
+    </div>
+
+    <div class="read-next no-print">
+        <div class="section-head" style="margin-bottom:20px;"><h2 style="font-size:1.3rem;">Read next</h2></div>
+        <div class="grid grid-2" id="readNext"><a href="../../articles/ai-agent-reliability-evals/" class="post-card fade-up"><div class="thumb"><img class="ph " src="../../../articles/ai-agent-reliability-evals/images/cover.svg" alt="" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;"><span class="cat-pill">AI · Explainer</span><span class="num">20</span></div><span class="cat">AI Agents</span><h3>It Works in the Demo, Breaks in Production</h3><p>An AI agent that was faultless in the conference-room demo falls apart the moment you put it on real traffic. The problem is usually not the model's intelligence but its reliability — because succeeding once and succeeding every time are entirely different disciplines of engineering. This piece calmly lays out why agents break, how to evaluate (eval) them, and what guardrails must be in place so that even when they break, they fail safely — all from the standpoint of real deployment.</p><div class="meta"><span class="by">Daeseung Park</span><span class="dot-sep">15 min read</span></div></a><a href="../../articles/reasoning-models-test-time-compute/" class="post-card fade-up"><div class="thumb"><img class="ph " src="../../../articles/reasoning-models-test-time-compute/images/cover.svg" alt="" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;"><span class="cat-pill">AI · Explainer</span><span class="num">19</span></div><span class="cat">AI Models</span><h3>Bigger Model or Longer Thought? The Economics of Reasoning LLMs and Test-Time Compute</h3><p>For years AI's growth formula was simple: bigger models, more data, more training compute. Then, from late 2024, the center of gravity quietly shifted — away from scaling the model and toward making it think longer at the moment of inference. This piece calmly anatomizes the background and mechanics of that shift, and the new economics in which tokens, latency, and cost are entangled.</p><div class="meta"><span class="by">Daeseung Park</span><span class="dot-sep">15 min read</span></div></a></div>
+      </div>
+      <nav class="post-nav no-print" id="postNav"><a class="pn" href="../../articles/ai-agent-reliability-evals/"><span class="pn-dir">‹ Previous</span><span class="pn-t">It Works in the Demo, Breaks in Production</span></a><a class="pn pn-list" href="../../articles.html">List</a><span class="pn pn-right empty"><span class="pn-dir">Next ›</span><span class="pn-t">None</span></span></nav>
+    </div>
+</article>
+
+<div class="print-footer">Daeseung Park · D. PARK Journal — Mining, Called Learning: The Generative-AI Copyright and Data-Licensing War</div>
+
+<footer class="site-footer no-print" id="contact"><div class="container-x"><div class="footer-grid"><div><div class="footer-brand">D. PARK</div><p style="max-width:34ch;">AI &amp; Software Systems Engineer · KAIST</p><div class="social" style="margin-top:16px;"><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener" aria-label="GitHub">GH</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener" aria-label="ORCID">iD</a><a href="mailto:dspark@daeseungpark.com" aria-label="Email">@</a></div></div><div><h6>Browse</h6><ul><li><a href="../../index.html">Home</a></li><li><a href="../../profile.html">Profile</a></li><li><a href="../../articles.html">Articles</a></li><li><a href="../../research.html">Research</a></li><li><a href="../../notices.html">Notice</a></li></ul></div><div><h6>Articles</h6><ul class="ft-arts"><li><a href="../../articles/genai-copyright-data-licensing/">Mining, Called Learning</a></li><li><a href="../../articles/ai-agent-reliability-evals/">It Works in the Demo, Breaks in Production</a></li><li><a href="../../articles/reasoning-models-test-time-compute/">Not Bigger, but Thinking Longer</a></li><li><a href="../../articles/rag-architectures-hallucination/">Four Ways Retrieval Rescues Intelligence — Lexical, Semantic, Hybrid, and Graph RAG, and the Anatomy of Hallucination</a></li><li><a href="../../articles/mcp-agent-interop-standard/">The Protocol That Became AI's HTTP</a></li></ul></div><div><h6>Contact</h6><ul><li><a href="mailto:dspark@daeseungpark.com">dspark@daeseungpark.com</a></li><li><a href="mailto:dspark@kaist.ac.kr">dspark@kaist.ac.kr</a></li><li><a href="tel:+821064547777">Phone (KR) +82 10 6454 7777</a></li><li><a href="tel:+16574109449">Phone (US) +1 657 410 9449</a></li><li>KAIST, Daejeon, Korea</li></ul></div></div><div class="footer-bottom"><span>© 2026 Daeseung Park. All rights reserved.</span><span>Designed &amp; built as a personal journal for Daeseung Park.</span></div></div></footer>
+
+<div class="mobile-nav" id="mobileNav"><button class="icon-btn close" id="navClose" aria-label="Close">✕</button><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></div>
+
+
+
+<script src="../../../assets/js/main.js"></script>
+
+</body></html>

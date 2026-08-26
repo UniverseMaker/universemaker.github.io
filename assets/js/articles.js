@@ -9,6 +9,33 @@
    ============================================================ */
 window.ARTICLES = [
   {
+    id: 21, slug: "genai-copyright-data-licensing", path: "articles/genai-copyright-data-licensing/",
+    title: "학습이라는 이름의 채굴: 생성형 AI 저작권·데이터 라이선싱 전쟁",
+    deck: "생성형 AI는 인류가 수백 년 쌓아 온 글과 그림과 코드를 삼켜 만들어졌다. 그 삼킴은 공정이용이라는 오래된 방패 뒤에 서 있다. 그러나 2025년, 법정과 시장은 방패의 크기를 다시 재기 시작했다. 소송과 15억 달러의 합의, 조용히 확산되는 라이선싱 딜, 웹의 문을 닫는 ‘콘텐츠 시그널’, 그리고 출처를 되묻는 기술 — 학습 데이터를 둘러싼 이 전쟁의 지형을 차분히 그려 본다.",
+    cat: "Tech · 이슈", catClass: "", catLabel: "AI 정책",
+    date: "2026-08-26", read: "15분", cover: "articles/genai-copyright-data-licensing/images/cover.svg",
+    tags: ["저작권", "데이터라이선싱", "생성형AI", "공정이용"],
+    feature: "특별기고"
+  },
+  {
+    id: 20, slug: "ai-agent-reliability-evals", path: "articles/ai-agent-reliability-evals/",
+    title: "데모는 되는데, 프로덕션에서 무너지는 이유",
+    deck: "회의실 시연에서는 흠잡을 데 없던 AI 에이전트가, 막상 실전 트래픽 위에 올려놓으면 무너진다. 문제는 대개 모델의 지능이 아니라 신뢰성이다. 한 번 성공하는 것과 매번 성공하는 것은 전혀 다른 공학이기 때문이다. 이 글은 에이전트가 왜 무너지는지, 그것을 어떻게 평가(evals)하고, 무너져도 안전하도록 어떤 가드레일을 깔아야 하는지를 실전 배치의 관점에서 차분히 정리한다.",
+    cat: "AI · 기술해설", catClass: "", catLabel: "AI 에이전트",
+    date: "2026-08-25", read: "15분", cover: "articles/ai-agent-reliability-evals/images/cover.svg",
+    tags: ["AI에이전트", "신뢰성", "평가", "가드레일"],
+    feature: "특별기고"
+  },
+  {
+    id: 19, slug: "reasoning-models-test-time-compute", path: "articles/reasoning-models-test-time-compute/",
+    title: "더 키우기보다 더 생각하게: 추론형 LLM과 테스트타임 컴퓨트의 경제학",
+    deck: "지난 몇 해 AI의 성장 공식은 단순했다. 더 큰 모델, 더 많은 데이터, 더 많은 학습 컴퓨트. 그런데 2024년 말부터 무게중심이 조용히 옮겨갔다. 모델을 키우는 대신 추론하는 순간에 더 오래 생각하게 만드는 쪽으로. 이 글은 그 전환의 배경과 원리, 그리고 토큰·지연·비용이 얽힌 새로운 경제학을 차분히 해부한다.",
+    cat: "AI · 기술해설", catClass: "", catLabel: "AI 모델",
+    date: "2026-08-24", read: "15분", cover: "articles/reasoning-models-test-time-compute/images/cover.svg",
+    tags: ["추론모델", "테스트타임컴퓨트", "LLM", "추론비용"],
+    feature: "특별기고"
+  },
+  {
     id: 18, slug: "rag-architectures-hallucination", path: "articles/rag-architectures-hallucination/",
     title: "검색이 지능을 구원하는 네 가지 방법 — Lexical·Semantic·Hybrid·Graph RAG와 환각의 해부",
     deck: "대형언어모델의 지식은 학습이 끝나는 순간 굳어 버린다. 검색증강생성(RAG)은 모델 바깥의 문서를 끌어와 그 빈틈을 메운다. Lexical·Semantic·Hybrid·Graph 네 검색 아키텍처를 원리부터 해부하고, 그것이 환각을 어떻게 줄이며 무엇이 여전히 남는지를 짚는다.",
