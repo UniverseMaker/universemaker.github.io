@@ -15,7 +15,7 @@
     <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/profile.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/profile.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/profile.html"/>
-    <lastmod>2026-07-27</lastmod>
+    <lastmod>2026-08-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -33,7 +33,7 @@
     <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/portfolio.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/portfolio.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/portfolio.html"/>
-    <lastmod>2026-07-27</lastmod>
+    <lastmod>2026-08-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -524,6 +524,15 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://daeseungpark.com/works/pf-resswitch/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-resswitch/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-resswitch/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-resswitch/"/>
+    <lastmod>2026-08-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://daeseungpark.com/works/pf-rfid-erp/</loc>
     <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-rfid-erp/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-rfid-erp/"/>
@@ -915,7 +924,7 @@
     <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/profile.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/profile.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/profile.html"/>
-    <lastmod>2026-07-27</lastmod>
+    <lastmod>2026-08-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -933,7 +942,7 @@
     <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/portfolio.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/portfolio.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/portfolio.html"/>
-    <lastmod>2026-07-27</lastmod>
+    <lastmod>2026-08-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1424,6 +1433,15 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://daeseungpark.com/en/works/pf-resswitch/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-resswitch/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-resswitch/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-resswitch/"/>
+    <lastmod>2026-08-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://daeseungpark.com/en/works/pf-rfid-erp/</loc>
     <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-rfid-erp/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-rfid-erp/"/>
@@ -1800,11 +1818,5 @@
     <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://daeseungpark.com/works/detail.html</loc>
-    <lastmod>2026-07-27</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
   </url>
 </urlset>

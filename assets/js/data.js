@@ -619,7 +619,19 @@ window.WORKS = {
       cover:"assets/portfolio/pf-archive-its/cover.jpg",
       tags:["ITS","PMS","PHP"],
       links:{ url:"https://github.com/UniverseMaker/Archive-ITS", demo:"https://superblaze.net/archive/" },
-      desc:["Jira·Redmine 개념을 결합한 이슈추적(ITS)·프로젝트관리(PMS)·문서관리 시스템을 PHP 환경에서 최대한 단순하게 구현하는 것을 목표로 한 웹 애플리케이션."] }
+      desc:["Jira·Redmine 개념을 결합한 이슈추적(ITS)·프로젝트관리(PMS)·문서관리 시스템을 PHP 환경에서 최대한 단순하게 구현하는 것을 목표로 한 웹 애플리케이션."] },
+
+    /* ---- 신규: ResSwitch — 원격근무용 디스플레이 해상도 전환 유틸리티 (GitHub, v1.0.0 / 2026-08-26) ---- */
+    { slug:"pf-resswitch", cat:"도구 · 라이브러리", order:33,
+      title:"ResSwitch — 원격근무용 디스플레이 해상도 전환 유틸리티",
+      period:"2026", org:"GitHub · C#/.NET Framework",
+      cover:"assets/portfolio/pf-resswitch/screenshot-main.png",
+      tags:["원격데스크톱","해상도","Windows"],
+      links:{ url:"https://github.com/UniverseMaker/Display-Resolution-Changer-ResSwitch", store:"https://github.com/UniverseMaker/Display-Resolution-Changer-ResSwitch/releases/tag/v1.0.0" },
+      files:[{ name:"ResSwitch.exe 직접 다운로드 (v1.0.0)", url:"https://github.com/UniverseMaker/Display-Resolution-Changer-ResSwitch/releases/download/v1.0.0/ResSwitch.exe" }],
+      figs:[{src:"assets/portfolio/pf-resswitch/screenshot-main.png", cap:"메인 화면 — 버튼 하나로 원격모드·사무실모드 즉시 전환"},{src:"assets/portfolio/pf-resswitch/screenshot-schedule.png", cap:"예약 관리 — 출근·퇴근 시간에 맞춘 자동 전환 등록"},{src:"assets/portfolio/pf-resswitch/screenshot-detail.png", cap:"상세 추가 — 모니터별 해상도·방향 개별 설정"}],
+      desc:["구글 원격 데스크톱 접속 시 생기는 호스트↔클라이언트 해상도 불일치를 버튼 하나로 해결하고, 집↔사무실 이동에 맞춰 예약으로 해상도를 자동 전환하는 초경량 Windows 유틸리티.",
+             "모니터별 해상도·방향·배치·주모니터 지정을 프로필로 저장해 원클릭으로 복원하고, Windows 작업 스케줄러에 예약을 등록해 앱이 꺼져 있어도 지정한 시각에 해상도가 전환된다. 설치 프로그램 없는 단일 실행 파일(ResChanger.cs 단일 소스)로 배포하며 관리자 권한도 필요하지 않다."] }
   ],
 
   /* 주요활동/사진첩 — 새 사진은 assets/img/activity/ 에 넣고 여기에 항목 추가 */

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light" data-prerendered="1">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ResSwitch — 원격근무용 디스플레이 해상도 전환 유틸리티 - Daeseung Park Journal</title>
+<meta name="description" content="구글 원격 데스크톱 접속 시 생기는 호스트↔클라이언트 해상도 불일치를 버튼 하나로 해결하고, 집↔사무실 이동에 맞춰 예약으로 해상도를 자동 전환하는 초경량 Windows 유틸리티.">
+<link rel="canonical" href="https://daeseungpark.com/works/pf-resswitch/">
+<!-- seo-i18n:start -->
+<link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-resswitch/">
+<link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-resswitch/">
+<link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-resswitch/">
+<meta property="og:locale:alternate" content="en_US">
+<!-- seo-i18n:end -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="D. PARK Journal">
+<meta property="og:title" content="ResSwitch — 원격근무용 디스플레이 해상도 전환 유틸리티">
+<meta property="og:description" content="구글 원격 데스크톱 접속 시 생기는 호스트↔클라이언트 해상도 불일치를 버튼 하나로 해결하고, 집↔사무실 이동에 맞춰 예약으로 해상도를 자동 전환하는 초경량 Windows 유틸리티.">
+<meta property="og:url" content="https://daeseungpark.com/works/pf-resswitch/">
+<meta property="og:image" content="https://daeseungpark.com/assets/portfolio/pf-resswitch/screenshot-main.png">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ResSwitch — 원격근무용 디스플레이 해상도 전환 유틸리티">
+<meta name="twitter:description" content="구글 원격 데스크톱 접속 시 생기는 호스트↔클라이언트 해상도 불일치를 버튼 하나로 해결하고, 집↔사무실 이동에 맞춰 예약으로 해상도를 자동 전환하는 초경량 Windows 유틸리티.">
+<meta name="twitter:image" content="https://daeseungpark.com/assets/portfolio/pf-resswitch/screenshot-main.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"ResSwitch — 원격근무용 디스플레이 해상도 전환 유틸리티","description":"구글 원격 데스크톱 접속 시 생기는 호스트↔클라이언트 해상도 불일치를 버튼 하나로 해결하고, 집↔사무실 이동에 맞춰 예약으로 해상도를 자동 전환하는 초경량 Windows 유틸리티.","author":{"@type":"Person","name":"박대승","alternateName":"Daeseung Park"},"url":"https://daeseungpark.com/works/pf-resswitch/","inLanguage":"ko"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Noto+Serif+KR:wght@400;600&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body data-base="../../">
+
+<div class="topbar">
+  <div class="container-x">
+    <span class="tb-date" id="today">—</span>
+    <div class="tb-links" data-prerendered="1"><a href="https://ai.daeseungpark.com/chat/" target="_blank" rel="noopener">Abliterated AI</a><a href="https://tcc.daeseungpark.com/" target="_blank" rel="noopener">Mission Control(TCC)</a><a href="../../profile.html">Profile</a><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener">GitHub</a><a href="https://scholar.google.com/citations?hl=ko&amp;user=qVom0QUAAAAJ" target="_blank" rel="noopener">Scholar</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener">ORCID</a><a href="https://hub.docker.com/u/daeseungpark" target="_blank" rel="noopener">Docker</a><a href="https://codespectrum.net" target="_blank" rel="noopener">Blog</a><a href="../../profile.html#contact">Contact</a><a href="../../notices.html">Notice</a><a href="/en/works/pf-resswitch/" class="tb-lang-link" aria-label="Language">English</a></div>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="container-x nav-row">
+    <a href="../../index.html" class="brand">D<span class="dot">.</span> PARK <small>Journal</small></a>
+    <nav class="main-nav" data-prerendered="1"><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="테마 전환"><span id="themeIcon">☾</span></button>
+      <a href="../../profile.html" class="btn-x" style="padding:9px 16px;">프로필 보기</a>
+      <button class="icon-btn nav-toggle" id="navToggle" aria-label="메뉴">≡</button>
+    </div>
+  </div>
+</header>
+
+<div class="ticker">
+  <div class="container-x">
+    <span class="label">Trending</span>
+    <div class="items" id="tickerItems" data-prerendered="1"><a href="../../articles/genai-copyright-data-licensing/">학습이라는 이름의 채굴</a><a href="../../articles/ai-agent-reliability-evals/">데모는 되는데, 프로덕션에서 무너지는 이유</a><a href="../../articles/reasoning-models-test-time-compute/">더 키우기보다 더 생각하게 — 테스트타임 컴퓨트…</a><a href="../../articles/rag-architectures-hallucination/">검색이 지능을 구원하는 네 가지 방법 — Lexical…</a><a href="../../articles/mcp-agent-interop-standard/">AI의 HTTP가 된 프로토콜</a><a href="../../articles/ai-datacenter-power-crunch/">AI의 진짜 한계는 전기다</a></div>
+  </div>
+</div>
+
+<main class="wd-wrap" id="workDetail" data-slug="pf-resswitch" data-prerendered="1"><div class="crumb"><a href="../../index.html">Home</a> / <a href="../../works.html">논문·특허·SW</a> / 포트폴리오</div><span class="work-badge " style="margin-bottom:14px;">도구 · 라이브러리</span><h1 class="wd-title">ResSwitch — 원격근무용 디스플레이 해상도 전환 유틸리티</h1><div class="wd-meta">2026 · GitHub · C#/.NET Framework</div><div class="wd-cover"><img src="../../assets/portfolio/pf-resswitch/screenshot-main.png" alt="ResSwitch — 원격근무용 디스플레이 해상도 전환 유틸리티"></div><div class="wd-figs"><figure class="wd-fig"><div class="wd-figbox"><img src="../../assets/portfolio/pf-resswitch/screenshot-main.png" alt="메인 화면 — 버튼 하나로 원격모드·사무실모드 즉시 전환"></div><figcaption>메인 화면 — 버튼 하나로 원격모드·사무실모드 즉시 전환</figcaption></figure><figure class="wd-fig"><div class="wd-figbox"><img src="../../assets/portfolio/pf-resswitch/screenshot-schedule.png" alt="예약 관리 — 출근·퇴근 시간에 맞춘 자동 전환 등록"></div><figcaption>예약 관리 — 출근·퇴근 시간에 맞춘 자동 전환 등록</figcaption></figure><figure class="wd-fig"><div class="wd-figbox"><img src="../../assets/portfolio/pf-resswitch/screenshot-detail.png" alt="상세 추가 — 모니터별 해상도·방향 개별 설정"></div><figcaption>상세 추가 — 모니터별 해상도·방향 개별 설정</figcaption></figure></div><div class="wd-summary"><p>구글 원격 데스크톱 접속 시 생기는 호스트↔클라이언트 해상도 불일치를 버튼 하나로 해결하고, 집↔사무실 이동에 맞춰 예약으로 해상도를 자동 전환하는 초경량 Windows 유틸리티.</p><p>모니터별 해상도·방향·배치·주모니터 지정을 프로필로 저장해 원클릭으로 복원하고, Windows 작업 스케줄러에 예약을 등록해 앱이 꺼져 있어도 지정한 시각에 해상도가 전환된다. 설치 프로그램 없는 단일 실행 파일(ResChanger.cs 단일 소스)로 배포하며 관리자 권한도 필요하지 않다.</p></div><h4 class="wd-h4">구조 · 설계</h4><p class="wd-block">단일 소스 파일(ResChanger.cs)로 이루어진 .NET Framework WinForms 실행 파일이며, 별도 IDE 없이 Windows에 기본 포함된 컴파일러(csc.exe /target:winexe)로 빌드된다. 기능은 다섯 갈래다. ① 원클릭 전환 — 버튼을 누르면 모든 모니터의 해상도가 즉시 바뀐다. ② 모니터별 개별 프로필 — 화면마다 해상도와 방향(가로/세로 90·180·270°), 배치 위치, 주 모니터 지정까지 저장·복원해 창이 모니터 간 넘어가는 배열까지 그대로 재현한다. ③ 현재 설정 저장 — 지금의 Windows 화면 구성을 그대로 캡처해 버튼으로 만든다. ④ 통일형 모드 — 모든 모니터를 같은 해상도로 맞춰 원격 접속용 단일 해상도를 만든다. ⑤ 예약 자동 전환 — 시각·요일별 자동 적용. 이 밖에 트레이 상주(최소화 시 트레이로, 트레이 메뉴에서 프로필 바로 적용), Windows 시작 시 자동 실행(선택), 요청 해상도가 미지원일 때 가장 가까운 지원 해상도로 대체하는 강제 적용 폴백, 실행·종료·적용·예외를 남기는 로그 기록을 갖췄다. 상태는 실행 파일과 같은 폴더의 텍스트 파일에 저장된다 — buttons.txt(버튼별 모니터 해상도·방향·위치·주모니터), schedules.txt(시·분·요일마스크·버튼이름), settings.txt(트레이 최소화·자동 최소화 옵션), log.txt(512KB 초과 시 log.txt.old로 롤링). 명령줄 옵션은 두 가지로, --apply "버튼이름"은 해당 프로필을 즉시 적용하고 종료하며(예약 스케줄러가 사용), --min은 트레이로 최소화된 상태로 시작한다(자동 실행 시 사용). 동작 요구 사항은 Windows 7·10·11과 Windows에 기본 포함된 .NET Framework 4.x이며 관리자 권한은 필요하지 않다. 라이선스는 MIT.</p><h4 class="wd-h4">설계 목표</h4><p class="wd-block">원격 데스크톱은 호스트(작업 PC)의 해상도를 그대로 클라이언트(접속 기기)에 보여준다. 그래서 사무실 데스크톱(예: 듀얼 2560×1440 + 세로 모니터)을 집의 노트북(1920×1080 한 화면)으로 원격 접속하면 화면이 잘리거나 글씨가 지나치게 작아지고 스크롤이 심해지며, 반대로 원격용으로 낮춰 둔 해상도를 사무실에서 그대로 쓰면 작업 공간이 좁아진다. 이 전환을 버튼 하나 또는 예약 한 줄로 끝내는 것이 목표였다 — 집에서 접속할 때는 원격모드 버튼으로 호스트를 접속 기기와 1:1로 맞추고, 사무실로 돌아오면 사무실모드 버튼으로 듀얼·세로 배치를 즉시 복원한다. 출퇴근 시간이 일정하다면 예약으로 자동화한다(예: 평일 09:00 사무실모드 / 19:00 원격모드). 예약이 앱 내부 타이머가 아니라 Windows 작업 스케줄러에 등록되도록 설계한 것이 핵심이다 — 예약 시각이 되면 OS가 직접 ResSwitch.exe --apply "버튼이름"을 실행하므로 앱이 꺼져 있거나 재부팅된 뒤에도(로그인 상태라면) 해상도가 바뀌고, 결과적으로 원격 접속 전에 호스트 해상도가 이미 전환되어 있다. 등록된 작업은 Windows 작업 스케줄러에서 ResChanger_* 이름으로 확인·삭제할 수 있다. 접속하는 기기의 화면 해상도와 동일한 값으로 원격모드를 만들면 스케일링 없이 1:1로 선명하게 보이고 스크롤도 사라진다. 특정 원격 도구에 묶이지 않도록 호스트 해상도 자체를 다루게 해, Chrome Remote Desktop 외에 TeamViewer·AnyDesk·RDP 등에서도 동일하게 쓰인다. 설치 프로그램 없는 단일 실행 파일로 배포한 것도 같은 이유에서다 — 필요한 곳에 파일 하나만 두면 되고 관리자 권한도 필요하지 않다.</p><div class="wd-links"><a class="btn-x" href="https://github.com/UniverseMaker/Display-Resolution-Changer-ResSwitch" target="_blank" rel="noopener">GitHub 리포지토리 ↗</a><a class="btn-x" href="https://github.com/UniverseMaker/Display-Resolution-Changer-ResSwitch/releases/tag/v1.0.0" target="_blank" rel="noopener">릴리스 v1.0.0 페이지 ↗</a></div><div class="wd-files"><h4 class="wd-h4">다운로드</h4><a class="wd-file" href="https://github.com/UniverseMaker/Display-Resolution-Changer-ResSwitch/releases/download/v1.0.0/ResSwitch.exe" target="_blank" rel="noopener">⬇ ResSwitch.exe 직접 다운로드 (v1.0.0)</a></div><div style="margin-top:32px;"><a href="../../works.html">← 전체 목록</a></div></main>
+
+<footer class="site-footer" id="contact" data-prerendered="1"><div class="container-x"><div class="footer-grid"><div><div class="footer-brand">D. PARK</div><p style="max-width:34ch;">AI &amp; Software Systems Engineer · KAIST</p><div class="social" style="margin-top:16px;"><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener" aria-label="GitHub">GH</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener" aria-label="ORCID">iD</a><a href="mailto:dspark@daeseungpark.com" aria-label="Email">@</a></div></div><div><h6>둘러보기</h6><ul><li><a href="../../index.html">Home</a></li><li><a href="../../profile.html">Profile</a></li><li><a href="../../articles.html">Articles</a></li><li><a href="../../research.html">Research</a></li><li><a href="../../notices.html">Notice</a></li></ul></div><div><h6>기고문</h6><ul class="ft-arts"><li><a href="../../articles/genai-copyright-data-licensing/">학습이라는 이름의 채굴</a></li><li><a href="../../articles/ai-agent-reliability-evals/">데모는 되는데, 프로덕션에서 무너지는 이유</a></li><li><a href="../../articles/reasoning-models-test-time-compute/">더 키우기보다 더 생각하게</a></li><li><a href="../../articles/rag-architectures-hallucination/">검색이 지능을 구원하는 네 가지 방법 — Lexical·Semantic·Hybrid·Graph RAG와 환각의 해부</a></li><li><a href="../../articles/mcp-agent-interop-standard/">AI의 HTTP가 된 프로토콜</a></li></ul></div><div><h6>Contact</h6><ul><li><a href="mailto:dspark@daeseungpark.com">dspark@daeseungpark.com</a></li><li><a href="mailto:dspark@kaist.ac.kr">dspark@kaist.ac.kr</a></li><li><a href="tel:+821064547777">Phone (KR) +82 10 6454 7777</a></li><li><a href="tel:+16574109449">Phone (US) +1 657 410 9449</a></li><li>KAIST, Daejeon, Korea</li></ul></div></div><div class="footer-bottom"><span>© 2026 Daeseung Park. All rights reserved.</span><span>Designed &amp; built as a personal journal for Daeseung Park.</span></div></div></footer>
+
+<div class="mobile-nav" id="mobileNav" data-prerendered="1"><button class="icon-btn close" id="navClose" aria-label="닫기">✕</button><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></div>
+
+
+
+
+
+
+
+<script src="../../assets/js/main.js"></script>
+</body>
+</html>

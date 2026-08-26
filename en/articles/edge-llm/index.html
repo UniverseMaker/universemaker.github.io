@@ -109,7 +109,7 @@
       <h3>3. Pruning, Caching, and Narrowing the Task</h3>
       <p><strong>Pruning</strong> cuts low-contribution connections to make the model sparse. <strong>Caching</strong> reuses the intermediate computations of recurring input patterns to shorten response time. But the most underrated lever lies elsewhere: <strong>narrowing the task</strong>. Rather than trying to build an all-purpose assistant, if you focus on the single job of “writing an underground-facility damage report in a standard format,” the model capacity you need shrinks in itself.</p>
 
-      <div class="callout"><b>Practical tip.</b> Don’t lightweight all at once; apply one technique at a time and, each time, measure accuracy and latency together on the same evaluation set. For instance, if accuracy falls below the threshold after 4-bit quantization, ‘mixed precision’ — rolling back only the sensitive layers to 8 bits — is often the answer. If you don’t know what you lose when you take something away, lightweighting becomes a gamble.<p></p></div>
+      <div class="callout"><b>Practical tip.</b> Don’t lightweight all at once; apply one technique at a time and, each time, measure accuracy and latency together on the same evaluation set. For instance, if accuracy falls below the threshold after 4-bit quantization, ‘mixed precision’ — rolling back only the sensitive layers to 8 bits — is often the answer. If you don’t know what you lose when you take something away, lightweighting becomes a gamble.</div>
 
       <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
         <table>
