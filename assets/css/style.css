@@ -638,7 +638,7 @@ body[data-theme="light"][data-hero="photo"] .feat-large:hover .bg::after {
 .paper-promo .pp-text b { font-weight:800; }
 .paper-promo .pp-soon { display:inline-block; margin-left:8px; font-size:.72rem; font-weight:700; background:rgba(255,255,255,.2); padding:3px 9px; border-radius:999px; vertical-align:middle; }
 .paper-promo .pp-cta { flex:none; font-weight:800; font-size:.9rem; }
-@media (max-width:640px){ .paper-promo{ flex-direction:column; align-items:flex-start; gap:8px; } .paper-promo .pp-text{ font-size:.9rem; align-self:stretch; } #homePromo3 .pp-text { white-space: normal; overflow: visible; text-overflow: clip; } }
+@media (max-width:640px){ .paper-promo{ flex-direction:column; align-items:flex-start; gap:8px; } .paper-promo .pp-text{ font-size:.9rem; align-self:stretch; } }
 /* 두 번째 배너(비검열 AI) — 버튼 2개 변형 */
 .paper-promo.ai-promo { background:linear-gradient(100deg,#4b3fb0,#7b5bff); }
 .paper-promo.ai-promo .pp-badge { color:#5b3fd0; }
@@ -649,19 +649,95 @@ body[data-theme="light"][data-hero="photo"] .feat-large:hover .bg::after {
 .paper-promo .pp-btn.solid { background:#fff; color:#4b3fb0; }
 .paper-promo .pp-btn.solid:hover { filter:brightness(.94); color:#4b3fb0; }
 
-/* 세 번째 배너(ICECCME 2026) — 긴 제목만 …으로 줄이고, 앞의 <b>ICECCME 2026</b>과 끝의 개최지·일정 칩(.pp-soon)은 항상 100% 노출.
+/* 세 번째 배너(ICECCME 2026) — 긴 제목만 …으로 줄이고, 리드 그룹(<b>ICECCME 2026</b> + 두 번째 리드
+   .pp-lead2)과 끝의 개최지·일정 칩(.pp-soon)은 잘리지 않는다.
    #homePromo3 에만 스코프. #homePromo / #homePromo2 및 공용 .paper-promo .pp-text 규칙은 건드리지 않는다. */
 #homePromo3 .pp-text { display:flex; align-items:center; min-width:0; }
 #homePromo3 .pp-text > b { flex:0 0 auto; }
+/* 두 번째 리드 — 국문 "논문 발표 예정" / 영문 "presentation".
+   <b> 안에 넣지 않은 이유: (1) <b>는 font-weight:800 이라 학회명과 설명구가 한 덩어리의 굵은 블록으로
+   읽혀 고유명사(ICECCME 2026)와 설명구의 구분이 사라진다. (2) 별도 span 이어야 좁은 폭에서 학회명과
+   독립적으로 크기를 조절할 수 있다. .pp-title 과 달리 flex:0 0 auto 라 줄어들지도, …으로 잘리지도 않는다.
+   font-weight 는 .pp-text 의 600 을 그대로 써서 주변 본문과 같은 굵기로 읽힌다.
+   실측 폭(데스크톱 .98rem=15.68px): 국문 88.77px / 영문 92.25px — 두 언어가 4% 안에서 같은 폭이라
+   아래 브레이크포인트 계산이 두 언어에서 거의 대칭이 된다. */
+#homePromo3 .pp-lead2 { flex:0 0 auto; margin-left:.42em; font-weight:600; }
 #homePromo3 .pp-dash { flex:0 0 auto; margin:0 .32em; }
 #homePromo3 .pp-title { flex:0 1 auto; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-#homePromo3 .pp-soon { flex:0 0 auto; }
-/* 태블릿·모바일(≤900px): 한 줄 생략 대신 자연 줄바꿈으로 제목 전체 노출(칩도 잘리지 않음).
-   768px에서 한 줄 생략을 쓰면 제목이 45~128px만 남아 "Pre…" 수준으로 의미를 잃으므로 900px부터 줄바꿈으로 전환. */
-@media (max-width:900px){
-  #homePromo3 .pp-text { display:block; }
-  #homePromo3 .pp-dash { display:inline; margin:0 .28em; }
-  #homePromo3 .pp-title { display:inline; overflow:visible; text-overflow:clip; white-space:normal; }
+/* 개최지·일정 칩 — 좁은 폭에서는 페이드아웃 + 폭 접기로 줄에서 빠진다.
+   transition 대상에 max-width 를 쓰기 때문에 "보이는 상태"에도 보간 가능한 상한이 필요하다
+   (none → 0 은 보간되지 않아 툭 끊긴다). 칩 실측 폭은 국문 175.56px / 영문 190.23px 로
+   .pp-soon 의 font-size 가 .72rem 고정이라 뷰포트와 무관하다. 15rem(=240px)은 그중 가장 넓은
+   영문 칩보다 49.8px(26%) 넉넉해 평소에는 아무것도 자르지 않고, 접힐 때만 실제로 작동한다.
+   overflow:hidden 은 접히는 도중 글자가 밖으로 새지 않게 하려고 항상 켜 둔다.
+   최초 페인트에서는 전이가 걸리지 않는다 — CSS Transitions 는 요소의 첫 스타일 계산에는
+   적용되지 않으므로(§ "no transition on the initial computed value") 별도 게이트가 필요 없다.
+   실측으로도 확인했다: 접히는 폭에서 새로 로드하면 첫 프레임부터 opacity 0 / width 0 이다. */
+#homePromo3 .pp-soon {
+  flex:0 0 auto;
+  overflow:hidden;
+  max-width:15rem;
+  transition:opacity .26s ease-out, max-width .26s ease-out,
+             margin-left .26s ease-out, padding-left .26s ease-out, padding-right .26s ease-out;
+}
+@media (prefers-reduced-motion: reduce){
+  #homePromo3 .pp-soon { transition:none; }
+}
+
+/* ── 1) 제목·em-dash 숨김: 보이는 제목 폭이 ~80px 아래로 마르는 지점 (v88 규칙 그대로, 값만 재계산) ──
+   한 줄(row) 구간의 .pp-text 가용폭 실측: 국문 (뷰포트−301)px, 영문 (뷰포트−369)px
+   (뷰포트−88 = 컨테이너, −badge(국문 111.5/영문 154.56) −cta(69.55/94.73) −gap 32).
+   이 경계보다 위에서는 칩이 온전히 보이므로 계산에 칩을 그대로 넣는다 —
+   국문: 115.34(b) +6.59(여백) +88.77(리드2) +25.70(dash) +8 +175.56(칩) = 419.96 → 80px 남으려면 ≥801px
+   영문: 115.34 +6.59 +92.25 +25.70 +8 +190.23(칩) = 438.11 → ≥887.4px
+   그래서 국문 ≤800px, 영문 ≤890px 에서 제목·em-dash 를 접는다(v88·v89와 같은 값).
+   칩이 접히는 구간(국문 ≤720 / 영문 ≤800)에서는 제목을 되살릴 여유가 생기지만, 그렇게 하면
+   제목이 800px 에서 사라졌다가 720px 에서 되돌아오는 비단조 거동이 되어 버그처럼 보인다.
+   폭이 줄어들수록 요소가 단조적으로 빠지는 순서를 유지한다: 제목 → 칩. */
+@media (max-width:800px){
+  #homePromo3 .pp-dash,
+  #homePromo3 .pp-title { display:none; }
+}
+@media (max-width:890px){
+  html[lang="en"] #homePromo3 .pp-dash,
+  html[lang="en"] #homePromo3 .pp-title { display:none; }
+}
+
+/* ── 2) 칩(.pp-soon) 페이드아웃 경계 ──
+   v89 까지는 "칩은 어떤 폭에서도 살린다"는 제약 때문에 ≤500/430/390/365px 4단 축소 사다리와
+   영문 641~685px 패치로 배너3의 본문을 9px 대까지 내려야 했고, 그 대가로 국문 641~720px /
+   영문 641~800px 에서 "논문 발표 예정"(EN "presentation")을 지워야 했다.
+   칩을 좁은 폭에서 접을 수 있게 되면서(일정·개최지는 링크된 상세 페이지에 그대로 있다)
+   그 사다리와 리드2 숨김이 전부 불필요해졌다 — 모두 삭제했다. 배너3의 글자 크기는 이제 어느 폭에서도
+   공용 .paper-promo 기본값(≥641px 0.98rem / ≤640px 0.9rem)이고, 리드 그룹은 375px 까지 살아 있다.
+   경계는 계산이 아니라 실측에서 나왔다. 리드 그룹+칩이 차지하는 실제 폭(b 왼쪽 끝 ~ 칩 오른쪽 끝)은
+   국문 394.25px / 영문 412.41px 이고, 한 줄 구간 .pp-text 가용폭은 (뷰포트−301) / (뷰포트−369)px 이다.
+   → 칩이 잘리지 않는 최소 뷰포트 국문 695.3px / 영문 781.4px
+     (실측 확인: 국문 695px 는 안 잘리고 690px 는 잘림, 영문 782px 는 안 잘리고 780px 는 잘림)
+   여기서 한 단계 위의 라운드 값을 경계로 잡아 안전 여유를 둔다 —
+     국문 720px  (721px 여유 25.75px)
+     영문 800px  (801px 여유 19.59px)
+   즉 "칩을 유지하려면 글자를 줄이거나 리드 문구를 지워야 하는 폭"에서 접는다.
+   ≤640px 의 세로 스택 구간에서는 .pp-text 가 배너 폭 전체를 쓰므로 칩이 다시 465px(국문) /
+   483px(영문) 까지 들어가긴 한다. 그래도 되살리지 않는다 — 720px 에서 사라진 칩이 640px 에서
+   다시 나타나면 창을 줄이는 동안 페이드가 두 번 일어나고 비단조로 읽힌다. 경계는 언어별로 하나씩이다. */
+@media (max-width:720px){
+  #homePromo3 .pp-soon {
+    opacity:0;
+    max-width:0;
+    margin-left:0;
+    padding-left:0;
+    padding-right:0;
+  }
+}
+@media (max-width:800px){
+  html[lang="en"] #homePromo3 .pp-soon {
+    opacity:0;
+    max-width:0;
+    margin-left:0;
+    padding-left:0;
+    padding-right:0;
+  }
 }
 
 /* 세 번째 배너 전용 색 — 딥 틸 → 틸-에메랄드.
