@@ -83,7 +83,7 @@ window.SITE = {
     enabled: true,
     href: "works/iceccme2026-predictive-load-balancing/",
     badge: "SOON · 발표 예정",
-    text: "<b>ICECCME 2026</b> — 시공간 GNN 기반 예측적 부하 분산<span class=\"pp-soon\">발리·인도네시아 · 2026.10.15–17</span>",
+    text: "<b>ICECCME 2026</b><span class=\"pp-dash\">—</span><span class=\"pp-title\">시공간 그래프 신경망 기반 예측적 부하 분산 시뮬레이션</span><span class=\"pp-soon\">발리·인도네시아 · 2026.10.15–17</span>",
     cta: "논문 보기 →"
   },
   /* 비검열 AI 플로팅 위젯 (removable) — enabled:false 로 끄면 우측하단 플로팅 버튼이 사라진다(상단 링크는 별도 quicklinks 항목).

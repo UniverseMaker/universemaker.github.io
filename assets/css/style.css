@@ -648,3 +648,18 @@ body[data-theme="light"][data-hero="photo"] .feat-large:hover .bg::after {
 .paper-promo .pp-btn.ghost:hover { background:rgba(255,255,255,.16); color:#fff; }
 .paper-promo .pp-btn.solid { background:#fff; color:#4b3fb0; }
 .paper-promo .pp-btn.solid:hover { filter:brightness(.94); color:#4b3fb0; }
+
+/* 세 번째 배너(ICECCME 2026) — 긴 제목만 …으로 줄이고, 앞의 <b>ICECCME 2026</b>과 끝의 개최지·일정 칩(.pp-soon)은 항상 100% 노출.
+   #homePromo3 에만 스코프. #homePromo / #homePromo2 및 공용 .paper-promo .pp-text 규칙은 건드리지 않는다. */
+#homePromo3 .pp-text { display:flex; align-items:center; min-width:0; }
+#homePromo3 .pp-text > b { flex:0 0 auto; }
+#homePromo3 .pp-dash { flex:0 0 auto; margin:0 .32em; }
+#homePromo3 .pp-title { flex:0 1 auto; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+#homePromo3 .pp-soon { flex:0 0 auto; }
+/* 태블릿·모바일(≤900px): 한 줄 생략 대신 자연 줄바꿈으로 제목 전체 노출(칩도 잘리지 않음).
+   768px에서 한 줄 생략을 쓰면 제목이 45~128px만 남아 "Pre…" 수준으로 의미를 잃으므로 900px부터 줄바꿈으로 전환. */
+@media (max-width:900px){
+  #homePromo3 .pp-text { display:block; }
+  #homePromo3 .pp-dash { display:inline; margin:0 .28em; }
+  #homePromo3 .pp-title { display:inline; overflow:visible; text-overflow:clip; white-space:normal; }
+}
