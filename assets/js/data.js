@@ -76,6 +76,16 @@ window.SITE = {
       { label: "지금 사용 →", href: AI_CHAT_URL, external: true }
     ]
   },
+  /* 홈 세 번째 공지 배너 (발표 예정 논문) — promo2 바로 아래. enabled:false 로 껐다 켰다.
+     사이트가 전면 정적이라 이 객체는 설정 기록이며, 실제 노출은 index.html / en/index.html 의
+     #homePromo3 섹션(baked HTML)이다. 문구를 바꿀 때 둘을 함께 수정한다. */
+  promo3: {
+    enabled: true,
+    href: "works/iceccme2026-predictive-load-balancing/",
+    badge: "SOON · 발표 예정",
+    text: "<b>ICECCME 2026</b> — 시공간 GNN 기반 예측적 부하 분산<span class=\"pp-soon\">발리·인도네시아 · 2026.10.15–17</span>",
+    cta: "논문 보기 →"
+  },
   /* 비검열 AI 플로팅 위젯 (removable) — enabled:false 로 끄면 우측하단 플로팅 버튼이 사라진다(상단 링크는 별도 quicklinks 항목).
      완전 제거: 이 블록 + quicklinks의 "Abliterated AI" 항목 + main.js 하단 "AI Trial widget" 블록 삭제 */
   aiTrial: {

@@ -638,7 +638,7 @@ body[data-theme="light"][data-hero="photo"] .feat-large:hover .bg::after {
 .paper-promo .pp-text b { font-weight:800; }
 .paper-promo .pp-soon { display:inline-block; margin-left:8px; font-size:.72rem; font-weight:700; background:rgba(255,255,255,.2); padding:3px 9px; border-radius:999px; vertical-align:middle; }
 .paper-promo .pp-cta { flex:none; font-weight:800; font-size:.9rem; }
-@media (max-width:640px){ .paper-promo{ flex-direction:column; align-items:flex-start; gap:8px; } .paper-promo .pp-text{ font-size:.9rem; align-self:stretch; } }
+@media (max-width:640px){ .paper-promo{ flex-direction:column; align-items:flex-start; gap:8px; } .paper-promo .pp-text{ font-size:.9rem; align-self:stretch; } #homePromo3 .pp-text { white-space: normal; overflow: visible; text-overflow: clip; } }
 /* 두 번째 배너(비검열 AI) — 버튼 2개 변형 */
 .paper-promo.ai-promo { background:linear-gradient(100deg,#4b3fb0,#7b5bff); }
 .paper-promo.ai-promo .pp-badge { color:#5b3fd0; }
