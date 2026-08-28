@@ -663,3 +663,14 @@ body[data-theme="light"][data-hero="photo"] .feat-large:hover .bg::after {
   #homePromo3 .pp-dash { display:inline; margin:0 .28em; }
   #homePromo3 .pp-title { display:inline; overflow:visible; text-overflow:clip; white-space:normal; }
 }
+
+/* 세 번째 배너 전용 색 — 딥 틸 → 틸-에메랄드.
+   배너1(#homePromo) 인디고 H235°, 배너2(#homePromo2) 바이올렛 H246→252°에 이어
+   배너3은 쿨 계열 반대쪽 끝(H196→175°)에 놓아 세 배너가 사이트 accent(인디고)를 가운데 둔
+   부채꼴 한 벌로 읽히게 한다. 채도(77~81%)는 기존 두 배너와 같은 대역, 명도는 흰 글자 대비
+   확보를 위해 낮게(L19→27%). 흰 본문 대비: 어두운 스톱 10.89:1 / 밝은 스톱 4.87:1 (둘 다 ≥4.5).
+   배너1·2와 마찬가지로 다크모드 오버라이드 없음(두 테마 동일 — .paper-promo/.ai-promo와 같은 방식). */
+#homePromo3 .paper-promo { background:linear-gradient(100deg,#0b4256,#0d7f76); }
+#homePromo3 .pp-badge { color:#0a6b62; }                     /* 흰 pill 위 텍스트, 대비 6.38:1 */
+#homePromo3 .pp-soon { background:rgba(3,40,45,.4); }        /* 밝은 틸 위에서 흰 글자 3.4:1로 떨어지던 반투명 흰 칩을
+                                                                딥틸 칩으로 교체 → 7.6~9.8:1 */
