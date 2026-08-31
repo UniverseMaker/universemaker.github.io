@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light" data-prerendered="1">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>어디서 무슨 일이 일어났는가: 주소 지식그래프와 멀티모달 재난 인지를 하나의 스택으로 - Daeseung Park Journal</title>
+<meta name="description" content="재난 신고는 주소로 들어오고, 판단은 영상과 센서로 이루어진다. 도로명주소를 노드와 관계로 푸는 지식그래프(AddressKG)와 영상·센서·공간정보·텍스트를 한 백본에서 읽는 도시안전 AI 서빙 API를 하나의 파이프라인으로 잇는 작업을 회고한다. 결정론적 식별자 GSID, 두 그래프의 조인 키, 근거 없는 문장을 거부하는 설계, 그리고 아직 못 한 것들.">
+<link rel="canonical" href="https://daeseungpark.com/articles/address-graph-disaster-perception-stack/">
+<!-- seo-i18n:start -->
+<link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/address-graph-disaster-perception-stack/">
+<link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/address-graph-disaster-perception-stack/">
+<link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/address-graph-disaster-perception-stack/">
+<meta property="og:locale:alternate" content="en_US">
+<!-- seo-i18n:end -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="D. PARK Journal">
+<meta property="og:title" content="어디서 무슨 일이 일어났는가: 주소 지식그래프와 멀티모달 재난 인지를 하나의 스택으로">
+<meta property="og:description" content="재난 신고는 주소로 들어오고, 판단은 영상과 센서로 이루어진다. 주소를 관계로 푸는 지식그래프 계층과 멀티모달 인지를 서빙하는 API 계층을 하나의 파이프라인으로 잇는 일에 대하여.">
+<meta property="og:url" content="https://daeseungpark.com/articles/address-graph-disaster-perception-stack/">
+<meta property="og:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="어디서 무슨 일이 일어났는가: 주소 지식그래프와 멀티모달 재난 인지를 하나의 스택으로">
+<meta name="twitter:description" content="주소는 의미로, 현장은 픽셀로 들어온다. 그 사이를 잇는 결정론적 식별자와 조인 키, 그리고 근거 없이는 말하지 않는 설계에 대한 회고.">
+<meta name="twitter:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"어디서 무슨 일이 일어났는가: 주소 지식그래프와 멀티모달 재난 인지를 하나의 스택으로","author":{"@type":"Person","name":"박대승","alternateName":"Daeseung Park"},"publisher":{"@type":"Organization","name":"D. PARK Journal"},"image":"https://daeseungpark.com/assets/img/profile/img3.jpg","mainEntityOfPage":"https://daeseungpark.com/articles/address-graph-disaster-perception-stack/","inLanguage":"ko","datePublished":"2026-08-31"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Noto+Serif+KR:wght@400;600&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="../../assets/css/style.css?v=f2072f20">
+<link rel="stylesheet" href="../../assets/css/article.css?v=20f2a72d">
+</head>
+<body data-base="../../">
+<div class="progress-bar" id="progress"></div>
+<div class="topbar no-print">
+  <div class="container-x">
+    <span class="tb-date" id="today">—</span>
+    <div class="tb-links" data-prerendered="1"><a href="https://ai.daeseungpark.com/chat/" target="_blank" rel="noopener">Abliterated AI</a><a href="https://tcc.daeseungpark.com/" target="_blank" rel="noopener">Mission Control(TCC)</a><a href="../../profile.html">Profile</a><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener">GitHub</a><a href="https://scholar.google.com/citations?hl=ko&amp;user=qVom0QUAAAAJ" target="_blank" rel="noopener">Scholar</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener">ORCID</a><a href="https://hub.docker.com/u/daeseungpark" target="_blank" rel="noopener">Docker</a><a href="https://codespectrum.net" target="_blank" rel="noopener">Blog</a><a href="../../profile.html#contact">Contact</a><a href="../../notices.html">Notice</a><a href="/en/articles/address-graph-disaster-perception-stack/" class="tb-lang-link" aria-label="Language">English</a></div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header no-print">
+  <div class="container-x nav-row">
+    <a href="../../index.html" class="brand">D<span class="dot">.</span> PARK <small>Journal</small></a>
+    <nav class="main-nav" data-prerendered="1"><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="테마 전환"><span id="themeIcon">☾</span></button>
+      <button class="print-cta" id="printBtn">🖶 인쇄 / PDF</button>
+      <button class="icon-btn nav-toggle" id="navToggle" aria-label="메뉴">≡</button>
+    </div>
+  </div>
+</header>
+
+<div class="ticker no-print">
+  <div class="container-x">
+    <span class="label">Trending</span>
+    <div class="items" id="tickerItems" data-prerendered="1"><a href="../../articles/address-graph-disaster-perception-stack/">어디서 무슨 일이 일어났는가</a><a href="../../articles/genai-copyright-data-licensing/">학습이라는 이름의 채굴</a><a href="../../articles/ai-agent-reliability-evals/">데모는 되는데, 프로덕션에서 무너지는 이유</a><a href="../../articles/reasoning-models-test-time-compute/">더 키우기보다 더 생각하게 — 테스트타임 컴퓨트…</a><a href="../../articles/rag-architectures-hallucination/">검색이 지능을 구원하는 네 가지 방법 — Lexical…</a><a href="../../articles/mcp-agent-interop-standard/">AI의 HTTP가 된 프로토콜</a></div>
+  </div>
+</div>
+
+<article data-article-id="22">
+  <div class="article-wrap">
+    <!-- Masthead -->
+    <header class="art-head">
+      <span class="cat-pill red">Research · 회고</span>
+      <h1>어디서 무슨 일이 일어났는가</h1>
+      <p class="deck">재난 현장의 언어는 주소로 들어온다. “유성구 어디쯤 상가 지하”라는 말로. 그러나 판단은 영상과 센서로 이루어진다. 연기의 두께, 수위의 기울기, 흔들림의 주기로. 이 두 언어 사이에는 아무도 대신 메워 주지 않는 틈이 있다. 올해 나는 그 틈의 양쪽에 서는 소프트웨어 두 벌을 만들었다 — 주소를 좌표와 관계로 푸는 지식그래프, 그리고 네 갈래 모달리티를 한 백본에서 읽는 인지 API. 이 글은 그 둘을 <em>하나의 스택</em>으로 세우려 한 시도와, 아직 못 한 것들에 대한 기록이다.</p>
+      <div class="art-byline">
+        <div class="av">DP</div>
+        <div class="who">
+          <b>박대승 (Daeseung Park)</b>
+          <span>AI &amp; Software Systems Engineer · KAIST</span>
+          <span>2026년 8월 · 17분 읽기</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="art-cover"><img src="images/cover.svg" alt="주소 지식그래프와 멀티모달 재난 인지를 하나의 스택으로 잇는 개념도" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;"></div>
+
+    <!-- Summary -->
+    <div class="summary-box">
+      <span class="tag">1분 요약</span>
+      재난 대응 시스템의 입력은 대부분 <strong>주소라는 문자열</strong>로 도착하지만, 실제 판단은 <strong>영상·센서라는 신호</strong>로 이루어진다. 그 사이를 잇는 것이 이 글의 주제다. 아래쪽 계층은 <strong>AddressKG</strong> — 도로명주소를 국가 표준 온톨로지에 따라 노드와 관계로 분해해 Neo4j 위에 세운 지식그래프다. 대전·세종 전수를 적재한 운영 그래프는 노드 1,682,015개·관계 5,527,976개이며, 모든 노드와 엣지에 결정론적 식별자 <strong>GSID</strong>를 부여해 같은 원천이면 같은 그래프가 재현된다. 위쪽 계층은 <strong>도시안전 AI API</strong> — 영상·센서 시계열·공간정보·텍스트 네 모달리티를 하나의 LLM 백본 위에서 함께 읽어 화재·침수·붕괴를 인지하고, 기관 사이의 모든 경계를 JSON Schema로 검증해 주고받는 서빙 소프트웨어다. 두 계층을 붙이려는 순간 드러난 진짜 문제는 모델이 아니라 <em>조인 키</em>였다. 표준 어휘 54클래스·73관계로 촘촘한 아래쪽과, 안전 의미에 맞춰 12노드·8관계로 굵게 추린 위쪽을 무엇으로 같은 개체라고 부를 것인가. 이 글은 그 접합면과, 근거 없이는 한 문장도 만들지 않게 만든 설계, 그리고 남은 숙제를 정리한다. (본문의 수치는 2026년 7월 재구축 리허설의 <em>실측치</em>이며, 아직 검증되지 않은 성능치는 싣지 않았다.)
+    </div>
+
+    <!-- Body -->
+    <div class="prose">
+      <span class="chapter-label">Chapter 1. 두 개의 언어</span>
+      <h2>신고는 주소로 오고, 판단은 장면으로 온다</h2>
+      <p>재난 대응 소프트웨어를 오래 들여다보면 이상한 비대칭이 눈에 띈다. 사건이 시스템에 들어오는 문은 거의 언제나 <em>주소</em>다. 신고 접수, 출동 지시, 대피 안내, 사후 보고 — 사람이 사람에게 위치를 전달하는 방식은 도로명과 건물번호라는 문자열이다. 그런데 시스템이 정작 판단에 쓰는 재료는 전혀 다른 종류다. CCTV의 프레임, 수위계의 시계열, 진동 센서의 스펙트럼. 앞의 것은 의미의 언어이고, 뒤의 것은 신호의 언어다.</p>
+      <p>두 언어는 서로를 자동으로 번역하지 않는다. 카메라는 자기가 보고 있는 것이 어느 건물의 몇 층인지 모르고, 주소 데이터베이스는 그 건물에서 지금 연기가 나는지 모른다. 그래서 현장에서는 사람이 그 번역을 맡는다. 상황실 담당자가 화면 속 장면을 보고 머릿속 지도를 떠올려 “저건 아마 그 지하상가 3번 출입구 쪽”이라고 판단한다. 이 번역은 놀랍도록 정확하지만, 놀랍도록 확장되지 않는다. 화면이 열 개일 때는 되고, 이백 개일 때는 되지 않는다.</p>
+      <div class="pullquote">사건은 주소로 들어오고 판단은 신호로 이루어진다. 그 사이의 번역을 사람의 머릿속에 남겨 두는 한, 시스템은 화면 개수만큼만 커진다.</div>
+      <p>올해 나는 이 비대칭의 양쪽에서 각각 하나씩, 소프트웨어 두 벌을 맡았다. 하나는 <strong>AddressKG</strong>다. 도로명주소 데이터를 노드와 링크로 분해해 지식그래프로 세우는 일. 다른 하나는 <strong>도시안전 AI API</strong>다. 영상·센서·공간정보·텍스트를 하나의 대형언어모델 백본 위에서 함께 읽어 재난 상황을 인지하고, 그 결과를 여러 기관이 주고받을 수 있는 형식으로 내놓는 서빙 소프트웨어. 처음에는 두 과업이 서로 다른 서랍에 들어 있는 별개의 일처럼 보였다. 그러나 각각을 어느 정도 만들고 나서 되돌아보니, 둘은 같은 문장의 앞뒤 절이었다. <em>어디서</em>에 답하는 계층과 <em>무슨 일이</em>에 답하는 계층.</p>
+      <p>이 글은 그 두 계층을 하나의 파이프라인으로 세우려 한 기록이다. 성공담이 아니라 접합면의 기록에 가깝다. 실제로 흥미로운 문제는 대부분 두 계층의 <em>안쪽</em>이 아니라 그 <em>사이</em>에 있었기 때문이다.</p>
+
+      <span class="chapter-label">Chapter 2. 아래쪽 계층</span>
+      <h2>주소를 관계로 푸는 일</h2>
+      <p>주소는 문자열처럼 생겼지만 실은 트리다. 시·도 아래 시·군·구, 그 아래 도로명, 그 아래 건물번호. 여기에 법정동과 행정동이 서로 다른 축으로 겹치고, 국가기초구역이 또 다른 축으로 덮는다. 이 구조를 관계형 테이블에 밀어 넣으면 조회는 되지만 “이 도로가 어느 법정동들을 관통하는가”, “이 건물 옆에 무엇이 있는가” 같은 질문에는 매번 새 조인을 짜야 한다. 그래서 그래프로 갔다.</p>
+      <p>설계의 단일 진실원본(SSOT)은 코드가 아니라 표준 문서다. 「주소정보 지식그래프 모델」 표준(Part 1~3)의 온톨로지가 위에 있고, 명세서 웹판·RDF/OWL·JSON-LD 컨텍스트·SHACL shapes·데이터 딕셔너리가 모두 그 하나에서 자동 생성된다. 문서와 구현이 어긋날 수 있는 경로 자체를 없앤 것이다. 그래프는 두 축으로 나뉜다. 표준 클래스로 정규화된 주소 요소와 계층·공간·의미 관계를 담는 <strong>Core Network(HSM)</strong>, 그리고 공공데이터 레코드를 주소 요소에 붙이는 <strong>External Network(ESC)</strong>. 작업 중 사물주소를 13종 매핑에서 25종 개별 클래스로 다루도록 표준을 개정하면서 클래스는 42개에서 54개로, 관계는 61종에서 73종으로 늘었다.</p>
+      <p>표준을 다루면서 배운 규율이 하나 있다. <em>표준에 없는 개념이 필요할 때 표준을 몰래 늘리지 않는다.</em> 출입구, 행정동의 법정동 관장 관계, 도로가 법정동을 관통하는 관계, 서로 다른 원천이 같은 실체를 가리킨다는 개체정합 관계 — 이런 것들은 전부 확장 사전에 따로 등재했다. 그리고 그 확장 목록에서 표준 개정 제안서가 자동으로 생성되어 표준 쪽으로 되돌아간다. 필요는 인정하고, 오염은 막고, 제안으로 환류한다. 이 세 박자를 도구로 강제하지 않으면 반드시 어느 밤에 누군가 클래스를 하나 슬쩍 추가한다.</p>
+      <div class="callout"><b>같은 원천이면 같은 그래프여야 한다.</b> 이 그래프의 식별자 <strong>GSID</strong>는 해시가 아니라 결정론적 규칙으로 발급된다 — 도메인 코드, S2 Level16 공간 셀, 지상·지하 층위, 세대, 결정론적 순번, 그리고 Luhn mod-36 검증문자. 예컨대 건물번호 하나가 <code>BD-357CA3FE-G0-00-913547-I</code>가 된다. 노드만이 아니라 <em>엣지에도</em> 부여한다. 모든 적재 단계를 멱등으로 만들었기 때문에, 재실행해도 다른 장비에서 처음부터 다시 만들어도 같은 식별자가 나온다. 지역을 순차로 추가할 때는 먼저 발급된 GSID를 그대로 채택하고 충돌한 것만 재발급한 뒤 엣지의 끝점을 재매핑해 식별자 불변을 지킨다. 지루하게 들리는 이 규칙이 뒤에 나올 ‘조인 키’ 문제의 유일한 밑돌이 된다.</div>
+      <p>좌표는 텍스트 데이터베이스가 아니라 주소 도형 파일에서 온다. 원천의 좌표계(EPSG:5179)를 적재 과정에서 WGS84와 EPSG:5186으로 변환해 노드에 주입하고, 실좌표를 기준으로 S2 셀을 다시 계산해 GSID를 재발급한다. 좌표가 들어오면 그때부터 공간 관계를 <em>계산</em>할 수 있다. 인접, 건물이 어느 도로를 면하는지, 반경 안에 무엇이 있는지, 어느 구역이 어느 건물을 품는지. 이 관계들은 하드코딩이 아니라 선언적 규칙 엔진이 만든다. 건물이 도로를 면한다는 판정은 출입구와 도로의 실제 접점을 근거로 삼고, 접점 데이터가 없을 때만 주소가 부여된 도로로 폴백하며 신뢰도 값을 낮춘다. 구역 포함 관계는 공간 포함과 법정동 코드를 교차검증한다. 규칙은 웹 콘솔에서 등록·수정·비활성화·재계산·삭제할 수 있고, 모든 조작이 감사 로그에 남는다.</p>
+      <p>공공데이터 연계는 pull 모델이다. 데이터셋을 카탈로그에 선언하면 주소 코드조인(신뢰도 1.0) → 좌표(0.9) → 영역(0.8) 순으로 링크를 시도하고, 어느 방식으로도 붙지 않으면 <em>링크를 만들지 않고</em> 레코드만 보존한다. 억지로 붙인 링크가 나중에 그래프 전체의 신뢰를 갉아먹는다는 것을 아는 사람의 설계다. 실제로 연계한 원천은 상가(상권)정보 94,030건(대전 78,607 + 세종 15,423, 좌표 링크 99.6%), 위키데이터 POI 1,175건, 전국표준데이터의 주차장 18,530건과 도서관·박물관미술관·공공시설개방 합계 11,605건, 지방자치단체 출자·출연기관 857개다. 마지막 것에는 좌표가 없었다. 외부 지오코딩 서비스를 붙이는 대신 그래프 자신의 건물번호 코드조인으로 자체 지오코딩했다. 그래프가 충분히 촘촘해지면, 그래프가 곧 지오코더가 된다.</p>
+      <p>그 위에 지식 계층을 얹었다. 주소용어집을 파싱해 용어 노드와 의미 매칭 엣지를 만들고, 560쪽짜리 업무편람에서 용어·질의회신·업무 기준·장절 트리·본문 청크를 <em>원문 그대로</em>(요약이나 재작성 없이) 추출해 노드화하고, 법조 인용은 별도 노드와 인용 관계로 실체화했다. 검색은 정확 일치 → 부분 일치 → 토큰 AND → 별칭 → 벡터 KNN 순의 폴백 체인이며, 벡터는 로컬에서 돌리는 임베딩 모델(768차원)로 만든다. 유료 API 없이, 오프라인에서, 비용 0으로 동작한다는 제약을 처음부터 요구사항으로 두었기 때문이다.</p>
+
+      <figure>
+        <svg viewBox="0 0 760 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="주소 계층에서 인지 계층으로 이어지는 파이프라인과 그 접합면 도식" style="width:100%;height:auto;display:block;">
+          <rect x="0" y="0" width="760" height="340" fill="none"/>
+          <text x="380" y="26" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="15" font-weight="700" fill="#1a2350">두 계층은 ‘조인 키’에서 만난다</text>
+          <g font-family="'Segoe UI',sans-serif">
+            <!-- lower layer -->
+            <rect x="24" y="48" width="300" height="112" rx="12" fill="#e8effc" stroke="#2f4fa8" stroke-width="2.4"/>
+            <text x="174" y="74" text-anchor="middle" font-size="13.5" font-weight="700" fill="#16306e">주소 지식그래프 계층</text>
+            <text x="174" y="98" text-anchor="middle" font-size="11.5" fill="#33406b">표준 온톨로지 · 클래스 54 · 관계 73</text>
+            <text x="174" y="118" text-anchor="middle" font-size="11.5" fill="#33406b">좌표 주입 · 선언적 공간 규칙</text>
+            <text x="174" y="138" text-anchor="middle" font-size="11.5" fill="#33406b">공공데이터 연계 · 자체 지오코딩</text>
+            <!-- upper layer -->
+            <rect x="436" y="48" width="300" height="112" rx="12" fill="#eef0fb" stroke="#5b3fb8" stroke-width="2.4"/>
+            <text x="586" y="74" text-anchor="middle" font-size="13.5" font-weight="700" fill="#3c2480">재난 인지 계층</text>
+            <text x="586" y="98" text-anchor="middle" font-size="11.5" fill="#3f3763">모달리티 4종 · 단일 encode 계약</text>
+            <text x="586" y="118" text-anchor="middle" font-size="11.5" fill="#3f3763">프로젝션 정렬 · LoRA 도메인 적응</text>
+            <text x="586" y="138" text-anchor="middle" font-size="11.5" fill="#3f3763">경계 스키마 검증 · 교체형 백엔드</text>
+            <!-- joint -->
+            <rect x="248" y="196" width="264" height="66" rx="14" fill="#fff4e0" stroke="#c47f13" stroke-width="2.6"/>
+            <text x="380" y="222" text-anchor="middle" font-size="13" font-weight="700" fill="#7a4c00">접합면 — 같은 개체를 같다고 부르는 키</text>
+            <text x="380" y="245" text-anchor="middle" font-size="11.5" fill="#5c4a22">결정론적 식별자 · 좌표계 · 어휘 대응표</text>
+            <!-- arrows -->
+            <g stroke="#2f4fa8" stroke-width="2.6" fill="none">
+              <path d="M174 160 L174 214 L244 214"/>
+            </g>
+            <g stroke="#5b3fb8" stroke-width="2.6" fill="none">
+              <path d="M586 160 L586 214 L516 214"/>
+            </g>
+            <g stroke="#c47f13" stroke-width="2.6" fill="none">
+              <path d="M380 262 L380 292"/>
+            </g>
+            <text x="380" y="314" text-anchor="middle" font-size="12.5" font-weight="700" fill="#7a4c00">“어디서 무슨 일이 일어났는가”에 한 문장으로 답하기</text>
+          </g>
+        </svg>
+        <figcaption>두 계층의 안쪽은 각자 정합적이다. 문제는 사이에 있다. 아래쪽은 국가 표준 어휘로 촘촘하고 위쪽은 안전 의미에 맞춰 굵게 추려져 있어, 같은 건물·같은 도로를 두 계층이 서로 다른 이름으로 부른다. 접합면의 과제는 모델이 아니라 식별자와 어휘 대응표다.</figcaption>
+      </figure>
+
+      <span class="chapter-label">Chapter 3. 위쪽 계층</span>
+      <h2>장면을 읽는 일</h2>
+      <p>위쪽 계층의 문제 정의는 아래쪽과 정반대다. 여기서는 데이터가 넘치고 형식이 다르다. 영상은 프레임의 격자, 센서는 시간의 축, 공간정보는 좌표와 위상, 텍스트는 토큰. 이 넷을 하나의 모델이 읽으려면 먼저 같은 모양으로 만들어야 한다. 그래서 첫 결정은 아키텍처가 아니라 <em>계약</em>이었다. 네 인코더가 모두 <code>encode(inputs) → Tensor[B, T, D]</code>라는 단일 추상 인터페이스를 구현한다. 계약만 지키면 새 모달리티를 붙여도 프로젝션과 학습 루프는 손대지 않는다.</p>
+      <p>인코더 출력을 LLM의 임베딩 공간에 맞추는 프로젝션은 Linear·MLP·Cross-Attention 세 방식을 팩토리로 교체할 수 있게 했다. 학습은 네 단계로 쪼갰다 — 인코더 독립 베이스라인, 프로젝션 정렬, LoRA 공동 미세조정, 재난 인지 지도학습. 단계마다 진입·중단·롤백 기준을 명시하고, 범용 성능 유지율을 주기적으로 측정하는 공용 콜백을 필수 요소로 강제했다.</p>
+      <div class="callout"><b>왜 백본을 거의 건드리지 않는가.</b> 도메인 데이터로 대형언어모델을 통째로 미세조정하면 재난 문서는 잘 읽지만 일반적인 한국어 능력이 무너지는 <em>치명적 망각</em>이 온다. 그래서 역할을 쪼갰다. 인코더는 동결이 기본, 모달리티 정렬은 프로젝션 레이어, 도메인 적응은 LoRA 어댑터, 지식 보강은 공간 지식그래프를 검색해 컨텍스트로 주입하는 방식이 각각 나누어 맡는다. 학습 스크립트는 유지율이 설정 임계 아래로 떨어지면 학습률을 낮추거나 학습을 중단하고 직전 체크포인트로 롤백한다. 능력을 더하는 일과 능력을 잃지 않는 일은 별개의 공정이고, 후자는 자동화하지 않으면 반드시 잊힌다.</div>
+      <p>서빙 쪽에서 가장 실용적이었던 결정은 추론 백엔드를 <em>문자열 하나로</em> 교체 가능하게 만든 것이다. 목업, 규칙 기반 로컬, 트랜스포머 직접 로드, 상용 API, 그리고 고성능 추론 엔진 — 다섯 종류를 같은 인터페이스 뒤에 두었다. 덕분에 GPU도 실모델 가중치도 없는 상태에서 API 경로와 지연 측정과 리포트를 그대로 실측할 수 있다. 본탑재 때는 백엔드만 바꾸면 된다. 연구 소프트웨어에서 “모델이 아직 없어서 못 한다”는 말이 나오는 순간 일정은 무너진다. 그 말이 나올 수 없게 만드는 것이 서빙 계층의 첫 임무였다.</p>
+      <p>같은 사고방식이 기관 간 경계에도 적용됐다. 여러 기관이 각자 맡은 부분을 병렬로 만드는 사업에서는 상대 모듈이 없다는 이유로 개발이 멈추기 쉽다. 그래서 엣지 장비에서 모델로, 검색 계층에서 모델로, 모델에서 서빙·실증 플랫폼으로 넘어가는 <strong>모든 경계의 메시지 형식을 JSON Schema로 먼저 못 박았고</strong>, 외부 연동부는 어댑터로 격리해 목업만으로도 전 구간이 관통되게 만들었다. 게이트웨이는 경계마다 이 스키마로 입출력을 검증하고 위반하면 422로 거절한다. 규격 위반이 통합 시점이 아니라 개발 시점에 드러나는 구조다.</p>
+      <p>종단간 엔드포인트는 센서 입력 → 검색 근거 조회 → 공간 지식그래프와 3D 객체 매핑 → 추론 요청 구성 → 모델 응답 → 엔드포인트 등록 → 실증 평가 바인딩 → 통합 상황판까지 여덟 단계를 한 번에 통과시키고, 각 단계의 산출물이 해당 경계 스키마를 만족하는지 그 자리에서 확인한다. 같은 파이프라인을 서버전송이벤트로 흘려보내면 단계별 진행 상황과 지연을 브라우저에서 실시간으로 볼 수 있다. 지연시간도 나중에 재는 값이 아니라 처음부터 게이트웨이의 측정 엔드포인트로 붙여, 어떤 백엔드를 꽂아도 같은 방식으로 측정된다.</p>
+      <p>그리고 데이터 계층에는 딱 하나의 강한 규칙을 두었다. 출처·라이선스·비식별화 메타가 없는 데이터는 학습에 <em>진입하지 못한다</em>. 스키마 검증에서 걸러진다. 재난 데이터는 성격상 사람이 찍히고 주소가 찍힌다. 이 규칙을 문서의 권고가 아니라 코드의 게이트로 만든 것은, 권고는 마감이 다가오면 반드시 양보된다는 것을 알기 때문이다.</p>
+
+      <span class="chapter-label">Chapter 4. 접합면</span>
+      <h2>모델보다 어려웠던 것: 조인 키</h2>
+      <p>두 계층을 실제로 붙이려 하자 예상과 다른 곳에서 벽이 나왔다. 나는 문제가 모델 쪽에 있을 것이라 생각했다 — 공간 정보를 어떻게 임베딩할까, 그래프 임베딩을 어떤 차원으로 정렬할까. 그런데 막힌 곳은 더 앞이었다. <em>두 계층이 같은 건물을 같은 건물이라고 부르지 못한다.</em></p>
+      <p>이유는 단순하고 구조적이다. 아래쪽 계층은 국가 표준을 SSOT로 삼기 때문에 어휘가 촘촘하다. 클래스 54종, 관계 73종. 건물번호와 출입구와 기초구간과 국가기초구역이 각각 다른 클래스다. 위쪽 계층은 목적이 다르다. 안전 판단에 필요한 것만 남겨 노드 12종(건물·필지·도로·주소·대피소·정류장·공원·CCTV·센서·하천·구역·출입구)과 관계 8종(근접·인접·연결·포함·감시·대피·출입·서비스)으로 굵게 추렸다. 굵은 쪽이 게을러서가 아니다. 안전점수를 산출하려면 대피소·교통·공원·감시장비 노드가 <em>반드시</em> 있어야 하고, 표준 주소 어휘에는 그 개념이 애초에 없다.</p>
+      <div class="pullquote">두 그래프의 어휘 입도가 다른 것은 결함이 아니다. 결함은 그 사이에 대응표가 없다는 것이다.</div>
+      <p>여기에 식별자 문제가 겹친다. 위쪽 계층의 노드 식별자는 접두어 규칙(건물·구역·대피소·정류장·감시장비 등을 접두어로 구분하는 방식)으로 논의되고 있고, 그 규칙은 아직 여러 기관 사이에서 확정되지 않았다. 확정되지 않은 키로는 조인을 짤 수 없다. 반면 아래쪽 계층에는 이미 결정론적이고 불변인 GSID가 있고, 그 GSID는 공간 셀을 내부에 품고 있으며, 노드뿐 아니라 엣지에도 붙어 있다. 이것이 접합면의 후보로 유력한 이유는 세 가지다. 첫째, 같은 원천이면 같은 값이 나오므로 두 계층이 각자 계산해도 일치한다. 둘째, 좌표를 품고 있어 공간 근접 질의로 <em>대략 맞는</em> 후보를 먼저 좁힐 수 있다. 셋째, 검증문자가 붙어 있어 전달 과정에서 망가진 키를 즉시 걸러낸다.</p>
+      <p>실제로 두 계층은 이미 몇 가지를 공유한다. 좌표계가 같다(원천이 EPSG:5179이고, 3D 매핑 스키마도 좌표와 CRS를 함께 실어 보낸다). 두 계층이 다루는 지역이 같다. 그리고 위쪽 계층의 3D·BIM 매핑 스키마는 안전 그래프 노드 하나에 3D 객체 식별자와 BIM GUID, 좌표, 실내 LOD를 함께 묶는다 — 즉 <em>키를 실어 보낼 자리는 이미 규격에 있다</em>. 비어 있는 것은 그 자리에 넣을 값의 출처다. 아래쪽 계층이 자기 그래프만으로 좌표 없는 기관 857곳을 지오코딩해 냈다는 사실은, 그 출처가 될 자격을 스스로 증명한 셈이다.</p>
+      <p>아래 표는 두 계층의 설계 좌표를 나란히 놓은 것이다. 흥미로운 것은 두 계층이 서로 다른 어휘를 쓰면서도 <em>같은 규율</em>에 도달했다는 점이다. 단일 진실원본을 두고, 확장은 격리하고, 위반은 그 자리에서 거절한다.</p>
+
+      <table>
+        <thead><tr><th>구분</th><th>아래쪽 — 주소 지식그래프 계층</th><th>위쪽 — 재난 인지 계층</th></tr></thead>
+        <tbody>
+          <tr><td>단일 진실원본</td><td>국가 표준 온톨로지(Part 1~3)</td><td>경계 메시지 JSON Schema</td></tr>
+          <tr><td>어휘 규모</td><td>클래스 54 · 관계 73</td><td>노드 12 · 관계 8(의미형)</td></tr>
+          <tr><td>식별자</td><td>GSID — 결정론·불변, 노드와 엣지 모두</td><td>접두어 규칙 논의 중(기관 간 미확정)</td></tr>
+          <tr><td>좌표 처리</td><td>도형 원천(EPSG:5179) → WGS84·5186 주입</td><td>매핑 메시지에 좌표·CRS·실내 LOD 동반</td></tr>
+          <tr><td>표준 밖 개념</td><td>확장 사전에 분리 등재 + 개정 제안 환류</td><td>어댑터로 격리 + 규격 변경 이력 관리</td></tr>
+          <tr><td>실패 처리</td><td>근거 노드 식별자 없으면 문장 생성 거부</td><td>스키마 위반 시 422로 즉시 거절</td></tr>
+          <tr><td>주 검증 수단</td><td>품질 게이트 6종(테스트·골든·메타모픽·자가질의·시나리오·SHACL)</td><td>경계 스키마 검증 · 지연 측정 · 유지율 롤백</td></tr>
+        </tbody>
+      </table>
+
+      <span class="chapter-label">Chapter 5. 모르는 것은 모른다고</span>
+      <h2>근거 없이는 한 문장도 만들지 않는다</h2>
+      <p>재난 도메인에서 언어모델을 쓴다고 하면 가장 먼저 나오는 반응은 “그거 헛소리하면 어떡하냐”다. 정당한 걱정이다. 평시의 챗봇이 틀리면 사용자가 웃고 넘기지만, 상황실의 시스템이 틀린 주소를 확신 있게 말하면 소방차가 다른 골목으로 간다. 아래쪽 계층의 주소 에이전트를 만들면서 나는 이 문제를 “환각을 줄인다”가 아니라 “근거 없이는 문장을 만들 수 없게 만든다”로 바꿔 잡았다.</p>
+      <p>파이프라인은 Graph-First / LLM-Last다. 결정론적 자연어 이해가 의도와 엔티티를 해석하고, 읽기 전용 도구가 <em>사전 정의된 파라미터화 질의만</em> 실행해 사실을 모은다. 그다음 문장을 만들 때, 근거가 된 노드의 식별자가 없으면 인용 오류로 예외가 난다. 생성된 문장은 숫자와 명칭이 수집한 사실에 그대로 있는지 자릿수 경계까지 대조해 검증하고, 실패하면 문장을 버리고 결정론적 폴백으로 돌아간다. 여기에 한 겹을 더 얹었다. 에이전트 객체는 생성자에서 <em>쓰기 가능한 백엔드를 타입 오류로 거부한다</em>. 모델이 만든 문장이 그래프에 들어갈 경로 자체를 타입 수준에서 막은 것이다.</p>
+      <p>이 원칙을 지키려면 “된다”는 감각이 아니라 측정이 필요했다. 그래서 품질 게이트를 여섯 겹으로 세웠다. 단위·회귀 테스트, 실측 시나리오 골든셋, 하나의 질의를 다섯 가지로 변형해도 같은 개체로 수렴하는지 보는 메타모픽 러너, 라벨별 층화 표본을 자기 이름으로 되물어 자기 자신을 찾아내는지 보는 자가 질의 스윕, 멀티턴 대화 시나리오, 그리고 제약 검증. 2026년 7월, 데이터베이스를 통째로 지우고 런북 전 절차를 재현하는 리허설을 돌렸다. 코어 적재 596초를 포함한 전 과정이 재현되었고 게이트는 만점을 기록했다 — 테스트 418, 골든 50/50, 메타모픽 126/126, 자가 질의 800/800, 시나리오 16/16, 제약 검증 표본 1,474건 위반 0. 운영 그래프는 노드 1,682,015개, 관계 5,527,976개였다.</p>
+      <p>만점보다 중요한 것은 그 만점에 이르는 과정이다. 게이트는 장식이 아니라 실제로 결함을 잡는 도구였다. 메타모픽 러너는 첫 실행에서 75%로 시작해 A급 결함 5건을 잡아낸 뒤 100%가 되었다. 자가 질의 스윕은 69.3%에서 시작했고, 전문 정확 일치 프로브와 텍스트 인덱스 3종을 도입하자 100%에 도달했다(덤으로 골든셋 응답 시간 중위값이 590ms에서 165ms로 3.6배 빨라졌다). 골든셋은 스스로를 자정하기도 했다 — 그동안 다른 지역명에 납치되어 <em>우연히</em> 통과하던 항목의 기댓값을, 정직한 미해석으로 교정했다. 재구축 리허설 자체도 실행하지 않으면 드러나지 않을 실결함 4건을 잡아냈다.</p>
+      <div class="pullquote">게이트가 만점이라서 좋은 것이 아니다. 만점에 이르는 동안 결함을 열 건 남짓 잡아냈다는 것이 좋은 것이다.</div>
+      <p>같은 잣대를 언어모델 자신에게도 적용했다. 소형 로컬 모델을 자연어 이해 폴백으로 붙여 A/B로 실측한 결과, 결정론적 스택이 이미 난문 20종 중 17종을 해소하고 있었고, 언어모델은 구제 0건·악화 0건·유효 개입 0건인 반면 응답 지연은 중위값 31초로 나빠졌다. 그래서 기본값을 “언어모델 미사용”으로 유지하기로 하고, 재평가 조건(임베딩과 분리된 전용 가속기, 미해석률 상승의 실측, 더 빠른 한국어 소형 모델)을 문서로 남겼다. 언어모델을 쓰지 않기로 하는 결정도 데이터로 하는 것이 맞다.</p>
+      <div class="callout"><b>이 계층은 판단을 대체하지 않는다.</b> 위쪽 계층이 산출하는 것은 상황 유형과 심각도, 그리고 그 판단의 근거다. 대피 사각지대 식별처럼 사람의 안전에 직결되는 결과는 설계 단계에서부터 <em>현장 전문가의 검수 대상</em>으로 명시했고, 가중치는 코드에 박지 않고 설정으로 주입해 조정 가능하게 두었다. 아래쪽 계층도 마찬가지다. 근거를 붙여 답하거나, 모른다고 답한다. 재난 대응에서 소프트웨어의 역할은 결정을 내리는 것이 아니라, 결정하는 사람이 더 빨리 더 정확한 재료를 손에 쥐게 하는 것이다. 그 선을 넘지 않는 것이 이 두 계층의 공통 설계 제약이다.</div>
+
+      <span class="chapter-label">Chapter 6. 남은 것들</span>
+      <h2>아직 못 한 것을 적어 두기</h2>
+      <p>스택이라는 말을 썼지만, 두 계층이 오늘 하나의 파이프라인으로 완전히 붙어 있는 것은 아니다. 정직하게 남은 것을 적어 둔다. 첫째, 어휘 대응표가 아직 문서로만 존재한다. 두 계층 사이의 노드·관계 매핑은 초안 상태이고, 위쪽 계층의 식별자 규칙이 확정되기 전에는 자동화된 조인을 짤 수 없다. 지금 할 수 있는 최선은 규격에 키를 실을 자리를 비워 두고, 아래쪽 계층이 그 값을 만들 준비를 끝내 두는 것이다.</p>
+      <p>둘째, 위쪽 계층의 성능치는 아직 없다. 지연 측정 경로와 리포트 형식은 만들었지만, 실모델 가중치로 재난 인지 정확도를 측정하는 단계는 시작되지 않았다. 그래서 이 글에는 인지 성능에 관한 숫자가 한 줄도 없다. 없는 숫자를 “약” 이나 “가량”으로 포장하는 것은 측정이 아니라 창작이라고 생각한다.</p>
+      <p>셋째, 지리적 범위와 갱신 주기의 문제가 남는다. 아래쪽 계층은 두 광역 지자체 전수를 적재했을 뿐이고, 증분 갱신은 매니페스트·워터마크·삭제 표식으로 처리하되 재계산 범위를 변경분과 그 공간 이웃으로 한정하도록 만들어 두었다(전역 재계산이 일어나면 그것을 결함으로 보고 잡아낸다). 원천이 분기 단위로 움직이는 데이터와 초 단위로 움직이는 센서를 같은 그래프에 담으려면, 시간 축을 어디에 둘 것인지에 대한 설계가 하나 더 필요하다. 이건 아직 답이 없다.</p>
+      <p>그럼에도 이 두 과업을 나란히 겪으면서 얻은 확신은 있다. 재난 대응에서 인공지능의 병목은 대개 모델이 아니라 <em>접합면</em>이다. 같은 도시를 다루는 두 시스템이 같은 건물을 같은 이름으로 부르지 못하는 동안, 아무리 좋은 인지 모델도 “어딘가에서 불이 났다”까지만 말할 수 있다. 반대로 접합면이 정리되면 평범한 모델로도 “어느 건물 어느 출입구 쪽에서, 이런 종류의 상황이, 이 정도 심각도로”라고 말할 수 있다. 후자가 현장에서 실제로 쓰이는 문장이다.</p>
+      <div class="callout"><b>맺으며 — 그래프가 지오코더가 되는 순간.</b> 좌표가 없던 기관 857곳을 외부 서비스 없이 그래프 자신의 코드조인으로 지오코딩할 수 있었을 때, 나는 이 작업의 성격을 조금 다르게 이해하게 됐다. 주소 지식그래프는 조회용 데이터베이스가 아니라, <em>다른 시스템의 위치를 확정해 주는 기준계</em>가 될 수 있다는 것. 위쪽 인지 계층이 필요한 것도 정확히 그것이다. 장면을 읽는 능력은 모델이 가져오지만, 그 장면이 세상의 어디인지는 누군가가 확정해 줘야 한다. 두 계층이 하나의 스택으로 만나야 하는 이유가 여기에 있다. 인지는 “무슨 일이”에 답하고, 주소 그래프는 “어디서”에 답한다. 그리고 재난 현장에 필요한 문장은, 언제나 그 둘을 한 호흡에 담은 문장이다.</div>
+
+      <div class="references">
+        <h4>참고</h4>
+        <ol>
+          <li>박대승, 「AddressKG — 국가주소정보 지식그래프」. 본문의 그래프 규모(노드 1,682,015 · 관계 5,527,976), GSID 구성, HSM·ESC 구조, 공공데이터 연계 건수, 품질 게이트 6종과 2026년 7월 재구축 리허설 실측치의 출처. <a href="../../works/pf-addresskg/">works/pf-addresskg</a></li>
+          <li>박대승, 「도시안전 AI API — 재난 상황 인지 멀티모달 모델 서빙 소프트웨어」. 인코더 4종의 단일 계약, 프로젝션·학습 4단계, 교체형 추론 백엔드 5종, JSON Schema 단일 진실원본과 종단간 8단계 파이프라인의 출처. 진행 중인 국가 연구개발 과제이므로 공개 가능한 구조·설계 원칙만 다룬다. <a href="../../works/pf-citysafety-ai-api/">works/pf-citysafety-ai-api</a></li>
+          <li>「주소정보 지식그래프 모델」 표준(Part 1~3). 아래쪽 계층 설계의 단일 진실원본. 표준 클래스·관계 체계와 URI 규칙, 그리고 확장 사전에서 생성되는 개정 제안의 근거. 표준 저작권은 표준화 기관에 있다. <a href="https://www.tta.or.kr/" target="_blank" rel="noopener">tta.or.kr</a></li>
+          <li>연계에 사용한 공공데이터 원천 — 상가(상권)정보, 전국표준데이터(주차장·도서관·박물관미술관·공공시설개방), 지방자치단체 출자·출연기관 현황. 원천 도로명주소·주소 도형 데이터는 행정안전부 제공. <a href="https://www.data.go.kr/" target="_blank" rel="noopener">data.go.kr</a></li>
+          <li>Wikidata(CC0). 연계한 POI 1,175건의 출처. <a href="https://www.wikidata.org/" target="_blank" rel="noopener">wikidata.org</a></li>
+          <li>박대승, 「지도를 읽는 언어모델」 — 지식그래프와 언어모델을 결합해 공간 질의에 답하게 만든 선행 작업. 이 글의 Graph-First 접근의 뿌리. <a href="../../articles/geollm-knowledge-graph/">articles/geollm-knowledge-graph</a></li>
+          <li>박대승, 「카메라 없이 지도 위에 사람을 그리다」 — 센서 신호를 실제 위·경도로 되돌리는 지리참조 연구. 신호와 좌표 사이의 번역을 다룬 편. <a href="../../articles/mmwave-georeferencing/">articles/mmwave-georeferencing</a></li>
+          <li>박대승, 「데모는 되는데, 프로덕션에서 무너지는 이유」 — 평가·가드레일 관점의 정리. 이 글 5장의 품질 게이트 논의와 같은 문제의식. <a href="../../articles/ai-agent-reliability-evals/">articles/ai-agent-reliability-evals</a></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer of article -->
+  <div class="art-foot">
+    <div class="art-tags">
+      <a href="#">#지식그래프</a><a href="#">#재난AI</a><a href="#">#멀티모달</a><a href="#">#주소정보</a><a href="#">#공간지능</a>
+    </div>
+    <div class="author-card">
+      <div class="av">DP</div>
+      <div class="who">
+        <b>박대승 · Daeseung Park</b>
+        <p>KAIST 연구원. 대형언어모델, 시계열 예측, 대화형 AI를 연구합니다. 연구의 과정을 가능한 한 정확하고 읽기 좋게 기록하려 합니다.</p>
+      </div>
+    </div>
+
+    <div class="read-next no-print">
+        <div class="section-head" style="margin-bottom:20px;"><h2 style="font-size:1.3rem;">다음 글</h2></div>
+        <div class="grid grid-2" id="readNext" data-prerendered="1"><a href="../../articles/genai-copyright-data-licensing/" class="post-card fade-up"><div class="thumb"><img class="ph " src="../../articles/genai-copyright-data-licensing/images/cover.svg" alt="" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;"><span class="cat-pill">Tech · 이슈</span><span class="num">21</span></div><span class="cat">AI 정책</span><h3>학습이라는 이름의 채굴: 생성형 AI 저작권·데이터 라이선싱 전쟁</h3><p>생성형 AI는 인류가 수백 년 쌓아 온 글과 그림과 코드를 삼켜 만들어졌다. 그 삼킴은 공정이용이라는 오래된 방패 뒤에 서 있다. 그러나 2025년, 법정과 시장은 방패의 크기를 다시 재기 시작했다. 소송과 15억 달러의 합의, 조용히 확산되는 라이선싱 딜, 웹의 문을 닫는 ‘콘텐츠 시그널’, 그리고 출처를 되묻는 기술 — 학습 데이터를 둘러싼 이 전쟁의 지형을 차분히 그려 본다.</p><div class="meta"><span class="by">박대승</span><span class="dot-sep">15분 읽기</span></div></a><a href="../../articles/ai-agent-reliability-evals/" class="post-card fade-up"><div class="thumb"><img class="ph " src="../../articles/ai-agent-reliability-evals/images/cover.svg" alt="" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;"><span class="cat-pill">AI · 기술해설</span><span class="num">20</span></div><span class="cat">AI 에이전트</span><h3>데모는 되는데, 프로덕션에서 무너지는 이유</h3><p>회의실 시연에서는 흠잡을 데 없던 AI 에이전트가, 막상 실전 트래픽 위에 올려놓으면 무너진다. 문제는 대개 모델의 지능이 아니라 신뢰성이다. 한 번 성공하는 것과 매번 성공하는 것은 전혀 다른 공학이기 때문이다. 이 글은 에이전트가 왜 무너지는지, 그것을 어떻게 평가(evals)하고, 무너져도 안전하도록 어떤 가드레일을 깔아야 하는지를 실전 배치의 관점에서 차분히 정리한다.</p><div class="meta"><span class="by">박대승</span><span class="dot-sep">15분 읽기</span></div></a></div>
+      </div>
+      <nav class="post-nav no-print" id="postNav" data-prerendered="1"><a class="pn" href="../../articles/genai-copyright-data-licensing/"><span class="pn-dir">‹ 이전 글</span><span class="pn-t">학습이라는 이름의 채굴</span></a><a class="pn pn-list" href="../../articles.html">목록</a><span class="pn pn-right empty"><span class="pn-dir">다음 글 ›</span><span class="pn-t">없음</span></span></nav>
+    </div>
+</article>
+
+<div class="print-footer">Daeseung Park · D. PARK Journal — 어디서 무슨 일이 일어났는가: 주소 지식그래프와 멀티모달 재난 인지를 하나의 스택으로</div>
+
+<footer class="site-footer no-print" id="contact" data-prerendered="1"><div class="container-x"><div class="footer-grid"><div><div class="footer-brand">D. PARK</div><p style="max-width:34ch;">AI &amp; Software Systems Engineer · KAIST</p><div class="social" style="margin-top:16px;"><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener" aria-label="GitHub">GH</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener" aria-label="ORCID">iD</a><a href="mailto:dspark@daeseungpark.com" aria-label="Email">@</a></div></div><div><h6>둘러보기</h6><ul><li><a href="../../index.html">Home</a></li><li><a href="../../profile.html">Profile</a></li><li><a href="../../articles.html">Articles</a></li><li><a href="../../research.html">Research</a></li><li><a href="../../notices.html">Notice</a></li></ul></div><div><h6>기고문</h6><ul class="ft-arts"><li><a href="../../articles/address-graph-disaster-perception-stack/">어디서 무슨 일이 일어났는가</a></li><li><a href="../../articles/genai-copyright-data-licensing/">학습이라는 이름의 채굴</a></li><li><a href="../../articles/ai-agent-reliability-evals/">데모는 되는데, 프로덕션에서 무너지는 이유</a></li><li><a href="../../articles/reasoning-models-test-time-compute/">더 키우기보다 더 생각하게</a></li><li><a href="../../articles/rag-architectures-hallucination/">검색이 지능을 구원하는 네 가지 방법 — Lexical·Semantic·Hybrid·Graph RAG와 환각의 해부</a></li></ul></div><div><h6>Contact</h6><ul><li><a href="mailto:dspark@daeseungpark.com">dspark@daeseungpark.com</a></li><li><a href="mailto:dspark@kaist.ac.kr">dspark@kaist.ac.kr</a></li><li><a href="tel:+821064547777">Phone (KR) +82 10 6454 7777</a></li><li><a href="tel:+16574109449">Phone (US) +1 657 410 9449</a></li><li>KAIST, Daejeon, Korea</li></ul></div></div><div class="footer-bottom"><span>© 2026 Daeseung Park. All rights reserved.</span><span>Designed &amp; built as a personal journal for Daeseung Park.</span></div></div></footer>
+
+<div class="mobile-nav" id="mobileNav" data-prerendered="1"><button class="icon-btn close" id="navClose" aria-label="닫기">✕</button><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></div>
+
+
+
+<script src="../../assets/js/main.js?v=a79743d9"></script>
+</body>
+</html>

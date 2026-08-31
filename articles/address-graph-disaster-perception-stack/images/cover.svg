@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img" aria-label="주소 지식그래프와 멀티모달 재난 인지를 하나의 스택으로 잇는 개념도">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a1230"/>
+      <stop offset="0.55" stop-color="#131c4a"/>
+      <stop offset="1" stop-color="#1c2660"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.44" r="0.62">
+      <stop offset="0" stop-color="#3a4bd0" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#3a4bd0" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="beam" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#5b74ff"/>
+      <stop offset="1" stop-color="#8ad8ff"/>
+    </linearGradient>
+    <linearGradient id="chip" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2a3aa8"/>
+      <stop offset="1" stop-color="#5b3fb8"/>
+    </linearGradient>
+    <marker id="ar" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M1 1 L11 6 L1 11 z" fill="#8ea2ff"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <rect width="1200" height="675" fill="url(#glow)"/>
+
+  <!-- faint grid -->
+  <g stroke="#3a4790" stroke-width="1" opacity="0.18">
+    <path d="M0 112 H1200 M0 225 H1200 M0 337 H1200 M0 450 H1200 M0 562 H1200"/>
+    <path d="M150 0 V675 M300 0 V675 M450 0 V675 M600 0 V675 M750 0 V675 M900 0 V675 M1050 0 V675"/>
+  </g>
+
+  <text x="600" y="74" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="17" letter-spacing="6" fill="#7f92e6">D. PARK JOURNAL · 연구 회고</text>
+
+  <!-- ===== stage A : address / meaning ===== -->
+  <g>
+    <rect x="70" y="112" width="320" height="330" rx="16" fill="#0d1638" stroke="#3f52b8" stroke-width="2"/>
+    <text x="230" y="146" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="15" font-weight="700" letter-spacing="2" fill="#8ea2ff">주소 · 의미</text>
+    <g stroke="#7f92e6" stroke-width="2.2" opacity="0.85">
+      <line x1="150" y1="192" x2="150" y2="252"/>
+      <line x1="150" y1="252" x2="150" y2="312"/>
+      <line x1="150" y1="312" x2="150" y2="372"/>
+      <line x1="150" y1="252" x2="290" y2="212"/>
+      <line x1="150" y1="312" x2="290" y2="292"/>
+      <line x1="150" y1="372" x2="290" y2="372"/>
+    </g>
+    <g font-family="'Segoe UI',sans-serif" font-size="12.5" fill="#dfe6ff">
+      <circle cx="150" cy="192" r="9" fill="#5b74ff"/><text x="168" y="197">시·도</text>
+      <circle cx="150" cy="252" r="9" fill="#5b74ff"/><text x="168" y="257">시·군·구</text>
+      <circle cx="150" cy="312" r="9" fill="#5b74ff"/><text x="168" y="317">도로명</text>
+      <circle cx="150" cy="372" r="9" fill="#5b74ff"/><text x="168" y="377">건물번호</text>
+      <circle cx="290" cy="212" r="7" fill="#8ad8ff"/><text x="304" y="217">구역</text>
+      <circle cx="290" cy="292" r="7" fill="#8ad8ff"/><text x="304" y="297">도로</text>
+      <circle cx="290" cy="372" r="7" fill="#8ad8ff"/><text x="304" y="377">출입구</text>
+    </g>
+    <text x="230" y="418" text-anchor="middle" font-family="'Courier New',monospace" font-size="12" fill="#7f92e6">hierarchy · spatial · semantic</text>
+  </g>
+
+  <!-- ===== stage B : space / coordinates ===== -->
+  <g>
+    <rect x="440" y="112" width="320" height="330" rx="16" fill="#0d1638" stroke="#3f52b8" stroke-width="2"/>
+    <text x="600" y="146" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="15" font-weight="700" letter-spacing="2" fill="#8ea2ff">공간 · 좌표</text>
+    <!-- cell grid -->
+    <g stroke="#4358c8" stroke-width="1.4" opacity="0.75" fill="none">
+      <path d="M486 186 H714 M486 232 H714 M486 278 H714 M486 324 H714"/>
+      <path d="M532 186 V324 M578 186 V324 M624 186 V324 M670 186 V324"/>
+      <rect x="486" y="186" width="228" height="138"/>
+    </g>
+    <rect x="578" y="232" width="46" height="46" fill="#5b74ff" opacity="0.42"/>
+    <!-- pin -->
+    <path d="M601 216 c-14 0 -25 11 -25 25 0 18 25 41 25 41 s25 -23 25 -41 c0 -14 -11 -25 -25 -25 z" fill="#8ad8ff" stroke="#e7ecff" stroke-width="2"/>
+    <circle cx="601" cy="241" r="8" fill="#0d1638"/>
+    <!-- gsid chip -->
+    <rect x="474" y="352" width="252" height="40" rx="10" fill="url(#chip)" stroke="#8ea2ff" stroke-width="1.6"/>
+    <text x="600" y="378" text-anchor="middle" font-family="'Courier New',monospace" font-size="14.5" fill="#eef1ff">BD-357CA3FE-G0-00-…</text>
+    <text x="600" y="418" text-anchor="middle" font-family="'Courier New',monospace" font-size="12" fill="#7f92e6">EPSG:5179 → WGS84 · S2 cell</text>
+  </g>
+
+  <!-- ===== stage C : perception / multimodal ===== -->
+  <g>
+    <rect x="810" y="112" width="320" height="330" rx="16" fill="#0d1638" stroke="#3f52b8" stroke-width="2"/>
+    <text x="970" y="146" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="15" font-weight="700" letter-spacing="2" fill="#8ea2ff">인지 · 멀티모달</text>
+    <g font-family="'Segoe UI',sans-serif" font-size="12.5">
+      <rect x="842" y="178" width="104" height="34" rx="8" fill="#16224e" stroke="#5b74ff" stroke-width="1.6"/>
+      <text x="894" y="200" text-anchor="middle" fill="#dfe6ff">영상</text>
+      <rect x="842" y="222" width="104" height="34" rx="8" fill="#16224e" stroke="#5b74ff" stroke-width="1.6"/>
+      <text x="894" y="244" text-anchor="middle" fill="#dfe6ff">센서</text>
+      <rect x="842" y="266" width="104" height="34" rx="8" fill="#16224e" stroke="#5b74ff" stroke-width="1.6"/>
+      <text x="894" y="288" text-anchor="middle" fill="#dfe6ff">공간정보</text>
+      <rect x="842" y="310" width="104" height="34" rx="8" fill="#16224e" stroke="#5b74ff" stroke-width="1.6"/>
+      <text x="894" y="332" text-anchor="middle" fill="#dfe6ff">텍스트</text>
+    </g>
+    <g stroke="url(#beam)" stroke-width="2.4" fill="none">
+      <path d="M946 195 C986 195 986 261 1014 261"/>
+      <path d="M946 239 C986 239 986 261 1014 261"/>
+      <path d="M946 283 C986 283 986 261 1014 261"/>
+      <path d="M946 327 C986 327 986 261 1014 261"/>
+    </g>
+    <rect x="1014" y="216" width="86" height="90" rx="12" fill="url(#chip)" stroke="#8ad8ff" stroke-width="2"/>
+    <text x="1057" y="255" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="15" font-weight="800" fill="#eef1ff">LLM</text>
+    <text x="1057" y="278" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="11.5" fill="#c8d2ff">+ LoRA</text>
+    <text x="970" y="380" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="13" fill="#dfe6ff">화재 · 침수 · 붕괴 상황 인지</text>
+    <text x="970" y="418" text-anchor="middle" font-family="'Courier New',monospace" font-size="12" fill="#7f92e6">encode(inputs) → [B, T, D]</text>
+  </g>
+
+  <!-- connectors between stages -->
+  <g stroke="#8ea2ff" stroke-width="3" fill="none" marker-end="url(#ar)">
+    <line x1="392" y1="277" x2="434" y2="277"/>
+    <line x1="762" y1="277" x2="804" y2="277"/>
+  </g>
+  <text x="413" y="262" text-anchor="middle" font-family="'Courier New',monospace" font-size="11" fill="#8ad8ff">geocode</text>
+  <text x="783" y="262" text-anchor="middle" font-family="'Courier New',monospace" font-size="11" fill="#8ad8ff">ground</text>
+
+  <!-- return arrow : perception answers back in address terms -->
+  <g fill="none" stroke="#8ad8ff" stroke-width="2.4" stroke-dasharray="9 7" marker-end="url(#ar)">
+    <path d="M1090 466 H 240"/>
+  </g>
+  <text x="672" y="456" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="13.5" fill="#aab6f0">인지 결과를 다시 ‘주소’로 되돌려 말하기</text>
+
+  <!-- title band -->
+  <text x="600" y="556" text-anchor="middle" font-family="'Noto Serif KR',Georgia,serif" font-size="46" font-weight="700" fill="#f2f4ff">어디서 무슨 일이 일어났는가</text>
+  <text x="600" y="592" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="16.5" fill="#aab6f0">주소 지식그래프 · 결정론적 식별자 · 멀티모달 재난 인지</text>
+  <text x="600" y="628" text-anchor="middle" font-family="'Courier New',monospace" font-size="12.5" letter-spacing="1.5" fill="#6f81d6">ADDRESS  →  SPACE  →  PERCEPTION</text>
+</svg>

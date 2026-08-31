@@ -9,6 +9,14 @@
    ============================================================ */
 window.ARTICLES = [
   {
+    id: 22, slug: "address-graph-disaster-perception-stack", path: "articles/address-graph-disaster-perception-stack/",
+    title: "어디서 무슨 일이 일어났는가: 주소 지식그래프와 멀티모달 재난 인지를 하나의 스택으로",
+    deck: "재난 현장의 언어는 주소로 들어온다. 그러나 판단은 영상과 센서로 이루어진다. 이 두 언어 사이에는 아무도 대신 메워 주지 않는 틈이 있다. 올해 나는 그 틈의 양쪽에 서는 소프트웨어 두 벌을 만들었다 — 주소를 좌표와 관계로 푸는 지식그래프, 그리고 네 갈래 모달리티를 한 백본에서 읽는 인지 API. 이 글은 그 둘을 하나의 스택으로 세우려 한 시도와, 아직 못 한 것들에 대한 기록이다.",
+    cat: "Research · 회고", catClass: "red", catLabel: "연구 회고",
+    date: "2026-08-31", read: "17분", cover: "articles/address-graph-disaster-perception-stack/images/cover.svg",
+    tags: ["지식그래프", "재난AI", "멀티모달", "주소정보", "공간지능"]
+  },
+  {
     id: 21, slug: "genai-copyright-data-licensing", path: "articles/genai-copyright-data-licensing/",
     title: "학습이라는 이름의 채굴: 생성형 AI 저작권·데이터 라이선싱 전쟁",
     deck: "생성형 AI는 인류가 수백 년 쌓아 온 글과 그림과 코드를 삼켜 만들어졌다. 그 삼킴은 공정이용이라는 오래된 방패 뒤에 서 있다. 그러나 2025년, 법정과 시장은 방패의 크기를 다시 재기 시작했다. 소송과 15억 달러의 합의, 조용히 확산되는 라이선싱 딜, 웹의 문을 닫는 ‘콘텐츠 시그널’, 그리고 출처를 되묻는 기술 — 학습 데이터를 둘러싼 이 전쟁의 지형을 차분히 그려 본다.",
