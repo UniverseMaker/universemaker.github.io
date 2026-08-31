@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img" aria-label="LLM Lab — 범용 LLM 테스트·연구 플랫폼 표지">
+  <defs>
+    <linearGradient id="cbg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1030"/>
+      <stop offset="0.55" stop-color="#131a4a"/>
+      <stop offset="1" stop-color="#1b2570"/>
+    </linearGradient>
+    <linearGradient id="cwire" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#4f7bff"/>
+      <stop offset="1" stop-color="#8ad8ff"/>
+    </linearGradient>
+    <radialGradient id="ccore" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#aebcff"/>
+      <stop offset="0.5" stop-color="#5b74ff"/>
+      <stop offset="1" stop-color="#2233c4"/>
+    </radialGradient>
+    <filter id="csoft" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="7"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="675" fill="url(#cbg)"/>
+
+  <!-- faint grid -->
+  <g stroke="#3a4790" stroke-width="1" opacity="0.22">
+    <path d="M0 112 H1200 M0 225 H1200 M0 337 H1200 M0 450 H1200 M0 562 H1200"/>
+    <path d="M150 0 V675 M300 0 V675 M450 0 V675 M600 0 V675 M750 0 V675 M900 0 V675 M1050 0 V675"/>
+  </g>
+
+  <!-- wires: hub to six workbenches -->
+  <g stroke="url(#cwire)" stroke-width="3" fill="none" opacity="0.85">
+    <path d="M600 300 C 430 180, 330 160, 215 148"/>
+    <path d="M600 300 C 440 268, 350 288, 205 300"/>
+    <path d="M600 300 C 430 420, 330 440, 215 452"/>
+    <path d="M600 300 C 770 180, 870 160, 985 148"/>
+    <path d="M600 300 C 760 268, 850 288, 995 300"/>
+    <path d="M600 300 C 770 420, 870 440, 985 452"/>
+  </g>
+
+  <!-- workbench nodes -->
+  <g font-family="'Segoe UI','Malgun Gothic',sans-serif" font-size="17" fill="#0b1030" text-anchor="middle">
+    <g><circle cx="188" cy="148" r="36" fill="#8ad8ff"/><text x="188" y="154">Chat</text></g>
+    <g><circle cx="176" cy="300" r="36" fill="#8ad8ff"/><text x="176" y="306">RAG</text></g>
+    <g><circle cx="188" cy="452" r="36" fill="#8ad8ff"/><text x="188" y="458">Chain</text></g>
+    <g><circle cx="1012" cy="148" r="36" fill="#7ff0c0"/><text x="1012" y="154">Agent</text></g>
+    <g><circle cx="1024" cy="300" r="36" fill="#7ff0c0"/><text x="1024" y="306">Eval</text></g>
+    <g><circle cx="1012" cy="452" r="36" fill="#7ff0c0"/><text x="1012" y="458" font-size="15">Simulate</text></g>
+  </g>
+
+  <!-- central hub -->
+  <circle cx="600" cy="300" r="122" fill="url(#ccore)" filter="url(#csoft)" opacity="0.55"/>
+  <circle cx="600" cy="300" r="100" fill="url(#ccore)" stroke="#dfe6ff" stroke-width="2"/>
+  <text x="600" y="288" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="44" font-weight="700" fill="#ffffff">LLM</text>
+  <text x="600" y="332" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="34" font-weight="700" fill="#cdd6ff">LAB</text>
+
+  <!-- bring-your-own-key strip -->
+  <g font-family="'Segoe UI','Malgun Gothic',sans-serif" font-size="16" fill="#a9b8ff" text-anchor="middle">
+    <text x="600" y="470">연결 프로필 JSON · OpenAI 호환 엔드포인트 · 키는 브라우저에만</text>
+  </g>
+
+  <!-- title band -->
+  <text x="600" y="580" text-anchor="middle" font-family="'Georgia',serif" font-size="38" font-weight="600" fill="#ffffff">범용 LLM 테스트·연구 플랫폼</text>
+  <text x="600" y="622" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="17" letter-spacing="3" fill="#8ea2ff">UNIVERSAL LLM TEST &amp; RESEARCH PLATFORM</text>
+</svg>

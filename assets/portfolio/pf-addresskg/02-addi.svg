@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" role="img" aria-label="ADDi 환각 없는 주소 에이전트의 Graph-First / LLM-Last 파이프라인" font-family="'Pretendard','Noto Sans KR',-apple-system,'Segoe UI',sans-serif">
+  <defs>
+    <linearGradient id="adNavy" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3a4cf0"/>
+      <stop offset="1" stop-color="#232a73"/>
+    </linearGradient>
+    <linearGradient id="adTeal" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0d7f76"/>
+      <stop offset="1" stop-color="#0b4256"/>
+    </linearGradient>
+    <marker id="adArw" markerWidth="12" markerHeight="12" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#3a4cf0"/>
+    </marker>
+    <marker id="adArwR" markerWidth="12" markerHeight="12" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#c2413a"/>
+    </marker>
+    <filter id="adSh" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#15171a" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="900" fill="#ffffff"/>
+
+  <text x="72" y="84" font-size="40" font-weight="700" fill="#15171a">ADDi — 환각 없는 주소 에이전트</text>
+  <text x="72" y="122" font-size="22" font-weight="600" fill="#3a4cf0">Graph-First / LLM-Last — Every Sentence Must Cite a Node in the Graph</text>
+  <line x1="72" y1="146" x2="1528" y2="146" stroke="#e7e8ec" stroke-width="2"/>
+
+  <!-- pipeline chain -->
+  <g transform="translate(72,196)">
+    <g>
+      <rect x="0" y="0" width="250" height="120" rx="14" fill="#f7f7f5" stroke="#c9cbd6" stroke-width="2" filter="url(#adSh)"/>
+      <text x="24" y="34" font-size="14" fill="#5a5d68">① 질의</text>
+      <text x="24" y="62" font-size="18" font-weight="700" fill="#15171a">자연어 입력</text>
+      <text x="24" y="88" font-size="14" fill="#5a5d68">“대학로 291에는 뭐가 있니”</text>
+      <text x="24" y="108" font-size="14" fill="#5a5d68">“기초번호가 뭐야?”</text>
+    </g>
+    <line x1="262" y1="60" x2="308" y2="60" stroke="#3a4cf0" stroke-width="3" marker-end="url(#adArw)"/>
+
+    <g transform="translate(320,0)">
+      <rect x="0" y="0" width="250" height="120" rx="14" fill="url(#adNavy)" filter="url(#adSh)"/>
+      <text x="24" y="34" font-size="14" fill="#cdd6ff">② NLU (결정론)</text>
+      <text x="24" y="62" font-size="18" font-weight="700" fill="#ffffff">의도·엔티티 해석</text>
+      <text x="24" y="88" font-size="14" fill="#dfe6ff">형태소 분석(kiwipiepy) ·</text>
+      <text x="24" y="108" font-size="14" fill="#dfe6ff">주소 정규식 · 세션 초점</text>
+    </g>
+    <line x1="582" y1="60" x2="628" y2="60" stroke="#3a4cf0" stroke-width="3" marker-end="url(#adArw)"/>
+
+    <g transform="translate(640,0)">
+      <rect x="0" y="0" width="250" height="120" rx="14" fill="url(#adNavy)" filter="url(#adSh)"/>
+      <text x="24" y="34" font-size="14" fill="#cdd6ff">③ 그래프 조회</text>
+      <text x="24" y="62" font-size="18" font-weight="700" fill="#ffffff">도구 7종 (read-only)</text>
+      <text x="24" y="88" font-size="14" fill="#dfe6ff">사전 정의 파라미터화 Cypher</text>
+      <text x="24" y="108" font-size="14" fill="#dfe6ff">access_mode = READ</text>
+    </g>
+    <line x1="902" y1="60" x2="948" y2="60" stroke="#3a4cf0" stroke-width="3" marker-end="url(#adArw)"/>
+
+    <g transform="translate(960,0)">
+      <rect x="0" y="0" width="250" height="120" rx="14" fill="url(#adNavy)" filter="url(#adSh)"/>
+      <text x="24" y="34" font-size="14" fill="#cdd6ff">④ facts</text>
+      <text x="24" y="62" font-size="18" font-weight="700" fill="#ffffff">사실 + 인용 강제</text>
+      <text x="24" y="88" font-size="14" fill="#dfe6ff">근거 노드 GSID 없이는</text>
+      <text x="24" y="108" font-size="14" fill="#dfe6ff">CitationError</text>
+    </g>
+    <line x1="1222" y1="60" x2="1268" y2="60" stroke="#3a4cf0" stroke-width="3" marker-end="url(#adArw)"/>
+
+    <g transform="translate(1280,0)">
+      <rect x="0" y="0" width="176" height="120" rx="14" fill="url(#adTeal)" filter="url(#adSh)"/>
+      <text x="24" y="34" font-size="14" fill="#c9f2ee">⑤ NLG</text>
+      <text x="24" y="62" font-size="18" font-weight="700" fill="#ffffff">템플릿 생성</text>
+      <text x="24" y="88" font-size="14" fill="#c9f2ee">한국어 조사 처리</text>
+      <text x="24" y="108" font-size="14" fill="#c9f2ee">결정론 · 무과금</text>
+    </g>
+  </g>
+
+  <!-- verification loop -->
+  <g transform="translate(72,368)">
+    <rect x="0" y="0" width="700" height="150" rx="16" fill="#fff4f2" stroke="#f0cfc9" stroke-width="2"/>
+    <text x="28" y="40" font-size="20" font-weight="700" fill="#c2413a">⑥ 검증 — verbatim 대조</text>
+    <g font-size="15" fill="#15171a">
+      <text x="28" y="74">생성 문장의 모든 수치·명칭이 facts에 그대로 있는지 대조한다.</text>
+      <text x="28" y="102">자릿수 경계까지 검사해 “total=3”에 “13개”가 통과하던 우회를 차단.</text>
+      <text x="28" y="130">검증 실패 → 문장 폐기 → 결정론 폴백. 모르면 모른다고 답한다.</text>
+    </g>
+    <line x1="352" y1="-16" x2="352" y2="-52" stroke="#c2413a" stroke-width="3" marker-end="url(#adArwR)"/>
+  </g>
+
+  <g transform="translate(806,368)">
+    <rect x="0" y="0" width="722" height="150" rx="16" fill="#f2f4ff" stroke="#dfe3ff" stroke-width="2"/>
+    <text x="28" y="40" font-size="20" font-weight="700" fill="#232a73">타입 수준 차단 · 쓰기 불가</text>
+    <g font-size="15" fill="#15171a">
+      <text x="28" y="74">ADDi 생성자가 쓰기 가능한 객체를 TypeError로 거부한다 —</text>
+      <text x="28" y="102">LLM이 만든 문장이 그래프에 들어갈 경로 자체가 없다.</text>
+      <text x="28" y="130">Cypher 콘솔도 문자열 가드 + READ 세션 이중 방어(CREATE는 403).</text>
+    </g>
+  </g>
+
+  <!-- resolution chain -->
+  <g transform="translate(72,558)">
+    <rect x="0" y="0" width="700" height="278" rx="16" fill="#f7f7f5" stroke="#e7e8ec" stroke-width="2" filter="url(#adSh)"/>
+    <text x="28" y="42" font-size="20" font-weight="700" fill="#232a73">명칭 해석 폴백 체인</text>
+    <text x="28" y="66" font-size="14" fill="#5a5d68">앞 단계가 실패할 때만 다음으로 — 저비용 · 결정론 우선</text>
+    <g font-size="15">
+      <rect x="28" y="86" width="644" height="34" rx="8" fill="#ffffff" stroke="#c9cbd6"/>
+      <text x="46" y="109" fill="#15171a"><tspan font-weight="700">1. 전문 정확 일치</tspan> — 질의 전체가 그래프 명칭과 동일 (TEXT 인덱스)</text>
+      <rect x="28" y="128" width="644" height="34" rx="8" fill="#ffffff" stroke="#c9cbd6"/>
+      <text x="46" y="151" fill="#15171a"><tspan font-weight="700">2. 부분 일치 → 토큰 AND → 별칭</tspan> — 어순·사이단어 변형 흡수</text>
+      <rect x="28" y="170" width="644" height="34" rx="8" fill="#ffffff" stroke="#c9cbd6"/>
+      <text x="46" y="193" fill="#15171a"><tspan font-weight="700">3. 벡터 KNN</tspan> — 오타·의미 매칭, confidence 상한 0.8</text>
+      <rect x="28" y="212" width="644" height="34" rx="8" fill="#fff4f2" stroke="#f0cfc9"/>
+      <text x="46" y="235" fill="#15171a"><tspan font-weight="700">4. 2단 게이트 미달</tspan> — 단정하지 않고 “혹시 이 명칭을 찾으셨나요?”</text>
+    </g>
+  </g>
+
+  <!-- LLM verdict -->
+  <g transform="translate(806,558)">
+    <rect x="0" y="0" width="722" height="278" rx="16" fill="#ffffff" stroke="#e7e8ec" stroke-width="2" filter="url(#adSh)"/>
+    <text x="28" y="42" font-size="20" font-weight="700" fill="#232a73">LLM은 왜 기본값이 아닌가 — A/B 실측</text>
+    <text x="28" y="68" font-size="14" fill="#5a5d68">구어·생략형 난문 20종을 결정론 스택 vs 결정론+LLM 폴백으로 비교</text>
+
+    <g transform="translate(28,92)">
+      <rect x="0" y="0" width="330" height="72" rx="10" fill="#f2f4ff" stroke="#dfe3ff"/>
+      <text x="20" y="30" font-size="15" font-weight="700" fill="#232a73">A · 결정론만</text>
+      <text x="20" y="56" font-size="15" fill="#15171a">해소 17/20 — 형태소 + 벡터 + 편람 폴백</text>
+
+      <rect x="352" y="0" width="330" height="72" rx="10" fill="#fff4f2" stroke="#f0cfc9"/>
+      <text x="372" y="30" font-size="15" font-weight="700" fill="#c2413a">B · +LLM 폴백</text>
+      <text x="372" y="56" font-size="15" fill="#15171a">해소 17/20 — 구제 0 · 악화 0 · 개입 0</text>
+    </g>
+
+    <g font-size="15" fill="#15171a">
+      <text x="28" y="200">지연은 p50 31초 / p95 62초로 악화되고 정확도 이득은 없었다.</text>
+      <text x="28" y="228">결론: LLM 폴백 기본 끔 유지(provider=none) — 비용 0 · 오프라인 동작.</text>
+      <text x="28" y="256" fill="#5a5d68" font-size="14">재평가 조건은 문서로 남겼다 — 전용 GPU 분리 · 미해석률 상승 · 더 빠른 한국어 소형 모델</text>
+    </g>
+  </g>
+</svg>

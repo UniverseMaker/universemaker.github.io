@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" width="1200" height="720" role="img" aria-label="연결 프로필 JSON에서 요청 전송·인스펙터까지의 파이프라인">
+  <defs>
+    <linearGradient id="pbg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1030"/>
+      <stop offset="0.55" stop-color="#131a4a"/>
+      <stop offset="1" stop-color="#1b2570"/>
+    </linearGradient>
+    <marker id="parrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#8ad8ff"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="720" fill="url(#pbg)"/>
+  <g stroke="#3a4790" stroke-width="1" opacity="0.18">
+    <path d="M0 120 H1200 M0 240 H1200 M0 360 H1200 M0 480 H1200 M0 600 H1200"/>
+    <path d="M150 0 V720 M300 0 V720 M450 0 V720 M600 0 V720 M750 0 V720 M900 0 V720 M1050 0 V720"/>
+  </g>
+
+  <text x="60" y="48" font-family="'Georgia',serif" font-size="30" font-weight="600" fill="#ffffff">연결 프로필 → 요청 → 인스펙터</text>
+  <text x="60" y="74" font-family="'Segoe UI',sans-serif" font-size="15" letter-spacing="2" fill="#8ea2ff">PROFILE JSON · KERNEL · RELAY FALLBACK · INSPECTOR</text>
+
+  <!-- profile card -->
+  <rect x="60" y="102" width="400" height="564" rx="14" fill="#0e1442" stroke="#7ff0c0" stroke-width="2"/>
+  <text x="84" y="136" font-family="'Segoe UI',sans-serif" font-size="18" font-weight="700" fill="#7ff0c0">API 프로필 JSON (schemaVersion 1)</text>
+  <g font-family="'Consolas','Segoe UI',monospace" font-size="15" fill="#c7d2ff">
+    <text x="84" y="174">service      연결 이름(라벨)</text>
+    <text x="84" y="204" fill="#8ad8ff">base_url     … /v1 로 끝나는 URL ★</text>
+    <text x="84" y="234" fill="#8ad8ff">model        서버의 정식 모델 id ★</text>
+    <text x="84" y="264" fill="#8ad8ff">auth         bearer / none / custom ★</text>
+    <text x="84" y="294">host · port · network</text>
+    <text x="84" y="324">model_note</text>
+    <text x="84" y="354">endpoints    chat_completions</text>
+    <text x="84" y="380">             completions · models</text>
+    <text x="84" y="406">             embeddings</text>
+    <text x="84" y="436">server       GPU · runtime · 유닛</text>
+    <text x="84" y="466">notes[] · examples{curl,python}</text>
+    <text x="84" y="496">params       context_window</text>
+    <text x="84" y="522">             max_tokens · temperature</text>
+    <text x="84" y="548">             top_p · top_k · min_p</text>
+    <text x="84" y="574">             stop · seed · stream</text>
+    <text x="84" y="600">             timeout_ms · extra_body</text>
+  </g>
+  <text x="84" y="640" font-family="'Segoe UI','Malgun Gothic',sans-serif" font-size="14" fill="#7ff0c0">★ 필수 3종 — 이 셋만 있으면 채팅·테스트 가능</text>
+
+  <!-- connector from card to stage 1 -->
+  <path d="M460 140 H 500" stroke="#8ad8ff" stroke-width="2.5" fill="none" marker-end="url(#parrow)"/>
+
+  <!-- stages -->
+  <g font-family="'Segoe UI','Malgun Gothic',sans-serif">
+    <g>
+      <rect x="512" y="102" width="628" height="76" rx="12" fill="#1a2360" fill-opacity="0.75" stroke="#5b74ff" stroke-width="1.8"/>
+      <text x="534" y="132" font-size="17" font-weight="700" fill="#8ad8ff">① Import</text>
+      <text x="534" y="160" font-size="15" fill="#c7d2ff">JSON 붙여넣기·파일 업로드 → 폼 자동채움 · 검증 · 이름 중복 처리</text>
+    </g>
+    <g>
+      <rect x="512" y="198" width="628" height="76" rx="12" fill="#1a2360" fill-opacity="0.75" stroke="#5b74ff" stroke-width="1.8"/>
+      <text x="534" y="228" font-size="17" font-weight="700" fill="#8ad8ff">② 활성 연결 선택</text>
+      <text x="534" y="256" font-size="15" fill="#c7d2ff">상단바 연결·모델 스위처 · 헬스체크 램프 · /v1/models 조회</text>
+    </g>
+    <g>
+      <rect x="512" y="294" width="628" height="76" rx="12" fill="#1a2360" fill-opacity="0.75" stroke="#5b74ff" stroke-width="1.8"/>
+      <text x="534" y="324" font-size="17" font-weight="700" fill="#8ad8ff">③ 커널 조립</text>
+      <text x="534" y="352" font-size="15" fill="#c7d2ff">buildTargetURL · buildHeaders · buildBody (params · extra_body)</text>
+    </g>
+    <g>
+      <rect x="512" y="390" width="628" height="76" rx="12" fill="#1a2360" fill-opacity="0.75" stroke="#5b74ff" stroke-width="1.8"/>
+      <text x="534" y="420" font-size="17" font-weight="700" fill="#7ff0c0">④ 전송 — 릴레이 우선, 실패 시 폴백</text>
+      <text x="534" y="448" font-size="15" fill="#c7d2ff">/api/proxy → 404·405·501·네트워크 실패 시 직접 호출 · http→https 승격</text>
+    </g>
+    <g>
+      <rect x="512" y="486" width="628" height="76" rx="12" fill="#1a2360" fill-opacity="0.75" stroke="#5b74ff" stroke-width="1.8"/>
+      <text x="534" y="516" font-size="17" font-weight="700" fill="#7ff0c0">⑤ 스트리밍 수신</text>
+      <text x="534" y="544" font-size="15" fill="#c7d2ff">SSE delta · reasoning_content 우선, 없으면 본문 &lt;think&gt; 태그 분리</text>
+    </g>
+    <g>
+      <rect x="512" y="582" width="628" height="84" rx="12" fill="#1a2360" fill-opacity="0.75" stroke="#5b74ff" stroke-width="1.8"/>
+      <text x="534" y="612" font-size="17" font-weight="700" fill="#7ff0c0">⑥ 결과를 메시지에 귀속</text>
+      <text x="534" y="640" font-size="15" fill="#c7d2ff">메시지별 runResult → 인스펙터 · View code(curl/python/fetch)</text>
+      <text x="534" y="662" font-size="15" fill="#c7d2ff">실행 로그 검색 · JSON/CSV 내보내기</text>
+    </g>
+  </g>
+
+  <g stroke="#8ad8ff" stroke-width="2.5" marker-end="url(#parrow)">
+    <path d="M826 178 V 194"/>
+    <path d="M826 274 V 290"/>
+    <path d="M826 370 V 386"/>
+    <path d="M826 466 V 482"/>
+    <path d="M826 562 V 578"/>
+  </g>
+</svg>

@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" role="img" aria-label="AddressKG 재구축 파이프라인과 품질 게이트 6종" font-family="'Pretendard','Noto Sans KR',-apple-system,'Segoe UI',sans-serif">
+  <defs>
+    <linearGradient id="pipNavy" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3a4cf0"/>
+      <stop offset="1" stop-color="#232a73"/>
+    </linearGradient>
+    <marker id="pipArw" markerWidth="12" markerHeight="12" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#3a4cf0"/>
+    </marker>
+    <filter id="pipSh" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#15171a" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="900" fill="#ffffff"/>
+
+  <text x="72" y="84" font-size="40" font-weight="700" fill="#15171a">재구축 파이프라인 · 원클릭 재현</text>
+  <text x="72" y="122" font-size="22" font-weight="600" fill="#3a4cf0">Empty DB → Full Graph → Six Quality Gates — Deterministic &amp; Idempotent</text>
+  <line x1="72" y1="146" x2="1528" y2="146" stroke="#e7e8ec" stroke-width="2"/>
+
+  <!-- stage row 1 -->
+  <g transform="translate(72,192)">
+    <g>
+      <rect x="0" y="0" width="272" height="112" rx="14" fill="url(#pipNavy)" filter="url(#pipSh)"/>
+      <text x="24" y="34" font-size="14" fill="#cdd6ff">0 · WIPE</text>
+      <text x="24" y="62" font-size="19" font-weight="700" fill="#ffffff">빈 DB 초기화</text>
+      <text x="24" y="88" font-size="14" fill="#dfe6ff">CREATE OR REPLACE DATABASE · 22초</text>
+    </g>
+    <line x1="284" y1="56" x2="332" y2="56" stroke="#3a4cf0" stroke-width="3" marker-end="url(#pipArw)"/>
+    <g transform="translate(344,0)">
+      <rect x="0" y="0" width="272" height="112" rx="14" fill="url(#pipNavy)" filter="url(#pipSh)"/>
+      <text x="24" y="34" font-size="14" fill="#cdd6ff">1 · CORE</text>
+      <text x="24" y="62" font-size="19" font-weight="700" fill="#ffffff">코어(HSM) 적재</text>
+      <text x="24" y="88" font-size="14" fill="#dfe6ff">노드 + 계층·공간·의미 관계 · 596초</text>
+    </g>
+    <line x1="628" y1="56" x2="676" y2="56" stroke="#3a4cf0" stroke-width="3" marker-end="url(#pipArw)"/>
+    <g transform="translate(688,0)">
+      <rect x="0" y="0" width="272" height="112" rx="14" fill="url(#pipNavy)" filter="url(#pipSh)"/>
+      <text x="24" y="34" font-size="14" fill="#cdd6ff">2 · NAMES</text>
+      <text x="24" y="62" font-size="19" font-weight="700" fill="#ffffff">건물명 보강</text>
+      <text x="24" y="88" font-size="14" fill="#dfe6ff">건물명 13,080종 → 27,522 노드</text>
+    </g>
+    <line x1="972" y1="56" x2="1020" y2="56" stroke="#3a4cf0" stroke-width="3" marker-end="url(#pipArw)"/>
+    <g transform="translate(1032,0)">
+      <rect x="0" y="0" width="272" height="112" rx="14" fill="url(#pipNavy)" filter="url(#pipSh)"/>
+      <text x="24" y="34" font-size="14" fill="#cdd6ff">3 · ESC</text>
+      <text x="24" y="62" font-size="19" font-weight="700" fill="#ffffff">외부 데이터 연계</text>
+      <text x="24" y="88" font-size="14" fill="#dfe6ff">상가 · 표준데이터 · 위키데이터 · 기관</text>
+    </g>
+  </g>
+
+  <!-- stage row 2 -->
+  <g transform="translate(72,340)">
+    <g>
+      <rect x="0" y="0" width="272" height="112" rx="14" fill="url(#pipNavy)" filter="url(#pipSh)"/>
+      <text x="24" y="34" font-size="14" fill="#cdd6ff">4 · ADMDONG</text>
+      <text x="24" y="62" font-size="19" font-weight="700" fill="#ffffff">행정동 적재</text>
+      <text x="24" y="88" font-size="14" fill="#dfe6ff">AdministrativeDong · administersLegalDong</text>
+    </g>
+    <line x1="284" y1="56" x2="332" y2="56" stroke="#3a4cf0" stroke-width="3" marker-end="url(#pipArw)"/>
+    <g transform="translate(344,0)">
+      <rect x="0" y="0" width="272" height="112" rx="14" fill="url(#pipNavy)" filter="url(#pipSh)"/>
+      <text x="24" y="34" font-size="14" fill="#cdd6ff">5 · SEMANTICS</text>
+      <text x="24" y="62" font-size="19" font-weight="700" fill="#ffffff">의미 관계 실체화</text>
+      <text x="24" y="88" font-size="14" fill="#dfe6ff">REFERS_TO_SAME · passesThrough</text>
+    </g>
+    <line x1="628" y1="56" x2="676" y2="56" stroke="#3a4cf0" stroke-width="3" marker-end="url(#pipArw)"/>
+    <g transform="translate(688,0)">
+      <rect x="0" y="0" width="272" height="112" rx="14" fill="url(#pipNavy)" filter="url(#pipSh)"/>
+      <text x="24" y="34" font-size="14" fill="#cdd6ff">6 · VOCAB</text>
+      <text x="24" y="62" font-size="19" font-weight="700" fill="#ffffff">용어집 · 업무편람</text>
+      <text x="24" y="88" font-size="14" fill="#dfe6ff">Term · ManualSection · LegalClause</text>
+    </g>
+    <line x1="972" y1="56" x2="1020" y2="56" stroke="#3a4cf0" stroke-width="3" marker-end="url(#pipArw)"/>
+    <g transform="translate(1032,0)">
+      <rect x="0" y="0" width="272" height="112" rx="14" fill="url(#pipNavy)" filter="url(#pipSh)"/>
+      <text x="24" y="34" font-size="14" fill="#cdd6ff">7 · EMBED</text>
+      <text x="24" y="62" font-size="19" font-weight="700" fill="#ffffff">명칭 임베딩</text>
+      <text x="24" y="88" font-size="14" fill="#dfe6ff">granite-embedding 768d · 1,700초</text>
+    </g>
+  </g>
+
+  <!-- gates -->
+  <g transform="translate(72,500)">
+    <rect x="0" y="0" width="892" height="270" rx="18" fill="#f7f7f5" stroke="#e7e8ec" stroke-width="2" filter="url(#pipSh)"/>
+    <text x="28" y="42" font-size="21" font-weight="700" fill="#232a73">품질 게이트 6종 — 전부 통과해야 구축 완료</text>
+    <text x="28" y="68" font-size="14" fill="#5a5d68">2026-07-21 DB 전체 소거 후 전 절차 재현 리허설 실측</text>
+
+    <g font-size="15">
+      <rect x="28" y="88" width="404" height="52" rx="10" fill="#ffffff" stroke="#c9cbd6"/>
+      <text x="48" y="112" font-weight="700" fill="#15171a">단위·회귀 테스트</text>
+      <text x="48" y="132" font-size="14" fill="#5a5d68">pytest — DB 없이도 통과</text>
+      <text x="412" y="120" text-anchor="end" font-size="19" font-weight="700" fill="#0d7f76">418</text>
+
+      <rect x="460" y="88" width="404" height="52" rx="10" fill="#ffffff" stroke="#c9cbd6"/>
+      <text x="480" y="112" font-weight="700" fill="#15171a">골든셋</text>
+      <text x="480" y="132" font-size="14" fill="#5a5d68">실측 시나리오 · 인용 누락 0</text>
+      <text x="844" y="120" text-anchor="end" font-size="19" font-weight="700" fill="#0d7f76">50/50</text>
+
+      <rect x="28" y="150" width="404" height="52" rx="10" fill="#ffffff" stroke="#c9cbd6"/>
+      <text x="48" y="174" font-weight="700" fill="#15171a">메타모픽 변형</text>
+      <text x="48" y="194" font-size="14" fill="#5a5d68">띄어쓰기·조사·오타·어순 5변형</text>
+      <text x="412" y="182" text-anchor="end" font-size="19" font-weight="700" fill="#0d7f76">126/126</text>
+
+      <rect x="460" y="150" width="404" height="52" rx="10" fill="#ffffff" stroke="#c9cbd6"/>
+      <text x="480" y="174" font-weight="700" fill="#15171a">명칭 자가 질의 스윕</text>
+      <text x="480" y="194" font-size="14" fill="#5a5d68">라벨별 층화 표본 8×100</text>
+      <text x="844" y="182" text-anchor="end" font-size="19" font-weight="700" fill="#0d7f76">800/800</text>
+
+      <rect x="28" y="212" width="404" height="52" rx="10" fill="#ffffff" stroke="#c9cbd6"/>
+      <text x="48" y="236" font-weight="700" fill="#15171a">시나리오 골든</text>
+      <text x="48" y="256" font-size="14" fill="#5a5d68">멀티턴 대화 체인</text>
+      <text x="412" y="244" text-anchor="end" font-size="19" font-weight="700" fill="#0d7f76">16/16</text>
+
+      <rect x="460" y="212" width="404" height="52" rx="10" fill="#ffffff" stroke="#c9cbd6"/>
+      <text x="480" y="236" font-weight="700" fill="#15171a">SHACL 제약 검증</text>
+      <text x="480" y="256" font-size="14" fill="#5a5d68">표본 1,474건</text>
+      <text x="844" y="244" text-anchor="end" font-size="19" font-weight="700" fill="#0d7f76">위반 0</text>
+    </g>
+  </g>
+
+  <!-- side notes -->
+  <g transform="translate(996,500)">
+    <rect x="0" y="0" width="532" height="270" rx="18" fill="#f2f4ff" stroke="#dfe3ff" stroke-width="2"/>
+    <text x="28" y="42" font-size="21" font-weight="700" fill="#232a73">재현성 · 멱등성 설계</text>
+    <g font-size="15" fill="#15171a">
+      <text x="28" y="80">· 모든 단계가 멱등 — 재실행해도 같은 결과</text>
+      <text x="28" y="112">· GSID는 결정론 — 같은 원천이면 같은 그래프</text>
+      <text x="28" y="144">· 지역 순차 적재 시 기존 GSID 채택(불변 승계),</text>
+      <text x="46" y="168">충돌만 재발급하고 엣지 끝점을 재매핑</text>
+      <text x="28" y="200">· 증분 갱신은 매니페스트 + watermark + tombstone,</text>
+      <text x="46" y="224">변경분과 공간 이웃만 재계산(전역 재계산 금지)</text>
+      <text x="28" y="252" fill="#5a5d68" font-size="14">리허설이 실결함 4건을 잡아냄 — 실행 없이는 알 수 없는 것들</text>
+    </g>
+  </g>
+</svg>

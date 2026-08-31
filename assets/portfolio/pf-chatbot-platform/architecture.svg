@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 780" width="1200" height="780" role="img" aria-label="LLM Lab 플랫폼 아키텍처 — 브라우저 엔진, 선택적 릴레이, 외부 엔드포인트·데이터베이스">
+  <defs>
+    <linearGradient id="abg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1030"/>
+      <stop offset="0.55" stop-color="#131a4a"/>
+      <stop offset="1" stop-color="#1b2570"/>
+    </linearGradient>
+    <marker id="aarrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#8ad8ff"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="780" fill="url(#abg)"/>
+  <g stroke="#3a4790" stroke-width="1" opacity="0.18">
+    <path d="M0 130 H1200 M0 260 H1200 M0 390 H1200 M0 520 H1200 M0 650 H1200"/>
+    <path d="M150 0 V780 M300 0 V780 M450 0 V780 M600 0 V780 M750 0 V780 M900 0 V780 M1050 0 V780"/>
+  </g>
+
+  <text x="60" y="48" font-family="'Georgia',serif" font-size="30" font-weight="600" fill="#ffffff">플랫폼 아키텍처</text>
+  <text x="60" y="74" font-family="'Segoe UI',sans-serif" font-size="15" letter-spacing="2" fill="#8ea2ff">BROWSER ENGINE · OPTIONAL RELAY · EXTERNAL ENDPOINTS</text>
+
+  <!-- ===== Layer 1: browser ===== -->
+  <rect x="60" y="96" width="1080" height="304" rx="16" fill="#1a2360" fill-opacity="0.55" stroke="#5b74ff" stroke-width="2"/>
+  <text x="84" y="128" font-family="'Segoe UI','Malgun Gothic',sans-serif" font-size="19" font-weight="700" fill="#dfe6ff">브라우저 — 순수 프런트엔드 (빌드 단계 없음 · IIFE · file:// 실행 가능)</text>
+
+  <!-- workbench chips -->
+  <g font-family="'Segoe UI','Malgun Gothic',sans-serif" font-size="16" fill="#0b1030" text-anchor="middle">
+    <g><rect x="97" y="146" width="156" height="50" rx="10" fill="#8ad8ff"/><text x="175" y="177">Chat</text></g>
+    <g><rect x="267" y="146" width="156" height="50" rx="10" fill="#8ad8ff"/><text x="345" y="177">RAG Lab</text></g>
+    <g><rect x="437" y="146" width="156" height="50" rx="10" fill="#8ad8ff"/><text x="515" y="177">Chain</text></g>
+    <g><rect x="607" y="146" width="156" height="50" rx="10" fill="#7ff0c0"/><text x="685" y="177">Agent / Tools</text></g>
+    <g><rect x="777" y="146" width="156" height="50" rx="10" fill="#7ff0c0"/><text x="855" y="177">Eval / Bench</text></g>
+    <g><rect x="947" y="146" width="156" height="50" rx="10" fill="#7ff0c0"/><text x="1025" y="177">Simulate</text></g>
+  </g>
+
+  <!-- engine box -->
+  <rect x="84" y="216" width="640" height="164" rx="12" fill="#0e1442" stroke="#4f7bff" stroke-width="1.5"/>
+  <text x="104" y="246" font-family="'Segoe UI',sans-serif" font-size="17" font-weight="700" fill="#8ad8ff">엔진 llmlab.js — 공용 커널</text>
+  <g font-family="'Segoe UI','Malgun Gothic',sans-serif" font-size="15" fill="#c7d2ff">
+    <text x="104" y="276">buildTargetURL · buildHeaders · buildBody · run()</text>
+    <text x="104" y="302">헬스체크 · 모델 목록 · 진단 · 스트리밍 SSE 파서</text>
+    <text x="104" y="328">View code (curl / python / fetch) · 실행로그 (JSON·CSV)</text>
+    <text x="104" y="354">인스펙터 — 요청 URL·헤더·바디 / 응답 / 지연 / 토큰</text>
+  </g>
+
+  <!-- storage box -->
+  <rect x="744" y="216" width="372" height="164" rx="12" fill="#0e1442" stroke="#7ff0c0" stroke-width="1.5"/>
+  <text x="764" y="246" font-family="'Segoe UI',sans-serif" font-size="17" font-weight="700" fill="#7ff0c0">브라우저 저장소만 사용</text>
+  <g font-family="'Segoe UI','Malgun Gothic',sans-serif" font-size="15" fill="#c7d2ff">
+    <text x="764" y="276">연결 프로필 · 활성 연결</text>
+    <text x="764" y="302">DB 연결 프로필 · 대화 세션</text>
+    <text x="764" y="328">실행 로그</text>
+    <text x="764" y="354" fill="#7ff0c0">API 키는 로컬에만 남는다</text>
+  </g>
+
+  <!-- arrows down -->
+  <g stroke="#8ad8ff" stroke-width="2.5" marker-end="url(#aarrow)">
+    <path d="M400 400 V 436"/>
+    <path d="M800 400 V 436"/>
+  </g>
+
+  <!-- ===== Layer 2: relay ===== -->
+  <rect x="60" y="442" width="1080" height="112" rx="16" fill="#1a2360" fill-opacity="0.55" stroke="#5b74ff" stroke-width="2"/>
+  <text x="84" y="474" font-family="'Segoe UI','Malgun Gothic',sans-serif" font-size="19" font-weight="700" fill="#dfe6ff">릴레이 계층 (선택) — 없으면 자동으로 직접 호출로 폴백</text>
+  <g font-family="'Segoe UI','Malgun Gothic',sans-serif" font-size="15" fill="#c7d2ff">
+    <text x="84" y="506">POST /api/proxy → server.py(개발용) 또는 proxy.php(공유호스팅) · CORS 우회 · SSE 청크 실시간 통과</text>
+    <text x="84" y="532">/api/db → db/router.php (PDO) · 드라이버·DB 부재 시 항상 200 + provider:"mock" 으로 강등</text>
+  </g>
+
+  <g stroke="#8ad8ff" stroke-width="2.5" marker-end="url(#aarrow)">
+    <path d="M400 554 V 590"/>
+    <path d="M800 554 V 590"/>
+  </g>
+
+  <!-- ===== Layer 3: external ===== -->
+  <rect x="60" y="596" width="1080" height="152" rx="16" fill="#1a2360" fill-opacity="0.55" stroke="#5b74ff" stroke-width="2"/>
+  <rect x="84" y="616" width="500" height="112" rx="12" fill="#0e1442" stroke="#4f7bff" stroke-width="1.5"/>
+  <text x="104" y="646" font-family="'Segoe UI',sans-serif" font-size="17" font-weight="700" fill="#8ad8ff">OpenAI 호환 엔드포인트</text>
+  <g font-family="'Segoe UI','Malgun Gothic',sans-serif" font-size="15" fill="#c7d2ff">
+    <text x="104" y="676">/v1/chat/completions · /v1/completions</text>
+    <text x="104" y="702">/v1/models · /v1/embeddings (vLLM 등 자체 서빙 포함)</text>
+  </g>
+
+  <rect x="616" y="616" width="500" height="112" rx="12" fill="#0e1442" stroke="#7ff0c0" stroke-width="1.5"/>
+  <text x="636" y="646" font-family="'Segoe UI',sans-serif" font-size="17" font-weight="700" fill="#7ff0c0">데이터 저장소</text>
+  <g font-family="'Segoe UI','Malgun Gothic',sans-serif" font-size="15" fill="#c7d2ff">
+    <text x="636" y="676">SQLite · MySQL · PostgreSQL (pgvector)</text>
+    <text x="636" y="702">Neo4j (HTTP) — RAG 검색이 벡터·그래프로 라우팅</text>
+  </g>
+</svg>

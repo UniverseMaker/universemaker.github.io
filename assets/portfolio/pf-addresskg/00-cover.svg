@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" role="img" aria-label="AddressKG 전체 구조 개념도 — 원천 데이터, Core(HSM)·External(ESC) 그래프, 서비스 계층" font-family="'Pretendard','Noto Sans KR',-apple-system,'Segoe UI',sans-serif">
+  <defs>
+    <linearGradient id="akgNavy" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3a4cf0"/>
+      <stop offset="0.55" stop-color="#232a73"/>
+      <stop offset="1" stop-color="#0e1132"/>
+    </linearGradient>
+    <linearGradient id="akgTeal" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0d7f76"/>
+      <stop offset="1" stop-color="#0b4256"/>
+    </linearGradient>
+    <marker id="akgArw" markerWidth="12" markerHeight="12" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#3a4cf0"/>
+    </marker>
+    <filter id="akgSh" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="7" flood-color="#15171a" flood-opacity="0.13"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="900" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="72" y="84" font-size="42" font-weight="700" fill="#15171a">AddressKG — 국가주소정보 지식그래프</text>
+  <text x="72" y="124" font-size="23" font-weight="600" fill="#3a4cf0">Road-name Address Knowledge Graph on Neo4j — Core(HSM) + External(ESC)</text>
+  <line x1="72" y1="148" x2="1528" y2="148" stroke="#e7e8ec" stroke-width="2"/>
+
+  <!-- ===== Column 1 : sources ===== -->
+  <g transform="translate(72,190)">
+    <rect x="0" y="0" width="330" height="470" rx="18" fill="#f7f7f5" stroke="#e7e8ec" stroke-width="2" filter="url(#akgSh)"/>
+    <text x="165" y="42" text-anchor="middle" font-size="20" font-weight="700" fill="#232a73">원천 데이터 · Sources</text>
+    <g font-size="16" fill="#15171a">
+      <rect x="24" y="66" width="282" height="62" rx="11" fill="#ffffff" stroke="#c9cbd6"/>
+      <text x="40" y="90" font-weight="700">도로명주소 전체분 (텍스트 DB)</text>
+      <text x="40" y="114" fill="#5a5d68" font-size="14">건물DB · 한글/영문주소 · 상세주소 · 사물주소</text>
+
+      <rect x="24" y="140" width="282" height="62" rx="11" fill="#ffffff" stroke="#c9cbd6"/>
+      <text x="40" y="164" font-weight="700">주소 도형 (shp, EPSG:5179)</text>
+      <text x="40" y="188" fill="#5a5d68" font-size="14">건물 폴리곤 · 도로 중심선 · 구역 경계</text>
+
+      <rect x="24" y="214" width="282" height="82" rx="11" fill="#ffffff" stroke="#c9cbd6"/>
+      <text x="40" y="238" font-weight="700">공공데이터 (ESC)</text>
+      <text x="40" y="261" fill="#5a5d68" font-size="14">상가정보 · 전국표준데이터 · 위키데이터</text>
+      <text x="40" y="282" fill="#5a5d68" font-size="14">출자·출연기관 · 문화/공공시설</text>
+
+      <rect x="24" y="308" width="282" height="82" rx="11" fill="#ffffff" stroke="#c9cbd6"/>
+      <text x="40" y="332" font-weight="700">지식 원천</text>
+      <text x="40" y="355" fill="#5a5d68" font-size="14">주소용어집 SKOS(TTL) · 주소정보 업무편람</text>
+      <text x="40" y="376" fill="#5a5d68" font-size="14">표준 「주소정보 지식그래프 모델」 = SSOT</text>
+    </g>
+    <text x="165" y="428" text-anchor="middle" font-size="14" fill="#5a5d68">좌표계 변환 5179 → WGS84 / 5186</text>
+    <text x="165" y="450" text-anchor="middle" font-size="14" fill="#5a5d68">멱등 적재 · 결정론 GSID 재발급</text>
+  </g>
+
+  <!-- arrow 1 -->
+  <line x1="412" y1="420" x2="472" y2="420" stroke="#3a4cf0" stroke-width="3" marker-end="url(#akgArw)"/>
+
+  <!-- ===== Column 2 : graph ===== -->
+  <g transform="translate(484,190)">
+    <rect x="0" y="0" width="540" height="470" rx="18" fill="url(#akgNavy)" filter="url(#akgSh)"/>
+    <text x="270" y="44" text-anchor="middle" font-size="21" font-weight="700" fill="#ffffff">Neo4j 주소 지식그래프</text>
+    <text x="270" y="70" text-anchor="middle" font-size="15" fill="#cdd6ff">GSID(불변 내부키) + 표준 URI 병존</text>
+
+    <!-- core box -->
+    <rect x="28" y="92" width="238" height="196" rx="14" fill="rgba(255,255,255,0.10)" stroke="#8ea2ff"/>
+    <text x="147" y="120" text-anchor="middle" font-size="17" font-weight="700" fill="#ffffff">Core Network (HSM)</text>
+    <g font-size="14" fill="#dfe6ff">
+      <text x="48" y="150">계층 Hierarchical — 61 → 73관계</text>
+      <text x="48" y="176">공간 Spatial — ADJACENT_TO ·</text>
+      <text x="48" y="196">FRONTS · NEAR · CONTAINS</text>
+      <text x="48" y="222">의미 Semantic — SAME_AS ·</text>
+      <text x="48" y="242">NEAR_ON_ROAD · ALONG</text>
+      <text x="48" y="268">표준 클래스 42 → 54</text>
+    </g>
+
+    <!-- esc box -->
+    <rect x="282" y="92" width="230" height="196" rx="14" fill="rgba(255,255,255,0.10)" stroke="#7ff0c0"/>
+    <text x="397" y="120" text-anchor="middle" font-size="17" font-weight="700" fill="#ffffff">External Network (ESC)</text>
+    <g font-size="14" fill="#d6fff0">
+      <text x="300" y="150">ExternalDataset ·</text>
+      <text x="300" y="170">ExternalRecord</text>
+      <text x="300" y="198">LOCATED_AT (주소·좌표·영역)</text>
+      <text x="300" y="222">BELONGS_TO_DATASET</text>
+      <text x="300" y="250">REFERS_TO_SAME</text>
+      <text x="300" y="270">(개체정합)</text>
+    </g>
+
+    <!-- knowledge layer -->
+    <rect x="28" y="304" width="484" height="66" rx="14" fill="rgba(255,255,255,0.10)" stroke="#ffd28a"/>
+    <text x="48" y="330" font-size="16" font-weight="700" fill="#ffffff">지식 계층</text>
+    <text x="48" y="356" font-size="14" fill="#ffe9c9">Term(SKOS 용어집) · ManualSection(업무편람) · LegalClause(법조) · cites</text>
+
+    <!-- stats -->
+    <g transform="translate(28,388)">
+      <rect x="0" y="0" width="484" height="58" rx="12" fill="#ffffff" opacity="0.94"/>
+      <text x="26" y="26" font-size="15" font-weight="700" fill="#232a73">운영 그래프 규모</text>
+      <text x="26" y="47" font-size="14" fill="#15171a">1,682,015 노드 · 5,527,976 관계 (대전광역시 + 세종특별자치시)</text>
+    </g>
+  </g>
+
+  <!-- arrow 2 -->
+  <line x1="1034" y1="420" x2="1094" y2="420" stroke="#3a4cf0" stroke-width="3" marker-end="url(#akgArw)"/>
+
+  <!-- ===== Column 3 : services ===== -->
+  <g transform="translate(1106,190)">
+    <rect x="0" y="0" width="422" height="470" rx="18" fill="#f7f7f5" stroke="#e7e8ec" stroke-width="2" filter="url(#akgSh)"/>
+    <text x="211" y="42" text-anchor="middle" font-size="20" font-weight="700" fill="#232a73">API-First 서비스 계층</text>
+    <text x="211" y="66" text-anchor="middle" font-size="14" fill="#5a5d68">모든 제어 = FastAPI /api/v1/* · RBAC · 감사</text>
+
+    <g font-size="16">
+      <rect x="24" y="86" width="374" height="66" rx="11" fill="url(#akgTeal)"/>
+      <text x="44" y="112" font-weight="700" fill="#ffffff">ADDi — 환각 없는 주소 에이전트</text>
+      <text x="44" y="136" font-size="14" fill="#c9f2ee">Graph-First / LLM-Last · 인용 강제 · read-only</text>
+
+      <rect x="24" y="164" width="374" height="58" rx="11" fill="#ffffff" stroke="#c9cbd6"/>
+      <text x="44" y="188" font-weight="700" fill="#15171a">웹 컨트롤 콘솔 (패널 11종)</text>
+      <text x="44" y="210" font-size="14" fill="#5a5d68">대시보드 · 적재 · 관계 규칙 · 검증 · 관리</text>
+
+      <rect x="24" y="234" width="374" height="58" rx="11" fill="#ffffff" stroke="#c9cbd6"/>
+      <text x="44" y="258" font-weight="700" fill="#15171a">3D 뷰어 · 그래프 탐색 뷰어</text>
+      <text x="44" y="280" font-size="14" fill="#5a5d68">건물 압출 · 관계 오버레이 · 포스 레이아웃</text>
+
+      <rect x="24" y="304" width="374" height="58" rx="11" fill="#ffffff" stroke="#c9cbd6"/>
+      <text x="44" y="328" font-weight="700" fill="#15171a">주소 정제 API · 용어집 위키</text>
+      <text x="44" y="350" font-size="14" fill="#5a5d68">/address/normalize · 표준주소·행정동·GSID</text>
+
+      <rect x="24" y="374" width="374" height="58" rx="11" fill="#ffffff" stroke="#c9cbd6"/>
+      <text x="44" y="398" font-weight="700" fill="#15171a">명세 산출물 생성 (SSOT)</text>
+      <text x="44" y="420" font-size="14" fill="#5a5d68">RDF/OWL · JSON-LD · SHACL · 데이터 딕셔너리</text>
+    </g>
+  </g>
+
+  <!-- bottom strip -->
+  <g transform="translate(72,700)">
+    <rect x="0" y="0" width="1456" height="126" rx="16" fill="#f2f4ff" stroke="#dfe3ff" stroke-width="2"/>
+    <text x="28" y="36" font-size="17" font-weight="700" fill="#232a73">확정 설계 원칙</text>
+    <g font-size="15" fill="#15171a">
+      <text x="28" y="66">GSID — S2 Level16 셀 · Luhn mod-36 검증 · 결정론 SEQ (같은 원천 → 같은 그래프)</text>
+      <text x="28" y="94">표준 SSOT 준수 — 표준 밖 확장은 EXTENSION 사전에 분리 등재하고 개정 제안서로 자동 환류</text>
+      <text x="800" y="66">환각 0 — 그래프에 없는 사실은 답하지 않는다 (인용 실패 시 결정론 폴백)</text>
+      <text x="800" y="94">품질 게이트 6종 통과 없이는 구축 완료로 보지 않는다 (재현성 리허설로 검증)</text>
+    </g>
+  </g>
+</svg>

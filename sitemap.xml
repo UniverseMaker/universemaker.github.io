@@ -15,7 +15,7 @@
     <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/profile.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/profile.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/profile.html"/>
-    <lastmod>2026-08-26</lastmod>
+    <lastmod>2026-08-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -33,7 +33,7 @@
     <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/portfolio.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/portfolio.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/portfolio.html"/>
-    <lastmod>2026-08-26</lastmod>
+    <lastmod>2026-08-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -353,6 +353,15 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://daeseungpark.com/works/pf-addresskg/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-addresskg/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-addresskg/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-addresskg/"/>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://daeseungpark.com/works/pf-archive-its/</loc>
     <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-archive-its/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-archive-its/"/>
@@ -367,6 +376,24 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-brokenprice/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-brokenprice/"/>
     <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/pf-chatbot-platform/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-chatbot-platform/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-chatbot-platform/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-chatbot-platform/"/>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/pf-citysafety-ai-api/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-citysafety-ai-api/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-citysafety-ai-api/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-citysafety-ai-api/"/>
+    <lastmod>2026-08-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -610,6 +637,15 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-sms-assistance/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-sms-assistance/"/>
     <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/works/pf-universal-login/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-universal-login/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-universal-login/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-universal-login/"/>
+    <lastmod>2026-08-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -924,7 +960,7 @@
     <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/profile.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/profile.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/profile.html"/>
-    <lastmod>2026-08-26</lastmod>
+    <lastmod>2026-08-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -942,7 +978,7 @@
     <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/portfolio.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/portfolio.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/portfolio.html"/>
-    <lastmod>2026-08-26</lastmod>
+    <lastmod>2026-08-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1262,6 +1298,15 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://daeseungpark.com/en/works/pf-addresskg/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-addresskg/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-addresskg/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-addresskg/"/>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://daeseungpark.com/en/works/pf-archive-its/</loc>
     <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-archive-its/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-archive-its/"/>
@@ -1276,6 +1321,24 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-brokenprice/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-brokenprice/"/>
     <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/en/works/pf-chatbot-platform/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-chatbot-platform/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-chatbot-platform/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-chatbot-platform/"/>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/en/works/pf-citysafety-ai-api/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-citysafety-ai-api/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-citysafety-ai-api/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-citysafety-ai-api/"/>
+    <lastmod>2026-08-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -1519,6 +1582,15 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-sms-assistance/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-sms-assistance/"/>
     <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/en/works/pf-universal-login/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/works/pf-universal-login/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/works/pf-universal-login/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/works/pf-universal-login/"/>
+    <lastmod>2026-08-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
