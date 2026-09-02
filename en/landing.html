@@ -326,9 +326,61 @@
     .hero{padding-top:104px;}
     .btn{flex:1 1 auto;justify-content:center;}
   }
+
+  /* ============================================================
+     인쇄 (v100 신규)
+     이 파일은 자기완결형 단일 HTML이라 assets/css/style.css 의 @media print 가
+     적용되지 않는다(전 217페이지 중 landing 2종만 style.css 를 로드하지 않는다).
+     그래서 같은 원칙 — 크롬 숨김 · 라이트 팔레트 강제 · reveal 복구 — 을
+     이 파일 안에 최소한으로 다시 적는다.
+     ============================================================ */
+  @media print {
+    :root, [data-theme="dark"], [data-theme="light"] {
+      --bg:#ffffff !important; --bg-soft:#ffffff !important;
+      --surface:#ffffff !important; --surface-2:#f4f4f2 !important;
+      --ink:#15171a !important; --ink-soft:#333333 !important; --muted:#5a5f68 !important;
+      --line:rgba(0,0,0,.22) !important;
+      --accent:#333333 !important; --accent-2:#333333 !important; --accent-ink:#000000 !important;
+      --shadow:none !important; --card-shadow:none !important;
+    }
+    html, body { background:#fff !important; color:#111 !important; }
+    /* 화면 전용 · 장식 요소 */
+    .topmini, .scroll-hint, .theme-btn, .hero-bg, .hero-scrim, .glow, .pulse, .btn, .skip-link { display:none !important; }
+    /* ⚠️ .reveal 은 IntersectionObserver 가 .in 을 붙이기 전까지 opacity:0 이다 —
+       화면 밖 섹션이 통째로 빈 종이로 인쇄되는 것을 막는다. */
+    .reveal { opacity:1 !important; transform:none !important; transition:none !important; animation:none !important; }
+    /* 히어로는 사진 위 흰 글씨(하드코딩)라 배경을 지우면 글자가 사라진다 → 검정으로 강제 */
+    .hero { min-height:0 !important; padding:0 0 18pt !important; color:#000 !important; }
+    .hero h1, .hero h1 .ko, .hero .role, .hero .role b, .hero .tagline, .eyebrow { color:#000 !important; text-shadow:none !important; }
+    .eyebrow { border-color:rgba(0,0,0,.3) !important; background:none !important; }
+    .stat, .hl, .art, .block, .cta-band, .foot-inner { break-inside:avoid; box-shadow:none !important; }
+    a { color:#000 !important; text-decoration:none !important; }
+  }
+  /* ============================================================
+     스킵 링크 (WCAG 2.4.1 Bypass Blocks · Level A · v100 신규)
+     이 파일은 자기완결형 단일 HTML이라 assets/css/style.css 와 main.js 를 로드하지 않는다
+     (전 217페이지 중 landing 2종만 그렇다) → 인쇄 규칙처럼 같은 패턴을 여기 다시 적는다.
+     display:none·visibility:hidden 은 포커스 대상에서 빠져 스킵 링크로 못 쓴다 → clip 기법.
+     position:fixed 라 문서 흐름 밖 → 레이아웃 영향 0.
+     ============================================================ */
+  .skip-link {
+    position: fixed; top: 0; left: 0; width: 1px; height: 1px;
+    overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%);
+    white-space: nowrap; z-index: 1200;
+  }
+  .skip-link:focus, .skip-link:focus-visible {
+    width: auto; height: auto; clip: auto; clip-path: none; overflow: visible;
+    margin: 8px; padding: 10px 18px; border-radius: 10px;
+    background: var(--ink); color: var(--bg);
+    font-size: .92rem; font-weight: 700; text-decoration: none;
+    outline: 3px solid var(--accent); outline-offset: 2px;
+  }
+  [tabindex="-1"]:focus { outline: none; }
+
 </style>
 </head>
 <body>
+<a class="skip-link" href="#content">Skip to main content</a>
 
 <!-- ===== Top mini bar ===== -->
 <div class="topmini" id="topmini">
@@ -343,7 +395,7 @@
 </div>
 
 <!-- ===== HERO ===== -->
-<header class="hero">
+<header class="hero" id="content" tabindex="-1">
   <div class="hero-bg" role="img" aria-label="Portrait of Daeseung Park"></div>
   <div class="hero-scrim"></div>
   <div class="wrap hero-inner">
@@ -516,21 +568,24 @@
   "use strict";
 
   /* ---------- Theme ---------- */
+  /* storage key must match main.js so the choice made here carries into the site */
+  var THEME_KEY="dpark-theme";
   var root=document.documentElement, icon=document.getElementById("themeIcon");
-  function apply(t){root.setAttribute("data-theme",t);icon.textContent=(t==="dark")?"☀":"☾";}
+  function apply(t){root.setAttribute("data-theme",t);if(icon)icon.textContent=(t==="dark")?"☀":"☾";}
   var saved;
-  try{saved=localStorage.getItem("dp-landing-theme");}catch(e){}
+  try{saved=localStorage.getItem(THEME_KEY);}catch(e){}
   if(saved){apply(saved);}
   else{apply(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");}
-  document.getElementById("themeToggle").addEventListener("click",function(){
+  var toggle=document.getElementById("themeToggle");
+  if(toggle)toggle.addEventListener("click",function(){
     var next=root.getAttribute("data-theme")==="dark"?"light":"dark";
     apply(next);
-    try{localStorage.setItem("dp-landing-theme",next);}catch(e){}
+    try{localStorage.setItem(THEME_KEY,next);}catch(e){}
   });
 
   /* ---------- Top bar solid on scroll ---------- */
   var bar=document.getElementById("topmini");
-  function onScroll(){ if(window.scrollY>60) bar.classList.add("solid"); else bar.classList.remove("solid"); }
+  function onScroll(){ if(!bar)return; if(window.scrollY>60) bar.classList.add("solid"); else bar.classList.remove("solid"); }
   onScroll(); window.addEventListener("scroll",onScroll,{passive:true});
 
   /* ---------- Reveal on scroll ---------- */

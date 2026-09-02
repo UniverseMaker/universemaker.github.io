@@ -33,7 +33,7 @@ window.SITE = {
   /* 상단 유틸리티 바 우측 퀵링크 (internal:true 는 사이트 내부 경로) */
   quicklinks: [
     { label: "Abliterated AI", href: AI_CHAT_URL },
-    { label: "Mission Control(TCC)", href: "https://tcc.daeseungpark.com/" },
+    { label: "LLM Research Platform", href: "https://service.daeseungpark.com/rchat" },
     { label: "Profile", href: "profile.html", internal: true },
     { label: "GitHub",  key: "github" },
     { label: "Scholar", key: "scholar" },
@@ -639,7 +639,7 @@ window.WORKS = {
       period:"2023", org:"GitHub · PHP",
       cover:"assets/portfolio/pf-archive-its/cover.jpg",
       tags:["ITS","PMS","PHP"],
-      links:{ url:"https://github.com/UniverseMaker/Archive-ITS", demo:"https://superblaze.net/archive/" },
+      links:{ url:"https://github.com/UniverseMaker/Archive-ITS" },
       desc:["Jira·Redmine 개념을 결합한 이슈추적(ITS)·프로젝트관리(PMS)·문서관리 시스템을 PHP 환경에서 최대한 단순하게 구현하는 것을 목표로 한 웹 애플리케이션."] },
 
     /* ---- 신규: ResSwitch — 원격근무용 디스플레이 해상도 전환 유틸리티 (GitHub, v1.0.0 / 2026-08-26) ---- */
@@ -660,7 +660,7 @@ window.WORKS = {
       period:"2026", org:"Neo4j · FastAPI · Python",
       cover:"assets/portfolio/pf-addresskg/00-cover.svg",
       tags:["지식그래프","Neo4j","공간정보"],
-      figs:[{src:"assets/portfolio/pf-addresskg/00-cover.svg", cap:"전체 구조 — 원천 데이터에서 Core(HSM)·External(ESC) 그래프를 거쳐 API-First 서비스 계층까지"},{src:"assets/portfolio/pf-addresskg/01-pipeline.svg", cap:"재구축 파이프라인 — 빈 DB에서 게이트 6종 만점까지, 멱등·결정론으로 재현"},{src:"assets/portfolio/pf-addresskg/02-addi.svg", cap:"ADDi — Graph-First / LLM-Last 파이프라인과 인용·검증 루프"}],
+      figs:[{src:"assets/portfolio/pf-addresskg/00-cover.svg", cap:"전체 구조 — 원천 데이터에서 Core(HSM)·External(ESC) 그래프를 거쳐 API-First 서비스 계층까지"},{src:"assets/portfolio/pf-addresskg/01-pipeline.svg", cap:"재구축 파이프라인 — 빈 DB에서 게이트 6종 만점까지, 멱등·결정론으로 재현"},{src:"assets/portfolio/pf-addresskg/02-addi.svg", cap:"ADDi — Graph-First / LLM-Last 파이프라인과 인용·검증 루프"},{src:"assets/portfolio/pf-addresskg/03-defense.png", cap:"환각 없음 4중 방어선 — 타입 수준 쓰기 차단 · 인용 강제 · 생성후 검증 · 결정론 폴백"},{src:"assets/portfolio/pf-addresskg/04-datamodel.png", cap:"데이터 모델(HSM + E 축) — ADDi가 순회하는 핵심 노드·관계, 그리고 인용의 근거가 되는 gsid·web_uri"},{src:"assets/portfolio/pf-addresskg/05-modules.png", cap:"모듈 지도 — api/(HTTP 계약) → agent/(ADDi 파이프라인) → ontology/·core/·db/(스키마)"}],
       desc:["도로명주소 데이터를 노드와 링크로 분해해 Neo4j 위에 세운 주소 지식그래프. 표준 온톨로지를 따르는 Core Network(HSM — 계층·공간·의미)와 공공데이터를 잇는 External Network(ESC)로 구성되며, 환각 없는 주소 에이전트 ADDi와 3D 시각화, 전 기능 제어 API + 웹 콘솔을 함께 제공한다.",
              "대전광역시·세종특별자치시 전수를 적재한 운영 그래프는 1,682,015개 노드와 5,527,976개 관계로 이루어진다. 모든 노드·링크에 결정론적 공간 식별자 GSID를 부여해 같은 원천이면 같은 그래프가 재현되며, 빈 DB에서 품질 게이트 6종 만점까지 도달하는 전 과정을 실제로 재구축해 재현성을 검증했다."] },
     { slug:"pf-citysafety-ai-api", cat:"AI · R&D", order:36,

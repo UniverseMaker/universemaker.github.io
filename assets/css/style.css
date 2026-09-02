@@ -16,12 +16,22 @@
   --accent: #3a4cf0;        /* editorial indigo */
   --accent-ink: #2233c4;
   --gold: #b7892f;          /* premium accent */
-  --red: #e0413a;           /* category red */
+  --red: #d4342c;           /* category red — v100에서 #e0413a→#d4342c 로 한 단계 낮췄다.
+                               흰 글자를 얹는 배지(.cat-pill.red · .ticker .label)가 4.21:1 로
+                               WCAG AA(4.5:1) 미달이었고, 같은 토큰을 전경색으로 쓰는
+                               `.cat.red`(10.9px bold, 흰 배경) 도 같은 4.21:1 이었다.
+                               토큰을 낮추면 배지·텍스트 두 용례가 한 번에 4.85:1 로 올라간다
+                               (배지 전경을 어둡게 뒤집는 방법은 .cat.red 를 못 고치고,
+                                중간 명도의 빨강 위 어두운 글자도 4.4:1 에 머물러 부적합). */
 
   /* Type */
   --sans: "Pretendard", "Pretendard Variable", -apple-system, BlinkMacSystemFont, system-ui, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
   --serif: "Source Serif 4", "Noto Serif KR", Georgia, "Nanum Myeongjo", serif;
   --display: "Fraunces", "Noto Serif KR", Georgia, serif;
+
+  /* 키보드 포커스 링 — 라이트 팔레트용. 링은 outline-offset 으로 요소 밖(=페이지 배경)에 그려지므로
+     대비 기준은 페이지 배경이다: 흰 배경 8.61:1 / --surface(#f7f7f5) 8.02:1 (WCAG 2.4.11 의 3:1 상회). */
+  --focus: #1230d8;
 
   --radius: 14px;
   --radius-sm: 9px;
@@ -44,6 +54,8 @@
   --accent-ink: #aab6ff;
   --gold: #d8b25e;
   --red: #ff6b62;
+  /* 다크에서는 밝은 링이어야 보인다. --bg(#131417) 9.56:1 / --surface(#1a1c20) 8.86:1 */
+  --focus: #a9b7ff;
   --shadow-sm: 0 1px 2px rgba(0,0,0,.4);
   --shadow: 0 8px 30px rgba(0,0,0,.5);
   --shadow-lg: 0 20px 60px rgba(0,0,0,.6);
@@ -109,7 +121,9 @@ img { max-width: 100%; display: block; }
 .ticker { border-bottom: 1px solid var(--line); background: var(--surface); }
 .ticker .container-x { display: flex; align-items: center; gap: 16px; height: 46px; overflow: hidden; }
 .ticker .label { background: var(--red); color: #fff; font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 4px 10px; border-radius: 4px; white-space: nowrap; }
-.ticker .items { display: flex; gap: 28px; font-size: .88rem; color: var(--muted); white-space: nowrap; overflow: hidden; }
+/* overflow:hidden 을 제거했다 — 부모 `.ticker .container-x` 가 이미 클립하므로 잘림 동작은 같고,
+   여기서 클립하면 링크 높이(≈23px)에서 포커스 링 바깥쪽이 잘려 키보드 위치가 안 보였다. */
+.ticker .items { display: flex; gap: 28px; font-size: .88rem; color: var(--muted); white-space: nowrap; min-width: 0; }
 .ticker .items a { color: var(--ink-soft); }
 .ticker .items a:hover { color: var(--accent-ink); }
 
@@ -372,6 +386,9 @@ body[data-theme="light"][data-hero="photo"] .feat-large:hover .bg::after {
 .subscribe-card form { display: flex; gap: 8px; }
 .subscribe-card input { flex: 1; min-width: 0; padding: 11px 15px; border-radius: 999px; border: 1px solid rgba(255,255,255,.25); background: rgba(255,255,255,.10); color: #fff; font-size: .9rem; font-family: var(--sans); }
 .subscribe-card input:focus { outline: none; border-color: #fff; }
+/* 마우스 클릭에는 링을 띄우지 않고(:focus), 키보드 이동에는 반드시 띄운다(:focus-visible).
+   같은 특이도이므로 이 규칙이 위 outline:none 보다 뒤에 와야 이긴다. */
+.subscribe-card input:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
 .subscribe-card input::placeholder { color: rgba(255,255,255,.55); }
 .subscribe-card button { border: 0; padding: 11px 22px; border-radius: 999px; background: #fff; color: var(--ink); font-weight: 700; font-size: .9rem; cursor: pointer; transition: .2s; }
 .subscribe-card button:hover { background: var(--gold); color: #fff; }
@@ -443,7 +460,7 @@ body[data-theme="light"][data-hero="photo"] .feat-large:hover .bg::after {
 .work-badge { justify-self: start; font-size: .68rem; font-weight: 700; letter-spacing: .05em; padding: 4px 9px; border-radius: 5px; background: var(--ink); color: var(--bg); white-space: nowrap; }
 .work-badge.scie { background: var(--accent); color: #fff; }
 .work-badge.kci { background: var(--gold); color: #fff; }
-.work-badge.pat { background: #1f9d8b; color: #fff; }
+.work-badge.pat { background: #17786c; color: #fff; }   /* v100: #1f9d8b(3.36:1) → #17786c(5.33:1) */
 .work-badge.sw { background: #6d28d9; color: #fff; }
 .work-main { min-width: 0; }
 .work-title { font-family: var(--display); font-size: 1.08rem; font-weight: 600; color: var(--ink); line-height: 1.3; }
@@ -587,9 +604,16 @@ body[data-theme="light"][data-hero="photo"] .feat-large:hover .bg::after {
 .lb-cap { position: absolute; bottom: 24px; left: 0; right: 0; text-align: center; color: #fff; font-size: .9rem; padding: 0 20px; }
 .lb-cap b { font-family: var(--display); }
 
-/* mobile nav drawer */
-.mobile-nav { position: fixed; inset: 0; background: var(--bg); z-index: 1100; transform: translateX(100%); transition: transform .3s; padding: 28px 24px; display: flex; flex-direction: column; gap: 4px; }
-.mobile-nav.open { transform: none; }
+/* mobile nav drawer
+   ⚠️ 닫힘 상태는 화면 밖(translateX(100%))으로만 밀려 있었고 display:flex·visibility:visible 이라
+   드로어 안 링크 9개가 데스크톱을 포함한 전 폭에서 tab 순서에 남아 있었다(포커스가 화면 밖으로 사라짐,
+   WCAG 2.4.3/2.4.7 실패). visibility:hidden 은 자신과 자손을 포커스 대상에서 제외하므로
+   tab 순서에서 완전히 빠진다. pointer-events:none 은 화면 밖 클릭 흡수까지 막는다.
+   visibility 는 이산(discrete) 속성이라 transition 에 넣으면 지연만 걸린다 —
+   닫을 때는 슬라이드아웃 .3s 가 끝난 뒤 숨기고(delay .3s), 열 때는 즉시 보이게(delay 0) 해야
+   기존 트랜지션이 그대로 유지된다. */
+.mobile-nav { position: fixed; inset: 0; background: var(--bg); z-index: 1100; transform: translateX(100%); visibility: hidden; pointer-events: none; transition: transform .3s, visibility 0s linear .3s; padding: 28px 24px; display: flex; flex-direction: column; gap: 4px; }
+.mobile-nav.open { transform: none; visibility: visible; pointer-events: auto; transition: transform .3s, visibility 0s linear 0s; }
 .mobile-nav a { font-family: var(--display); font-size: 1.5rem; padding: 12px 0; border-bottom: 1px solid var(--line); }
 .mobile-nav .close { align-self: flex-end; margin-bottom: 16px; }
 
@@ -620,6 +644,8 @@ body[data-theme="light"][data-hero="photo"] .feat-large:hover .bg::after {
 .notice-search { display:flex; justify-content:center; gap:8px; margin-top:26px; }
 .notice-search input { width:min(340px,60vw); padding:10px 14px; border:1px solid var(--line); border-radius:9px; background:var(--bg); color:var(--ink); font-size:.9rem; font-family:var(--sans); }
 .notice-search input:focus { outline:none; border-color:var(--accent); }
+/* 위와 동일 — 키보드 포커스에서만 링을 되살린다(특이도 동일, 순서로 승리). */
+.notice-search input:focus-visible { outline:3px solid var(--focus); outline-offset:2px; }
 .notice-search .btn-x { flex:none; }
 @media (max-width:640px){
   .notice-row { gap:10px; padding:14px 4px; }
@@ -750,3 +776,215 @@ body[data-theme="light"][data-hero="photo"] .feat-large:hover .bg::after {
 #homePromo3 .pp-badge { color:#0a6b62; }                     /* 흰 pill 위 텍스트, 대비 6.38:1 */
 #homePromo3 .pp-soon { background:rgba(3,40,45,.4); }        /* 밝은 틸 위에서 흰 글자 3.4:1로 떨어지던 반투명 흰 칩을
                                                                 딥틸 칩으로 교체 → 7.6~9.8:1 */
+
+/* ============================================================
+   v100 — 접근성(A11Y) · 대비 · 인쇄 공통 규칙
+   기존 규칙을 재작성하지 않고 파일 말미에 덧붙였다. 아래 블록은 모두
+   (a) 기존 셀렉터보다 특이도가 높거나, (b) 같은 특이도에서 뒤에 와서 이긴다.
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   0) 스킵 링크 (WCAG 2.4.1 · Level A) — main.js 가 body 첫 자식으로 주입한다.
+   ⚠️ `display:none`·`visibility:hidden` 은 포커스 대상에서 제외돼 스킵 링크로 쓸 수 없다.
+      화면 밖으로 밀어내는 clip 기법을 쓴다 — 문서 흐름에서 빠지므로(position:fixed)
+      레이아웃 영향이 0 이다(실측: 주입 전후 전 요소 geometry 변화 0).
+   포커스를 받으면 상단바 위(z-index 1200 > .topbar/.site-header)에 나타난다.
+   ------------------------------------------------------------ */
+.skip-link {
+  position: fixed; top: 0; left: 0; width: 1px; height: 1px;
+  overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%);
+  white-space: nowrap; z-index: 1200;
+}
+.skip-link:focus, .skip-link:focus-visible {
+  width: auto; height: auto; clip: auto; clip-path: none; overflow: visible;
+  margin: 8px; padding: 10px 18px; border-radius: var(--radius-sm);
+  background: var(--ink); color: var(--bg);
+  font-family: var(--sans); font-size: .92rem; font-weight: 700; text-decoration: none;
+  box-shadow: var(--shadow);
+}
+/* ------------------------------------------------------------
+   1) 전역 키보드 포커스 링 (WCAG 2.4.7)
+   :focus 가 아니라 :focus-visible 이므로 마우스 클릭에는 링이 나오지 않는다(정상 동작).
+   ------------------------------------------------------------ */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible,
+[role="button"]:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  /* ⛔ 여기에 border-radius 를 주지 않는다(v100 검증에서 제거).
+     outline 은 브라우저가 요소의 자체 border-radius 를 따라 그리므로 링 모서리를 위해
+     반경을 지정할 필요가 없다. 반면 이 규칙의 특이도(0,1,1)는 `.icon-btn`(0,1,0) 같은
+     기존 클래스 규칙을 이기기 때문에, 지정하면 포커스 순간 요소 자체 모양이 바뀐다 —
+     실측: `.site-footer a` 50%→3px(원형 아이콘이 사각형으로), `.feat-card`·`.paper-promo`·
+     `.gal-card` 14px→3px. 링을 보여주려다 레이아웃이 튀는 쪽이 더 큰 회귀다. */
+}
+/* 스킵 링크의 도착지(main·article 등)에는 tabindex="-1" 만 붙는다. 바로 위 규칙의
+   `[tabindex]:focus-visible` 가 이들까지 잡아 컨테이너 전체를 두르는 거대한 링을 그리므로
+   여기서 끈다(같은 특이도 (0,2,0) — 뒤에 와서 이긴다). 이동 사실은 스킵 링크 자신의
+   링과 스크롤 위치로 이미 전달된다. tabindex="-1" 은 tab 순서에 없어 손실도 없다. */
+[tabindex="-1"]:focus,
+[tabindex="-1"]:focus-visible { outline: none; }
+/* 어두운 배경 영역(상단바 · 푸터 · 페이지 히어로 · 어두운 배너 내부 · 라이트박스)에서는
+   라이트 테마의 짙은 파랑 링이 배경에 묻는다 → 흰 링으로 바꾼다.
+   ⚠️ 기준은 "요소 자신이 어두운가"가 아니라 **링이 그려지는 자리가 어두운가**다.
+      outline-offset:2px 이므로 링은 요소 바깥(=부모 배경) 위에 놓인다.
+      따라서 아래 목록은 부모가 두 테마 모두 어두운 것만 남긴다(15.5~19.1:1 실측). */
+.topbar a:focus-visible,
+.site-footer a:focus-visible,
+.site-footer button:focus-visible,
+.page-hero a:focus-visible,
+.feat-card a:focus-visible,
+.paper-promo a:focus-visible,
+.promo a:focus-visible,
+.subscribe-card button:focus-visible,
+.lightbox button:focus-visible {
+  outline-color: #fff;
+}
+/* ⚠️ 반대로 `a.feat-card`(카드 전체가 링크) 와 `a.paper-promo`(배너 전체가 링크) 는
+   자신은 어둡지만 **바깥이 페이지 배경**이다. v100 초판이 이 둘을 위 목록에 넣어
+   라이트 테마에서 흰 링이 흰 배경에 얹혀 사실상 보이지 않았다
+   (픽셀 실측: feat-card 254,254,254 vs 245,245,245 = 1.08:1 / paper-promo 1.02:1).
+   → 라이트에서는 기본 `--focus`(#1230d8, 페이지 배경 대비 8.02~8.61:1)를 그대로 쓰고,
+     페이지 배경이 어두워지는 다크 테마에서만 흰 링으로 바꾼다(17.4~15.7:1 실측). */
+[data-theme="dark"] a.feat-card:focus-visible,
+[data-theme="dark"] a.paper-promo:focus-visible {
+  outline-color: #fff;
+}
+
+/* ------------------------------------------------------------
+   2) 다크모드 배지 대비 (WCAG 1.4.3)
+   다크에서 --accent(#8b9bff) · --red(#ff6b62) 토큰이 밝아지는데 전경색이 #fff 로 남아
+   2.55:1 / 2.79:1 까지 떨어졌다. 472행 `[data-theme=dark] .pf-chip.is-active{color:#0d1026}`
+   선례와 같은 방식으로 어두운 전경색으로 뒤집는다.
+   ⚠️ `.cat-pill.dark` 는 반투명 남색 배경(rgba(13,16,38,.72))이므로 제외해야 한다
+      — 뒤집으면 어두운 배경 위 어두운 글자가 된다. :not(.dark) 로 걸러낸다.
+   ⚠️ `.feat-card` 계열의 흰 글자(어두운 그라디언트 위)는 건드리지 않는다.
+   ------------------------------------------------------------ */
+[data-theme="dark"] .cat-pill:not(.dark),
+[data-theme="dark"] .ticker .label,
+[data-theme="dark"] .work-badge.scie,
+[data-theme="dark"] .notice-cat,
+[data-theme="dark"] .notice-row .n-title .notice-cat,
+[data-theme="dark"] .icon-btn:hover,
+[data-theme="dark"] .tag-cloud a:hover,
+[data-theme="dark"] .topic-tile:hover,
+[data-theme="dark"] .topic-list a:hover,
+[data-theme="dark"] .btn-x:hover,
+[data-theme="dark"] .btn-ghost:hover,
+[data-theme="dark"] .work-links .wl-ext:hover,
+[data-theme="dark"] .wd-file:hover,
+[data-theme="dark"] .art-tags a:hover,
+[data-theme="dark"] .social a:hover {
+  color: #0d1026;
+}
+/* 금색 배지는 두 테마 모두 흰 글자가 미달이다(라이트 3.17:1 / 다크 2.01:1).
+   금색은 명도가 높아 흰 글자로는 어떤 톤 조정으로도 4.5:1 을 만들기 어렵고,
+   토큰을 낮추면 갈색이 되어 `.wd-award` 등 장식 용례의 성격이 바뀐다.
+   → 토큰은 그대로 두고 전경색만 어둡게 뒤집는다(라이트 5.85:1 / 다크 9.22:1). */
+.feature-badge,
+.work-badge.kci,
+.subscribe-card button:hover {
+  color: #1a1206;
+}
+
+/* ------------------------------------------------------------
+   3) 긴 무개행 토큰으로 인한 모바일 가로 오버플로 (WCAG 1.4.10)
+   `works/pf-addresskg/` 의 `p.wd-block` 에 64자 무개행 토큰
+   (`EXTENSION_CLASSES·EXTENSION_RELATIONSHIPS·ESC_RELATIONSHIPS`)이 있어
+   375px 에서 265px, 320px 에서 320px 가로 스크롤이 생겼다(`·` 는 개행 기회가 아니다).
+   `anywhere` 를 쓰는 이유: `break-word` 와 달리 min-content 계산에도 반영되어
+   그리드/플렉스 blowout 까지 함께 막는다.
+   ⛔ 표(`.wd-table`·`.cap-table`·`.prose table`)와 코드성 블록에는 적용하지 않는다.
+      `.prose` 전체가 아니라 `.prose > p`·`li` 만 지정한 이유도 표 상속을 피하려는 것이다.
+   ------------------------------------------------------------ */
+.wd-block,
+.wd-summary,
+.wd-summary p,
+.wd-abstract,
+.wd-why p,
+.wd-fig figcaption,
+.wd-authors,
+.wd-meta,
+.wd-title,
+.wd-en,
+.work-title,
+.work-en,
+.work-meta,
+.proj-desc,
+.proj-row2 .proj-desc,
+.proj-row2 .proj-meta,
+.notice-body p,
+.post-card p,
+.feature-body p,
+.pf-body p,
+.recent-card h4,
+.gal-card figcaption p {
+  overflow-wrap: anywhere;
+}
+
+/* ------------------------------------------------------------
+   4) 인쇄 공통 규칙 (전 217페이지)
+   기존 인쇄 규칙은 `article.css` 의 @media print 에만 있고 그 파일은 48페이지
+   (기고문 44 + 프로필 4)에만 로드된다. 성과물 상세 142 · 목록 6 · index · landing 은
+   Ctrl+P 시 상단바·헤더·티커·푸터·네비가 그대로 찍히고 다크모드면 어두운 배경까지 인쇄됐다.
+   여기서는 **공통 크롬 숨김 + 색 리셋**만 승격한다.
+   기고문 전용 조판(`.art-*`·`.prose`·`@page`·`.print-footer`)은 article.css 에 그대로 남긴다.
+   두 파일의 공통 선언은 값이 동일해 충돌하지 않으며, article.css 가 뒤에 로드되므로
+   기고문 페이지에서는 article.css 쪽이 최종값이 된다(같은 값).
+   ------------------------------------------------------------ */
+@media print {
+  /* 다크모드에서 인쇄해도 라이트 팔레트로 나오게 강제 */
+  :root, [data-theme="dark"], [data-theme="light"] {
+    --ink:#15171a !important; --ink-soft:#333333 !important; --muted:#5a5f68 !important;
+    --line:#cccccc !important; --line-soft:#dddddd !important;
+    --bg:#ffffff !important; --surface:#f4f4f2 !important; --surface-2:#eeeeec !important;
+    --accent:#333333 !important; --accent-ink:#000000 !important;
+    --gold:#555555 !important; --red:#333333 !important;
+  }
+  html, body { background:#fff !important; color:#111 !important; }
+
+  /* 공통 크롬 — 화면 전용 요소 */
+  .topbar, .site-header, .ticker, .site-footer, .nav-actions, .nav-toggle, .mobile-nav,
+  .progress-bar, .print-cta, .crumb, .skip-link,
+  .lightbox, #aiTrialBtn, #aiTrialPanel,
+  .paper-promo-wrap, .promo, .subscribe-card,
+  .pf-filter, #boardFilter, .pager, .notice-search, .post-nav, .read-next,
+  .art-tags, .author-card, .social,
+  .no-print { display:none !important; }
+
+  /* ⚠️ `.fade-up` 은 IntersectionObserver 가 `.in` 을 붙이기 전까지 opacity:0 이다.
+     화면 밖(아래쪽) 카드는 `.in` 이 붙지 않은 상태로 인쇄되어 통째로 사라진다.
+     인쇄에서는 무조건 보이게 강제한다. */
+  .fade-up, .fade-up.in { opacity:1 !important; transform:none !important; transition:none !important; }
+
+  /* 배경 그라디언트로 흰 글자를 얹은 블록은 종이에서 글자가 사라진다 → 검정 글자 + 무배경 */
+  .page-hero { background:none !important; color:#000 !important; padding:0 0 10pt !important; }
+  .page-hero h1, .page-hero .lead, .page-hero .board-count { color:#000 !important; }
+  .proj-row2 .proj-org { background:none !important; color:#000 !important; border:.5pt solid #999; }
+  /* 색 배경 배지는 종이에서 잉크만 먹고 흰 글자가 사라진다 → 무배경 검정 글자.
+     `.cat-pill`·`.feature-badge` 는 article.css 의 `.art-head .cat-pill`(letter-spacing 만 남기는
+     기존 조판)과 충돌하지 않도록 테두리를 주지 않고 순수 텍스트로 둔다. */
+  .cat-pill, .cat-pill.red, .cat-pill.dark, .feature-badge {
+    background:none !important; color:#000 !important; box-shadow:none !important; padding:0;
+  }
+  /* 반면 SCIE·KCI·특허·SW·공지 분류는 목록에서 식별 정보라 얇은 테두리를 남긴다. */
+  .work-badge, .notice-cat {
+    background:none !important; color:#000 !important; border:.5pt solid #999; padding:1px 5px;
+  }
+
+  /* 카드/행이 페이지 경계에서 갈라지지 않게 */
+  .work-row, .proj-row, .proj-row2, .role-detail, .role-detail .rd-group,
+  .cap-table tr, .wd-table tr, .notice-row, .gal-card, .pf-card, .feature-card, .post-card,
+  .wd-why, .wd-abstract, .wd-fig { break-inside: avoid; }
+  .prof-section h2, .work-group, .wd-h4 { break-after: avoid; }
+
+  /* 화면용 장식 제거 */
+  .feat-card, .pf-card, .gal-card, .feature-card, .recent-card, .notice-card,
+  .wd-cover, .wd-figbox, .about-author, .topics-side { box-shadow:none !important; }
+  a { text-decoration:none; }
+}

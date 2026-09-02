@@ -21,14 +21,20 @@
     noticeCount: "{n} notices · {p} / {tp} pages", noticeEmpty: "No results found.",
     subscribeMsg: "Thanks for subscribing! Notifications aren't ready yet, so for now we'll email new-post updates to dspark@daeseungpark.com.",
     dateLocale: "en-US",
-    lightboxClose: "Close", lightboxPrev: "Previous", lightboxNext: "Next"
+    lightboxClose: "Close", lightboxPrev: "Previous", lightboxNext: "Next",
+    navDrawer: "Site menu", lightboxDialog: "Photo viewer",
+    galleryOpen: "Open larger view: {t}",
+    skipToContent: "Skip to main content"
   } : {
     pagerPrev: "‹ 이전", pagerNext: "다음 ›",
     boardCount: "총 {n}편 · {p} / {tp} 페이지", boardEmpty: "해당 조건의 기고문이 없습니다.",
     noticeCount: "총 {n}건 · {p} / {tp} 페이지", noticeEmpty: "검색 결과가 없습니다.",
     subscribeMsg: "구독해 주셔서 감사합니다! 알림 기능은 준비 중이라, 우선 dspark@daeseungpark.com 으로 새 글 소식을 보내드릴게요.",
     dateLocale: "ko-KR",
-    lightboxClose: "닫기", lightboxPrev: "이전", lightboxNext: "다음"
+    lightboxClose: "닫기", lightboxPrev: "이전", lightboxNext: "다음",
+    navDrawer: "사이트 메뉴", lightboxDialog: "사진 크게 보기",
+    galleryOpen: "{t} 사진 크게 보기",
+    skipToContent: "본문으로 건너뛰기"
   };
   function tpl(s, m) { return String(s == null ? "" : s).replace(/\{(\w+)\}/g, function (_, k) { return m[k] != null ? m[k] : ""; }); }
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
@@ -51,6 +57,32 @@
     gtag("config", GA_ID);
   })();
 
+  /* ---------------- 스킵 링크 (WCAG 2.4.1 Bypass Blocks · Level A) ----------------
+     상단바 퀵링크 11 + 메인 네비 9 + 티커 6 ≈ 26개를 지나야 본문에 닿는다.
+     baked HTML 214개를 건드리지 않기 위해 여기서 주입한다 — 라이트박스·AI 위젯이
+     이미 같은 방식으로 body 에 요소를 넣는 선례가 있다(273·444행).
+     ⚠️ landing.html · en/landing.html 2개는 main.js 를 로드하지 않으므로 적용되지 않는다
+        (자기완결형 단일 HTML, 별도 인라인 추가가 필요 — 이번엔 손대지 않았다).
+     대상 선정: `<main>`(성과물 상세 153) → 티커 다음 형제(기고 상세 44 등) → 폴백.
+     `tabindex="-1"` 을 붙이는 이유: 링크로 이동만 하면 스크롤은 되지만 포커스가
+     본문으로 옮겨가지 않아 다음 Tab 이 다시 헤더로 돌아간다. */
+  (function initSkipLink() {
+    if (document.querySelector(".skip-link")) return;
+    var ticker = document.querySelector(".ticker");
+    var next = ticker ? ticker.nextElementSibling : null;
+    if (next && /^(SCRIPT|STYLE|LINK|TEMPLATE|NOSCRIPT)$/.test(next.tagName)) next = null;
+    var target = document.querySelector("main") || next ||
+      document.querySelector(".page-hero, .prof-hero, .hero, article, .wd-wrap");
+    if (!target || !document.body) return;
+    if (!target.id) target.id = "content";
+    if (!target.hasAttribute("tabindex")) target.setAttribute("tabindex", "-1");
+    var a = document.createElement("a");
+    a.className = "skip-link";
+    a.href = "#" + target.id;
+    a.textContent = LB.skipToContent;
+    document.body.insertBefore(a, document.body.firstChild);
+  })();
+
   /* ---------------- Theme ---------------- */
   var KEY = "dpark-theme";
   function applyTheme(t) {
@@ -66,10 +98,66 @@
       var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
       applyTheme(next); localStorage.setItem(KEY, next);
     }
-    if (e.target.closest("#navToggle")) { var mn = document.querySelector("#mobileNav"); if (mn) mn.classList.add("open"); }
-    if (e.target.closest("#navClose")) { var mn2 = document.querySelector("#mobileNav"); if (mn2) mn2.classList.remove("open"); }
+    if (e.target.closest("#navToggle")) setMobileNav(true);
+    if (e.target.closest("#navClose")) setMobileNav(false);
     if (e.target.closest("#printBtn")) window.print();
   });
+
+  /* ---------------- Mobile nav drawer: 상태·ARIA·포커스 ----------------
+     닫힘 상태는 CSS 에서 visibility:hidden 으로 tab 순서에서 빠지지만(style.css),
+     `#navToggle` 의 aria-expanded 와 드로어의 aria-hidden 은 속성이라 JS 만이 갱신할 수 있다.
+     열 때는 드로어 안(✕ 버튼)으로 포커스를 옮기고, 닫을 때는 열었던 버튼으로 되돌린다.
+     baked HTML(214파일)을 건드리지 않으려고 초기 속성도 여기서 심는다. */
+  var navToggleEl = document.querySelector("#navToggle");
+  var mobileNavEl = document.querySelector("#mobileNav");
+  function setMobileNav(open) {
+    if (!mobileNavEl) return;
+    mobileNavEl.classList.toggle("open", !!open);
+    mobileNavEl.setAttribute("aria-hidden", open ? "false" : "true");
+    /* aria-modal 은 노출돼 있는 동안에만 참이어야 한다(닫힌 채 true 면 AT 가 본문을 무시할 수 있다). */
+    if (open) mobileNavEl.setAttribute("aria-modal", "true"); else mobileNavEl.removeAttribute("aria-modal");
+    if (navToggleEl) navToggleEl.setAttribute("aria-expanded", open ? "true" : "false");
+    if (open) {
+      /* ⚠️ 방금 `.open` 을 붙였을 뿐이어서 이 시점의 계산된 visibility 는 아직 hidden 이고,
+         visibility:hidden 요소는 focus() 를 받지 못한다(실측: 같은 태스크에서 호출하면 무반응).
+         스타일이 반영된 다음 프레임으로 미뤄야 포커스가 실제로 드로어 안으로 들어간다. */
+      var target = mobileNavEl.querySelector("#navClose") || mobileNavEl.querySelector("a");
+      if (target) requestAnimationFrame(function () { requestAnimationFrame(function () { target.focus(); }); });
+    } else if (navToggleEl) {
+      navToggleEl.focus();
+    }
+  }
+  if (mobileNavEl) {
+    mobileNavEl.setAttribute("aria-hidden", "true");
+    if (!mobileNavEl.getAttribute("role")) mobileNavEl.setAttribute("role", "dialog");
+    if (!mobileNavEl.getAttribute("aria-label")) mobileNavEl.setAttribute("aria-label", LB.navDrawer);
+    if (navToggleEl) {
+      navToggleEl.setAttribute("aria-expanded", "false");
+      navToggleEl.setAttribute("aria-controls", "mobileNav");
+    }
+    /* Escape 로 닫기 — 드로어가 열려 있을 때만 반응한다. */
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && mobileNavEl.classList.contains("open")) { e.preventDefault(); setMobileNav(false); }
+    });
+    /* 드로어는 position:fixed; inset:0 으로 화면 전체를 덮는다. 마지막 링크에서 Tab 을 누르면
+       오버레이 뒤의 본문으로 포커스가 넘어가 다시 "보이지 않는 포커스"가 되므로 드로어 안에서 순환시킨다. */
+    mobileNavEl.addEventListener("keydown", function (e) {
+      if (e.key !== "Tab") return;
+      var f = mobileNavEl.querySelectorAll("a[href], button:not([disabled])");
+      if (!f.length) return;
+      var first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    });
+    /* 드로어 안 링크를 누르면 같은 페이지 앵커일 수 있으니 상태를 닫힘으로 정리한다. */
+    mobileNavEl.addEventListener("click", function (e) {
+      if (e.target.closest("a")) {
+        mobileNavEl.classList.remove("open");
+        mobileNavEl.setAttribute("aria-hidden", "true");
+        if (navToggleEl) navToggleEl.setAttribute("aria-expanded", "false");
+      }
+    });
+  }
 
   /* ---------------- Topbar date ---------------- */
   var d = document.querySelector("#today");
@@ -214,23 +302,61 @@
       LBX.innerHTML = '<button class="lb-close" aria-label="' + LB.lightboxClose + '">✕</button><button class="lb-prev" aria-label="' + LB.lightboxPrev + '">‹</button><img class="lb-img" alt=""><button class="lb-next" aria-label="' + LB.lightboxNext + '">›</button><div class="lb-cap"></div>';
       document.body.appendChild(LBX);
     }
+    /* 라이트박스를 대화상자로 노출 — 스크린리더가 모달임을 알 수 있게 한다.
+       (KO 는 위에서 새로 만들고 EN 은 baked 라 어느 경로든 여기서 속성을 통일한다.) */
+    LBX.setAttribute("role", "dialog");
+    if (!LBX.getAttribute("aria-label")) LBX.setAttribute("aria-label", LB.lightboxDialog);
+    LBX.setAttribute("aria-hidden", "true");
+
     var idx = 0;
+    var lastFocus = null;   // 닫을 때 포커스를 되돌릴 원래 요소
     function show(i) {
       if (!imgs.length) return;
       idx = (i + imgs.length) % imgs.length; var g = imgs[idx];
       LBX.querySelector(".lb-img").src = g.src;
       LBX.querySelector(".lb-cap").innerHTML = "<b>" + esc(g.title) + "</b> " + esc(g.desc);
+      var wasOpen = LBX.classList.contains("open");
       LBX.classList.add("open");
+      LBX.setAttribute("aria-hidden", "false");
+      LBX.setAttribute("aria-modal", "true");
+      if (!wasOpen) {
+        lastFocus = document.activeElement;
+        var cb = LBX.querySelector(".lb-close");
+        if (cb) cb.focus();
+      }
     }
-    galCards.forEach(function (c, i) { c.style.cursor = "zoom-in"; c.addEventListener("click", function (e) { e.preventDefault(); show(i); }); });
+    function closeLB() {
+      if (!LBX.classList.contains("open")) return;
+      LBX.classList.remove("open");
+      LBX.setAttribute("aria-hidden", "true");
+      LBX.removeAttribute("aria-modal");
+      if (lastFocus && typeof lastFocus.focus === "function") lastFocus.focus();
+      lastFocus = null;
+    }
+    /* 카드 진입점은 하나(open)로 두고 클릭·키보드가 모두 이 함수를 쓴다(로직 중복 금지). */
+    galCards.forEach(function (c, i) {
+      c.style.cursor = "zoom-in";
+      /* baked HTML 에 이미 tabindex/role/aria-label 이 있지만, 누락된 페이지가 있어도
+         키보드로 도달할 수 있도록 방어적으로 보강한다. */
+      if (!c.hasAttribute("tabindex")) c.setAttribute("tabindex", "0");
+      if (!c.getAttribute("role")) c.setAttribute("role", "button");
+      if (!c.getAttribute("aria-label")) {
+        var tb = c.querySelector("figcaption b");
+        c.setAttribute("aria-label", tpl(LB.galleryOpen, { t: tb ? tb.textContent : "" }));
+      }
+      c.addEventListener("click", function (e) { e.preventDefault(); show(i); });
+      c.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " " || e.key === "Spacebar") { e.preventDefault(); show(i); }
+      });
+    });
     LBX.addEventListener("click", function (e) {
-      if (e.target === LBX || e.target.classList.contains("lb-close")) LBX.classList.remove("open");
+      if (e.target === LBX || e.target.classList.contains("lb-close")) closeLB();
       if (e.target.classList.contains("lb-prev")) show(idx - 1);
       if (e.target.classList.contains("lb-next")) show(idx + 1);
     });
     document.addEventListener("keydown", function (e) {
       if (!LBX.classList.contains("open")) return;
-      if (e.key === "Escape") LBX.classList.remove("open");
+      if (e.key === "Escape") closeLB();
       if (e.key === "ArrowLeft") show(idx - 1);
       if (e.key === "ArrowRight") show(idx + 1);
     });
