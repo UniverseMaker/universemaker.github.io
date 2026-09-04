@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img" aria-label="Conceptual illustration of one class dictionary generating the spec, RDF/OWL, SHACL shapes and the data dictionary, with ungrounded sentences refused at the instance level">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a1230"/>
+      <stop offset="0.55" stop-color="#131c4a"/>
+      <stop offset="1" stop-color="#1c2660"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.44" r="0.62">
+      <stop offset="0" stop-color="#3a4bd0" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#3a4bd0" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="chip" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2a3aa8"/>
+      <stop offset="1" stop-color="#5b3fb8"/>
+    </linearGradient>
+    <marker id="ar" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M1 1 L11 6 L1 11 z" fill="#8ea2ff"/>
+    </marker>
+    <marker id="arc" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M1 1 L11 6 L1 11 z" fill="#8ad8ff"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <rect width="1200" height="675" fill="url(#glow)"/>
+
+  <!-- faint grid -->
+  <g stroke="#3a4790" stroke-width="1" opacity="0.18">
+    <path d="M0 112 H1200 M0 225 H1200 M0 337 H1200 M0 450 H1200 M0 562 H1200"/>
+    <path d="M150 0 V675 M300 0 V675 M450 0 V675 M600 0 V675 M750 0 V675 M900 0 V675 M1050 0 V675"/>
+  </g>
+
+  <text x="600" y="74" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="17" letter-spacing="6" fill="#7f92e6">D. PARK JOURNAL · RESEARCH RETROSPECTIVE</text>
+
+  <!-- ===== panel A : T-box / the dictionary ===== -->
+  <g>
+    <rect x="70" y="112" width="320" height="330" rx="16" fill="#0d1638" stroke="#3f52b8" stroke-width="2"/>
+    <text x="230" y="146" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="15" font-weight="700" letter-spacing="2" fill="#8ea2ff">CONCEPT LEVEL · T-box</text>
+    <g font-family="'Segoe UI',sans-serif">
+      <rect x="100" y="170" width="260" height="40" rx="9" fill="#16224e" stroke="#5b74ff" stroke-width="1.6"/>
+      <text x="116" y="186" font-size="12" font-weight="700" fill="#dfe6ff">Classes</text>
+      <text x="116" y="203" font-size="11" fill="#9db0f2">label · alias · axis</text>
+
+      <rect x="100" y="218" width="260" height="40" rx="9" fill="#16224e" stroke="#5b74ff" stroke-width="1.6"/>
+      <text x="116" y="234" font-size="12" font-weight="700" fill="#dfe6ff">Relations</text>
+      <text x="116" y="251" font-size="11" fill="#9db0f2">name · domain · range</text>
+
+      <rect x="100" y="266" width="260" height="40" rx="9" fill="#16224e" stroke="#5b74ff" stroke-width="1.6"/>
+      <text x="116" y="282" font-size="12" font-weight="700" fill="#dfe6ff">Constraints</text>
+      <text x="116" y="299" font-size="11" fill="#9db0f2">required · unique · pattern</text>
+
+      <rect x="100" y="314" width="260" height="40" rx="9" fill="url(#chip)" stroke="#8ad8ff" stroke-width="1.8"/>
+      <text x="116" y="330" font-size="12" font-weight="700" fill="#eef1ff">Business key</text>
+      <text x="116" y="347" font-size="11" fill="#c8d2ff">what makes two things one</text>
+    </g>
+    <text x="230" y="382" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="12.5" fill="#dfe6ff">decided before any data lands</text>
+    <text x="230" y="418" text-anchor="middle" font-family="'Courier New',monospace" font-size="12" fill="#7f92e6">class · relation · shape · key</text>
+  </g>
+
+  <!-- ===== panel B : generated artifacts ===== -->
+  <g>
+    <rect x="440" y="112" width="320" height="330" rx="16" fill="#0d1638" stroke="#3f52b8" stroke-width="2"/>
+    <text x="600" y="146" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="15" font-weight="700" letter-spacing="2" fill="#8ea2ff">ONE SOURCE · GENERATED</text>
+    <circle cx="600" cy="188" r="22" fill="#5b74ff" stroke="#e7ecff" stroke-width="2"/>
+    <text x="600" y="192" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="10.5" font-weight="700" fill="#0d1638">DICT</text>
+    <g stroke="#7f92e6" stroke-width="2.2" fill="none" opacity="0.9">
+      <path d="M584 202 L534 232"/>
+      <path d="M616 202 L666 232"/>
+      <path d="M592 210 L560 292"/>
+      <path d="M608 210 L640 292"/>
+    </g>
+    <g font-family="'Segoe UI',sans-serif" font-size="11.5">
+      <rect x="474" y="232" width="118" height="44" rx="9" fill="#16224e" stroke="#5b74ff" stroke-width="1.6"/>
+      <text x="533" y="250" text-anchor="middle" font-weight="700" fill="#dfe6ff">Spec</text>
+      <text x="533" y="266" text-anchor="middle" fill="#9db0f2">read by people</text>
+
+      <rect x="608" y="232" width="118" height="44" rx="9" fill="#16224e" stroke="#5b74ff" stroke-width="1.6"/>
+      <text x="667" y="250" text-anchor="middle" font-weight="700" fill="#dfe6ff">RDF · OWL</text>
+      <text x="667" y="266" text-anchor="middle" fill="#9db0f2">read by machines</text>
+
+      <rect x="474" y="292" width="118" height="44" rx="9" fill="#2b2140" stroke="#e0a33c" stroke-width="1.8"/>
+      <text x="533" y="310" text-anchor="middle" font-weight="700" fill="#ffe3ab">SHACL</text>
+      <text x="533" y="326" text-anchor="middle" fill="#d9bd88">shape validation</text>
+
+      <rect x="608" y="292" width="118" height="44" rx="9" fill="#2b2140" stroke="#e0a33c" stroke-width="1.8"/>
+      <text x="667" y="310" text-anchor="middle" font-weight="700" fill="#ffe3ab">Constraints</text>
+      <text x="667" y="326" text-anchor="middle" fill="#d9bd88">locked at the DB</text>
+    </g>
+    <text x="600" y="382" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="12.5" fill="#dfe6ff">no path for doc and code to drift</text>
+    <text x="600" y="418" text-anchor="middle" font-family="'Courier New',monospace" font-size="12" fill="#7f92e6">one dictionary → six outputs</text>
+  </g>
+
+  <!-- ===== panel C : A-box / refusal ===== -->
+  <g>
+    <rect x="810" y="112" width="320" height="330" rx="16" fill="#0d1638" stroke="#3f52b8" stroke-width="2"/>
+    <text x="970" y="146" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="15" font-weight="700" letter-spacing="2" fill="#8ea2ff">INSTANCE LEVEL · A-box</text>
+    <g font-family="'Segoe UI',sans-serif" font-size="11.5">
+      <rect x="842" y="170" width="256" height="34" rx="9" fill="#16224e" stroke="#5b74ff" stroke-width="1.6"/>
+      <text x="862" y="192" fill="#dfe6ff">1 writes blocked by type</text>
+      <text x="1084" y="192" text-anchor="end" font-family="'Courier New',monospace" font-size="13" fill="#ff9d9d">✕</text>
+
+      <rect x="842" y="212" width="256" height="34" rx="9" fill="#16224e" stroke="#5b74ff" stroke-width="1.6"/>
+      <text x="862" y="234" fill="#dfe6ff">2 facts without citations</text>
+      <text x="1084" y="234" text-anchor="end" font-family="'Courier New',monospace" font-size="13" fill="#ff9d9d">✕</text>
+
+      <rect x="842" y="254" width="256" height="34" rx="9" fill="#16224e" stroke="#5b74ff" stroke-width="1.6"/>
+      <text x="862" y="276" fill="#dfe6ff">3 digit-level cross-check</text>
+      <text x="1084" y="276" text-anchor="end" font-family="'Courier New',monospace" font-size="13" fill="#ff9d9d">✕</text>
+
+      <rect x="842" y="296" width="256" height="34" rx="9" fill="url(#chip)" stroke="#8ad8ff" stroke-width="1.8"/>
+      <text x="862" y="318" fill="#eef1ff">4 deterministic fallback</text>
+      <text x="1084" y="318" text-anchor="end" font-family="'Courier New',monospace" font-size="13" fill="#a8ffd6">✓</text>
+    </g>
+    <text x="970" y="358" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="12.5" fill="#dfe6ff">answer with evidence, or say you don't know</text>
+    <text x="970" y="384" text-anchor="middle" font-family="'Courier New',monospace" font-size="11.5" fill="#9db0f2">BD-357CA3FE-G0-00-…</text>
+    <text x="970" y="418" text-anchor="middle" font-family="'Courier New',monospace" font-size="12" fill="#7f92e6">no citation → no sentence</text>
+  </g>
+
+  <!-- connectors between panels -->
+  <g stroke="#8ea2ff" stroke-width="3" fill="none" marker-end="url(#ar)">
+    <line x1="392" y1="277" x2="434" y2="277"/>
+    <line x1="762" y1="277" x2="804" y2="277"/>
+  </g>
+
+  <!-- return arrow : validation audits the schema itself -->
+  <g fill="none" stroke="#8ad8ff" stroke-width="2.4" stroke-dasharray="9 7" marker-end="url(#arc)">
+    <path d="M1090 466 H 240"/>
+  </g>
+  <text x="672" y="456" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="13.5" fill="#aab6f0">validation audits the schema itself</text>
+
+  <!-- title band -->
+  <text x="600" y="556" text-anchor="middle" font-family="'Source Serif 4',Georgia,serif" font-size="52" font-weight="700" fill="#f2f4ff">Schema Before Data</text>
+  <text x="600" y="592" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="16.5" fill="#aab6f0">ontology · single source of truth · business keys · refusal at the type level</text>
+  <text x="600" y="628" text-anchor="middle" font-family="'Courier New',monospace" font-size="12.5" letter-spacing="1.5" fill="#6f81d6">T-BOX  →  GENERATED SPEC  →  A-BOX</text>
+</svg>

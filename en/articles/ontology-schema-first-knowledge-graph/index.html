@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-prerendered="1"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Schema Before Data: Four Things an Ontology Buys a Knowledge Graph - Daeseung Park Journal</title>
+<meta name="description" content="The dullest decision in building a knowledge graph comes first — what counts as a class, what counts as a relation, and which key decides that two records are the same thing. What I learned putting a national address knowledge graph on top of a standard ontology: documents cannot drift from code, you get to choose what stays open and what gets locked, identifiers exist before joins do, and a plausible-sounding sentence becomes impossible to write in the first place.">
+<link rel="canonical" href="https://daeseungpark.com/en/articles/ontology-schema-first-knowledge-graph/"><link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/ontology-schema-first-knowledge-graph/"><link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/ontology-schema-first-knowledge-graph/"><link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/ontology-schema-first-knowledge-graph/"><meta property="og:locale:alternate" content="ko_KR">
+<!-- seo-i18n:start -->
+
+
+
+
+<!-- seo-i18n:end -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="D. PARK Journal">
+<meta property="og:title" content="Schema Before Data: Four Things an Ontology Buys a Knowledge Graph">
+<meta property="og:description" content="Fixing classes, relations and keys before a single row is loaded looks like bureaucracy. It is a payment — and four things come back for it: documents that cannot drift, openness you get to choose, identifiers that predate the model, and hallucination made structurally impossible.">
+<meta property="og:url" content="https://daeseungpark.com/en/articles/ontology-schema-first-knowledge-graph/">
+<meta property="og:image" content="https://daeseungpark.com/en/articles/ontology-schema-first-knowledge-graph/images/cover.png">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Schema Before Data: Four Things an Ontology Buys a Knowledge Graph">
+<meta name="twitter:description" content="An ontology is not a fancier word for database design. It is deciding, at the type level, what shall be forbidden — and that prohibition stops a generative model's hallucination with no post-processing at all.">
+<meta name="twitter:image" content="https://daeseungpark.com/en/articles/ontology-schema-first-knowledge-graph/images/cover.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Schema Before Data: Four Things an Ontology Buys a Knowledge Graph","author":{"@type":"Person","name":"박대승","alternateName":"Daeseung Park"},"publisher":{"@type":"Organization","name":"D. PARK Journal"},"image":"https://daeseungpark.com/en/articles/ontology-schema-first-knowledge-graph/images/cover.png","mainEntityOfPage":"https://daeseungpark.com/en/articles/ontology-schema-first-knowledge-graph/","inLanguage":"en","datePublished":"2026-09-01"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&amp;family=Noto+Serif+KR:wght@400;600&amp;family=Noto+Sans+KR:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="../../../assets/css/style.css?v=da183d3f">
+<link rel="stylesheet" href="../../../assets/css/article.css?v=20f2a72d">
+</head>
+<body data-base="../../">
+<div class="progress-bar" id="progress"></div>
+<div class="topbar no-print">
+  <div class="container-x">
+    <span class="tb-date" id="today">—</span>
+    <div class="tb-links"><a href="https://ai.daeseungpark.com/chat/" target="_blank" rel="noopener">Abliterated AI</a><a href="https://service.daeseungpark.com/rchat" target="_blank" rel="noopener">LLM Research Platform</a><a href="../../profile.html">Profile</a><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener">GitHub</a><a href="https://scholar.google.com/citations?hl=ko&amp;user=qVom0QUAAAAJ" target="_blank" rel="noopener">Scholar</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener">ORCID</a><a href="https://hub.docker.com/u/daeseungpark" target="_blank" rel="noopener">Docker</a><a href="https://codespectrum.net" target="_blank" rel="noopener">Blog</a><a href="../../profile.html#contact">Contact</a><a href="../../notices.html">Notice</a><a href="/articles/ontology-schema-first-knowledge-graph/" class="tb-lang-link" aria-label="Language">한국어</a></div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header no-print">
+  <div class="container-x nav-row">
+    <a href="../../index.html" class="brand">D<span class="dot">.</span> PARK <small>Journal</small></a>
+    <nav class="main-nav"><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">☾</span></button>
+      <button class="print-cta" id="printBtn">🖶 Print / PDF</button>
+      <button class="icon-btn nav-toggle" id="navToggle" aria-label="Menu">≡</button>
+    </div>
+  </div>
+</header>
+
+<div class="ticker no-print">
+  <div class="container-x">
+    <span class="label">Trending</span>
+    <div class="items" id="tickerItems"><a href="../../articles/ontology-schema-first-knowledge-graph/">Schema Before Data</a><a href="../../articles/address-graph-disaster-perception-stack/">Where, and What Happened</a><a href="../../articles/genai-copyright-data-licensing/">Mining, Called Learning</a><a href="../../articles/ai-agent-reliability-evals/">It Works in the Demo, Breaks in…</a><a href="../../articles/reasoning-models-test-time-compute/">Bigger Model or Longer Thought?</a><a href="../../articles/rag-architectures-hallucination/">Four Ways Retrieval Rescues In…</a></div>
+  </div>
+</div>
+
+<article data-article-id="23">
+  <div class="article-wrap">
+    <!-- Masthead -->
+    <header class="art-head">
+      <span class="cat-pill red">Research · Retrospective</span>
+      <h1>Schema Before Data</h1>
+      <p class="deck">A meeting about building a knowledge graph opens with talk of data, but the first thing that lands in the repository is not data — it is a dictionary. What shall we call a class, what counts as a relation, which key decides that two records are the same thing. Settled before a single row is loaded, these decisions look like bureaucracy whose only product is longer meetings. Putting a national address knowledge graph on top of a national standard ontology taught me the opposite. Fixing the schema first is a <em>payment</em>, and there is something definite you get for it.</p>
+      <div class="art-byline">
+        <div class="av">DP</div>
+        <div class="who">
+          <b>Daeseung Park</b>
+          <span>AI &amp; Software Systems Engineer · KAIST</span>
+          <span>September 2026 · 17 min read</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="art-cover"><img src="images/cover.svg" alt="Conceptual illustration of one class dictionary generating the spec, RDF/OWL, SHACL shapes and the data dictionary, with ungrounded sentences refused at the instance level" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;"></div>
+
+    <!-- Summary -->
+    <div class="summary-box">
+      <span class="tag">1-min summary</span>
+      An ontology is not a fancier word for database design. It is <strong>fixing the concepts before the instances arrive</strong>, and that act decides what you will and will not be able to do later. This piece sets out the four things I got in return for putting a national address knowledge graph on top of a standard ontology. ① <strong>Documents cannot drift from the implementation</strong> — with a single class dictionary as the source of truth, and the spec, the RDF/OWL file, the JSON-LD context, the SHACL shapes, the data dictionary and the database constraints all generated from it, the path along which they could diverge simply does not exist. ② <strong>You get to choose what stays open and what gets locked</strong> — what should remain open-world (whether a relation exists at all, how much it is trusted) and what should be closed-world (required properties, identifier uniqueness) are assigned to different tools on purpose. ③ <strong>Identifiers exist before the model does</strong> — declare a business key alongside each class and that one line becomes the basis for idempotent loading, for the standard URI, and for deterministic identifier issuance; only then does the word "join" mean anything. ④ <strong>A plausible-sounding sentence cannot be written at all</strong> — instead of grading a generative model's hallucinations after the fact, a statement without a grounding identifier is made unable to pass through the type system. And I have written down what all four cost: slow consensus, and early decisions that are expensive to undo.
+    </div>
+
+    <!-- Body -->
+    <div class="prose">
+      <span class="chapter-label">Chapter 1. A Question of Order</span>
+      <h2>What has to be decided before the data arrives</h2>
+      <p>A meeting about building a knowledge graph usually opens with data. Which sources exist, how many records, in what format, and how we will load them. Yet the file that actually lands in the first commit is not data. It is a dictionary. What shall we call a class, what counts as a relation, what are that relation's domain and range, and which key decides that two records refer to the same thing. The data comes after.</p>
+      <p>The temptation to reverse this order is strong. The last dozen years of data engineering have leaned toward "load first, interpret later," and for logs and event streams that lean is mostly right — decide the schema at read time and a change upstream will not stop the pipeline. A knowledge graph is different, because a great many of the questions it is built to answer are questions of <em>identity</em>. Is this record and that record the same building? Is this road that road? Do two sources point at one institution or two? Identity is not the kind of judgement you can improvise at read time.</p>
+      <div class="pullquote">Naming things before you load them is not bureaucracy. It is the only way to make a join possible later.</div>
+      <p>Let me fix the vocabulary first. A knowledge graph is a data structure that puts entities in nodes and facts about them on edges. An ontology is the conceptual layer that governs <em>which kinds of nodes and edges may exist</em> in that graph. Technical discussions split these into the T-box (the concept level — classes, relations, constraints) and the A-box (the instance level — the actual instances). In standard vocabulary, RDF is the format for writing facts as subject–predicate–object triples, OWL is the language for describing what classes and relations mean, and SHACL is the language for validating that a data graph conforms to a declared shape. All three are W3C Recommendations. To fix the schema first is, in short, to <em>settle the T-box before filling the A-box</em>.</p>
+      <p>The address domain is unusually well suited to enforcing that order. First, a national standard already exists: the "Address Information Knowledge Graph Model" standard (Parts 1–3) defines the class system, the relation system and the URI rules in a document. Second, several organisations refer to the same entities from their own separate systems — different answers about the same building really do occur, and the problem is recognised as such. Third, the answers need evidence. When a public system says "the administrative district responsible for this address is here," that sentence has to be able to cite its source.</p>
+      <p>So on this project I decided to keep the order. The ontology sits above the code, and data may only enter in a shape the ontology has permitted. Below I set out, in four items, what that decision bought. I hope it does not read as a success story; the last chapter records what it cost.</p>
+
+      <span class="chapter-label">Chapter 2. The First Return</span>
+      <h2>Documents can no longer drift from the implementation</h2>
+      <p>Plenty of organisations fix their schema in a document. Few have a document that matches the code. The reason is obvious: people edit the document and people separately edit the code, so given enough time the two must diverge. It starts as a trivial discrepancy, and at some point nobody believes the document any more. The benefit of having fixed the schema first evaporates with it.</p>
+      <p>The remedy chosen here was not to manage the document more diligently but to <em>remove the path along which drift is possible</em>. The single source of truth is neither prose nor code; it is a class dictionary in which the ontology is written down as data. Each entry in that dictionary carries its English label, its Korean alias, the axis the class belongs to, and its business key. And the web edition of the standard spec, the RDF/OWL ontology file, the JSON-LD context, the SHACL shapes, the data dictionary, and the database constraint and index statements are <em>all</em> generated from it.</p>
+      <p>The effect shows up immediately. Add one class and a row appears in the spec's table, a class declaration appears in the RDF, one node shape for that class appears in the SHACL, and a uniqueness constraint plus a business-key index appear in the database. There is no need to edit six places six times, and no chance of forgetting one of the six. Put the other way round: a class that is in the spec but missing from validation cannot exist.</p>
+      <div class="callout"><b>Extension is isolation, not contamination.</b> Take the standard as your source of truth and you hit a wall soon enough, because concepts the standard does not have will certainly turn out to be necessary. Entrances; the relation by which an administrative district administers a legal district; the relation by which a road passes through a legal district; the entity-resolution relation asserting that two different sources point at the same thing — without these the graph cannot answer real questions. But slip them quietly into the standard dictionary and the word "standard" stops meaning anything. So three beats became the rule: <em>admit the need, prevent the contamination, feed it back as a proposal.</em> Concepts outside the standard are registered separately in an extension dictionary, and from the registered entries a standard-revision proposal is generated automatically and returned to the standards side. If a tool does not enforce this, then on some night somebody will quietly add one more class.</div>
+      <p>There is a case where that feedback path actually worked. Object addresses were being handled through thirteen mappings at first, until it emerged that the source treats twenty-five kinds of thing quite differently from one another. Put bus stops, post boxes and tsunami emergency shelters in the same drawer and you cannot answer a query about "shelters nearby." So the standard was revised so that each of the twenty-five is handled as its own class. Classes grew from forty-two to <strong>fifty-four</strong> and relations from sixty-one to <strong>seventy-three</strong>. What matters is not that they grew but that the growth happened in <em>one dictionary</em>. Correcting a mapping means editing that one file; the code is untouched.</p>
+      <p>The same discipline applies to relations. The hierarchical relations the standard defines are registered as triples of name, domain and range, and the uniqueness key is that same triple — the fact that a relation with one name is registered separately for each domain/range combination simply follows the structure of the standard text. Spatial and semantic relations, which the standard does not define, are defined newly in a separate layer and tagged with a different category. Someone reading the graph has to be able to tell which edges carry the authority of the standard on their back and which are our own judgement.</p>
+
+      <figure>
+        <svg viewBox="0 0 760 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram of one class dictionary generating the spec, RDF/OWL, JSON-LD context, SHACL shapes, data dictionary and database constraints, with instance data validated beneath them" style="width:100%;height:auto;display:block;">
+          <rect x="0" y="0" width="760" height="400" rx="14" fill="#fbfcff" stroke="#e2e7f5" stroke-width="1"/>
+          <text x="380" y="24" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="15" font-weight="700" fill="#1a2350">One dictionary makes six things</text>
+          <g font-family="'Segoe UI',sans-serif">
+            <!-- SSOT -->
+            <rect x="252" y="44" width="256" height="66" rx="14" fill="#e8effc" stroke="#2f4fa8" stroke-width="2.6"/>
+            <text x="380" y="70" text-anchor="middle" font-size="13.5" font-weight="700" fill="#16306e">class &amp; relation dictionary (T-box)</text>
+            <text x="380" y="92" text-anchor="middle" font-size="11.5" fill="#33406b">label · alias · axis · business key</text>
+            <!-- fan out -->
+            <g stroke="#2f4fa8" stroke-width="2" fill="none" opacity="0.85">
+              <path d="M300 110 L120 156"/>
+              <path d="M338 110 L258 156"/>
+              <path d="M366 110 L366 156"/>
+              <path d="M394 110 L474 156"/>
+              <path d="M422 110 L604 156"/>
+              <path d="M440 110 L690 156"/>
+            </g>
+            <g font-size="11" fill="#22305e">
+              <rect x="42" y="158" width="132" height="54" rx="10" fill="#f2f5fd" stroke="#5b74c8" stroke-width="1.8"/>
+              <text x="108" y="180" text-anchor="middle" font-weight="700">spec (web)</text>
+              <text x="108" y="198" text-anchor="middle">tables people read</text>
+
+              <rect x="190" y="158" width="132" height="54" rx="10" fill="#f2f5fd" stroke="#5b74c8" stroke-width="1.8"/>
+              <text x="256" y="180" text-anchor="middle" font-weight="700">RDF / OWL</text>
+              <text x="256" y="198" text-anchor="middle">meaning machines read</text>
+
+              <rect x="338" y="158" width="132" height="54" rx="10" fill="#f2f5fd" stroke="#5b74c8" stroke-width="1.8"/>
+              <text x="404" y="180" text-anchor="middle" font-weight="700">JSON-LD context</text>
+              <text x="404" y="198" text-anchor="middle">exchange format</text>
+
+              <rect x="486" y="158" width="132" height="54" rx="10" fill="#fff4e0" stroke="#c47f13" stroke-width="1.8"/>
+              <text x="552" y="180" text-anchor="middle" font-weight="700" fill="#7a4c00">SHACL shapes</text>
+              <text x="552" y="198" text-anchor="middle" fill="#5c4a22">shape validation</text>
+
+              <rect x="634" y="158" width="86" height="54" rx="10" fill="#fff4e0" stroke="#c47f13" stroke-width="1.8"/>
+              <text x="677" y="180" text-anchor="middle" font-weight="700" fill="#7a4c00">constraints</text>
+              <text x="677" y="198" text-anchor="middle" fill="#5c4a22">at the DB</text>
+            </g>
+            <!-- data dictionary note -->
+            <text x="290" y="230" text-anchor="middle" font-size="11.5" fill="#4a5578">the data dictionary comes from the same place — six outputs, one origin</text>
+
+            <!-- A-box -->
+            <rect x="120" y="262" width="520" height="72" rx="14" fill="#eef0fb" stroke="#5b3fb8" stroke-width="2.4"/>
+            <text x="380" y="288" text-anchor="middle" font-size="13.5" font-weight="700" fill="#3c2480">instance data (A-box)</text>
+            <text x="380" y="312" text-anchor="middle" font-size="11.5" fill="#3f3763">only permitted shapes survive · no match means the record is kept with no link</text>
+            <g stroke="#c47f13" stroke-width="2.6" fill="none">
+              <path d="M552 212 L552 249 L380 249 L380 258"/>
+              <path d="M677 212 L677 249 L520 249"/>
+            </g>
+            <text x="380" y="368" text-anchor="middle" font-size="12.5" font-weight="700" fill="#7a4c00">validation is generated from the schema, so the two cannot diverge</text>
+          </g>
+        </svg>
+        <figcaption>Fixing the schema first is not enough on its own. Only when the <em>validator is generated from the schema you fixed</em> does drift between document and implementation become structurally impossible. On this project the spec, the RDF/OWL file, the JSON-LD context, the SHACL shapes, the data dictionary and the database constraints all come out of a single class dictionary.</figcaption>
+      </figure>
+
+      <span class="chapter-label">Chapter 3. The Second Return</span>
+      <h2>You get to choose what stays open and what gets locked</h2>
+      <p>It would be unfortunate if "fix the schema first" were read as "nail everything down in advance." The important decision is not what you nail down but <em>what you leave open</em>, and being able to make that choice explicitly is the second return on schema-first.</p>
+      <p>In ontology terms the question splits into the open-world and closed-world assumptions. Under the closed-world assumption, what is absent from the data is false — this is how a relational database behaves. If a building has no entrance record, that building has no entrance. Under the open-world assumption, what is absent from the data is merely <em>unknown</em>; OWL reasoning rests on this assumption. From the fact that a building has no entrance record you cannot conclude that it has no entrance.</p>
+      <p>In the address and disaster domains this distinction is not a matter of academic taste, because missing source data is routine. Institution lists with no coordinates, buildings with no contact-point information, car parks with no object address assigned. Read those absences as "none" and the system will be confidently wrong. "There is no shelter nearby" means something entirely different when there truly is none than when the data simply has not been loaded — and yet the sentence is identical.</p>
+      <div class="pullquote">Open world versus closed world is not a theoretical question. It is the question of what the sentence "there is none" is allowed to mean.</div>
+      <p>So the tools were assigned separately. The meanings of classes and relations are described in open-world vocabulary (RDF/OWL), while the minimum shape the actual graph must satisfy is locked down by closed-world validation (SHACL). The SHACL shapes keep one node shape per class, require the deterministic identifier, the standard URI and the Korean alias as common mandatory properties, and layer that class's business key on top as required. The identifier is constrained down to a regular-expression pattern. At the database layer, every class carries an identifier uniqueness constraint and an index on the business key. In short: <em>what an entity is</em> is left open; <em>the minimum conditions under which an entity may be called an entity</em> are closed.</p>
+      <p>The open side was designed just as explicitly. The path by which external public data attaches to the graph is attempted in three tiers — joining on the address code is strongest, joining by coordinate comes next, and joining by area containment is weakest. Each tier is assigned a different confidence value, and if none of the three attaches, <em>no link is created and only the record is preserved</em>. That is a schema decision. It forbids "attach it anyway and fix it later," and it makes the existence of a link carry information in itself. A record that failed to attach remains a gap that can be filled later; a wrongly attached link quietly eats away the credibility of the whole graph.</p>
+      <p>The same thinking governs relation generation. Spatial and semantic relations are produced not by hardcoded procedures but by declarative rules. Which road a building fronts is judged from the actual contact point between entrance and road, falling back to the road that assigned the address only when contact data is missing, and lowering the confidence when it does. Area containment is cross-validated between spatial containment and the legal-district code. Because the rules are declarations rather than code, they can be registered, edited, disabled, recomputed and deleted from a web console, and every operation is recorded in an audit log. The advantage of this approach showed up more plainly in the paper that ran alongside: because the rules are declarative specifications independent of any region, the framework was portable to other cities providing equivalent open data.</p>
+
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;"><table>
+        <thead><tr><th>Decision</th><th>Where it is enforced</th><th>What it prevents</th></tr></thead>
+        <tbody>
+          <tr><td>class and relation vocabulary</td><td>class dictionary (single source)</td><td>drift between spec and implementation</td></tr>
+          <tr><td>minimum node shape</td><td>SHACL shapes (generated from it)</td><td>nodes with no identifier, URI or key</td></tr>
+          <tr><td>entity uniqueness</td><td>DB uniqueness + business-key index</td><td>the same entity materialised twice</td></tr>
+          <tr><td>concepts outside the standard</td><td>extension dictionary + revision feedback</td><td>quiet contamination of the vocabulary</td></tr>
+          <tr><td>external links</td><td>three confidence tiers, no match no link</td><td>links attached by force</td></tr>
+          <tr><td>ungrounded statements</td><td>citations required, writes blocked by type</td><td>circulation of model-invented sentences</td></tr>
+        </tbody>
+      </table></div>
+
+      <span class="chapter-label">Chapter 4. The Third Return</span>
+      <h2>Identifiers exist before the model does</h2>
+      <p>The third return on schema-first sounds the dullest and is in fact worth the most. Write the business key alongside each class in the dictionary and that one line becomes the basis for three things: the merge key for idempotent loading, the local identifier in the standard URI, and the sequence in deterministic identifier issuance. Because all three draw on the same source, all three cannot disagree.</p>
+      <p>Why does this matter? Without a business key, the phrase "the same entity" is undefined. Undefined, and loading twice produces two nodes; two nodes, and the edges hanging off them fork; and on a forked graph no query can be trusted. The problem also gets harder to find as the data grows. Working out after the fact which few of a million nodes are in fact the same building is orders of magnitude more expensive than fixing the key at the start.</p>
+      <p>The identifiers on this project are issued by rule rather than by hash — a domain code, a spatial cell, an above- or below-ground level, a generation, a deterministic sequence, and a check character, concatenated. A single building number ends up looking like <code>BD-357CA3FE-G0-00-913547-I</code>. Rules were chosen over hashes for three reasons. First, the same sources always give the same value, so re-running the load, or rebuilding from scratch on a different machine, yields the same identifier. Second, the spatial cell lives inside the identifier, so the value alone tells you roughly where the thing is. Third, the check character filters out, immediately, a key mangled somewhere in transit. And the identifier is assigned not only to nodes but to <em>edges</em> as well. With identifiers on edges you can trace "where did this fact come from" one fact at a time.</p>
+      <div class="callout"><b>Why the standard URI and the internal key coexist.</b> The standard requires a web URI for every node. Its form is, under the namespace, <code>/id/{class}/{local id}</code>, where the class label is converted to lower snake case (hub and abbreviation classes get an override mapping) and the local id is the business key joined with hyphens, zero-padded and lowercased. But a URI can change when the standard is revised — rename a class and the URI changes with it. So both are kept: <em>an external identifier that may change</em> and <em>an internal key that may not</em>. When regions are added one after another, an internal key already issued is inherited as it stands, only the collisions are reissued, and the endpoints of edges are remapped so that immutability holds. Identifier immutability is not preserved by declaring it. It is preserved by having the inheritance, collision and remapping procedures built beforehand.</div>
+      <p>There was one moment when this design repaid itself all at once. When the register of local-government invested and funded institutions was linked in, that source had no coordinates. The usual remedy is to attach an external geocoding service. But the graph already held building-number nodes densely, each with its business key, and the address codes in the institution list matched those keys. So <strong>857 institutions</strong> were geocoded by the graph's own code join, with no external service at all. Once a graph is dense enough and its keys are consistent, the graph becomes the geocoder. A model cannot do this in its place. Give a language model an institution's name and ask for coordinates and plausible numbers come back, but there is nothing underneath them.</p>
+      <p>And when the keys are honest, the graph can audit its own sources in return. Cases where the spatial containment and the code disagreed were detected as quality signals, and cross-validating object addresses against national standard datasets produced car parks with no object address assigned as candidates for assignment, which went into the standard-revision proposal. Stop assuming the source is always right and the graph becomes a validator rather than a consumer.</p>
+      <p>How far this argument runs when there is more than one layer is a separate matter. Meshing two graphs built for different purposes over the same entities needs both a vocabulary crosswalk and a settled key, and that story is told in <a href="../../articles/address-graph-disaster-perception-stack/">"Where, and What Happened."</a> This piece is about the discipline <em>inside</em> one layer.</p>
+
+      <span class="chapter-label">Chapter 5. The Fourth Return</span>
+      <h2>A plausible-sounding sentence cannot be written at all</h2>
+      <p>This is the part I most wanted to write. Anyone attaching a generative model to a knowledge graph will almost certainly meet the hallucination problem, and two prescriptions usually arrive first: writing "do not make things up" into the prompt, and grading the generated answer after the fact. Both are useful and both are <em>probabilistic</em>. A request may not be honoured, and a grader may miss.</p>
+      <p>Fix the schema first and a different kind of prescription becomes available: not reducing hallucination but removing the place where hallucination could be expressed. Four layers of refusal sit on the address agent in this project, and the four are different in kind.</p>
+      <p><strong>First, writes blocked at the type level.</strong> The agent object refuses a writable backend outright, in its constructor. A wrong value does not raise an exception somewhere mid-run; it is rejected as a type error at the moment the object is created. What that one line does is delete from the program the very path by which a model-authored sentence could be recorded into the graph. Whatever the prompt asks, however confident the model is, there is no write, so there is no contamination.</p>
+      <p><strong>Second, citations required.</strong> A fact object is not constructed without the identifier of the node that grounds it. If the citation is empty, or if the identifier and URI are missing from the citation, a citation error is raised. Here the schema intervenes decisively. Because the previous chapter locked the deterministic identifier and the standard URI in as <em>mandatory properties of every node</em>, "evidence that can be cited" exists everywhere in the graph. Had the schema not made them mandatory, mandatory citation could not be implemented. The two decisions are one body.</p>
+      <p><strong>Third, post-generation cross-checking.</strong> The language model only does the work of stringing <em>supplied</em> facts into sentences. The resulting sentence is checked, down to digit boundaries, against whether its figures and names really do appear in the collected facts. Fail the check and the sentence is not adopted.</p>
+      <p><strong>Fourth, deterministic fallback.</strong> The place left by a rejected sentence is not filled with silence but with a sentence assembled deterministically. A less fluent answer goes back, but one with evidence behind it.</p>
+      <div class="pullquote">Reducing hallucination and removing the place where hallucination could be expressed are different kinds of guarantee. The first is a probability; the second is a type.</div>
+      <p>What is interesting about this structure is that the <em>character</em> of the remaining errors changes. In earlier work in the same line we confirmed that when all reasoning is performed by graph traversal and the language model's role is restricted to generating sentences, the observed errors stem from gaps in knowledge rather than from fabrication. That is a more important change than a gain in accuracy. Fabrication is something a user cannot notice; a gap is something a user can. "That information is not in the graph" is an answer from which the user can decide what to do next, and a plausible wrong answer is not. Choosing a good failure mode comes before achieving good performance.</p>
+      <div class="callout"><b>When validation audited the schema itself.</b> The unexpected dividend of schema-first was that the validation layer catches errors <em>in the schema itself</em>. The business key of the national basic-district number class originally included the town/township/district code. Read the address hierarchy top-down and that is the natural design. But running SHACL validation against the real graph flagged the entire sample as violations. The cause was not the data but the concept: national basic districts are assigned at the municipal level, independently of town and township boundaries, so that class has <em>no such code in its system at all</em>. The business key was corrected. Had the validator been written by hand rather than generated from the dictionary, the hand-written validator would have shared the hand-written schema's misconception and the violations would never have surfaced. The value of generating validation from the schema was recovered once more, right there.</div>
+      <p>One thing should be said plainly. These four layers do not make the model trustworthy. They make it unable to contaminate the graph and unable to circulate ungrounded sentences. Judgement is still human. Where address and spatial information touches safety or public decisions, the outputs have to be subject to review by field experts, and adjustable values such as weights belong in configuration rather than nailed into the code. The role of software is not to make the decision but to put faster and more accurate material into the hands of the person who does.</p>
+
+      <span class="chapter-label">Chapter 6. What It Cost</span>
+      <h2>Why schema-first is expensive, and what is left</h2>
+      <p>Having written down four things bought, fairness requires writing down the price. Schema-first is slow. You hold meetings instead of loading data. Days can go on the name of a single class. Take the standard as your source of truth and one more stage of slowness attaches: revising a standard requires human consensus, and consensus moves far more slowly than code. The extension dictionary and the revision-proposal feedback path exist precisely to survive that difference in speed.</p>
+      <p>And early decisions are expensive to undo. Change a class definition after you have begun issuing identifiers and the question becomes what to do about keys already out in the world. The inheritance, collision reissuance and edge-endpoint remapping procedures described earlier are machinery for managing that cost, not for eliminating it. Schema-first means less "get it right at the start and life is easy" and more "what to do when you got it wrong is already decided."</p>
+      <p>So I cannot claim the approach is always right. In domains where several organisations refer to the same entities from their own systems, where answers require public evidence, and where the system outlives the project, fixing the schema first is almost always cheaper. Conversely, for exploratory analysis, for an early product whose hypotheses change weekly, or for a pipeline whose upstream schema wobbles outside your control, load-first-interpret-later is better. The criterion is not the size of the data but <em>whether identity matters</em>.</p>
+      <p>Let me also record the homework. First, the decision to use open-world vocabulary alongside closed-world validation was pragmatic but left a duality. RDF/OWL is generated as a standard artefact, while operational queries run over a property graph. The two representations come from the same dictionary and so cannot diverge, but no OWL reasoner sits in the operational path. Which inferences belong at validation time and which at query time is not yet sorted out.</p>
+      <p>Second, there is no time axis in the schema. To hold address data whose source updates quarterly and sensor signals that flow by the second in the same graph, you have to decide where to record when a fact was true. Incremental updates are handled with manifests, watermarks and tombstones, with recomputation confined to the changed records and their spatial neighbours — but that is a design for <em>updating</em>, not a design for <em>time</em>. This one has no answer yet.</p>
+      <p>Third, deciding an ontology is in the end a human judgement. What counts as a class, and how much counts as one entity, is not settled by the data. Even the decision to split the twenty-five kinds of object address into separate classes came out of a purpose: that only by splitting them could you ask about shelters. A schema is not a fact about the world but <em>the shadow of the question you intend to ask</em>. Which means that fixing the schema first also means deciding, before you load the data, what you are going to ask of it.</p>
+      <div class="callout"><b>In closing — the dull decision that makes room to move.</b> The sentence I heard most often during this work was "can't we decide that later?" The answer was usually no, and the reason was neither discipline nor perfectionism. Decide later and by then two systems are already calling the same building by different names, identifiers have already gone out into the world, and a hand-written validator is already sharing a hand-written misconception. Fix one dictionary first, on the other hand, and adding a class, adding a region, or attaching a language model each becomes a day's work. What the dullness of schema-first buys is not only correctness. It is the freedom to move quickly later.</div>
+
+      <div class="references">
+        <h4>References</h4>
+        <ol>
+          <li>Daeseung Park, "AddressKG — National Address Information Knowledge Graph." Source for the single-source class dictionary structure, the 54 classes and 73 relations, the extension dictionary and revision-proposal feedback, the composition and example of the deterministic identifier, the three-tier external linkage, the self-geocoding of 857 institutions, and the quality gates and SHACL validation. <a href="../../works/pf-addresskg/">works/pf-addresskg</a></li>
+          <li>C.-S. Lee, D. Park et al., "A Declarative Geographic Knowledge Graph Framework for District-Scale Urban Infrastructure Analysis," <em>IEEE Access</em>, 2026. Co-author (2nd author). Source for the statement that the declarative rules are region-independent specifications and therefore portable to other cities providing equivalent open data. DOI: 10.1109/ACCESS.2026.3695549. <a href="../../works/ieee-access-geo-kg/">works/ieee-access-geo-kg</a></li>
+          <li>C.-S. Lee, D. Park et al., "GNLM: A Graph-Native Language Model With Road Name Address-Based Spatial Reasoning for Geographic Question Answering," <em>IEEE Access</em>, 2026. Co-author (2nd author). Source for the statement that when reasoning is performed by graph traversal and the language model's role is restricted to generation, the observed errors stem from knowledge gaps rather than fabrication. DOI: 10.1109/ACCESS.2026.3705784. <a href="../../works/ieee-access-gnlm/">works/ieee-access-gnlm</a></li>
+          <li>"Address Information Knowledge Graph Model" standard (Parts 1–3). Source for the class and relation system and the web URI rules, and the single source of truth for this design. Copyright in the standard rests with the standards body. <a href="https://www.tta.or.kr/" target="_blank" rel="noopener">tta.or.kr</a></li>
+          <li>W3C Recommendations — RDF (the triple data model), OWL (describing the meaning of classes and relations), SHACL (validating the shape of a data graph), JSON-LD (an exchange format for linked data), SKOS (vocabulary systems). The T-box/A-box and open-world/closed-world discussion in the body stays within the established concepts of these standards. <a href="https://www.w3.org/TR/" target="_blank" rel="noopener">w3.org/TR</a></li>
+          <li>Daeseung Park, "A Language Model That Reads Maps" — earlier work filling the geographic gap in language models with retrieval, spatial functions and a knowledge graph. What the schema discipline in this piece is applied to. <a href="../../articles/geollm-knowledge-graph/">articles/geollm-knowledge-graph</a></li>
+          <li>Daeseung Park, "Where, and What Happened" — the join key and vocabulary crosswalk between two layers built for different purposes. This piece treats only the schema discipline inside one of those layers. <a href="../../articles/address-graph-disaster-perception-stack/">articles/address-graph-disaster-perception-stack</a></li>
+          <li>Daeseung Park, "Urban Safety AI API" — a case in which the same principle, fixing the interface specification before finishing the model, is applied to linkage between organisations. As this is an ongoing national R&amp;D project, only publicly shareable structure and design principles are discussed. <a href="../../works/pf-citysafety-ai-api/">works/pf-citysafety-ai-api</a></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer of article -->
+  <div class="art-foot">
+    <div class="art-tags">
+      <a href="#">#Ontology</a><a href="#">#KnowledgeGraph</a><a href="#">#SchemaDesign</a><a href="#">#SHACL</a><a href="#">#HallucinationPrevention</a>
+    </div>
+    <div class="author-card">
+      <div class="av">DP</div>
+      <div class="who">
+        <b>Daeseung Park</b>
+        <p>Researcher at KAIST. I study large language models, time-series forecasting, and conversational AI, and I try to record the research process as accurately and readably as I can.</p>
+      </div>
+    </div>
+
+    <div class="read-next no-print">
+        <div class="section-head" style="margin-bottom:20px;"><h2 style="font-size:1.3rem;">Read next</h2></div>
+        <div class="grid grid-2" id="readNext"><a href="../../articles/address-graph-disaster-perception-stack/" class="post-card fade-up"><div class="thumb"><img class="ph " src="../../articles/address-graph-disaster-perception-stack/images/cover.svg" alt="" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;"><span class="cat-pill red">Research · Retrospective</span><span class="num">22</span></div><span class="cat red">Research Retrospective</span><h3>Where, and What Happened: Wiring an Address Knowledge Graph to Multimodal Disaster Perception</h3><p>The language of a disaster scene arrives as an address. But the judgement is made from video and sensors. Between those two languages sits a gap nobody fills for you. This year I built two pieces of software, one on each side of it — a knowledge graph that resolves addresses into coordinates and relations, and a perception API that reads four modalities on a single backbone. This is a record of trying to make them one stack, and of what is still undone.</p><div class="meta"><span class="by">Daeseung Park</span><span class="dot-sep">17 min read</span></div></a><a href="../../articles/genai-copyright-data-licensing/" class="post-card fade-up"><div class="thumb"><img class="ph " src="../../../articles/genai-copyright-data-licensing/images/cover.svg" alt="" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;"><span class="cat-pill">Tech · Issue</span><span class="num">21</span></div><span class="cat">AI Policy</span><h3>Mining, Called Learning: The Generative-AI Copyright and Data-Licensing War</h3><p>Generative AI was built by swallowing the writing, pictures, and code humanity has piled up over centuries. That swallowing stands behind an old shield called fair use. But in 2025, courts and markets began re-measuring the shield. Lawsuits and a $1.5 billion settlement, licensing deals spreading quietly, "content signals" closing the door on the web, and a technology that asks provenance back — this is a calm map of the war over training data.</p><div class="meta"><span class="by">Daeseung Park</span><span class="dot-sep">15 min read</span></div></a></div>
+      </div>
+      <nav class="post-nav no-print" id="postNav"><a class="pn" href="../../articles/address-graph-disaster-perception-stack/"><span class="pn-dir">‹ Previous</span><span class="pn-t">Where, and What Happened</span></a><a class="pn pn-list" href="../../articles.html">List</a><span class="pn pn-right empty"><span class="pn-dir">Next ›</span><span class="pn-t">None</span></span></nav>
+    </div>
+</article>
+
+<div class="print-footer">Daeseung Park · D. PARK Journal — Schema Before Data: Four Things an Ontology Buys a Knowledge Graph</div>
+
+<footer class="site-footer no-print" id="contact"><div class="container-x"><div class="footer-grid"><div><div class="footer-brand">D. PARK</div><p style="max-width:34ch;">AI &amp; Software Systems Engineer · KAIST</p><div class="social" style="margin-top:16px;"><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener" aria-label="GitHub">GH</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener" aria-label="ORCID">iD</a><a href="mailto:dspark@daeseungpark.com" aria-label="Email">@</a></div></div><div><h6>Browse</h6><ul><li><a href="../../index.html">Home</a></li><li><a href="../../profile.html">Profile</a></li><li><a href="../../articles.html">Articles</a></li><li><a href="../../research.html">Research</a></li><li><a href="../../notices.html">Notice</a></li></ul></div><div><h6>Articles</h6><ul class="ft-arts"><li><a href="../../articles/ontology-schema-first-knowledge-graph/">Schema Before Data</a></li><li><a href="../../articles/address-graph-disaster-perception-stack/">Where, and What Happened</a></li><li><a href="../../articles/genai-copyright-data-licensing/">Mining, Called Learning</a></li><li><a href="../../articles/ai-agent-reliability-evals/">It Works in the Demo, Breaks in Production</a></li><li><a href="../../articles/reasoning-models-test-time-compute/">Not Bigger, but Thinking Longer</a></li></ul></div><div><h6>Contact</h6><ul><li><a href="mailto:dspark@daeseungpark.com">dspark@daeseungpark.com</a></li><li><a href="mailto:dspark@kaist.ac.kr">dspark@kaist.ac.kr</a></li><li><a href="tel:+821064547777">Phone (KR) +82 10 6454 7777</a></li><li><a href="tel:+16574109449">Phone (US) +1 657 410 9449</a></li><li>KAIST, Daejeon, Korea</li></ul></div></div><div class="footer-bottom"><span>© 2026 Daeseung Park. All rights reserved.</span><span>Designed &amp; built as a personal journal for Daeseung Park.</span></div></div></footer>
+
+<div class="mobile-nav" id="mobileNav"><button class="icon-btn close" id="navClose" aria-label="Close">✕</button><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></div>
+
+<script src="../../../assets/js/main.js?v=33869a70"></script>
+
+</body></html>

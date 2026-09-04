@@ -709,7 +709,7 @@ window.WORKS = {
 
   /* ===================== 연구 과제 (프로젝트) ===================== */
   projects: [
- { slug:"prj-citysafety-ai", funder:"행정안전부", orgs:["(재)대전지역사업평가단","KAIST"], title:"도시안전 AI 모델 개발 및 실증", period:"2026.04–2026.12", order:26, desc:"지역혁신클러스터육성(R&D) 사업의 도시안전 AI 모델 개발·실증." },
+ { slug:"prj-citysafety-ai", funder:"산업통상자원부", orgs:["(재)대전지역사업평가단","KAIST"], title:"도시안전 AI 모델 개발 및 실증", period:"2026.04–2026.12", order:26, desc:"지역혁신클러스터육성(R&D) 사업의 도시안전 AI 모델 개발·실증." },
  { slug:"prj-kaix", funder:"국토교통부", orgs:["한국국토정보공사(LX)","KAIST"], title:"주소지능정보 확장(K-AIX) 생태계 조성 모델 마련", period:"2025.12–2026.03", order:25, desc:"주소지능정보 확장(K-AIX) 생태계 조성 모델 마련." },
  { slug:"prj-data-intel", funder:"행정안전부", orgs:["(사)주소기반산업협회","KAIST"], title:"데이터지능정보 생성·운영", period:"2025.06–2026.12", budget:"총 6억 2,645만원", order:24, desc:"데이터지능정보 생성·운영." },
  { slug:"prj-dt-health", funder:"대전광역시청", orgs:["(재)대전테크노파크","KAIST"], title:"AI 기반 디지털 트윈 헬스케어 플랫폼 구축", period:"2025.04–2025.12", order:23, desc:"디지털 트윈 기반 헬스케어 플랫폼 구축." },

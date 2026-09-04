@@ -9,6 +9,14 @@
    ============================================================ */
 window.ARTICLES = [
   {
+    id: 23, slug: "ontology-schema-first-knowledge-graph", path: "articles/ontology-schema-first-knowledge-graph/",
+    title: "데이터보다 스키마가 먼저다: 온톨로지가 지식그래프에 사 주는 네 가지",
+    deck: "지식그래프를 만들자는 회의는 데이터 이야기로 시작하지만, 첫 커밋에 들어가는 것은 데이터가 아니라 사전이다. 무엇을 클래스라 부를지, 어떤 것을 관계로 볼지, 같은 개체를 같다고 판정할 키를 무엇으로 삼을지 — 데이터를 한 줄도 넣기 전에 정해야 하는 이 결정들은 회의만 길어지게 만드는 관료적 절차처럼 보인다. 그러나 국가주소정보 지식그래프를 국가 표준 온톨로지 위에 세우면서 나는 반대의 것을 배웠다. 스키마를 먼저 정하는 일은 지불이고, 그 대가로 사는 것이 분명히 있다는 것을.",
+    cat: "Research · 회고", catClass: "red", catLabel: "연구 회고",
+    date: "2026-09-01", read: "17분", cover: "articles/ontology-schema-first-knowledge-graph/images/cover.svg",
+    tags: ["온톨로지", "지식그래프", "스키마설계", "SHACL", "환각방지"]
+  },
+  {
     id: 22, slug: "address-graph-disaster-perception-stack", path: "articles/address-graph-disaster-perception-stack/",
     title: "어디서 무슨 일이 일어났는가: 주소 지식그래프와 멀티모달 재난 인지를 하나의 스택으로",
     deck: "재난 현장의 언어는 주소로 들어온다. 그러나 판단은 영상과 센서로 이루어진다. 이 두 언어 사이에는 아무도 대신 메워 주지 않는 틈이 있다. 올해 나는 그 틈의 양쪽에 서는 소프트웨어 두 벌을 만들었다 — 주소를 좌표와 관계로 푸는 지식그래프, 그리고 네 갈래 모달리티를 한 백본에서 읽는 인지 API. 이 글은 그 둘을 하나의 스택으로 세우려 한 시도와, 아직 못 한 것들에 대한 기록이다.",

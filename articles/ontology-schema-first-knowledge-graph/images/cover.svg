@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img" aria-label="개념 수준의 클래스 사전이 명세서·RDF/OWL·SHACL·데이터 딕셔너리로 갈라지고, 개체 수준에서 근거 없는 문장이 거절되는 구조를 나타낸 개념도">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a1230"/>
+      <stop offset="0.55" stop-color="#131c4a"/>
+      <stop offset="1" stop-color="#1c2660"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.44" r="0.62">
+      <stop offset="0" stop-color="#3a4bd0" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#3a4bd0" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="chip" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2a3aa8"/>
+      <stop offset="1" stop-color="#5b3fb8"/>
+    </linearGradient>
+    <marker id="ar" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M1 1 L11 6 L1 11 z" fill="#8ea2ff"/>
+    </marker>
+    <marker id="arc" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M1 1 L11 6 L1 11 z" fill="#8ad8ff"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <rect width="1200" height="675" fill="url(#glow)"/>
+
+  <!-- faint grid -->
+  <g stroke="#3a4790" stroke-width="1" opacity="0.18">
+    <path d="M0 112 H1200 M0 225 H1200 M0 337 H1200 M0 450 H1200 M0 562 H1200"/>
+    <path d="M150 0 V675 M300 0 V675 M450 0 V675 M600 0 V675 M750 0 V675 M900 0 V675 M1050 0 V675"/>
+  </g>
+
+  <text x="600" y="74" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="17" letter-spacing="6" fill="#7f92e6">D. PARK JOURNAL · 연구 회고</text>
+
+  <!-- ===== panel A : T-box / the dictionary ===== -->
+  <g>
+    <rect x="70" y="112" width="320" height="330" rx="16" fill="#0d1638" stroke="#3f52b8" stroke-width="2"/>
+    <text x="230" y="146" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="15" font-weight="700" letter-spacing="2" fill="#8ea2ff">개념 수준 · T-box</text>
+    <g font-family="'Segoe UI',sans-serif">
+      <rect x="100" y="170" width="260" height="40" rx="9" fill="#16224e" stroke="#5b74ff" stroke-width="1.6"/>
+      <text x="116" y="186" font-size="12" font-weight="700" fill="#dfe6ff">클래스</text>
+      <text x="116" y="203" font-size="11" fill="#9db0f2">라벨 · 한글별칭 · 축</text>
+
+      <rect x="100" y="218" width="260" height="40" rx="9" fill="#16224e" stroke="#5b74ff" stroke-width="1.6"/>
+      <text x="116" y="234" font-size="12" font-weight="700" fill="#dfe6ff">관계</text>
+      <text x="116" y="251" font-size="11" fill="#9db0f2">이름 · 정의역 · 치역</text>
+
+      <rect x="100" y="266" width="260" height="40" rx="9" fill="#16224e" stroke="#5b74ff" stroke-width="1.6"/>
+      <text x="116" y="282" font-size="12" font-weight="700" fill="#dfe6ff">제약</text>
+      <text x="116" y="299" font-size="11" fill="#9db0f2">필수 · 유일 · 패턴</text>
+
+      <rect x="100" y="314" width="260" height="40" rx="9" fill="url(#chip)" stroke="#8ad8ff" stroke-width="1.8"/>
+      <text x="116" y="330" font-size="12" font-weight="700" fill="#eef1ff">업무키</text>
+      <text x="116" y="347" font-size="11" fill="#c8d2ff">같음을 판정하는 근거</text>
+    </g>
+    <text x="230" y="382" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="12.5" fill="#dfe6ff">데이터보다 먼저 정한다</text>
+    <text x="230" y="418" text-anchor="middle" font-family="'Courier New',monospace" font-size="12" fill="#7f92e6">class · relation · shape · key</text>
+  </g>
+
+  <!-- ===== panel B : generated artifacts ===== -->
+  <g>
+    <rect x="440" y="112" width="320" height="330" rx="16" fill="#0d1638" stroke="#3f52b8" stroke-width="2"/>
+    <text x="600" y="146" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="15" font-weight="700" letter-spacing="2" fill="#8ea2ff">단일 출처 · 생성물</text>
+    <circle cx="600" cy="188" r="20" fill="#5b74ff" stroke="#e7ecff" stroke-width="2"/>
+    <text x="600" y="193" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="12" font-weight="700" fill="#0d1638">사전</text>
+    <g stroke="#7f92e6" stroke-width="2.2" fill="none" opacity="0.9">
+      <path d="M586 202 L534 232"/>
+      <path d="M614 202 L666 232"/>
+      <path d="M592 208 L560 292"/>
+      <path d="M608 208 L640 292"/>
+    </g>
+    <g font-family="'Segoe UI',sans-serif" font-size="11.5">
+      <rect x="474" y="232" width="118" height="44" rx="9" fill="#16224e" stroke="#5b74ff" stroke-width="1.6"/>
+      <text x="533" y="250" text-anchor="middle" font-weight="700" fill="#dfe6ff">명세서</text>
+      <text x="533" y="266" text-anchor="middle" fill="#9db0f2">사람이 읽는 표</text>
+
+      <rect x="608" y="232" width="118" height="44" rx="9" fill="#16224e" stroke="#5b74ff" stroke-width="1.6"/>
+      <text x="667" y="250" text-anchor="middle" font-weight="700" fill="#dfe6ff">RDF · OWL</text>
+      <text x="667" y="266" text-anchor="middle" fill="#9db0f2">기계가 읽는 의미</text>
+
+      <rect x="474" y="292" width="118" height="44" rx="9" fill="#2b2140" stroke="#e0a33c" stroke-width="1.8"/>
+      <text x="533" y="310" text-anchor="middle" font-weight="700" fill="#ffe3ab">SHACL</text>
+      <text x="533" y="326" text-anchor="middle" fill="#d9bd88">모양 검증</text>
+
+      <rect x="608" y="292" width="118" height="44" rx="9" fill="#2b2140" stroke="#e0a33c" stroke-width="1.8"/>
+      <text x="667" y="310" text-anchor="middle" font-weight="700" fill="#ffe3ab">제약 · 딕셔너리</text>
+      <text x="667" y="326" text-anchor="middle" fill="#d9bd88">DB 수준 잠금</text>
+    </g>
+    <text x="600" y="382" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="12.5" fill="#dfe6ff">문서와 구현이 갈라질 경로가 없다</text>
+    <text x="600" y="418" text-anchor="middle" font-family="'Courier New',monospace" font-size="12" fill="#7f92e6">one dictionary → six outputs</text>
+  </g>
+
+  <!-- ===== panel C : A-box / refusal ===== -->
+  <g>
+    <rect x="810" y="112" width="320" height="330" rx="16" fill="#0d1638" stroke="#3f52b8" stroke-width="2"/>
+    <text x="970" y="146" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="15" font-weight="700" letter-spacing="2" fill="#8ea2ff">개체 수준 · A-box</text>
+    <g font-family="'Segoe UI',sans-serif" font-size="11.5">
+      <rect x="842" y="170" width="256" height="34" rx="9" fill="#16224e" stroke="#5b74ff" stroke-width="1.6"/>
+      <text x="866" y="192" fill="#dfe6ff">① 타입 수준 쓰기 차단</text>
+      <text x="1082" y="192" text-anchor="end" font-family="'Courier New',monospace" font-size="13" fill="#ff9d9d">✕</text>
+
+      <rect x="842" y="212" width="256" height="34" rx="9" fill="#16224e" stroke="#5b74ff" stroke-width="1.6"/>
+      <text x="866" y="234" fill="#dfe6ff">② 인용 없는 사실 거절</text>
+      <text x="1082" y="234" text-anchor="end" font-family="'Courier New',monospace" font-size="13" fill="#ff9d9d">✕</text>
+
+      <rect x="842" y="254" width="256" height="34" rx="9" fill="#16224e" stroke="#5b74ff" stroke-width="1.6"/>
+      <text x="866" y="276" fill="#dfe6ff">③ 생성 후 자릿수 대조</text>
+      <text x="1082" y="276" text-anchor="end" font-family="'Courier New',monospace" font-size="13" fill="#ff9d9d">✕</text>
+
+      <rect x="842" y="296" width="256" height="34" rx="9" fill="url(#chip)" stroke="#8ad8ff" stroke-width="1.8"/>
+      <text x="866" y="318" fill="#eef1ff">④ 결정론 폴백</text>
+      <text x="1082" y="318" text-anchor="end" font-family="'Courier New',monospace" font-size="13" fill="#a8ffd6">✓</text>
+    </g>
+    <text x="970" y="358" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="12.5" fill="#dfe6ff">근거를 붙여 답하거나, 모른다고 답한다</text>
+    <text x="970" y="384" text-anchor="middle" font-family="'Courier New',monospace" font-size="11.5" fill="#9db0f2">BD-357CA3FE-G0-00-…</text>
+    <text x="970" y="418" text-anchor="middle" font-family="'Courier New',monospace" font-size="12" fill="#7f92e6">no citation → no sentence</text>
+  </g>
+
+  <!-- connectors between panels -->
+  <g stroke="#8ea2ff" stroke-width="3" fill="none" marker-end="url(#ar)">
+    <line x1="392" y1="277" x2="434" y2="277"/>
+    <line x1="762" y1="277" x2="804" y2="277"/>
+  </g>
+
+  <!-- return arrow : validation audits the schema itself -->
+  <g fill="none" stroke="#8ad8ff" stroke-width="2.4" stroke-dasharray="9 7" marker-end="url(#arc)">
+    <path d="M1090 466 H 240"/>
+  </g>
+  <text x="672" y="456" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="13.5" fill="#aab6f0">검증이 스키마 자신의 오류를 되감사한다</text>
+
+  <!-- title band -->
+  <text x="600" y="556" text-anchor="middle" font-family="'Noto Serif KR',Georgia,serif" font-size="46" font-weight="700" fill="#f2f4ff">데이터보다 스키마가 먼저다</text>
+  <text x="600" y="592" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="16.5" fill="#aab6f0">온톨로지 · 단일 출처 · 업무키 · 타입 수준의 거절</text>
+  <text x="600" y="628" text-anchor="middle" font-family="'Courier New',monospace" font-size="12.5" letter-spacing="1.5" fill="#6f81d6">T-BOX  →  GENERATED SPEC  →  A-BOX</text>
+</svg>

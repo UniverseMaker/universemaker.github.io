@@ -6,7 +6,7 @@
     <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/"/>
-    <lastmod>2026-08-31</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -15,7 +15,7 @@
     <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/profile.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/profile.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/profile.html"/>
-    <lastmod>2026-08-31</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -24,7 +24,7 @@
     <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles.html"/>
-    <lastmod>2026-08-31</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -51,7 +51,7 @@
     <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/research.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/research.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/research.html"/>
-    <lastmod>2026-08-31</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -78,7 +78,7 @@
     <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/landing.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/landing.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/landing.html"/>
-    <lastmod>2026-08-31</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -911,6 +911,15 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://daeseungpark.com/articles/ontology-schema-first-knowledge-graph/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/ontology-schema-first-knowledge-graph/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/ontology-schema-first-knowledge-graph/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/ontology-schema-first-knowledge-graph/"/>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://daeseungpark.com/articles/parallel-simulation-ape/</loc>
     <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/parallel-simulation-ape/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/parallel-simulation-ape/"/>
@@ -969,7 +978,7 @@
     <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/"/>
-    <lastmod>2026-08-31</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -978,7 +987,7 @@
     <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/profile.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/profile.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/profile.html"/>
-    <lastmod>2026-08-31</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -987,7 +996,7 @@
     <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles.html"/>
-    <lastmod>2026-08-31</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1014,7 +1023,7 @@
     <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/research.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/research.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/research.html"/>
-    <lastmod>2026-08-31</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1041,7 +1050,7 @@
     <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/landing.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/landing.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/landing.html"/>
-    <lastmod>2026-08-31</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -1870,6 +1879,15 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/mmwave-georeferencing/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/mmwave-georeferencing/"/>
     <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/en/articles/ontology-schema-first-knowledge-graph/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/ontology-schema-first-knowledge-graph/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/ontology-schema-first-knowledge-graph/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/ontology-schema-first-knowledge-graph/"/>
+    <lastmod>2026-09-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
