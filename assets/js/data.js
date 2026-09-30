@@ -56,8 +56,14 @@ window.SITE = {
   ],
   /* Articles 게시판 정책 — showFeatureInAll:
      false(기본) → '전체보기'에는 특별기고 제외, [특별기고] 칩을 눌렀을 때만 노출
-     true        → '전체보기'에도 특별기고 함께 노출 (특별기고 칩은 값과 무관하게 항상 특별기고만) */
-  articles: { showFeatureInAll: false },
+     true        → '전체보기'에도 특별기고 함께 노출 (특별기고 칩은 값과 무관하게 항상 특별기고만)
+     showBlogInAll (v102):
+     false(기본) → '전체보기'·카테고리 칩에는 블로그(articles.js `blog: "블로그"`, 카드 data-blog="1") 제외,
+                   [블로그] 칩(data-filter="__blog")을 눌렀을 때만 노출
+     true        → '전체보기'에도 블로그 함께 노출 (블로그 칩은 값과 무관하게 항상 블로그만)
+     ※ full-static: 런타임 실제 값은 main.js 인라인 상수 SHOW_FEATURE_IN_ALL / SHOW_BLOG_IN_ALL 이다.
+       이 정책을 바꾸면 main.js 상수도 함께 바꿀 것. */
+  articles: { showFeatureInAll: false, showBlogInAll: false },
   promo: {
     enabled: true,
     href: "works/ieee-access-distributed-mmwave/",

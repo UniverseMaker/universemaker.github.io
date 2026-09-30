@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-prerendered="1"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Making “Show more options” the Default Right-Click Menu in Windows 11 - Daeseung Park Journal</title>
+<meta name="description" content="A registry command that makes Windows 11 open the full, classic right-click menu (“Show more options”) instead of the simplified one — and the command that puts it back.">
+<link rel="canonical" href="https://daeseungpark.com/en/articles/windows11-classic-context-menu/"><link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/windows11-classic-context-menu/"><link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/windows11-classic-context-menu/"><link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/windows11-classic-context-menu/"><meta property="og:locale:alternate" content="ko_KR">
+<!-- seo-i18n:start -->
+
+
+
+
+<!-- seo-i18n:end -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="D. PARK Journal">
+<meta property="og:title" content="Making “Show more options” the Default Right-Click Menu in Windows 11">
+<meta property="og:description" content="A registry command that makes Windows 11 open the full, classic right-click menu (“Show more options”) instead of the simplified one — and the command that puts it back.">
+<meta property="og:url" content="https://daeseungpark.com/en/articles/windows11-classic-context-menu/">
+<meta property="og:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Making “Show more options” the Default Right-Click Menu in Windows 11">
+<meta name="twitter:description" content="A registry command that makes Windows 11 open the full, classic right-click menu (“Show more options”) instead of the simplified one — and the command that puts it back.">
+<meta name="twitter:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Making “Show more options” the Default Right-Click Menu in Windows 11","author":{"@type":"Person","name":"박대승","alternateName":"Daeseung Park"},"publisher":{"@type":"Organization","name":"D. PARK Journal"},"image":"https://daeseungpark.com/assets/img/profile/img3.jpg","mainEntityOfPage":"https://daeseungpark.com/en/articles/windows11-classic-context-menu/","inLanguage":"en","datePublished":"2025-09-03"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&amp;family=Noto+Serif+KR:wght@400;600&amp;family=Noto+Sans+KR:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="../../../assets/css/style.css?v=edd658d3">
+<link rel="stylesheet" href="../../../assets/css/article.css?v=c9e013b8">
+</head>
+<body data-base="../../">
+<div class="progress-bar" id="progress"></div>
+<div class="topbar no-print">
+  <div class="container-x">
+    <span class="tb-date" id="today">—</span>
+    <div class="tb-links"><a href="https://ai.daeseungpark.com/chat/" target="_blank" rel="noopener">Abliterated AI</a><a href="https://service.daeseungpark.com/rchat" target="_blank" rel="noopener">LLM Research Platform</a><a href="../../profile.html">Profile</a><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener">GitHub</a><a href="https://scholar.google.com/citations?hl=ko&amp;user=qVom0QUAAAAJ" target="_blank" rel="noopener">Scholar</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener">ORCID</a><a href="https://hub.docker.com/u/daeseungpark" target="_blank" rel="noopener">Docker</a><a href="https://codespectrum.net" target="_blank" rel="noopener">Blog</a><a href="../../profile.html#contact">Contact</a><a href="../../notices.html">Notice</a><a href="/articles/windows11-classic-context-menu/" class="tb-lang-link" aria-label="Language">한국어</a></div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header no-print">
+  <div class="container-x nav-row">
+    <a href="../../index.html" class="brand">D<span class="dot">.</span> PARK <small>Journal</small></a>
+    <nav class="main-nav"><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">☾</span></button>
+      <button class="print-cta" id="printBtn">🖶 Print / PDF</button>
+      <button class="icon-btn nav-toggle" id="navToggle" aria-label="Menu">≡</button>
+    </div>
+  </div>
+</header>
+
+<div class="ticker no-print">
+  <div class="container-x">
+    <span class="label">Trending</span>
+    <div class="items" id="tickerItems"><a href="../../articles/ontology-schema-first-knowledge-graph/">Schema Before Data</a><a href="../../articles/address-graph-disaster-perception-stack/">Where, and What Happened</a><a href="../../articles/genai-copyright-data-licensing/">Mining, Called Learning</a><a href="../../articles/ai-agent-reliability-evals/">It Works in the Demo, Breaks in…</a><a href="../../articles/reasoning-models-test-time-compute/">Bigger Model or Longer Thought?</a><a href="../../articles/rag-architectures-hallucination/">Four Ways Retrieval Rescues In…</a></div>
+  </div>
+</div>
+
+<article class="blog-import" data-article-id="110">
+  <div class="article-wrap">
+    <!-- Masthead -->
+    <header class="art-head">
+      <span class="cat-pill dark">Dev · Notes</span>
+      <h1>Making “Show more options” the Default Right-Click Menu in Windows 11</h1>
+      <p class="deck">A registry command that makes Windows 11 open the full, classic right-click menu (“Show more options”) instead of the simplified one — and the command that puts it back.</p>
+      <div class="art-byline">
+        <div class="av">DP</div>
+        <div class="who">
+          <b>Daeseung Park</b>
+          <span>AI &amp; Software Systems Engineer · KAIST</span>
+          <span>September 3, 2025 · 1 min read</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="art-cover"><div class="fill-5 fill-grid" style="position:absolute;inset:0;"></div></div>
+
+    <!-- Body -->
+    <div class="prose">
+      <p>Run CMD as administrator, then enter the commands below. (The Korean comments read: register the registry key / kill Explorer / start Explorer.)</p>
+      <pre class="blog-code" tabindex="0"><code># 레지스트리 등록
+reg.exe add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve
+
+# 익스플로러 종료
+taskkill /f /im explorer.exe
+
+# 익스플로러 실행
+explorer</code></pre>
+      <p>To restore the original behavior, enter the command below 🙂 (comment: remove the registry key)</p>
+      <pre class="blog-code" tabindex="0"><code># 레지스트리 제거
+reg.exe delete "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}" /f</code></pre>
+      <p>If the commands don't work, check that you ran CMD as administrator!</p>
+      <div class="callout blog-origin"><b>Originally published:</b> <a href="https://codespectrum.net/2025/09/03/%ec%9c%88%eb%8f%84%ec%9a%b011-%ec%9a%b0%ed%81%b4%eb%a6%ad-%ec%8b%9c-%ec%b6%94%ea%b0%80%ec%98%b5%ec%85%98%eb%b3%b4%ea%b8%b0%eb%a5%bc-%ea%b8%b0%eb%b3%b8%ec%9c%bc%eb%a1%9c-%ec%84%a4%ec%a0%95%ed%95%98/" target="_blank" rel="noopener">codespectrum.net</a>, 2025-09-03 (in Korean). Moved here from my tech blog CODESPECTRUM and translated into English; commands, code and error messages are kept exactly as in the original.</div>
+    </div>
+  </div>
+
+  <!-- Footer of article -->
+  <div class="art-foot">
+    <div class="art-tags">
+      <a href="#">#Windows11</a><a href="#">#ContextMenu</a><a href="#">#Registry</a>
+    </div>
+    <div class="author-card">
+      <div class="av">DP</div>
+      <div class="who">
+        <b>Daeseung Park</b>
+        <p>Researcher at KAIST. I study large language models, time-series forecasting, and conversational AI, and I try to record the research process as accurately and readably as I can.</p>
+      </div>
+    </div>
+
+    <div class="read-next no-print">
+        <div class="section-head" style="margin-bottom:20px;"><h2 style="font-size:1.3rem;">Read next</h2></div>
+        <div class="grid grid-2" id="readNext"><a href="../../articles/ubuntu-server-cli-4k-font-size/" class="post-card fade-up"><div class="thumb"><div class="ph fill-4 fill-grid "></div><span class="cat-pill dark">Dev · Notes</span><span class="num">B07</span></div><span class="cat dark">Linux</span><h3>Ubuntu Server CLI Mode on a 4K Monitor: A Dead-Simple Way to Enlarge the Font</h3><p>When the Ubuntu Server console text on a 4K monitor is too small to read, one run of dpkg-reconfigure console-setup enlarges the font to Terminus 16x32.</p><div class="meta"><span class="by">Daeseung Park</span><span class="dot-sep">1 min read</span></div></a><a href="../../articles/git-submodule-branch-not-applied/" class="post-card fade-up"><div class="thumb"><div class="ph fill-3 fill-grid "></div><span class="cat-pill dark">Dev · Notes</span><span class="num">B09</span></div><span class="cat dark">Git</span><h3>(Git Error) Git Submodule Branch Won't Apply</h3><p>When the branch set in .gitmodules is not applied to a submodule: force it with git config, verify it, then update with git submodule update --remote.</p><div class="meta"><span class="by">Daeseung Park</span><span class="dot-sep">1 min read</span></div></a></div>
+      </div>
+      <nav class="post-nav no-print" id="postNav"><a class="pn" href="../../articles/git-submodule-branch-not-applied/"><span class="pn-dir">‹ Previous</span><span class="pn-t">(Git Error) Git Submodule Branch Won't Apply</span></a><a class="pn pn-list" href="../../articles.html?cat=blog">List</a><a class="pn pn-right" href="../../articles/claude-session-switcher/"><span class="pn-dir">Next ›</span><span class="pn-t">Claude Session Switcher</span></a></nav>
+    </div>
+</article>
+
+<div class="print-footer">Daeseung Park · D. PARK Journal — Making “Show more options” the Default Right-Click Menu in Windows 11</div>
+
+<footer class="site-footer no-print" id="contact"><div class="container-x"><div class="footer-grid"><div><div class="footer-brand">D. PARK</div><p style="max-width:34ch;">AI &amp; Software Systems Engineer · KAIST</p><div class="social" style="margin-top:16px;"><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener" aria-label="GitHub">GH</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener" aria-label="ORCID">iD</a><a href="mailto:dspark@daeseungpark.com" aria-label="Email">@</a></div></div><div><h6>Browse</h6><ul><li><a href="../../index.html">Home</a></li><li><a href="../../profile.html">Profile</a></li><li><a href="../../articles.html">Articles</a></li><li><a href="../../research.html">Research</a></li><li><a href="../../notices.html">Notice</a></li></ul></div><div><h6>Articles</h6><ul class="ft-arts"><li><a href="../../articles/ontology-schema-first-knowledge-graph/">Schema Before Data</a></li><li><a href="../../articles/address-graph-disaster-perception-stack/">Where, and What Happened</a></li><li><a href="../../articles/genai-copyright-data-licensing/">Mining, Called Learning</a></li><li><a href="../../articles/ai-agent-reliability-evals/">It Works in the Demo, Breaks in Production</a></li><li><a href="../../articles/reasoning-models-test-time-compute/">Not Bigger, but Thinking Longer</a></li></ul></div><div><h6>Contact</h6><ul><li><a href="mailto:dspark@daeseungpark.com">dspark@daeseungpark.com</a></li><li><a href="mailto:dspark@kaist.ac.kr">dspark@kaist.ac.kr</a></li><li><a href="tel:+821064547777">Phone (KR) +82 10 6454 7777</a></li><li><a href="tel:+16574109449">Phone (US) +1 657 410 9449</a></li><li>KAIST, Daejeon, Korea</li></ul></div></div><div class="footer-bottom"><span>© 2026 Daeseung Park. All rights reserved.</span><span>Designed &amp; built as a personal journal for Daeseung Park.</span></div></div></footer>
+
+<div class="mobile-nav" id="mobileNav"><button class="icon-btn close" id="navClose" aria-label="Close">✕</button><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></div>
+
+<script src="../../../assets/js/main.js?v=e9f2908b"></script>
+
+</body></html>

@@ -11,6 +11,7 @@
   var GA_ID = "G-1MMKKGR3MF";                       // Google Analytics 측정 ID
   var AI_CHAT_URL = "https://ai.daeseungpark.com/chat/"; // (AI 위젯 IIFE에서도 동일 상수 사용)
   var SHOW_FEATURE_IN_ALL = false;                  // 전체보기에 특별기고 노출 여부(기본 false)
+  var SHOW_BLOG_IN_ALL = false;                     // 전체보기·카테고리 칩에 블로그 노출 여부(기본 false — [블로그] 칩에서만)
 
   /* ---------------- 언어 + UI 라벨 ---------------- */
   var LANG = (function () { var s = location.pathname.split("/").filter(Boolean); return s[0] === "en" ? "en" : "ko"; })();
@@ -198,27 +199,35 @@
 
   /* ============================================================
      Articles board (articles.html) — 카테고리 칩 필터 + 게시판 페이지네이션
-     baked DOM 의 전체 카드(18편, data-cat / data-feature 속성 보유)를 show/hide.
+     baked DOM 의 전체 카드(v102 기준 기고 23편[일반 17 + 특별기고 6] + 블로그 11편 —
+     data-cat / data-feature="1" / data-blog="1" 속성 보유)를 show/hide.
+     특별기고·블로그는 직교 플래그: 각자 전용 칩(__feature / __blog)에서만 보이고,
+     SHOW_*_IN_ALL=true 일 때만 '전체'·카테고리 칩에도 섞인다.
      ============================================================ */
   var board = document.querySelector("#boardGrid");
   if (board) {
     var PER = 12;
-    var FEATURE_FILTER = "__feature", ALL_FILTER = "__all";
+    var FEATURE_FILTER = "__feature", BLOG_FILTER = "__blog", ALL_FILTER = "__all";
     var cards = Array.prototype.slice.call(board.querySelectorAll(".post-card"));
     var activeFilter = ALL_FILTER;
-    /* ?cat= 딥링크: feature → 특별기고 칩, 카테고리명 일치 → 그 칩, 그 외/없음 → 전체 */
+    /* ?cat= 딥링크: feature → 특별기고 칩, blog → 블로그 칩, 카테고리명 일치(전체보기에 노출되는 카드 기준) → 그 칩, 그 외/없음 → 전체 */
     (function () {
       var m = /[?&]cat=([^&#]*)/.exec(location.search);
       if (!m) return;
       var val = ""; try { val = decodeURIComponent(m[1].replace(/\+/g, " ")); } catch (e) { val = m[1]; }
       if (val === "feature" || val === FEATURE_FILTER) activeFilter = FEATURE_FILTER;
-      else if (val && cards.some(function (c) { return c.getAttribute("data-cat") === val; })) activeFilter = val;
+      else if (val === "blog" || val === BLOG_FILTER) activeFilter = BLOG_FILTER;
+      else if (val && cards.some(function (c) { return c.getAttribute("data-cat") === val && passSpecial(c); })) activeFilter = val;
     })();
     function isFeature(c) { return c.getAttribute("data-feature") === "1"; }
+    function isBlog(c) { return c.getAttribute("data-blog") === "1"; }
+    /* '전체'·카테고리 칩 통과 조건 — 특별기고·블로그는 정책 플래그가 true 일 때만 섞인다 */
+    function passSpecial(c) { return (SHOW_FEATURE_IN_ALL || !isFeature(c)) && (SHOW_BLOG_IN_ALL || !isBlog(c)); }
     function matches(c) {
       if (activeFilter === FEATURE_FILTER) return isFeature(c);
-      if (activeFilter === ALL_FILTER) return SHOW_FEATURE_IN_ALL || !isFeature(c);
-      return c.getAttribute("data-cat") === activeFilter && (SHOW_FEATURE_IN_ALL || !isFeature(c));
+      if (activeFilter === BLOG_FILTER) return isBlog(c);
+      if (activeFilter === ALL_FILTER) return passSpecial(c);
+      return c.getAttribute("data-cat") === activeFilter && passSpecial(c);
     }
     var filterEl = document.querySelector("#boardFilter");
     if (filterEl) {
@@ -262,7 +271,7 @@
       }
       if (!skipScroll) window.scrollTo({ top: 0, behavior: "smooth" });
     }
-    renderBoard(true); // 초기: baked 는 18편 전부 → 필터·1페이지로 축소 (스크롤 억제)
+    renderBoard(true); // 초기: baked 는 전체 카드(기고+특별기고+블로그) → 필터·1페이지로 축소 (스크롤 억제)
     window.addEventListener("hashchange", function () { renderBoard(false); });
   }
 

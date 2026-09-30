@@ -23,6 +23,9 @@
                                토큰을 낮추면 배지·텍스트 두 용례가 한 번에 4.85:1 로 올라간다
                                (배지 전경을 어둡게 뒤집는 방법은 .cat.red 를 못 고치고,
                                 중간 명도의 빨강 위 어두운 글자도 4.4:1 에 머물러 부적합). */
+  --blog: #047857;          /* v102 블로그 배지(.feature-badge.blog-badge) 배경 — 금색 특별기고 배지와 구분되는 에메랄드.
+                               흰 글자(--blog-ink) 대비 5.48:1 (WCAG AA 4.5:1 상회, .68rem bold 소형 텍스트 기준) */
+  --blog-ink: #ffffff;
 
   /* Type */
   --sans: "Pretendard", "Pretendard Variable", -apple-system, BlinkMacSystemFont, system-ui, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
@@ -54,6 +57,9 @@
   --accent-ink: #aab6ff;
   --gold: #d8b25e;
   --red: #ff6b62;
+  /* 블로그 배지 — 다크에선 토큰을 밝히고 전경을 어둡게 뒤집는다(.pf-chip.is-active #0d1026 선례). 9.76:1 */
+  --blog: #34d399;
+  --blog-ink: #0d1026;
   /* 다크에서는 밝은 링이어야 보인다. --bg(#131417) 9.56:1 / --surface(#1a1c20) 8.86:1 */
   --focus: #a9b7ff;
   --shadow-sm: 0 1px 2px rgba(0,0,0,.4);
@@ -366,6 +372,27 @@ body[data-theme="light"][data-hero="photo"] .feat-large:hover .bg::after {
 .feature-card:hover .feature-body h3 { color: var(--accent-ink); }
 .feature-body p { color: var(--muted); font-size: .92rem; line-height: 1.6; margin: 0 0 14px; flex: 1; }
 .feature-body .meta { margin-top: auto; }
+
+/* ---------- Home: 최근 블로그 (v102 · #homeBlog) ----------
+   카드는 .feature-card 마크업을 그대로 재사용하고 한 줄 4장으로 촘촘하게 둔다.
+   배지는 `.feature-badge.blog-badge` 이중 클래스 — 위치·크기·인쇄 리셋은 .feature-badge 를 상속하고
+   색만 --blog / --blog-ink 토큰으로 바꾼다(특이도 0,2,0 이라 아래 `.feature-badge{color:#1a1206}` 보다 우선). */
+.blog-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+.blog-grid .feature-thumb { aspect-ratio: 16/10; }
+.blog-grid .feature-badge { left: 12px; top: 12px; padding: 4px 10px; }
+.blog-grid .feature-body { padding: 14px 16px 16px; }
+.blog-grid .feature-body .cat { margin-bottom: 4px; }
+.blog-grid .feature-body h3 { font-size: 1.06rem; line-height: 1.3; margin: 0 0 8px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden; }
+.blog-grid .feature-body p { font-size: .84rem; line-height: 1.55; margin: 0 0 12px; flex: 0 0 auto; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; line-clamp: 3; overflow: hidden; }
+.blog-grid .feature-body .meta { font-size: .78rem; }
+/* 블로그 제목·요약엔 공백 없는 긴 토큰(ERR_TOO_MANY_REDIRECTS, 'std::runtime_error':)이 있어 좁은 칸에서 넘친다 → 아무 곳에서나 줄바꿈 */
+.blog-grid .feature-body h3, .blog-grid .feature-body p,
+#boardGrid .post-card[data-blog="1"] h3, #boardGrid .post-card[data-blog="1"] p { overflow-wrap: anywhere; }
+.feature-badge.blog-badge { background: var(--blog); color: var(--blog-ink); }
+/* v102 QA: 3열 구간 제거 — 4장이 3+1 로 고아 카드가 생기므로 4열 → (960↓) 2열 → (640↓) 1열. 4열 최소폭 구간은 간격만 좁힌다 */
+@media (max-width: 1120px) { .blog-grid { gap: 16px; } }
+@media (max-width: 960px) { .blog-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .blog-grid { grid-template-columns: minmax(0, 1fr); gap: 18px; } }
 
 /* ---------- Home preview: 주요 활동 thumbs ---------- */
 .home-activity-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
@@ -945,6 +972,7 @@ summary:focus-visible,
     --bg:#ffffff !important; --surface:#f4f4f2 !important; --surface-2:#eeeeec !important;
     --accent:#333333 !important; --accent-ink:#000000 !important;
     --gold:#555555 !important; --red:#333333 !important;
+    --blog:#555555 !important; --blog-ink:#ffffff !important;
   }
   html, body { background:#fff !important; color:#111 !important; }
 
@@ -969,7 +997,7 @@ summary:focus-visible,
   /* 색 배경 배지는 종이에서 잉크만 먹고 흰 글자가 사라진다 → 무배경 검정 글자.
      `.cat-pill`·`.feature-badge` 는 article.css 의 `.art-head .cat-pill`(letter-spacing 만 남기는
      기존 조판)과 충돌하지 않도록 테두리를 주지 않고 순수 텍스트로 둔다. */
-  .cat-pill, .cat-pill.red, .cat-pill.dark, .feature-badge {
+  .cat-pill, .cat-pill.red, .cat-pill.dark, .feature-badge, .feature-badge.blog-badge {
     background:none !important; color:#000 !important; box-shadow:none !important; padding:0;
   }
   /* 반면 SCIE·KCI·특허·SW·공지 분류는 목록에서 식별 정보라 얇은 테두리를 남긴다. */

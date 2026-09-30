@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-prerendered="1"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Session Switcher: Your Conversations Never Left - Daeseung Park Journal</title>
+<meta name="description" content="Why switching accounts in Claude Desktop and Claude Code makes conversations disappear, and how to fix it. Claude Session Switcher is a Windows tool built on one finding — each transcript exists once per machine and account folders only hold pointers — covering Unified Linking, per-computer backup and restore, separate scheduled backups for conversations and Cowork, a Session Explorer, setup and limitations.">
+<link rel="canonical" href="https://daeseungpark.com/en/articles/claude-session-switcher/"><link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/claude-session-switcher/"><link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/claude-session-switcher/"><link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/claude-session-switcher/"><meta property="og:locale:alternate" content="ko_KR">
+<!-- seo-i18n:start -->
+
+
+
+
+<!-- seo-i18n:end -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="D. PARK Journal">
+<meta property="og:title" content="Claude Session Switcher: Your Conversations Never Left">
+<meta property="og:description" content="Conversations vanish on an account switch not because a server blocks them. There is one transcript and the account folders are only pointers — the features, use cases, setup and design principles of the Windows tool built on that finding, with screenshots and diagrams.">
+<meta property="og:url" content="https://daeseungpark.com/en/articles/claude-session-switcher/">
+<meta property="og:image" content="https://daeseungpark.com/en/articles/claude-session-switcher/images/cover.png">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Claude Session Switcher: Your Conversations Never Left">
+<meta name="twitter:description" content="Link every conversation to every account with one click, and back them up per computer to move to another PC. Pointer files are copied byte for byte and restores merge by default. A personal open-source project, not an official Anthropic tool.">
+<meta name="twitter:image" content="https://daeseungpark.com/en/articles/claude-session-switcher/images/cover.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Claude Session Switcher: Your Conversations Never Left","author":{"@type":"Person","name":"박대승","alternateName":"Daeseung Park"},"publisher":{"@type":"Organization","name":"D. PARK Journal"},"image":"https://daeseungpark.com/en/articles/claude-session-switcher/images/cover.png","mainEntityOfPage":"https://daeseungpark.com/en/articles/claude-session-switcher/","inLanguage":"en","datePublished":"2026-09-30"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&amp;family=Noto+Serif+KR:wght@400;600&amp;family=Noto+Sans+KR:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="../../../assets/css/style.css?v=edd658d3">
+<link rel="stylesheet" href="../../../assets/css/article.css?v=c9e013b8">
+</head>
+<body data-base="../../">
+<div class="progress-bar" id="progress"></div>
+<div class="topbar no-print">
+  <div class="container-x">
+    <span class="tb-date" id="today">—</span>
+    <div class="tb-links"><a href="https://ai.daeseungpark.com/chat/" target="_blank" rel="noopener">Abliterated AI</a><a href="https://service.daeseungpark.com/rchat" target="_blank" rel="noopener">LLM Research Platform</a><a href="../../profile.html">Profile</a><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener">GitHub</a><a href="https://scholar.google.com/citations?hl=ko&amp;user=qVom0QUAAAAJ" target="_blank" rel="noopener">Scholar</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener">ORCID</a><a href="https://hub.docker.com/u/daeseungpark" target="_blank" rel="noopener">Docker</a><a href="https://codespectrum.net" target="_blank" rel="noopener">Blog</a><a href="../../profile.html#contact">Contact</a><a href="../../notices.html">Notice</a><a href="/articles/ontology-schema-first-knowledge-graph/" class="tb-lang-link" aria-label="Language">한국어</a></div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header no-print">
+  <div class="container-x nav-row">
+    <a href="../../index.html" class="brand">D<span class="dot">.</span> PARK <small>Journal</small></a>
+    <nav class="main-nav"><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">☾</span></button>
+      <button class="print-cta" id="printBtn">🖶 Print / PDF</button>
+      <button class="icon-btn nav-toggle" id="navToggle" aria-label="Menu">≡</button>
+    </div>
+  </div>
+</header>
+
+<div class="ticker no-print">
+  <div class="container-x">
+    <span class="label">Trending</span>
+    <div class="items" id="tickerItems"><a href="../../articles/ontology-schema-first-knowledge-graph/">Schema Before Data</a><a href="../../articles/address-graph-disaster-perception-stack/">Where, and What Happened</a><a href="../../articles/genai-copyright-data-licensing/">Mining, Called Learning</a><a href="../../articles/ai-agent-reliability-evals/">It Works in the Demo, Breaks in…</a><a href="../../articles/reasoning-models-test-time-compute/">Bigger Model or Longer Thought?</a><a href="../../articles/rag-architectures-hallucination/">Four Ways Retrieval Rescues In…</a></div>
+  </div>
+</div>
+
+<article data-article-id="111">
+  <div class="article-wrap">
+    <!-- Masthead -->
+    <header class="art-head">
+      <span class="cat-pill dark">Dev · Notes</span>
+      <h1>Claude Session Switcher</h1>
+      <p class="deck">Use more than one Claude account and every switch makes yesterday's conversations vanish from the sidebar. I gave up for a while, trusting the common belief that a server was blocking it — but when I finally took it apart, there was only one copy of each conversation on the machine, and the account folders held nothing but pointers to it. From that one finding I built a Windows tool that links every conversation to every account and backs them up per computer so they can move to another PC. Here is what it does, where it helps, and what the accidents along the way taught me.</p>
+      <div class="art-byline">
+        <div class="av">DP</div>
+        <div class="who">
+          <b>Daeseung Park</b>
+          <span>AI &amp; Software Systems Engineer · KAIST</span>
+          <span>September 2026 · 18 min read</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="art-cover"><img src="images/cover.svg" alt="Concept sketch of three account folders pointing at one transcript, beside the Unified Linking screen of Claude Session Switcher (sample data)" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;"></div>
+
+    <!-- Summary -->
+    <div class="summary-box">
+      <span class="tag">1-min summary</span>
+      Claude Desktop shows conversations per account, so switching accounts makes them seem to disappear. In reality <strong>each conversation's transcript (<code>.jsonl</code>) exists exactly once on the machine</strong>; what sits in an account folder is only a small registration file — a pointer — that references it by filename. Claude Session Switcher builds on that structure to ① link every conversation to every account with one click (<strong>Unified Linking</strong>), ② back conversations up <strong>per computer</strong>, not per account, so they can move to another PC, ③ run scheduled backups for conversations and Cowork on separate schedules, and ④ search and browse every conversation on the machine in one list. Pointer files are never rebuilt but copied byte for byte, and restores merge line by line instead of overwriting. It passes 172 automated checks, but the round trip to a second computer has not yet been verified in real use. Windows 10/11 only, and not an official Anthropic tool.
+    </div>
+
+    <!-- Body -->
+    <div class="prose">
+      <span class="chapter-label">Chapter 1. The Problem</span>
+      <h2>Switch accounts, and yesterday's conversations disappear</h2>
+      <p>If you use Claude with a single account, you will never run into the problem this piece is about. But if, like me, you move between a work account and a personal account — and the work account itself belongs to more than one organization — and you live in Claude Desktop and Claude Code every day, a very specific kind of friction builds up. The moment you switch accounts, the session list in the sidebar is replaced wholesale. The conversation about payment-webhook retry logic I spent all of yesterday afternoon on vanishes without a trace when I log in with the other account. Go back to the original account and there it is, perfectly intact.</p>
+      <p>At first I shrugged it off: different account, different list, of course. But as it kept happening, questions formed. The conversations must be stored on my own machine — so why are they invisible from another account? And when I change computers, how do I take them with me? Written down, the symptoms came to four.</p>
+
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;"><table>
+        <thead><tr><th>What I saw</th><th>What was actually happening</th></tr></thead>
+        <tbody>
+          <tr><td>I switched accounts and yesterday's conversations vanished from the sidebar</td><td>The conversation file was still there; the current account folder simply had no registration file pointing at it</td></tr>
+          <tr><td>There is no way to bring conversations to a new PC</td><td>Transcripts, registration records and Cowork data live in three different places, which makes copying by hand practically impossible</td></tr>
+          <tr><td>I cannot tell which account holds what</td><td>The only option is to switch accounts and count by eye</td></tr>
+          <tr><td>I backed up, restored, and overwrote newer conversations</td><td>A plain file copy cannot tell which side has moved further ahead</td></tr>
+        </tbody>
+      </table></div>
+
+      <p>What I built to fix these four is <strong>Claude Session Switcher</strong> (클로드 코드세션 스위처). It is a Windows desktop app written in Python with customtkinter, published on GitHub under the MIT license; the public release v3.0.0 went up on 29 September 2026. This piece gathers in one place what the tool is, what makes it different, where it is useful, and which mistakes I made while building it and what they taught me. Let me be clear up front: <strong>this is not an official Anthropic tool.</strong> Claude, Claude Desktop and Claude Code are Anthropic products; this app is a personal project built by observing how they store data locally.</p>
+
+      <span class="chapter-label">Chapter 2. The Key Finding</span>
+      <h2>One conversation — the accounts were only pointers</h2>
+      <p>For a while this project ran on a false premise. Open a Claude Code session that had been moved to another account, and the screen said <em>"This session may belong to another organization."</em> Anyone reading that sentence naturally infers three things: the app knows which account owns the session; it checks that with a server; so no amount of fiddling with local files will help. Most of the community reached that conclusion, the author of the related GitHub issue wrote as much, and for a while I believed it too.</p>
+      <p>What overturned it was tedious work. I extracted Claude Desktop's Electron bundle (<code>app.asar</code>) and read through the code path that lists sessions and opens them, and I read the files piled up on a real PC — not a sample, but <strong>all of them</strong>. The storage turned out to have a completely different shape from what I had pictured.</p>
+
+      <figure>
+        <svg viewBox="0 0 760 396" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram: two of three pointer files in account folders reference a single transcript by filename; the personal account folder has nothing pointing at it" style="width:100%;height:auto;display:block;">
+          <rect x="0" y="0" width="760" height="396" rx="14" fill="#fbfcff" stroke="#e2e7f5" stroke-width="1"/>
+          <defs><marker id="cssend1b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#2f4fa8"/></marker><marker id="cssend1r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#c0392b"/></marker></defs>
+          <text x="380" y="26" text-anchor="middle" font-family="'Segoe UI','Noto Sans KR','Apple SD Gothic Neo',sans-serif" font-size="15" font-weight="700" fill="#1a2350">One conversation, many pointers</text>
+          <g font-family="'Segoe UI','Noto Sans KR','Apple SD Gothic Neo',sans-serif">
+            <rect x="20" y="46" width="300" height="302" rx="12" fill="none" stroke="#cfd6ea" stroke-dasharray="4 4"/>
+            <rect x="440" y="46" width="300" height="302" rx="12" fill="none" stroke="#cfd6ea" stroke-dasharray="4 4"/>
+            <text x="170" y="66" text-anchor="middle" font-size="12" font-weight="700" fill="#1a2350">Account folders</text>
+            <text x="170" y="82" text-anchor="middle" font-size="10.5" fill="#4a5578">%APPDATA%\Claude\claude-code-sessions\</text>
+            <text x="590" y="66" text-anchor="middle" font-size="12" font-weight="700" fill="#1a2350">Transcripts</text>
+            <text x="590" y="82" text-anchor="middle" font-size="10.5" fill="#4a5578">~\.claude\projects\</text>
+            <rect x="40" y="98" width="260" height="62" rx="10" fill="#e8effc" stroke="#2f4fa8" stroke-width="1.8"/>
+            <text x="170" y="124.68" text-anchor="middle" font-size="13" font-weight="700" fill="#16306e">Work account / Org A</text>
+            <text x="170" y="142.68" text-anchor="middle" font-size="11.5" fill="#16306e">local_….json</text>
+            <rect x="40" y="180" width="260" height="62" rx="10" fill="#e8effc" stroke="#2f4fa8" stroke-width="1.8"/>
+            <text x="170" y="206.68" text-anchor="middle" font-size="13" font-weight="700" fill="#16306e">Work account / Org B</text>
+            <text x="170" y="224.68" text-anchor="middle" font-size="11.5" fill="#16306e">local_….json</text>
+            <rect x="40" y="262" width="260" height="62" rx="10" fill="#fff4e0" stroke="#c47f13" stroke-width="1.8" stroke-dasharray="6 4"/>
+            <text x="170" y="288.68" text-anchor="middle" font-size="13" font-weight="700" fill="#7a4c00">Personal account</text>
+            <text x="170" y="306.68" text-anchor="middle" font-size="11.5" fill="#7a4c00">(empty)</text>
+            <rect x="460" y="134" width="260" height="62" rx="10" fill="#2b2f52" stroke="#6366f1" stroke-width="1.8"/>
+            <text x="590" y="160.68" text-anchor="middle" font-size="13" font-weight="700" fill="#eef0ff">Payment webhook retry</text>
+            <text x="590" y="178.68" text-anchor="middle" font-size="11.5" fill="#c9ccf2">abc123.jsonl</text>
+            <rect x="460" y="236" width="260" height="62" rx="10" fill="#2b2f52" stroke="#6366f1" stroke-width="1.8"/>
+            <text x="590" y="262.68" text-anchor="middle" font-size="13" font-weight="700" fill="#eef0ff">Order list bug</text>
+            <text x="590" y="280.68" text-anchor="middle" font-size="11.5" fill="#c9ccf2">def456.jsonl</text>
+            <path d="M300 129 C 370 129, 390 160, 456 162" stroke="#2f4fa8" stroke-width="2" fill="none" marker-end="url(#cssend1b)"/>
+            <path d="M300 211 C 370 211, 390 170, 456 168" stroke="#2f4fa8" stroke-width="2" fill="none" marker-end="url(#cssend1b)"/>
+            <path d="M300 293 C 380 293, 400 184, 456 176" stroke="#c0392b" stroke-width="2" fill="none" stroke-dasharray="6 5" marker-end="url(#cssend1r)"/>
+            <text x="378" y="118" text-anchor="middle" font-size="11" font-weight="700" fill="#16306e">points by filename</text>
+            <text x="384" y="314" text-anchor="middle" font-size="11" font-weight="700" fill="#8a1f15">✕ nothing points here</text>
+            <text x="380" y="374" text-anchor="middle" font-size="12" fill="#4a5578">All 143 pointer files checked — no account ID, no org ID inside. Ownership is simply which folder the file sits in.</text>
+          </g>
+        </svg>
+        <figcaption>Figure 1. There is exactly one transcript (<code>.jsonl</code>) per conversation on the machine; the <code style="overflow-wrap:anywhere;">local_&lt;sessionId&gt;.json</code> in an account folder is merely a pointer that references it by filename. If the personal account's folder has no pointer, the conversation looks "missing" only in that account's sidebar. Redrawn for this site from the pointer diagram in the README.</figcaption>
+      </figure>
+
+      <p>In short: a single Claude Code session is split across <strong>two different places</strong>. One is a registration file under <code style="overflow-wrap:anywhere;">%APPDATA%\Claude\claude-code-sessions\&lt;accountId&gt;\&lt;orgId&gt;\</code>; each line in the sidebar corresponds to one such file. The other is the transcript under <code style="overflow-wrap:anywhere;">%USERPROFILE%\.claude\projects\</code> — the actual body of the conversation. The first is partitioned by account; the second has no notion of accounts at all.</p>
+      <p>The decisive fact was that the registration file contains <strong>neither an account ID nor an organization ID</strong>. I confirmed this by reading every one of the 143 registration files on a machine in daily use. The only basis the app has for deciding "whose session is this?" is the folder the file sits in. The two-level folders named with account and org UUIDs were not a lock but an <em>address</em>. The app reads the address that matches the logged-in account and never asks whose files are inside. I checked the transcript side as well: a byte-level scan of 984 transcript files totalling 1.10 GB found zero keys indicating organization ownership.</p>
+
+      <div class="pullquote">The account folder was an address, not a lock. There was never a conversation to move — only a small missing pointer.</div>
+
+      <p>Two things follow immediately. First, the phrase "moving a conversation between accounts" is simply the wrong model. Nothing moves. You only plant a pointer in the account folder that lacks one — which is why I named the feature <strong>Unified Linking</strong>. Second, linking once is enough. Whichever account you continue the conversation in, the single transcript file just grows, so every other account sees the latest content automatically. There is never a reason to move it again.</p>
+
+      <h3>The twist in the "another organization" message — and an honest caveat</h3>
+      <p>So what was that message? Follow the session-opening path and everything — <code>listCliSessions</code>, <code>readCliTranscript</code>, <code>resumeCliSession</code> — is local file I/O, with no network call. When the native side reports a failure, it has exactly five reasons to choose from: <code>running</code>, <code>liveness_unknown</code>, <code style="overflow-wrap:anywhere;">workspace_untrusted</code>, <code>folder_missing</code> and <code>failed</code>. There is no code for "organization mismatch", and a code that does not exist cannot be returned. So I read that message as a <strong>speculative fallback</strong> the web front end shows when something fails for another reason — its best guess at a cause.</p>
+      <div class="callout"><b>Here is how strong each piece of evidence is.</b> That registration files carry no account field (all 143 checked) and that transcripts carry no organization data (all 984 files, 1.10 GB) are facts established by exhaustive scans. That there are only five failure reasons I confirmed by reading the bundle's code directly. But the conclusion that the "another organization" message is a web-front-end fallback is <strong>a strong inference by elimination</strong>. It is certain that the native side has no such check; I did not, however, open the web bundle and put my finger on the code that emits that string. This piece does not claim more than that.</div>
+      <p>When a session genuinely will not open, the cause has almost always been one of those five. My guess is that the common ones are a working folder that does not exist on that PC (<code>folder_missing</code>) or one that is not on the trusted list (<code style="overflow-wrap:anywhere;">workspace_untrusted</code>), but I have not measured which occurs most often. What is certain is that mistaking the message for evidence was the heart of the misdiagnosis.</p>
+
+      <span class="chapter-label">Chapter 3. What the Tool Does</span>
+      <h2>Four screens, one button</h2>
+      <p>The Switcher turns that finding directly into features. It has four screens.</p>
+
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;"><table>
+        <thead><tr><th>Screen</th><th>What it does</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Unified Linking</strong></td><td>One button. Scans every account folder, finds every conversation not yet linked everywhere, and links it automatically (idempotent).</td></tr>
+          <tr><td><strong>Backup / Restore</strong></td><td>Per computer, not per account. Pick conversations and export them as a zip; import them on another computer. Restoring merges line by line by default.</td></tr>
+          <tr><td><strong>Scheduled Backup</strong></td><td>Backs up conversations (Code) and Cowork automatically, each on its own schedule.</td></tr>
+          <tr><td><strong>Session Explorer</strong></td><td>Every conversation on this PC in one list regardless of account — search, preview, full view, save as Markdown.</td></tr>
+        </tbody>
+      </table></div>
+
+      <figure>
+        <a href="../../../articles/claude-session-switcher/images/01_link.png" target="_blank" rel="noopener" style="display:block;"><img src="../../../articles/claude-session-switcher/images/01_link.png" alt="The Unified Linking screen of Claude Session Switcher, showing the currently logged-in account, a summary of 4 unlinked conversations and 2 Cowork items, the Link now button, the list of conversations not yet linked, and the three accounts on this computer" width="2122" height="1406" loading="lazy" style="width:100%;height:auto;display:block;border-radius:var(--radius-sm);box-shadow:var(--shadow-sm);"></a>
+        <figcaption>Figure 2. The main screen, Unified Linking (the app's UI is in Korean). Below the summary — "4 conversations and 2 Cowork items unlinked, 12 places in total" — sits the <em>Link now</em> button; on the right, every account that has ever logged in on this computer is listed. All screenshots were taken with fake demo data (click an image for full size).</figcaption>
+      </figure>
+
+      <p>The linking screen deliberately keeps three numbers apart: all conversations on this computer, those registered in Claude Desktop and therefore eligible for linking, and those with no registration record and therefore not eligible. Mix them and the "N unlinked" figure stops meaning anything. That did happen once, and on a real machine it produced <strong>78 phantom entries out of 86 "unlinked"</strong>. More on that in Chapter 7.</p>
+
+      <figure>
+        <svg viewBox="0 0 760 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tree: 18 conversations on this PC split into 16 registered and 2 unregistered; the 16 registered split into 12 fully linked and 4 with gaps" style="width:100%;height:auto;display:block;">
+          <rect x="0" y="0" width="760" height="360" rx="14" fill="#fbfcff" stroke="#e2e7f5" stroke-width="1"/>
+          <text x="380" y="26" text-anchor="middle" font-family="'Segoe UI','Noto Sans KR','Apple SD Gothic Neo',sans-serif" font-size="15" font-weight="700" fill="#1a2350">Why the screen keeps three numbers apart (sample data)</text>
+          <g font-family="'Segoe UI','Noto Sans KR','Apple SD Gothic Neo',sans-serif">
+            <rect x="250" y="44" width="260" height="46" rx="10" fill="#2b2f52" stroke="#6366f1" stroke-width="1.8"/>
+            <text x="380" y="72.04" text-anchor="middle" font-size="14" font-weight="700" fill="#eef0ff">18 conversations on this PC</text>
+            <path d="M380 90 L380 108 L210 108 L210 128" stroke="#6b77a6" stroke-width="2" fill="none"/>
+            <path d="M380 108 L575 108 L575 128" stroke="#6b77a6" stroke-width="2" fill="none"/>
+            <rect x="60" y="128" width="300" height="58" rx="10" fill="#e8effc" stroke="#2f4fa8" stroke-width="1.8"/>
+            <text x="210" y="152.68" text-anchor="middle" font-size="13" font-weight="700" fill="#16306e">16 registered in Claude Desktop</text>
+            <text x="210" y="170.68" text-anchor="middle" font-size="11.5" fill="#16306e">= linking targets</text>
+            <rect x="430" y="128" width="290" height="58" rx="10" fill="#f2f4f8" stroke="#8a93a8" stroke-width="1.8"/>
+            <text x="575" y="152.68" text-anchor="middle" font-size="13" font-weight="700" fill="#3d4560">2 without a registration record</text>
+            <text x="575" y="170.68" text-anchor="middle" font-size="11.5" fill="#3d4560">(created from the CLI)</text>
+            <path d="M210 186 L210 204 L115 204 L115 222" stroke="#6b77a6" stroke-width="2" fill="none"/>
+            <path d="M210 204 L305 204 L305 222" stroke="#6b77a6" stroke-width="2" fill="none"/>
+            <path d="M575 186 L575 222" stroke="#6b77a6" stroke-width="2" fill="none"/>
+            <rect x="24" y="222" width="182" height="58" rx="10" fill="#e6f5ec" stroke="#1f8a4c" stroke-width="1.8"/>
+            <text x="115" y="246.68" text-anchor="middle" font-size="13" font-weight="700" fill="#125c32">12 already linked</text>
+            <text x="115" y="264.68" text-anchor="middle" font-size="11.5" fill="#125c32">to every account</text>
+            <rect x="216" y="222" width="182" height="58" rx="10" fill="#fff4e0" stroke="#c47f13" stroke-width="1.8"/>
+            <text x="307" y="246.68" text-anchor="middle" font-size="13" font-weight="700" fill="#7a4c00">4 still missing</text>
+            <text x="307" y="264.68" text-anchor="middle" font-size="11.5" fill="#7a4c00">somewhere</text>
+            <rect x="430" y="222" width="290" height="80" rx="10" fill="#f7f8fb" stroke="#b3bacb" stroke-width="1.8" stroke-dasharray="6 4"/>
+            <text x="575" y="249" text-anchor="middle" font-size="12.5" fill="#3d4560">No basis to put them in a sidebar,</text>
+            <text x="575" y="266.5" text-anchor="middle" font-size="11" fill="#3d4560">so they are not linking targets —</text>
+            <text x="575" y="284" text-anchor="middle" font-size="11" fill="#3d4560">but they are backed up and visible in Explorer</text>
+            <text x="380" y="336" text-anchor="middle" font-size="12" fill="#4a5578">Mix these numbers and "N unlinked" stops meaning anything — which is exactly what happened once.</text>
+          </g>
+        </svg>
+        <figcaption>Figure 3. 18 conversations = 16 registered (linking targets) + 2 unregistered. The 16 registered split again into 12 "already linked to every account" and 4 "still missing somewhere" — the same numbers as the demo screen in Figure 2.</figcaption>
+      </figure>
+
+      <span class="chapter-label">Chapter 4. What Sets It Apart</span>
+      <h2>What is different</h2>
+
+      <h3>① Unified Linking — a union with no direction, and idempotent</h3>
+      <p>The first design was a distribution model: pick one master account and spray its sessions onto all the others. Then something I said as a user overturned the design — there is no need to distribute anything; it only needs linking. Today's Unified Linking has no direction. It builds the union of all accounts and fills only what each one lacks. A conversation that existed only in account A and one that existed only in account B are both linked in one go. And it is idempotent: anything already linked is skipped, so when new conversations appear you just press the button again.</p>
+
+      <figure>
+        <svg viewBox="0 0 760 318" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Comparison: before Unified Linking the accounts show 16, 12 and 12 conversations; afterwards all three show the union of 16" style="width:100%;height:auto;display:block;">
+          <rect x="0" y="0" width="760" height="318" rx="14" fill="#fbfcff" stroke="#e2e7f5" stroke-width="1"/>
+          <defs><marker id="cssend2g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#1f8a4c"/></marker></defs>
+          <text x="380" y="26" text-anchor="middle" font-family="'Segoe UI','Noto Sans KR','Apple SD Gothic Neo',sans-serif" font-size="15" font-weight="700" fill="#1a2350">Before and after Unified Linking — a union, not a direction</text>
+          <g font-family="'Segoe UI','Noto Sans KR','Apple SD Gothic Neo',sans-serif">
+            <rect x="20" y="46" width="330" height="222" rx="12" fill="#f4f5f9" stroke="#9aa3bb" stroke-width="1.6"/>
+            <text x="185" y="72" text-anchor="middle" font-size="13" font-weight="700" fill="#1a2350">Before linking</text>
+            <text x="36" y="109" text-anchor="start" font-size="12.5" font-weight="700" fill="#22305e">Work account</text>
+            <rect x="156" y="96" width="150" height="18" rx="4" fill="#e3e7f1"/>
+            <rect x="156" y="96" width="150" height="18" rx="4" fill="#5b74c8"/>
+            <text x="314" y="109" text-anchor="start" font-size="12" font-weight="700" fill="#22305e">16</text>
+            <text x="36" y="163" text-anchor="start" font-size="12.5" font-weight="700" fill="#22305e">Work / Org B</text>
+            <rect x="156" y="150" width="150" height="18" rx="4" fill="#e3e7f1"/>
+            <rect x="156" y="150" width="112.5" height="18" rx="4" fill="#8a93a8"/>
+            <text x="314" y="163" text-anchor="start" font-size="12" font-weight="700" fill="#22305e">12</text>
+            <text x="36" y="217" text-anchor="start" font-size="12.5" font-weight="700" fill="#22305e">Personal</text>
+            <rect x="156" y="204" width="150" height="18" rx="4" fill="#e3e7f1"/>
+            <rect x="156" y="204" width="112.5" height="18" rx="4" fill="#8a93a8"/>
+            <text x="314" y="217" text-anchor="start" font-size="12" font-weight="700" fill="#22305e">12</text>
+            <rect x="410" y="46" width="330" height="222" rx="12" fill="#e6f5ec" stroke="#1f8a4c" stroke-width="1.6"/>
+            <text x="575" y="72" text-anchor="middle" font-size="13" font-weight="700" fill="#1a2350">After linking — the union</text>
+            <text x="426" y="109" text-anchor="start" font-size="12.5" font-weight="700" fill="#22305e">Work account</text>
+            <rect x="546" y="96" width="150" height="18" rx="4" fill="#e3e7f1"/>
+            <rect x="546" y="96" width="150" height="18" rx="4" fill="#1f8a4c"/>
+            <text x="704" y="109" text-anchor="start" font-size="12" font-weight="700" fill="#22305e">16</text>
+            <text x="426" y="163" text-anchor="start" font-size="12.5" font-weight="700" fill="#22305e">Work / Org B</text>
+            <rect x="546" y="150" width="150" height="18" rx="4" fill="#e3e7f1"/>
+            <rect x="546" y="150" width="150" height="18" rx="4" fill="#1f8a4c"/>
+            <text x="704" y="163" text-anchor="start" font-size="12" font-weight="700" fill="#22305e">16</text>
+            <text x="426" y="217" text-anchor="start" font-size="12.5" font-weight="700" fill="#22305e">Personal</text>
+            <rect x="546" y="204" width="150" height="18" rx="4" fill="#e3e7f1"/>
+            <rect x="546" y="204" width="150" height="18" rx="4" fill="#1f8a4c"/>
+            <text x="704" y="217" text-anchor="start" font-size="12" font-weight="700" fill="#22305e">16</text>
+            <path d="M354 157 L404 157" stroke="#1f8a4c" stroke-width="3" fill="none" marker-end="url(#cssend2g)"/>
+            <text x="379" y="146" text-anchor="middle" font-size="11" font-weight="700" fill="#125c32">one click</text>
+            <text x="380" y="292" text-anchor="middle" font-size="12" fill="#4a5578">No master account is picked. It builds the union of every account and fills only the gaps (idempotent).</text>
+          </g>
+        </svg>
+        <figcaption>Figure 4. Before linking, the accounts each showed a different number of conversations — 16, 12 and 12. After one click all three see the union, 16. Linking targets are limited to account/org pairs that actually have a Code folder.</figcaption>
+      </figure>
+
+      <h3>② Backups per computer, not per account</h3>
+      <p>The backup screen has no account picker. That too existed at first and was removed. If there is only one copy of each transcript on the machine, the unit of backup should be <strong>the conversations on the computer</strong>, not an account. Back up per account and every conversation that is registered to no account falls out entirely. On my development PC, 8 of 46 conversations were registered to no account at all; an account-based backup would have lost those 8 for good.</p>
+      <p>The backup does not carry one registration file per account — it carries <strong>one representative</strong>. Once the restore finishes, Unified Linking spreads it to the remaining accounts.</p>
+      <pre style="overflow-x:auto;font-size:.8rem;line-height:1.55;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px 16px;margin:0 0 1.45em;">claude_sessions_20260929_170717.zip
+├── manifest.json                     ← what is inside (titles, sizes, counts)
+├── transcripts/&lt;cliSessionId&gt;.jsonl  ← the conversation
+├── sidecars/&lt;cliSessionId&gt;/…         ← its subagent logs and tool results
+├── records/&lt;cliSessionId&gt;.json       ← one representative pointer, byte for byte
+└── cowork/local_&lt;uuid&gt;.json + local_&lt;uuid&gt;/</pre>
+
+      <h3>③ Pointer files are never rebuilt — they are copied byte for byte</h3>
+      <p>"Just plant a pointer" does not mean it is fine to <em>fabricate</em> one. An original registration file has 24 to 32 fields: title, creation and last-activity timestamps, working folder, archive flag, fork relationships and more. From information available outside, you can reconstruct at most eight. Synthesise one and the remaining 16 to 24 fields fall back to defaults; issue a new filename (<code>sessionId</code>) and the fork chain linked through <code style="overflow-wrap:anywhere;">forkedFromSessionId</code> breaks, because the app looks up the parent by that ID directly and has no code to remap it.</p>
+      <p>Since there was no account field inside the registration file to change in the first place, the answer was simple: do not parse it, do not re-serialise it — copy the original file, filename and all. You do not need to understand what every field means. <strong>Copying the bytes is the surest way to preserve the fields you do not understand.</strong></p>
+
+      <figure>
+        <svg viewBox="0 0 760 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Comparison: copying the original pointer byte for byte keeps the fork chain, while synthesising only the needed fields loses title, timestamps and fork links" style="width:100%;height:auto;display:block;">
+          <rect x="0" y="0" width="760" height="300" rx="14" fill="#fbfcff" stroke="#e2e7f5" stroke-width="1"/>
+          <defs><marker id="cssend8v" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#1f8a4c"/></marker><marker id="cssend8x" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#c0392b"/></marker></defs>
+          <text x="380" y="26" text-anchor="middle" font-family="'Segoe UI','Noto Sans KR','Apple SD Gothic Neo',sans-serif" font-size="15" font-weight="700" fill="#1a2350">Pointer files are carried byte for byte, never rebuilt</text>
+          <g font-family="'Segoe UI','Noto Sans KR','Apple SD Gothic Neo',sans-serif">
+            <rect x="28" y="104" width="230" height="86" rx="10" fill="#e8effc" stroke="#2f4fa8" stroke-width="1.8"/>
+            <text x="143" y="133.68" text-anchor="middle" font-size="13" font-weight="700" fill="#16306e">Original pointer file</text>
+            <text x="143" y="151.68" text-anchor="middle" font-size="11.5" fill="#16306e">24–32 fields</text>
+            <text x="143" y="169.68" text-anchor="middle" font-size="11.5" fill="#16306e">incl. forkedFromSessionId</text>
+            <rect x="478" y="48" width="256" height="80" rx="10" fill="#e6f5ec" stroke="#1f8a4c" stroke-width="1.8"/>
+            <text x="606" y="83.68" text-anchor="middle" font-size="13" font-weight="700" fill="#125c32">Works</text>
+            <text x="606" y="101.68" text-anchor="middle" font-size="11.5" fill="#125c32">fork chain intact · unknown fields kept</text>
+            <rect x="478" y="170" width="256" height="80" rx="10" fill="#fdecec" stroke="#c0392b" stroke-width="1.8"/>
+            <text x="606" y="205.68" text-anchor="middle" font-size="13" font-weight="700" fill="#8a1f15">Title, timestamps, forks lost</text>
+            <text x="606" y="223.68" text-anchor="middle" font-size="11.5" fill="#8a1f15">16–24 fields fall back to defaults</text>
+            <path d="M258 132 C 350 132, 380 88, 472 88" stroke="#1f8a4c" stroke-width="2.4" fill="none" marker-end="url(#cssend8v)"/>
+            <path d="M258 162 C 350 162, 380 210, 472 210" stroke="#c0392b" stroke-width="2.4" fill="none" marker-end="url(#cssend8x)"/>
+            <text x="366" y="64" text-anchor="middle" font-size="11.5" font-weight="700" fill="#125c32">✓ copy byte for byte</text>
+            <text x="366" y="80" text-anchor="middle" font-size="11" fill="#125c32">keep filename (sessionId)</text>
+            <text x="366" y="226" text-anchor="middle" font-size="11.5" font-weight="700" fill="#8a1f15">✕ synthesise needed fields</text>
+            <text x="366" y="242" text-anchor="middle" font-size="11" fill="#8a1f15">8 fields + new sessionId</text>
+            <text x="380" y="280" text-anchor="middle" font-size="12" fill="#4a5578">The one exception is Cowork: its pointer really holds accountName and emailAddress, so those two are rewritten for the target.</text>
+          </g>
+        </svg>
+        <figcaption>Figure 5. A byte-for-byte copy keeps the fork chain and even the unknown fields. Synthesising only the needed fields looks like "the session appeared" to the user, while it quietly breaks. Cowork is the only exception: its registration file really does contain the account name and email (all 190 checked), so exactly those two fields are rewritten for the target account.</figcaption>
+      </figure>
+
+      <h3>④ Restore merges by default instead of overwriting</h3>
+      <p>The conversation you are restoring may already have moved further ahead on this computer. Overwrite it naively and the newest conversation is gone — which is exactly what an earlier version did. So now, if the same conversation exists and its content differs, the user is asked first, and the default is a line-by-line merge that loses nothing on either side. Overwriting happens only for items the user ticks explicitly, and the dialog shows "N lines on this PC · M lines in the backup" as the basis for the decision.</p>
+
+      <figure>
+        <a href="../../../articles/claude-session-switcher/images/06_conflict.png" target="_blank" rel="noopener" style="display:block;max-width:620px;margin:0 auto;"><img src="../../../articles/claude-session-switcher/images/06_conflict.png" alt="The dialog for conversations that already exist, explaining that 5 sessions to restore already exist on this computer with different content, and listing for each the current line count, the backup line count and an overwrite checkbox" width="1012" height="896" loading="lazy" style="width:100%;height:auto;display:block;border-radius:var(--radius-sm);box-shadow:var(--shadow-sm);"></a>
+        <figcaption>Figure 6. The conflict dialog. The default is "merge"; only ticked items are overwritten with the backup. The top right summarises exactly what will happen, e.g. "0 overwrite · 5 merge".</figcaption>
+      </figure>
+
+      <figure>
+        <svg viewBox="0 0 760 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Flowchart: a restored conversation is written new, skipped, merged or overwritten depending on whether it exists and whether it differs" style="width:100%;height:auto;display:block;">
+          <rect x="0" y="0" width="760" height="470" rx="14" fill="#fbfcff" stroke="#e2e7f5" stroke-width="1"/>
+          <defs><marker id="cssend5k" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#5a6488"/></marker></defs>
+          <text x="380" y="26" text-anchor="middle" font-family="'Segoe UI','Noto Sans KR','Apple SD Gothic Neo',sans-serif" font-size="15" font-weight="700" fill="#1a2350">Handling conversations that already exist — merge by default</text>
+          <g font-family="'Segoe UI','Noto Sans KR','Apple SD Gothic Neo',sans-serif">
+            <rect x="290" y="44" width="180" height="40" rx="10" fill="#2b2f52" stroke="#6366f1" stroke-width="1.8"/>
+            <text x="380" y="68.68" text-anchor="middle" font-size="13" font-weight="700" fill="#eef0ff">Conversation to restore</text>
+            <path d="M380 84 L380 100" stroke="#5a6488" stroke-width="2" fill="none" marker-end="url(#cssend5k)"/>
+            <polygon points="380,102 530,138 380,174 230,138" fill="#fff4e0" stroke="#c47f13" stroke-width="1.8"/>
+            <text x="380" y="134.25" text-anchor="middle" font-size="12.5" font-weight="700" fill="#7a4c00">Is the same conversation</text>
+            <text x="380" y="150.75" text-anchor="middle" font-size="12.5" font-weight="700" fill="#7a4c00">already on this PC?</text>
+            <path d="M230 138 L150 138 L150 176" stroke="#5a6488" stroke-width="2" fill="none" marker-end="url(#cssend5k)"/>
+            <text x="190" y="130" text-anchor="middle" font-size="11.5" font-weight="700" fill="#4a5578">no</text>
+            <rect x="40" y="178" width="220" height="42" rx="10" fill="#e8effc" stroke="#2f4fa8" stroke-width="1.8"/>
+            <text x="150" y="203.68" text-anchor="middle" font-size="13" font-weight="700" fill="#16306e">Write it as new</text>
+            <path d="M380 174 L380 204" stroke="#5a6488" stroke-width="2" fill="none" marker-end="url(#cssend5k)"/>
+            <text x="394" y="194" text-anchor="start" font-size="11.5" font-weight="700" fill="#4a5578">yes</text>
+            <polygon points="380,206 510,240 380,274 250,240" fill="#fff4e0" stroke="#c47f13" stroke-width="1.8"/>
+            <text x="380" y="244.5" text-anchor="middle" font-size="12.5" font-weight="700" fill="#7a4c00">Does the content differ?</text>
+            <path d="M510 240 L600 240 L600 272" stroke="#5a6488" stroke-width="2" fill="none" marker-end="url(#cssend5k)"/>
+            <text x="556" y="232" text-anchor="middle" font-size="11.5" font-weight="700" fill="#4a5578">same</text>
+            <rect x="510" y="274" width="200" height="42" rx="10" fill="#f2f4f8" stroke="#8a93a8" stroke-width="1.8"/>
+            <text x="610" y="299.68" text-anchor="middle" font-size="13" font-weight="700" fill="#3d4560">Ask nothing</text>
+            <path d="M380 274 L380 304" stroke="#5a6488" stroke-width="2" fill="none" marker-end="url(#cssend5k)"/>
+            <text x="394" y="294" text-anchor="start" font-size="11.5" font-weight="700" fill="#4a5578">differs</text>
+            <rect x="250" y="306" width="260" height="52" rx="10" fill="#eef1fb" stroke="#5b74c8" stroke-width="1.8"/>
+            <text x="380" y="327.68" text-anchor="middle" font-size="13" font-weight="700" fill="#16306e">Ask the user</text>
+            <text x="380" y="345.68" text-anchor="middle" font-size="11.5" fill="#16306e">now N lines vs backup M lines</text>
+            <path d="M320 358 L320 378 L200 378 L200 394" stroke="#1f8a4c" stroke-width="2" fill="none" marker-end="url(#cssend5k)"/>
+            <path d="M440 358 L440 378 L560 378 L560 394" stroke="#c0392b" stroke-width="2" fill="none" marker-end="url(#cssend5k)"/>
+            <text x="250" y="372" text-anchor="middle" font-size="11.5" font-weight="700" fill="#125c32">default</text>
+            <text x="510" y="372" text-anchor="middle" font-size="11.5" font-weight="700" fill="#8a1f15">only if ticked</text>
+            <rect x="80" y="396" width="240" height="50" rx="10" fill="#e6f5ec" stroke="#1f8a4c" stroke-width="1.8"/>
+            <text x="200" y="416.68" text-anchor="middle" font-size="13" font-weight="700" fill="#125c32">✓ Merge line by line</text>
+            <text x="200" y="434.68" text-anchor="middle" font-size="11.5" fill="#125c32">nothing is lost on either side</text>
+            <rect x="440" y="396" width="240" height="50" rx="10" fill="#fdecec" stroke="#c0392b" stroke-width="1.8"/>
+            <text x="560" y="416.68" text-anchor="middle" font-size="13" font-weight="700" fill="#8a1f15">⚠ Overwrite with backup</text>
+            <text x="560" y="434.68" text-anchor="middle" font-size="11.5" fill="#8a1f15">current content is discarded</text>
+          </g>
+        </svg>
+        <figcaption>Figure 7. How overlapping conversations are handled. If the same conversation is absent, it is written as new; if present with identical content, nothing is asked. Only when the content differs does it ask — and the default is to merge.</figcaption>
+      </figure>
+
+      <h3>⑤ Scheduled backups with separate tracks for conversations and Cowork</h3>
+      <p>Conversations change often and a little at a time; Cowork work folders are large and change rarely. Put both on one schedule and one of them is always wrong. So scheduled backup runs the two on entirely separate schedules. There are three modes: <em>continuous watch</em>, checking every N minutes; <em>daily at a set time</em>, as in "once after the workday"; and <em>only within a time window</em>, which supports windows that cross midnight, such as 19:00 to 08:00. On top of these, both share weekday selection, "only if something changed", and "only once N minutes have passed since the last change". That last option matters more than you would think: start copying a gigabyte while someone is mid-conversation and they will feel it.</p>
+
+      <figure>
+        <a href="../../../articles/claude-session-switcher/images/03_schedule.png" target="_blank" rel="noopener" style="display:block;"><img src="../../../articles/claude-session-switcher/images/03_schedule.png" alt="The Scheduled Backup screen: a retention-count setting, and side-by-side cards for conversations (Code) and Cowork, each with a choice of continuous watch, daily at a set time or time window only, a check interval, weekday checkboxes, an only-if-changed option and quick presets" width="2122" height="1406" loading="lazy" style="width:100%;height:auto;display:block;border-radius:var(--radius-sm);box-shadow:var(--shadow-sm);"></a>
+        <figcaption>Figure 8. The Scheduled Backup screen. Conversations (Code) and Cowork can run on different intervals — say every 360 minutes and every 1,440 minutes — and there are presets such as "once after work", "once at night" and "outside working hours only". It never backs up the moment the app starts; it takes that moment as the baseline and treats only later changes as a signal.</figcaption>
+      </figure>
+
+      <p>The decision logic is isolated as a <strong>pure function</strong> that touches neither the clock nor the file system. It takes the current time, the last run and the last change as arguments and returns only whether to run now. That makes it possible to verify "does it fire properly at 11 p.m.?" without waiting until 11 p.m. — and 34 test cases do exactly that, covering weekdays, windows, midnight crossings, waiting for things to go quiet, and the independence of the two tracks. If a backup fails, the baseline is not advanced; advance it and the next check would conclude "no changes" and never retry.</p>
+
+      <figure>
+        <svg viewBox="0 0 760 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Flowchart: every 30 seconds the scheduler checks enabled, weekday, time condition, changes and quiet period in turn, and backs up only when all pass" style="width:100%;height:auto;display:block;">
+          <rect x="0" y="0" width="760" height="600" rx="14" fill="#fbfcff" stroke="#e2e7f5" stroke-width="1"/>
+          <defs><marker id="cssend7s" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#5a6488"/></marker><marker id="cssend7n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#8a93a8"/></marker></defs>
+          <text x="380" y="26" text-anchor="middle" font-family="'Segoe UI','Noto Sans KR','Apple SD Gothic Neo',sans-serif" font-size="15" font-weight="700" fill="#1a2350">Scheduled-backup decision — conversations and Cowork run separately</text>
+          <g font-family="'Segoe UI','Noto Sans KR','Apple SD Gothic Neo',sans-serif">
+            <rect x="110" y="46" width="380" height="38" rx="10" fill="#2b2f52" stroke="#6366f1" stroke-width="1.8"/>
+            <text x="300" y="69.5" text-anchor="middle" font-size="12.5" font-weight="700" fill="#eef0ff">check every 30 seconds</text>
+            <path d="M300 84 L300 106" stroke="#5a6488" stroke-width="2" fill="none" marker-end="url(#cssend7s)"/>
+            <rect x="110" y="108" width="380" height="40" rx="10" fill="#fff4e0" stroke="#c47f13" stroke-width="1.8"/>
+            <text x="300" y="132.5" text-anchor="middle" font-size="12.5" font-weight="700" fill="#7a4c00">Enabled?</text>
+            <path d="M490 128 L590 128" stroke="#8a93a8" stroke-width="1.6" fill="none" marker-end="url(#cssend7n)"/>
+            <text x="532" y="122" text-anchor="middle" font-size="11" font-weight="700" fill="#6a7390">no</text>
+            <path d="M300 148 L300 176" stroke="#5a6488" stroke-width="2" fill="none" marker-end="url(#cssend7s)"/>
+            <text x="310" y="167" text-anchor="start" font-size="11" font-weight="700" fill="#4a5578">yes</text>
+            <rect x="110" y="178" width="380" height="40" rx="10" fill="#fff4e0" stroke="#c47f13" stroke-width="1.8"/>
+            <text x="300" y="202.5" text-anchor="middle" font-size="12.5" font-weight="700" fill="#7a4c00">A scheduled weekday?</text>
+            <path d="M490 198 L590 198" stroke="#8a93a8" stroke-width="1.6" fill="none" marker-end="url(#cssend7n)"/>
+            <text x="532" y="192" text-anchor="middle" font-size="11" font-weight="700" fill="#6a7390">no</text>
+            <path d="M300 218 L300 246" stroke="#5a6488" stroke-width="2" fill="none" marker-end="url(#cssend7s)"/>
+            <text x="310" y="237" text-anchor="start" font-size="11" font-weight="700" fill="#4a5578">yes</text>
+            <rect x="110" y="248" width="380" height="82" rx="10" fill="#fff4e0" stroke="#c47f13" stroke-width="1.8"/>
+            <text x="300" y="276" text-anchor="middle" font-size="12.5" font-weight="700" fill="#7a4c00">Time condition met for this mode?</text>
+            <text x="300" y="293.5" text-anchor="middle" font-size="11" fill="#5c4a22">Daily at a set time: time has passed, not yet run today</text>
+            <text x="300" y="311" text-anchor="middle" font-size="11" fill="#5c4a22">Watch / time window: inside window and interval elapsed</text>
+            <path d="M490 289 L590 289" stroke="#8a93a8" stroke-width="1.6" fill="none" marker-end="url(#cssend7n)"/>
+            <text x="532" y="283" text-anchor="middle" font-size="11" font-weight="700" fill="#6a7390">no</text>
+            <path d="M300 330 L300 358" stroke="#5a6488" stroke-width="2" fill="none" marker-end="url(#cssend7s)"/>
+            <text x="310" y="349" text-anchor="start" font-size="11" font-weight="700" fill="#4a5578">yes</text>
+            <rect x="110" y="360" width="380" height="50" rx="10" fill="#fff4e0" stroke="#c47f13" stroke-width="1.8"/>
+            <text x="300" y="380.75" text-anchor="middle" font-size="12.5" font-weight="700" fill="#7a4c00">Anything changed?</text>
+            <text x="300" y="398.25" text-anchor="middle" font-size="11" fill="#5c4a22">(when 'only if changed' is on)</text>
+            <path d="M490 385 L590 385" stroke="#8a93a8" stroke-width="1.6" fill="none" marker-end="url(#cssend7n)"/>
+            <text x="532" y="379" text-anchor="middle" font-size="11" font-weight="700" fill="#6a7390">no</text>
+            <path d="M300 410 L300 438" stroke="#5a6488" stroke-width="2" fill="none" marker-end="url(#cssend7s)"/>
+            <text x="310" y="429" text-anchor="start" font-size="11" font-weight="700" fill="#4a5578">yes</text>
+            <rect x="110" y="440" width="380" height="40" rx="10" fill="#fff4e0" stroke="#c47f13" stroke-width="1.8"/>
+            <text x="300" y="464.5" text-anchor="middle" font-size="12.5" font-weight="700" fill="#7a4c00">Quiet long enough since last change?</text>
+            <path d="M490 460 L590 460" stroke="#8a93a8" stroke-width="1.6" fill="none" marker-end="url(#cssend7n)"/>
+            <text x="532" y="454" text-anchor="middle" font-size="11" font-weight="700" fill="#6a7390">no</text>
+            <rect x="592" y="100" width="148" height="398" rx="12" fill="#f2f4f8" stroke="#aab3cc" stroke-width="1.4"/>
+            <text x="666" y="284" text-anchor="middle" font-size="12.5" font-weight="700" fill="#3d4560">Do nothing</text>
+            <text x="666" y="304" text-anchor="middle" font-size="11.5" fill="#3d4560">check again</text>
+            <text x="666" y="324" text-anchor="middle" font-size="11.5" fill="#3d4560">in 30 seconds</text>
+            <path d="M300 480 L300 516" stroke="#5a6488" stroke-width="2" fill="none" marker-end="url(#cssend7s)"/>
+            <text x="310" y="502" text-anchor="start" font-size="11" font-weight="700" fill="#4a5578">yes</text>
+            <rect x="110" y="518" width="380" height="44" rx="10" fill="#e6f5ec" stroke="#1f8a4c" stroke-width="1.8"/>
+            <text x="300" y="544.68" text-anchor="middle" font-size="13" font-weight="700" fill="#125c32">Run backup → prune to retention count</text>
+            <text x="380" y="586" text-anchor="middle" font-size="11.5" fill="#4a5578">The decision is a pure function that touches neither clock nor files — '11 p.m.' is tested in 34 cases without waiting for 11 p.m.</text>
+          </g>
+        </svg>
+        <figcaption>Figure 9. The scheduled-backup decision. Every 30 seconds it wakes up and checks five conditions in turn; if any one says "no", it does nothing. Redrawn in a single column from the decision flowchart in the README.</figcaption>
+      </figure>
+
+      <h3>⑥ A Session Explorer with no account picker</h3>
+      <p>The Explorer shows every conversation on this computer in one list. You can search by title or working folder, preview, open the full conversation and save it as Markdown. Again there is no account picker. There used to be one, but choosing an account showed only part of the 46 conversations — the exact opposite of the Explorer's purpose, which is to find every conversation on this computer. Per-account link status is the linking screen's job.</p>
+
+      <figure>
+        <a href="../../../articles/claude-session-switcher/images/04_explorer.png" target="_blank" rel="noopener" style="display:block;"><img src="../../../articles/claude-session-switcher/images/04_explorer.png" alt="The Session Explorer screen: on the left a list of 18 conversations with title, working folder, turns and last activity columns; on the right a preview pane with buttons for full conversation, save as Markdown and open folder" width="2122" height="1406" loading="lazy" style="width:100%;height:auto;display:block;border-radius:var(--radius-sm);box-shadow:var(--shadow-sm);"></a>
+        <figcaption>Figure 10. Session Explorer. All 18 conversations on this computer, including unregistered ones, appear in a single list regardless of account.</figcaption>
+      </figure>
+
+      <h3>⑦ What it never does — a fail-closed safety design</h3>
+      <p>Because this tool handles people's conversation histories, I felt the list of things it does <em>not</em> do matters more than its features. These are the rules it follows today; most of them were born from real accidents.</p>
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;"><table>
+        <thead><tr><th>Rule</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td>Never deletes conversation files</td><td>The only deletion path is pruning old backups</td></tr>
+          <tr><td>Leaves a target account alone if it already holds its own original</td><td>An earlier version lacked this guard and silently deleted an original</td></tr>
+          <tr><td>Restore merges by default</td><td>So conversations newer than the backup are not lost</td></tr>
+          <tr><td>Never overwrites existing subagent logs</td><td>To protect records continued on this computer</td></tr>
+          <tr><td>Never fabricates a folder Claude Desktop did not create</td><td>Linking targets are limited to account/org pairs with a Code folder</td></tr>
+          <tr><td>Never backs up the moment the app starts</td><td>So repeated launches do not pile up backups and push out the retained ones</td></tr>
+        </tbody>
+      </table></div>
+      <p>Behind these sits one more attitude. Before any irreversible write it takes a snapshot, and <strong>if the snapshot itself fails, the write does not happen.</strong> No backup, no operation — the fail-closed principle. The tool also deals only with local files; the only thing that goes over the network is the app's update check.</p>
+
+      <h3>⑧ 172 automated checks and measurements on real data</h3>
+      <p>There are six test scripts with 172 checks in total. A script passes when its last line reads <code>FAILS: []</code>.</p>
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;"><table>
+        <thead><tr><th>Script</th><th>Checks</th><th>What it covers</th></tr></thead>
+        <tbody>
+          <tr><td><code>t_engine.py</code></td><td>57</td><td>Linking, backup, restore, conflict detection, kind filter, target eligibility, subagent logs</td></tr>
+          <tr><td><code>t_schedule.py</code></td><td>34</td><td>Scheduled-backup decisions (weekdays, windows, midnight crossing, waiting for quiet, independent tracks)</td></tr>
+          <tr><td><code>t_ui_flows.py</code></td><td>55</td><td>All four screens instantiated for real, end-to-end flows plus large-list performance</td></tr>
+          <tr><td><code>t_app_boot.py</code></td><td>—</td><td>Full app boot and screen layout</td></tr>
+          <tr><td><code>t_real_backup.py</code></td><td>17</td><td>A real backup of production data (reads real data, writes only to a temp folder)</td></tr>
+          <tr><td><code>t_real_ui_speed.py</code></td><td>9</td><td>How fast the selection dialog opens on real data (freeze regression)</td></tr>
+        </tbody>
+      </table></div>
+      <p>Isolated tests run only after redirecting environment variables before import and, after import, every path constant each module holds to a temp folder — confirmed with <code>assert</code>. Real-data tests only read, export backups to a temp folder, and never restore. Running a genuine backup on real data gave these results.</p>
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;"><table>
+        <thead><tr><th>Item</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Scope</td><td>49 conversations · 20 Cowork items · 2,018 subagent files</td></tr>
+          <tr><td>Source total → zip</td><td>1,115 MB → 896 MB</td></tr>
+          <tr><td>Time taken</td><td>64 seconds</td></tr>
+          <tr><td>Transcripts</td><td>Byte-identical</td></tr>
+          <tr><td>Changes to account folders</td><td>0 files added or removed</td></tr>
+          <tr><td>Opening the selection dialog</td><td>28+ seconds → 0.41 seconds for 1,015 items</td></tr>
+        </tbody>
+      </table></div>
+
+      <span class="chapter-label">Chapter 5. Use Cases</span>
+      <h2>When to use it</h2>
+      <p><strong>A developer moving between work and personal accounts.</strong> The most common case. Mornings go to company repositories on the work account, evenings to a side project on the personal one — yet conversations continuing in the same working folder on the same computer show up separately in each account. Press Unified Linking once and every conversation is visible from both; after that, press it again only when new conversations appear.</p>
+      <p><strong>One account with several organizations.</strong> Even with the same email, each organization gets its own folder under the account folder — which is also why switching organizations changes the sidebar. The Switcher treats each account/org pair as a separate linking target, so a conversation started in organization A can be listed in organization B as well.</p>
+      <p><strong>Moving to a new computer.</strong> Transcripts, registration files and Cowork data are scattered across three places, so copying by hand almost always misses something. Create a backup zip on the old computer, carry it over by USB or cloud, and restore it on the new one with "From file...". Unified Linking runs automatically right after the restore, so the conversations attach to every account on the new computer at once. There is, however, an important caveat on this scenario, covered in the "Limitations" chapter.</p>
+
+      <figure>
+        <svg viewBox="0 0 760 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sequence: computer A creates a backup, the file is carried over, computer B restores it, links automatically, then Claude Desktop restarts" style="width:100%;height:auto;display:block;">
+          <rect x="0" y="0" width="760" height="470" rx="14" fill="#fbfcff" stroke="#e2e7f5" stroke-width="1"/>
+          <defs><marker id="cssend6q" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#3b4a86"/></marker></defs>
+          <text x="380" y="26" text-anchor="middle" font-family="'Segoe UI','Noto Sans KR','Apple SD Gothic Neo',sans-serif" font-size="15" font-weight="700" fill="#1a2350">Moving to another computer, end to end</text>
+          <g font-family="'Segoe UI','Noto Sans KR','Apple SD Gothic Neo',sans-serif">
+            <line x1="95" y1="84" x2="95" y2="452" stroke="#aab3cc" stroke-width="1.4" stroke-dasharray="5 5"/>
+            <rect x="15" y="44" width="160" height="40" rx="10" fill="#2b2f52" stroke="#6366f1" stroke-width="1.8"/>
+            <text x="95" y="68.5" text-anchor="middle" font-size="12.5" font-weight="700" fill="#eef0ff">Computer A</text>
+            <line x1="285" y1="84" x2="285" y2="452" stroke="#aab3cc" stroke-width="1.4" stroke-dasharray="5 5"/>
+            <rect x="205" y="44" width="160" height="40" rx="10" fill="#2b2f52" stroke="#6366f1" stroke-width="1.8"/>
+            <text x="285" y="68.5" text-anchor="middle" font-size="12.5" font-weight="700" fill="#eef0ff">Backup .zip</text>
+            <line x1="475" y1="84" x2="475" y2="452" stroke="#aab3cc" stroke-width="1.4" stroke-dasharray="5 5"/>
+            <rect x="395" y="44" width="160" height="40" rx="10" fill="#2b2f52" stroke="#6366f1" stroke-width="1.8"/>
+            <text x="475" y="68.5" text-anchor="middle" font-size="12.5" font-weight="700" fill="#eef0ff">Computer B</text>
+            <line x1="665" y1="84" x2="665" y2="452" stroke="#aab3cc" stroke-width="1.4" stroke-dasharray="5 5"/>
+            <rect x="585" y="44" width="160" height="40" rx="10" fill="#2b2f52" stroke="#6366f1" stroke-width="1.8"/>
+            <text x="665" y="68.5" text-anchor="middle" font-size="12.5" font-weight="700" fill="#eef0ff">Claude Desktop on B</text>
+            <path d="M95 124 L279 124" stroke="#3b4a86" stroke-width="1.8" fill="none" marker-end="url(#cssend6q)"/>
+            <text x="190" y="116" text-anchor="middle" font-size="11.5" font-weight="700" fill="#1d2a5c">① pick conversations → create backup</text>
+            <rect x="160" y="140" width="250" height="40" rx="6" fill="#fffbe8" stroke="#d4b348" stroke-width="1.2"/>
+            <text x="285" y="164.14" text-anchor="middle" font-size="11.5" fill="#5c4a10">transcripts + subagent logs + pointer + Cowork</text>
+            <path d="M285 214 L469 214" stroke="#3b4a86" stroke-width="1.8" fill="none" stroke-dasharray="6 5" marker-end="url(#cssend6q)"/>
+            <text x="380" y="206" text-anchor="middle" font-size="11.5" font-weight="700" fill="#1d2a5c">② carry the file (USB, cloud)</text>
+            <path d="M475 258 L291 258" stroke="#3b4a86" stroke-width="1.8" fill="none" marker-end="url(#cssend6q)"/>
+            <text x="380" y="250" text-anchor="middle" font-size="11.5" font-weight="700" fill="#1d2a5c">③ restore via 'From file...'</text>
+            <path d="M285 300 L469 300" stroke="#3b4a86" stroke-width="1.8" fill="none" marker-end="url(#cssend6q)"/>
+            <text x="380" y="292" text-anchor="middle" font-size="11.5" font-weight="700" fill="#1d2a5c">ask first, then merge overlaps</text>
+            <rect x="360" y="318" width="230" height="40" rx="6" fill="#fffbe8" stroke="#d4b348" stroke-width="1.2"/>
+            <text x="475" y="342.14" text-anchor="middle" font-size="11.5" fill="#5c4a10">④ Unified Linking runs automatically</text>
+            <path d="M475 392 L659 392" stroke="#3b4a86" stroke-width="1.8" fill="none" marker-end="url(#cssend6q)"/>
+            <text x="570" y="384" text-anchor="middle" font-size="11.5" font-weight="700" fill="#1d2a5c">⑤ restart Claude Desktop</text>
+            <path d="M665 436 L481 436" stroke="#3b4a86" stroke-width="1.8" fill="none" stroke-dasharray="6 5" marker-end="url(#cssend6q)"/>
+            <text x="570" y="428" text-anchor="middle" font-size="11.5" font-weight="700" fill="#1d2a5c">conversations appear in every sidebar</text>
+          </g>
+        </svg>
+        <figcaption>Figure 11. The full move from computer A to computer B. Step ⑤, the restart, is needed because Claude Desktop reads registration files at startup (whether changes are picked up without a restart has not been tested, so the tool conservatively asks for one).</figcaption>
+      </figure>
+
+      <p><strong>Scheduled backup as insurance.</strong> For anyone whose conversation history is effectively their work log, this alone is reason enough. Keep the app in the tray, back up conversations every few hours and Cowork once a day, both with "only if something changed". Once the retention count is exceeded, the oldest backups are removed first.</p>
+      <p><strong>Finding an old conversation and turning it into a document.</strong> A memory like "how did we settle that parser tokenisation rule?" usually starts with not knowing which account or which session it was in. Find it in the Explorer by title or working folder, and if needed save it as Markdown as raw material for a design document or a retrospective.</p>
+
+      <span class="chapter-label">Chapter 6. Installation and Use</span>
+      <h2>From download to first link</h2>
+      <p><strong>Step 1 — Download.</strong> Grab <code style="overflow-wrap:anywhere;">ClaudeSessionSwitcher-v3.0.0.exe</code> (about 32 MB) from the GitHub releases page and run it; there is no installer. Settings and logs are stored in <code style="overflow-wrap:anywhere;">%APPDATA%\ClaudeSessionSwitcherV2\</code>. You need Windows 10/11 and Claude Desktop installed. To run from source instead, use Python 3.10 or later:</p>
+      <pre style="overflow-x:auto;font-size:.8rem;line-height:1.55;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px 16px;margin:0 0 1.45em;">git clone https://github.com/UniverseMaker/Claude-Desktop-Application-Cowork-and-Code-Session-Transfer.git
+cd Claude-Desktop-Application-Cowork-and-Code-Session-Transfer
+pip install -r requirements.txt
+python main.py</pre>
+      <p><strong>Step 2 — Check the current account.</strong> When the app opens, the top of the linking screen shows the "currently logged-in account" as Claude Desktop sees it (Figure 2). If automatic detection got it wrong, correct it with <em>Fix</em>, and use <em>Nickname</em> to give an account a human-readable name. The "accounts on this computer" list on the right shows Code and Cowork counts per account.</p>
+      <p><strong>Step 3 — Link.</strong> Press <em>Link now</em>. To link only some conversations, use <em>Pick and link...</em>; to just recompute the status, <em>Check again</em>. Then <strong>restart Claude Desktop</strong> — the <em>Force-restart Claude</em> button at the top right will do. From now on, logging in with another account shows the same list of conversations.</p>
+      <p><strong>Step 4 — Back up.</strong> On the Backup / Restore screen, the left side exports and the right side imports. Choose what to include (conversations, Cowork) and press <em>Pick conversations and back up...</em> or <em>Back up everything</em>. Compression (zip) and the backup location are set here too.</p>
+
+      <figure>
+        <a href="../../../articles/claude-session-switcher/images/02_transfer.png" target="_blank" rel="noopener" style="display:block;"><img src="../../../articles/claude-session-switcher/images/02_transfer.png" alt="The Backup / Restore screen: the backup location and zip option at the top; on the left, export from this computer with kind checkboxes, a pick-and-back-up button and the list of this computer's conversations; on the right, import from another computer with the backup list and restore buttons" width="2122" height="1406" loading="lazy" style="width:100%;height:auto;display:block;border-radius:var(--radius-sm);box-shadow:var(--shadow-sm);"></a>
+        <figcaption>Figure 12. The Backup / Restore screen. There is no field for choosing an account — the on-screen text says outright that each conversation exists only once on the computer. The "(unregistered conversation)" entries at the top of the list are backed up too. In the published image, the user-folder part of the backup path has been masked as <code>%USERPROFILE%</code>.</figcaption>
+      </figure>
+
+      <p>Backing up a selection opens a picker. By default <strong>everything is selected</strong>; untick only what you want to leave out. It offers a kind filter (conversations / Cowork), title search, and drag-selecting several rows then toggling them all with the space bar. "Select all" applies only to the items currently visible after filtering — touching items that are not on screen would make changes the user never saw.</p>
+
+      <figure>
+        <a href="../../../articles/claude-session-switcher/images/05_select.png" target="_blank" rel="noopener" style="display:block;max-width:620px;margin:0 auto;"><img src="../../../articles/claude-session-switcher/images/05_select.png" alt="The dialog for choosing conversations to back up: a select-all checkbox, all / conversations / Cowork filters, a title search box, a 23 of 23 selected counter, a list of ticked conversations with date, working folder and number of linked accounts, and a Create backup (23) button" width="1012" height="1016" loading="lazy" style="width:100%;height:auto;display:block;border-radius:var(--radius-sm);box-shadow:var(--shadow-sm);"></a>
+        <figcaption>Figure 13. Choosing conversations to back up — 23 of 23 selected by default. Since the list was rebuilt on a Treeview (the old version created several widgets per row), it opens within 0.4 seconds even past 1,000 items.</figcaption>
+      </figure>
+
+      <p><strong>Step 5 — Restore.</strong> On the other computer, select a backup on the import side and it first shows what is inside. Press <em>Restore from this backup...</em> or <em>From file...</em>; if any conversations overlap, the dialog in Figure 6 appears, and leaving it as is means merge. Unified Linking runs automatically when the restore finishes. Finally, restart Claude Desktop.</p>
+      <p><strong>Step 6 — Scheduled backup.</strong> On the Scheduled Backup screen, switch on the conversations and Cowork cards separately and pick a mode for each (Figure 8). Then turn on <strong>Stay in tray</strong> in the sidebar — if the program is closed, scheduled backups do not run.</p>
+
+      <span class="chapter-label">Chapter 7. How It Works, in Depth</span>
+      <h2>Why this works — the asymmetry between Cowork and Code</h2>
+      <p>The most confusing thing early in development was this: Cowork (agent mode) work, copied folder and all, opened fine in another account — so why not Code sessions? The answer lay in an asymmetry between the two storage trees.</p>
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;"><table>
+        <thead><tr><th>Item</th><th>Cowork</th><th>Code</th></tr></thead>
+        <tbody>
+          <tr><td>Where the registration file lives</td><td>Inside the account folder</td><td>Inside the account folder</td></tr>
+          <tr><td>Where the actual content lives</td><td>Inside the same account folder</td><td>In a shared area outside any account</td></tr>
+          <tr><td>What to copy when moving</td><td>Registration file + its whole content folder</td><td>The registration file only</td></tr>
+          <tr><td>Account fields in the registration file</td><td>Yes (<code>accountName</code>, <code>emailAddress</code>)</td><td>None</td></tr>
+          <tr><td>How to write it on move</td><td>Rewrite just those two fields</td><td>Copy byte for byte</td></tr>
+          <tr><td>Amount copied</td><td>Large (all work products)</td><td>Small (a few KB)</td></tr>
+        </tbody>
+      </table></div>
+      <p>Cowork keeps its content self-contained inside the account folder, so copying the folder wholesale just works; intuition and result agree. With Code, following intuition misses in one of two ways. Copy only the <code>.jsonl</code> and, with no registration file, it never appears in the sidebar. Hand-craft a registration file and it does appear — but broken, short of fields. It is not so much hard as a structure where <strong>intuition leads you astray</strong>.</p>
+      <p>I also checked how transcripts are found. The app walks every subfolder under <code>projects\</code> looking for a <em>filename</em>, <code style="overflow-wrap:anywhere;">&lt;cliSessionId&gt;.jsonl</code>. It does not matter if the working-folder value in the registration file differs from the folder the transcript actually sits in, so there is no need to reproduce the folder structure when moving a transcript. The working-folder value itself, however, is used for the trust check and for display, and if it is empty the app silently skips that registration file — so it must never be left blank.</p>
+
+      <h3>The number of .jsonl files is not the number of conversations</h3>
+      <p>Walk <code>projects\</code> recursively and count <code>.jsonl</code> files, and the conversation count swells more than twentyfold. Measured on one PC during development, only 46 of 992 files were actual conversations; the other 946 were logs left by the subagents those conversations spawned (<code style="overflow-wrap:anywhere;">subagents\agent-*.jsonl</code>). For a while, not knowing this, I believed the wrong figures of "995 sessions, 954 unregistered".</p>
+
+      <figure>
+        <svg viewBox="0 0 760 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Donut chart: of 992 .jsonl files under projects, 946 are subagent logs and only 46 are conversations" style="width:100%;height:auto;display:block;">
+          <rect x="0" y="0" width="760" height="320" rx="14" fill="#fbfcff" stroke="#e2e7f5" stroke-width="1"/>
+          <text x="380" y="26" text-anchor="middle" font-family="'Segoe UI','Noto Sans KR','Apple SD Gothic Neo',sans-serif" font-size="15" font-weight="700" fill="#1a2350">What the 992 .jsonl files under projects\ really are (one dev PC)</text>
+          <g font-family="'Segoe UI','Noto Sans KR','Apple SD Gothic Neo',sans-serif">
+            <circle cx="180" cy="172" r="96" fill="none" stroke="#b9c3dc" stroke-width="44"/>
+            <circle cx="180" cy="172" r="96" fill="none" stroke="#e0752d" stroke-width="44" stroke-dasharray="27.97 575.22" transform="rotate(-90 180 172)"/>
+            <text x="180" y="168" text-anchor="middle" font-size="30" font-weight="700" fill="#1a2350">992</text>
+            <text x="180" y="192" text-anchor="middle" font-size="12" fill="#4a5578">.jsonl files</text>
+            <rect x="340" y="86" width="18" height="18" rx="4" fill="#b9c3dc"/>
+            <text x="368" y="100" text-anchor="start" font-size="13.5" font-weight="700" fill="#1a2350">Subagent logs 946 · 95.4%</text>
+            <text x="368" y="121" text-anchor="start" font-size="11.5" fill="#4a5578">&lt;conversation&gt;\subagents\agent-*.jsonl</text>
+            <rect x="340" y="146" width="18" height="18" rx="4" fill="#e0752d"/>
+            <text x="368" y="160" text-anchor="start" font-size="13.5" font-weight="700" fill="#1a2350">Conversations 46 · 4.6%</text>
+            <text x="368" y="181" text-anchor="start" font-size="11.5" fill="#4a5578">&lt;project&gt;\&lt;cliSessionId&gt;.jsonl</text>
+            <line x1="340" y1="202" x2="740" y2="202" stroke="#e2e7f5"/>
+            <text x="340" y="226" text-anchor="start" font-size="12" fill="#2c3658">· Every subagent log lives inside a parent conversation folder (0 orphans)</text>
+            <text x="340" y="248" text-anchor="start" font-size="12" fill="#2c3658">· So conversations are counted one level deep only</text>
+            <text x="340" y="270" text-anchor="start" font-size="12" fill="#2c3658">· Backups carry subagent logs along with their parent</text>
+          </g>
+        </svg>
+        <figcaption>Figure 14. Of the 992 <code>.jsonl</code> files under <code>projects\</code>, 946 (95.4%) are subagent logs and only 46 (4.6%) are conversations. Redrawn as a donut from the pie chart in the README.</figcaption>
+      </figure>
+
+      <p>Every subagent log sat inside its parent conversation's folder (zero orphans). So the Switcher counts conversations one level deep only. And when backing up, it carries subagent logs <em>along with</em> their conversation, because moving the conversation alone would drop everything it had delegated. On restore, subagent logs that already exist are never overwritten.</p>
+
+      <h3>Always split both sides the same way</h3>
+      <p>When merging or comparing two transcripts, both sides must be split into lines in exactly the same way. Python's <code>str.splitlines()</code> splits not only on newlines but also on characters such as <code> </code> (LINE SEPARATOR). If only one side uses it, identical files are reported as "different". It actually happened: a single such character in a conversation put the two sides at 296 versus 298 lines. Left alone, users would have seen a groundless overwrite warning on every restore. Now both sides are split by one and the same helper function.</p>
+
+      <h3>"The account I am logged in with" is harder than it sounds</h3>
+      <p>At one point the app kept showing the first account even after I switched accounts in Claude Desktop. The cause: it was only reading <code style="overflow-wrap:anywhere;">%USERPROFILE%\.claude.json</code>. What that file records is the Claude Code <strong>CLI</strong> login, which can differ from the Desktop login. Now the app reads the current account Desktop remembers from <code style="overflow-wrap:anywhere;">%APPDATA%\Claude\config.json</code> and cross-checks it against the modification times of the <em>files inside</em> each account folder. It does not trust the folders' own modification times: the Switcher's own backups and restores were updating every account folder's timestamp, so it had been reading its own noise as a signal. And it does not present guesses as facts. Only accounts with direct evidence are shown by email; the rest are left to the account ID and the nickname the user gives them.</p>
+
+      <span class="chapter-label">Chapter 8. Lessons from Real Accidents</span>
+      <h2>The worst failures are the silent ones</h2>
+      <p>Most of this project's design principles did not come from a desk. They came from accidents in which data was damaged, or nearly was. It is a little embarrassing, but I am writing them down so the same mistakes are not repeated.</p>
+      <p><strong>Synthesised registration files dropped fields.</strong> The early implementation wrote brand-new registration files: 8 fields where the original had 24 to 32. To the user it looks like "the session showed up" — it has a title, it opens — so only much later do you discover that forks have vanished or some metadata has been reset. Worse, the distribution path had already moved to transplanting originals while the restore path was still on the old synthesis approach: two entry points to the same problem with two different policies. Both paths are now unified as "transplant the original if there is one; synthesise only if there is none". Synthesis is not forbidden but a last resort, and the tool warns when it has had to use it.</p>
+      <p><strong>A target account's genuine original was silently deleted.</strong> This was the most serious one. To prevent duplicate sidebar entries, I added logic that, after transplanting, deleted "other registration files pointing at the same conversation" — but that other file could be the target account's own genuine original. Now, just before transplanting, the tool looks at the target folder first, and if a non-synthesised original is there it neither transplants nor deletes. Originals and synthesised records are told apart by field count (24–32 versus at most 8) and the presence of the timestamp fields, with the threshold set at 9, just above the synthetic side. Misjudging an original as synthetic leads to deletion and must never happen; misjudging the other way merely means "tidied up a bit less", which can be recovered.</p>
+
+      <div class="pullquote">Misjudgements have a direction. Design so that when you are wrong, you are wrong in the direction you can undo.</div>
+
+      <p><strong>A restore overwrote the newest conversation.</strong> An earlier version overwrote conversation files wholesale by copying whole folders, so conversations newer than the backup quietly disappeared. All transcripts moved to line-by-line merging, which is today's "merge by default". Around the same time, the pre-overwrite snapshot function swallowed its exceptions on failure and the caller, never checking, overwrote anyway. Now, if a snapshot cannot be taken, that item is skipped rather than overwritten.</p>
+      <p><strong>A plugin folder was mistaken for accounts.</strong> Directly under the Cowork tree sat a non-UUID folder, <code>skills-plugin</code>, and code that only looked at the two-level folder structure took it for four normal accounts and sprayed user sessions into the plugin store. Now a folder counts as an account only when <strong>both</strong> the account and the org positions are standard hyphenated UUIDs. Data that had already gone in was not deleted; deletion is the user's call.</p>
+      <p><strong>The unlinked count was inflated.</strong> Account/org pairs that had only a Cowork folder and no Code folder were being counted as linking targets, so perfectly linked conversations were flagged as "missing" — 78 of 86 unlinked entries were phantoms. A Cowork folder may have been copied there by an older version of this very app, so it is no evidence that the pair is real. Limiting targets to pairs that actually have a Code folder fixed it.</p>
+      <p><strong>Tests touched my real data.</strong> Twice. Each module held its own copy of the path constants, and only some were patched. Since then, every isolated test counts all modules that reference paths, overrides them all and confirms with <code>assert</code> before running. There was also the time <strong>backups ate 40 GB of disk</strong>: the default backup location was next to the executable, so backups piled up in every version folder until the C drive was down to 230 MB free and the executable would not even start. Backups now go under the Documents folder. And a bug where creating two backups in the same second silently overwrote the first zip was caught just before the public release, when one of two demo backups disappeared.</p>
+      <div class="callout"><b>Design principles left behind by the accidents.</b> ① Originals stay byte for byte — never reconstruct; there are more than 24 fields we do not understand. ② Keep rather than delete. ③ Snapshot before any irreversible write, and if the snapshot fails, do not write (fail-closed). ④ If the target has its own original, leave it alone. ⑤ Never present a guess as a fact. ⑥ Compare both sides with the same helper. ⑦ Never mix <code>None</code> (everything) and <code>[]</code> (nothing) — mix them and "I unticked everything, yet everything ran" is the result.</div>
+
+      <span class="chapter-label">Chapter 9. Limitations and Cautions</span>
+      <h2>What has not been verified yet</h2>
+      <p>Listing only the good parts would not be fair. Here is what you should know before using the tool.</p>
+      <ul>
+        <li><strong>Windows 10/11 only.</strong> Every measurement was made on Windows 11 with the Store (MSIX) install. The layout on macOS/Linux has not been examined.</li>
+        <li><strong>Claude Desktop must be restarted.</strong> Whether changed registration files are picked up without a restart has not been tested, so the tool conservatively asks for one.</li>
+        <li><strong>The cross-computer round trip has not yet been verified in real use.</strong> Backup, restore and linking within one machine have passed both isolated and real-data tests, but there is not yet any record of actually moving between two physical computers. If you use it to migrate, please keep a separate backup as well.</li>
+        <li><strong>Conversations without a registration record</strong> (created from the CLI) have no basis for being put in a sidebar, so they are not linking targets. They are included in backups and visible in the Explorer. Putting them in the sidebar would mean synthesising registration files — records this codebase deliberately treats as inferior — so that decision has been left open.</li>
+        <li><strong>Titles and last-activity times can go stale in other accounts,</strong> because of the guard that never touches a target's genuine original. A rule that updates them while keeping the guard is left for the next version.</li>
+        <li><strong>A new Claude Desktop version could shake these premises.</strong> The structure described here reflects a specific build at the time of investigation. If the separation between registration and transcript IDs, or the list of failure reasons, changes, so may the tool's behaviour.</li>
+      </ul>
+      <div class="callout"><b>Not an official tool.</b> Claude Session Switcher is a personal open-source project unaffiliated with Anthropic. Claude, Claude Desktop and Claude Code are Anthropic products, and both this piece and the tool rest on observations of their local storage format. If an app update changes that internal format, the tool's behaviour may change too. Please keep independent backups of any conversations that matter.</div>
+      <p>Some things were also removed in v3.0.0. Shared-repository sync, usage analysis, CLI profiles and backup encryption, all present up to v2.0.0, were dropped as being too far from the tool's purpose. If you need them, the v2.0.0 release is still available.</p>
+
+      <span class="chapter-label">Chapter 10. Closing</span>
+      <h2>It looked impossible because of a single line of text</h2>
+      <p>Looking back, what consumed the most time in this project was not code but a false premise. One line — "may belong to another organization" — painted a picture of a server standing in the way, and inside that picture everything looked impossible. What erased it was no clever technique, just the dull work of reading every file and following the code to the end. Seen that way, the conversation had been in one place all along, and all that was missing was a pointer.</p>
+      <p>What I learned next was the distance between "possible" and "safe". Planting a pointer was easy. The hard part was not deleting someone's original, not overwriting the newest conversation, not losing fields I did not understand, and not presenting guesses as facts. Every one of those rules came after getting it wrong once.</p>
+      <p>If you move between several Claude accounts and feel the same friction, please give it a try, and let me know through GitHub issues if something goes wrong. Reports from anyone who has moved to another computer would be especially welcome — that is precisely the real-world verification this tool does not have yet.</p>
+      <ul>
+        <li>Repository: <a href="https://github.com/UniverseMaker/Claude-Desktop-Application-Cowork-and-Code-Session-Transfer#english" target="_blank" rel="noopener" style="overflow-wrap:anywhere;">github.com/UniverseMaker/Claude-Desktop-Application-Cowork-and-Code-Session-Transfer</a></li>
+        <li>Release v3.0.0: <a href="https://github.com/UniverseMaker/Claude-Desktop-Application-Cowork-and-Code-Session-Transfer/releases/tag/v3.0.0" target="_blank" rel="noopener">releases/tag/v3.0.0</a> (<code style="overflow-wrap:anywhere;">ClaudeSessionSwitcher-v3.0.0.exe</code>)</li>
+        <li>License: MIT</li>
+      </ul>
+
+      <div class="references">
+        <h4>References</h4>
+        <ol>
+          <li>Daeseung Park (UniverseMaker), "클로드 코드세션 스위처 · Claude Session Switcher" README (Korean and English). Storage layout, screens, how it works, safety rules, the 172 checks and the real-data backup measurement, limitations. All six screenshots were captured with fake demo data. <a href="https://github.com/UniverseMaker/Claude-Desktop-Application-Cowork-and-Code-Session-Transfer#english" target="_blank" rel="noopener" style="overflow-wrap:anywhere;">github.com/UniverseMaker/…Session-Transfer</a></li>
+          <li>Same repository, release notes "v3.0.0 — Unified Linking · per-computer backup · per-kind scheduled backup" (2026-09-29). The 78-of-86 phantom count, selection dialog from 28+ s to 0.41 s, 946 of 992 <code>.jsonl</code> files being subagent logs, the list of removed features. <a href="https://github.com/UniverseMaker/Claude-Desktop-Application-Cowork-and-Code-Session-Transfer/releases/tag/v3.0.0" target="_blank" rel="noopener">releases/tag/v3.0.0</a></li>
+          <li>The project's internal development documents, "Core technique: moving Claude Code sessions between accounts" and "Development progress and problem solving" (unpublished). Exhaustive scans of 143 registration files, 190 Cowork registration files and 984 transcripts (1.10 GB); the five failure reasons; evidence grades and the "not verified" list; the accident log. The evidence grading in this piece follows that document's distinctions exactly.</li>
+          <li>Same repository, <code>tests/README.md</code> — check counts and isolation rules for the six test scripts, and the script that builds the demo data environment (3 accounts, 18 conversations, 5 Cowork items).</li>
+          <li>Claude, Claude Desktop and Claude Code are products of Anthropic. The descriptions of internal structure in this piece come from observing local files and the app bundle, not from official documentation, and reflect a specific build at the time of investigation.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer of article -->
+  <div class="art-foot">
+    <div class="art-tags">
+      <a href="#">#Claude</a><a href="#">#ClaudeCode</a><a href="#">#SessionManagement</a><a href="#">#Backup</a><a href="#">#DeveloperTools</a>
+    </div>
+    <div class="author-card">
+      <div class="av">DP</div>
+      <div class="who">
+        <b>Daeseung Park</b>
+        <p>Researcher at KAIST. I study large language models, time-series forecasting, and conversational AI, and I try to record the research process as accurately and readably as I can.</p>
+      </div>
+    </div>
+
+    <div class="read-next no-print">
+        <div class="section-head" style="margin-bottom:20px;"><h2 style="font-size:1.3rem;">Read next</h2></div>
+        <div class="grid grid-2" id="readNext"><a href="../../articles/windows11-classic-context-menu/" class="post-card fade-up"><div class="thumb"><div class="ph fill-5 fill-grid "></div><span class="cat-pill dark">Dev · Notes</span><span class="num">B10</span></div><span class="cat dark">Windows</span><h3>Making “Show more options” the Default Right-Click Menu in Windows 11</h3><p>A registry command that makes Windows 11 open the full, classic right-click menu (“Show more options”) instead of the simplified one — and the command that puts it back.</p><div class="meta"><span class="by">Daeseung Park</span><span class="dot-sep">1 min read</span></div></a><a href="../../articles/git-submodule-branch-not-applied/" class="post-card fade-up"><div class="thumb"><div class="ph fill-3 fill-grid "></div><span class="cat-pill dark">Dev · Notes</span><span class="num">B09</span></div><span class="cat dark">Git</span><h3>(Git Error) Git Submodule Branch Won't Apply</h3><p>When the branch set in .gitmodules is not applied to a submodule: force it with git config, verify it, then update with git submodule update --remote.</p><div class="meta"><span class="by">Daeseung Park</span><span class="dot-sep">1 min read</span></div></a></div>
+      </div>
+      <nav class="post-nav no-print" id="postNav"><a class="pn" href="../../articles/windows11-classic-context-menu/"><span class="pn-dir">‹ Previous</span><span class="pn-t">Windows 11: “Show more options” by Default</span></a><a class="pn pn-list" href="../../articles.html?cat=blog">List</a><span class="pn pn-right empty"><span class="pn-dir">Next ›</span><span class="pn-t">None</span></span></nav>
+    </div>
+</article>
+
+<div class="print-footer">Daeseung Park · D. PARK Journal — Claude Session Switcher: Your Conversations Never Left</div>
+
+<footer class="site-footer no-print" id="contact"><div class="container-x"><div class="footer-grid"><div><div class="footer-brand">D. PARK</div><p style="max-width:34ch;">AI &amp; Software Systems Engineer · KAIST</p><div class="social" style="margin-top:16px;"><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener" aria-label="GitHub">GH</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener" aria-label="ORCID">iD</a><a href="mailto:dspark@daeseungpark.com" aria-label="Email">@</a></div></div><div><h6>Browse</h6><ul><li><a href="../../index.html">Home</a></li><li><a href="../../profile.html">Profile</a></li><li><a href="../../articles.html">Articles</a></li><li><a href="../../research.html">Research</a></li><li><a href="../../notices.html">Notice</a></li></ul></div><div><h6>Articles</h6><ul class="ft-arts"><li><a href="../../articles/ontology-schema-first-knowledge-graph/">Schema Before Data</a></li><li><a href="../../articles/address-graph-disaster-perception-stack/">Where, and What Happened</a></li><li><a href="../../articles/genai-copyright-data-licensing/">Mining, Called Learning</a></li><li><a href="../../articles/ai-agent-reliability-evals/">It Works in the Demo, Breaks in Production</a></li><li><a href="../../articles/reasoning-models-test-time-compute/">Not Bigger, but Thinking Longer</a></li></ul></div><div><h6>Contact</h6><ul><li><a href="mailto:dspark@daeseungpark.com">dspark@daeseungpark.com</a></li><li><a href="mailto:dspark@kaist.ac.kr">dspark@kaist.ac.kr</a></li><li><a href="tel:+821064547777">Phone (KR) +82 10 6454 7777</a></li><li><a href="tel:+16574109449">Phone (US) +1 657 410 9449</a></li><li>KAIST, Daejeon, Korea</li></ul></div></div><div class="footer-bottom"><span>© 2026 Daeseung Park. All rights reserved.</span><span>Designed &amp; built as a personal journal for Daeseung Park.</span></div></div></footer>
+
+<div class="mobile-nav" id="mobileNav"><button class="icon-btn close" id="navClose" aria-label="Close">✕</button><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></div>
+
+<script src="../../../assets/js/main.js?v=e9f2908b"></script>
+
+</body></html>

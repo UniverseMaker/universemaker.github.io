@@ -29,7 +29,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Noto+Serif+KR:wght@400;600&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
-<link rel="stylesheet" href="assets/css/style.css?v=da183d3f">
+<link rel="stylesheet" href="assets/css/style.css?v=edd658d3">
 </head>
 <body data-base="" data-hero="photo">
 
@@ -152,6 +152,17 @@
   </div>
 </section>
 
+<!-- ===== 최근 블로그 (blog-flagged articles · 블로그 id 내림차순 상위 4) ===== -->
+<section class="section" id="blog">
+  <div class="container-x">
+    <div class="section-head">
+      <div><h2>최근 블로그</h2><div class="sub">개발하며 남긴 기록과 문제 해결 노트</div></div>
+      <a href="articles.html?cat=blog" class="more">전체 보기 →</a>
+    </div>
+    <div class="blog-grid" id="homeBlog" data-prerendered="1"><a href="articles/claude-session-switcher/" class="feature-card fade-up"><div class="feature-thumb"><img class="ph " src="articles/claude-session-switcher/images/cover.svg" alt="" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;" loading="lazy"><span class="feature-badge blog-badge">블로그</span></div><div class="feature-body"><span class="cat">Dev · 노트</span><h3>클로드 코드세션 스위처: 계정을 바꿔도 대화는 그대로다</h3><p>Claude 계정을 여러 개 쓰면 계정을 바꿀 때마다 어제까지 쓰던 대화가 사이드바에서 사라진다. 서버가 막는다는 통념을 믿고 한동안 포기했지만, 직접 뜯어보니 대화 원문은 컴퓨터에 하나뿐이었고 계정 폴더에 있던 것은 그 파일을 가리키는 포인터일 뿐이었다. 그 발견 하나에서 출발해, 모든 대화를 모든 계정에 연결하고 컴퓨터 단위로 백업해 다른 PC로 옮기는 Windows 도구를 만들었다. 무엇을 하는 도구인지, 어디에 쓰는지, 그리고 만들면서 낸 사고에서 무엇을 배웠는지 적는다.</p><div class="meta"><span class="by">박대승</span><span class="dot-sep">2026-09-30</span></div></div></a><a href="articles/windows11-classic-context-menu/" class="feature-card fade-up"><div class="feature-thumb"><div class="ph fill-5 fill-grid "></div><span class="feature-badge blog-badge">블로그</span></div><div class="feature-body"><span class="cat">Dev · 노트</span><h3>윈도우11 우클릭 시 “추가옵션보기”를 기본으로 설정하기</h3><p>윈도우11의 간소화된 우클릭 메뉴 대신 예전 전체 메뉴(추가 옵션 보기)가 바로 뜨도록 레지스트리를 등록하는 명령어와, 원래대로 되돌리는 명령어.</p><div class="meta"><span class="by">박대승</span><span class="dot-sep">2025-09-03</span></div></div></a><a href="articles/git-submodule-branch-not-applied/" class="feature-card fade-up"><div class="feature-thumb"><div class="ph fill-3 fill-grid "></div><span class="feature-badge blog-badge">블로그</span></div><div class="feature-body"><span class="cat">Dev · 노트</span><h3>(Git Error) Git submodule branch 적용불가 문제</h3><p>.gitmodules에 branch를 지정해도 서브모듈에 적용되지 않을 때, git config로 강제 적용하고 확인한 뒤 git submodule update --remote로 업데이트하는 순서.</p><div class="meta"><span class="by">박대승</span><span class="dot-sep">2025-08-20</span></div></div></a><a href="articles/cpp-runtime-error-unable-to-open-xml/" class="feature-card fade-up"><div class="feature-thumb"><div class="ph fill-1 fill-grid "></div><span class="feature-badge blog-badge">블로그</span></div><div class="feature-body"><span class="cat">Dev · 노트</span><h3>(C++ Error) terminate called after throwing an instance of 'std::runtime_error': Unable to open xml file</h3><p>C++ 프로그램이 'Unable to open xml file' 런타임 에러로 종료될 때 확인할 것 — 필요한 폴더 디렉터리 구성과 해당 파일의 존재 여부.</p><div class="meta"><span class="by">박대승</span><span class="dot-sep">2025-08-19</span></div></div></a></div>
+  </div>
+</section>
+
 <!-- ===== Home preview sections (config-driven) ===== -->
 <section class="section" id="homeActivitySec">
   <div class="container-x">
@@ -228,6 +239,6 @@
 
 
 
-<script src="assets/js/main.js?v=33869a70"></script>
+<script src="assets/js/main.js?v=e9f2908b"></script>
 </body>
 </html>

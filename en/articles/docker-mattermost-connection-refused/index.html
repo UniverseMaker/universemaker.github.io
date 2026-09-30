@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-prerendered="1"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[Docker] Mattermost Unreachable from Outside: Connection Refused, Mattermost-preview - Daeseung Park Journal</title>
+<meta name="description" content="When a Dockerized mattermost-preview answers outside connections with Connection Refused, recreate the container with the --add-host option.">
+<link rel="canonical" href="https://daeseungpark.com/en/articles/docker-mattermost-connection-refused/"><link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/docker-mattermost-connection-refused/"><link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/docker-mattermost-connection-refused/"><link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/docker-mattermost-connection-refused/"><meta property="og:locale:alternate" content="ko_KR">
+<!-- seo-i18n:start -->
+
+
+
+
+<!-- seo-i18n:end -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="D. PARK Journal">
+<meta property="og:title" content="[Docker] Mattermost Unreachable from Outside: Connection Refused, Mattermost-preview">
+<meta property="og:description" content="When a Dockerized mattermost-preview answers outside connections with Connection Refused, recreate the container with the --add-host option.">
+<meta property="og:url" content="https://daeseungpark.com/en/articles/docker-mattermost-connection-refused/">
+<meta property="og:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="[Docker] Mattermost Unreachable from Outside: Connection Refused, Mattermost-preview">
+<meta name="twitter:description" content="When a Dockerized mattermost-preview answers outside connections with Connection Refused, recreate the container with the --add-host option.">
+<meta name="twitter:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"[Docker] Mattermost Unreachable from Outside: Connection Refused, Mattermost-preview","author":{"@type":"Person","name":"박대승","alternateName":"Daeseung Park"},"publisher":{"@type":"Organization","name":"D. PARK Journal"},"image":"https://daeseungpark.com/assets/img/profile/img3.jpg","mainEntityOfPage":"https://daeseungpark.com/en/articles/docker-mattermost-connection-refused/","inLanguage":"en","datePublished":"2024-05-23"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&amp;family=Noto+Serif+KR:wght@400;600&amp;family=Noto+Sans+KR:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="../../../assets/css/style.css?v=edd658d3">
+<link rel="stylesheet" href="../../../assets/css/article.css?v=c9e013b8">
+</head>
+<body data-base="../../">
+<div class="progress-bar" id="progress"></div>
+<div class="topbar no-print">
+  <div class="container-x">
+    <span class="tb-date" id="today">—</span>
+    <div class="tb-links"><a href="https://ai.daeseungpark.com/chat/" target="_blank" rel="noopener">Abliterated AI</a><a href="https://service.daeseungpark.com/rchat" target="_blank" rel="noopener">LLM Research Platform</a><a href="../../profile.html">Profile</a><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener">GitHub</a><a href="https://scholar.google.com/citations?hl=ko&amp;user=qVom0QUAAAAJ" target="_blank" rel="noopener">Scholar</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener">ORCID</a><a href="https://hub.docker.com/u/daeseungpark" target="_blank" rel="noopener">Docker</a><a href="https://codespectrum.net" target="_blank" rel="noopener">Blog</a><a href="../../profile.html#contact">Contact</a><a href="../../notices.html">Notice</a><a href="/articles/docker-mattermost-connection-refused/" class="tb-lang-link" aria-label="Language">한국어</a></div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header no-print">
+  <div class="container-x nav-row">
+    <a href="../../index.html" class="brand">D<span class="dot">.</span> PARK <small>Journal</small></a>
+    <nav class="main-nav"><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">☾</span></button>
+      <button class="print-cta" id="printBtn">🖶 Print / PDF</button>
+      <button class="icon-btn nav-toggle" id="navToggle" aria-label="Menu">≡</button>
+    </div>
+  </div>
+</header>
+
+<div class="ticker no-print">
+  <div class="container-x">
+    <span class="label">Trending</span>
+    <div class="items" id="tickerItems"><a href="../../articles/ontology-schema-first-knowledge-graph/">Schema Before Data</a><a href="../../articles/address-graph-disaster-perception-stack/">Where, and What Happened</a><a href="../../articles/genai-copyright-data-licensing/">Mining, Called Learning</a><a href="../../articles/ai-agent-reliability-evals/">It Works in the Demo, Breaks in…</a><a href="../../articles/reasoning-models-test-time-compute/">Bigger Model or Longer Thought?</a><a href="../../articles/rag-architectures-hallucination/">Four Ways Retrieval Rescues In…</a></div>
+  </div>
+</div>
+
+<article class="blog-import" data-article-id="105">
+  <div class="article-wrap">
+    <!-- Masthead -->
+    <header class="art-head">
+      <span class="cat-pill dark">Dev · Notes</span>
+      <h1>[Docker] Mattermost Unreachable from Outside: Connection Refused, Mattermost-preview</h1>
+      <p class="deck">When a Dockerized mattermost-preview answers outside connections with Connection Refused, recreate the container with the --add-host option.</p>
+      <div class="art-byline">
+        <div class="av">DP</div>
+        <div class="who">
+          <b>Daeseung Park</b>
+          <span>AI &amp; Software Systems Engineer · KAIST</span>
+          <span>May 23, 2024 · 1 min read</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="art-cover"><div class="fill-7 fill-grid" style="position:absolute;inset:0;"></div></div>
+
+    <!-- Body -->
+    <div class="prose">
+      <p>If the server can't be reached from outside, recreate the container with the command below and use that instead.</p>
+      <pre class="blog-code" tabindex="0"><code>docker run --name mattermost-preview -d --publish 8065:8065 --add-host dockerhost:127.0.0.1 mattermost/mattermost-preview</code></pre>
+      <p>The key part is <code>--add-host dockerhost:127.0.0.1</code>.</p>
+      <p>This is the step that allows outside access; without that option you may see a Connection Refused error.</p>
+      <div class="callout blog-origin"><b>Originally published:</b> <a href="https://codespectrum.net/2024/05/23/docker-mattermost-%ec%99%b8%eb%b6%80%ec%a0%91%ec%86%8d-%eb%b6%88%ea%b0%80-connection-refused-mattermost-preview/" target="_blank" rel="noopener">codespectrum.net</a>, 2024-05-23 (in Korean). Moved here from my tech blog CODESPECTRUM and translated into English; commands, code and error messages are kept exactly as in the original.</div>
+    </div>
+  </div>
+
+  <!-- Footer of article -->
+  <div class="art-foot">
+    <div class="art-tags">
+      <a href="#">#Docker</a><a href="#">#Mattermost</a><a href="#">#Troubleshooting</a>
+    </div>
+    <div class="author-card">
+      <div class="av">DP</div>
+      <div class="who">
+        <b>Daeseung Park</b>
+        <p>Researcher at KAIST. I study large language models, time-series forecasting, and conversational AI, and I try to record the research process as accurately and readably as I can.</p>
+      </div>
+    </div>
+
+    <div class="read-next no-print">
+        <div class="section-head" style="margin-bottom:20px;"><h2 style="font-size:1.3rem;">Read next</h2></div>
+        <div class="grid grid-2" id="readNext"><a href="../../articles/ubuntu-apm-quick-install/" class="post-card fade-up"><div class="thumb"><div class="ph fill-3 fill-grid "></div><span class="cat-pill dark">Dev · Notes</span><span class="num">B03</span></div><span class="cat dark">Linux</span><h3>Ubuntu APM Quick Install (Apache, PHP, MySQL)</h3><p>Only the essential commands for putting Apache, MySQL and PHP on Ubuntu, in order — plus what to do when the MySQL password prompt never appears and when PHP won't run.</p><div class="meta"><span class="by">Daeseung Park</span><span class="dot-sep">1 min read</span></div></a><a href="../../articles/git-submodule-branch-not-applied/" class="post-card fade-up"><div class="thumb"><div class="ph fill-3 fill-grid "></div><span class="cat-pill dark">Dev · Notes</span><span class="num">B09</span></div><span class="cat dark">Git</span><h3>(Git Error) Git Submodule Branch Won't Apply</h3><p>When the branch set in .gitmodules is not applied to a submodule: force it with git config, verify it, then update with git submodule update --remote.</p><div class="meta"><span class="by">Daeseung Park</span><span class="dot-sep">1 min read</span></div></a></div>
+      </div>
+      <nav class="post-nav no-print" id="postNav"><a class="pn" href="../../articles/openai-fine-tuning-data-format/"><span class="pn-dir">‹ Previous</span><span class="pn-t">OpenAI ChatGPT Fine-tuning Data Format</span></a><a class="pn pn-list" href="../../articles.html?cat=blog">List</a><a class="pn pn-right" href="../../articles/wordpress-cloudflare-too-many-redirects/"><span class="pn-dir">Next ›</span><span class="pn-t">[WordPress] ERR_TOO_MANY_REDIRECTS After Cloudflare</span></a></nav>
+    </div>
+</article>
+
+<div class="print-footer">Daeseung Park · D. PARK Journal — [Docker] Mattermost Unreachable from Outside: Connection Refused, Mattermost-preview</div>
+
+<footer class="site-footer no-print" id="contact"><div class="container-x"><div class="footer-grid"><div><div class="footer-brand">D. PARK</div><p style="max-width:34ch;">AI &amp; Software Systems Engineer · KAIST</p><div class="social" style="margin-top:16px;"><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener" aria-label="GitHub">GH</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener" aria-label="ORCID">iD</a><a href="mailto:dspark@daeseungpark.com" aria-label="Email">@</a></div></div><div><h6>Browse</h6><ul><li><a href="../../index.html">Home</a></li><li><a href="../../profile.html">Profile</a></li><li><a href="../../articles.html">Articles</a></li><li><a href="../../research.html">Research</a></li><li><a href="../../notices.html">Notice</a></li></ul></div><div><h6>Articles</h6><ul class="ft-arts"><li><a href="../../articles/ontology-schema-first-knowledge-graph/">Schema Before Data</a></li><li><a href="../../articles/address-graph-disaster-perception-stack/">Where, and What Happened</a></li><li><a href="../../articles/genai-copyright-data-licensing/">Mining, Called Learning</a></li><li><a href="../../articles/ai-agent-reliability-evals/">It Works in the Demo, Breaks in Production</a></li><li><a href="../../articles/reasoning-models-test-time-compute/">Not Bigger, but Thinking Longer</a></li></ul></div><div><h6>Contact</h6><ul><li><a href="mailto:dspark@daeseungpark.com">dspark@daeseungpark.com</a></li><li><a href="mailto:dspark@kaist.ac.kr">dspark@kaist.ac.kr</a></li><li><a href="tel:+821064547777">Phone (KR) +82 10 6454 7777</a></li><li><a href="tel:+16574109449">Phone (US) +1 657 410 9449</a></li><li>KAIST, Daejeon, Korea</li></ul></div></div><div class="footer-bottom"><span>© 2026 Daeseung Park. All rights reserved.</span><span>Designed &amp; built as a personal journal for Daeseung Park.</span></div></div></footer>
+
+<div class="mobile-nav" id="mobileNav"><button class="icon-btn close" id="navClose" aria-label="Close">✕</button><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></div>
+
+<script src="../../../assets/js/main.js?v=e9f2908b"></script>
+
+</body></html>

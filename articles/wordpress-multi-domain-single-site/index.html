@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light" data-prerendered="1">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>워드프레스 멀티도메인 사용 설정하기 / WordPress using Multi-domain with Single-site - Daeseung Park Journal</title>
+<meta name="description" content="워드프레스 사이트 하나에 도메인 여러 개를 연결하면 메인 도메인을 제외한 나머지에서는 이미지가 엑스박스로 뜬다. 리다이렉션 없이 각 도메인이 개별적으로 정상 작동하게 만드는 wp-config.php 설정.">
+<link rel="canonical" href="https://daeseungpark.com/articles/wordpress-multi-domain-single-site/">
+<!-- seo-i18n:start -->
+<link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/wordpress-multi-domain-single-site/">
+<link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/wordpress-multi-domain-single-site/">
+<link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/wordpress-multi-domain-single-site/">
+<meta property="og:locale:alternate" content="en_US">
+<!-- seo-i18n:end -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="D. PARK Journal">
+<meta property="og:title" content="워드프레스 멀티도메인 사용 설정하기 / WordPress using Multi-domain with Single-site">
+<meta property="og:description" content="워드프레스 사이트 하나에 도메인 여러 개를 연결하면 메인 도메인을 제외한 나머지에서는 이미지가 엑스박스로 뜬다. 리다이렉션 없이 각 도메인이 개별적으로 정상 작동하게 만드는 wp-config.php 설정.">
+<meta property="og:url" content="https://daeseungpark.com/articles/wordpress-multi-domain-single-site/">
+<meta property="og:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="워드프레스 멀티도메인 사용 설정하기 / WordPress using Multi-domain with Single-site">
+<meta name="twitter:description" content="워드프레스 사이트 하나에 도메인 여러 개를 연결하면 메인 도메인을 제외한 나머지에서는 이미지가 엑스박스로 뜬다. 리다이렉션 없이 각 도메인이 개별적으로 정상 작동하게 만드는 wp-config.php 설정.">
+<meta name="twitter:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"워드프레스 멀티도메인 사용 설정하기 / WordPress using Multi-domain with Single-site","author":{"@type":"Person","name":"박대승","alternateName":"Daeseung Park"},"publisher":{"@type":"Organization","name":"D. PARK Journal"},"image":"https://daeseungpark.com/assets/img/profile/img3.jpg","mainEntityOfPage":"https://daeseungpark.com/articles/wordpress-multi-domain-single-site/","inLanguage":"ko","datePublished":"2024-04-18"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Noto+Serif+KR:wght@400;600&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="../../assets/css/style.css?v=edd658d3">
+<link rel="stylesheet" href="../../assets/css/article.css?v=c9e013b8">
+</head>
+<body data-base="../../">
+<div class="progress-bar" id="progress"></div>
+<div class="topbar no-print">
+  <div class="container-x">
+    <span class="tb-date" id="today">—</span>
+    <div class="tb-links" data-prerendered="1"><a href="https://ai.daeseungpark.com/chat/" target="_blank" rel="noopener">Abliterated AI</a><a href="https://service.daeseungpark.com/rchat" target="_blank" rel="noopener">LLM Research Platform</a><a href="../../profile.html">Profile</a><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener">GitHub</a><a href="https://scholar.google.com/citations?hl=ko&amp;user=qVom0QUAAAAJ" target="_blank" rel="noopener">Scholar</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener">ORCID</a><a href="https://hub.docker.com/u/daeseungpark" target="_blank" rel="noopener">Docker</a><a href="https://codespectrum.net" target="_blank" rel="noopener">Blog</a><a href="../../profile.html#contact">Contact</a><a href="../../notices.html">Notice</a><a href="/en/articles/wordpress-multi-domain-single-site/" class="tb-lang-link" aria-label="Language">English</a></div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header no-print">
+  <div class="container-x nav-row">
+    <a href="../../index.html" class="brand">D<span class="dot">.</span> PARK <small>Journal</small></a>
+    <nav class="main-nav" data-prerendered="1"><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="테마 전환"><span id="themeIcon">☾</span></button>
+      <button class="print-cta" id="printBtn">🖶 인쇄 / PDF</button>
+      <button class="icon-btn nav-toggle" id="navToggle" aria-label="메뉴">≡</button>
+    </div>
+  </div>
+</header>
+
+<div class="ticker no-print">
+  <div class="container-x">
+    <span class="label">Trending</span>
+    <div class="items" id="tickerItems" data-prerendered="1"><a href="../../articles/ontology-schema-first-knowledge-graph/">데이터보다 스키마가 먼저다</a><a href="../../articles/address-graph-disaster-perception-stack/">어디서 무슨 일이 일어났는가</a><a href="../../articles/genai-copyright-data-licensing/">학습이라는 이름의 채굴</a><a href="../../articles/ai-agent-reliability-evals/">데모는 되는데, 프로덕션에서 무너지는 이유</a><a href="../../articles/reasoning-models-test-time-compute/">더 키우기보다 더 생각하게 — 테스트타임 컴퓨트…</a><a href="../../articles/rag-architectures-hallucination/">검색이 지능을 구원하는 네 가지 방법 — Lexical…</a></div>
+  </div>
+</div>
+
+<article class="blog-import" data-article-id="102">
+  <div class="article-wrap">
+    <!-- Masthead -->
+    <header class="art-head">
+      <span class="cat-pill dark">Dev · 노트</span>
+      <h1>워드프레스 멀티도메인 사용 설정하기 / WordPress using Multi-domain with Single-site</h1>
+      <p class="deck">워드프레스 사이트 하나에 도메인 여러 개를 연결하면 메인 도메인을 제외한 나머지에서는 이미지가 엑스박스로 뜬다. 리다이렉션 없이 각 도메인이 개별적으로 정상 작동하게 만드는 wp-config.php 설정.</p>
+      <div class="art-byline">
+        <div class="av">DP</div>
+        <div class="who">
+          <b>박대승 (Daeseung Park)</b>
+          <span>AI &amp; Software Systems Engineer · KAIST</span>
+          <span>2024년 4월 18일 · 3분 읽기</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="art-cover"><div class="fill-1 fill-grid" style="position:absolute;inset:0;"></div></div>
+
+    <!-- Body -->
+    <div class="prose">
+      <p>한개의 워드프레스 사이트에서 여러개 도메인을 연결해 사용하며 Redirection 이 아닌 각 도메인이 개별적으로 정상 작동하기 위해서는 wp-config.php 파일 수정이 필요하다.</p>
+      <p>wp-config.php 를 수정하지 않고 여러 도메인을 사용하는 경우 처음 설정한 메인도메인을 제외한 나머지 도메인에서는 이미지 엑스박스가 뜨기 때문에 아래 설정이 필수이다.</p>
+      <p>*원본 wp-config.php의 내용</p>
+      <pre class="blog-code" tabindex="0"><code>&lt;?php
+/**
+ * The base configuration for WordPress
+ *
+ * The wp-config.php creation script uses this file during the installation.
+ * You don't have to use the web site, you can copy this file to "wp-config.php"
+ * and fill in the values.
+ *
+ * This file contains the following configurations:
+ *
+ * * Database settings
+ * * Secret keys
+ * * Database table prefix
+ * * ABSPATH
+ *
+ * @link https://wordpress.org/support/article/editing-wp-config-php/
+ *
+ * @package WordPress
+ */
+
+// ** Database settings - You can get this info from your web host ** //
+/** The name of the database for WordPress */
+define( 'DB_NAME', 'database' );
+
+/** Database username */
+define( 'DB_USER', 'user' );
+
+/** Database password */
+define( 'DB_PASSWORD', 'password' );
+
+/** Database hostname */
+define( 'DB_HOST', 'localhost' );
+
+/** Database charset to use in creating database tables. */
+define( 'DB_CHARSET', 'utf8mb4' );
+
+/** The database collate type. Don't change this if in doubt. */
+define( 'DB_COLLATE', '' );
+
+/**#@+
+ * Authentication unique keys and salts.
+ *
+ * Change these to different unique phrases! You can generate these using
+ * the {@link https://api.wordpress.org/secret-key/1.1/salt/ WordPress.org secret-key service}.
+ *
+ * You can change these at any point in time to invalidate all existing cookies.
+ * This will force all users to have to log in again.
+ *
+ * @since 2.6.0
+ */
+define( 'AUTH_KEY',         'key1' );
+define( 'SECURE_AUTH_KEY',  'key2' );
+define( 'LOGGED_IN_KEY',    'key3' );
+define( 'NONCE_KEY',        'key4' );
+define( 'AUTH_SALT',        'key5' );
+define( 'SECURE_AUTH_SALT', 'key6' );
+define( 'LOGGED_IN_SALT',   'key7' );
+define( 'NONCE_SALT',       'key8' );
+
+/**#@-*/
+
+/**
+ * WordPress database table prefix.
+ *
+ * You can have multiple installations in one database if you give each
+ * a unique prefix. Only numbers, letters, and underscores please!
+ */
+$table_prefix = 'wp_';
+
+/**
+ * For developers: WordPress debugging mode.
+ *
+ * Change this to true to enable the display of notices during development.
+ * It is strongly recommended that plugin and theme developers use WP_DEBUG
+ * in their development environments.
+ *
+ * For information on other constants that can be used for debugging,
+ * visit the documentation.
+ *
+ * @link https://wordpress.org/support/article/debugging-in-wordpress/
+ */
+define( 'WP_DEBUG', false );
+
+/* Add any custom values between this line and the "stop editing" line. */
+
+/* That's all, stop editing! Happy publishing. */
+
+/** Absolute path to the WordPress directory. */
+if ( ! defined( 'ABSPATH' ) ) {
+	define( 'ABSPATH', __DIR__ . '/' );
+}
+
+/** Sets up WordPress vars and included files. */
+require_once ABSPATH . 'wp-settings.php';</code></pre>
+      <p>멀티 도메인의 원활한 사용을 위해서는 “Add any custom values between this line and the “stop editing” line.” 이 라인 아래에 코드 추가가 필요하다.</p>
+      <pre class="blog-code" tabindex="0"><code>define('COOKIE_DOMAIN', $_SERVER['HTTP_HOST']);
+define('WP_CONTENT_URL', "https://{$_SERVER['HTTP_HOST']}/wp-content");
+define( 'WP_ALLOW_MULTISITE', true );</code></pre>
+      <p>위 코드를 추가하면 어떠한 도메인으로 접근하여도 이미지가 잘 보이게 된다.</p>
+      <div class="callout blog-origin"><b>원문:</b> <a href="https://codespectrum.net/2024/04/18/%ec%9b%8c%eb%93%9c%ed%94%84%eb%a0%88%ec%8a%a4-%eb%a9%80%ed%8b%b0%eb%8f%84%eb%a9%94%ec%9d%b8-%ec%82%ac%ec%9a%a9-%ec%84%a4%ec%a0%95%ed%95%98%ea%b8%b0-wordpress-using-multi-domain-with-single-site/" target="_blank" rel="noopener">codespectrum.net</a>, 2024-04-18 게시. 필자의 기술 블로그 코드스펙트럼(CODESPECTRUM)에 올렸던 글을 이곳으로 옮겨 왔습니다. 문장과 명령어는 원문 그대로 두고 서식만 정리했습니다.</div>
+    </div>
+  </div>
+
+  <!-- Footer of article -->
+  <div class="art-foot">
+    <div class="art-tags">
+      <a href="#">#워드프레스</a><a href="#">#멀티도메인</a><a href="#">#wp-config</a>
+    </div>
+    <div class="author-card">
+      <div class="av">DP</div>
+      <div class="who">
+        <b>박대승 · Daeseung Park</b>
+        <p>KAIST 연구원. 대형언어모델, 시계열 예측, 대화형 AI를 연구합니다. 연구의 과정을 가능한 한 정확하고 읽기 좋게 기록하려 합니다.</p>
+      </div>
+    </div>
+
+    <div class="read-next no-print">
+        <div class="section-head" style="margin-bottom:20px;"><h2 style="font-size:1.3rem;">다음 글</h2></div>
+        <div class="grid grid-2" id="readNext" data-prerendered="1"><a href="../../articles/wordpress-cloudflare-too-many-redirects/" class="post-card fade-up"><div class="thumb"><div class="ph fill-2 fill-grid "></div><span class="cat-pill dark">Dev · 노트</span><span class="num">B06</span></div><span class="cat dark">WordPress</span><h3>[WordPress] Cloudflare 적용 후 ERR_TOO_MANY_REDIRECTS 초간단 해결방법</h3><p>스팸 댓글 때문에 Cloudflare를 적용했더니 로그인에서 ERR_TOO_MANY_REDIRECTS가 났다. 원인은 SSL 가변 모드에서 생기는 https와 http 사이의 루프 — 암호화 모드를 '전체'로 바꿔 해결한다.</p><div class="meta"><span class="by">박대승</span><span class="dot-sep">3분 읽기</span></div></a><a href="../../articles/ubuntu-apm-quick-install/" class="post-card fade-up"><div class="thumb"><div class="ph fill-3 fill-grid "></div><span class="cat-pill dark">Dev · 노트</span><span class="num">B03</span></div><span class="cat dark">Linux</span><h3>Ubuntu APM 빠른설치 (Apache, PHP, MySQL)</h3><p>우분투에 Apache, MySQL, PHP를 올리는 데 꼭 필요한 명령어만 순서대로 정리했다. MySQL 암호 설정 화면이 뜨지 않을 때와 PHP가 동작하지 않을 때의 처방까지.</p><div class="meta"><span class="by">박대승</span><span class="dot-sep">1분 읽기</span></div></a></div>
+      </div>
+      <nav class="post-nav no-print" id="postNav" data-prerendered="1"><a class="pn" href="../../articles/ai-last-invention-humanity-fate/"><span class="pn-dir">‹ 이전 글</span><span class="pn-t">인류의 마지막 발명품</span></a><a class="pn pn-list" href="../../articles.html?cat=blog">목록</a><a class="pn pn-right" href="../../articles/ubuntu-apm-quick-install/"><span class="pn-dir">다음 글 ›</span><span class="pn-t">Ubuntu APM 빠른설치</span></a></nav>
+    </div>
+</article>
+
+<div class="print-footer">Daeseung Park · D. PARK Journal — 워드프레스 멀티도메인 사용 설정하기 / WordPress using Multi-domain with Single-site</div>
+
+<footer class="site-footer no-print" id="contact" data-prerendered="1"><div class="container-x"><div class="footer-grid"><div><div class="footer-brand">D. PARK</div><p style="max-width:34ch;">AI &amp; Software Systems Engineer · KAIST</p><div class="social" style="margin-top:16px;"><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener" aria-label="GitHub">GH</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener" aria-label="ORCID">iD</a><a href="mailto:dspark@daeseungpark.com" aria-label="Email">@</a></div></div><div><h6>둘러보기</h6><ul><li><a href="../../index.html">Home</a></li><li><a href="../../profile.html">Profile</a></li><li><a href="../../articles.html">Articles</a></li><li><a href="../../research.html">Research</a></li><li><a href="../../notices.html">Notice</a></li></ul></div><div><h6>기고문</h6><ul class="ft-arts"><li><a href="../../articles/ontology-schema-first-knowledge-graph/">데이터보다 스키마가 먼저다</a></li><li><a href="../../articles/address-graph-disaster-perception-stack/">어디서 무슨 일이 일어났는가</a></li><li><a href="../../articles/genai-copyright-data-licensing/">학습이라는 이름의 채굴</a></li><li><a href="../../articles/ai-agent-reliability-evals/">데모는 되는데, 프로덕션에서 무너지는 이유</a></li><li><a href="../../articles/reasoning-models-test-time-compute/">더 키우기보다 더 생각하게</a></li></ul></div><div><h6>Contact</h6><ul><li><a href="mailto:dspark@daeseungpark.com">dspark@daeseungpark.com</a></li><li><a href="mailto:dspark@kaist.ac.kr">dspark@kaist.ac.kr</a></li><li><a href="tel:+821064547777">Phone (KR) +82 10 6454 7777</a></li><li><a href="tel:+16574109449">Phone (US) +1 657 410 9449</a></li><li>KAIST, Daejeon, Korea</li></ul></div></div><div class="footer-bottom"><span>© 2026 Daeseung Park. All rights reserved.</span><span>Designed &amp; built as a personal journal for Daeseung Park.</span></div></div></footer>
+
+<div class="mobile-nav" id="mobileNav" data-prerendered="1"><button class="icon-btn close" id="navClose" aria-label="닫기">✕</button><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></div>
+
+
+
+<script src="../../assets/js/main.js?v=e9f2908b"></script>
+</body>
+</html>

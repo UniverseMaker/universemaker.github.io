@@ -121,6 +121,28 @@
 }
 
 /* ============================================================
+   Blog (v102) — codespectrum.net 이관 블로그 글(id 101~110) 공용 스타일.
+   v102 초안에서 20페이지 head 에 복제돼 있던 로컬 <style> 을 그대로 승격했다.
+   · .blog-code / .blog-fig / .blog-svg / .blog-quote / .blog-origin 은 블로그 전용 클래스라 전역 선언.
+   · 인라인 code 칩·긴 토큰 줄바꿈 규칙은 다른 기고문 렌더를 바꾸지 않도록
+     <article class="blog-import"> 스코프로 한정(일반 기고·세션 스위처(id 111)는 인라인 code 무장식 유지).
+   · 색은 전부 CSS 변수 → 다크모드 자동 대응. 인쇄는 아래 @media print 말미.
+   ============================================================ */
+.prose pre.blog-code { margin: 0 0 1.45em; padding: 14px 16px; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "D2Coding", "Noto Sans Mono CJK KR", "Noto Sans KR", monospace; font-size: .84rem; line-height: 1.6; color: var(--ink); white-space: pre; tab-size: 4; text-align: left; hyphens: none; }
+.prose pre.blog-code code { font: inherit; color: inherit; background: none; padding: 0; border: 0; }
+.blog-import .prose :not(pre) > code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .88em; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: .05em .35em; overflow-wrap: anywhere; }
+.prose .blog-fig { margin: 1.6em 0 1.8em; }
+.prose .blog-fig img { height: auto; margin: 0 auto; border: 1px solid var(--line); border-radius: var(--radius-sm); }
+.prose .blog-fig.narrow img { max-width: min(100%, 560px); }
+.prose .blog-svg svg { border-radius: var(--radius-sm); }
+.prose .blog-quote { margin: 0 0 1.8em; padding: .6em 0 .6em 1.2em; border-left: 3px solid var(--accent); font-style: italic; color: var(--ink); }
+.prose .blog-quote p { margin: 0 0 .5em; }
+.prose .blog-quote cite { display: block; font-family: var(--sans); font-style: normal; font-size: .85rem; color: var(--muted); }
+.prose .blog-origin { margin-top: 2.4em; }
+.blog-import .prose .references a { overflow-wrap: anywhere; }
+.blog-import .art-head h1, .blog-import .art-head .deck, .blog-import .post-card h3, .blog-import .post-card p, .blog-import .post-nav .pn-t { overflow-wrap: anywhere; }
+
+/* ============================================================
    PRINT — book / academic paper quality
    ============================================================ */
 @media print {
@@ -174,5 +196,9 @@
   a { color: #000 !important; text-decoration: none !important; }
   /* 문서 끝 크레딧 한 줄 — 고정(running)로 두면 본문과 겹쳐서, 정적 블록으로 문서 맨 끝에 한 번만 출력 */
   .print-footer { display: block !important; position: static; margin: 14mm 0 0; padding-top: 4mm; border-top: .5pt solid #bbb; text-align: center; font-family: var(--sans); font-size: 8.5pt; color: #888; break-inside: avoid; }
+  /* Blog (v102) — 코드블록은 가로스크롤 대신 줄바꿈, 스크린샷은 쪽 넘김 방지 */
+  .prose pre.blog-code { white-space: pre-wrap; word-break: break-all; overflow: visible; background: #f6f6f4 !important; border: .5pt solid #ccc; font-size: 8.6pt; color: #111; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .prose .blog-fig { break-inside: avoid; }
+  .prose .blog-fig img { max-height: 120mm; width: auto; }
 }
 .print-footer { display: none; }

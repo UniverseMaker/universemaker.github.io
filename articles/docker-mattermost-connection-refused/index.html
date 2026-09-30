@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light" data-prerendered="1">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[Docker] Mattermost 외부접속 불가: Connection Refused, Mattermost-preview - Daeseung Park Journal</title>
+<meta name="description" content="Docker로 띄운 mattermost-preview에 외부에서 접속하면 Connection Refused가 뜰 때, 컨테이너를 --add-host 옵션과 함께 새로 만들어 해결하는 방법.">
+<link rel="canonical" href="https://daeseungpark.com/articles/docker-mattermost-connection-refused/">
+<!-- seo-i18n:start -->
+<link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/docker-mattermost-connection-refused/">
+<link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/docker-mattermost-connection-refused/">
+<link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/docker-mattermost-connection-refused/">
+<meta property="og:locale:alternate" content="en_US">
+<!-- seo-i18n:end -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="D. PARK Journal">
+<meta property="og:title" content="[Docker] Mattermost 외부접속 불가: Connection Refused, Mattermost-preview">
+<meta property="og:description" content="Docker로 띄운 mattermost-preview에 외부에서 접속하면 Connection Refused가 뜰 때, 컨테이너를 --add-host 옵션과 함께 새로 만들어 해결하는 방법.">
+<meta property="og:url" content="https://daeseungpark.com/articles/docker-mattermost-connection-refused/">
+<meta property="og:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="[Docker] Mattermost 외부접속 불가: Connection Refused, Mattermost-preview">
+<meta name="twitter:description" content="Docker로 띄운 mattermost-preview에 외부에서 접속하면 Connection Refused가 뜰 때, 컨테이너를 --add-host 옵션과 함께 새로 만들어 해결하는 방법.">
+<meta name="twitter:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"[Docker] Mattermost 외부접속 불가: Connection Refused, Mattermost-preview","author":{"@type":"Person","name":"박대승","alternateName":"Daeseung Park"},"publisher":{"@type":"Organization","name":"D. PARK Journal"},"image":"https://daeseungpark.com/assets/img/profile/img3.jpg","mainEntityOfPage":"https://daeseungpark.com/articles/docker-mattermost-connection-refused/","inLanguage":"ko","datePublished":"2024-05-23"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Noto+Serif+KR:wght@400;600&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="../../assets/css/style.css?v=edd658d3">
+<link rel="stylesheet" href="../../assets/css/article.css?v=c9e013b8">
+</head>
+<body data-base="../../">
+<div class="progress-bar" id="progress"></div>
+<div class="topbar no-print">
+  <div class="container-x">
+    <span class="tb-date" id="today">—</span>
+    <div class="tb-links" data-prerendered="1"><a href="https://ai.daeseungpark.com/chat/" target="_blank" rel="noopener">Abliterated AI</a><a href="https://service.daeseungpark.com/rchat" target="_blank" rel="noopener">LLM Research Platform</a><a href="../../profile.html">Profile</a><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener">GitHub</a><a href="https://scholar.google.com/citations?hl=ko&amp;user=qVom0QUAAAAJ" target="_blank" rel="noopener">Scholar</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener">ORCID</a><a href="https://hub.docker.com/u/daeseungpark" target="_blank" rel="noopener">Docker</a><a href="https://codespectrum.net" target="_blank" rel="noopener">Blog</a><a href="../../profile.html#contact">Contact</a><a href="../../notices.html">Notice</a><a href="/en/articles/docker-mattermost-connection-refused/" class="tb-lang-link" aria-label="Language">English</a></div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header no-print">
+  <div class="container-x nav-row">
+    <a href="../../index.html" class="brand">D<span class="dot">.</span> PARK <small>Journal</small></a>
+    <nav class="main-nav" data-prerendered="1"><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="테마 전환"><span id="themeIcon">☾</span></button>
+      <button class="print-cta" id="printBtn">🖶 인쇄 / PDF</button>
+      <button class="icon-btn nav-toggle" id="navToggle" aria-label="메뉴">≡</button>
+    </div>
+  </div>
+</header>
+
+<div class="ticker no-print">
+  <div class="container-x">
+    <span class="label">Trending</span>
+    <div class="items" id="tickerItems" data-prerendered="1"><a href="../../articles/ontology-schema-first-knowledge-graph/">데이터보다 스키마가 먼저다</a><a href="../../articles/address-graph-disaster-perception-stack/">어디서 무슨 일이 일어났는가</a><a href="../../articles/genai-copyright-data-licensing/">학습이라는 이름의 채굴</a><a href="../../articles/ai-agent-reliability-evals/">데모는 되는데, 프로덕션에서 무너지는 이유</a><a href="../../articles/reasoning-models-test-time-compute/">더 키우기보다 더 생각하게 — 테스트타임 컴퓨트…</a><a href="../../articles/rag-architectures-hallucination/">검색이 지능을 구원하는 네 가지 방법 — Lexical…</a></div>
+  </div>
+</div>
+
+<article class="blog-import" data-article-id="105">
+  <div class="article-wrap">
+    <!-- Masthead -->
+    <header class="art-head">
+      <span class="cat-pill dark">Dev · 노트</span>
+      <h1>[Docker] Mattermost 외부접속 불가: Connection Refused, Mattermost-preview</h1>
+      <p class="deck">Docker로 띄운 mattermost-preview에 외부에서 접속하면 Connection Refused가 뜰 때, 컨테이너를 --add-host 옵션과 함께 새로 만들어 해결하는 방법.</p>
+      <div class="art-byline">
+        <div class="av">DP</div>
+        <div class="who">
+          <b>박대승 (Daeseung Park)</b>
+          <span>AI &amp; Software Systems Engineer · KAIST</span>
+          <span>2024년 5월 23일 · 1분 읽기</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="art-cover"><div class="fill-7 fill-grid" style="position:absolute;inset:0;"></div></div>
+
+    <!-- Body -->
+    <div class="prose">
+      <p>외부 접속이 안되는 경우 아래 명령어로 컨테이너를 새로 만들어 사용합니다</p>
+      <pre class="blog-code" tabindex="0"><code>docker run --name mattermost-preview -d --publish 8065:8065 --add-host dockerhost:127.0.0.1 mattermost/mattermost-preview</code></pre>
+      <p>핵심은 <code>--add-host dockerhost:127.0.0.1</code> 부분입니다</p>
+      <p>외부 접속을 허용하는 단계이며 해당 옵션이 없을경우 Connection Refused 에러가 표시될 수 있습니다</p>
+      <div class="callout blog-origin"><b>원문:</b> <a href="https://codespectrum.net/2024/05/23/docker-mattermost-%ec%99%b8%eb%b6%80%ec%a0%91%ec%86%8d-%eb%b6%88%ea%b0%80-connection-refused-mattermost-preview/" target="_blank" rel="noopener">codespectrum.net</a>, 2024-05-23 게시. 필자의 기술 블로그 코드스펙트럼(CODESPECTRUM)에 올렸던 글을 이곳으로 옮겨 왔습니다. 문장과 명령어는 원문 그대로 두고 서식만 정리했습니다.</div>
+    </div>
+  </div>
+
+  <!-- Footer of article -->
+  <div class="art-foot">
+    <div class="art-tags">
+      <a href="#">#Docker</a><a href="#">#Mattermost</a><a href="#">#트러블슈팅</a>
+    </div>
+    <div class="author-card">
+      <div class="av">DP</div>
+      <div class="who">
+        <b>박대승 · Daeseung Park</b>
+        <p>KAIST 연구원. 대형언어모델, 시계열 예측, 대화형 AI를 연구합니다. 연구의 과정을 가능한 한 정확하고 읽기 좋게 기록하려 합니다.</p>
+      </div>
+    </div>
+
+    <div class="read-next no-print">
+        <div class="section-head" style="margin-bottom:20px;"><h2 style="font-size:1.3rem;">다음 글</h2></div>
+        <div class="grid grid-2" id="readNext" data-prerendered="1"><a href="../../articles/ubuntu-apm-quick-install/" class="post-card fade-up"><div class="thumb"><div class="ph fill-3 fill-grid "></div><span class="cat-pill dark">Dev · 노트</span><span class="num">B03</span></div><span class="cat dark">Linux</span><h3>Ubuntu APM 빠른설치 (Apache, PHP, MySQL)</h3><p>우분투에 Apache, MySQL, PHP를 올리는 데 꼭 필요한 명령어만 순서대로 정리했다. MySQL 암호 설정 화면이 뜨지 않을 때와 PHP가 동작하지 않을 때의 처방까지.</p><div class="meta"><span class="by">박대승</span><span class="dot-sep">1분 읽기</span></div></a><a href="../../articles/git-submodule-branch-not-applied/" class="post-card fade-up"><div class="thumb"><div class="ph fill-3 fill-grid "></div><span class="cat-pill dark">Dev · 노트</span><span class="num">B09</span></div><span class="cat dark">Git</span><h3>(Git Error) Git submodule branch 적용불가 문제</h3><p>.gitmodules에 branch를 지정해도 서브모듈에 적용되지 않을 때, git config로 강제 적용하고 확인한 뒤 git submodule update --remote로 업데이트하는 순서.</p><div class="meta"><span class="by">박대승</span><span class="dot-sep">1분 읽기</span></div></a></div>
+      </div>
+      <nav class="post-nav no-print" id="postNav" data-prerendered="1"><a class="pn" href="../../articles/openai-fine-tuning-data-format/"><span class="pn-dir">‹ 이전 글</span><span class="pn-t">OpenAI ChatGPT Fine-tuning Data Format</span></a><a class="pn pn-list" href="../../articles.html?cat=blog">목록</a><a class="pn pn-right" href="../../articles/wordpress-cloudflare-too-many-redirects/"><span class="pn-dir">다음 글 ›</span><span class="pn-t">[WordPress] Cloudflare 적용 후 ERR_TOO_MANY_REDIRECTS</span></a></nav>
+    </div>
+</article>
+
+<div class="print-footer">Daeseung Park · D. PARK Journal — [Docker] Mattermost 외부접속 불가: Connection Refused, Mattermost-preview</div>
+
+<footer class="site-footer no-print" id="contact" data-prerendered="1"><div class="container-x"><div class="footer-grid"><div><div class="footer-brand">D. PARK</div><p style="max-width:34ch;">AI &amp; Software Systems Engineer · KAIST</p><div class="social" style="margin-top:16px;"><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener" aria-label="GitHub">GH</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener" aria-label="ORCID">iD</a><a href="mailto:dspark@daeseungpark.com" aria-label="Email">@</a></div></div><div><h6>둘러보기</h6><ul><li><a href="../../index.html">Home</a></li><li><a href="../../profile.html">Profile</a></li><li><a href="../../articles.html">Articles</a></li><li><a href="../../research.html">Research</a></li><li><a href="../../notices.html">Notice</a></li></ul></div><div><h6>기고문</h6><ul class="ft-arts"><li><a href="../../articles/ontology-schema-first-knowledge-graph/">데이터보다 스키마가 먼저다</a></li><li><a href="../../articles/address-graph-disaster-perception-stack/">어디서 무슨 일이 일어났는가</a></li><li><a href="../../articles/genai-copyright-data-licensing/">학습이라는 이름의 채굴</a></li><li><a href="../../articles/ai-agent-reliability-evals/">데모는 되는데, 프로덕션에서 무너지는 이유</a></li><li><a href="../../articles/reasoning-models-test-time-compute/">더 키우기보다 더 생각하게</a></li></ul></div><div><h6>Contact</h6><ul><li><a href="mailto:dspark@daeseungpark.com">dspark@daeseungpark.com</a></li><li><a href="mailto:dspark@kaist.ac.kr">dspark@kaist.ac.kr</a></li><li><a href="tel:+821064547777">Phone (KR) +82 10 6454 7777</a></li><li><a href="tel:+16574109449">Phone (US) +1 657 410 9449</a></li><li>KAIST, Daejeon, Korea</li></ul></div></div><div class="footer-bottom"><span>© 2026 Daeseung Park. All rights reserved.</span><span>Designed &amp; built as a personal journal for Daeseung Park.</span></div></div></footer>
+
+<div class="mobile-nav" id="mobileNav" data-prerendered="1"><button class="icon-btn close" id="navClose" aria-label="닫기">✕</button><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></div>
+
+
+
+<script src="../../assets/js/main.js?v=e9f2908b"></script>
+</body>
+</html>

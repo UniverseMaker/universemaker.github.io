@@ -8,6 +8,107 @@
    - path: 글 폴더 (루트 기준, 끝에 / 포함)
    ============================================================ */
 window.ARTICLES = [
+  /* ── 블로그 (blog: "블로그") — 블로그 전용 id 블록 101~ (v102). 전체보기·#latestGrid·티커·푸터·landing·#boardCount 제외 ── */
+  {
+    id: 111, slug: "claude-session-switcher", path: "articles/claude-session-switcher/",
+    title: "클로드 코드세션 스위처: 계정을 바꿔도 대화는 그대로다",
+    deck: "Claude 계정을 여러 개 쓰면 계정을 바꿀 때마다 어제까지 쓰던 대화가 사이드바에서 사라진다. 서버가 막는다는 통념을 믿고 한동안 포기했지만, 직접 뜯어보니 대화 원문은 컴퓨터에 하나뿐이었고 계정 폴더에 있던 것은 그 파일을 가리키는 포인터일 뿐이었다. 그 발견 하나에서 출발해, 모든 대화를 모든 계정에 연결하고 컴퓨터 단위로 백업해 다른 PC로 옮기는 Windows 도구를 만들었다. 무엇을 하는 도구인지, 어디에 쓰는지, 그리고 만들면서 낸 사고에서 무엇을 배웠는지 적는다.",
+    cat: "Dev · 노트", catClass: "dark", catLabel: "개발 도구",
+    date: "2026-09-30", read: "18분", cover: "articles/claude-session-switcher/images/cover.svg",
+    tags: ["Claude", "Claude Code", "세션관리", "백업", "개발도구"],
+    blog: "블로그"
+  },
+  {
+    id: 110, slug: "windows11-classic-context-menu", path: "articles/windows11-classic-context-menu/",
+    title: "윈도우11 우클릭 시 “추가옵션보기”를 기본으로 설정하기",
+    deck: "윈도우11의 간소화된 우클릭 메뉴 대신 예전 전체 메뉴(추가 옵션 보기)가 바로 뜨도록 레지스트리를 등록하는 명령어와, 원래대로 되돌리는 명령어.",
+    cat: "Dev · 노트", catClass: "dark", catLabel: "Windows",
+    date: "2025-09-03", read: "1분", cover: "fill-5",
+    tags: ["Windows11", "우클릭메뉴", "레지스트리"],
+    blog: "블로그"
+  },
+  {
+    id: 109, slug: "git-submodule-branch-not-applied", path: "articles/git-submodule-branch-not-applied/",
+    title: "(Git Error) Git submodule branch 적용불가 문제",
+    deck: ".gitmodules에 branch를 지정해도 서브모듈에 적용되지 않을 때, git config로 강제 적용하고 확인한 뒤 git submodule update --remote로 업데이트하는 순서.",
+    cat: "Dev · 노트", catClass: "dark", catLabel: "Git",
+    date: "2025-08-20", read: "1분", cover: "fill-3",
+    tags: ["Git", "서브모듈", "트러블슈팅"],
+    blog: "블로그"
+  },
+  {
+    id: 108, slug: "cpp-runtime-error-unable-to-open-xml", path: "articles/cpp-runtime-error-unable-to-open-xml/",
+    title: "(C++ Error) terminate called after throwing an instance of 'std::runtime_error': Unable to open xml file",
+    deck: "C++ 프로그램이 'Unable to open xml file' 런타임 에러로 종료될 때 확인할 것 — 필요한 폴더 디렉터리 구성과 해당 파일의 존재 여부.",
+    cat: "Dev · 노트", catClass: "dark", catLabel: "C++",
+    date: "2025-08-19", read: "1분", cover: "fill-1",
+    tags: ["C++", "런타임에러", "트러블슈팅"],
+    blog: "블로그"
+  },
+  {
+    id: 107, slug: "ubuntu-server-cli-4k-font-size", path: "articles/ubuntu-server-cli-4k-font-size/",
+    title: "Ubuntu Server Cli 모드 4K 고해상도 모니터 초간단 폰트크기 키우기",
+    deck: "4K 모니터에서 Ubuntu Server 콘솔 글씨가 보이지 않을 만큼 작을 때, dpkg-reconfigure console-setup 한 번으로 폰트를 Terminus 16x32로 키우는 방법.",
+    cat: "Dev · 노트", catClass: "dark", catLabel: "Linux",
+    date: "2024-10-16", read: "1분", cover: "fill-4",
+    tags: ["Ubuntu", "콘솔폰트", "4K"],
+    blog: "블로그"
+  },
+  {
+    id: 106, slug: "wordpress-cloudflare-too-many-redirects", path: "articles/wordpress-cloudflare-too-many-redirects/",
+    title: "[WordPress] Cloudflare 적용 후 ERR_TOO_MANY_REDIRECTS 초간단 해결방법",
+    deck: "스팸 댓글 때문에 Cloudflare를 적용했더니 로그인에서 ERR_TOO_MANY_REDIRECTS가 났다. 원인은 SSL 가변 모드에서 생기는 https와 http 사이의 루프 — 암호화 모드를 '전체'로 바꿔 해결한다.",
+    cat: "Dev · 노트", catClass: "dark", catLabel: "WordPress",
+    date: "2024-10-16", read: "3분", cover: "fill-2",
+    tags: ["워드프레스", "Cloudflare", "SSL", "리다이렉트"],
+    blog: "블로그"
+  },
+  {
+    id: 105, slug: "docker-mattermost-connection-refused", path: "articles/docker-mattermost-connection-refused/",
+    title: "[Docker] Mattermost 외부접속 불가: Connection Refused, Mattermost-preview",
+    deck: "Docker로 띄운 mattermost-preview에 외부에서 접속하면 Connection Refused가 뜰 때, 컨테이너를 --add-host 옵션과 함께 새로 만들어 해결하는 방법.",
+    cat: "Dev · 노트", catClass: "dark", catLabel: "Docker",
+    date: "2024-05-23", read: "1분", cover: "fill-7",
+    tags: ["Docker", "Mattermost", "트러블슈팅"],
+    blog: "블로그"
+  },
+  {
+    id: 104, slug: "openai-fine-tuning-data-format", path: "articles/openai-fine-tuning-data-format/",
+    title: "OpenAI ChatGPT Fine-tuning Data Format / 학습데이터 작성 방법",
+    deck: "OpenAI 파인튜닝용 학습데이터는 .jsonl 파일로 작성한다. 대화형, 프롬프트 쌍, 멀티턴(weight) 세 가지 형식의 예시와 Python으로 간단히 출력하는 코드.",
+    cat: "AI · 노트", catClass: "", catLabel: "LLM",
+    date: "2024-04-18", read: "2분", cover: "fill-6",
+    tags: ["OpenAI", "파인튜닝", "JSONL", "학습데이터"],
+    blog: "블로그"
+  },
+  {
+    id: 103, slug: "ubuntu-apm-quick-install", path: "articles/ubuntu-apm-quick-install/",
+    title: "Ubuntu APM 빠른설치 (Apache, PHP, MySQL)",
+    deck: "우분투에 Apache, MySQL, PHP를 올리는 데 꼭 필요한 명령어만 순서대로 정리했다. MySQL 암호 설정 화면이 뜨지 않을 때와 PHP가 동작하지 않을 때의 처방까지.",
+    cat: "Dev · 노트", catClass: "dark", catLabel: "Linux",
+    date: "2024-04-18", read: "1분", cover: "fill-3",
+    tags: ["Ubuntu", "Apache", "PHP", "MySQL"],
+    blog: "블로그"
+  },
+  {
+    id: 102, slug: "wordpress-multi-domain-single-site", path: "articles/wordpress-multi-domain-single-site/",
+    title: "워드프레스 멀티도메인 사용 설정하기 / WordPress using Multi-domain with Single-site",
+    deck: "워드프레스 사이트 하나에 도메인 여러 개를 연결하면 메인 도메인을 제외한 나머지에서는 이미지가 엑스박스로 뜬다. 리다이렉션 없이 각 도메인이 개별적으로 정상 작동하게 만드는 wp-config.php 설정.",
+    cat: "Dev · 노트", catClass: "dark", catLabel: "WordPress",
+    date: "2024-04-18", read: "3분", cover: "fill-1",
+    tags: ["워드프레스", "멀티도메인", "wp-config"],
+    blog: "블로그"
+  },
+  {
+    id: 101, slug: "ai-last-invention-humanity-fate", path: "articles/ai-last-invention-humanity-fate/",
+    title: "인류의 마지막 발명품: 인공지능 그리고 인류의 운명",
+    deck: "닉 보스트롬은 인공지능이 인류가 만들어야 하는 마지막 발명품이 될 것이라고 했다. 약인공지능(ANI)에서 강인공지능(AGI), 초인공지능(ASI), 초월인공지능(ATI)으로 이어지는 네 단계와, 그 진화가 인류에게 던지는 질문을 정리한다.",
+    cat: "AI · 칼럼", catClass: "", catLabel: "AI",
+    date: "2023-12-25", read: "5분", cover: "fill-5",
+    tags: ["인공지능", "AGI", "초인공지능", "기술적특이점"],
+    blog: "블로그"
+  },
+  /* ── 일반 기고·특별기고 ── */
   {
     id: 23, slug: "ontology-schema-first-knowledge-graph", path: "articles/ontology-schema-first-knowledge-graph/",
     title: "데이터보다 스키마가 먼저다: 온톨로지가 지식그래프에 사 주는 네 가지",

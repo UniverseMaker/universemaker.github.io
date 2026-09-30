@@ -812,11 +812,29 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://daeseungpark.com/articles/ai-last-invention-humanity-fate/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/ai-last-invention-humanity-fate/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/ai-last-invention-humanity-fate/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/ai-last-invention-humanity-fate/"/>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://daeseungpark.com/articles/bert-medical-classification/</loc>
     <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/bert-medical-classification/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/bert-medical-classification/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/bert-medical-classification/"/>
     <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/articles/claude-session-switcher/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/claude-session-switcher/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/claude-session-switcher/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/claude-session-switcher/"/>
+    <lastmod>2026-09-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -830,11 +848,29 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://daeseungpark.com/articles/cpp-runtime-error-unable-to-open-xml/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/cpp-runtime-error-unable-to-open-xml/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/cpp-runtime-error-unable-to-open-xml/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/cpp-runtime-error-unable-to-open-xml/"/>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://daeseungpark.com/articles/data-augmentation-activation/</loc>
     <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/data-augmentation-activation/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/data-augmentation-activation/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/data-augmentation-activation/"/>
     <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/articles/docker-mattermost-connection-refused/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/docker-mattermost-connection-refused/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/docker-mattermost-connection-refused/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/docker-mattermost-connection-refused/"/>
+    <lastmod>2026-09-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -871,6 +907,15 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/geollm-knowledge-graph/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/geollm-knowledge-graph/"/>
     <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/articles/git-submodule-branch-not-applied/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/git-submodule-branch-not-applied/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/git-submodule-branch-not-applied/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/git-submodule-branch-not-applied/"/>
+    <lastmod>2026-09-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -920,6 +965,15 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://daeseungpark.com/articles/openai-fine-tuning-data-format/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/openai-fine-tuning-data-format/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/openai-fine-tuning-data-format/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/openai-fine-tuning-data-format/"/>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://daeseungpark.com/articles/parallel-simulation-ape/</loc>
     <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/parallel-simulation-ape/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/parallel-simulation-ape/"/>
@@ -965,11 +1019,56 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://daeseungpark.com/articles/ubuntu-apm-quick-install/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/ubuntu-apm-quick-install/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/ubuntu-apm-quick-install/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/ubuntu-apm-quick-install/"/>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/articles/ubuntu-server-cli-4k-font-size/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/ubuntu-server-cli-4k-font-size/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/ubuntu-server-cli-4k-font-size/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/ubuntu-server-cli-4k-font-size/"/>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://daeseungpark.com/articles/waterpipe-prediction/</loc>
     <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/waterpipe-prediction/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/waterpipe-prediction/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/waterpipe-prediction/"/>
     <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/articles/windows11-classic-context-menu/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/windows11-classic-context-menu/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/windows11-classic-context-menu/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/windows11-classic-context-menu/"/>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/articles/wordpress-cloudflare-too-many-redirects/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/wordpress-cloudflare-too-many-redirects/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/wordpress-cloudflare-too-many-redirects/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/wordpress-cloudflare-too-many-redirects/"/>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/articles/wordpress-multi-domain-single-site/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/wordpress-multi-domain-single-site/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/wordpress-multi-domain-single-site/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/wordpress-multi-domain-single-site/"/>
+    <lastmod>2026-09-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -1784,11 +1883,29 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://daeseungpark.com/en/articles/ai-last-invention-humanity-fate/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/ai-last-invention-humanity-fate/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/ai-last-invention-humanity-fate/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/ai-last-invention-humanity-fate/"/>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://daeseungpark.com/en/articles/bert-medical-classification/</loc>
     <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/bert-medical-classification/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/bert-medical-classification/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/bert-medical-classification/"/>
     <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/en/articles/claude-session-switcher/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/claude-session-switcher/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/claude-session-switcher/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/claude-session-switcher/"/>
+    <lastmod>2026-09-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -1802,11 +1919,29 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://daeseungpark.com/en/articles/cpp-runtime-error-unable-to-open-xml/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/cpp-runtime-error-unable-to-open-xml/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/cpp-runtime-error-unable-to-open-xml/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/cpp-runtime-error-unable-to-open-xml/"/>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://daeseungpark.com/en/articles/data-augmentation-activation/</loc>
     <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/data-augmentation-activation/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/data-augmentation-activation/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/data-augmentation-activation/"/>
     <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/en/articles/docker-mattermost-connection-refused/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/docker-mattermost-connection-refused/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/docker-mattermost-connection-refused/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/docker-mattermost-connection-refused/"/>
+    <lastmod>2026-09-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -1843,6 +1978,15 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/geollm-knowledge-graph/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/geollm-knowledge-graph/"/>
     <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/en/articles/git-submodule-branch-not-applied/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/git-submodule-branch-not-applied/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/git-submodule-branch-not-applied/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/git-submodule-branch-not-applied/"/>
+    <lastmod>2026-09-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -1892,6 +2036,15 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://daeseungpark.com/en/articles/openai-fine-tuning-data-format/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/openai-fine-tuning-data-format/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/openai-fine-tuning-data-format/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/openai-fine-tuning-data-format/"/>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://daeseungpark.com/en/articles/parallel-simulation-ape/</loc>
     <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/parallel-simulation-ape/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/parallel-simulation-ape/"/>
@@ -1937,11 +2090,56 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://daeseungpark.com/en/articles/ubuntu-apm-quick-install/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/ubuntu-apm-quick-install/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/ubuntu-apm-quick-install/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/ubuntu-apm-quick-install/"/>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/en/articles/ubuntu-server-cli-4k-font-size/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/ubuntu-server-cli-4k-font-size/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/ubuntu-server-cli-4k-font-size/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/ubuntu-server-cli-4k-font-size/"/>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://daeseungpark.com/en/articles/waterpipe-prediction/</loc>
     <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/waterpipe-prediction/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/waterpipe-prediction/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/waterpipe-prediction/"/>
     <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/en/articles/windows11-classic-context-menu/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/windows11-classic-context-menu/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/windows11-classic-context-menu/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/windows11-classic-context-menu/"/>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/en/articles/wordpress-cloudflare-too-many-redirects/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/wordpress-cloudflare-too-many-redirects/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/wordpress-cloudflare-too-many-redirects/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/wordpress-cloudflare-too-many-redirects/"/>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://daeseungpark.com/en/articles/wordpress-multi-domain-single-site/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/wordpress-multi-domain-single-site/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/wordpress-multi-domain-single-site/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/wordpress-multi-domain-single-site/"/>
+    <lastmod>2026-09-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

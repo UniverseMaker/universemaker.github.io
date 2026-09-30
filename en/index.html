@@ -28,7 +28,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&amp;family=Noto+Serif+KR:wght@400;600&amp;family=Noto+Sans+KR:wght@400;500;700&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
-<link rel="stylesheet" href="../assets/css/style.css?v=da183d3f">
+<link rel="stylesheet" href="../assets/css/style.css?v=edd658d3">
 </head>
 <body data-base="" data-hero="photo">
 
@@ -149,6 +149,17 @@
   </div>
 </section>
 
+<!-- ===== 최근 블로그 (blog-flagged articles · 블로그 id 내림차순 상위 4) ===== -->
+<section class="section" id="blog">
+  <div class="container-x">
+    <div class="section-head">
+      <div><h2>Recent Blog</h2><div class="sub">Development logs and troubleshooting notes from hands-on work</div></div>
+      <a href="articles.html?cat=blog" class="more">View all →</a>
+    </div>
+    <div class="blog-grid" id="homeBlog"><a href="articles/claude-session-switcher/" class="feature-card fade-up"><div class="feature-thumb"><img class="ph " src="articles/claude-session-switcher/images/cover.svg" alt="" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;" loading="lazy"><span class="feature-badge blog-badge">Blog</span></div><div class="feature-body"><span class="cat">Dev · Notes</span><h3>Claude Session Switcher: Your Conversations Never Left</h3><p>Use more than one Claude account and every switch makes yesterday's conversations vanish from the sidebar. I gave up for a while, trusting the common belief that a server was blocking it — but when I finally took it apart, there was only one copy of each conversation on the machine, and the account folders held nothing but pointers to it. From that one finding I built a Windows tool that links every conversation to every account and backs them up per computer so they can move to another PC. Here is what it does, where it helps, and what the accidents along the way taught me.</p><div class="meta"><span class="by">Daeseung Park</span><span class="dot-sep">2026-09-30</span></div></div></a><a href="articles/windows11-classic-context-menu/" class="feature-card fade-up"><div class="feature-thumb"><div class="ph fill-5 fill-grid "></div><span class="feature-badge blog-badge">Blog</span></div><div class="feature-body"><span class="cat">Dev · Notes</span><h3>Making “Show more options” the Default Right-Click Menu in Windows 11</h3><p>A registry command that makes Windows 11 open the full, classic right-click menu (“Show more options”) instead of the simplified one — and the command that puts it back.</p><div class="meta"><span class="by">Daeseung Park</span><span class="dot-sep">2025-09-03</span></div></div></a><a href="articles/git-submodule-branch-not-applied/" class="feature-card fade-up"><div class="feature-thumb"><div class="ph fill-3 fill-grid "></div><span class="feature-badge blog-badge">Blog</span></div><div class="feature-body"><span class="cat">Dev · Notes</span><h3>(Git Error) Git Submodule Branch Won't Apply</h3><p>When the branch set in .gitmodules is not applied to a submodule: force it with git config, verify it, then update with git submodule update --remote.</p><div class="meta"><span class="by">Daeseung Park</span><span class="dot-sep">2025-08-20</span></div></div></a><a href="articles/cpp-runtime-error-unable-to-open-xml/" class="feature-card fade-up"><div class="feature-thumb"><div class="ph fill-1 fill-grid "></div><span class="feature-badge blog-badge">Blog</span></div><div class="feature-body"><span class="cat">Dev · Notes</span><h3>(C++ Error) terminate called after throwing an instance of 'std::runtime_error': Unable to open xml file</h3><p>What to check when a C++ program dies with the 'Unable to open xml file' runtime error — the required folder layout, and whether the file actually exists.</p><div class="meta"><span class="by">Daeseung Park</span><span class="dot-sep">2025-08-19</span></div></div></a></div>
+  </div>
+</section>
+
 <!-- ===== Home preview sections (config-driven) ===== -->
 <section class="section" id="homeActivitySec">
   <div class="container-x">
@@ -225,7 +236,7 @@
 
 
 
-<script src="../assets/js/main.js?v=33869a70"></script>
+<script src="../assets/js/main.js?v=e9f2908b"></script>
 
 
 </body></html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light" data-prerendered="1">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ubuntu APM 빠른설치 (Apache, PHP, MySQL) - Daeseung Park Journal</title>
+<meta name="description" content="우분투에 Apache, MySQL, PHP를 올리는 데 꼭 필요한 명령어만 순서대로 정리했다. MySQL 암호 설정 화면이 뜨지 않을 때와 PHP가 동작하지 않을 때의 처방까지.">
+<link rel="canonical" href="https://daeseungpark.com/articles/ubuntu-apm-quick-install/">
+<!-- seo-i18n:start -->
+<link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/ubuntu-apm-quick-install/">
+<link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/ubuntu-apm-quick-install/">
+<link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/ubuntu-apm-quick-install/">
+<meta property="og:locale:alternate" content="en_US">
+<!-- seo-i18n:end -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="D. PARK Journal">
+<meta property="og:title" content="Ubuntu APM 빠른설치 (Apache, PHP, MySQL)">
+<meta property="og:description" content="우분투에 Apache, MySQL, PHP를 올리는 데 꼭 필요한 명령어만 순서대로 정리했다. MySQL 암호 설정 화면이 뜨지 않을 때와 PHP가 동작하지 않을 때의 처방까지.">
+<meta property="og:url" content="https://daeseungpark.com/articles/ubuntu-apm-quick-install/">
+<meta property="og:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ubuntu APM 빠른설치 (Apache, PHP, MySQL)">
+<meta name="twitter:description" content="우분투에 Apache, MySQL, PHP를 올리는 데 꼭 필요한 명령어만 순서대로 정리했다. MySQL 암호 설정 화면이 뜨지 않을 때와 PHP가 동작하지 않을 때의 처방까지.">
+<meta name="twitter:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Ubuntu APM 빠른설치 (Apache, PHP, MySQL)","author":{"@type":"Person","name":"박대승","alternateName":"Daeseung Park"},"publisher":{"@type":"Organization","name":"D. PARK Journal"},"image":"https://daeseungpark.com/assets/img/profile/img3.jpg","mainEntityOfPage":"https://daeseungpark.com/articles/ubuntu-apm-quick-install/","inLanguage":"ko","datePublished":"2024-04-18"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Noto+Serif+KR:wght@400;600&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="../../assets/css/style.css?v=edd658d3">
+<link rel="stylesheet" href="../../assets/css/article.css?v=c9e013b8">
+</head>
+<body data-base="../../">
+<div class="progress-bar" id="progress"></div>
+<div class="topbar no-print">
+  <div class="container-x">
+    <span class="tb-date" id="today">—</span>
+    <div class="tb-links" data-prerendered="1"><a href="https://ai.daeseungpark.com/chat/" target="_blank" rel="noopener">Abliterated AI</a><a href="https://service.daeseungpark.com/rchat" target="_blank" rel="noopener">LLM Research Platform</a><a href="../../profile.html">Profile</a><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener">GitHub</a><a href="https://scholar.google.com/citations?hl=ko&amp;user=qVom0QUAAAAJ" target="_blank" rel="noopener">Scholar</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener">ORCID</a><a href="https://hub.docker.com/u/daeseungpark" target="_blank" rel="noopener">Docker</a><a href="https://codespectrum.net" target="_blank" rel="noopener">Blog</a><a href="../../profile.html#contact">Contact</a><a href="../../notices.html">Notice</a><a href="/en/articles/ubuntu-apm-quick-install/" class="tb-lang-link" aria-label="Language">English</a></div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header no-print">
+  <div class="container-x nav-row">
+    <a href="../../index.html" class="brand">D<span class="dot">.</span> PARK <small>Journal</small></a>
+    <nav class="main-nav" data-prerendered="1"><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="테마 전환"><span id="themeIcon">☾</span></button>
+      <button class="print-cta" id="printBtn">🖶 인쇄 / PDF</button>
+      <button class="icon-btn nav-toggle" id="navToggle" aria-label="메뉴">≡</button>
+    </div>
+  </div>
+</header>
+
+<div class="ticker no-print">
+  <div class="container-x">
+    <span class="label">Trending</span>
+    <div class="items" id="tickerItems" data-prerendered="1"><a href="../../articles/ontology-schema-first-knowledge-graph/">데이터보다 스키마가 먼저다</a><a href="../../articles/address-graph-disaster-perception-stack/">어디서 무슨 일이 일어났는가</a><a href="../../articles/genai-copyright-data-licensing/">학습이라는 이름의 채굴</a><a href="../../articles/ai-agent-reliability-evals/">데모는 되는데, 프로덕션에서 무너지는 이유</a><a href="../../articles/reasoning-models-test-time-compute/">더 키우기보다 더 생각하게 — 테스트타임 컴퓨트…</a><a href="../../articles/rag-architectures-hallucination/">검색이 지능을 구원하는 네 가지 방법 — Lexical…</a></div>
+  </div>
+</div>
+
+<article class="blog-import" data-article-id="103">
+  <div class="article-wrap">
+    <!-- Masthead -->
+    <header class="art-head">
+      <span class="cat-pill dark">Dev · 노트</span>
+      <h1>Ubuntu APM 빠른설치 (Apache, PHP, MySQL)</h1>
+      <p class="deck">우분투에 Apache, MySQL, PHP를 올리는 데 꼭 필요한 명령어만 순서대로 정리했다. MySQL 암호 설정 화면이 뜨지 않을 때와 PHP가 동작하지 않을 때의 처방까지.</p>
+      <div class="art-byline">
+        <div class="av">DP</div>
+        <div class="who">
+          <b>박대승 (Daeseung Park)</b>
+          <span>AI &amp; Software Systems Engineer · KAIST</span>
+          <span>2024년 4월 18일 · 1분 읽기</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="art-cover"><div class="fill-3 fill-grid" style="position:absolute;inset:0;"></div></div>
+
+    <!-- Body -->
+    <div class="prose">
+      <p>우분투 APM(Apache, PHP, MySQL) 설치하는데 필요 없는 내용 모두 제외 후 필수 핵심 명령어만 정리합니다.</p>
+      <p>1. Ubuntu 초기설정</p>
+      <pre class="blog-code" tabindex="0"><code>sudo apt-get update</code></pre>
+      <p>2. Apache 설치</p>
+      <pre class="blog-code" tabindex="0"><code>sudo apt-get install apache2</code></pre>
+      <p>3. 방화벽 허용 설정</p>
+      <pre class="blog-code" tabindex="0"><code>sudo ufw allow 'Apache'</code></pre>
+      <p>4. Mysql 설치</p>
+      <pre class="blog-code" tabindex="0"><code>sudo apt install mysql-server</code></pre>
+      <p>5. Mysql 암호 설정</p>
+      <pre class="blog-code" tabindex="0"><code>sudo mysql_secure_installation</code></pre>
+      <p>6. 만약 위 명령어에서 암호 설정이 안 뜬 경우 아래 명령어 실행 후 5번 재실행</p>
+      <pre class="blog-code" tabindex="0"><code>sudo mysql</code></pre>
+      <pre class="blog-code" tabindex="0"><code>ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password by 'mynewpassword';</code></pre>
+      <p>PHP 설치</p>
+      <pre class="blog-code" tabindex="0"><code>sudo apt install php libapache2-mod-php php-mysql</code></pre>
+      <p>*웹 서버 동작 후 php 작동이 안되는 경우 &gt; 아래 파일 수정</p>
+      <pre class="blog-code" tabindex="0"><code>vi /etc/apache2/mods-enabled/mime.conf</code></pre>
+      <p>적당한 곳에 아래 코드 추가 후 Apache2 재실행</p>
+      <pre class="blog-code" tabindex="0"><code>AddType application/x-httpd-php .html .htm .php</code></pre>
+      <div class="callout blog-origin"><b>원문:</b> <a href="https://codespectrum.net/2024/04/18/ubuntu-apm-%eb%b9%a0%eb%a5%b8%ec%84%a4%ec%b9%98-apache-php-mysql/" target="_blank" rel="noopener">codespectrum.net</a>, 2024-04-18 게시. 필자의 기술 블로그 코드스펙트럼(CODESPECTRUM)에 올렸던 글을 이곳으로 옮겨 왔습니다. 문장과 명령어는 원문 그대로 두고 서식만 정리했습니다.</div>
+    </div>
+  </div>
+
+  <!-- Footer of article -->
+  <div class="art-foot">
+    <div class="art-tags">
+      <a href="#">#Ubuntu</a><a href="#">#Apache</a><a href="#">#PHP</a><a href="#">#MySQL</a>
+    </div>
+    <div class="author-card">
+      <div class="av">DP</div>
+      <div class="who">
+        <b>박대승 · Daeseung Park</b>
+        <p>KAIST 연구원. 대형언어모델, 시계열 예측, 대화형 AI를 연구합니다. 연구의 과정을 가능한 한 정확하고 읽기 좋게 기록하려 합니다.</p>
+      </div>
+    </div>
+
+    <div class="read-next no-print">
+        <div class="section-head" style="margin-bottom:20px;"><h2 style="font-size:1.3rem;">다음 글</h2></div>
+        <div class="grid grid-2" id="readNext" data-prerendered="1"><a href="../../articles/wordpress-multi-domain-single-site/" class="post-card fade-up"><div class="thumb"><div class="ph fill-1 fill-grid "></div><span class="cat-pill dark">Dev · 노트</span><span class="num">B02</span></div><span class="cat dark">WordPress</span><h3>워드프레스 멀티도메인 사용 설정하기 / WordPress using Multi-domain with Single-site</h3><p>워드프레스 사이트 하나에 도메인 여러 개를 연결하면 메인 도메인을 제외한 나머지에서는 이미지가 엑스박스로 뜬다. 리다이렉션 없이 각 도메인이 개별적으로 정상 작동하게 만드는 wp-config.php 설정.</p><div class="meta"><span class="by">박대승</span><span class="dot-sep">3분 읽기</span></div></a><a href="../../articles/ubuntu-server-cli-4k-font-size/" class="post-card fade-up"><div class="thumb"><div class="ph fill-4 fill-grid "></div><span class="cat-pill dark">Dev · 노트</span><span class="num">B07</span></div><span class="cat dark">Linux</span><h3>Ubuntu Server Cli 모드 4K 고해상도 모니터 초간단 폰트크기 키우기</h3><p>4K 모니터에서 Ubuntu Server 콘솔 글씨가 보이지 않을 만큼 작을 때, dpkg-reconfigure console-setup 한 번으로 폰트를 Terminus 16x32로 키우는 방법.</p><div class="meta"><span class="by">박대승</span><span class="dot-sep">1분 읽기</span></div></a></div>
+      </div>
+      <nav class="post-nav no-print" id="postNav" data-prerendered="1"><a class="pn" href="../../articles/wordpress-multi-domain-single-site/"><span class="pn-dir">‹ 이전 글</span><span class="pn-t">워드프레스 멀티도메인 사용 설정하기</span></a><a class="pn pn-list" href="../../articles.html?cat=blog">목록</a><a class="pn pn-right" href="../../articles/openai-fine-tuning-data-format/"><span class="pn-dir">다음 글 ›</span><span class="pn-t">OpenAI ChatGPT Fine-tuning Data Format</span></a></nav>
+    </div>
+</article>
+
+<div class="print-footer">Daeseung Park · D. PARK Journal — Ubuntu APM 빠른설치 (Apache, PHP, MySQL)</div>
+
+<footer class="site-footer no-print" id="contact" data-prerendered="1"><div class="container-x"><div class="footer-grid"><div><div class="footer-brand">D. PARK</div><p style="max-width:34ch;">AI &amp; Software Systems Engineer · KAIST</p><div class="social" style="margin-top:16px;"><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener" aria-label="GitHub">GH</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener" aria-label="ORCID">iD</a><a href="mailto:dspark@daeseungpark.com" aria-label="Email">@</a></div></div><div><h6>둘러보기</h6><ul><li><a href="../../index.html">Home</a></li><li><a href="../../profile.html">Profile</a></li><li><a href="../../articles.html">Articles</a></li><li><a href="../../research.html">Research</a></li><li><a href="../../notices.html">Notice</a></li></ul></div><div><h6>기고문</h6><ul class="ft-arts"><li><a href="../../articles/ontology-schema-first-knowledge-graph/">데이터보다 스키마가 먼저다</a></li><li><a href="../../articles/address-graph-disaster-perception-stack/">어디서 무슨 일이 일어났는가</a></li><li><a href="../../articles/genai-copyright-data-licensing/">학습이라는 이름의 채굴</a></li><li><a href="../../articles/ai-agent-reliability-evals/">데모는 되는데, 프로덕션에서 무너지는 이유</a></li><li><a href="../../articles/reasoning-models-test-time-compute/">더 키우기보다 더 생각하게</a></li></ul></div><div><h6>Contact</h6><ul><li><a href="mailto:dspark@daeseungpark.com">dspark@daeseungpark.com</a></li><li><a href="mailto:dspark@kaist.ac.kr">dspark@kaist.ac.kr</a></li><li><a href="tel:+821064547777">Phone (KR) +82 10 6454 7777</a></li><li><a href="tel:+16574109449">Phone (US) +1 657 410 9449</a></li><li>KAIST, Daejeon, Korea</li></ul></div></div><div class="footer-bottom"><span>© 2026 Daeseung Park. All rights reserved.</span><span>Designed &amp; built as a personal journal for Daeseung Park.</span></div></div></footer>
+
+<div class="mobile-nav" id="mobileNav" data-prerendered="1"><button class="icon-btn close" id="navClose" aria-label="닫기">✕</button><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></div>
+
+
+
+<script src="../../assets/js/main.js?v=e9f2908b"></script>
+</body>
+</html>

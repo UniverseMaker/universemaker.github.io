@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light" data-prerendered="1">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[WordPress] Cloudflare 적용 후 ERR_TOO_MANY_REDIRECTS 초간단 해결방법 - Daeseung Park Journal</title>
+<meta name="description" content="스팸 댓글 때문에 Cloudflare를 적용했더니 로그인에서 ERR_TOO_MANY_REDIRECTS가 났다. 원인은 SSL 가변 모드에서 생기는 https와 http 사이의 루프 — 암호화 모드를 '전체'로 바꿔 해결한다.">
+<link rel="canonical" href="https://daeseungpark.com/articles/wordpress-cloudflare-too-many-redirects/">
+<!-- seo-i18n:start -->
+<link rel="alternate" hreflang="ko" href="https://daeseungpark.com/articles/wordpress-cloudflare-too-many-redirects/">
+<link rel="alternate" hreflang="en" href="https://daeseungpark.com/en/articles/wordpress-cloudflare-too-many-redirects/">
+<link rel="alternate" hreflang="x-default" href="https://daeseungpark.com/articles/wordpress-cloudflare-too-many-redirects/">
+<meta property="og:locale:alternate" content="en_US">
+<!-- seo-i18n:end -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="D. PARK Journal">
+<meta property="og:title" content="[WordPress] Cloudflare 적용 후 ERR_TOO_MANY_REDIRECTS 초간단 해결방법">
+<meta property="og:description" content="스팸 댓글 때문에 Cloudflare를 적용했더니 로그인에서 ERR_TOO_MANY_REDIRECTS가 났다. 원인은 SSL 가변 모드에서 생기는 https와 http 사이의 루프 — 암호화 모드를 '전체'로 바꿔 해결한다.">
+<meta property="og:url" content="https://daeseungpark.com/articles/wordpress-cloudflare-too-many-redirects/">
+<meta property="og:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="[WordPress] Cloudflare 적용 후 ERR_TOO_MANY_REDIRECTS 초간단 해결방법">
+<meta name="twitter:description" content="스팸 댓글 때문에 Cloudflare를 적용했더니 로그인에서 ERR_TOO_MANY_REDIRECTS가 났다. 원인은 SSL 가변 모드에서 생기는 https와 http 사이의 루프 — 암호화 모드를 '전체'로 바꿔 해결한다.">
+<meta name="twitter:image" content="https://daeseungpark.com/assets/img/profile/img3.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"[WordPress] Cloudflare 적용 후 ERR_TOO_MANY_REDIRECTS 초간단 해결방법","author":{"@type":"Person","name":"박대승","alternateName":"Daeseung Park"},"publisher":{"@type":"Organization","name":"D. PARK Journal"},"image":"https://daeseungpark.com/assets/img/profile/img3.jpg","mainEntityOfPage":"https://daeseungpark.com/articles/wordpress-cloudflare-too-many-redirects/","inLanguage":"ko","datePublished":"2024-10-16"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Noto+Serif+KR:wght@400;600&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="../../assets/css/style.css?v=edd658d3">
+<link rel="stylesheet" href="../../assets/css/article.css?v=c9e013b8">
+</head>
+<body data-base="../../">
+<div class="progress-bar" id="progress"></div>
+<div class="topbar no-print">
+  <div class="container-x">
+    <span class="tb-date" id="today">—</span>
+    <div class="tb-links" data-prerendered="1"><a href="https://ai.daeseungpark.com/chat/" target="_blank" rel="noopener">Abliterated AI</a><a href="https://service.daeseungpark.com/rchat" target="_blank" rel="noopener">LLM Research Platform</a><a href="../../profile.html">Profile</a><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener">GitHub</a><a href="https://scholar.google.com/citations?hl=ko&amp;user=qVom0QUAAAAJ" target="_blank" rel="noopener">Scholar</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener">ORCID</a><a href="https://hub.docker.com/u/daeseungpark" target="_blank" rel="noopener">Docker</a><a href="https://codespectrum.net" target="_blank" rel="noopener">Blog</a><a href="../../profile.html#contact">Contact</a><a href="../../notices.html">Notice</a><a href="/en/articles/wordpress-cloudflare-too-many-redirects/" class="tb-lang-link" aria-label="Language">English</a></div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header no-print">
+  <div class="container-x nav-row">
+    <a href="../../index.html" class="brand">D<span class="dot">.</span> PARK <small>Journal</small></a>
+    <nav class="main-nav" data-prerendered="1"><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="테마 전환"><span id="themeIcon">☾</span></button>
+      <button class="print-cta" id="printBtn">🖶 인쇄 / PDF</button>
+      <button class="icon-btn nav-toggle" id="navToggle" aria-label="메뉴">≡</button>
+    </div>
+  </div>
+</header>
+
+<div class="ticker no-print">
+  <div class="container-x">
+    <span class="label">Trending</span>
+    <div class="items" id="tickerItems" data-prerendered="1"><a href="../../articles/ontology-schema-first-knowledge-graph/">데이터보다 스키마가 먼저다</a><a href="../../articles/address-graph-disaster-perception-stack/">어디서 무슨 일이 일어났는가</a><a href="../../articles/genai-copyright-data-licensing/">학습이라는 이름의 채굴</a><a href="../../articles/ai-agent-reliability-evals/">데모는 되는데, 프로덕션에서 무너지는 이유</a><a href="../../articles/reasoning-models-test-time-compute/">더 키우기보다 더 생각하게 — 테스트타임 컴퓨트…</a><a href="../../articles/rag-architectures-hallucination/">검색이 지능을 구원하는 네 가지 방법 — Lexical…</a></div>
+  </div>
+</div>
+
+<article class="blog-import" data-article-id="106">
+  <div class="article-wrap">
+    <!-- Masthead -->
+    <header class="art-head">
+      <span class="cat-pill dark">Dev · 노트</span>
+      <h1>[WordPress] Cloudflare 적용 후 ERR_TOO_MANY_REDIRECTS 초간단 해결방법</h1>
+      <p class="deck">스팸 댓글 때문에 Cloudflare를 적용했더니 로그인에서 ERR_TOO_MANY_REDIRECTS가 났다. 원인은 SSL 가변 모드에서 생기는 https와 http 사이의 루프 — 암호화 모드를 '전체'로 바꿔 해결한다.</p>
+      <div class="art-byline">
+        <div class="av">DP</div>
+        <div class="who">
+          <b>박대승 (Daeseung Park)</b>
+          <span>AI &amp; Software Systems Engineer · KAIST</span>
+          <span>2024년 10월 16일 · 3분 읽기</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="art-cover"><div class="fill-2 fill-grid" style="position:absolute;inset:0;"></div></div>
+
+    <!-- Body -->
+    <div class="prose">
+      <p>최근 스팸 댓글이 매우 많이 증가하여 Cloudflare를 적용하였습니다.</p>
+      <p>그런데!!</p>
+      <figure class="blog-fig"><img src="images/err-too-many-redirects.png" alt="크롬 오류 화면: 페이지가 작동하지 않습니다. codespectrum.net에서 리디렉션한 횟수가 너무 많습니다. ERR_TOO_MANY_REDIRECTS" width="873" height="704" loading="lazy" decoding="async"></figure>
+      <p>로그인을 하려니 ERR_TOO_MANY_REDIRECTS 에러가 발생하네요..</p>
+      <p>검색을 조금 해보니 Nginx를 수정하라느니 .htaccess를 수정하라는둥.. 각종 해결법이 등장합니다.</p>
+      <p>원인을 알아보니 웹서비스가 https와 http 사이에서 서로에게 반복해 전달하며 루프에 빠져 발생하는 현상입니다.</p>
+      <p>원래는 안그랬는데 왜 Cloudflare(클라우드플레어) 적용 후 이런 현상이 발생했을까요?</p>
+      <figure class="blog-fig"><img src="images/cloudflare-ssl-overview.png" alt="Cloudflare 대시보드 SSL/TLS 개요 화면. 현재 암호화 모드가 가변으로 표시되고 오른쪽에 구성 버튼이 있다" width="1600" height="997" loading="lazy" decoding="async"></figure>
+      <figure class="blog-fig"><img src="images/ssl-mode-flexible.png" alt="SSL/TLS 암호화 도식: 현재 암호화 모드 가변. 브라우저와 Cloudflare 사이에만 자물쇠가 있고 Cloudflare와 원본 서버 사이는 암호화되지 않음" width="979" height="389" loading="lazy" decoding="async"></figure>
+      <p>Cloudflare(클라우드플레어) 대시보드에서 SSL 설정메뉴로 들어갔더니 기본 셋팅이 SSL 가변으로 설정되어 있습니다.</p>
+      <p>사용자와 클라우드 플레어 사이에는 SSL(https)로 통신하나 Cloudflare와 원본서버(내 호스팅 서버)간에는 http로 통신합니다.</p>
+      <p>딱봐도 여기가 문제같습니다.. 설정을 바꿔봅시다. 위 화면의 오른쪽 구성버튼을 클릭합니다.</p>
+      <figure class="blog-fig narrow"><img src="images/ssl-mode-configure-full.png" alt="Cloudflare 암호화 모드 구성 화면. 사용자 지정 SSL/TLS에서 '전체' 모드가 선택되어 있다" width="1038" height="1644" loading="lazy" decoding="async"></figure>
+      <p>전체로 놓고 저장합니다.</p>
+      <figure class="blog-fig"><img src="images/ssl-mode-full.png" alt="SSL/TLS 암호화 도식: 현재 암호화 모드 전체. 브라우저–Cloudflare, Cloudflare–원본 서버 양쪽 모두 자물쇠 표시" width="971" height="388" loading="lazy" decoding="async"></figure>
+      <p>이제 전체구간을 https로만 통신합니다. 과연 해결되었을까요?</p>
+      <figure class="blog-fig narrow"><img src="images/wordpress-login-ok.png" alt="정상적으로 표시된 워드프레스 로그인 화면" width="842" height="958" loading="lazy" decoding="async"></figure>
+      <p>짠!! 잘 동작합니다^^</p>
+      <div class="callout blog-origin"><b>원문:</b> <a href="https://codespectrum.net/2024/10/16/wordpress-cloudflare-%ec%a0%81%ec%9a%a9-%ed%9b%84-err_too_many_redirects-%ec%b4%88%ea%b0%84%eb%8b%a8-%ed%95%b4%ea%b2%b0%eb%b0%a9%eb%b2%95/" target="_blank" rel="noopener">codespectrum.net</a>, 2024-10-16 게시. 필자의 기술 블로그 코드스펙트럼(CODESPECTRUM)에 올렸던 글을 이곳으로 옮겨 왔습니다. 문장과 명령어는 원문 그대로 두고 서식만 정리했습니다.</div>
+    </div>
+  </div>
+
+  <!-- Footer of article -->
+  <div class="art-foot">
+    <div class="art-tags">
+      <a href="#">#워드프레스</a><a href="#">#Cloudflare</a><a href="#">#SSL</a><a href="#">#리다이렉트</a>
+    </div>
+    <div class="author-card">
+      <div class="av">DP</div>
+      <div class="who">
+        <b>박대승 · Daeseung Park</b>
+        <p>KAIST 연구원. 대형언어모델, 시계열 예측, 대화형 AI를 연구합니다. 연구의 과정을 가능한 한 정확하고 읽기 좋게 기록하려 합니다.</p>
+      </div>
+    </div>
+
+    <div class="read-next no-print">
+        <div class="section-head" style="margin-bottom:20px;"><h2 style="font-size:1.3rem;">다음 글</h2></div>
+        <div class="grid grid-2" id="readNext" data-prerendered="1"><a href="../../articles/wordpress-multi-domain-single-site/" class="post-card fade-up"><div class="thumb"><div class="ph fill-1 fill-grid "></div><span class="cat-pill dark">Dev · 노트</span><span class="num">B02</span></div><span class="cat dark">WordPress</span><h3>워드프레스 멀티도메인 사용 설정하기 / WordPress using Multi-domain with Single-site</h3><p>워드프레스 사이트 하나에 도메인 여러 개를 연결하면 메인 도메인을 제외한 나머지에서는 이미지가 엑스박스로 뜬다. 리다이렉션 없이 각 도메인이 개별적으로 정상 작동하게 만드는 wp-config.php 설정.</p><div class="meta"><span class="by">박대승</span><span class="dot-sep">3분 읽기</span></div></a><a href="../../articles/windows11-classic-context-menu/" class="post-card fade-up"><div class="thumb"><div class="ph fill-5 fill-grid "></div><span class="cat-pill dark">Dev · 노트</span><span class="num">B10</span></div><span class="cat dark">Windows</span><h3>윈도우11 우클릭 시 “추가옵션보기”를 기본으로 설정하기</h3><p>윈도우11의 간소화된 우클릭 메뉴 대신 예전 전체 메뉴(추가 옵션 보기)가 바로 뜨도록 레지스트리를 등록하는 명령어와, 원래대로 되돌리는 명령어.</p><div class="meta"><span class="by">박대승</span><span class="dot-sep">1분 읽기</span></div></a></div>
+      </div>
+      <nav class="post-nav no-print" id="postNav" data-prerendered="1"><a class="pn" href="../../articles/docker-mattermost-connection-refused/"><span class="pn-dir">‹ 이전 글</span><span class="pn-t">[Docker] Mattermost 외부접속 불가</span></a><a class="pn pn-list" href="../../articles.html?cat=blog">목록</a><a class="pn pn-right" href="../../articles/ubuntu-server-cli-4k-font-size/"><span class="pn-dir">다음 글 ›</span><span class="pn-t">Ubuntu Server Cli 모드 4K 폰트크기 키우기</span></a></nav>
+    </div>
+</article>
+
+<div class="print-footer">Daeseung Park · D. PARK Journal — [WordPress] Cloudflare 적용 후 ERR_TOO_MANY_REDIRECTS 초간단 해결방법</div>
+
+<footer class="site-footer no-print" id="contact" data-prerendered="1"><div class="container-x"><div class="footer-grid"><div><div class="footer-brand">D. PARK</div><p style="max-width:34ch;">AI &amp; Software Systems Engineer · KAIST</p><div class="social" style="margin-top:16px;"><a href="https://github.com/UniverseMaker" target="_blank" rel="noopener" aria-label="GitHub">GH</a><a href="https://orcid.org/0009-0002-3044-2689" target="_blank" rel="noopener" aria-label="ORCID">iD</a><a href="mailto:dspark@daeseungpark.com" aria-label="Email">@</a></div></div><div><h6>둘러보기</h6><ul><li><a href="../../index.html">Home</a></li><li><a href="../../profile.html">Profile</a></li><li><a href="../../articles.html">Articles</a></li><li><a href="../../research.html">Research</a></li><li><a href="../../notices.html">Notice</a></li></ul></div><div><h6>기고문</h6><ul class="ft-arts"><li><a href="../../articles/ontology-schema-first-knowledge-graph/">데이터보다 스키마가 먼저다</a></li><li><a href="../../articles/address-graph-disaster-perception-stack/">어디서 무슨 일이 일어났는가</a></li><li><a href="../../articles/genai-copyright-data-licensing/">학습이라는 이름의 채굴</a></li><li><a href="../../articles/ai-agent-reliability-evals/">데모는 되는데, 프로덕션에서 무너지는 이유</a></li><li><a href="../../articles/reasoning-models-test-time-compute/">더 키우기보다 더 생각하게</a></li></ul></div><div><h6>Contact</h6><ul><li><a href="mailto:dspark@daeseungpark.com">dspark@daeseungpark.com</a></li><li><a href="mailto:dspark@kaist.ac.kr">dspark@kaist.ac.kr</a></li><li><a href="tel:+821064547777">Phone (KR) +82 10 6454 7777</a></li><li><a href="tel:+16574109449">Phone (US) +1 657 410 9449</a></li><li>KAIST, Daejeon, Korea</li></ul></div></div><div class="footer-bottom"><span>© 2026 Daeseung Park. All rights reserved.</span><span>Designed &amp; built as a personal journal for Daeseung Park.</span></div></div></footer>
+
+<div class="mobile-nav" id="mobileNav" data-prerendered="1"><button class="icon-btn close" id="navClose" aria-label="닫기">✕</button><a href="../../index.html">Home</a><a href="../../profile.html">Profile</a><a href="../../articles.html">Articles</a><a href="../../portfolio.html">Portfolio</a><a href="../../works.html">Publications</a><a href="../../research.html">Research</a><a href="../../activity.html">Activity</a><a href="../../profile.html#contact">Contact</a></div>
+
+
+
+<script src="../../assets/js/main.js?v=e9f2908b"></script>
+</body>
+</html>
