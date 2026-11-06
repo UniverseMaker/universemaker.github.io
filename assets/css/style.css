@@ -96,11 +96,12 @@ img { max-width: 100%; display: block; }
   letter-spacing: .02em;
 }
 [data-theme="dark"] .topbar { background: #000; }
-.topbar .container-x { display: flex; align-items: center; justify-content: space-between; height: 40px; }
+.topbar .container-x { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 40px; padding-top: 5px; padding-bottom: 5px; }
 .topbar a { color: rgba(255,255,255,.82); }
 .topbar a:hover { color: #fff; }
-.topbar .tb-links { display: flex; gap: 18px; align-items: center; }
-.topbar .tb-date { color: rgba(255,255,255,.6); }
+.topbar .tb-links { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 2px 18px; align-items: center; min-width: 0; }
+.topbar .tb-links a { white-space: nowrap; }
+.topbar .tb-date { color: rgba(255,255,255,.6); flex: none; white-space: nowrap; }
 /* 언어 링크 (상단 퀵링크 맨 오른쪽, 다른 퀵링크와 동일 스타일) */
 .tb-lang-link { color: rgba(255,255,255,.82); }
 .tb-lang-link:hover { color: #fff; }
