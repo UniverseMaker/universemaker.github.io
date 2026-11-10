@@ -33,12 +33,7 @@ window.SITE = {
   /* 상단 유틸리티 바 우측 퀵링크 (internal:true 는 사이트 내부 경로) */
   quicklinks: [
     { label: "Abliterated AI", href: AI_CHAT_URL },
-    { label: "LLM Research Platform", href: "https://service.daeseungpark.com/rchat" },
-    { label: "Mission Control", href: "https://mcc.daeseungpark.com" },
-    { label: "Research Admin", href: "https://mgm.daeseungpark.com" },
-    { label: "AI Office", href: "https://office.daeseungpark.com" },
-    { label: "AI Learning Center", href: "https://alc.daeseungpark.com" },
-    { label: "NextSim", href: "https://nextsim.daeseungpark.com" },
+    { label: "Portal", href: "https://portal.daeseungpark.com" },
     { label: "Profile", href: "profile.html", internal: true },
     { label: "GitHub",  key: "github" },
     { label: "Scholar", key: "scholar" },
