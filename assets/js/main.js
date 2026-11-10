@@ -3,13 +3,12 @@
    이 스크립트는 데이터 파일(data.js·articles.js·content-*·notices.js·i18n-en.js) 없이,
    baked DOM 위에 상호작용만 바인딩한다: 테마 토글, 스크롤 등장, 진행바, 구독폼,
    기고 게시판 필터·페이지네이션, 포트폴리오 필터, 공지 검색·페이지네이션, 활동 라이트박스,
-   Google Analytics, 그리고 우측하단 AI Trial 위젯(별도 IIFE). */
+   Google Analytics. */
 (function () {
   var root = document.documentElement;
 
   /* ---------------- 인라인 상수 (구 data.js 참조 대체) ---------------- */
   var GA_ID = "G-1MMKKGR3MF";                       // Google Analytics 측정 ID
-  var AI_CHAT_URL = "https://ai.daeseungpark.com/chat/"; // (AI 위젯 IIFE에서도 동일 상수 사용)
   var SHOW_FEATURE_IN_ALL = false;                  // 전체보기에 특별기고 노출 여부(기본 false)
   var SHOW_BLOG_IN_ALL = false;                     // 전체보기·카테고리 칩에 블로그 노출 여부(기본 false — [블로그] 칩에서만)
 
@@ -421,96 +420,4 @@
       });
     }
   }
-})();
-
-/* ==========================================================================
-   AI Trial widget — 비검열 AI 플로팅 위젯 (self-contained, REMOVABLE)
-   · 우측하단 플로팅 버튼 + (넓은 화면) PC 미니 대화창(iframe)
-   · 상단 메뉴 접힘(햄버거)·터치: 버튼 클릭 → 새 탭으로 챗 UI 바로 이동
-   · 기고문(article[data-article-id]) 페이지에는 버튼 미표시
-   · EN 프리렌더 페이지엔 style/button 이 이미 baked → 중복 생성 방지, 재사용 후 핸들러만 바인딩
-   ========================================================================== */
-(function () {
-  var URL = "https://ai.daeseungpark.com/chat/";
-  var EN = location.pathname.split("/").filter(Boolean)[0] === "en";
-  var L = EN
-    ? { badge: "β experiment", close: "Close", newWin: "New window ↗", openNew: "Open in new window", btn: "Uncensored AI", aria: "Use the uncensored AI preview" }
-    : { badge: "β 실험", close: "닫기", newWin: "새 창 ↗", openNew: "새 창에서 열기", btn: "비검열 AI", aria: "비검열 AI 시범 서비스 사용" };
-
-  var css = [
-    '#aiTrialBtn{position:fixed;right:22px;bottom:22px;z-index:940;display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border:0;border-radius:999px;cursor:pointer;font-family:"Pretendard",system-ui,sans-serif;font-weight:700;font-size:.92rem;color:#fff;background:linear-gradient(135deg,#5b6cff,#8b5bff);box-shadow:0 8px 24px rgba(70,70,140,.35);transition:transform .2s,box-shadow .2s,opacity .2s;}',
-    '#aiTrialBtn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(70,70,140,.45);}',
-    '#aiTrialBtn.active{opacity:.5;}',
-    '#aiTrialBtn .ai-ic{font-size:1.05rem;line-height:1;}',
-    '#aiTrialBtn .ai-b{font-size:.6rem;font-weight:800;background:rgba(255,255,255,.28);padding:2px 6px;border-radius:999px;letter-spacing:.5px;}',
-    '#aiTrialPanel{position:fixed;right:22px;bottom:84px;z-index:945;width:380px;max-width:calc(100vw - 32px);height:560px;max-height:calc(100vh - 120px);background:var(--bg,#fff);border:1px solid var(--line,#e6e6e6);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.28);opacity:0;transform:translateY(12px) scale(.98);pointer-events:none;transition:opacity .22s,transform .22s;}',
-    '#aiTrialPanel.open{opacity:1;transform:none;pointer-events:auto;}',
-    '#aiTrialPanel .ai-head{display:flex;align-items:center;justify-content:space-between;padding:10px 8px 10px 14px;border-bottom:1px solid var(--line,#e6e6e6);}',
-    '#aiTrialPanel .ai-ti{font-family:"Pretendard",system-ui,sans-serif;font-size:.9rem;color:var(--ink,#15171a);}',
-    '#aiTrialPanel .ai-badge{font-size:.64rem;color:#7b83ff;border:1px solid #7b83ff;border-radius:999px;padding:1px 6px;margin-left:5px;}',
-    '#aiTrialPanel .ai-actions{display:flex;gap:2px;}',
-    '#aiTrialPanel .ai-x{border:0;background:transparent;cursor:pointer;font-size:1rem;line-height:1;padding:6px 9px;border-radius:8px;color:var(--ink,#15171a);opacity:.65;}',
-    '#aiTrialPanel .ai-x:hover{opacity:1;background:rgba(125,125,140,.14);}',
-    '#aiTrialPanel .ai-body{position:relative;flex:1;min-height:0;background:var(--bg,#fff);}',
-    '#aiTrialPanel .ai-open{font-family:"Pretendard",system-ui,sans-serif;font-size:.78rem;font-weight:700;color:#7b83ff;padding:6px 10px;border-radius:8px;text-decoration:none;white-space:nowrap;}',
-    '#aiTrialPanel .ai-open:hover{background:rgba(125,125,140,.14);}',
-    '#aiTrialPanel iframe{position:relative;width:100%;height:100%;border:0;display:block;background:var(--bg,#fff);}',
-    '@media (max-width:640px){#aiTrialBtn{right:16px;bottom:16px;padding:11px 15px;font-size:.86rem;}}'
-  ].join('');
-  if (!document.getElementById('aiTrialStyle')) {
-    var st = document.createElement('style'); st.id = 'aiTrialStyle'; st.textContent = css;
-    document.head.appendChild(st);
-  }
-
-  /* 기고문 페이지에는 플로팅 버튼을 띄우지 않는다 */
-  if (document.querySelector('article[data-article-id]')) return;
-
-  /* 상단 메뉴가 접혀 햄버거로 바뀐 상태(=좁은 화면)면 외부링크로 전환. 터치 기기도 외부. */
-  function useExternal() {
-    var tog = document.querySelector('.nav-toggle');
-    if (tog && getComputedStyle(tog).display !== 'none') return true;
-    return ('ontouchstart' in window) && window.matchMedia('(pointer: coarse)').matches;
-  }
-
-  var btn = document.getElementById('aiTrialBtn'); // EN baked → 재사용, 없으면 생성
-  if (!btn) {
-    btn = document.createElement('button');
-    btn.id = 'aiTrialBtn'; btn.type = 'button';
-    btn.setAttribute('aria-label', L.aria);
-    btn.innerHTML = '<span class="ai-ic">🔓</span><span class="ai-tx">' + L.btn + '</span><span class="ai-b">β</span>';
-    document.body.appendChild(btn);
-  }
-
-  function openFull() { window.open(URL, '_blank', 'noopener'); }
-
-  var panel = null;
-  function buildPanel() {
-    panel = document.createElement('div'); panel.id = 'aiTrialPanel';
-    panel.innerHTML =
-      '<div class="ai-head">' +
-        '<span class="ai-ti"><b>Abliterated AI</b><span class="ai-badge">' + L.badge + '</span></span>' +
-        '<span class="ai-actions">' +
-          '<a class="ai-open" href="' + URL + '" target="_blank" rel="noopener" title="' + L.openNew + '">' + L.newWin + '</a>' +
-          '<button type="button" class="ai-x" data-act="close" title="' + L.close + '" aria-label="' + L.close + '">✕</button>' +
-        '</span>' +
-      '</div>' +
-      '<div class="ai-body">' +
-        '<iframe title="Abliterated AI Chat" src="' + URL + '" loading="lazy"></iframe>' +
-      '</div>';
-    document.body.appendChild(panel);
-    panel.addEventListener('click', function (e) {
-      var a = e.target.closest('[data-act]'); if (!a) return;
-      hidePanel();
-    });
-  }
-  function showPanel() { if (!panel) buildPanel(); requestAnimationFrame(function () { panel.classList.add('open'); }); btn.classList.add('active'); }
-  function hidePanel() { if (panel) panel.classList.remove('open'); btn.classList.remove('active'); }
-
-  btn.addEventListener('click', function () {
-    if (useExternal()) { openFull(); return; }
-    if (panel && panel.classList.contains('open')) hidePanel(); else showPanel();
-  });
-  window.addEventListener('resize', function () {
-    if (panel && panel.classList.contains('open') && useExternal()) hidePanel();
-  });
 })();
